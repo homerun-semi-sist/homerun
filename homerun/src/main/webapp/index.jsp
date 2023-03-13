@@ -66,17 +66,16 @@ String root = request.getContextPath();
 	<div class="layout title" style="border: 5px solid tomato">
 		<jsp:include page="layout/title.jsp" />
 	</div>
-
-<%-- 	<div class="layout nav">
-		<jsp:include page="layout/nav.jsp" />
-	</div> --%>
+<div class="layout nav">
+		<jsp:include page="layout/nav_u.jsp" />
+	</div>
 
 	<div class="layout main">
 		<jsp:include page="<%=mainPage%>" />
 	</div>
 
 	<div class="layout footer">
-		<jsp:include page="layout/footer.jsp" />
+		<jsp:include page="layout/footer_u.jsp" />
 	</div>
 </body>
 </html>
