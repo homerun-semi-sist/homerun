@@ -10,35 +10,6 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 </head>
 <style>
-nav{
-	margin-top: 170px;
-}
-
-.navbar-nav{
-	float: right;
-
-	}
-	
-.navbar-default .navbar-nav>li>a{
-	color:#0b214e;
-	font-weight: bold;
-	}
-	
- .navbar-nav>li>a{
-  	margin-right: 100px;
-  }
-  
-  .dropdown:hover .dropdown-menu {
-    display: block;
-    margin-top: 0;
-  }
-  
-  .navbar-default .navbar-brand{
-  	color:#0b214e;
-	font-weight: bold;
-  }
-  
-
   html {
     height: 100%;
   }
@@ -133,7 +104,7 @@ nav{
   	color: white;
   }
   
-  button.gaip{
+  button.regist{
   	background-color: #0b214e;
   	float: right;
   	margin-top: 20px;
@@ -144,82 +115,45 @@ nav{
 
 
 </style>
+<%
+	//세션 값 얻기
+	String saveok=(String)session.getAttribute("saveok");
+
+	String myid="";
+	
+	if(saveok!=null)
+	{
+		myid=(String)session.getAttribute("myid");
+	}
+%>
 <body>
-
-<nav class="navbar navbar-default">
-  <div class="container-fluid">
-    <div class="navbar-header">
-      <a class="navbar-brand" href="#">Homerun</a>
-    </div>
-     
-     <div class="inb-sub"></div>
-     
-    <ul class="nav navbar-nav">
-      <li><a href="#">Home</a></li>
-      <li class="dropdown"><a href="#">경기일정<span class="caret"></span></a>
-        <ul class="dropdown-menu">
-          <li><a href="#">Page 1-1</a></li>
-          <li><a href="#">Page 1-2</a></li>
-          <li><a href="#">Page 1-3</a></li>
-        </ul>
-      </li>
-      
-      <li class="dropdown"><a href="#">게시판<span class="caret"></span></a>
-        <ul class="dropdown-menu">
-          <li><a href="#">Page 1-1</a></li>
-          <li><a href="#">Page 1-2</a></li>
-          <li><a href="#">Page 1-3</a></li>
-        </ul>
-      </li>
-
-      <li class="dropdown"><a href="#">응원용품<span class="caret"></span></a>
-        <ul class="dropdown-menu">
-          <li><a href="#">Page 1-1</a></li>
-          <li><a href="#">Page 1-2</a></li>
-          <li><a href="#">Page 1-3</a></li>
-        </ul>
-      </li>
-
-      <li class="dropdown"><a href="#">예약<span class="caret"></span></a>
-        <ul class="dropdown-menu">
-          <li><a href="#">Page 1-1</a></li>
-          <li><a href="#">Page 1-2</a></li>
-          <li><a href="#">Page 1-3</a></li>
-        </ul>
-      </li>
-
-      <li class="dropdown"><a href="#">관리자페이지<span class="caret"></span></a>
-        <ul class="dropdown-menu">
-          <li><a href="#">회원관리</a></li>
-          <li><a href="#">재고관리</a></li>
-          <li><a href="#">게시글관리</a></li>
-        </ul>
-      </li>
-      
-    </ul>
-  </div>
-</nav>
-  
-
 
 <div class="login-box">
   <h2>Login</h2>
-  <form>
+  
+  <form action="loginaction.jsp" method="post">
+  
     <div class="user-box">
-      <input type="text" name="" required="required">
+      <input type="text" name="id" required="required" value="<%=myid %>" >
       <label>아이디</label>
     </div>
+    
     <div class="user-box">
-      <input type="password" name="" required="required">
+      <input type="password" name="pass" required="required">
       <label>비밀번호</label>
     </div>
+    
     <div class="user-check">
-    	<input type="checkbox" name="cbsave">&nbsp;아이디저장
+    	<input type="checkbox" name="cbsave"
+    	<%=saveok==null?"":"checked" %>>&nbsp;아이디저장
     </div>
+    
     <button type="submit" class="login" >로그인</button>
-    <button type="submit" class="gaip" >회원가입</button>
-
+    <button type="button" class="regist"  onclick="location.href='../regist/registform.jsp'">회원가입</button>
+    
   </form>
+  
 </div>
+
 </body>
 </html>
