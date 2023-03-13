@@ -1,13 +1,9 @@
 INDEX VERSION 1.4+C:\Users\USER\semi-project-SIST\homerun\.metadata\.plugins\org.eclipse.wst.jsdt.core\indexes
-4106992957.index
 3973322314.index
-1787864817.index
 956015847.index
-1853649707.index
 3196422674.index
-2621252279.index
 2614424270.index
-847627634.index
 2530028541.index
+766439472.index
 766439472.index
 3829223410.index

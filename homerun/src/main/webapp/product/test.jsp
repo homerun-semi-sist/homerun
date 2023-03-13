@@ -14,23 +14,17 @@
 </head>
 <body>
 	<%
-    ProductDao dao=new ProductDao();
-    List<ProductDto> list= dao.selectAllProduct();
-	
-%>
+	ProductDao dao = new ProductDao();
+	List<ProductDto> list = dao.selectAllProduct();
+	%>
 	<%
-				for(ProductDto dto : list) {
-			%>
-
-
-	<%=dto.getpId() %>
-	<%=dto.getpImage() %>
-
-
-
-	<%
-				}
-			%>
+	for (ProductDto dto : list) {
+	%>
+	<%=dto.getpId()%>
+	<%=dto.getpImage()%>
+	<%	
+	}
+	%>
 
 </body>
 </html>
