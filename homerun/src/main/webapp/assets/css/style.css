@@ -111,6 +111,8 @@
   }
 }
 
+/* nav 수정 */
+
 @media (max-width: 576px) {
   .carousel-caption h4 {
     font-size: 18px;
