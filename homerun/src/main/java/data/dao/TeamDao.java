@@ -9,6 +9,7 @@ import data.dto.TeamDto;
 import mysql.db.DbConnect;
 
 public class TeamDao {
+	
 	 DbConnect db = new DbConnect();
 
     public TeamDto getTeam(String teamNick) {

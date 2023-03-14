@@ -13,7 +13,7 @@ public class GameDao {
 
 	DbConnect db = new DbConnect();
 	
-	// GAME 테이블의 데이터 가져오기
+	// getGame
 	public GameDto getGame(String gId) {
 		GameDto dto = new GameDto();
 		
@@ -47,7 +47,7 @@ public class GameDao {
 		return dto;
 	}
 	
-	// GAME 리스트 출력
+	// allList
 	public Vector<GameDto> getAllGames() {
 		Vector<GameDto> list = new Vector<>();
 		

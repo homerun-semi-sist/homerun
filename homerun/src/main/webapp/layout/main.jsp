@@ -15,7 +15,9 @@
 <body style="overflow-x: hidden;">
 	<div class="row" style="height: 1200px;">
 		<div class="col-sm-2" style="border: 1px solid red;">왼</div>
-		<div class="col-sm-8" style="border: 1px solid pink;">메인</div>
+		<div class="col-sm-8" style="border: 1px solid pink;">
+			<div class="mapWeather"><jsp:include page="mapWeather.jsp"></jsp:include></div>		
+		</div>
 		<div class="col-sm-2" style="border: 1px solid blue;">오</div>
 	</div>
 </body>

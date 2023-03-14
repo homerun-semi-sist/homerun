@@ -22,12 +22,12 @@
 	%>
 
 	<header class="main_title">
-		<jsp:include page="layout/header.jsp" />
+		<jsp:include page="layout/title.jsp" />
 	</header>
-<%-- 
+
 	<div class="main_nav">
 		<jsp:include page="layout/nav.jsp" />
-	</div> --%>
+	</div>
 
 	<div id="wrap">
 		<div id="content-wrap">
