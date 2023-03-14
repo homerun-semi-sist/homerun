@@ -15,9 +15,9 @@
 </head>
 <body style="overflow-x: hidden;">
 	<div class="row" style="height: 1200px;">
-	  <div class="col-sm-2" style="border: 1px solid red; height: 800px;">왼</div>
-	  <div class="col-sm-8" style="border: 1px solid pink; height: 800px;">메인</div>
-	  <div class="col-sm-2" style="border: 1px solid blue; height: 800px;">오</div>
+	  <div class="col-sm-2" style="border: 1px solid red; ">왼</div>
+	  <div class="col-sm-8" style="border: 1px solid pink;">메인</div>
+	  <div class="col-sm-2" style="border: 1px solid blue;">오</div>
 </div>
 </body>
 </html>

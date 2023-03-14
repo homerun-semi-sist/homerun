@@ -1,57 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
 	pageEncoding="utf-8"%>
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-<meta charset="utf-8">
-<title>Insert title here</title>
-<link
-	href="https://fonts.googleapis.com/css2?family=Anton&family=Edu+VIC+WA+NT+Beginner:wght@600&family=Gamja+Flower&family=Single+Day&family=Jua&family=Nanum+Pen+Script&display=swap"
-	rel="stylesheet">
-<link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-<script src="https://code.jquery.com/jquery-3.6.3.js"></script>
-
-<style>
-.layout {
-	border: 0px solid gray;
-	position: absolute;
-}
-
-html, body {
-	height: 100%;
-	padding: 0px;
-	margin: 0px;
-}
-
-header {
-	width: 100%;
-	height: 80px;
-}
-
-.main_nav {
-	width: 100%;
-	height: 80px;
-	top: 150px;
-}
-
-#wrap {
-	min-height: calc(100% - 120px);
-}
-
-.mainbox {
-	height: 1000px;
-	font-size: 13pt;
-	top: 250px;
-	margin-bottom: 20px;
-}
-
-.main_footer {
-	width: 100%;
-	height: 80px;
-	margin-bottom: 0px;
-}
-</style>
+<meta charset="UTF-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Document</title>
+<link href="assets/css/index.css" rel="stylesheet">
 </head>
 <body>
 	<%
@@ -64,14 +20,22 @@ header {
 
 	String root = request.getContextPath();
 	%>
-	<header class="layout"><jsp:include page="layout/title_u.jsp" /></header>
-	<div class="layout main_nav"><jsp:include page="layout/nav2.jsp" /></div>
-	<div id="wrap" class="mainbox">
+
+	<header class="main_title">
+		<jsp:include page="layout/title.jsp" />
+	</header>
+
+	<div class="main_nav">
+		<jsp:include page="layout/nav.jsp" />
+	</div>
+
+	<div id="wrap">
 		<div id="content-wrap">
-			<div><jsp:include page="<%=mainPage%>" /></div>
+			<jsp:include page="<%=mainPage%>" />
 		</div>
 	</div>
-	<div class="layout main_footer"><jsp:include
-			page="layout/footer_u.jsp" /></div>
+	<div class="main_footer">
+		<jsp:include page="layout/footer.jsp" />
+	</div>
 </body>
 </html>

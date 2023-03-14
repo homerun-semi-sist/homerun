@@ -5,14 +5,14 @@
     <meta charset="utf-8">
     <title>Insert title here</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"/>
-    <link href="../css/footer.css" rel="stylesheet" />
+    <link href="assets/css/style.css" rel="stylesheet" />
     <script src="https://code.jquery.com/jquery-3.6.3.js"></script>
 </head>
 <body>
 <div id="layoutSidenav_content">
     <footer
             class="py-4 mt-auto"
-            style="background-color: #0b214e; color: white"
+            style="background-color: #0b214e; color: white; height: 70px; font-size:13pt; line-height: 45px;"
     >
         <div class="px-4">
             <div class="d-flex justify-content-between small">
