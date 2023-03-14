@@ -44,7 +44,7 @@
                             value="1"
                             style="max-width: 4rem"
                     />
-                    <button class="btn btn-outline-dark flex-shrink-0" type="button">
+                    <button class="btn btn-dark flex-shrink-0" type="button">
                         장바구니 담기
                         <i class="bi-cart-fill me-1"></i>
                     </button>
