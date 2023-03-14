@@ -10,35 +10,35 @@
 <script src="https://code.jquery.com/jquery-3.6.3.js"></script>
 
 <style type="text/css">
-	div.layout {
-		border: 0px solid gray;
-		position: absolute;
-	}
-	.main_title{	
-		width:100%;
-		height: 80px;
-	}
-	
-	.main_nav{
-		width: 100%;
-		height: 80px;
-		top: 250px;
-	}
-	
-	.mainbox{		
-		width: 80%;
-		height: 1000px;
-		font-size: 13pt;
-		top: 250px;
-		margin-left:200px;
-		margin-bottom: 20px;
-	}
-	.main_footer {
-		width:100%;
-		height: 80px;
-		top: 1300px;
-		margin-bottom: 0px;
-	}
+div.layout {
+	border: 0px solid gray;
+	position: absolute;
+}
+
+.main_title {
+	width: 100%;
+	height: 80px;
+}
+
+.main_nav {
+	width: 100%;
+	height: 80px;
+	top: 250px;
+}
+
+.mainbox {
+	height: 1000px;
+	font-size: 13pt;
+	top: 250px;
+	margin-bottom: 20px;
+}
+
+.main_footer {
+	width: 100%;
+	height: 80px;
+	top: 1300px;
+	margin-bottom: 0px;
+}
 </style>
 
 
@@ -57,12 +57,12 @@ String root = request.getContextPath();
 	<div class="layout main_title">
 		<jsp:include page="layout/title_u.jsp" />
 	</div>
-	
+
 	<div class="layout main_nav">
 		<jsp:include page="layout/nav2.jsp" />
 	</div>
 
-	<div class="layout mainbox"  style="border: 1px solid gray;">
+	<div class="layout mainbox">
 		<jsp:include page="<%=mainPage%>" />
 	</div>
 

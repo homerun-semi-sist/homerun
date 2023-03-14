@@ -5,16 +5,19 @@
 <head>
 <meta charset="utf-8">
 <title>Insert title here</title>
-<link
-        href="https://fonts.googleapis.com/css2?family=Anton&family=Edu+VIC+WA+NT+Beginner:wght@600&family=Gamja+Flower&family=Single+Day&family=Jua&family=Nanum+Pen+Script&display=swap"
-        rel="stylesheet">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
 <script src="https://code.jquery.com/jquery-3.6.3.js"></script>
+
+<style type="text/css">
+
+
+</style>
 </head>
-<body>
-
-<div>메인 화면</div>
-
-
+<body style="overflow-x: hidden;">
+	<div class="row" style="height: 1200px;">
+	  <div class="col-sm-2" style="border: 1px solid red; height: 800px;">왼</div>
+	  <div class="col-sm-8" style="border: 1px solid pink; height: 800px;">메인</div>
+	  <div class="col-sm-2" style="border: 1px solid blue; height: 800px;">오</div>
+</div>
 </body>
 </html>
