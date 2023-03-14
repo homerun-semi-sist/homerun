@@ -14,14 +14,11 @@
 
     <meta name="description" content="" />
 <!-- 
-    Favicon
-    <link rel="icon" type="image/x-icon" href="../assets/board/img/favicon/favicon.ico" />
- -->
-    <!-- Google Web Fonts -->
+    Google Web Fonts
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&family=Poppins:wght@600;700&display=swap"
-        rel="stylesheet" />
+        rel="stylesheet" /> -->
 <!-- 
     Icons. Uncomment required icon fonts
     <link rel="stylesheet" href="../assets/board/vendor/fonts/boxicons.css" />
@@ -96,6 +93,7 @@
 </head>
 
 <body>	
+
     <!-- Layout wrapper -->
     <div class="layout-wrapper layout-content-navbar">
         <div class="layout-container">
