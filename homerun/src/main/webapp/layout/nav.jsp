@@ -1,64 +1,89 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
+
+<%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8" %>
 <!DOCTYPE html>
-<html>
+<html lang="en">
+
 <head>
-<meta charset="EUC-KR">
-<title>Insert title here</title>
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-    <script src="https://code.jquery.com/jquery-3.6.3.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <meta content="" name="keywords" />
+    <meta content="" name="description" />
+
+
+    <!-- Google Web Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&family=Poppins:wght@600;700&display=swap"
+        rel="stylesheet" />
+
+    <!-- Icon Font Stylesheet -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet" />
+
+    <!-- Customized Bootstrap Stylesheet -->
+    <link href="../assets/css/bootstrap.min.css" rel="stylesheet" />
+
+    <!-- Template Stylesheet -->
+    <link href="../assets/css/style.css" rel="stylesheet" />
 </head>
+
 <body>
-	<nav class="navbar navbar-default">
-  <div class="container-fluid">
-     
-     <div class="inb-sub"></div>
-     
-    <ul class="nav navbar-nav">
-      <li><a href="#">Home</a></li>
-      <li class="dropdown"><a href="#">°æ±âÀÏÁ¤<span class="caret"></span></a>
-        <ul class="dropdown-menu">
-          <li><a href="#">Page 1-1</a></li>
-          <li><a href="#">Page 1-2</a></li>
-          <li><a href="#">Page 1-3</a></li>
-        </ul>
-      </li>
-      
-      <li class="dropdown"><a href="#">°Ô½ÃÆÇ<span class="caret"></span></a>
-        <ul class="dropdown-menu">
-          <li><a href="#">Page 1-1</a></li>
-          <li><a href="#">Page 1-2</a></li>
-          <li><a href="#">Page 1-3</a></li>
-        </ul>
-      </li>
+    <!-- Navbar Start -->
+    <nav class="navbar navbar-expand-lg navbar-light sticky-top px-4 px-lg-5 py-lg-0">
+        <a href="index.jsp" class="navbar-brand d-flex align-items-center">
+            Homerun
+        </a>
+        <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarCollapse">
+            <div class="navbar-nav ms-auto py-3 py-lg-0">
+                <a href="index.jsp" class="nav-item nav-link active">Home</a>
+                <div class="nav-item dropdown">
+                    <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">å¯ƒì„ë¦°ï¿½ì‡±ï¿½ï¿½</a>
+                    <div class="dropdown-menu bg-light m-0">
+                        <a href="#" class="dropdown-item">Page 1-1</a>
+                        <a href="#" class="dropdown-item">Page 1-2</a>
+                        <a href="#" class="dropdown-item">Page 1-3</a>
+                    </div>
+                </div>
+                <div class="nav-item dropdown">
+                    <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">å¯ƒï¿½ï¿½ï¿½ï¿½ï¿½</a>
+                    <div class="dropdown-menu bg-light m-0">
+                        <a href="#" class="dropdown-item">Page 1-1</a>
+                        <a href="#" class="dropdown-item">Page 1-2</a>
+                        <a href="#" class="dropdown-item">Page 1-3</a>
+                    </div>
+                </div>
+                <div class="nav-item dropdown">
+                    <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">ï¿½ï¿½ï¿½ï¿½ï¿½â‘ºï¿½ï¿½</a>
+                    <div class="dropdown-menu bg-light m-0">
+                        <a href="#" class="dropdown-item">Page 1-1</a>
+                        <a href="#" class="dropdown-item">Page 1-2</a>
+                        <a href="#" class="dropdown-item">Page 1-3</a>
+                    </div>
+                </div>
+                <div class="nav-item dropdown">
+                    <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">ï¿½ï¿½ï¿½ï¿½</a>
+                    <div class="dropdown-menu bg-light m-0">
+                        <a href="#" class="dropdown-item">Page 1-1</a>
+                        <a href="#" class="dropdown-item">Page 1-2</a>
+                        <a href="#" class="dropdown-item">Page 1-3</a>
+                    </div>
+                </div>
+                <div class="nav-item dropdown">
+                    <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">æ„¿ï¿½ç”±ÑŠï¿½ï¿½ï¿½ï¿½ï¿½ëŒï¿½</a>
+                    <div class="dropdown-menu bg-light m-0">
+                        <a href="#" class="dropdown-item">ï¿½ï¿½ï¿½ï¿½æ„¿ï¿½ç”±ï¿½</a>
+                        <a href="#" class="dropdown-item">ï¿½Ñˆï¿½æ„¿ï¿½ç”±ï¿½</a>
+                        <a href="#" class="dropdown-item">å¯ƒï¿½ï¿½ï¿½æ¹²ï¿½æ„¿ï¿½ç”±ï¿½</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+    <!-- Navbar End -->
 
-      <li class="dropdown"><a href="#">ÀÀ¿ø¿ëÇ°<span class="caret"></span></a>
-        <ul class="dropdown-menu">
-          <li><a href="#">Page 1-1</a></li>
-          <li><a href="#">Page 1-2</a></li>
-          <li><a href="#">Page 1-3</a></li>
-        </ul>
-      </li>
-
-      <li class="dropdown"><a href="#">¿¹¾à<span class="caret"></span></a>
-        <ul class="dropdown-menu">
-          <li><a href="#">Page 1-1</a></li>
-          <li><a href="#">Page 1-2</a></li>
-          <li><a href="#">Page 1-3</a></li>
-        </ul>
-      </li>
-
-      <li class="dropdown"><a href="#">°ü¸®ÀÚÆäÀÌÁö<span class="caret"></span></a>
-        <ul class="dropdown-menu">
-          <li><a href="#">È¸¿ø°ü¸®</a></li>
-          <li><a href="#">Àç°í°ü¸®</a></li>
-          <li><a href="#">°Ô½Ã±Û°ü¸®</a></li>
-        </ul>
-      </li>
-      
-    </ul>
-  </div>
-</nav>
 </body>
+
 </html>
