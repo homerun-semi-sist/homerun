@@ -3571,6 +3571,7 @@ fieldset:disabled .btn {
   border-top-left-radius: 0;
   border-top-right-radius: 0;
 }
+
 .nav {
   display: flex;
   flex-wrap: wrap;
@@ -3585,6 +3586,7 @@ fieldset:disabled .btn {
   transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out,
     border-color 0.15s ease-in-out;
 }
+
 @media (prefers-reduced-motion: reduce) {
   .nav-link {
     transition: none;
