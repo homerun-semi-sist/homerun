@@ -10,6 +10,19 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 </head>
 <body>
+<%
+		String loginok=(String)session.getAttribute("loginok");
 	
+	if(loginok==null)	
+	{%>
+	
+		<jsp:include page="loginform.jsp"/>
+		
+	<%}else{%>
+	
+		<jsp:include page="logoutform.jsp"/>
+		
+	<%}
+	%>
 </body>
 </html>

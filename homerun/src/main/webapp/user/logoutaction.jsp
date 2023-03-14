@@ -10,6 +10,12 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 </head>
 <body>
+	<%
+		//loginok 세션 제거
+		session.removeAttribute("loginok");
 	
+		//loginmain이동
+		response.sendRedirect("../index.jsp?main=user/loginmain.jsp");
+	%>
 </body>
 </html>

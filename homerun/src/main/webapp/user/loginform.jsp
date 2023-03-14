@@ -15,7 +15,6 @@
   }
   body {
     padding:0;
-    font-family: sans-serif;
     background: #F8F9FA;
     color: white;
   }
