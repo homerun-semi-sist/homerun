@@ -1,62 +1,73 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
 	pageEncoding="utf-8"%>
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-<meta charset="utf-8">
-<title>Insert title here</title>
-<link
-	href="https://fonts.googleapis.com/css2?family=Anton&family=Edu+VIC+WA+NT+Beginner:wght@600&family=Gamja+Flower&family=Single+Day&family=Jua&family=Nanum+Pen+Script&display=swap"
-	rel="stylesheet">
-<link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-<script src="https://code.jquery.com/jquery-3.6.3.js"></script>
-
-<style type="text/css">
-.title {
-margin: 0px;
+<meta charset="UTF-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Document</title>
+<style>
+html, body {
+	height: 100%;
+	padding: 0px;
+	margin: 0px;
 }
 
-.nav {
-margin: 0px;
+div.layout {
+	border: 0px solid gray;
+	position: absolute;
 }
 
-.footer{
-margin: 0px;
+.main_nav {
+	height: 80px;
+	top: 250px;
 }
 
+#wrap {
+	min-height: calc(100% - 310px);
+}
+
+.mainbox {
+	height: 1000px;
+	font-size: 13pt;
+	/* top: 250px; */
+	margin-bottom: 20px;
+}
+
+footer {
+	height: 60px;
+	background-color: #e9eaed;
+}
 </style>
 </head>
+<body>
+	<%
+	String mainPage = "layout/main.jsp";
 
-	<body>
-		<%
-			request.setCharacterEncoding("UTF-8");
-		
-			String mainPage = "layout/main.jsp";
-			
-			// url을 통해서 main 값을 읽어서 메인페이지에 출력
-			if(request.getParameter("main") != null) {
-				mainPage = request.getParameter("main");
-			}
-			
-			// 프로젝트 경로 구하기
-			String root = request.getContextPath();
-		%>
-		
-		<div class="">
-			<jsp:include page="layout/title_u.jsp"></jsp:include>
+	//url을 통해서 main값을 읽어서 메인페이지에 출력을한다
+	if (request.getParameter("main") != null) {
+		mainPage = request.getParameter("main");
+	}
+
+	String root = request.getContextPath();
+	%>
+
+	<header class="main_title">
+		<jsp:include page="layout/title_u.jsp" />
+	</header>
+
+	<div class="main_nav">
+		<jsp:include page="layout/nav2.jsp" />
+	</div>
+
+	<div id="wrap">
+		<div id="content-wrap">
+			<jsp:include page="<%=mainPage%>" />
 		</div>
-		
-		<div class="">
-			<jsp:include page="layout/nav_u.jsp"></jsp:include>
-		</div>
-		
-<div class="">
-			<jsp:include page="layout/footer_u.jsp"></jsp:include>
-		</div>
-		
-		<div class="">
-			<jsp:include page="<%=mainPage %>"></jsp:include>
-		</div>
-	</body>
+	</div>
+	<div>
+		<jsp:include page="layout/footer_u.jsp" />
+	</div>
+</body>
 </html>
