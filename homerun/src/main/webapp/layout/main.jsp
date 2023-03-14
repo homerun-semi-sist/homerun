@@ -13,9 +13,7 @@
 </head>
 <body>
 
-<!-- 
-	<img alt="" src="image/testview.png"><br><br>
- -->
+<div>메인 화면</div>
 
 
 </body>

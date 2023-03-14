@@ -13,12 +13,12 @@
 </head>
 <style>
 .navbar-nav {
-	padding: 0;
 	float: right;
 	font-family: sans-serif;
-	height: 100%;
+	height: 50px;
 	background-color: #0b214e;
 	color: white;
+	
 }
 
 .navbar-default .navbar-nav>li>a {
@@ -51,6 +51,11 @@
 	color: #DCE4FF;
 }
 
+.navbar-default .navbar-brand:hover {
+	color: #DCE4FF;
+}
+
+/* 클릭 후 색상 이상함 -  수정 ㅍ */
 </style>
 <body>
 
@@ -97,8 +102,8 @@
 						<li><a href="#">회원관리</a></li>
 						<li><a href="#">재고관리</a></li>
 						<li><a href="#">게시글관리</a></li>
-					</ul></li>
-
+					</ul>
+				</li>
 			</ul>
 		</div>
 	</nav>

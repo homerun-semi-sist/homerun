@@ -13,11 +13,47 @@
 <script src="https://code.jquery.com/jquery-3.6.3.js"></script>
 
 <style type="text/css">
+div.layout {
+	border: 0px solid gray;
+	position: absolute;
+}
 
+div.title {
+	width: 100%;
+	height: 170px;
+	line-height: 80px;
+	font-size: 75px;
+	text-align: center;
+	background: #0b214e;
+	font-wight: bold;
+}
+
+div.main {
+	width: 1200px;
+	height: 800px;
+	font-size: 15pt;
+	top: 280px;
+	left: 350px;
+	padding-left: 100px;
+}
+
+div.nav {
+	width: 100%;
+	height: 80px;
+	font-size: 25pt;
+	top: 25px;
+	text-align: center;
+}
+
+div.footer {
+	width: 100%;
+	position: fixed;
+	bottom: 0;
+}
 </style>
 </head>
 <%
-String mainPage ="layout/main.jsp";
+String mainPage = "layout/main.jsp";
 
 //url을 통해서 main값을 읽어서 메인페이지에 출력을한다
 if (request.getParameter("main") != null) {
@@ -27,21 +63,19 @@ if (request.getParameter("main") != null) {
 String root = request.getContextPath();
 %>
 <body>
-	<div class="layout title">
-		<%-- <jsp:include page="layout/title_u.jsp" /> --%>
+	<div class="layout title" style="border: 5px solid tomato">
+		<jsp:include page="layout/title.jsp" />
 	</div>
-	
-	<div class="layout nav">
-		<%-- <jsp:include page="layout/nav_u.jsp" /> --%>
+<div class="layout nav">
+		<jsp:include page="layout/nav_u.jsp" />
 	</div>
 
 	<div class="layout main">
-	메인
-		<%-- <jsp:include page="<%=mainPage%>" /> --%>
+		<jsp:include page="<%=mainPage%>" />
 	</div>
 
 	<div class="layout footer">
-		<jsp:include page="../layout/footer_u.jsp" />
+		<jsp:include page="layout/footer_u.jsp" />
 	</div>
 </body>
 </html>

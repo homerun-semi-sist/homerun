@@ -5,52 +5,43 @@
 <head>
 <meta charset="utf-8">
 <title>Insert title here</title>
-<link
-	href="https://fonts.googleapis.com/css2?family=Anton&family=Edu+VIC+WA+NT+Beginner:wght@600&family=Gamja+Flower&family=Single+Day&family=Jua&family=Nanum+Pen+Script&display=swap"
-	rel="stylesheet">
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
 <script src="https://code.jquery.com/jquery-3.6.3.js"></script>
 
 <style type="text/css">
-div.layout {
-	border: 0px solid gray;
-	position: absolute;
-}
-
-div.title {
-	width: 100%;
-	height: 170px;
-	line-height: 80px;
-	font-size: 75px;
-	text-align: center;
-	background: #0b214e;
-	font-wight: bold;
-}
-
-div.main {
-	width: 1200px;
-	height: 800px;
-	font-size: 15pt;
-	top: 280px;
-	left: 350px;
-	padding-left: 100px;
-}
-
-div.nav {
-	width: 100%;
-	height: 80px;
-	font-size: 25pt;
-	top: 25px;
-	text-align: center;
-}
-
-div.footer {
-	width: 100%;
-	position: fixed;
-	bottom: 0;
-}
+	div.layout {
+		border: 0px solid gray;
+		position: absolute;
+	}
+	.main_title{	
+		width:100%;
+		height: 80px;
+	}
+	
+	.main_nav{
+		width: 100%;
+		height: 80px;
+		top: 250px;
+	}
+	
+	.mainbox{		
+		width: 80%;
+		height: 1000px;
+		font-size: 13pt;
+		top: 250px;
+		margin-left:200px;
+		margin-bottom: 20px;
+	}
+	.main_footer {
+		width:100%;
+		height: 80px;
+		top: 1300px;
+		margin-bottom: 0px;
+	}
 </style>
+
+
 </head>
 <%
 String mainPage = "layout/main.jsp";
@@ -63,18 +54,19 @@ if (request.getParameter("main") != null) {
 String root = request.getContextPath();
 %>
 <body>
-	<div class="layout title" style="border: 5px solid tomato">
-		<jsp:include page="layout/title.jsp" />
+	<div class="layout main_title">
+		<jsp:include page="layout/title_u.jsp" />
 	</div>
-<div class="layout nav">
-		<jsp:include page="layout/nav_u.jsp" />
+	
+	<div class="layout main_nav">
+		<jsp:include page="layout/nav2.jsp" />
 	</div>
 
-	<div class="layout main">
+	<div class="layout mainbox"  style="border: 1px solid gray;">
 		<jsp:include page="<%=mainPage%>" />
 	</div>
 
-	<div class="layout footer">
+	<div class="layout main_footer">
 		<jsp:include page="layout/footer_u.jsp" />
 	</div>
 </body>
