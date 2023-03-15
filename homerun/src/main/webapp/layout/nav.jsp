@@ -40,7 +40,7 @@
             <div class="navbar-nav ms-auto py-3 py-lg-0">
                 <a href="index.jsp" class="nav-item nav-link active">Home</a>
                 <div class="nav-item dropdown">
-                    <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">寃쎄린�쇱��</a>
+                    <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">경기일정</a>
                     <div class="dropdown-menu bg-light m-0">
                         <a href="#" class="dropdown-item">Page 1-1</a>
                         <a href="#" class="dropdown-item">Page 1-2</a>
@@ -48,7 +48,7 @@
                     </div>
                 </div>
                 <div class="nav-item dropdown">
-                    <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">寃�����</a>
+                    <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">게시판</a>
                     <div class="dropdown-menu bg-light m-0">
                         <a href="#" class="dropdown-item">Page 1-1</a>
                         <a href="#" class="dropdown-item">Page 1-2</a>
@@ -56,7 +56,7 @@
                     </div>
                 </div>
                 <div class="nav-item dropdown">
-                    <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">�����⑺��</a>
+                    <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">응원용품</a>
                     <div class="dropdown-menu bg-light m-0">
                         <a href="#" class="dropdown-item">Page 1-1</a>
                         <a href="#" class="dropdown-item">Page 1-2</a>
@@ -64,7 +64,7 @@
                     </div>
                 </div>
                 <div class="nav-item dropdown">
-                    <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">����</a>
+                    <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">ooo</a>
                     <div class="dropdown-menu bg-light m-0">
                         <a href="#" class="dropdown-item">Page 1-1</a>
                         <a href="#" class="dropdown-item">Page 1-2</a>
@@ -72,11 +72,11 @@
                     </div>
                 </div>
                 <div class="nav-item dropdown">
-                    <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">愿�由ъ�����댁�</a>
+                    <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">관리자페이지</a>
                     <div class="dropdown-menu bg-light m-0">
-                        <a href="#" class="dropdown-item">����愿�由�</a>
-                        <a href="#" class="dropdown-item">�ш�愿�由�</a>
-                        <a href="#" class="dropdown-item">寃���湲�愿�由�</a>
+                        <a href="#" class="dropdown-item">Page 1-1</a>
+                        <a href="#" class="dropdown-item">Page 1-2</a>
+                        <a href="#" class="dropdown-item">Page 1-3</a>
                     </div>
                 </div>
             </div>
