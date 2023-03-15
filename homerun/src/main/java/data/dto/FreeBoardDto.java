@@ -1,5 +1,7 @@
 package data.dto;
 
+import java.sql.Timestamp;
+
 public class FreeBoardDto {
 	
 	private String fbNum;
@@ -11,7 +13,7 @@ public class FreeBoardDto {
 	private String fbReadCnt;
 	private String fbLike;
 	private String fbDislike;
-	private String fbWriteday;
+	private Timestamp fbWriteday;
 	private String fbReport;
 	
 	public String getFbNum() {
@@ -68,10 +70,10 @@ public class FreeBoardDto {
 	public void setFbDislike(String fbDislike) {
 		this.fbDislike = fbDislike;
 	}
-	public String getFbWriteday() {
+	public Timestamp getFbWriteday() {
 		return fbWriteday;
 	}
-	public void setFbWriteday(String fbWriteday) {
+	public void setFbWriteday(Timestamp fbWriteday) {
 		this.fbWriteday = fbWriteday;
 	}
 	public String getFbReport() {

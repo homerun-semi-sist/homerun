@@ -1,4 +1,8 @@
-
+<%@page import="data.dao.TeamDao"%>
+<%@page import="java.text.SimpleDateFormat"%>
+<%@page import="java.util.List"%>
+<%@page import="data.dto.FreeBoardDto"%>
+<%@page import="data.dao.FreeBoardDao"%>
 <%@ page language="java" contentType="text/html; charset=utf-8"
 	pageEncoding="utf-8"%>
 <!DOCTYPE html>
@@ -13,16 +17,7 @@
     <title>자유게시판 목록</title>
 
     <meta name="description" content="" />
-<!-- 
-    Google Web Fonts
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&family=Poppins:wght@600;700&display=swap"
-        rel="stylesheet" /> -->
-<!-- 
-    Icons. Uncomment required icon fonts
-    <link rel="stylesheet" href="../assets/board/vendor/fonts/boxicons.css" />
- -->
+
     <!-- Core CSS -->
     <link rel="stylesheet" href="../assets/board/vendor/css/core.css" class="template-customizer-core-css" />
     <link rel="stylesheet" href="../assets/board/vendor/css/theme-default.css" class="template-customizer-theme-css" />
@@ -69,7 +64,7 @@
         }
 
         .bInsert {
-            border: 1px solid gray;
+            border: 0px solid gray;
             width: 100px;
             text-align: center;
             margin-left: auto;
@@ -93,6 +88,14 @@
 </head>
 
 <body>	
+	<%
+		FreeBoardDao fbDao = new FreeBoardDao();
+		List<FreeBoardDto> list = fbDao.getAllFBs();
+		
+		TeamDao tDao = new TeamDao();
+		
+		SimpleDateFormat sdf = new SimpleDateFormat("yy-MM-dd"); 
+	%>
 
     <!-- Layout wrapper -->
     <div class="layout-wrapper layout-content-navbar">
@@ -121,62 +124,71 @@
                                     </tr>
                                 </thead>
                                 <tbody class="table-border-bottom-0">
-                                    <tr>
-                                        <td style="text-align: center;">1</td>
-                                        <td style="text-align: center;">전체</td>
-                                        <td><a href="post_detail.html">제목1</a></td>
-                                        <td style=" text-align: center;">작성자1</td>
-                                        <td style="text-align: center;">2023-03-11 11:23</td>
-                                        <td style="text-align: center;">0</td>
-                                        <td style="text-align: center;">0</td>
-                                        <td style="text-align: center;">0</td>
-                                    </tr>
-                                    <tr>
-                                        <td style="text-align: center;">2</td>
-                                        <td style="text-align: center; color: #570514;">키움</td>
-                                        <td><a href="post_detail.html">제목2</a></td>
-                                        <td style=" text-align: center;">작성자2</td>
-                                        <td style="text-align: center;">2023-03-10 11:23</td>
-                                        <td style="text-align: center;">10</td>
-                                        <td style="text-align: center;">3</td>
-                                        <td style="text-align: center;">0</td>
-                                    </tr>
-                                    <tr>
-                                        <td style="text-align: center;">3</td>
-                                        <td style="text-align: center; color: #EA0029;">기아</td>
-                                        <td><a href="post_detail.html">제목3</a></td>
-                                        <td style=" text-align: center;">작성자3</td>
-                                        <td style="text-align: center;">2023-03-09 11:23</td>
-                                        <td style="text-align: center;">43</td>
-                                        <td style="text-align: center;">20</td>
-                                        <td style="text-align: center;">7</td>
-                                    </tr>
-                                    <tr>
-                                        <td style="text-align: center;">3</td>
+                                
+                                <%                                	
+                                	for(FreeBoardDto fbDto : list) {
+                                %>
+                                
+                                <!-- 
+                                	카테고리 : 전체 -> 야구공 png
+                                	야구공 png -> https://cdn.icon-icons.com/icons2/2070/PNG/512/baseball_icon_126956.png
+                                	야구공 크기만 25px
+                                 -->
+                                
+                                	<tr>
+                                        <td style="text-align: center;"><%=fbDto.getFbNum() %></td>
+                                        <!-- 
+                                        카테고리 전체
                                         <td style="text-align: center;"><img
-                                                src="https://upload.wikimedia.org/wikipedia/ko/7/7b/Kt_%EC%9C%84%EC%A6%88_%EB%A1%9C%EA%B3%A0.png"
-                                                style="width: 30px;">
+                                                src="https://cdn.icon-icons.com/icons2/2070/PNG/512/baseball_icon_126956.png"
+                                                style="width: 25px;">
                                         </td>
-                                        <td><a href="post_detail.html">제목3</a></td>
-                                        <td style=" text-align: center;">작성자3</td>
-                                        <td style="text-align: center;">2023-03-09 11:23</td>
-                                        <td style="text-align: center;">43</td>
-                                        <td style="text-align: center;">20</td>
-                                        <td style="text-align: center;">7</td>
+                                        -->
+                                        
+                                        <%
+                                        	// 카테고리 : 전체 -> 야구공 png
+                                        	if(fbDto.getFbCategory().equals("전체")) {
+                                        		
+                                        %>
+                                        		<td style="text-align: center;"><img
+	                                                src="https://cdn.icon-icons.com/icons2/2070/PNG/512/baseball_icon_126956.png"
+	                                                style="width: 30px;">
+                                        		</td>
+                                        	
+                                        <%
+                                        	} else if(fbDto.getFbCategory().equals("한화")) {
+                                        %>
+                                        		<td style="text-align: center;">
+                                        		<img
+	                                                src="<%=tDao.getTeam(fbDto.getFbCategory()).getTeamLogo() %>"
+	                                                    style="max-width: 50px;">
+                                        		</td>
+                                        <%		
+                                        	}
+                                        	
+                                        	else {
+                                        %>
+                                        		<td style="text-align: center;">
+	                                        		<img
+	                                                	src="<%=tDao.getTeam(fbDto.getFbCategory()).getTeamLogo() %>"
+	                                                    style="max-width: 40px;">
+                                        		</td>
+                                        <%
+                                        	}
+                                     
+                                        %>
+                                    	<td><a href="freePost_detail.jsp?fbNum=<%=fbDto.getFbNum() %>"><%=fbDto.getFbSubject() %></a></td>
+                                        <td style="text-align: center;"><%=fbDto.getNickname() %></td>
+                                        <td style="text-align: center;"><%=sdf.format(fbDto.getFbWriteday()) %></td>
+                                        <td style="text-align: center;"><%=fbDto.getFbReadCnt() %></td>
+                                        <td style="text-align: center;"><%=fbDto.getFbLike() %></td>
+                                        <td style="text-align: center;"><%=fbDto.getFbDislike() %></td>
                                     </tr>
-                                    <tr>
-                                        <td style="text-align: center;">3</td>
-                                        <td style="text-align: center;"><img
-                                                src="https://upload.wikimedia.org/wikipedia/ko/7/7b/Kt_%EC%9C%84%EC%A6%88_%EB%A1%9C%EA%B3%A0.png"
-                                                style="width: 30px;">
-                                        </td>
-                                        <td><a href="post_detail.html">제목3</a></td>
-                                        <td style=" text-align: center;">작성자3</td>
-                                        <td style="text-align: center;">2023-03-09 11:23</td>
-                                        <td style="text-align: center;">43</td>
-                                        <td style="text-align: center;">20</td>
-                                        <td style="text-align: center;">7</td>
-                                    </tr>
+                         
+                                <%
+                                	}
+                                %>
+                              
                                 </tbody>
                             </table>
                         </div>
@@ -186,7 +198,9 @@
                                 <div class="bSelect">select</div>
                                 <div class="bSearch">검색창</div>
                             </div>
-                            <div class="bInsert">글쓰기</div>
+                            <div class="bInsert">
+								<button type="button" class="btn btn-default" style="border: 1px solid gray;" onclick="location.href='freeBoard_insert.jsp'">글쓰기</button>
+							</div>
                         </div>
                         <div class="bPaging">페이징 처리</div>
                     </div>

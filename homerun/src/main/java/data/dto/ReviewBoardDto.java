@@ -1,5 +1,7 @@
 package data.dto;
 
+import java.sql.Timestamp;
+
 public class ReviewBoardDto {
 
 	private String rbNum;
@@ -11,7 +13,7 @@ public class ReviewBoardDto {
 	private String rbReadCnt;
 	private String rbLike;
 	private String rbDislike;
-	private String rbWriteday;
+	private Timestamp rbWriteday;
 	private String rbReport;
 	
 	public String getRbNum() {
@@ -68,10 +70,10 @@ public class ReviewBoardDto {
 	public void setRbDislike(String rbDislike) {
 		this.rbDislike = rbDislike;
 	}
-	public String getRbWriteday() {
+	public Timestamp getRbWriteday() {
 		return rbWriteday;
 	}
-	public void setRbWriteday(String rbWriteday) {
+	public void setRbWriteday(Timestamp rbWriteday) {
 		this.rbWriteday = rbWriteday;
 	}
 	public String getRbReport() {

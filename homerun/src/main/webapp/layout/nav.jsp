@@ -22,7 +22,7 @@
     <link href="../assets/css/bootstrap.min.css" rel="stylesheet" />
 
     <!-- Template Stylesheet -->
-    <link href="../assets/css/style.css" rel="stylesheet" />
+    <link href="../assets/css/style_main.css" rel="stylesheet" />
 </head>
 
 <body>
