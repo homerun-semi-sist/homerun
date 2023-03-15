@@ -1,3 +1,6 @@
+<%@page import="java.text.SimpleDateFormat"%>
+<%@page import="data.dto.TeamDto"%>
+<%@page import="data.dao.TeamDao"%>
 <%@page import="data.dto.ReviewBoardDto"%>
 <%@page import="data.dao.ReviewBoardDao"%>
 <%@page import="data.dto.GameDto"%>
@@ -35,7 +38,7 @@
     <script src="../assets/board/js/config.js"></script>
     
     <style>
-        .bBottom {
+                .bBottom {
             border: 0px solid gray;
             height: 35px;
             display: flex;
@@ -63,7 +66,7 @@
         }
 
         .bInsert {
-            border: 1px solid gray;
+            border: 0px solid gray;
             width: 100px;
             text-align: center;
             margin-left: auto;
@@ -79,19 +82,21 @@
             text-align: center;
         }
 
-        img {
-            width: 35px;
+        a {
+            text-decoration: none;
+            color: black;
         }
     </style>
 </head>
 
 <body>
-<%
-	GameDao gDao = new GameDao();
-	List<GameDto> gList = gDao.getAllGames();
-	
+<%	
 	ReviewBoardDao rbDao = new ReviewBoardDao();
 	List<ReviewBoardDto> rbList = rbDao.getAllRBs();
+	
+	TeamDao tDao = new TeamDao();
+	
+	SimpleDateFormat sdf = new SimpleDateFormat("yy-MM-dd"); 
 %>
     <!-- Layout wrapper -->
     <div class="layout-wrapper layout-content-navbar">
@@ -124,6 +129,9 @@
                                     
                                 <%                                	
                                 	for(ReviewBoardDto rbDto : rbList) {
+                                		GameDao gDao = new GameDao();
+                                		GameDto gDto = gDao.getGame(rbDto.getgId());
+                                		
                                 %>
 
                                 	<%-- <tr>
@@ -137,73 +145,44 @@
                                     </tr> --%>
                          
                          
-                                    <tr>
+                                     <tr>
                                         <td style="text-align: center;"><%=rbDto.getRbNum() %></td>
-                                        <td style="text-align: center;"><%=rbDto.getgId()x %></td>
+                                        <td style="text-align: center;"><%=gDto.getgDay() %></td>
                                         <td style="text-align: center;">
-                                            <span style="color: #FF6600; font-weight: bold;">한화</span>
-                                            <span>&nbsp;vs&nbsp;</span>
-                                            <span style="color: #C30452; font-weight: bold">LG</span>
+                                        
+                                        <%
+                                        	if(gDto.getHome().equals("한화")) {	
+                                        %>
+                                        		<img src="<%=tDao.getTeam(gDto.getHome()).getTeamLogo() %>" style="width: 50px;">
+                                        		&nbsp;vs&nbsp;
+                                            	<img src="<%=tDao.getTeam(gDto.getAway()).getTeamLogo() %>" style="width: 40px;">      
+                                        <%		
+                                        	} else if(gDto.getAway().equals("한화")) {
+                                        %>
+                                        		<img src="<%=tDao.getTeam(gDto.getHome()).getTeamLogo() %>" style="width: 40px;">
+                                        		&nbsp;vs&nbsp;
+                                            	<img src="<%=tDao.getTeam(gDto.getAway()).getTeamLogo() %>" style="width: 50px;"> 
+                                        <%			
+                                        	} else {
+                                        %>
+                                        		<img src="<%=tDao.getTeam(gDto.getHome()).getTeamLogo() %>" style="width: 40px;">
+                                        		&nbsp;vs&nbsp;
+                                            	<img src="<%=tDao.getTeam(gDto.getAway()).getTeamLogo() %>" style="width: 40px;"> 
+                                        <%
+                                        	}
+                                        %>                                      
                                         </td>
-                                        <td><a href="post_detail.html">제목1</a></td>
-                                        <td style=" text-align: center;">작성자1</td>
-                                        <td style="text-align: center;">2023-03-11 11:23</td>
-                                        <td style="text-align: center;">0</td>
-                                        <td style="text-align: center;">0</td>
-                                        <td style="text-align: center;">0</td>
+                                        <td><a href="reviewPost_detail.jsp?rbNum=<%=rbDto.getRbNum() %>"><%=rbDto.getRbSubject() %></a></td>
+                                        <td style=" text-align: center;"><%=rbDto.getNickname() %></td>
+                                        <td style="text-align: center;"><%=sdf.format(rbDto.getRbWriteday()) %></td>
+                                        <td style="text-align: center;"><%=rbDto.getRbReadCnt() %></td>
+                                        <td style="text-align: center;"><%=rbDto.getRbLike() %></td>
+                                        <td style="text-align: center;"><%=rbDto.getRbDislike() %></td>
                                     </tr>
                                 <%
                                 	}
                                 %>
-                                    
-                                    
-                                    <tr>
-                                        <td style="text-align: center;">1</td>
-                                        <td style="text-align: center;">23.03.06</td>
-                                        <td style="text-align: center;">
-                                            <span style="color: #FF6600; font-weight: bold;">한화</span>
-                                            <span>&nbsp;vs&nbsp;</span>
-                                            <span style="color: #C30452; font-weight: bold">LG</span>
-                                        </td>
-                                        <td><a href="post_detail.html">제목1</a></td>
-                                        <td style=" text-align: center;">작성자1</td>
-                                        <td style="text-align: center;">2023-03-11 11:23</td>
-                                        <td style="text-align: center;">0</td>
-                                        <td style="text-align: center;">0</td>
-                                        <td style="text-align: center;">0</td>
-                                    </tr>
-                                    <tr>
-                                        <td style="text-align: center;">2</td>
-                                        <td style="text-align: center;">23.03.08</td>
-                                        <td style="text-align: center;">
-                                            <img
-                                                src="https://upload.wikimedia.org/wikipedia/ko/7/7b/Kt_%EC%9C%84%EC%A6%88_%EB%A1%9C%EA%B3%A0.png">
-                                            vs
-                                            <img
-                                                src="https://upload.wikimedia.org/wikipedia/ko/0/05/%EB%91%90%EC%82%B0_%EB%B2%A0%EC%96%B4%EC%8A%A4_%EB%A1%9C%EA%B3%A0.png">
-                                        </td>
-                                        <td><a href="post_detail.html">제목2</a></td>
-                                        <td style=" text-align: center;">작성자2</td>
-                                        <td style="text-align: center;">2023-03-10 11:23</td>
-                                        <td style="text-align: center;">10</td>
-                                        <td style="text-align: center;">3</td>
-                                        <td style="text-align: center;">0</td>
-                                    </tr>
-                                    <tr>
-                                        <td style="text-align: center;">3</td>
-                                        <td style="text-align: center;">23.03.10</td>
-                                        <td style="text-align: center;">
-                                            <span style="color: #000000;">KT</span>
-                                            <span>&nbsp;vs&nbsp;</span>
-                                            <span style="color: #131230;">두산</span>
-                                        </td>
-                                        <td><a href="post_detail.html">제목3</a></td>
-                                        <td style=" text-align: center;">작성자3</td>
-                                        <td style="text-align: center;">2023-03-09 11:23</td>
-                                        <td style="text-align: center;">43</td>
-                                        <td style="text-align: center;">20</td>
-                                        <td style="text-align: center;">7</td>
-                                    </tr>
+                                   
                                 </tbody>
                             </table>
                         </div>
@@ -213,7 +192,7 @@
                                 <div class="bSearch">검색창</div>
                             </div>
                             <div class="bInsert">
-								<button type="button" class="btn btn-default" style="border: 1px solid gray;" onclick="location.href='freeBoard_insert.jsp'">글쓰기</button>
+								<button type="button" class="btn btn-default" style="border: 1px solid gray;" onclick="location.href='reviewBoard_insert.jsp'">글쓰기</button>
 							</div>
                         </div>
                         <div class="bPaging">페이징 처리</div>

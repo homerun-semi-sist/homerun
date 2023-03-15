@@ -17,21 +17,17 @@
 			request.setCharacterEncoding("UTF-8");
 		
 			String fbNum = request.getParameter("fbNum");
-			String nickname = request.getParameter("nickname");
-			String category = request.getParameter("category");
 			String subject = request.getParameter("subject");
 			String content = request.getParameter("content");
 			
 			FreeBoardDto dto = new FreeBoardDto();
 			
 			dto.setFbNum(fbNum);
-			dto.setNickname(nickname);
-			dto.setFbCategory(category);
 			dto.setFbSubject(subject);
 			dto.setFbContent(content);
 		
 			FreeBoardDao dao = new FreeBoardDao();
-			dao.updateFreeBoard(dto);
+			dao.updateFB(dto);
 			
 			// 페이징 처리
 			/* int num = dao.getMaxNum(); */

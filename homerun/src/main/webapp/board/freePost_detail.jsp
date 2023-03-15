@@ -36,7 +36,7 @@
 		<table class="table table-condensed" style="width: 650px;">
 			<tr>
 				<td style="width: 500px;">
-					<h2><%=dto.getFbSubject() %></h2>
+					<h2>[<%=dto.getFbCategory() %>] <%=dto.getFbSubject() %></h2>
 					<span style="font-size: 9pt;"><b><%=dto.getNickname() %></b></span>
 					<span style="color: gray; font-size: 9pt;"><%=sdf.format(dto.getFbWriteday()) %></span>&nbsp;&nbsp;&nbsp;&nbsp;
 					<span style="font-size: 9pt;">조회 : <%=dto.getFbReadCnt() %></span>

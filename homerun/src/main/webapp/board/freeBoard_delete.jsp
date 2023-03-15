@@ -20,7 +20,7 @@
 		 	FreeBoardDao dao = new FreeBoardDao();
 			
 			// dao 삭제
-			dao.deleteFreeBoard(fbNum);
+			dao.deleteFB(fbNum);
 			
 			// 페이지 이동
 			response.sendRedirect("freeBoard_list.jsp");

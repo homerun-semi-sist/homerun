@@ -29,7 +29,7 @@
 			dto.setFbContent(content);
 		
 			FreeBoardDao dao = new FreeBoardDao();
-			dao.insertFreeBoard(dto);
+			dao.insertFB(dto);
 			
 			// 페이징 처리
 			/* int num = dao.getMaxNum(); */

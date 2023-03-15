@@ -147,8 +147,7 @@
                                         
                                         <%
                                         	// 카테고리 : 전체 -> 야구공 png
-                                        	if(fbDto.getFbCategory().equals("전체")) {
-                                        		
+                                        	if(fbDto.getFbCategory().equals("전체")) {                                       		
                                         %>
                                         		<td style="text-align: center;"><img
 	                                                src="https://cdn.icon-icons.com/icons2/2070/PNG/512/baseball_icon_126956.png"
@@ -161,7 +160,7 @@
                                         		<td style="text-align: center;">
                                         		<img
 	                                                src="<%=tDao.getTeam(fbDto.getFbCategory()).getTeamLogo() %>"
-	                                                    style="max-width: 50px;">
+	                                                    style="width: 50px;">
                                         		</td>
                                         <%		
                                         	}
@@ -171,7 +170,7 @@
                                         		<td style="text-align: center;">
 	                                        		<img
 	                                                	src="<%=tDao.getTeam(fbDto.getFbCategory()).getTeamLogo() %>"
-	                                                    style="max-width: 40px;">
+	                                                    style="width: 40px;">
                                         		</td>
                                         <%
                                         	}

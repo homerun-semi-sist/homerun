@@ -101,7 +101,7 @@ public class FreeBoardDao {
     }
 	
 	// insert
-	public void insertFreeBoard(FreeBoardDto dto) {
+	public void insertFB(FreeBoardDto dto) {
 		Connection conn = db.getConnection();
 		PreparedStatement pstmt = null;
 		
@@ -126,7 +126,7 @@ public class FreeBoardDao {
 	}
 	
 	// update
-	public void updateFreeBoard(FreeBoardDto dto) {
+	public void updateFB(FreeBoardDto dto) {
 		Connection conn = db.getConnection();
 		PreparedStatement pstmt = null;
 		
@@ -149,7 +149,7 @@ public class FreeBoardDao {
 	}
 
 	// delete
-	public void deleteFreeBoard(String fbNum) {
+	public void deleteFB(String fbNum) {
 		Connection conn = db.getConnection();
 		PreparedStatement pstmt = null;
 		

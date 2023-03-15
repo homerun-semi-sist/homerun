@@ -1,3 +1,5 @@
+<%@page import="data.dto.GameDto"%>
+<%@page import="data.dao.GameDao"%>
 <%@page import="data.dto.ReviewBoardDto"%>
 <%@page import="data.dao.ReviewBoardDao"%>
 <%@page import="java.text.SimpleDateFormat"%>
@@ -22,13 +24,13 @@
 			String rbNum = request.getParameter("rbNum");
 			
 			// dao
-			ReviewBoardDao dao = new ReviewBoardDao();
-			
+			ReviewBoardDao rbDao = new ReviewBoardDao();
+			GameDao gDao = new GameDao();
 			// 조회수 증가
 			// dao.updateReadCount(num);
 			
 			// 데이터
-			ReviewBoardDto dto = dao.getRB(rbNum);
+			ReviewBoardDto rbDto = rbDao.getRB(rbNum);
 			
 			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
 		%>
@@ -36,18 +38,22 @@
 		<table class="table table-condensed" style="width: 650px;">
 			<tr>
 				<td style="width: 500px;">
-					<h2><%=dto.getRbNum() %></h2>
-					<span style="font-size: 9pt;"><b><%=dto.getNickname() %></b></span>
-					<span style="color: gray; font-size: 9pt;"><%=sdf.format(dto.getRbWriteday() %></span>&nbsp;&nbsp;&nbsp;&nbsp;
-					<span style="font-size: 9pt;">조회 : <%=dto.getRbPhoto() %></span>
-					<span style="font-size: 9pt;">추천 : <%=dto.getRbLike() %></span>
-					<span style="font-size: 9pt;">비추천 : <%=dto.getRbDislike() %></span>
+				<%
+					GameDto gDto = gDao.getGame(rbDto.getgId());
+				%>
+				
+					<h2>[<%=gDto.getgDay()%> <%=gDto.getHome()%> vs <%=gDto.getAway()%>] <%=rbDto.getRbSubject() %></h2>
+					<span style="font-size: 9pt;"><b><%=rbDto.getNickname() %></b></span>
+					<span style="color: gray; font-size: 9pt;"><%=sdf.format(rbDto.getRbWriteday()) %></span>&nbsp;&nbsp;&nbsp;&nbsp;
+					<span style="font-size: 9pt;">조회 : <%=rbDto.getRbReadCnt() %></span>
+					<span style="font-size: 9pt;">추천 : <%=rbDto.getRbLike() %></span>
+					<span style="font-size: 9pt;">비추천 : <%=rbDto.getRbDislike() %></span>
 				</td>
 			</tr>
 			
 			<tr>
 				<td colspan="2">
-					<%=dto.getFbContent().replace("\n", "<br>") %>
+					<%=rbDto.getRbContent().replace("\n", "<br>") %>
 				</td>
 			</tr>
 		</table>
@@ -55,8 +61,8 @@
 		<div style="margin-left: 400px;">
 			<button type="button" class="btn btn-default" onclick="location.href='reviewBoard_insert.jsp'">글쓰기</button>
 			<button type="button" class="btn btn-default" onclick="location.href='reviewBoard_list.jsp'">목록</button>
-			<button type="button" class="btn btn-default" onclick="location.href='freeBoard_update.jsp?rbNum=<%=dto.getRbNum() %>'">수정</button>
-			<button type="button" class="btn btn-default" onclick="location.href='freeBoard_delete.jsp?rbNum=<%=dto.getRbNum() %>'">삭제</button>
+			<button type="button" class="btn btn-default" onclick="location.href='reviewBoard_update.jsp?rbNum=<%=rbDto.getRbNum() %>'">수정</button>
+			<button type="button" class="btn btn-default" onclick="location.href='reviewBoard_delete.jsp?rbNum=<%=rbDto.getRbNum() %>'">삭제</button>
 		</div>
 	</body>
 </html>

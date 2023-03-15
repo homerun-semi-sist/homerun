@@ -16,20 +16,18 @@
 		<%
 			request.setCharacterEncoding("UTF-8");
 		
-			String nickname = request.getParameter("nickname");
-			String gId = request.getParameter("gId");
+			String rbNum = request.getParameter("rbNum");
 			String subject = request.getParameter("subject");
 			String content = request.getParameter("content");
 			
 			ReviewBoardDto dto = new ReviewBoardDto();
 			
-			dto.setNickname(nickname);
-			dto.setgId(gId);
+			dto.setRbNum(rbNum);
 			dto.setRbSubject(subject);
 			dto.setRbContent(content);
 		
 			ReviewBoardDao dao = new ReviewBoardDao();
-			dao.insertRB(dto);
+			dao.updateRB(dto);
 			
 			// 페이징 처리
 			/* int num = dao.getMaxNum(); */

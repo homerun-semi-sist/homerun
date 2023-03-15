@@ -13,13 +13,7 @@
 <title>Insert title here</title>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
 <script src="https://code.jquery.com/jquery-3.5.0.js"></script>
-<%
-	//프로젝트의 경로
-	// String root=request.getContextPath();
-	
-	TeamDao tDao = new TeamDao();
-	List<TeamDto> list = tDao.getAllTeams();
-%>
+
 <!-- se2 폴더에서 js 파일 가져오기 -->
 <script type="text/javascript" src="../smartEditor/js/HuskyEZCreator.js"
 	charset="utf-8"></script>

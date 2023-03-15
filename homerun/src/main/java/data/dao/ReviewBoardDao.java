@@ -100,7 +100,7 @@ public class ReviewBoardDao {
     }
 	
 	// insert
-	public void insertReviewBoard(ReviewBoardDto dto) {
+	public void insertRB(ReviewBoardDto dto) {
 		Connection conn = db.getConnection();
 		PreparedStatement pstmt = null;
 		
@@ -125,7 +125,7 @@ public class ReviewBoardDao {
 	}
 	
 	// update
-	public void updateReviewBoard(ReviewBoardDto dto) {
+	public void updateRB(ReviewBoardDto dto) {
 		Connection conn = db.getConnection();
 		PreparedStatement pstmt = null;
 		
@@ -148,7 +148,7 @@ public class ReviewBoardDao {
 	}
 
 	// delete
-	public void deleteReviewBoard(String rbNum) {
+	public void deleteRB(String rbNum) {
 		Connection conn = db.getConnection();
 		PreparedStatement pstmt = null;
 		

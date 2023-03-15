@@ -1,6 +1,10 @@
-<%@page import="data.dto.TeamDto"%>
+<%@page import="data.dto.ReviewBoardDto"%>
+<%@page import="data.dao.ReviewBoardDao"%>
+<%@page import="data.dto.GameDto"%>
+<%@page import="data.dao.GameDao"%>
+<%@page import="java.sql.Array"%>
 <%@page import="java.util.List"%>
-<%@page import="data.dao.TeamDao"%>
+
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -20,58 +24,55 @@
 </head>
 <body>
 <%
-	//프로젝트의 경로
-	// String root=request.getContextPath();
+	String rbNum = request.getParameter("rbNum");
+	// String currentPage = request.getParameter("currentPage");
 	
-	TeamDao dao = new TeamDao();
-	List<TeamDto> list = dao.getAllTeams();
+	ReviewBoardDao rbDao = new ReviewBoardDao();
+	ReviewBoardDto rbDto = rbDao.getRB(rbNum);
+	
+	GameDao gDao = new GameDao();
 	
 	String nickname = "헬로헬로";
 %>
-
-<form action="freeBoard_insertAction.jsp" method="post">	
-	<!-- hiddend으로 nickname / value 값 변경 필요 -->
-	<input type="hidden" name="nickname" value="<%=nickname %>">
-	<table class="table table-bordered" style="width: 1000px; height:700px; margin-left: 100px;">
-		<caption style="caption-side: top;"><h3>자유게시판 게시글 등록</h3></caption>
-		<tr>
-			<th bgcolor="#E1EEDD" width="100" style="height:30px; text-align: center; line-height: 30px;">카테고리</th>
-			<td>
-				<select name="category" class="form-control" style="width: 220px;">
-					<option value="전체" selected="selected">전체</option>
-					<%
-						for(TeamDto dto : list) {
-							String category = dto.getTeamNick();	
-					%>
-						<option value="<%=category %>"><%=category %></option>
-					<%
-						}
-					%>
-				</select>
-			</td>
+<form action="reviewBoard_updateAction.jsp" method="post">
+	<input type="hidden" name="rbNum" value="<%=rbNum %>">
 	
+	<!-- hiddend으로 nickname / value 값 변경 필요 -->
+	<input type="hidden" name="nickname" value="<%=nickname %>">	
+	<%-- <input type="hidden" name="currentPage" value="<%=currentPage %>"> --%>
+	
+	<table class="table table-bordered" style="height:30px; width: 1000px; height:700px; margin-left: 100px;">
+		<caption style="caption-side: top;"><h3>후기 게시판 작성글 수정</h3></caption>
+		<tr>
+			<th bgcolor="#E1EEDD" width="200" style="height:30px; text-align: center; line-height: 30px;">경기일 경기팀</th>
+			<td>
+				<%=gDao.getGame(rbDto.getgId()).getgDay() %> <%=gDao.getGame(rbDto.getgId()).getHome() %> vs <%=gDao.getGame(rbDto.getgId()).getAway() %>
+			</td>
+		</tr>
+		
+		<tr>
 			<th bgcolor="#E1EEDD" width="100" style="height:30px; text-align: center; line-height: 30px;">제목</th>
 			<td>
 				<input type="text" name="subject" class="form-control"
-					required="required" style="width: 500px;">
+					required="required" style="width: 500px;" value="<%=rbDto.getRbSubject() %>">
 			</td>
 		</tr>
 		<tr>
 			<td colspan="4">
 				<textarea name="content" id="content"		
 					required="required"			
-					style="width: 100%; height: 600px; display: none;"></textarea>		
+					style="width: 100%; height: 600px; display: none;"><%=rbDto.getRbContent() %></textarea>		
 			</td>
 		</tr>
 		<tr>
 			<td colspan="4" align="center">
 				<button type="button" class="btn btn-default"
 					style="width: 120px;"
-					onclick="submitContents(this)">DB 저장</button>
+					onclick="submitContents(this)">수정</button>
 				
 				<button type="button" class="btn btn-default"
 					style="width: 120px;"
-					onclick="location.href='freeBoard_list.jsp'">목록</button>
+					onclick="location.href='reviewBoard_list.jsp'">목록</button>
 			</td>
 		</tr>
 		
