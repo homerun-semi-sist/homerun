@@ -16,14 +16,14 @@
 		<%
 			request.setCharacterEncoding("UTF-8");
 		
-			String nickname = request.getParameter("nickname");
+			String uId = request.getParameter("uId");
 			String category = request.getParameter("category");
 			String subject = request.getParameter("subject");
 			String content = request.getParameter("content");
 			
 			FreeBoardDto dto = new FreeBoardDto();
 			
-			dto.setNickname(nickname);
+			dto.setUId(uId);
 			dto.setFbCategory(category);
 			dto.setFbSubject(subject);
 			dto.setFbContent(content);

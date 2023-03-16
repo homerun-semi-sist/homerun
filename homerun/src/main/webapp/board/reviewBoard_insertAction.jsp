@@ -16,14 +16,14 @@
 		<%
 			request.setCharacterEncoding("UTF-8");
 		
-			String nickname = request.getParameter("nickname");
+			String uId = request.getParameter("uId");
 			String gId = request.getParameter("gId");
 			String subject = request.getParameter("subject");
 			String content = request.getParameter("content");
 			
 			ReviewBoardDto dto = new ReviewBoardDto();
 			
-			dto.setNickname(nickname);
+			dto.setUId(uId);
 			dto.setgId(gId);
 			dto.setRbSubject(subject);
 			dto.setRbContent(content);

@@ -1,3 +1,5 @@
+<%@page import="data.dto.UserDto"%>
+<%@page import="data.dao.UserDao"%>
 <%@page import="data.dao.TeamDao"%>
 <%@page import="java.text.SimpleDateFormat"%>
 <%@page import="java.util.List"%>
@@ -127,6 +129,8 @@
                                 
                                 <%                                	
                                 	for(FreeBoardDto fbDto : list) {
+                                		UserDao uDao = new UserDao();
+                                		String nickname = uDao.getUser(fbDto.getUId()).getNickname();
                                 %>
                                 
                                 <!-- 
@@ -177,7 +181,7 @@
                                      
                                         %>
                                     	<td><a href="freePost_detail.jsp?fbNum=<%=fbDto.getFbNum() %>"><%=fbDto.getFbSubject() %></a></td>
-                                        <td style="text-align: center;"><%=fbDto.getNickname() %></td>
+                                        <td style="text-align: center;"><%=nickname %></td>
                                         <td style="text-align: center;"><%=sdf.format(fbDto.getFbWriteday()) %></td>
                                         <td style="text-align: center;"><%=fbDto.getFbReadCnt() %></td>
                                         <td style="text-align: center;"><%=fbDto.getFbLike() %></td>

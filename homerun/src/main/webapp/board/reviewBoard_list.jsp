@@ -1,3 +1,4 @@
+<%@page import="data.dao.UserDao"%>
 <%@page import="java.text.SimpleDateFormat"%>
 <%@page import="data.dto.TeamDto"%>
 <%@page import="data.dao.TeamDao"%>
@@ -132,6 +133,9 @@
                                 		GameDao gDao = new GameDao();
                                 		GameDto gDto = gDao.getGame(rbDto.getgId());
                                 		
+                                		UserDao uDao = new UserDao();
+                                		String nickname = uDao.getUser(rbDto.getUId()).getNickname();
+                                		
                                 %>
 
                                 	<%-- <tr>
@@ -173,7 +177,7 @@
                                         %>                                      
                                         </td>
                                         <td><a href="reviewPost_detail.jsp?rbNum=<%=rbDto.getRbNum() %>"><%=rbDto.getRbSubject() %></a></td>
-                                        <td style=" text-align: center;"><%=rbDto.getNickname() %></td>
+                                        <td style=" text-align: center;"><%=nickname %></td>
                                         <td style="text-align: center;"><%=sdf.format(rbDto.getRbWriteday()) %></td>
                                         <td style="text-align: center;"><%=rbDto.getRbReadCnt() %></td>
                                         <td style="text-align: center;"><%=rbDto.getRbLike() %></td>

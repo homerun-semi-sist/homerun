@@ -1,3 +1,5 @@
+<%@page import="data.dto.UserDto"%>
+<%@page import="data.dao.UserDao"%>
 <%@page import="data.dto.GameDto"%>
 <%@page import="data.dao.GameDao"%>
 <%@page import="data.dto.ReviewBoardDto"%>
@@ -26,13 +28,19 @@
 			// dao
 			ReviewBoardDao rbDao = new ReviewBoardDao();
 			GameDao gDao = new GameDao();
+			
 			// 조회수 증가
-			// dao.updateReadCount(num);
+			rbDao.updateReadCount(rbNum);
 			
 			// 데이터
 			ReviewBoardDto rbDto = rbDao.getRB(rbNum);
 			
 			SimpleDateFormat sdf = new SimpleDateFormat("yy.MM.dd HH:mm");
+			
+			String uId = (String)session.getAttribute("myid");
+			
+			UserDao uDao = new UserDao();
+			UserDto uDto = uDao.getUser(uId);	
 		%>
 
 		<table class="table table-condensed" style="width: 650px;">
@@ -43,7 +51,7 @@
 				%>
 				
 					<h2>[<%=gDto.getgDay()%> <%=gDto.getHome()%> vs <%=gDto.getAway()%>] <%=rbDto.getRbSubject() %></h2>
-					<span style="font-size: 9pt;"><b><%=rbDto.getNickname() %></b></span>
+					<span style="font-size: 9pt;"><b><%=uDto.getNickname() %></b></span>
 					<span style="color: gray; font-size: 9pt;"><%=sdf.format(rbDto.getRbWriteday()) %></span>&nbsp;&nbsp;&nbsp;&nbsp;
 					<span style="font-size: 9pt;">조회 : <%=rbDto.getRbReadCnt() %></span>
 					<span style="font-size: 9pt;">추천 : <%=rbDto.getRbLike() %></span>

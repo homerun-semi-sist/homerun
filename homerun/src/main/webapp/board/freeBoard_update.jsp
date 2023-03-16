@@ -30,11 +30,11 @@
 	
 	FreeBoardDao fbDao = new FreeBoardDao();
 	FreeBoardDto fbDto = fbDao.getFB(fbNum);
-	
-	String uId = (String)session.getAttribute("myid");
+
+	String uId = fbDto.getUId();
 %>
 <form action="freeBoard_updateAction.jsp" method="post">
-	<input type="hidden" name="fbNum" value="<%=fbNum %>">
+	<input type="hidden" name="fbNum" value="<%=uId %>">
 	
 	<!-- hiddend으로 nickname / value 값 변경 필요 -->
 	<input type="hidden" name="uId" value="<%=uId %>">	

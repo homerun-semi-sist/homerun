@@ -32,13 +32,13 @@
 	
 	GameDao gDao = new GameDao();
 	
-	String nickname = "헬로헬로";
+	String uId = rbDto.getUId();
 %>
 <form action="reviewBoard_updateAction.jsp" method="post">
 	<input type="hidden" name="rbNum" value="<%=rbNum %>">
 	
 	<!-- hiddend으로 nickname / value 값 변경 필요 -->
-	<input type="hidden" name="nickname" value="<%=nickname %>">	
+	<input type="hidden" name="uId" value="<%=uId %>">	
 	<%-- <input type="hidden" name="currentPage" value="<%=currentPage %>"> --%>
 	
 	<table class="table table-bordered" style="height:30px; width: 1000px; height:700px; margin-left: 100px;">

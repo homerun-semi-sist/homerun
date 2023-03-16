@@ -31,12 +31,12 @@
 	GameDao dao = new GameDao();
 	List<GameDto> list = dao.getAllGames();
 	
-	String nickname = "헬로헬로";
+	String uId = (String)session.getAttribute("myid");
 %>
 
 <form action="reviewBoard_insertAction.jsp" method="post">	
 	<!-- hiddend으로 nickname / value 값 변경 필요 -->
-	<input type="hidden" name="nickname" value="<%=nickname %>">
+	<input type="hidden" name="uId" value="<%=uId %>">
 	<table class="table table-bordered" style="width: 1000px; height:700px; margin-left: 100px;">
 		<caption style="caption-side: top;"><h3>후기게시판 게시글 등록</h3></caption>
 		<tr>

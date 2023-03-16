@@ -191,38 +191,39 @@ public class UserDao {
 		}
 	}
 	
-	// getFB 
-		public UserDto getUser(String uId) {
-			UserDto dto = new UserDto();
+	// getUser
+	public UserDto getUser(String uId) {
+		UserDto dto = new UserDto();
 
-	        Connection conn = db.getConnection();
-	        PreparedStatement pstmt = null;
-	        ResultSet rs = null;
+        Connection conn = db.getConnection();
+        PreparedStatement pstmt = null;
+        ResultSet rs = null;
 
-	        String sql = "select * from USER where uid=?";
+        String sql = "select * from USER where uid=?";
 
-	        try {
-	            pstmt = conn.prepareStatement(sql);
+        try {
+            pstmt = conn.prepareStatement(sql);
 
-	            pstmt.setString(1, uId);
-	            rs = pstmt.executeQuery();
+            pstmt.setString(1, uId);
+            rs = pstmt.executeQuery();
 
-	            if(rs.next()) {
-	            	pstmt.setString(1, dto.getUid());
-	    			pstmt.setString(2, dto.getPw());
-	    			pstmt.setString(3, dto.getuName());
-	    			pstmt.setString(4, dto.getNickname());
-	    			pstmt.setString(5, dto.getGender());
-	    			pstmt.setString(6, dto.getBirth());
-	    			pstmt.setString(7, dto.getHp());
-	    			pstmt.setString(8, dto.getAddr());
-	            }
-	        } catch (SQLException e) {
-	            e.printStackTrace();
-	        } finally {
-	            db.dbClose(rs, pstmt, conn);
-	        }
+            if(rs.next()) {
+            	dto.setUid(rs.getString("uId"));
+                dto.setPw(rs.getString("pw"));
+                dto.setuName(rs.getString("uName"));
+                dto.setNickname(rs.getString("nickname"));
+                dto.setGender(rs.getString("gender"));
+                dto.setBirth(rs.getString("birth"));
+                dto.setHp(rs.getString("hp"));
+                dto.setAddr(rs.getString("addr"));
+                dto.setuPhoto(rs.getString("uPhoto"));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            db.dbClose(rs, pstmt, conn);
+        }
 
-	        return dto;
-	    }
+        return dto;
+    }
 }
