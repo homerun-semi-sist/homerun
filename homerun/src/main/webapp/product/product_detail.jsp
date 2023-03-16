@@ -10,8 +10,6 @@
 <title>HOMERUN | ShopDetail</title>
 <!-- Core theme CSS (includes Bootstrap)-->
 <link href="../assets/css/styles_detail.css" rel="stylesheet" />
-
-<link href="../assets/css/footer.css" rel="stylesheet" />
 </head>
 <body>
 	<section class="py-5">

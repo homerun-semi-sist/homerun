@@ -7,8 +7,6 @@
 <title>HOMERUN | ShopList</title>
 <link href="../assets/css/theme.css" rel="stylesheet" />
 
-<link href="../assets/css/styles_footer.css" rel="stylesheet" />
-
 <style>
 #navv-doosan, #navv-kiwoom, #navv-samsung, #navv-lg, #navv-kt, #navv-ssg,
 	#navv-nc, #navv-lotte, #navv-kia, #navv-hanhwa, #pills-doosan_teamwear,

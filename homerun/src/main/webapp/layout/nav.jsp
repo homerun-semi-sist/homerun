@@ -28,7 +28,7 @@
 <link href="../assets/css/bootstrap.min.css" rel="stylesheet" />
 
 <!-- Template Stylesheet -->
-<link href="../assets/css/style.css" rel="stylesheet" />
+<link href="../assets/css/style_main.css" rel="stylesheet" />
 </head>
 
 <body>
@@ -70,9 +70,9 @@
 					<a href="#" class="nav-link dropdown-toggle"
 						data-bs-toggle="dropdown">응원용품</a>
 					<div class="dropdown-menu bg-light m-0">
-						<a href="<%=root %>/product/product_mainPage.jsp" class="dropdown-item">상품메인</a> <a
-							href="#" class="dropdown-item">Page 1-2</a> <a href="#"
-							class="dropdown-item">Page 1-3</a>
+						<a href="<%=root%>/product/product_mainPage.jsp"
+							class="dropdown-item">상품메인</a> <a href="#" class="dropdown-item">Page
+							1-2</a> <a href="#" class="dropdown-item">Page 1-3</a>
 					</div>
 				</div>
 				<div class="nav-item dropdown">
@@ -88,7 +88,9 @@
 					<a href="#" class="nav-link dropdown-toggle"
 						data-bs-toggle="dropdown">관리자페이지</a>
 					<div class="dropdown-menu bg-light m-0">
-						<a href="#" class="dropdown-item">회원관리</a> <a href="#"
+						<a href="#" class="dropdown-item">회원관리</a> 
+						<a href="<%=root%>/product/product_insertPage.jsp" class="dropdown-item">재고입력</a>
+						<a href="<%=root%>/managementpage/management_productPage.jsp"
 							class="dropdown-item">재고관리</a> <a href="#" class="dropdown-item">게시글관리</a>
 					</div>
 				</div>
