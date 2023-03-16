@@ -24,6 +24,7 @@ public class FreeBoardDao {
  		ResultSet rs = null;
  		
  		String sql = "select * from FREEBOARD order by fbNum";
+// 		 where nickname=''
  		
  		try {
  			pstmt = conn.prepareStatement(sql);
