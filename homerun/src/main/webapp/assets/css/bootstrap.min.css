@@ -302,7 +302,7 @@ button {
 button:focus:not(:focus-visible) {
   outline: 0;
 }
-input,
+/* input,
 button,
 select,
 optgroup,
@@ -311,7 +311,7 @@ textarea {
   font-family: inherit;
   font-size: inherit;
   line-height: inherit;
-}
+} */
 button,
 select {
   text-transform: none;
@@ -3672,7 +3672,7 @@ fieldset:disabled .btn {
   background-color: #0b214e;
   width: 100%;
   height: 60px;
-  font-size: 10pt;
+  font-size: 11pt;
 }
 .navbar > .container,
 .navbar > .container-fluid,

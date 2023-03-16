@@ -16,17 +16,15 @@ div.layout {
 
 #wrap, #content-wrap, .row {
 	height: auto;
-	/* 	min-height: calc(100% - 310px); */
-	min-height: 1000px;
+
 }
 
 .mainbox {
-	/* height: 100%;
-	min-height:1000px; */
+
 	margin-bottom: 20px;
 	font-size: 13pt;
 }
 
 .main_footer {
-	margin-top: 18px;
+	margin-top: 25px;
 }
