@@ -26,8 +26,8 @@ public class FreeCommentDto {
 	public String getUId() {
 		return uId;
 	}
-	public void setUId(String nickname) {
-		this.uId = nickname;
+	public void setUId(String uId) {
+		this.uId = uId;
 	}
 	public String getFcContent() {
 		return fcContent;
