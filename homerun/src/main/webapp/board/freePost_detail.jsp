@@ -1,3 +1,5 @@
+<%@page import="data.dto.UserDto"%>
+<%@page import="data.dao.UserDao"%>
 <%@page import="data.dto.FreeBoardDto"%>
 <%@page import="data.dao.FreeBoardDao"%>
 <%@page import="java.text.SimpleDateFormat"%>
@@ -22,26 +24,31 @@
 			String fbNum = request.getParameter("fbNum");
 			
 			// dao
-			FreeBoardDao dao = new FreeBoardDao();
+			FreeBoardDao fbDao = new FreeBoardDao();
 			
 			// 조회수 증가
-			dao.updateReadCount(fbNum);
+			fbDao.updateReadCount(fbNum);
 			
 			// 데이터
-			FreeBoardDto dto = dao.getFB(fbNum);
+			FreeBoardDto fbDto = fbDao.getFB(fbNum);
 			
 			SimpleDateFormat sdf = new SimpleDateFormat("yy.MM.dd HH:mm");
+			
+			String uId = (String)session.getAttribute("myid");
+			
+			UserDao uDao = new UserDao();
+			UserDto uDto = uDao.getUser(uId);	
 		%>
 
 		<table class="table table-condensed" style="width: 650px;">
 			<tr>
 				<td style="width: 500px;">
-					<h2>[<%=dto.getFbCategory() %>] <%=dto.getFbSubject() %></h2>
-					<span style="font-size: 9pt;"><b><%=dto.getNickname() %></b></span>
+					<h2>[<%=fbDto.getFbCategory() %>] <%=fbDto.getFbSubject() %></h2>
+					<span style="font-size: 9pt;"><b><%=uDto.getUid() %></b></span>
 					<span style="color: gray; font-size: 9pt;"><%=sdf.format(dto.getFbWriteday()) %></span>&nbsp;&nbsp;&nbsp;&nbsp;
-					<span style="font-size: 9pt;">조회 : <%=dto.getFbReadCnt() %></span>
-					<span style="font-size: 9pt;">추천 : <%=dto.getFbLike() %></span>
-					<span style="font-size: 9pt;">비추천 : <%=dto.getFbDislike() %></span>
+					<span style="font-size: 9pt;">조회 : <%=fbDto.getFbReadCnt() %></span>
+					<span style="font-size: 9pt;">추천 : <%=fbDto.getFbLike() %></span>
+					<span style="font-size: 9pt;">비추천 : <%=fbDto.getFbDislike() %></span>
 				</td>
 			</tr>
 			
@@ -59,8 +66,8 @@
 			<br><br>
 			<button type="button" class="btn btn-default" onclick="location.href='freeBoard_insert.jsp'">글쓰기</button>
 			<button type="button" class="btn btn-default" onclick="location.href='freeBoard_list.jsp'">목록</button>
-			<button type="button" class="btn btn-default" onclick="location.href='freeBoard_update.jsp?fbNum=<%=dto.getFbNum() %>'">수정</button>
-			<button type="button" class="btn btn-default" onclick="location.href='freeBoard_delete.jsp?fbNum=<%=dto.getFbNum() %>'">삭제</button>
+			<button type="button" class="btn btn-default" onclick="location.href='freeBoard_update.jsp?fbNum=<%=fbDto.getFbNum() %>'">수정</button>
+			<button type="button" class="btn btn-default" onclick="location.href='freeBoard_delete.jsp?fbNum=<%=fbDto.getFbNum() %>'">삭제</button>
 		</div>
 		
 		<script type="text/javascript">
@@ -69,12 +76,33 @@
 				console.log('<%=fbNum %>');		
 				
 				<%
-					dao.updateLike(fbNum);			
+				fbDao.updateLike(fbNum);			
 				%>
 				
 				$(this).css("background-color", "red");
 			});
 
+			// 비추천수 증가
+			$("#dislikeCnt").click(function() {
+				console.log('<%=fbNum %>');		
+				
+				<%
+				fbDao.updateDislike(fbNum);			
+				%>
+				
+				$(this).css("background-color", "red");
+			});
+			
+			// 비추천수 증가
+			$("#reportCnt").click(function() {
+				console.log('<%=fbNum %>');		
+				
+				<%
+				fbDao.updateReport(fbNum);			
+				%>
+				
+				$(this).css("background-color", "red");
+			});ㄴ
 		</script>
 	</body>
 </html>

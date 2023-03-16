@@ -32,7 +32,7 @@ public class ReviewBoardDao {
  				ReviewBoardDto dto = new ReviewBoardDto();
  				
  				dto.setRbNum(rs.getString("rbNum"));
-                dto.setNickname(rs.getString("nickname"));
+                dto.setUId(rs.getString("uId"));
                 dto.setgId(rs.getString("gId"));
                 dto.setRbSubject(rs.getString("rbSubject"));
                 dto.setRbContent(rs.getString("rbContent"));
@@ -79,7 +79,7 @@ public class ReviewBoardDao {
 
             if(rs.next()) {
             	dto.setRbNum(rs.getString("rbNum"));
-                dto.setNickname(rs.getString("nickname"));
+            	dto.setUId(rs.getString("uId"));
                 dto.setgId(rs.getString("gId"));
                 dto.setRbSubject(rs.getString("rbSubject"));
                 dto.setRbContent(rs.getString("rbContent"));
@@ -104,12 +104,12 @@ public class ReviewBoardDao {
 		Connection conn = db.getConnection();
 		PreparedStatement pstmt = null;
 		
-		String sql = "insert into REVIEWBOARD(nickname,gId,rbSubject,rbContent,rbWriteday) value(?,?,?,?,now());";
+		String sql = "insert into REVIEWBOARD(uId,gId,rbSubject,rbContent,rbWriteday) value(?,?,?,?,now());";
 		
 		try {
 			pstmt = conn.prepareStatement(sql);
 			
-			pstmt.setString(1, dto.getNickname());
+			pstmt.setString(1, dto.getUId());
 			pstmt.setString(2, dto.getgId());
 			pstmt.setString(3, dto.getRbSubject());
 			pstmt.setString(4, dto.getRbContent());

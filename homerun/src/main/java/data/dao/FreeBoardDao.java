@@ -34,7 +34,7 @@ public class FreeBoardDao {
  				FreeBoardDto dto = new FreeBoardDto();
  				
  				dto.setFbNum(rs.getString("fbNum"));
-                dto.setNickname(rs.getString("nickname"));
+ 				dto.setUId(rs.getString("uId"));
                 dto.setFbCategory(rs.getString("fbCategory"));
                 dto.setFbSubject(rs.getString("fbSubject"));
                 dto.setFbContent(rs.getString("fbContent"));
@@ -81,7 +81,7 @@ public class FreeBoardDao {
 
             if(rs.next()) {
             	dto.setFbNum(rs.getString("fbNum"));
-                dto.setNickname(rs.getString("nickname"));
+            	dto.setUId(rs.getString("uId"));
                 dto.setFbCategory(rs.getString("fbCategory"));
                 dto.setFbSubject(rs.getString("fbSubject"));
                 dto.setFbContent(rs.getString("fbContent"));
@@ -106,12 +106,12 @@ public class FreeBoardDao {
 		Connection conn = db.getConnection();
 		PreparedStatement pstmt = null;
 		
-		String sql = "insert into FREEBOARD(nickname,fbCategory,fbSubject,fbContent,fbWriteday) value(?,?,?,?,now());";
+		String sql = "insert into FREEBOARD(uId,fbCategory,fbSubject,fbContent,fbWriteday) value(?,?,?,?,now());";
 		
 		try {
 			pstmt = conn.prepareStatement(sql);
 			
-			pstmt.setString(1, dto.getNickname());
+			pstmt.setString(1, dto.getUId());
 			pstmt.setString(2, dto.getFbCategory());
 			pstmt.setString(3, dto.getFbSubject());
 			pstmt.setString(4, dto.getFbContent());

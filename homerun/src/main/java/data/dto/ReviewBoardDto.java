@@ -5,7 +5,7 @@ import java.sql.Timestamp;
 public class ReviewBoardDto {
 
 	private String rbNum;
-	private String nickname;
+	private String uId;
 	private String gId;
 	private String rbSubject;
 	private String rbContent;
@@ -22,11 +22,11 @@ public class ReviewBoardDto {
 	public void setRbNum(String rbNum) {
 		this.rbNum = rbNum;
 	}
-	public String getNickname() {
-		return nickname;
+	public String getUId() {
+		return uId;
 	}
-	public void setNickname(String nickname) {
-		this.nickname = nickname;
+	public void setUId(String uId) {
+		this.uId = uId;
 	}
 	public String getgId() {
 		return gId;

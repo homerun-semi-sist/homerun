@@ -1,3 +1,5 @@
+<%@page import="data.dto.UserDto"%>
+<%@page import="data.dao.UserDao"%>
 <%@page import="java.sql.Array"%>
 <%@page import="java.util.List"%>
 <%@page import="data.dto.FreeBoardDto"%>
@@ -29,13 +31,13 @@
 	FreeBoardDao fbDao = new FreeBoardDao();
 	FreeBoardDto fbDto = fbDao.getFB(fbNum);
 	
-	String nickname = "헬로헬로";
+	String uId = (String)session.getAttribute("myid");
 %>
 <form action="freeBoard_updateAction.jsp" method="post">
 	<input type="hidden" name="fbNum" value="<%=fbNum %>">
 	
 	<!-- hiddend으로 nickname / value 값 변경 필요 -->
-	<input type="hidden" name="nickname" value="<%=nickname %>">	
+	<input type="hidden" name="uId" value="<%=uId %>">	
 	<%-- <input type="hidden" name="currentPage" value="<%=currentPage %>"> --%>
 	
 	<table class="table table-bordered" style="height:30px; width: 1000px; height:700px; margin-left: 100px;">

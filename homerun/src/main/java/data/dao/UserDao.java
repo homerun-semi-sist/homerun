@@ -5,6 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import data.dto.FreeBoardDto;
 import data.dto.UserDto;
 import mysql.db.DbConnect;
 
@@ -189,4 +190,39 @@ public class UserDao {
 			db.dbClose(pstmt, conn);
 		}
 	}
+	
+	// getFB 
+		public UserDto getUser(String uId) {
+			UserDto dto = new UserDto();
+
+	        Connection conn = db.getConnection();
+	        PreparedStatement pstmt = null;
+	        ResultSet rs = null;
+
+	        String sql = "select * from USER where uid=?";
+
+	        try {
+	            pstmt = conn.prepareStatement(sql);
+
+	            pstmt.setString(1, uId);
+	            rs = pstmt.executeQuery();
+
+	            if(rs.next()) {
+	            	pstmt.setString(1, dto.getUid());
+	    			pstmt.setString(2, dto.getPw());
+	    			pstmt.setString(3, dto.getuName());
+	    			pstmt.setString(4, dto.getNickname());
+	    			pstmt.setString(5, dto.getGender());
+	    			pstmt.setString(6, dto.getBirth());
+	    			pstmt.setString(7, dto.getHp());
+	    			pstmt.setString(8, dto.getAddr());
+	            }
+	        } catch (SQLException e) {
+	            e.printStackTrace();
+	        } finally {
+	            db.dbClose(rs, pstmt, conn);
+	        }
+
+	        return dto;
+	    }
 }
