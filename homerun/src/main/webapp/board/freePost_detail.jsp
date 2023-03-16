@@ -30,7 +30,7 @@
 			// 데이터
 			FreeBoardDto dto = dao.getFB(fbNum);
 			
-			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+			SimpleDateFormat sdf = new SimpleDateFormat("yy.MM.dd HH:mm");
 		%>
 
 		<table class="table table-condensed" style="width: 650px;">

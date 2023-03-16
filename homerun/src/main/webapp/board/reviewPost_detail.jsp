@@ -32,7 +32,7 @@
 			// 데이터
 			ReviewBoardDto rbDto = rbDao.getRB(rbNum);
 			
-			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+			SimpleDateFormat sdf = new SimpleDateFormat("yy.MM.dd HH:mm");
 		%>
 
 		<table class="table table-condensed" style="width: 650px;">

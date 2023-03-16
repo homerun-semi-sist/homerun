@@ -94,7 +94,7 @@
 		
 		TeamDao tDao = new TeamDao();
 		
-		SimpleDateFormat sdf = new SimpleDateFormat("yy-MM-dd"); 
+		SimpleDateFormat sdf = new SimpleDateFormat("yy.MM.dd"); 
 	%>
 
     <!-- Layout wrapper -->
@@ -212,20 +212,20 @@
     </div>
     <!-- / Layout page -->
 
-    <!-- Core JS -->
+	<!-- Core JS -->
     <!-- build:js assets/vendor/js/core.js -->
-    <script src="../assets/vendor/libs/jquery/jquery.js"></script>
-    <script src="../assets/vendor/libs/popper/popper.js"></script>
-    <script src="../assets/vendor/js/bootstrap.js"></script>
-    <script src="../assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.js"></script>
+    <script src="../assets/board/vendor/libs/jquery/jquery.js"></script>
+    <script src="../assets/board/vendor/libs/popper/popper.js"></script>
+    <script src="../assets/board/vendor/js/bootstrap.js"></script>
+    <script src="../assets/board/vendor/libs/perfect-scrollbar/perfect-scrollbar.js"></script>
 
-    <script src="../assets/vendor/js/menu.js"></script>
+    <script src="../assets/board/vendor/js/menu.js"></script>
     <!-- endbuild -->
 
     <!-- Vendors JS -->
 
     <!-- Main JS -->
-    <script src="../assets/js/main.js"></script>
+    <script src="../assets/board/js/main.js"></script>
 
     <!-- Page JS -->
 
