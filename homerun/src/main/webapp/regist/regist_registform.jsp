@@ -30,9 +30,14 @@
 					if(res.count==1){
 						
 						alert("이미 가입된 아이디 입니다");
+						
+					}else if(uid=="" || uid.length==0){
+						
+						alert("아이디를 입력 해 주세요");
+						
 					}else{
 						
-						alert("사용 가능한 아이디 입니다");
+						alert("사용 가능한 아이디 입니다")
 					}
 				}
 			});
@@ -52,6 +57,7 @@ $("#btnnck").click(function(){
 					if(res.Ncount==1){
 						
 						alert("이미 가입된 닉네임 입니다");
+
 					}else{
 						
 						alert("사용 가능한 닉네임 입니다");
@@ -101,8 +107,11 @@ $("#btnnck").click(function(){
 			
 			alert("전화번호 뒷자리를 입력 해 주세요");
 			
-		}else
+		}else if(f.addr.value==""){
+			
 			alert("주소를 입력 해 주세요");
+			
+		}
 	}
 	
 	
@@ -296,7 +305,7 @@ $("#btnnck").click(function(){
 					<div class="col-sm-2" style="border: 1px solid red;">left</div>
 					<div class="col-sm-8" style="border: 1px solid pink;">
 						<!-- write here -->
-						<form action="../regist/regist_registaction.jsp" method="post" class="joinForm" 
+						<form action="regist_registaction.jsp" method="post" class="joinForm" 
 		onsubmit="return passcheck(this)" name="f">
                                                                                                
       <h2>회원가입</h2>

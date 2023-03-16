@@ -12,6 +12,17 @@
 			href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" />
 		<script src="https://code.jquery.com/jquery-3.6.3.js"></script>
 		<link href="../assets/css/index.css" rel="stylesheet">
+		<script type="text/javascript">
+		function logincheck(a)
+		{
+			if(a.uid.value==""){
+				
+				alert("아이디를 입력 해 주세요");
+								
+			}else if(a.pw.value=="")
+				alert("비밀번호를 입력 해 주세요");
+		}
+		</script>
 	</head>
 	<style>
   html {
@@ -156,7 +167,8 @@
 <div class="login-box">
   <h2>Login</h2>
   
-  <form action="user_loginaction.jsp" method="post">
+  <form action="user_loginaction.jsp" method="post" 
+  onsubmit="return logincheck(this)" name="a">
   
     <div class="user-box">
       <input type="text" name="uid" required="required" value="<%=myid %>" >
@@ -173,7 +185,7 @@
     	<%=saveok==null?"":"checked" %>>&nbsp;아이디저장
     </div>
     
-    <button type="submit" class="login" >로그인</button>
+    <button type="submit" class="login" onclick="logincheck(a)">로그인</button>
     <button type="button" class="regist"  onclick="location.href='../regist/regist_registform.jsp'">회원가입</button>
     
   </form>

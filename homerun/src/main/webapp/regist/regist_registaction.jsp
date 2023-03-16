@@ -38,7 +38,7 @@
 		UserDao dao=new UserDao();
 		dao.insertUser(dto);
 		
-		response.sendRedirect("../index.jsp?main=regist/regist_registsuccess.jsp?uid="+uid);
+		response.sendRedirect("regist_registsuccess.jsp?uid="+uid);
 	%>
 </body>
 </html>
