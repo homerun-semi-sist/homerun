@@ -25,7 +25,7 @@
 			FreeBoardDao dao = new FreeBoardDao();
 			
 			// 조회수 증가
-			// dao.updateReadCount(num);
+			dao.updateReadCount(fbNum);
 			
 			// 데이터
 			FreeBoardDto dto = dao.getFB(fbNum);
@@ -53,14 +53,28 @@
 		</table>
 		
 		<div style="margin-left: 400px;">
-			<button type="button" class="btn btn-default" onclick="location.href='freeBoard_insert.jsp'">글쓰기</button>
-			<button type="button" class="btn btn-default" onclick="location.href='freeBoard_list.jsp'">목록</button>
-			<button type="button" class="btn btn-default" onclick="location.href='freeBoard_insert.jsp'">글쓰기</button>
+			<button type="button" class="btn btn-default" id="likeCnt" style="background-color: pink;">추천</button>
+			<button type="button" class="btn btn-default" onclick="dislikeCnt" style="background-color: pink;">비추천</button>
+			<button type="button" class="btn btn-default" onclick="reportCnt" style="background-color: pink;">신고</button>
 			<br><br>
 			<button type="button" class="btn btn-default" onclick="location.href='freeBoard_insert.jsp'">글쓰기</button>
 			<button type="button" class="btn btn-default" onclick="location.href='freeBoard_list.jsp'">목록</button>
 			<button type="button" class="btn btn-default" onclick="location.href='freeBoard_update.jsp?fbNum=<%=dto.getFbNum() %>'">수정</button>
 			<button type="button" class="btn btn-default" onclick="location.href='freeBoard_delete.jsp?fbNum=<%=dto.getFbNum() %>'">삭제</button>
 		</div>
+		
+		<script type="text/javascript">
+			// 추천수 증가
+			$("#likeCnt").click(function() {
+				console.log('<%=fbNum %>');		
+				
+				<%
+					dao.updateLike(fbNum);			
+				%>
+				
+				$(this).css("background-color", "red");
+			});
+
+		</script>
 	</body>
 </html>

@@ -24,7 +24,7 @@ public class FreeBoardDao {
  		ResultSet rs = null;
  		
  		String sql = "select * from FREEBOARD order by fbNum";
-// 		 where nickname=''
+ 		// where nickname=''
  		
  		try {
  			pstmt = conn.prepareStatement(sql);
@@ -170,12 +170,84 @@ public class FreeBoardDao {
 	}
 	
 	// fbReadCnt 1 증가
+	public void updateReadCount(String fbNum) {
+		Connection conn = db.getConnection();
+		PreparedStatement pstmt = null;
+		
+		String sql = "update FREEBOARD set fbReadCnt=fbReadCnt+1 where fbNum=?";
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setString(1, fbNum);
+			
+			pstmt.execute();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			db.dbClose(pstmt, conn);
+		}
+	}
 	
 	// fbLike 1 증가
+	public void updateLike(String fbNum) {
+		Connection conn = db.getConnection();
+		PreparedStatement pstmt = null;
+		
+		String sql = "update FREEBOARD set fbLike=fbLike+1 where fbNum=?";
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setString(1, fbNum);
+			
+			pstmt.execute();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			db.dbClose(pstmt, conn);
+		}
+	}
 	
 	// fbDislike 1 증가
+	public void updateDislike(String fbNum) {
+		Connection conn = db.getConnection();
+		PreparedStatement pstmt = null;
+		
+		String sql = "update FREEBOARD set fbDislike=fbDislike+1 where fbNum=?";
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setString(1, fbNum);
+			
+			pstmt.execute();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			db.dbClose(pstmt, conn);
+		}
+	}
 	
 	// fbReport 1 증가
+	public void updateReport(String fbNum) {
+		Connection conn = db.getConnection();
+		PreparedStatement pstmt = null;
+		
+		String sql = "update FREEBOARD set fbReport=fbReport+1 where fbNum=?";
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setString(1, fbNum);
+			
+			pstmt.execute();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			db.dbClose(pstmt, conn);
+		}
+	}
 	
 	// search - nickname
 	

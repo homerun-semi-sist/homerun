@@ -168,13 +168,84 @@ public class ReviewBoardDao {
 	}
 	
 	// rbReadCnt 1 증가
+	public void updateReadCount(String rbNum) {
+		Connection conn = db.getConnection();
+		PreparedStatement pstmt = null;
+		
+		String sql = "update REVIEWBOARD set rbReadCnt=rbReadCnt+1 where rbNum=?";
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setString(1, rbNum);
+			
+			pstmt.execute();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			db.dbClose(pstmt, conn);
+		}
+	}
 	
 	// rbLike 1 증가
+	public void updateLike(String rbNum) {
+		Connection conn = db.getConnection();
+		PreparedStatement pstmt = null;
+		
+		String sql = "update REVIEWBOARD set rbLike=rbLike+1 where rbNum=?";
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setString(1, rbNum);
+			
+			pstmt.execute();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			db.dbClose(pstmt, conn);
+		}
+	}
 	
 	// rbDislike 1 증가
+	public void updateDislike(String rbNum) {
+		Connection conn = db.getConnection();
+		PreparedStatement pstmt = null;
+		
+		String sql = "update REVIEWBOARD set rbDislike=rbDislike+1 where rbNum=?";
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setString(1, rbNum);
+			
+			pstmt.execute();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			db.dbClose(pstmt, conn);
+		}
+	}
 	
 	// rbReport 1 증가
-	
+	public void updateReport(String rbNum) {
+		Connection conn = db.getConnection();
+		PreparedStatement pstmt = null;
+		
+		String sql = "update REVIEWBOARD set rbReport=rbReport+1 where rbNum=?";
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setString(1, rbNum);
+			
+			pstmt.execute();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			db.dbClose(pstmt, conn);
+		}
+	}
 	// search - nickname
 	
 	// search - rbSubject

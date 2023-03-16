@@ -1,4 +1,3 @@
-<%@ page import="org.jsoup.nodes.Document" %>
 <%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8" %>
 <!DOCTYPE html>
 <html>
@@ -8,24 +7,19 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"/>
     <script src="https://code.jquery.com/jquery-3.6.3.js"></script>
     
-    <link href="../assets/css/index.css" rel="stylesheet">
+    <link href="../assets/css/style_index.css" rel="stylesheet">
 </head>
 <body>
 <%
 
 			String mainPage = "../layout/main.jsp";
-		
-			// url?? ????? main???? ?��? ???????????? ???
+	
 			if (request.getParameter("main") != null) {
 				mainPage = request.getParameter("main");
 			}
 	
 			String root = request.getContextPath();
 		%>
-	
-		<%-- <header class="main_title">
-			<jsp:include page="../layout/header.jsp" />
-		</header> --%>
 	
 		<header class="main_title">
 			<jsp:include page="../layout/title.jsp" />
@@ -52,5 +46,5 @@
 			<jsp:include page="../layout/footer.jsp" />
 		</div>
 
-</body>
+	</body>
 </html>

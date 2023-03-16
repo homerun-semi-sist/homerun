@@ -21,67 +21,75 @@
     <!-- Customized Bootstrap Stylesheet -->
     <link href="../assets/css/bootstrap.min.css" rel="stylesheet" />
 
-    <!-- Template Stylesheet -->
-    <link href="../assets/css/style_main.css" rel="stylesheet" />
-</head>
+	<!-- Template Stylesheet -->
+	<link href="../assets/css/style_main.css" rel="stylesheet" />
+	</head>
+	
+	<body>
+		<%
+		String root = request.getContextPath();
+		%>
+	
+		<!-- Navbar Start -->
+		<nav
+			class="navbar navbar-expand-lg navbar-light sticky-top px-4 px-lg-5 py-lg-0">
+			<a href="../index.jsp" class="navbar-brand d-flex align-items-center">
+				Homerun </a>
+			<button type="button" class="navbar-toggler" data-bs-toggle="collapse"
+				data-bs-target="#navbarCollapse">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+			<div class="collapse navbar-collapse" id="navbarCollapse">
+				<div class="navbar-nav ms-auto py-3 py-lg-0">
+					<a href="../index.jsp" class="nav-item nav-link active">Home</a>
+					<div class="nav-item dropdown">
+						<a href="#" class="nav-link dropdown-toggle"
+							data-bs-toggle="dropdown">경기일정</a>
+						<div class="dropdown-menu bg-light m-0">
+							<a href="#" class="dropdown-item">Page 1-1</a> <a href="#"
+								class="dropdown-item">Page 1-2</a> <a href="#"
+								class="dropdown-item">Page 1-3</a>
+						</div>
+					</div>
+					<div class="nav-item dropdown">
+						<a href="#" class="nav-link dropdown-toggle"
+							data-bs-toggle="dropdown">게시판</a>
+						<div class="dropdown-menu bg-light m-0">
+							<a href="<%=root %>/board/freeBoard_list.jsp" class="dropdown-item">자유게시판</a> 
+							<a href="<%=root %>/board/reviewBoard_list.jsp" class="dropdown-item">후기게시판</a> 
+						</div>
+					</div>
+					<div class="nav-item dropdown">
+						<a href="#" class="nav-link dropdown-toggle"
+							data-bs-toggle="dropdown">응원용품</a>
+						<div class="dropdown-menu bg-light m-0">
+							<a href="<%=root %>/product/product_mainPage.jsp" class="dropdown-item">상품메인</a> <a
+								href="#" class="dropdown-item">Page 1-2</a> <a href="#"
+								class="dropdown-item">Page 1-3</a>
+						</div>
+					</div>
+					<div class="nav-item dropdown">
+						<a href="#" class="nav-link dropdown-toggle"
+							data-bs-toggle="dropdown">예약</a>
+						<div class="dropdown-menu bg-light m-0">
+							<a href="#" class="dropdown-item">Page 1-1</a> <a href="#"
+								class="dropdown-item">Page 1-2</a> <a href="#"
+								class="dropdown-item">Page 1-3</a>
+						</div>
+					</div>
+					<div class="nav-item dropdown">
+						<a href="#" class="nav-link dropdown-toggle"
+							data-bs-toggle="dropdown">관리자페이지</a>
+						<div class="dropdown-menu bg-light m-0">
+							<a href="#" class="dropdown-item">회원관리</a> <a href="#"
+								class="dropdown-item">재고관리</a> <a href="#" class="dropdown-item">게시글관리</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</nav>
+		<!-- Navbar End -->
 
-<body>
-    <!-- Navbar Start -->
-    <nav class="navbar navbar-expand-lg navbar-light sticky-top px-4 px-lg-5 py-lg-0">
-        <a href="index.jsp" class="navbar-brand d-flex align-items-center">
-            Homerun
-        </a>
-        <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarCollapse">
-            <div class="navbar-nav ms-auto py-3 py-lg-0">
-                <a href="index.jsp" class="nav-item nav-link active">Home</a>
-                <div class="nav-item dropdown">
-                    <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">경기일정</a>
-                    <div class="dropdown-menu bg-light m-0">
-                        <a href="#" class="dropdown-item">Page 1-1</a>
-                        <a href="#" class="dropdown-item">Page 1-2</a>
-                        <a href="#" class="dropdown-item">Page 1-3</a>
-                    </div>
-                </div>
-                <div class="nav-item dropdown">
-                    <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">게시판</a>
-                    <div class="dropdown-menu bg-light m-0">
-                        <a href="#" class="dropdown-item">Page 1-1</a>
-                        <a href="#" class="dropdown-item">Page 1-2</a>
-                        <a href="#" class="dropdown-item">Page 1-3</a>
-                    </div>
-                </div>
-                <div class="nav-item dropdown">
-                    <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">응원용품</a>
-                    <div class="dropdown-menu bg-light m-0">
-                        <a href="#" class="dropdown-item">Page 1-1</a>
-                        <a href="#" class="dropdown-item">Page 1-2</a>
-                        <a href="#" class="dropdown-item">Page 1-3</a>
-                    </div>
-                </div>
-                <div class="nav-item dropdown">
-                    <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">예약</a>
-                    <div class="dropdown-menu bg-light m-0">
-                        <a href="#" class="dropdown-item">Page 1-1</a>
-                        <a href="#" class="dropdown-item">Page 1-2</a>
-                        <a href="#" class="dropdown-item">Page 1-3</a>
-                    </div>
-                </div>
-                <div class="nav-item dropdown">
-                    <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">관리자페이지</a>
-                    <div class="dropdown-menu bg-light m-0">
-                        <a href="#" class="dropdown-item">회원관리</a>
-                        <a href="#" class="dropdown-item">재고관리</a>
-                        <a href="#" class="dropdown-item">게시글관리</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </nav>
-    <!-- Navbar End -->
-
-</body>
+	</body>
 
 </html>
