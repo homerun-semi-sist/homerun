@@ -130,7 +130,7 @@ ProductDto dto = dao.getProduct(pId);
 		<div style="margin-top: 20px">
 			<button type="submit" class="pinsertbtn pinsertbtn1">재고수정</button>
 			<button type="button" class="pinsertbtn"
-				onclick="location.href='../product/product_listPage.jsp'">취소</button>
+				onclick="location.href='../managementpage/management_stockListPage.jsp'">취소</button>
 		</div>
 	</form>
 

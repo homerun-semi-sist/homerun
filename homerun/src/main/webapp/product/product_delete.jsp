@@ -21,7 +21,7 @@
 	ProductDao dao = new ProductDao();
 	dao.deleteProduct(pId);
 
-	response.sendRedirect("../managementpage/management_productPage.jsp");
+	response.sendRedirect("../managementpage/management_stockListPage.jsp");
 	%>
 </body>
 </html>

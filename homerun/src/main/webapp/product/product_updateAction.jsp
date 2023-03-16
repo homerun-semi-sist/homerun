@@ -45,7 +45,7 @@
 	ProductDao dao = new ProductDao();
 	dao.updateProduct(dto);
 
-	response.sendRedirect("../index.jsp");
+	response.sendRedirect("../managementpage/management_stockListPage.jsp");
 	%>
 
 </body>
