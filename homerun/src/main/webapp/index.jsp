@@ -13,7 +13,7 @@
 	<%
 	String mainPage = "layout/main.jsp";
 
-	//url을 통해서 main값을 읽어서 메인페이지에 출력을한다
+	//url을 통해서 main값을 읽어서 메인페이지에 출력을한다 		
 	if (request.getParameter("main") != null) {
 		mainPage = request.getParameter("main");
 	}
