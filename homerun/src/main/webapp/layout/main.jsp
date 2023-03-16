@@ -18,7 +18,15 @@
 		<div class="col-sm-8" style="border: 1px solid pink;">
 			<div class="mapWeather"><jsp:include page="mapWeather.jsp"></jsp:include></div>
 			<button type="button" class="login"
-				onclick="location.href='../homerun/user/user_loginform.jsp'">로그인</button>
+						onclick="location.href='../homerun/user/user_loginform.jsp'">로그인</button>
+			<%
+				String loginok = (String)session.getAttribute("loginok");
+				String myid = (String)session.getAttribute("myid");
+				System.out.println(loginok);
+				System.out.println(myid);
+				
+			%>			
+						
 		</div>
 		<div class="col-sm-2" style="border: 1px solid blue;">오</div>
 	</div>
