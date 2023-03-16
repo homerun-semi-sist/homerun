@@ -17,6 +17,8 @@
 		<div class="col-sm-2" style="border: 1px solid red;">왼</div>
 		<div class="col-sm-8" style="border: 1px solid pink;">
 			<div class="mapWeather"><jsp:include page="mapWeather.jsp"></jsp:include></div>
+			<button type="button" class="login"
+				onclick="location.href='../homerun/user/user_loginform.jsp'">로그인</button>
 		</div>
 		<div class="col-sm-2" style="border: 1px solid blue;">오</div>
 	</div>
