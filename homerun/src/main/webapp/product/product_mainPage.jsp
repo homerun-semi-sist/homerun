@@ -30,7 +30,7 @@
 				<div class="row">
 					<div class="col-sm-2" style="border: 0px solid red;"></div>
 					<div class="col-sm-8" style="border: 0px solid pink;">
-						<jsp:include page="product_main.jsp"></jsp:include>
+						
 					</div>
 					<div class="col-sm-2" style="border: 0px solid blue;"></div>
 				</div>
