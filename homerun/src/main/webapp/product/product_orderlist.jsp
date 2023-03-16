@@ -36,18 +36,10 @@
 					<div class="col-sm-8" style="border: 1px solid pink;">
 						<!-- write here -->
 						
-						<button type="button" class="btn1" onclick="location.href='../index.jsp'">메인으로</button>
-						<%
-							ProductDao dao = new ProductDao();
-							List<ProductDto> list = dao.selectAllProduct();
+						<div>지성웅님 주문목록</div>
 						
-							for (ProductDto dto : list) {
-						%>
-							<%=dto.getpId()%>
-							<%=dto.getpImage()%>
-						<%
-							}
-						%>
+						
+						<div></div>
 						
 						<!-- the end -->
 					</div>

@@ -1,9 +1,9 @@
 package data.dto;
 
 public class CartDto {
-	private int cId;
-	private String uId;
-	private String pId;
+	private int cId; //cart id
+	private String uId; //user id
+	private String pId; //상품 id 
 	private int cQTY; // 이것이 무엇인고?
 	public int getcId() {
 		return cId;

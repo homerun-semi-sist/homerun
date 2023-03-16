@@ -46,7 +46,6 @@ td {
 }
 
 .btn1 {
-	position: relative;
 	left: 40%;
 	transform: translateX(-38%);
 	margin-bottom: 20px;
@@ -61,7 +60,6 @@ td {
 }
 
 .btn2 {
-	position: relative;
 	left: 40%;
 	transform: translateX(-38%);
 	margin-bottom: 20px;
@@ -134,8 +132,8 @@ margin-top:50px;
 					</div>
 					<div id="thanksmsg">구매해 주셔서 감사합니다.</div>
 					<br> <br>
-					<div style="text-align: center; margin-left: 350px;">
-						<table class="table table-bordered" style="width: 60%">
+					<div style="text-align: center; margin-left: 350px; ">
+						<table class="table table-bordered" style="width: 60%; position:relative">
 							<!--   나중 시간 있을 때 할 것
 							<tr>
 								<th width="60px" style="text-align: center;">상품명</th>
@@ -155,7 +153,7 @@ margin-top:50px;
 
 
 
-					<div style="margin-right: 500px;">
+					<div style="margin-left: 100px;">
 						<button type="submit" class="btn2"
 							onclick="location.href='product_orderlist.jsp'">주문목록</button>
 						&nbsp;
