@@ -31,7 +31,7 @@
 	}else{%>
 	
 	<script type="text/javascript">
-		alert("아이디와 비번이 맞지 않습니다");
+		alert("아이디와 비밀번호가 일치하지 않습니다");
 		history.back();
 	</script>
 	<%}

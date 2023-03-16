@@ -16,7 +16,10 @@
 <body style="overflow-x: hidden;">
 	<div class="row" style="height: 1200px;">
 		<div class="col-sm-2" style="border: 1px solid red;">왼</div>
-		<div class="col-sm-8" style="border: 1px solid pink;">메인</div>
+		<div class="col-sm-8" style="border: 1px solid pink;">메인
+			<button type="button" class="login"
+						onclick="location.href='../homerun/user/user_loginform.jsp'">로그인</button>
+		</div>
 		<div class="col-sm-2" style="border: 1px solid blue;">오</div>
 	</div>
 

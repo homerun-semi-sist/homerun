@@ -20,6 +20,7 @@
 				alert("아이디를 입력 해 주세요");
 								
 			}else if(a.pw.value=="")
+				
 				alert("비밀번호를 입력 해 주세요");
 		}
 		</script>
