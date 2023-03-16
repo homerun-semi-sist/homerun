@@ -55,6 +55,10 @@
 		<div style="margin-left: 400px;">
 			<button type="button" class="btn btn-default" onclick="location.href='freeBoard_insert.jsp'">글쓰기</button>
 			<button type="button" class="btn btn-default" onclick="location.href='freeBoard_list.jsp'">목록</button>
+			<button type="button" class="btn btn-default" onclick="location.href='freeBoard_insert.jsp'">글쓰기</button>
+			<br><br>
+			<button type="button" class="btn btn-default" onclick="location.href='freeBoard_insert.jsp'">글쓰기</button>
+			<button type="button" class="btn btn-default" onclick="location.href='freeBoard_list.jsp'">목록</button>
 			<button type="button" class="btn btn-default" onclick="location.href='freeBoard_update.jsp?fbNum=<%=dto.getFbNum() %>'">수정</button>
 			<button type="button" class="btn btn-default" onclick="location.href='freeBoard_delete.jsp?fbNum=<%=dto.getFbNum() %>'">삭제</button>
 		</div>
