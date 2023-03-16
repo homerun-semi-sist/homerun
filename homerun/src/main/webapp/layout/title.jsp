@@ -1,3 +1,4 @@
+<%@page import="data.dao.UserDao"%>
 <%@ page language="java" contentType="text/html; charset=utf-8"
 	pageEncoding="utf-8"%>
 <!DOCTYPE html>
@@ -32,10 +33,19 @@
 
 <%
 String root = request.getContextPath();
+
+String uid=request.getParameter("uid");
+
+UserDao dao=new UserDao();
+
+dao.getuName(uid);
+
 %>
 
 <body>
 	<!-- Topbar Start -->
+
+
 	<div class="container-fluid px-5 d-none d-lg-block"
 		style="background-color: #0b214e; height: 150px;">
 		<div class=" gx-5 align-items-center">
@@ -51,10 +61,27 @@ String root = request.getContextPath();
 			</div>
 			<div class="col-lg-3" style="margin-top: 20px;">
 				<div class="d-flex align-items-center justify-content-end">
-					<span class="me-3"><span class="uname_title">박예은</span><span
-						class="a_title">님</span></span> <a class="a_title" href="#"><span>마이페이지</span></a><span
-						class="a_title">&nbsp;|&nbsp;</span> <a style="color: white;"
-						href="#"><span>장바구니</span></a>
+					<span class="me-3">
+					
+						<span class="uname_title"><%=uid %></span>
+						
+						<span class="a_title">님</span>
+						
+					</span>
+						
+						 <a class="a_title" href="../homerun/mypage/mypage_myinfo.jsp">
+						 
+						 <span>마이페이지</span>
+						 
+						 </a>
+						 
+						 <span class="a_title">&nbsp;|&nbsp;</span> 
+						 
+						 <a style="color: white;" href="#">
+						 
+						 <span>장바구니</span>
+						 
+						 </a>
 				</div>
 			</div>
 		</div>
