@@ -1,3 +1,4 @@
+<%@page import="data.dao.UserDao"%>
 <%@ page language="java" contentType="text/html; charset=utf-8"
 	pageEncoding="utf-8"%>
 <!DOCTYPE html>
@@ -32,6 +33,10 @@
 
 <%
 String root = request.getContextPath();
+
+UserDao udao = new UserDao();
+String uId=(String)session.getAttribute("uId");
+String name=udao.getuName(uId);
 %>
 
 <body>
@@ -51,10 +56,10 @@ String root = request.getContextPath();
 			</div>
 			<div class="col-lg-3" style="margin-top: 20px;">
 				<div class="d-flex align-items-center justify-content-end">
-					<span class="me-3"><span class="uname_title">박예은</span><span
+					<span class="me-3"><span class="uname_title"><%=uId %></span><span
 						class="a_title">님</span></span> <a class="a_title" href="#"><span>마이페이지</span></a><span
 						class="a_title">&nbsp;|&nbsp;</span> <a style="color: white;"
-						href="#"><span>장바구니</span></a>
+						href="../product/product_cartlist.jsp"><span>장바구니</span></a>
 				</div>
 			</div>
 		</div>

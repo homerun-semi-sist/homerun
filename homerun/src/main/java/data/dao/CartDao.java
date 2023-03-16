@@ -27,9 +27,9 @@ public class CartDao {
 		 
 		 
 		 //cartday 상의.
-		 String sql="select c.cId,p.pName,p.pId,p.pImage,p.price,c.QTY,c.cartday "
+		 String sql="select c.cId,p.pName,p.pId,p.pImage,p.price,c.QTY "
 		     		+ "from CART c,PRODUCT p,USER u "
-		     		+ "where c.cId=p.pId and c.cId=u.uId and u.uId=?";	
+		     		+ "where c.pId=p.pId and c.uId=u.uId and u.uId=?";	
 		     
 		 
 		 try {
@@ -46,8 +46,7 @@ public class CartDao {
 					map.put("pId", rs.getString("pId"));
 					map.put("pImage", rs.getString("pImage"));
 					map.put("price", rs.getString("price"));
-					map.put("QTY", rs.getString("QTY"));
-					map.put("cartday", rs.getString("cartday"));
+					map.put("cQTY", rs.getString("cQTY"));
 					
 					list.add(map);
 				 
@@ -55,6 +54,9 @@ public class CartDao {
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		}finally {
+			
+			db.dbClose(rs, pstmt, conn);
 		}
 		 
 		 
