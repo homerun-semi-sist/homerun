@@ -6,7 +6,7 @@ public class CartDto {
 	private int cId; //cart id
 	private String uId; //user id
 	private String pId; //상품 id 
-	private int cQTY; // 이것이 무엇인고?
+	private int cQTY; // 
 	private Timestamp cartDay;
 	
 	public Timestamp getCartDay() {

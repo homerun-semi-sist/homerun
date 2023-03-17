@@ -49,8 +49,9 @@
         
         // 데이터베이스에서 현재 사용자의 주문 정보를 조회합니다.
         // (여기에서는 간단하게 코드를 작성합니다.)
+      
         List<Order> orders = getOrderList(uId);
-        
+         
     	NumberFormat nf=NumberFormat.getInstance();
 
     %>
