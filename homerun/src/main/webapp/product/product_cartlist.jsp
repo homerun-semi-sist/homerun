@@ -202,7 +202,7 @@ NumberFormat nf = NumberFormat.getInstance();
 								</tr>
 
 								<%
-								for (int i = 0; i < 1; i++) {//사이즈만큼
+								for (int i = 0; i < cartSize; i++) {//사이즈만큼
 
 									HashMap<String, String> map = list.get(i);
 									//사진얻기
@@ -217,14 +217,14 @@ NumberFormat nf = NumberFormat.getInstance();
 
 									<td>
 										<div pId="<%=map.get("pId")%>" class="pName">
-											<img src="save/" class="photo" align="left" hspace="20">
+											<img src="<%=photo %>" class="photo" align="left" hspace="20">
 
 											<h5>
-												<b>상품명: <%=map.get("pName")%></b>
+												상품명: <%=map.get("pName")%>
 											</h5>
 											<h5>
-												<b>개수: <%=cQTY%>개
-												</b>
+												개수: <%=cQTY%>개
+												
 											</h5>
 										</div>
 									</td>
@@ -271,5 +271,8 @@ NumberFormat nf = NumberFormat.getInstance();
 	<div class="main_footer">
 		<jsp:include page="../layout/footer.jsp" />
 	</div>
+	<script type="text/javascript">
+		alert('<%=cartSize %>' + " : "+ '<%=uid %>' + " : " + );
+	</script>
 </body>
 </html>

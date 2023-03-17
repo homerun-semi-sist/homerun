@@ -43,9 +43,9 @@ public class CartDao {
 				 
 				 HashMap<String, String> map = new HashMap<>();
 				 
-				 map.put("uId", rs.getString("uId"));
+				 	map.put("cId", rs.getString("cId"));
+				 	map.put("pId", rs.getString("pId"));
 					map.put("pName", rs.getString("pName"));
-					map.put("pId", rs.getString("pId"));
 					map.put("pImage", rs.getString("pImage"));
 					map.put("price", rs.getString("price"));
 					map.put("cQTY", rs.getString("cQTY"));
