@@ -28,7 +28,7 @@ div.aList {
 	margin-left: 10px;
 }
 
-span.aDay {
+span.fcDay {
 	/*  float: right; */
 	font-size: 0.8em;
 	color: gray;
@@ -46,19 +46,19 @@ span.aDay {
 			// alert(num);
 			
 			// 댓글 insert
-			$("#btnAnswer").click(function() {
+			$("#cInsertBtn").click(function() {
 				
-				var nickname = $("#uId").val();
+				var uId = $("#uId").val();
 				var content = $("#content").val();
-							
+				
+				 alert(num + ", "+ uId + ", " + content);
 				$.ajax({
 					type : "get",
 					dataType : "html",
-					url : "smartAnswer/insertAnswer.jsp",
-					data : {"num" : num, "nickname" : nickname, "content" : content},
+					url : "freeComment_insert.jsp",
+					data : {"num" : num, "uId" : uId, "content" : content},
 					success : function (res) {
-						
-						// location.reload();
+
 						// 기존 입력값 지우기
 						$("#nickname").val("");
 						$("#content").val("");
@@ -67,7 +67,7 @@ span.aDay {
 						list();
 					}
 					
-				}) 
+				})
 			});
 			
 			/* // 댓글 delete
@@ -125,33 +125,36 @@ span.aDay {
 		
 		// list 사용자 정의 함수
 		function list() {
-			console.log("list num=" + $("num").val());
-			/* $.ajax({
+
+			$.ajax({
 				
 				type : "get",
-			    url : "smartAnswer/listAnswer.jsp",
+			    url : "freeComment_list.jsp",
 			    dataType : "json",
-			    data : {"num" : $("#num").val()},
+			    data : {"num" : $("#fbNum").val()},
 			    success:function(res){
+					// alert("성공");
 					
 					//댓글갯수출력
-					$("b.aCount>span").text(res.length);
+					$("b.FCcnt>span").text(res.length);
 					
 					var s="";
 					
-					$.each(res,function(idx,item){
+					$.each(res,function(idx, item){
 						
-						s+="<div>" + item.nickname + " : " + item.content;
-						s+="<span class='aDay'>" + item.writeday + "</sapn>&nbsp;";
-						s+="<span style='color: red; cursor:pointer;' class='glyphicon glyphicon-remove-circle aDel' idx=" + item.idx + "></span>&nbsp;";
-						s+="<span style='color: green; cursor:pointer;' class='glyphicon glyphicon-edit aMod' idx=" + item.idx + "></span>";
+						s+="<div>" + item.nickname + " : " + item.fcContent;
+						s+="<span class='fcDay'>" + item.fcWriteday + "</sapn>&nbsp;";
+						s+="<span>추천수 : " + item.fcLike + " 비추천수 : " + item.fcDislike + 
+						s+="<span style='color: red; cursor:pointer;' class='glyphicon glyphicon-remove-circle aDel' idx=" + item.fcIdx + "></span>&nbsp;";
+						s+="<span style='color: green; cursor:pointer;' class='glyphicon glyphicon-edit aMod' idx=" + item.fcIdx + "></span>";
+						s+="<span style='color: blue; cursor:pointer;' class='	glyphicon glyphicon-bell report' idx=" + item.fcIdx + "></span>";
 						s+="</div>";
 					});
 					
 					$("div.aList").html(s);
 				}
 			   
-			}); */
+			});
 		}
 		
 	</script>
@@ -179,12 +182,11 @@ span.aDay {
 	String loginok = (String) session.getAttribute("loginok");
 
 	UserDao uDao = new UserDao();
-	UserDto uDto = uDao.getUser(uId);
+	UserDto uDto = uDao.getUser(fbDto.getUId());
 
-	boolean likeCK = false;
-	boolean dislikeCK = false;
 	%>
-	
+	<input type="hidden" id="fbNum" name="fbNum" value="<%=fbNum%>">
+
 	<table class="table table-condensed" style="width: 650px;">
 		<tr>
 			<td style="width: 500px;">
@@ -232,25 +234,30 @@ span.aDay {
 					onclick="location.href='freePost_updatePage.jsp?fbNum=<%=fbDto.getFbNum()%>'">수정</button>
 				<button type="button" class="btn btn-default"
 					onclick="funDel(<%=fbNum%>, <%=currentPage%>)">삭제</button> <%
- 				}
- 			%>
+ }
+ %>
 			</td>
 		</tr>
 
 		<!-- 댓글 -->
 		<tr>
-			<td><b class="aCount">댓글 <span>0</span></b>
-
+			<td>
+				<b class="FCcnt">댓글 <span>0</span></b>
 				<div class="aForm form-inline">
-					<input type="hidden" id="num" name="num" value="<%=fbNum %>">
-					<input type="hidden" id="uId" name="uId" value="<%=uId %>">
-					<input type="text" id="content" class="form-control" style="width: 400px;" placeholder="댓글 입력">&nbsp;&nbsp;
-					<button type="button" id="btnAnswer" class="btn btn-info">입력</button>
+					<input type="hidden" id="num" name="num" value="<%=fbNum%>">
+					<input type="hidden" id="uId" name="uId" value="<%=uId%>">
+					<span><%=uDao.getUser(uId).getNickname()%></span> <input
+						type="text" id="content" class="form-control"
+						style="width: 400px;" placeholder="댓글 입력">&nbsp;&nbsp;
+					<button type="button" id="cInsertBtn" class="btn btn-info">입력</button>
 				</div>
-
-				<div class="aList">댓글 목록</div></td>
+				<div class="aList">댓글 목록</div>
+			</td>
 		</tr>
 	</table>
+
+
+
 
 	<%-- <div style="margin-left: 400px;">
 		<%
