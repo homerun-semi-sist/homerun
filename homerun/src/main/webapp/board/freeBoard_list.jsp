@@ -1,3 +1,5 @@
+<%@page import="data.dto.UserDto"%>
+<%@page import="data.dao.UserDao"%>
 <%@page import="data.dao.TeamDao"%>
 <%@page import="java.text.SimpleDateFormat"%>
 <%@page import="java.util.List"%>
@@ -89,12 +91,64 @@
 
 <body>	
 	<%
+		String loginok = (String)session.getAttribute("loginok");
+	
 		FreeBoardDao fbDao = new FreeBoardDao();
-		List<FreeBoardDto> list = fbDao.getAllFBs();
 		
 		TeamDao tDao = new TeamDao();
 		
 		SimpleDateFormat sdf = new SimpleDateFormat("yy.MM.dd"); 
+		
+		// 페이징 처리		
+		int totalCount;
+		int totalPage;      // 총 페이지 수 
+		int startPage;      // 각 블럭의 시작 페이지
+		int endPage;        // 각 블럭의 마지막 페이지
+		int start;          // 각 페이지의 시작 번호 
+		int perPage = 15;    // 한 페이지에 보여질 글의 개수
+		int perBlock = 5;   // 한 블럭당 보여지는 페이지 개수
+		int currentPage;    // 현재 페이지
+		int no;
+		
+		// 총 개수 
+		totalCount = fbDao.getFBTotalCount();
+
+		// 현재 페이지 번호 읽기, null일 때는 1페이지로
+		if(request.getParameter("currentPage") == null)
+			currentPage = 1;
+		else
+			currentPage = Integer.parseInt(request.getParameter("currentPage"));
+
+		// 총 페이지 개수
+		totalPage = totalCount / perPage + (totalCount % perPage == 0 ? 0 : 1);
+		  
+		// 각 블럭의 시작 페이지 ex) 현재 페이지가 3일 때(start:1, end:5), 6일 때(start:6, end:10)
+		startPage = (currentPage - 1) / perBlock * perBlock + 1;
+		endPage = startPage + perBlock - 1;
+		    
+		// 총 페이지가 8일 때(6 ~ 10 -> endPage를 8로 수정해주어야 함)
+		if(endPage > totalPage)
+			endPage = totalPage;
+
+		// 각 페이지에서 불러올 시작 번호
+		start = (currentPage - 1) * perPage;
+
+		// 각 페이지에서 필요한 게시글 가져오기
+		List<FreeBoardDto> fbList = fbDao.getFBList(start, perPage);
+		
+		no = totalCount - (currentPage - 1) * perPage;
+		
+		/* // 댓글에 대한 dao
+		SmartAnswerDao aDao = new SmartAnswerDao();
+		
+		for(SmartDto dto : list) {
+			
+			// 댓글 변수에 댓글 총 개수 넣기
+			int aCount = aDao.getAllAnswers(dto.getNum()).size();
+			dto.setAnswerCount(aCount);
+					
+		} */
+		
 	%>
 
     <!-- Layout wrapper -->
@@ -126,7 +180,9 @@
                                 <tbody class="table-border-bottom-0">
                                 
                                 <%                                	
-                                	for(FreeBoardDto fbDto : list) {
+                                	for(FreeBoardDto fbDto : fbList) {
+                                		UserDao uDao = new UserDao();
+                                		String nickname = uDao.getUser(fbDto.getUId()).getNickname();
                                 %>
                                 
                                 <!-- 
@@ -176,8 +232,8 @@
                                         	}
                                      
                                         %>
-                                    	<td><a href="freePost_detail.jsp?fbNum=<%=fbDto.getFbNum() %>"><%=fbDto.getFbSubject() %></a></td>
-                                        <td style="text-align: center;"><%=fbDto.getNickname() %></td>
+                                    	<td><a href="freePost_detailPage.jsp?fbNum=<%=fbDto.getFbNum() %>&currentPage=<%=currentPage%>"><%=fbDto.getFbSubject() %></a></td>
+                                        <td style="text-align: center;"><%=nickname %></td>
                                         <td style="text-align: center;"><%=sdf.format(fbDto.getFbWriteday()) %></td>
                                         <td style="text-align: center;"><%=fbDto.getFbReadCnt() %></td>
                                         <td style="text-align: center;"><%=fbDto.getFbLike() %></td>
@@ -198,10 +254,51 @@
                                 <div class="bSearch">검색창</div>
                             </div>
                             <div class="bInsert">
-								<button type="button" class="btn btn-default" style="border: 1px solid gray;" onclick="location.href='freeBoard_insert.jsp'">글쓰기</button>
+								<button type="button" class="btn btn-default" id="insertBtn" style="border: 1px solid gray;">글쓰기</button>
 							</div>
                         </div>
-                        <div class="bPaging">페이징 처리</div>
+                        <div class="bPaging">
+							<!-- 페이징 처리 -->
+							<div style="width: 900px; text-align: center;">
+								<ul class="pagination">
+									<% 
+										// 이전
+										if(startPage > 1) {
+									%>
+										<li>
+											<a href="freeBoard_listPage.jsp?currentPage=<%=startPage-1 %>">이전</a>
+										</li>
+									<%
+										}
+										
+										for(int pp = startPage; pp <= endPage; pp++) {
+											if(pp == currentPage) {
+									%>
+												<li class="active">
+													<a href="freeBoard_listPage.jsp?currentPage=<%=pp %>"><%=pp %></a>
+												</li>
+									<%
+											} else {
+									%>
+												<li>
+													<a href="freeBoard_listPage.jsp?currentPage=<%=pp %>"><%=pp %></a>
+												</li>
+									<%
+											}
+										}
+										
+										// 다음
+										if(endPage < totalPage) {
+									%>
+											<li>
+												<a href="freeBoard_listPage.jsp?currentPage=<%=endPage+1 %>">다음</a>
+											</li>
+									<%
+										}
+									%>
+								</ul>
+							</div>
+						</div>
                     </div>
                 </div>
                 <!-- Bootstrap Table with Header - Light -->
@@ -211,6 +308,21 @@
         <!-- Content wrapper -->
     </div>
     <!-- / Layout page -->
+
+	<script type="text/javascript">
+		
+		$("#insertBtn").click(function() {
+			var login = '<%=loginok %>';
+			
+			// alert(login);
+			if(login == "yes") {
+				location.href="freePost_insertPage.jsp"
+			} else 
+				alert("로그인 후 이용 가능합니다");
+			
+		});
+		
+	</script>
 
 	<!-- Core JS -->
     <!-- build:js assets/vendor/js/core.js -->

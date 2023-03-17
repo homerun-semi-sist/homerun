@@ -4,7 +4,7 @@ public class FreeCommentDto {
 
 	private String fcIdx;
 	private String fbNum;
-	private String nickname;
+	private String uId;
 	private String fcContent;
 	private String fcLike;
 	private String fcDislike;
@@ -23,11 +23,11 @@ public class FreeCommentDto {
 	public void setFbNum(String fbNum) {
 		this.fbNum = fbNum;
 	}
-	public String getNickname() {
-		return nickname;
+	public String getUId() {
+		return uId;
 	}
-	public void setNickname(String nickname) {
-		this.nickname = nickname;
+	public void setUId(String uId) {
+		this.uId = uId;
 	}
 	public String getFcContent() {
 		return fcContent;

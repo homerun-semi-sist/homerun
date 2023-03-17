@@ -1,10 +1,7 @@
-<%@page import="data.dto.ReviewBoardDto"%>
-<%@page import="data.dao.ReviewBoardDao"%>
+<%@page import="java.text.SimpleDateFormat"%>
 <%@page import="data.dto.GameDto"%>
 <%@page import="data.dao.GameDao"%>
-<%@page import="java.sql.Array"%>
 <%@page import="java.util.List"%>
-
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -13,7 +10,10 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+<link rel="stylesheet" href="resources/css/plugin/datepicker/bootstrap-datepicker.css">
+
 <script src="https://code.jquery.com/jquery-3.5.0.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/locales/bootstrap-datepicker.ko.min.js" integrity="sha512-L4qpL1ZotXZLLe8Oo0ZyHrj/SweV7CieswUODAAPN/tnqN3PA1P+4qPu5vIryNor6HQ5o22NujIcAZIfyVXwbQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
 <!-- se2 폴더에서 js 파일 가져오기 -->
 <script type="text/javascript" src="../smartEditor/js/HuskyEZCreator.js"
@@ -22,57 +22,79 @@
 <script type="text/javascript" src="../smartEditor/photo_uploader/plugin/hp_SE2M_AttachQuickPhoto.js"
 	charset="utf-8"></script>	
 </head>
+
 <body>
 <%
-	String rbNum = request.getParameter("rbNum");
-	// String currentPage = request.getParameter("currentPage");
+	//프로젝트의 경로
+	// String root=request.getContextPath();
 	
-	ReviewBoardDao rbDao = new ReviewBoardDao();
-	ReviewBoardDto rbDto = rbDao.getRB(rbNum);
+	GameDao dao = new GameDao();
+	List<GameDto> list = dao.getAllGames();
 	
-	GameDao gDao = new GameDao();
-	
-	String nickname = "헬로헬로";
+	String uId = (String)session.getAttribute("myid");
 %>
-<form action="reviewBoard_updateAction.jsp" method="post">
-	<input type="hidden" name="rbNum" value="<%=rbNum %>">
-	
+
+<form action="reviewBoard_insertAction.jsp" method="post">	
 	<!-- hiddend으로 nickname / value 값 변경 필요 -->
-	<input type="hidden" name="nickname" value="<%=nickname %>">	
-	<%-- <input type="hidden" name="currentPage" value="<%=currentPage %>"> --%>
-	
-	<table class="table table-bordered" style="height:30px; width: 1000px; height:700px; margin-left: 100px;">
-		<caption style="caption-side: top;"><h3>후기 게시판 작성글 수정</h3></caption>
+	<input type="hidden" name="uId" value="<%=uId %>">
+	<table class="table table-bordered" style="width: 1000px; height:700px; margin-left: 100px;">
+		<caption style="caption-side: top;"><h3>후기게시판 게시글 등록</h3></caption>
 		<tr>
-			<th bgcolor="#E1EEDD" width="200" style="height:30px; text-align: center; line-height: 30px;">경기일 경기팀</th>
+			<th bgcolor="#E1EEDD" width="100" style="height:30px; text-align: center; line-height: 30px;">경기일</th>
+			<td width="300">
+				<input type="date" id="input_date" max="2023-12-31" min="2020-01-01" value="2023-04-01" style="width: 140px;">		
+				<input type="button" class="btn btn-default" onclick="inputDate()" value="확인" style="width: 50px; height: 30px;">	
+				
+				<script type="text/javascript">
+					function inputDate() {
+						var day = $("#input_date").val();
+						alert(day);
+					}
+				</script>
+			
+			</td>
+			
+			<th bgcolor="#E1EEDD" width="100" style="height:30px; text-align: center; line-height: 30px;">경기팀</th>
 			<td>
-				<%=gDao.getGame(rbDto.getgId()).getgDay() %> <%=gDao.getGame(rbDto.getgId()).getHome() %> vs <%=gDao.getGame(rbDto.getgId()).getAway() %>
+				<select name="gId" class="form-control" style="width: 300px;">
+					<option value="null">-</option>
+						<%
+							for(GameDto dto : list) {
+						%>
+							<%-- <option value="<%=dto.getgId() %>"><%=dto.getHome() %> vs <%=dto.getAway() %></option> --%>
+							<option value="<%=dto.getgId() %>"><%=dto.getgDay() %> <%=dto.getHome() %> vs <%=dto.getAway() %></option>
+						<%
+							}
+						%>
+				</select>
+			</td>
+		</tr>	
+		
+		<tr>
+			<th bgcolor="#E1EEDD" width="100" style="height:30px; text-align: center; line-height: 30px;">제목</th>
+			<td colspan="4">
+				<input type="text" name="subject" class="form-control"
+					required="required" style="width: 500px;">
 			</td>
 		</tr>
 		
 		<tr>
-			<th bgcolor="#E1EEDD" width="100" style="height:30px; text-align: center; line-height: 30px;">제목</th>
-			<td>
-				<input type="text" name="subject" class="form-control"
-					required="required" style="width: 500px;" value="<%=rbDto.getRbSubject() %>">
-			</td>
-		</tr>
-		<tr>
 			<td colspan="4">
 				<textarea name="content" id="content"		
 					required="required"			
-					style="width: 100%; height: 600px; display: none;"><%=rbDto.getRbContent() %></textarea>		
+					style="width: 100%; height: 600px; display: none;"></textarea>		
 			</td>
 		</tr>
+		
 		<tr>
 			<td colspan="4" align="center">
 				<button type="button" class="btn btn-default"
 					style="width: 120px;"
-					onclick="submitContents(this)">수정</button>
+					onclick="submitContents(this)">DB 저장</button>
 				
 				<button type="button" class="btn btn-default"
 					style="width: 120px;"
-					onclick="location.href='reviewBoard_list.jsp'">목록</button>
+					onclick="location.href='reviewBoard_listPage.jsp'">목록</button>
 			</td>
 		</tr>
 		
@@ -119,7 +141,7 @@ function submitContents(elClickedObj) {
 // textArea에 이미지 첨부
 
 function pasteHTML(filepath){
-    var sHTML = '<img src="../photoSave/'+filepath+'">';
+    var sHTML = '<img src="../save/'+filepath+'">';
     oEditors.getById["content"].exec("PASTE_HTML", [sHTML]); 
 
 }

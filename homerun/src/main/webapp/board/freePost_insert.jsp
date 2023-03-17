@@ -1,3 +1,5 @@
+<%@page import="data.dto.UserDto"%>
+<%@page import="data.dao.UserDao"%>
 <%@page import="data.dto.TeamDto"%>
 <%@page import="java.util.List"%>
 <%@page import="data.dao.TeamDao"%>
@@ -19,19 +21,19 @@
 	charset="utf-8"></script>	
 </head>
 <body>
-<%
-	//프로젝트의 경로
-	// String root=request.getContextPath();
+	<%
+		//프로젝트의 경로
+		// String root=request.getContextPath();
 	
-	TeamDao dao = new TeamDao();
-	List<TeamDto> list = dao.getAllTeams();
+		TeamDao tDao = new TeamDao();	
+		List<TeamDto> list = tDao.getAllTeams();
 	
-	String nickname = "헬로헬로";
-%>
+		String uId = (String)session.getAttribute("myid");
+	%>
 
 <form action="freeBoard_insertAction.jsp" method="post">	
 	<!-- hiddend으로 nickname / value 값 변경 필요 -->
-	<input type="hidden" name="nickname" value="<%=nickname %>">
+	<input type="hidden" name="uId" value="<%=uId %>">
 	<table class="table table-bordered" style="width: 1000px; height:700px; margin-left: 100px;">
 		<caption style="caption-side: top;"><h3>자유게시판 게시글 등록</h3></caption>
 		<tr>
@@ -40,8 +42,8 @@
 				<select name="category" class="form-control" style="width: 220px;">
 					<option value="전체" selected="selected">전체</option>
 					<%
-						for(TeamDto dto : list) {
-							String category = dto.getTeamNick();	
+						for(TeamDto tDto : list) {
+							String category = tDto.getTeamNick();	
 					%>
 						<option value="<%=category %>"><%=category %></option>
 					<%
@@ -71,7 +73,7 @@
 				
 				<button type="button" class="btn btn-default"
 					style="width: 120px;"
-					onclick="location.href='freeBoard_list.jsp'">목록</button>
+					onclick="location.href='freeBoard_listPage.jsp'">목록</button>
 			</td>
 		</tr>
 		

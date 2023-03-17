@@ -4,7 +4,7 @@ public class ReviewCommentDto {
 
 	private String rcIdx;
 	private String rbNum;
-	private String nickname;
+	private String uId;
 	private String rcContent;
 	private String rcLike;
 	private String rcDislike;
@@ -23,11 +23,11 @@ public class ReviewCommentDto {
 	public void setRbNum(String rbNum) {
 		this.rbNum = rbNum;
 	}
-	public String getNickname() {
-		return nickname;
+	public String getUId() {
+		return uId;
 	}
-	public void setNickname(String nickname) {
-		this.nickname = nickname;
+	public void setUId(String uId) {
+		this.uId = uId;
 	}
 	public String getRcContent() {
 		return rcContent;

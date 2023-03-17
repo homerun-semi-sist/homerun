@@ -34,6 +34,7 @@
 			<jsp:include page="<%=mainPage%>" />
 		</div>
 	</div>
+	
 	<div class="main_footer">
 		<jsp:include page="layout/footer.jsp" />
 	</div>

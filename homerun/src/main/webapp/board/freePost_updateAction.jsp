@@ -16,25 +16,23 @@
 		<%
 			request.setCharacterEncoding("UTF-8");
 		
-			String nickname = request.getParameter("nickname");
-			String category = request.getParameter("category");
+			String fbNum = request.getParameter("fbNum");
 			String subject = request.getParameter("subject");
 			String content = request.getParameter("content");
 			
 			FreeBoardDto dto = new FreeBoardDto();
 			
-			dto.setNickname(nickname);
-			dto.setFbCategory(category);
+			dto.setFbNum(fbNum);
 			dto.setFbSubject(subject);
 			dto.setFbContent(content);
 		
 			FreeBoardDao dao = new FreeBoardDao();
-			dao.insertFB(dto);
+			dao.updateFB(dto);
 			
 			// 페이징 처리
 			/* int num = dao.getMaxNum(); */
 			
-			response.sendRedirect("freeBoard_list.jsp");
+			response.sendRedirect("freePost_detailPage.jsp?fbNum=" + fbNum);
 			
 		%>
 
