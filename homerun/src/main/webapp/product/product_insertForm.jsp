@@ -78,7 +78,7 @@
 			</span> <span class="inputForm"> <span class="categoryWidth">
 					카테고리 선택&nbsp;&nbsp; </span> <select name="pCategory">
 					<option value="팀웨어" selected="selected">팀웨어</option>
-					<option value="응원용폼">응원용폼</option>
+					<option value="응원용품">응원용품</option>
 					<option value="야구용품">야구용품</option>
 					<option value="기념상품">기념상품</option>
 			</select>

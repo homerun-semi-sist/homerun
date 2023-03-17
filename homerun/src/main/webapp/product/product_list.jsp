@@ -1,3 +1,7 @@
+<%@page import="java.text.NumberFormat"%>
+<%@page import="data.dto.ProductDto"%>
+<%@page import="java.util.List"%>
+<%@page import="data.dao.ProductDao"%>
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
 	pageEncoding="EUC-KR"%>
 <!DOCTYPE html>
@@ -33,6 +37,12 @@
 </style>
 
 </head>
+<%
+ProductDao dao = new ProductDao();
+List<ProductDto> list = dao.selectAllProduct();
+
+NumberFormat nf = NumberFormat.getCurrencyInstance();
+%>
 <body>
 	<section id="categoryWomen">
 
@@ -67,7 +77,7 @@
 						aria-controls="navv-kia" aria-selected="false">KIA 타이거즈</button>
 					<button class="navv-link" id="navv-kt-tab" data-bs-toggle="tab"
 						data-bs-target="#navv-kt" type="button" role="tab"
-						aria-controls="navv-kt" aria-selected="false">KT 위즈</button>
+						aria-controls="navv-kt" aria-selected="false">KT WIZ</button>
 					<button class="navv-link" id="navv-lg-tab" data-bs-toggle="tab"
 						data-bs-target="#navv-lg" type="button" role="tab"
 						aria-controls="navv-lg" aria-selected="false">LG 트윈스</button>
@@ -123,158 +133,33 @@
 										<!-- 두산 팀웨어 첫번째 페이지 -->
 										<div class="carousel-item active" data-bs-interval="10000">
 											<div class="row h-100 align-items-center g-2">
+												<%
+												for (ProductDto dto : list) {
+													if (dto.getTeamName().equals("두산 베어스")) {
+														if (dto.getpCategory().equals("팀웨어")) {
+												%>
 												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
 													<div class="card card-span h-100 text-white">
-														<img class="img-fluid h-100"
-															src="https://ktwizstore.co.kr/web/product/big/202204/05feabbf22d3ba44b5ae41ea7f6089e4.jpg"
+														<img class="img-fluid h-100" src="<%=dto.getpImage()%>"
 															alt="..." />
 														<div class="card-img-overlay ps-0"></div>
 														<div class="card-body ps-0 bg-200">
-															<h5 class="fw-bold text-1000 text-truncate">어센틱 홈
-																유니폼</h5>
+															<h5 class="fw-bold text-1000 text-truncate"><%=dto.getpName()%></h5>
 															<div class="fw-bold">
-																<span class="text-600 me-2 text-decoration-line-through">$200</span><span
-																	class="text-primary">$175</span>
+																<span class="text-primary"><%=nf.format(dto.getPrice())%></span>
 															</div>
 														</div>
-														<a class="stretched-link" href="detailpage.html"></a>
+														<a class="stretched-link"
+															href="product_detailPage.jsp?pId=<%=dto.getpId()%>"></a>
 													</div>
 												</div>
-												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
-													<div class="card card-span h-100 text-white">
-														<img class="img-fluid h-100"
-															src="https://ktwizstore.co.kr/web/product/big/202204/01cc6e31eb89089880b620519b6073ae.jpg"
-															alt="..." />
-														<div class="card-img-overlay ps-0"></div>
-														<div class="card-body ps-0 bg-200">
-															<h5 class="fw-bold text-1000 text-truncate">어센틱 어웨이
-																유니폼</h5>
-															<div class="fw-bold">
-																<span class="text-600 me-2 text-decoration-line-through">$200</span><span
-																	class="text-primary">$175</span>
-															</div>
-														</div>
-														<a class="stretched-link" href="#"></a>
-													</div>
-												</div>
-												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
-													<div class="card card-span h-100 text-white">
-														<img class="img-fluid h-100"
-															src="https://ktwizstore.co.kr/web/product/big/202201/4d32839c4f3435b90f9c16ff35c9e135.jpg"
-															alt="..." />
-														<div class="card-img-overlay ps-0"></div>
-														<div class="card-body ps-0 bg-200">
-															<h5 class="fw-bold text-1000 text-truncate">어센틱 야구가방</h5>
-															<div class="fw-bold">
-																<span class="text-600 me-2 text-decoration-line-through">$200</span><span
-																	class="text-primary">$175</span>
-															</div>
-														</div>
-														<a class="stretched-link" href="#"></a>
-													</div>
-												</div>
-												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
-													<div class="card card-span h-100 text-white">
-														<img class="img-fluid h-100"
-															src="https://ktwizstore.co.kr/web/product/big/202201/b6935cecfecf97821160d70300adf7ba.jpg"
-															alt="..." />
-														<div class="card-img-overlay ps-0"></div>
-														<div class="card-body ps-0 bg-200">
-															<h5 class="fw-bold text-1000 text-truncate">어센틱 삭스</h5>
-															<div class="fw-bold">
-																<span class="text-600 me-2 text-decoration-line-through">$200</span><span
-																	class="text-primary">$175</span>
-															</div>
-														</div>
-														<a class="stretched-link" href="#"></a>
-													</div>
-												</div>
-											</div>
-										</div>
-										<!-- 두산 팀웨어 두번째 페이지 -->
-										<div class="carousel-item">
-											<div class="row h-100 align-items-center g-2">
-												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
-													<div class="card card-span h-100 text-white">
-														<img class="img-fluid h-100"
-															src="../assets/img/gallery/red-tshirt.png" alt="..." />
-														<div class="card-img-overlay ps-0"></div>
-														<div class="card-body ps-0 bg-200">
-															<h5 class="fw-bold text-1000 text-truncate">Red
-																T-Shirt</h5>
-															<div class="fw-bold">
-																<span class="text-600 me-2 text-decoration-line-through">$200</span><span
-																	class="text-primary">$175</span>
-															</div>
-														</div>
-														<a class="stretched-link" href="#"></a>
-													</div>
-												</div>
-												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
-													<div class="card card-span h-100 text-white">
-														<img class="img-fluid h-100"
-															src="../assets/img/gallery/pink-tshirt.png" alt="..." />
-														<div class="card-img-overlay ps-0"></div>
-														<div class="card-body ps-0 bg-200">
-															<h5 class="fw-bold text-1000 text-truncate">Pink
-																T-Shirt</h5>
-															<div class="fw-bold">
-																<span class="text-600 me-2 text-decoration-line-through">$200</span><span
-																	class="text-primary">$175</span>
-															</div>
-														</div>
-														<a class="stretched-link" href="#"></a>
-													</div>
-												</div>
-												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
-													<div class="card card-span h-100 text-white">
-														<img class="img-fluid h-100"
-															src="../assets/img/gallery/orange-tshirt.png" alt="..." />
-														<div class="card-img-overlay ps-0"></div>
-														<div class="card-body ps-0 bg-200">
-															<h5 class="fw-bold text-1000 text-truncate">Orange
-																T-Shirt</h5>
-															<div class="fw-bold">
-																<span class="text-600 me-2 text-decoration-line-through">$200</span><span
-																	class="text-primary">$175</span>
-															</div>
-														</div>
-														<a class="stretched-link" href="#"></a>
-													</div>
-												</div>
-												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
-													<div class="card card-span h-100 text-white">
-														<img class="img-fluid h-100"
-															src="../assets/img/gallery/purple-tshirt.png" alt="..." />
-														<div class="card-img-overlay ps-0"></div>
-														<div class="card-body ps-0 bg-200">
-															<h5 class="fw-bold text-1000 text-truncate">Purple
-																T-Shirt</h5>
-															<div class="fw-bold">
-																<span class="text-600 me-2 text-decoration-line-through">$200</span><span
-																	class="text-primary">$175</span>
-															</div>
-														</div>
-														<a class="stretched-link" href="#"></a>
-													</div>
-												</div>
-											</div>
-										</div>
+												<%
+												}
+												}
+												}
+												%>
 
-										<!-- 두산 팀웨어 좌우이동 -->
-										<div class="row">
-											<button class="carousel-control-prev" type="button"
-												data-bs-target="#carouselCategoryDoosanTeamwear"
-												data-bs-slide="prev">
-												<span class="carousel-control-prev-icon" aria-hidden="true"></span><span
-													class="visually-hidden">Previous</span>
-											</button>
-											<button class="carousel-control-next" type="button"
-												data-bs-target="#carouselCategoryDoosanTeamwear"
-												data-bs-slide="next">
-												<span class="carousel-control-next-icon" aria-hidden="true"></span><span
-													class="visually-hidden">Next </span>
-											</button>
+											</div>
 										</div>
 									</div>
 								</div>
@@ -290,157 +175,37 @@
 										<!-- 두산 응원용품 첫번째 페이지 -->
 										<div class="carousel-item active" data-bs-interval="10000">
 											<div class="row h-100 align-items-center g-2">
+												<%
+												for (ProductDto dto : list) {
+													if (dto.getTeamName().equals("두산 베어스")) {
+														if (dto.getpCategory().equals("응원용품")) {
+												%>
 												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
 													<div class="card card-span h-100 text-white">
-														<img class="img-fluid h-100"
-															src="https://www.doosanbearswefan.shop/shop/data/goods/1393576360193s0.JPG"
+														<img class="img-fluid h-100" src="<%=dto.getpImage()%>"
 															alt="..." />
 														<div class="card-img-overlay ps-0"></div>
 														<div class="card-body ps-0 bg-200">
-															<h5 class="fw-bold text-1000 text-truncate">투명우산</h5>
+															<h5 class="fw-bold text-1000 text-truncate"><%=dto.getpName()%></h5>
 															<div class="fw-bold">
-																<span class="text-600 me-2 text-decoration-line-through">$200</span><span
-																	class="text-primary">$175</span>
+																<span class="text-primary"><%=nf.format(dto.getPrice())%></span>
 															</div>
 														</div>
-														<a class="stretched-link" href="#"></a>
+														<a class="stretched-link"
+															href="product_detailPage.jsp?pId=<%=dto.getpId()%>"></a>
 													</div>
 												</div>
-												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
-													<div class="card card-span h-100 text-white">
-														<img class="img-fluid h-100"
-															src="../assets/img/gallery/shirt-2.png" alt="..." />
-														<div class="card-img-overlay ps-0"></div>
-														<div class="card-body ps-0 bg-200">
-															<h5 class="fw-bold text-1000 text-truncate">Gray
-																Shirt</h5>
-															<div class="fw-bold">
-																<span class="text-600 me-2 text-decoration-line-through">$200</span><span
-																	class="text-primary">$175</span>
-															</div>
-														</div>
-														<a class="stretched-link" href="#"></a>
-													</div>
-												</div>
-												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
-													<div class="card card-span h-100 text-white">
-														<img class="img-fluid h-100"
-															src="../assets/img/gallery/shirt-3.png" alt="..." />
-														<div class="card-img-overlay ps-0"></div>
-														<div class="card-body ps-0 bg-200">
-															<h5 class="fw-bold text-1000 text-truncate">White
-																Shirt</h5>
-															<div class="fw-bold">
-																<span class="text-600 me-2 text-decoration-line-through">$200</span><span
-																	class="text-primary">$175</span>
-															</div>
-														</div>
-														<a class="stretched-link" href="#"></a>
-													</div>
-												</div>
-												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
-													<div class="card card-span h-100 text-white">
-														<img class="img-fluid h-100"
-															src="../assets/img/gallery/shirt-4.png" alt="..." />
-														<div class="card-img-overlay ps-0"></div>
-														<div class="card-body ps-0 bg-200">
-															<h5 class="fw-bold text-1000 text-truncate">Black
-																Shirt</h5>
-															<div class="fw-bold">
-																<span class="text-600 me-2 text-decoration-line-through">$500</span><span
-																	class="text-primary">$275</span>
-															</div>
-														</div>
-														<a class="stretched-link" href="#"></a>
-													</div>
-												</div>
+												<%
+												}
+												}
+												}
+												%>
+
+
 											</div>
 										</div>
 
-										<!-- 두산 응원용품 두번째 페이지-->
-										<div class="carousel-item">
-											<div class="row h-100 align-items-center g-2">
-												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
-													<div class="card card-span h-100 text-white">
-														<img class="img-fluid h-100"
-															src="../assets/img/gallery/shirt-1.png" alt="..." />
-														<div class="card-img-overlay ps-0"></div>
-														<div class="card-body ps-0 bg-200">
-															<h5 class="fw-bold text-1000 text-truncate">Shirt</h5>
-															<div class="fw-bold">
-																<span class="text-600 me-2 text-decoration-line-through">$200</span><span
-																	class="text-primary">$175</span>
-															</div>
-														</div>
-														<a class="stretched-link" href="#"></a>
-													</div>
-												</div>
-												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
-													<div class="card card-span h-100 text-white">
-														<img class="img-fluid h-100"
-															src="../assets/img/gallery/shirt-2.png" alt="..." />
-														<div class="card-img-overlay ps-0"></div>
-														<div class="card-body ps-0 bg-200">
-															<h5 class="fw-bold text-1000 text-truncate">Gray
-																Shirt</h5>
-															<div class="fw-bold">
-																<span class="text-600 me-2 text-decoration-line-through">$200</span><span
-																	class="text-primary">$175</span>
-															</div>
-														</div>
-														<a class="stretched-link" href="#"></a>
-													</div>
-												</div>
-												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
-													<div class="card card-span h-100 text-white">
-														<img class="img-fluid h-100"
-															src="../assets/img/gallery/shirt-3.png" alt="..." />
-														<div class="card-img-overlay ps-0"></div>
-														<div class="card-body ps-0 bg-200">
-															<h5 class="fw-bold text-1000 text-truncate">White
-																Shirt</h5>
-															<div class="fw-bold">
-																<span class="text-600 me-2 text-decoration-line-through">$200</span><span
-																	class="text-primary">$175</span>
-															</div>
-														</div>
-														<a class="stretched-link" href="#"></a>
-													</div>
-												</div>
-												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
-													<div class="card card-span h-100 text-white">
-														<img class="img-fluid h-100"
-															src="../assets/img/gallery/shirt-4.png" alt="..." />
-														<div class="card-img-overlay ps-0"></div>
-														<div class="card-body ps-0 bg-200">
-															<h5 class="fw-bold text-1000 text-truncate">Black
-																Shirt</h5>
-															<div class="fw-bold">
-																<span class="text-600 me-2 text-decoration-line-through">$500</span><span
-																	class="text-primary">$275</span>
-															</div>
-														</div>
-														<a class="stretched-link" href="#"></a>
-													</div>
-												</div>
-											</div>
-										</div>
 
-										<!-- 두산 응원용품 좌우이동-->
-										<div class="row">
-											<button class="carousel-control-prev" type="button"
-												data-bs-target="#carouselCategoryDoosanCheering"
-												data-bs-slide="prev">
-												<span class="carousel-control-prev-icon" aria-hidden="true"></span><span
-													class="visually-hidden">Previous</span>
-											</button>
-											<button class="carousel-control-next" type="button"
-												data-bs-target="#carouselCategoryDoosanCheering"
-												data-bs-slide="next">
-												<span class="carousel-control-next-icon" aria-hidden="true"></span><span
-													class="visually-hidden">Next </span>
-											</button>
-										</div>
 									</div>
 								</div>
 							</div>
@@ -455,151 +220,36 @@
 										<!-- 두산 야구용품 첫번째 페이지-->
 										<div class="carousel-item active" data-bs-interval="10000">
 											<div class="row h-100 align-items-center g-2">
+												<%
+												for (ProductDto dto : list) {
+													if (dto.getTeamName().equals("두산 베어스")) {
+														if (dto.getpCategory().equals("야구용품")) {
+												%>
 												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
 													<div class="card card-span h-100 text-white">
-														<img class="img-fluid h-100"
-															src="https://www.doosanbearswefan.shop/shop/data/goods/1527557404826m0.jpg"
+														<img class="img-fluid h-100" src="<%=dto.getpImage()%>"
 															alt="..." />
 														<div class="card-img-overlay ps-0"></div>
 														<div class="card-body ps-0 bg-200">
-															<h5 class="fw-bold text-1000 text-truncate">어센틱 배트가방</h5>
+															<h5 class="fw-bold text-1000 text-truncate"><%=dto.getpName()%></h5>
 															<div class="fw-bold">
-																<span class="text-600 me-2 text-decoration-line-through">$200</span><span
-																	class="text-primary">$175</span>
+																<span class="text-primary"><%=nf.format(dto.getPrice())%></span>
 															</div>
 														</div>
-														<a class="stretched-link" href="#"></a>
+														<a class="stretched-link"
+															href="product_detailPage.jsp?pId=<%=dto.getpId()%>"></a>
 													</div>
 												</div>
-												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
-													<div class="card card-span h-100 text-white">
-														<img class="img-fluid h-100"
-															src="../assets/img/gallery/shoe-2.png" alt="..." />
-														<div class="card-img-overlay ps-0"></div>
-														<div class="card-body ps-0 bg-200">
-															<h5 class="fw-bold text-1000 text-truncate">Shoe</h5>
-															<div class="fw-bold">
-																<span class="text-600 me-2 text-decoration-line-through">$500</span><span
-																	class="text-primary">$275</span>
-															</div>
-														</div>
-														<a class="stretched-link" href="#"></a>
-													</div>
-												</div>
-												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
-													<div class="card card-span h-100 text-white">
-														<img class="img-fluid h-100"
-															src="../assets/img/gallery/shoe-3.png" alt="..." />
-														<div class="card-img-overlay ps-0"></div>
-														<div class="card-body ps-0 bg-200">
-															<h5 class="fw-bold text-1000 text-truncate">Shoe</h5>
-															<div class="fw-bold">
-																<span class="text-600 me-2 text-decoration-line-through">$200</span><span
-																	class="text-primary">$175</span>
-															</div>
-														</div>
-														<a class="stretched-link" href="#"></a>
-													</div>
-												</div>
-												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
-													<div class="card card-span h-100 text-white">
-														<img class="img-fluid h-100"
-															src="../assets/img/gallery/shoe-4.png" alt="..." />
-														<div class="card-img-overlay ps-0"></div>
-														<div class="card-body ps-0 bg-200">
-															<h5 class="fw-bold text-1000 text-truncate">Shoe</h5>
-															<div class="fw-bold">
-																<span class="text-600 me-2 text-decoration-line-through">$500</span><span
-																	class="text-primary">$275</span>
-															</div>
-														</div>
-														<a class="stretched-link" href="#"></a>
-													</div>
-												</div>
+												<%
+												}
+												}
+												}
+												%>
+
 											</div>
 										</div>
 
-										<!-- 두산 야구용품 두번째 페이지-->
-										<div class="carousel-item">
-											<div class="row h-100 align-items-center g-2">
-												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
-													<div class="card card-span h-100 text-white">
-														<img class="img-fluid h-100"
-															src="../assets/img/gallery/shoe-1.png" alt="..." />
-														<div class="card-img-overlay ps-0"></div>
-														<div class="card-body ps-0 bg-200">
-															<h5 class="fw-bold text-1000 text-truncate">Shoe</h5>
-															<div class="fw-bold">
-																<span class="text-600 me-2 text-decoration-line-through">$200</span><span
-																	class="text-primary">$175</span>
-															</div>
-														</div>
-														<a class="stretched-link" href="#"></a>
-													</div>
-												</div>
-												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
-													<div class="card card-span h-100 text-white">
-														<img class="img-fluid h-100"
-															src="../assets/img/gallery/shoe-2.png" alt="..." />
-														<div class="card-img-overlay ps-0"></div>
-														<div class="card-body ps-0 bg-200">
-															<h5 class="fw-bold text-1000 text-truncate">Shoe</h5>
-															<div class="fw-bold">
-																<span class="text-600 me-2 text-decoration-line-through">$500</span><span
-																	class="text-primary">$275</span>
-															</div>
-														</div>
-														<a class="stretched-link" href="#"></a>
-													</div>
-												</div>
-												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
-													<div class="card card-span h-100 text-white">
-														<img class="img-fluid h-100"
-															src="../assets/img/gallery/shoe-3.png" alt="..." />
-														<div class="card-img-overlay ps-0"></div>
-														<div class="card-body ps-0 bg-200">
-															<h5 class="fw-bold text-1000 text-truncate">Shoe</h5>
-															<div class="fw-bold">
-																<span class="text-600 me-2 text-decoration-line-through">$200</span><span
-																	class="text-primary">$175</span>
-															</div>
-														</div>
-														<a class="stretched-link" href="#"></a>
-													</div>
-												</div>
-												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
-													<div class="card card-span h-100 text-white">
-														<img class="img-fluid h-100"
-															src="../assets/img/gallery/shoe-4.png" alt="..." />
-														<div class="card-img-overlay ps-0"></div>
-														<div class="card-body ps-0 bg-200">
-															<h5 class="fw-bold text-1000 text-truncate">Shoe</h5>
-															<div class="fw-bold">
-																<span class="text-600 me-2 text-decoration-line-through">$500</span><span
-																	class="text-primary">$275</span>
-															</div>
-														</div>
-														<a class="stretched-link" href="#"></a>
-													</div>
-												</div>
-											</div>
-										</div>
 
-										<!-- 두산 야구용품 좌우이동 -->
-										<div class="row">
-											<button class="carousel-control-prev" type="button"
-												data-bs-target="#carouselCategoryDoosanbaseball"
-												data-bs-slide="prev">
-												<span class="carousel-control-prev-icon" aria-hidden="true"></span><span
-													class="visually-hidden">Previous</span>
-											</button>
-											<button class="carousel-control-next" type="button"
-												data-bs-target="#carouselCategoryDoosanbaseball"
-												data-bs-slide="next">
-												<span class="carousel-control-next-icon" aria-hidden="true"></span><span
-													class="visually-hidden">Next </span>
-											</button>
-										</div>
 									</div>
 								</div>
 							</div>
@@ -615,155 +265,37 @@
 										<!-- 두산 기념상품 첫번째 페이지-->
 										<div class="carousel-item active" data-bs-interval="10000">
 											<div class="row h-100 align-items-center g-2">
+												<%
+												for (ProductDto dto : list) {
+													if (dto.getTeamName().equals("두산 베어스")) {
+														if (dto.getpCategory().equals("기념상품")) {
+												%>
 												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
 													<div class="card card-span h-100 text-white">
-														<img class="img-fluid h-100"
-															src="https://www.doosanbearswefan.shop/shop/data/goods/1474879985163s0.jpg"
+														<img class="img-fluid h-100" src="<%=dto.getpImage()%>"
 															alt="..." />
 														<div class="card-img-overlay ps-0"></div>
 														<div class="card-body ps-0 bg-200">
-															<h5 class="fw-bold text-1000 text-truncate">2016
-																정규시즌 우승 기념 모자</h5>
+															<h5 class="fw-bold text-1000 text-truncate"><%=dto.getpName()%></h5>
 															<div class="fw-bold">
-																<span class="text-600 me-2 text-decoration-line-through">$500</span><span
-																	class="text-primary">$275</span>
+																<span class="text-primary"><%=nf.format(dto.getPrice())%></span>
 															</div>
 														</div>
-														<a class="stretched-link" href="#"></a>
+														<a class="stretched-link"
+															href="product_detailPage.jsp?pId=<%=dto.getpId()%>"></a>
 													</div>
 												</div>
-												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
-													<div class="card card-span h-100 text-white">
-														<img class="img-fluid h-100"
-															src="../assets/img/gallery/watch-2.png" alt="..." />
-														<div class="card-img-overlay ps-0"></div>
-														<div class="card-body ps-0 bg-200">
-															<h5 class="fw-bold text-1000 text-truncate">Watch</h5>
-															<div class="fw-bold">
-																<span class="text-600 me-2 text-decoration-line-through">$500</span><span
-																	class="text-primary">$275</span>
-															</div>
-														</div>
-														<a class="stretched-link" href="#"></a>
-													</div>
-												</div>
-												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
-													<div class="card card-span h-100 text-white">
-														<img class="img-fluid h-100"
-															src="../assets/img/gallery/watch-3.png" alt="..." />
-														<div class="card-img-overlay ps-0"></div>
-														<div class="card-body ps-0 bg-200">
-															<h5 class="fw-bold text-1000 text-truncate">Watch</h5>
-															<div class="fw-bold">
-																<span class="text-600 me-2 text-decoration-line-through">$500</span><span
-																	class="text-primary">$275</span>
-															</div>
-														</div>
-														<a class="stretched-link" href="#"></a>
-													</div>
-												</div>
-												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
-													<div class="card card-span h-100 text-white">
-														<img class="img-fluid h-100"
-															src="../assets/img/gallery/watch-4.png" alt="..." />
-														<div class="card-img-overlay ps-0"></div>
-														<div class="card-body ps-0 bg-200">
-															<h5 class="fw-bold text-1000 text-truncate">Watch</h5>
-															<div class="fw-bold">
-																<span class="text-600 me-2 text-decoration-line-through">$500</span><span
-																	class="text-primary">$275</span>
-															</div>
-														</div>
-														<a class="stretched-link" href="#"></a>
-													</div>
-												</div>
+												<%
+												}
+												}
+												}
+												%>
 											</div>
 										</div>
 
-										<!-- 두산 기념상품 두번째 페이지-->
-										<div class="carousel-item">
-											<div class="row h-100 align-items-center g-2">
-												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
-													<div class="card card-span h-100 text-white">
-														<img class="img-fluid h-100"
-															src="../assets/img/gallery/watch-1.png" alt="..." />
-														<div class="card-img-overlay ps-0"></div>
-														<div class="card-body ps-0 bg-200">
-															<h5 class="fw-bold text-1000 text-truncate">Watch</h5>
-															<div class="fw-bold">
-																<span class="text-600 me-2 text-decoration-line-through">$500</span><span
-																	class="text-primary">$275</span>
-															</div>
-														</div>
-														<a class="stretched-link" href="#"></a>
-													</div>
-												</div>
-												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
-													<div class="card card-span h-100 text-white">
-														<img class="img-fluid h-100"
-															src="../assets/img/gallery/watch-2.png" alt="..." />
-														<div class="card-img-overlay ps-0"></div>
-														<div class="card-body ps-0 bg-200">
-															<h5 class="fw-bold text-1000 text-truncate">Watch</h5>
-															<div class="fw-bold">
-																<span class="text-600 me-2 text-decoration-line-through">$500</span><span
-																	class="text-primary">$275</span>
-															</div>
-														</div>
-														<a class="stretched-link" href="#"></a>
-													</div>
-												</div>
-												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
-													<div class="card card-span h-100 text-white">
-														<img class="img-fluid h-100"
-															src="../assets/img/gallery/watch-3.png" alt="..." />
-														<div class="card-img-overlay ps-0"></div>
-														<div class="card-body ps-0 bg-200">
-															<h5 class="fw-bold text-1000 text-truncate">Watch</h5>
-															<div class="fw-bold">
-																<span class="text-600 me-2 text-decoration-line-through">$500</span><span
-																	class="text-primary">$275</span>
-															</div>
-														</div>
-														<a class="stretched-link" href="#"></a>
-													</div>
-												</div>
-												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
-													<div class="card card-span h-100 text-white">
-														<img class="img-fluid h-100"
-															src="../assets/img/gallery/watch-4.png" alt="..." />
-														<div class="card-img-overlay ps-0"></div>
-														<div class="card-body ps-0 bg-200">
-															<h5 class="fw-bold text-1000 text-truncate">Watch</h5>
-															<div class="fw-bold">
-																<span class="text-600 me-2 text-decoration-line-through">$500</span><span
-																	class="text-primary">$275</span>
-															</div>
-														</div>
-														<a class="stretched-link" href="#"></a>
-													</div>
-												</div>
-											</div>
-										</div>
 
-										<!-- 두산 기념상품 좌우이동-->
-										<div class="row">
-											<button class="carousel-control-prev" type="button"
-												data-bs-target="#carouselCategoryDoosanCommemoration"
-												data-bs-slide="prev">
-												<span class="carousel-control-prev-icon" aria-hidden="true"></span><span
-													class="visually-hidden">Previous</span>
-											</button>
-											<button class="carousel-control-next" type="button"
-												data-bs-target="#carouselCategoryDoosanCommemoration"
-												data-bs-slide="next">
-												<span class="carousel-control-next-icon" aria-hidden="true"></span><span
-													class="visually-hidden">Next </span>
-											</button>
-										</div>
 									</div>
 								</div>
-
 							</div>
 						</div>
 					</div>
@@ -808,165 +340,44 @@
 									data-bs-touch="false" data-bs-interval="false">
 									<!-- 롯데 팀웨어 시작 -->
 									<div class="carousel-inner">
+
 										<!-- 롯데 팀웨어 첫번째 페이지 -->
 										<div class="carousel-item active" data-bs-interval="10000">
 											<div class="row h-100 align-items-center g-2">
+												<%
+												for (ProductDto dto : list) {
+													if (dto.getTeamName().equals("롯데 자이언츠")) {
+														if (dto.getpCategory().equals("팀웨어")) {
+												%>
 												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
 													<div class="card card-span h-100 text-white">
-														<img class="img-fluid h-100"
-															src="http://www.lottegiantsshop.com/shopimages/giant00/0020040001533.jpg?1659488197"
+														<img class="img-fluid h-100" src="<%=dto.getpImage()%>"
 															alt="..." />
 														<div class="card-img-overlay ps-0"></div>
 														<div class="card-body ps-0 bg-200">
-															<h5 class="fw-bold text-1000 text-truncate">G로고 베이직
-																버킷햇</h5>
+															<h5 class="fw-bold text-1000 text-truncate"><%=dto.getpName()%></h5>
 															<div class="fw-bold">
-																<span class="text-600 me-2 text-decoration-line-through">$200</span><span
-																	class="text-primary">$175</span>
+																<span class="text-primary"><%=nf.format(dto.getPrice())%></span>
 															</div>
 														</div>
-														<a class="stretched-link" href="#"></a>
+														<a class="stretched-link"
+															href="product_detailPage.jsp?pId=<%=dto.getpId()%>"></a>
 													</div>
 												</div>
-												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
-													<div class="card card-span h-100 text-white">
-														<img class="img-fluid h-100"
-															src="http://www.lottegiantsshop.com/shopimages/giant00/0020040001573.jpg?1659677052"
-															alt="..." />
-														<div class="card-img-overlay ps-0"></div>
-														<div class="card-body ps-0 bg-200">
-															<h5 class="fw-bold text-1000 text-truncate">
-																Giants로고 올드스쿨 스냅백</h5>
-															<div class="fw-bold">
-																<span class="text-600 me-2 text-decoration-line-through">$200</span><span
-																	class="text-primary">$175</span>
-															</div>
-														</div>
-														<a class="stretched-link" href="#"></a>
-													</div>
-												</div>
-												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
-													<div class="card card-span h-100 text-white">
-														<img class="img-fluid h-100"
-															src="http://www.lottegiantsshop.com/shopimages/giant00/0010010000553.jpg?1657675959"
-															alt="..." />
-														<div class="card-img-overlay ps-0"></div>
-														<div class="card-body ps-0 bg-200">
-															<h5 class="fw-bold text-1000 text-truncate">홈 어센틱
-																유니폼</h5>
-															<div class="fw-bold">
-																<span class="text-600 me-2 text-decoration-line-through">$200</span><span
-																	class="text-primary">$175</span>
-															</div>
-														</div>
-														<a class="stretched-link" href="#"></a>
-													</div>
-												</div>
-												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
-													<div class="card card-span h-100 text-white">
-														<img class="img-fluid h-100"
-															src="http://www.lottegiantsshop.com/shopimages/giant00/0010020000343.jpg?1628126774"
-															alt="..." />
-														<div class="card-img-overlay ps-0"></div>
-														<div class="card-body ps-0 bg-200">
-															<h5 class="fw-bold text-1000 text-truncate">챔피언 원정
-																레플리카 유니폼</h5>
-															<div class="fw-bold">
-																<span class="text-600 me-2 text-decoration-line-through">$200</span><span
-																	class="text-primary">$175</span>
-															</div>
-														</div>
-														<a class="stretched-link" href="#"></a>
-													</div>
-												</div>
+												<%
+												}
+												}
+												}
+												%>
+
+
 											</div>
 										</div>
 
-										<!-- 롯데 팀웨어 두번째 페이지 -->
-										<div class="carousel-item">
-											<div class="row h-100 align-items-center g-2">
-												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
-													<div class="card card-span h-100 text-white">
-														<img class="img-fluid h-100"
-															src="../assets/img/gallery/white-tshirt.png" alt="..." />
-														<div class="card-img-overlay ps-0"></div>
-														<div class="card-body ps-0 bg-200">
-															<h5 class="fw-bold text-1000 text-truncate">White
-																T-Shirt</h5>
-															<div class="fw-bold">
-																<span class="text-600 me-2 text-decoration-line-through">$200</span><span
-																	class="text-primary">$175</span>
-															</div>
-														</div>
-														<a class="stretched-link" href="#"></a>
-													</div>
-												</div>
-												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
-													<div class="card card-span h-100 text-white">
-														<img class="img-fluid h-100"
-															src="../assets/img/gallery/sky-tshirt.png" alt="..." />
-														<div class="card-img-overlay ps-0"></div>
-														<div class="card-body ps-0 bg-200">
-															<h5 class="fw-bold text-1000 text-truncate">Sky
-																T-Shirt</h5>
-															<div class="fw-bold">
-																<span class="text-600 me-2 text-decoration-line-through">$200</span><span
-																	class="text-primary">$175</span>
-															</div>
-														</div>
-														<a class="stretched-link" href="#"></a>
-													</div>
-												</div>
-												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
-													<div class="card card-span h-100 text-white">
-														<img class="img-fluid h-100"
-															src="../assets/img/gallery/yellow-tshirt.png" alt="..." />
-														<div class="card-img-overlay ps-0"></div>
-														<div class="card-body ps-0 bg-200">
-															<h5 class="fw-bold text-1000 text-truncate">Yellow
-																T-Shirt</h5>
-															<div class="fw-bold">
-																<span class="text-600 me-2 text-decoration-line-through">$200</span><span
-																	class="text-primary">$175</span>
-															</div>
-														</div>
-														<a class="stretched-link" href="#"></a>
-													</div>
-												</div>
-												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
-													<div class="card card-span h-100 text-white">
-														<img class="img-fluid h-100"
-															src="../assets/img/gallery/black-tshirt.png" alt="..." />
-														<div class="card-img-overlay ps-0"></div>
-														<div class="card-body ps-0 bg-200">
-															<h5 class="fw-bold text-1000 text-truncate">Black
-																T-Shirt</h5>
-															<div class="fw-bold">
-																<span class="text-600 me-2 text-decoration-line-through">$200</span><span
-																	class="text-primary">$175</span>
-															</div>
-														</div>
-														<a class="stretched-link" href="#"></a>
-													</div>
-												</div>
-											</div>
-										</div>
 
-										<!-- 롯데 팀웨어 좌우이동 -->
-										<div class="row">
-											<button class="carousel-control-prev" type="button"
-												data-bs-target="#carouselCategoryLotteTeamwear"
-												data-bs-slide="prev">
-												<span class="carousel-control-prev-icon" aria-hidden="true"></span><span
-													class="visually-hidden">Previous</span>
-											</button>
-											<button class="carousel-control-next" type="button"
-												data-bs-target="#carouselCategoryLotteTeamwear"
-												data-bs-slide="next">
-												<span class="carousel-control-next-icon" aria-hidden="true"></span><span
-													class="visually-hidden">Next </span>
-											</button>
-										</div>
+
+
+
 									</div>
 								</div>
 
@@ -983,158 +394,40 @@
 										<!-- 롯데 응원용품 첫번째 페이지 -->
 										<div class="carousel-item active" data-bs-interval="10000">
 											<div class="row h-100 align-items-center g-2">
+												<%
+												for (ProductDto dto : list) {
+													if (dto.getTeamName().equals("롯데 자이언츠")) {
+														if (dto.getpCategory().equals("응원용품")) {
+												%>
 												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
 													<div class="card card-span h-100 text-white">
-														<img class="img-fluid h-100"
-															src="http://www.lottegiantsshop.com/shopimages/giant00/013008000002.jpg?1677205437"
+														<img class="img-fluid h-100" src="<%=dto.getpImage()%>"
 															alt="..." />
 														<div class="card-img-overlay ps-0"></div>
 														<div class="card-body ps-0 bg-200">
-															<h5 class="fw-bold text-1000 text-truncate">우.선.응.원
-																패치</h5>
+															<h5 class="fw-bold text-1000 text-truncate"><%=dto.getpName()%></h5>
 															<div class="fw-bold">
-																<span class="text-600 me-2 text-decoration-line-through">$200</span><span
-																	class="text-primary">$175</span>
+																<span class="text-primary"><%=nf.format(dto.getPrice())%></span>
 															</div>
 														</div>
-														<a class="stretched-link" href="#"></a>
+														<a class="stretched-link"
+															href="product_detailPage.jsp?pId=<%=dto.getpId()%>"></a>
 													</div>
 												</div>
-												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
-													<div class="card card-span h-100 text-white">
-														<img class="img-fluid h-100"
-															src="../assets/img/gallery/shirt-6.png" alt="..." />
-														<div class="card-img-overlay ps-0"></div>
-														<div class="card-body ps-0 bg-200">
-															<h5 class="fw-bold text-1000 text-truncate">Gray
-																Shirt</h5>
-															<div class="fw-bold">
-																<span class="text-600 me-2 text-decoration-line-through">$200</span><span
-																	class="text-primary">$175</span>
-															</div>
-														</div>
-														<a class="stretched-link" href="#"></a>
-													</div>
-												</div>
-												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
-													<div class="card card-span h-100 text-white">
-														<img class="img-fluid h-100"
-															src="../assets/img/gallery/shirt-7.png" alt="..." />
-														<div class="card-img-overlay ps-0"></div>
-														<div class="card-body ps-0 bg-200">
-															<h5 class="fw-bold text-1000 text-truncate">White
-																Shirt</h5>
-															<div class="fw-bold">
-																<span class="text-600 me-2 text-decoration-line-through">$200</span><span
-																	class="text-primary">$175</span>
-															</div>
-														</div>
-														<a class="stretched-link" href="#"></a>
-													</div>
-												</div>
-												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
-													<div class="card card-span h-100 text-white">
-														<img class="img-fluid h-100"
-															src="../assets/img/gallery/shirt-8.png" alt="..." />
-														<div class="card-img-overlay ps-0"></div>
-														<div class="card-body ps-0 bg-200">
-															<h5 class="fw-bold text-1000 text-truncate">Black
-																Shirt</h5>
-															<div class="fw-bold">
-																<span class="text-600 me-2 text-decoration-line-through">$500</span><span
-																	class="text-primary">$275</span>
-															</div>
-														</div>
-														<a class="stretched-link" href="#"></a>
-													</div>
-												</div>
+												<%
+												}
+												}
+												}
+												%>
+
+
+
 											</div>
 										</div>
 
-										<!-- 롯데 응원용품 두번째 페이지-->
-										<div class="carousel-item">
-											<div class="row h-100 align-items-center g-2">
-												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
-													<div class="card card-span h-100 text-white">
-														<img class="img-fluid h-100"
-															src="../assets/img/gallery/shirt-5.png" alt="..." />
-														<div class="card-img-overlay ps-0"></div>
-														<div class="card-body ps-0 bg-200">
-															<h5 class="fw-bold text-1000 text-truncate">Shirt</h5>
-															<div class="fw-bold">
-																<span class="text-600 me-2 text-decoration-line-through">$200</span><span
-																	class="text-primary">$175</span>
-															</div>
-														</div>
-														<a class="stretched-link" href="#"></a>
-													</div>
-												</div>
-												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
-													<div class="card card-span h-100 text-white">
-														<img class="img-fluid h-100"
-															src="../assets/img/gallery/shirt-6.png" alt="..." />
-														<div class="card-img-overlay ps-0"></div>
-														<div class="card-body ps-0 bg-200">
-															<h5 class="fw-bold text-1000 text-truncate">Gray
-																Shirt</h5>
-															<div class="fw-bold">
-																<span class="text-600 me-2 text-decoration-line-through">$200</span><span
-																	class="text-primary">$175</span>
-															</div>
-														</div>
-														<a class="stretched-link" href="#"></a>
-													</div>
-												</div>
-												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
-													<div class="card card-span h-100 text-white">
-														<img class="img-fluid h-100"
-															src="../assets/img/gallery/shirt-7.png" alt="..." />
-														<div class="card-img-overlay ps-0"></div>
-														<div class="card-body ps-0 bg-200">
-															<h5 class="fw-bold text-1000 text-truncate">White
-																Shirt</h5>
-															<div class="fw-bold">
-																<span class="text-600 me-2 text-decoration-line-through">$200</span><span
-																	class="text-primary">$175</span>
-															</div>
-														</div>
-														<a class="stretched-link" href="#"></a>
-													</div>
-												</div>
-												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
-													<div class="card card-span h-100 text-white">
-														<img class="img-fluid h-100"
-															src="../assets/img/gallery/shirt-8.png" alt="..." />
-														<div class="card-img-overlay ps-0"></div>
-														<div class="card-body ps-0 bg-200">
-															<h5 class="fw-bold text-1000 text-truncate">Black
-																Shirt</h5>
-															<div class="fw-bold">
-																<span class="text-600 me-2 text-decoration-line-through">$500</span><span
-																	class="text-primary">$275</span>
-															</div>
-														</div>
-														<a class="stretched-link" href="#"></a>
-													</div>
-												</div>
-											</div>
-										</div>
 
-										<!-- 롯데 응원용품 좌우이동-->
-										<div class="row">
-											<button class="carousel-control-prev" type="button"
-												data-bs-target="#carouselCategoryLotteCheering"
-												data-bs-slide="prev">
-												<span class="carousel-control-prev-icon" aria-hidden="true"></span><span
-													class="visually-hidden">Previous</span>
-											</button>
-											<button class="carousel-control-next" type="button"
-												data-bs-target="#carouselCategoryLotteCheering"
-												data-bs-slide="next">
-												<span class="carousel-control-next-icon" aria-hidden="true"></span><span
-													class="visually-hidden">Next </span>
-											</button>
-										</div>
+
+
 									</div>
 								</div>
 
@@ -1151,151 +444,39 @@
 										<!-- 롯데 야구용품 첫번째 페이지 -->
 										<div class="carousel-item active" data-bs-interval="10000">
 											<div class="row h-100 align-items-center g-2">
+												<%
+												for (ProductDto dto : list) {
+													if (dto.getTeamName().equals("롯데 자이언츠")) {
+														if (dto.getpCategory().equals("야구용품")) {
+												%>
 												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
 													<div class="card card-span h-100 text-white">
-														<img class="img-fluid h-100"
-															src="http://www.lottegiantsshop.com/shopimages/giant00/0070010000753.jpg?1619500346"
+														<img class="img-fluid h-100" src="<%=dto.getpImage()%>"
 															alt="..." />
 														<div class="card-img-overlay ps-0"></div>
 														<div class="card-body ps-0 bg-200">
-															<h5 class="fw-bold text-1000 text-truncate">기본 로고볼</h5>
+															<h5 class="fw-bold text-1000 text-truncate"><%=dto.getpName()%></h5>
 															<div class="fw-bold">
-																<span class="text-600 me-2 text-decoration-line-through">$200</span><span
-																	class="text-primary">$175</span>
+																<span class="text-primary"><%=nf.format(dto.getPrice())%></span>
 															</div>
 														</div>
-														<a class="stretched-link" href="#"></a>
+														<a class="stretched-link"
+															href="product_detailPage.jsp?pId=<%=dto.getpId()%>"></a>
 													</div>
 												</div>
-												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
-													<div class="card card-span h-100 text-white">
-														<img class="img-fluid h-100"
-															src="../assets/img/gallery/shoe-6.png" alt="..." />
-														<div class="card-img-overlay ps-0"></div>
-														<div class="card-body ps-0 bg-200">
-															<h5 class="fw-bold text-1000 text-truncate">Shoe</h5>
-															<div class="fw-bold">
-																<span class="text-600 me-2 text-decoration-line-through">$500</span><span
-																	class="text-primary">$275</span>
-															</div>
-														</div>
-														<a class="stretched-link" href="#"></a>
-													</div>
-												</div>
-												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
-													<div class="card card-span h-100 text-white">
-														<img class="img-fluid h-100"
-															src="../assets/img/gallery/shoe-7.png" alt="..." />
-														<div class="card-img-overlay ps-0"></div>
-														<div class="card-body ps-0 bg-200">
-															<h5 class="fw-bold text-1000 text-truncate">Shoe</h5>
-															<div class="fw-bold">
-																<span class="text-600 me-2 text-decoration-line-through">$200</span><span
-																	class="text-primary">$175</span>
-															</div>
-														</div>
-														<a class="stretched-link" href="#"></a>
-													</div>
-												</div>
-												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
-													<div class="card card-span h-100 text-white">
-														<img class="img-fluid h-100"
-															src="../assets/img/gallery/shoe-8.png" alt="..." />
-														<div class="card-img-overlay ps-0"></div>
-														<div class="card-body ps-0 bg-200">
-															<h5 class="fw-bold text-1000 text-truncate">Shoe</h5>
-															<div class="fw-bold">
-																<span class="text-600 me-2 text-decoration-line-through">$500</span><span
-																	class="text-primary">$275</span>
-															</div>
-														</div>
-														<a class="stretched-link" href="#"></a>
-													</div>
-												</div>
+												<%
+												}
+												}
+												}
+												%>
+
+
 											</div>
 										</div>
 
-										<!-- 롯데 야구용품 두번째 페이지 -->
-										<div class="carousel-item">
-											<div class="row h-100 align-items-center g-2">
-												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
-													<div class="card card-span h-100 text-white">
-														<img class="img-fluid h-100"
-															src="../assets/img/gallery/shoe-5.png" alt="..." />
-														<div class="card-img-overlay ps-0"></div>
-														<div class="card-body ps-0 bg-200">
-															<h5 class="fw-bold text-1000 text-truncate">Shoe</h5>
-															<div class="fw-bold">
-																<span class="text-600 me-2 text-decoration-line-through">$200</span><span
-																	class="text-primary">$175</span>
-															</div>
-														</div>
-														<a class="stretched-link" href="#"></a>
-													</div>
-												</div>
-												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
-													<div class="card card-span h-100 text-white">
-														<img class="img-fluid h-100"
-															src="../assets/img/gallery/shoe-6.png" alt="..." />
-														<div class="card-img-overlay ps-0"></div>
-														<div class="card-body ps-0 bg-200">
-															<h5 class="fw-bold text-1000 text-truncate">Shoe</h5>
-															<div class="fw-bold">
-																<span class="text-600 me-2 text-decoration-line-through">$500</span><span
-																	class="text-primary">$275</span>
-															</div>
-														</div>
-														<a class="stretched-link" href="#"></a>
-													</div>
-												</div>
-												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
-													<div class="card card-span h-100 text-white">
-														<img class="img-fluid h-100"
-															src="../assets/img/gallery/shoe-7.png" alt="..." />
-														<div class="card-img-overlay ps-0"></div>
-														<div class="card-body ps-0 bg-200">
-															<h5 class="fw-bold text-1000 text-truncate">Shoe</h5>
-															<div class="fw-bold">
-																<span class="text-600 me-2 text-decoration-line-through">$200</span><span
-																	class="text-primary">$175</span>
-															</div>
-														</div>
-														<a class="stretched-link" href="#"></a>
-													</div>
-												</div>
-												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
-													<div class="card card-span h-100 text-white">
-														<img class="img-fluid h-100"
-															src="../assets/img/gallery/shoe-8.png" alt="..." />
-														<div class="card-img-overlay ps-0"></div>
-														<div class="card-body ps-0 bg-200">
-															<h5 class="fw-bold text-1000 text-truncate">Shoe</h5>
-															<div class="fw-bold">
-																<span class="text-600 me-2 text-decoration-line-through">$500</span><span
-																	class="text-primary">$275</span>
-															</div>
-														</div>
-														<a class="stretched-link" href="#"></a>
-													</div>
-												</div>
-											</div>
-										</div>
 
-										<!-- 롯데 야구용품 좌우이동 -->
-										<div class="row">
-											<button class="carousel-control-prev" type="button"
-												data-bs-target="#carouselCategoryLottebaseball"
-												data-bs-slide="prev">
-												<span class="carousel-control-prev-icon" aria-hidden="true"></span><span
-													class="visually-hidden">Previous</span>
-											</button>
-											<button class="carousel-control-next" type="button"
-												data-bs-target="#carouselCategoryLottebaseball"
-												data-bs-slide="next">
-												<span class="carousel-control-next-icon" aria-hidden="true"></span><span
-													class="visually-hidden">Next </span>
-											</button>
-										</div>
+
+
 									</div>
 								</div>
 							</div>
@@ -1312,151 +493,39 @@
 										<!-- 롯데 기념상품 첫번째 페이지 -->
 										<div class="carousel-item active" data-bs-interval="10000">
 											<div class="row h-100 align-items-center g-2">
+												<%
+												for (ProductDto dto : list) {
+													if (dto.getTeamName().equals("롯데 자이언츠")) {
+														if (dto.getpCategory().equals("기념상품")) {
+												%>
 												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
 													<div class="card card-span h-100 text-white">
-														<img class="img-fluid h-100"
-															src="http://www.lottegiantsshop.com/shopimages/giant00/0130030000173.jpg?1663327629"
+														<img class="img-fluid h-100" src="<%=dto.getpImage()%>"
 															alt="..." />
 														<div class="card-img-overlay ps-0"></div>
 														<div class="card-body ps-0 bg-200">
-															<h5 class="fw-bold text-1000 text-truncate">골프 패키지박스</h5>
+															<h5 class="fw-bold text-1000 text-truncate"><%=dto.getpName()%></h5>
 															<div class="fw-bold">
-																<span class="text-600 me-2 text-decoration-line-through">$500</span><span
-																	class="text-primary">$275</span>
+																<span class="text-primary"><%=nf.format(dto.getPrice())%></span>
 															</div>
 														</div>
-														<a class="stretched-link" href="#"></a>
+														<a class="stretched-link"
+															href="product_detailPage.jsp?pId=<%=dto.getpId()%>"></a>
 													</div>
 												</div>
-												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
-													<div class="card card-span h-100 text-white">
-														<img class="img-fluid h-100"
-															src="../assets/img/gallery/watch-6.png" alt="..." />
-														<div class="card-img-overlay ps-0"></div>
-														<div class="card-body ps-0 bg-200">
-															<h5 class="fw-bold text-1000 text-truncate">Watch</h5>
-															<div class="fw-bold">
-																<span class="text-600 me-2 text-decoration-line-through">$500</span><span
-																	class="text-primary">$275</span>
-															</div>
-														</div>
-														<a class="stretched-link" href="#"></a>
-													</div>
-												</div>
-												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
-													<div class="card card-span h-100 text-white">
-														<img class="img-fluid h-100"
-															src="../assets/img/gallery/watch-7.png" alt="..." />
-														<div class="card-img-overlay ps-0"></div>
-														<div class="card-body ps-0 bg-200">
-															<h5 class="fw-bold text-1000 text-truncate">Watch</h5>
-															<div class="fw-bold">
-																<span class="text-600 me-2 text-decoration-line-through">$500</span><span
-																	class="text-primary">$275</span>
-															</div>
-														</div>
-														<a class="stretched-link" href="#"></a>
-													</div>
-												</div>
-												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
-													<div class="card card-span h-100 text-white">
-														<img class="img-fluid h-100"
-															src="../assets/img/gallery/watch-8.png" alt="..." />
-														<div class="card-img-overlay ps-0"></div>
-														<div class="card-body ps-0 bg-200">
-															<h5 class="fw-bold text-1000 text-truncate">Watch</h5>
-															<div class="fw-bold">
-																<span class="text-600 me-2 text-decoration-line-through">$500</span><span
-																	class="text-primary">$275</span>
-															</div>
-														</div>
-														<a class="stretched-link" href="#"></a>
-													</div>
-												</div>
+												<%
+												}
+												}
+												}
+												%>
+
+
 											</div>
 										</div>
 
-										<!-- 롯데 기념상품 두번째 페이지 -->
-										<div class="carousel-item">
-											<div class="row h-100 align-items-center g-2">
-												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
-													<div class="card card-span h-100 text-white">
-														<img class="img-fluid h-100"
-															src="../assets/img/gallery/watch-5.png" alt="..." />
-														<div class="card-img-overlay ps-0"></div>
-														<div class="card-body ps-0 bg-200">
-															<h5 class="fw-bold text-1000 text-truncate">Watch</h5>
-															<div class="fw-bold">
-																<span class="text-600 me-2 text-decoration-line-through">$500</span><span
-																	class="text-primary">$275</span>
-															</div>
-														</div>
-														<a class="stretched-link" href="#"></a>
-													</div>
-												</div>
-												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
-													<div class="card card-span h-100 text-white">
-														<img class="img-fluid h-100"
-															src="../assets/img/gallery/watch-6.png" alt="..." />
-														<div class="card-img-overlay ps-0"></div>
-														<div class="card-body ps-0 bg-200">
-															<h5 class="fw-bold text-1000 text-truncate">Watch</h5>
-															<div class="fw-bold">
-																<span class="text-600 me-2 text-decoration-line-through">$500</span><span
-																	class="text-primary">$275</span>
-															</div>
-														</div>
-														<a class="stretched-link" href="#"></a>
-													</div>
-												</div>
-												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
-													<div class="card card-span h-100 text-white">
-														<img class="img-fluid h-100"
-															src="../assets/img/gallery/watch-7.png" alt="..." />
-														<div class="card-img-overlay ps-0"></div>
-														<div class="card-body ps-0 bg-200">
-															<h5 class="fw-bold text-1000 text-truncate">Watch</h5>
-															<div class="fw-bold">
-																<span class="text-600 me-2 text-decoration-line-through">$500</span><span
-																	class="text-primary">$275</span>
-															</div>
-														</div>
-														<a class="stretched-link" href="#"></a>
-													</div>
-												</div>
-												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
-													<div class="card card-span h-100 text-white">
-														<img class="img-fluid h-100"
-															src="../assets/img/gallery/watch-8.png" alt="..." />
-														<div class="card-img-overlay ps-0"></div>
-														<div class="card-body ps-0 bg-200">
-															<h5 class="fw-bold text-1000 text-truncate">Watch</h5>
-															<div class="fw-bold">
-																<span class="text-600 me-2 text-decoration-line-through">$500</span><span
-																	class="text-primary">$275</span>
-															</div>
-														</div>
-														<a class="stretched-link" href="#"></a>
-													</div>
-												</div>
-											</div>
-										</div>
 
-										<!-- 롯데 기념상품 좌우이동 -->
-										<div class="row">
-											<button class="carousel-control-prev" type="button"
-												data-bs-target="#carouselCategoryLotteCommemoration"
-												data-bs-slide="prev">
-												<span class="carousel-control-prev-icon" aria-hidden="true"></span><span
-													class="visually-hidden">Previous</span>
-											</button>
-											<button class="carousel-control-next" type="button"
-												data-bs-target="#carouselCategoryLotteCommemoration"
-												data-bs-slide="next">
-												<span class="carousel-control-next-icon" aria-hidden="true"></span><span
-													class="visually-hidden">Next </span>
-											</button>
-										</div>
+
+
 									</div>
 								</div>
 							</div>
@@ -1507,162 +576,39 @@
 										<!-- 삼성 팀웨어 첫번째 페이지 -->
 										<div class="carousel-item active" data-bs-interval="10000">
 											<div class="row h-100 align-items-center g-2">
+												<%
+												for (ProductDto dto : list) {
+													if (dto.getTeamName().equals("삼성 라이온즈")) {
+														if (dto.getpCategory().equals("팀웨어")) {
+												%>
 												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
 													<div class="card card-span h-100 text-white">
-														<img class="img-fluid h-100"
-															src="https://samsunglionsmall.com/web/product/big/202302/2073128f4a3079a02c1aa52d5a6032d0.jpg"
+														<img class="img-fluid h-100" src="<%=dto.getpImage()%>"
 															alt="..." />
 														<div class="card-img-overlay ps-0"></div>
 														<div class="card-body ps-0 bg-200">
-															<h5 class="fw-bold text-1000 text-truncate">삼성라이온즈
-																2023 프로페셔널 어웨이 유니폼</h5>
+															<h5 class="fw-bold text-1000 text-truncate"><%=dto.getpName()%></h5>
 															<div class="fw-bold">
-																<span class="text-600 me-2 text-decoration-line-through">$200</span><span
-																	class="text-primary">$175</span>
+																<span class="text-primary"><%=nf.format(dto.getPrice())%></span>
 															</div>
 														</div>
-														<a class="stretched-link" href="#"></a>
+														<a class="stretched-link"
+															href="product_detailPage.jsp?pId=<%=dto.getpId()%>"></a>
 													</div>
 												</div>
-												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
-													<div class="card card-span h-100 text-white">
-														<img class="img-fluid h-100"
-															src="http://www.lottegiantsshop.com/shopimages/giant00/0020040001573.jpg?1659677052"
-															alt="..." />
-														<div class="card-img-overlay ps-0"></div>
-														<div class="card-body ps-0 bg-200">
-															<h5 class="fw-bold text-1000 text-truncate">
-																Giants로고 올드스쿨 스냅백</h5>
-															<div class="fw-bold">
-																<span class="text-600 me-2 text-decoration-line-through">$200</span><span
-																	class="text-primary">$175</span>
-															</div>
-														</div>
-														<a class="stretched-link" href="#"></a>
-													</div>
-												</div>
-												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
-													<div class="card card-span h-100 text-white">
-														<img class="img-fluid h-100"
-															src="http://www.lottegiantsshop.com/shopimages/giant00/0010010000553.jpg?1657675959"
-															alt="..." />
-														<div class="card-img-overlay ps-0"></div>
-														<div class="card-body ps-0 bg-200">
-															<h5 class="fw-bold text-1000 text-truncate">홈 어센틱
-																유니폼</h5>
-															<div class="fw-bold">
-																<span class="text-600 me-2 text-decoration-line-through">$200</span><span
-																	class="text-primary">$175</span>
-															</div>
-														</div>
-														<a class="stretched-link" href="#"></a>
-													</div>
-												</div>
-												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
-													<div class="card card-span h-100 text-white">
-														<img class="img-fluid h-100"
-															src="http://www.lottegiantsshop.com/shopimages/giant00/0010020000343.jpg?1628126774"
-															alt="..." />
-														<div class="card-img-overlay ps-0"></div>
-														<div class="card-body ps-0 bg-200">
-															<h5 class="fw-bold text-1000 text-truncate">챔피언 원정
-																레플리카 유니폼</h5>
-															<div class="fw-bold">
-																<span class="text-600 me-2 text-decoration-line-through">$200</span><span
-																	class="text-primary">$175</span>
-															</div>
-														</div>
-														<a class="stretched-link" href="#"></a>
-													</div>
-												</div>
+												<%
+												}
+												}
+												}
+												%>
+
+
+
 											</div>
 										</div>
 
-										<!-- 삼성 팀웨어 두번째 페이지 -->
-										<div class="carousel-item">
-											<div class="row h-100 align-items-center g-2">
-												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
-													<div class="card card-span h-100 text-white">
-														<img class="img-fluid h-100"
-															src="../assets/img/gallery/white-tshirt.png" alt="..." />
-														<div class="card-img-overlay ps-0"></div>
-														<div class="card-body ps-0 bg-200">
-															<h5 class="fw-bold text-1000 text-truncate">White
-																T-Shirt</h5>
-															<div class="fw-bold">
-																<span class="text-600 me-2 text-decoration-line-through">$200</span><span
-																	class="text-primary">$175</span>
-															</div>
-														</div>
-														<a class="stretched-link" href="#"></a>
-													</div>
-												</div>
-												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
-													<div class="card card-span h-100 text-white">
-														<img class="img-fluid h-100"
-															src="../assets/img/gallery/sky-tshirt.png" alt="..." />
-														<div class="card-img-overlay ps-0"></div>
-														<div class="card-body ps-0 bg-200">
-															<h5 class="fw-bold text-1000 text-truncate">Sky
-																T-Shirt</h5>
-															<div class="fw-bold">
-																<span class="text-600 me-2 text-decoration-line-through">$200</span><span
-																	class="text-primary">$175</span>
-															</div>
-														</div>
-														<a class="stretched-link" href="#"></a>
-													</div>
-												</div>
-												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
-													<div class="card card-span h-100 text-white">
-														<img class="img-fluid h-100"
-															src="../assets/img/gallery/yellow-tshirt.png" alt="..." />
-														<div class="card-img-overlay ps-0"></div>
-														<div class="card-body ps-0 bg-200">
-															<h5 class="fw-bold text-1000 text-truncate">Yellow
-																T-Shirt</h5>
-															<div class="fw-bold">
-																<span class="text-600 me-2 text-decoration-line-through">$200</span><span
-																	class="text-primary">$175</span>
-															</div>
-														</div>
-														<a class="stretched-link" href="#"></a>
-													</div>
-												</div>
-												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
-													<div class="card card-span h-100 text-white">
-														<img class="img-fluid h-100"
-															src="../assets/img/gallery/black-tshirt.png" alt="..." />
-														<div class="card-img-overlay ps-0"></div>
-														<div class="card-body ps-0 bg-200">
-															<h5 class="fw-bold text-1000 text-truncate">Black
-																T-Shirt</h5>
-															<div class="fw-bold">
-																<span class="text-600 me-2 text-decoration-line-through">$200</span><span
-																	class="text-primary">$175</span>
-															</div>
-														</div>
-														<a class="stretched-link" href="#"></a>
-													</div>
-												</div>
-											</div>
-										</div>
 
-										<!-- 삼성 팀웨어 좌우이동 -->
-										<div class="row">
-											<button class="carousel-control-prev" type="button"
-												data-bs-target="#carouselCategorySamsungTeamwear"
-												data-bs-slide="prev">
-												<span class="carousel-control-prev-icon" aria-hidden="true"></span><span
-													class="visually-hidden">Previous</span>
-											</button>
-											<button class="carousel-control-next" type="button"
-												data-bs-target="#carouselCategorySamsungTeamwear"
-												data-bs-slide="next">
-												<span class="carousel-control-next-icon" aria-hidden="true"></span><span
-													class="visually-hidden">Next </span>
-											</button>
-										</div>
+
 									</div>
 								</div>
 							</div>
@@ -1677,158 +623,37 @@
 										<!-- 삼성 응원용품 첫번째 페이지 -->
 										<div class="carousel-item active" data-bs-interval="10000">
 											<div class="row h-100 align-items-center g-2">
+												<%
+												for (ProductDto dto : list) {
+													if (dto.getTeamName().equals("삼성 라이온즈")) {
+														if (dto.getpCategory().equals("응원용품")) {
+												%>
 												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
 													<div class="card card-span h-100 text-white">
-														<img class="img-fluid h-100"
-															src="https://samsunglionsmall.com/web/product/big/202303/0cef71d9b7e745c89b3841f0c0710912.jpg"
+														<img class="img-fluid h-100" src="<%=dto.getpImage()%>"
 															alt="..." />
 														<div class="card-img-overlay ps-0"></div>
 														<div class="card-body ps-0 bg-200">
-															<h5 class="fw-bold text-1000 text-truncate">삼성라이온즈
-																SL 빅로고 목걸이</h5>
+															<h5 class="fw-bold text-1000 text-truncate"><%=dto.getpName()%></h5>
 															<div class="fw-bold">
-																<span class="text-600 me-2 text-decoration-line-through">$200</span><span
-																	class="text-primary">$175</span>
+																<span class="text-primary"><%=nf.format(dto.getPrice())%></span>
 															</div>
 														</div>
-														<a class="stretched-link" href="#"></a>
+														<a class="stretched-link"
+															href="product_detailPage.jsp?pId=<%=dto.getpId()%>"></a>
 													</div>
 												</div>
-												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
-													<div class="card card-span h-100 text-white">
-														<img class="img-fluid h-100"
-															src="../assets/img/gallery/shirt-6.png" alt="..." />
-														<div class="card-img-overlay ps-0"></div>
-														<div class="card-body ps-0 bg-200">
-															<h5 class="fw-bold text-1000 text-truncate">Gray
-																Shirt</h5>
-															<div class="fw-bold">
-																<span class="text-600 me-2 text-decoration-line-through">$200</span><span
-																	class="text-primary">$175</span>
-															</div>
-														</div>
-														<a class="stretched-link" href="#"></a>
-													</div>
-												</div>
-												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
-													<div class="card card-span h-100 text-white">
-														<img class="img-fluid h-100"
-															src="../assets/img/gallery/shirt-7.png" alt="..." />
-														<div class="card-img-overlay ps-0"></div>
-														<div class="card-body ps-0 bg-200">
-															<h5 class="fw-bold text-1000 text-truncate">White
-																Shirt</h5>
-															<div class="fw-bold">
-																<span class="text-600 me-2 text-decoration-line-through">$200</span><span
-																	class="text-primary">$175</span>
-															</div>
-														</div>
-														<a class="stretched-link" href="#"></a>
-													</div>
-												</div>
-												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
-													<div class="card card-span h-100 text-white">
-														<img class="img-fluid h-100"
-															src="../assets/img/gallery/shirt-8.png" alt="..." />
-														<div class="card-img-overlay ps-0"></div>
-														<div class="card-body ps-0 bg-200">
-															<h5 class="fw-bold text-1000 text-truncate">Black
-																Shirt</h5>
-															<div class="fw-bold">
-																<span class="text-600 me-2 text-decoration-line-through">$500</span><span
-																	class="text-primary">$275</span>
-															</div>
-														</div>
-														<a class="stretched-link" href="#"></a>
-													</div>
-												</div>
+												<%
+												}
+												}
+												}
+												%>
+
+
 											</div>
 										</div>
 
-										<!-- 삼성 응원용품 두번째 페이지-->
-										<div class="carousel-item">
-											<div class="row h-100 align-items-center g-2">
-												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
-													<div class="card card-span h-100 text-white">
-														<img class="img-fluid h-100"
-															src="../assets/img/gallery/shirt-5.png" alt="..." />
-														<div class="card-img-overlay ps-0"></div>
-														<div class="card-body ps-0 bg-200">
-															<h5 class="fw-bold text-1000 text-truncate">Shirt</h5>
-															<div class="fw-bold">
-																<span class="text-600 me-2 text-decoration-line-through">$200</span><span
-																	class="text-primary">$175</span>
-															</div>
-														</div>
-														<a class="stretched-link" href="#"></a>
-													</div>
-												</div>
-												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
-													<div class="card card-span h-100 text-white">
-														<img class="img-fluid h-100"
-															src="../assets/img/gallery/shirt-6.png" alt="..." />
-														<div class="card-img-overlay ps-0"></div>
-														<div class="card-body ps-0 bg-200">
-															<h5 class="fw-bold text-1000 text-truncate">Gray
-																Shirt</h5>
-															<div class="fw-bold">
-																<span class="text-600 me-2 text-decoration-line-through">$200</span><span
-																	class="text-primary">$175</span>
-															</div>
-														</div>
-														<a class="stretched-link" href="#"></a>
-													</div>
-												</div>
-												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
-													<div class="card card-span h-100 text-white">
-														<img class="img-fluid h-100"
-															src="../assets/img/gallery/shirt-7.png" alt="..." />
-														<div class="card-img-overlay ps-0"></div>
-														<div class="card-body ps-0 bg-200">
-															<h5 class="fw-bold text-1000 text-truncate">White
-																Shirt</h5>
-															<div class="fw-bold">
-																<span class="text-600 me-2 text-decoration-line-through">$200</span><span
-																	class="text-primary">$175</span>
-															</div>
-														</div>
-														<a class="stretched-link" href="#"></a>
-													</div>
-												</div>
-												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
-													<div class="card card-span h-100 text-white">
-														<img class="img-fluid h-100"
-															src="../assets/img/gallery/shirt-8.png" alt="..." />
-														<div class="card-img-overlay ps-0"></div>
-														<div class="card-body ps-0 bg-200">
-															<h5 class="fw-bold text-1000 text-truncate">Black
-																Shirt</h5>
-															<div class="fw-bold">
-																<span class="text-600 me-2 text-decoration-line-through">$500</span><span
-																	class="text-primary">$275</span>
-															</div>
-														</div>
-														<a class="stretched-link" href="#"></a>
-													</div>
-												</div>
-											</div>
-										</div>
 
-										<!-- 삼성 응원용품 좌우이동-->
-										<div class="row">
-											<button class="carousel-control-prev" type="button"
-												data-bs-target="#carouselCategorySamsungCheering"
-												data-bs-slide="prev">
-												<span class="carousel-control-prev-icon" aria-hidden="true"></span><span
-													class="visually-hidden">Previous</span>
-											</button>
-											<button class="carousel-control-next" type="button"
-												data-bs-target="#carouselCategorySamsungCheering"
-												data-bs-slide="next">
-												<span class="carousel-control-next-icon" aria-hidden="true"></span><span
-													class="visually-hidden">Next </span>
-											</button>
-										</div>
 									</div>
 								</div>
 							</div>
@@ -1843,152 +668,37 @@
 										<!-- 삼성 야구용품 첫번째 페이지 -->
 										<div class="carousel-item active" data-bs-interval="10000">
 											<div class="row h-100 align-items-center g-2">
+												<%
+												for (ProductDto dto : list) {
+													if (dto.getTeamName().equals("삼성 라이온즈")) {
+														if (dto.getpCategory().equals("야구용품")) {
+												%>
 												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
 													<div class="card card-span h-100 text-white">
-														<img class="img-fluid h-100"
-															src="https://samsunglionsmall.com/web/product/big/202204/ec17fa5af199e1b0d6cda2a250ae8386.jpg"
+														<img class="img-fluid h-100" src="<%=dto.getpImage()%>"
 															alt="..." />
 														<div class="card-img-overlay ps-0"></div>
 														<div class="card-body ps-0 bg-200">
-															<h5 class="fw-bold text-1000 text-truncate">삼성 라이온즈
-																2022 야구글러브</h5>
+															<h5 class="fw-bold text-1000 text-truncate"><%=dto.getpName()%></h5>
 															<div class="fw-bold">
-																<span class="text-600 me-2 text-decoration-line-through">$200</span><span
-																	class="text-primary">$175</span>
+																<span class="text-primary"><%=nf.format(dto.getPrice())%></span>
 															</div>
 														</div>
-														<a class="stretched-link" href="#"></a>
+														<a class="stretched-link"
+															href="product_detailPage.jsp?pId=<%=dto.getpId()%>"></a>
 													</div>
 												</div>
-												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
-													<div class="card card-span h-100 text-white">
-														<img class="img-fluid h-100"
-															src="../assets/img/gallery/shoe-6.png" alt="..." />
-														<div class="card-img-overlay ps-0"></div>
-														<div class="card-body ps-0 bg-200">
-															<h5 class="fw-bold text-1000 text-truncate">Shoe</h5>
-															<div class="fw-bold">
-																<span class="text-600 me-2 text-decoration-line-through">$500</span><span
-																	class="text-primary">$275</span>
-															</div>
-														</div>
-														<a class="stretched-link" href="#"></a>
-													</div>
-												</div>
-												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
-													<div class="card card-span h-100 text-white">
-														<img class="img-fluid h-100"
-															src="../assets/img/gallery/shoe-7.png" alt="..." />
-														<div class="card-img-overlay ps-0"></div>
-														<div class="card-body ps-0 bg-200">
-															<h5 class="fw-bold text-1000 text-truncate">Shoe</h5>
-															<div class="fw-bold">
-																<span class="text-600 me-2 text-decoration-line-through">$200</span><span
-																	class="text-primary">$175</span>
-															</div>
-														</div>
-														<a class="stretched-link" href="#"></a>
-													</div>
-												</div>
-												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
-													<div class="card card-span h-100 text-white">
-														<img class="img-fluid h-100"
-															src="../assets/img/gallery/shoe-8.png" alt="..." />
-														<div class="card-img-overlay ps-0"></div>
-														<div class="card-body ps-0 bg-200">
-															<h5 class="fw-bold text-1000 text-truncate">Shoe</h5>
-															<div class="fw-bold">
-																<span class="text-600 me-2 text-decoration-line-through">$500</span><span
-																	class="text-primary">$275</span>
-															</div>
-														</div>
-														<a class="stretched-link" href="#"></a>
-													</div>
-												</div>
+												<%
+												}
+												}
+												}
+												%>
+
+
 											</div>
 										</div>
 
-										<!-- 삼성 야구용품 두번째 페이지 -->
-										<div class="carousel-item">
-											<div class="row h-100 align-items-center g-2">
-												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
-													<div class="card card-span h-100 text-white">
-														<img class="img-fluid h-100"
-															src="../assets/img/gallery/shoe-5.png" alt="..." />
-														<div class="card-img-overlay ps-0"></div>
-														<div class="card-body ps-0 bg-200">
-															<h5 class="fw-bold text-1000 text-truncate">Shoe</h5>
-															<div class="fw-bold">
-																<span class="text-600 me-2 text-decoration-line-through">$200</span><span
-																	class="text-primary">$175</span>
-															</div>
-														</div>
-														<a class="stretched-link" href="#"></a>
-													</div>
-												</div>
-												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
-													<div class="card card-span h-100 text-white">
-														<img class="img-fluid h-100"
-															src="../assets/img/gallery/shoe-6.png" alt="..." />
-														<div class="card-img-overlay ps-0"></div>
-														<div class="card-body ps-0 bg-200">
-															<h5 class="fw-bold text-1000 text-truncate">Shoe</h5>
-															<div class="fw-bold">
-																<span class="text-600 me-2 text-decoration-line-through">$500</span><span
-																	class="text-primary">$275</span>
-															</div>
-														</div>
-														<a class="stretched-link" href="#"></a>
-													</div>
-												</div>
-												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
-													<div class="card card-span h-100 text-white">
-														<img class="img-fluid h-100"
-															src="../assets/img/gallery/shoe-7.png" alt="..." />
-														<div class="card-img-overlay ps-0"></div>
-														<div class="card-body ps-0 bg-200">
-															<h5 class="fw-bold text-1000 text-truncate">Shoe</h5>
-															<div class="fw-bold">
-																<span class="text-600 me-2 text-decoration-line-through">$200</span><span
-																	class="text-primary">$175</span>
-															</div>
-														</div>
-														<a class="stretched-link" href="#"></a>
-													</div>
-												</div>
-												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
-													<div class="card card-span h-100 text-white">
-														<img class="img-fluid h-100"
-															src="../assets/img/gallery/shoe-8.png" alt="..." />
-														<div class="card-img-overlay ps-0"></div>
-														<div class="card-body ps-0 bg-200">
-															<h5 class="fw-bold text-1000 text-truncate">Shoe</h5>
-															<div class="fw-bold">
-																<span class="text-600 me-2 text-decoration-line-through">$500</span><span
-																	class="text-primary">$275</span>
-															</div>
-														</div>
-														<a class="stretched-link" href="#"></a>
-													</div>
-												</div>
-											</div>
-										</div>
 
-										<!-- 삼성 야구용품 좌우이동 -->
-										<div class="row">
-											<button class="carousel-control-prev" type="button"
-												data-bs-target="#carouselCategorySamsungbaseball"
-												data-bs-slide="prev">
-												<span class="carousel-control-prev-icon" aria-hidden="true"></span><span
-													class="visually-hidden">Previous</span>
-											</button>
-											<button class="carousel-control-next" type="button"
-												data-bs-target="#carouselCategorySamsungbaseball"
-												data-bs-slide="next">
-												<span class="carousel-control-next-icon" aria-hidden="true"></span><span
-													class="visually-hidden">Next </span>
-											</button>
-										</div>
 									</div>
 								</div>
 							</div>
@@ -2005,152 +715,37 @@
 										<!-- 삼성 기념상품 첫번째 페이지 -->
 										<div class="carousel-item active" data-bs-interval="10000">
 											<div class="row h-100 align-items-center g-2">
+												<%
+												for (ProductDto dto : list) {
+													if (dto.getTeamName().equals("삼성 라이온즈")) {
+														if (dto.getpCategory().equals("기념상품")) {
+												%>
 												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
 													<div class="card card-span h-100 text-white">
-														<img class="img-fluid h-100"
-															src="https://samsunglionsmall.com/web/product/big/20191211/dfa7691b09d4cad6f6f6ede886b2505f.jpg"
+														<img class="img-fluid h-100" src="<%=dto.getpImage()%>"
 															alt="..." />
 														<div class="card-img-overlay ps-0"></div>
 														<div class="card-body ps-0 bg-200">
-															<h5 class="fw-bold text-1000 text-truncate">삼성 라이온즈
-																양창섭 패치</h5>
+															<h5 class="fw-bold text-1000 text-truncate"><%=dto.getpName()%></h5>
 															<div class="fw-bold">
-																<span class="text-600 me-2 text-decoration-line-through">$500</span><span
-																	class="text-primary">$275</span>
+																<span class="text-primary"><%=nf.format(dto.getPrice())%></span>
 															</div>
 														</div>
-														<a class="stretched-link" href="#"></a>
+														<a class="stretched-link"
+															href="product_detailPage.jsp?pId=<%=dto.getpId()%>"></a>
 													</div>
 												</div>
-												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
-													<div class="card card-span h-100 text-white">
-														<img class="img-fluid h-100"
-															src="../assets/img/gallery/watch-6.png" alt="..." />
-														<div class="card-img-overlay ps-0"></div>
-														<div class="card-body ps-0 bg-200">
-															<h5 class="fw-bold text-1000 text-truncate">Watch</h5>
-															<div class="fw-bold">
-																<span class="text-600 me-2 text-decoration-line-through">$500</span><span
-																	class="text-primary">$275</span>
-															</div>
-														</div>
-														<a class="stretched-link" href="#"></a>
-													</div>
-												</div>
-												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
-													<div class="card card-span h-100 text-white">
-														<img class="img-fluid h-100"
-															src="../assets/img/gallery/watch-7.png" alt="..." />
-														<div class="card-img-overlay ps-0"></div>
-														<div class="card-body ps-0 bg-200">
-															<h5 class="fw-bold text-1000 text-truncate">Watch</h5>
-															<div class="fw-bold">
-																<span class="text-600 me-2 text-decoration-line-through">$500</span><span
-																	class="text-primary">$275</span>
-															</div>
-														</div>
-														<a class="stretched-link" href="#"></a>
-													</div>
-												</div>
-												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
-													<div class="card card-span h-100 text-white">
-														<img class="img-fluid h-100"
-															src="../assets/img/gallery/watch-8.png" alt="..." />
-														<div class="card-img-overlay ps-0"></div>
-														<div class="card-body ps-0 bg-200">
-															<h5 class="fw-bold text-1000 text-truncate">Watch</h5>
-															<div class="fw-bold">
-																<span class="text-600 me-2 text-decoration-line-through">$500</span><span
-																	class="text-primary">$275</span>
-															</div>
-														</div>
-														<a class="stretched-link" href="#"></a>
-													</div>
-												</div>
+												<%
+												}
+												}
+												}
+												%>
+
+
 											</div>
 										</div>
 
-										<!-- 삼성 기념상품 두번째 페이지 -->
-										<div class="carousel-item">
-											<div class="row h-100 align-items-center g-2">
-												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
-													<div class="card card-span h-100 text-white">
-														<img class="img-fluid h-100"
-															src="../assets/img/gallery/watch-5.png" alt="..." />
-														<div class="card-img-overlay ps-0"></div>
-														<div class="card-body ps-0 bg-200">
-															<h5 class="fw-bold text-1000 text-truncate">Watch</h5>
-															<div class="fw-bold">
-																<span class="text-600 me-2 text-decoration-line-through">$500</span><span
-																	class="text-primary">$275</span>
-															</div>
-														</div>
-														<a class="stretched-link" href="#"></a>
-													</div>
-												</div>
-												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
-													<div class="card card-span h-100 text-white">
-														<img class="img-fluid h-100"
-															src="../assets/img/gallery/watch-6.png" alt="..." />
-														<div class="card-img-overlay ps-0"></div>
-														<div class="card-body ps-0 bg-200">
-															<h5 class="fw-bold text-1000 text-truncate">Watch</h5>
-															<div class="fw-bold">
-																<span class="text-600 me-2 text-decoration-line-through">$500</span><span
-																	class="text-primary">$275</span>
-															</div>
-														</div>
-														<a class="stretched-link" href="#"></a>
-													</div>
-												</div>
-												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
-													<div class="card card-span h-100 text-white">
-														<img class="img-fluid h-100"
-															src="../assets/img/gallery/watch-7.png" alt="..." />
-														<div class="card-img-overlay ps-0"></div>
-														<div class="card-body ps-0 bg-200">
-															<h5 class="fw-bold text-1000 text-truncate">Watch</h5>
-															<div class="fw-bold">
-																<span class="text-600 me-2 text-decoration-line-through">$500</span><span
-																	class="text-primary">$275</span>
-															</div>
-														</div>
-														<a class="stretched-link" href="#"></a>
-													</div>
-												</div>
-												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
-													<div class="card card-span h-100 text-white">
-														<img class="img-fluid h-100"
-															src="../assets/img/gallery/watch-8.png" alt="..." />
-														<div class="card-img-overlay ps-0"></div>
-														<div class="card-body ps-0 bg-200">
-															<h5 class="fw-bold text-1000 text-truncate">Watch</h5>
-															<div class="fw-bold">
-																<span class="text-600 me-2 text-decoration-line-through">$500</span><span
-																	class="text-primary">$275</span>
-															</div>
-														</div>
-														<a class="stretched-link" href="#"></a>
-													</div>
-												</div>
-											</div>
-										</div>
 
-										<!-- 삼성 기념상품 좌우이동 -->
-										<div class="row">
-											<button class="carousel-control-prev" type="button"
-												data-bs-target="#carouselCategorySamsungCommemoration"
-												data-bs-slide="prev">
-												<span class="carousel-control-prev-icon" aria-hidden="true"></span><span
-													class="visually-hidden">Previous</span>
-											</button>
-											<button class="carousel-control-next" type="button"
-												data-bs-target="#carouselCategorySamsungCommemoration"
-												data-bs-slide="next">
-												<span class="carousel-control-next-icon" aria-hidden="true"></span><span
-													class="visually-hidden">Next </span>
-											</button>
-										</div>
 									</div>
 								</div>
 							</div>
@@ -2200,162 +795,37 @@
 										<!-- 키움 팀웨어 첫번째 페이지 -->
 										<div class="carousel-item active" data-bs-interval="10000">
 											<div class="row h-100 align-items-center g-2">
+												<%
+												for (ProductDto dto : list) {
+													if (dto.getTeamName().equals("키움 히어로즈")) {
+														if (dto.getpCategory().equals("팀웨어")) {
+												%>
 												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
 													<div class="card card-span h-100 text-white">
-														<img class="img-fluid h-100"
-															src="https://samsunglionsmall.com/web/product/big/202302/2073128f4a3079a02c1aa52d5a6032d0.jpg"
+														<img class="img-fluid h-100" src="<%=dto.getpImage()%>"
 															alt="..." />
 														<div class="card-img-overlay ps-0"></div>
 														<div class="card-body ps-0 bg-200">
-															<h5 class="fw-bold text-1000 text-truncate">삼성라이온즈
-																2023 프로페셔널 어웨이 유니폼</h5>
+															<h5 class="fw-bold text-1000 text-truncate"><%=dto.getpName()%></h5>
 															<div class="fw-bold">
-																<span class="text-600 me-2 text-decoration-line-through">$200</span><span
-																	class="text-primary">$175</span>
+																<span class="text-primary"><%=nf.format(dto.getPrice())%></span>
 															</div>
 														</div>
-														<a class="stretched-link" href="#"></a>
+														<a class="stretched-link"
+															href="product_detailPage.jsp?pId=<%=dto.getpId()%>"></a>
 													</div>
 												</div>
-												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
-													<div class="card card-span h-100 text-white">
-														<img class="img-fluid h-100"
-															src="http://www.lottegiantsshop.com/shopimages/giant00/0020040001573.jpg?1659677052"
-															alt="..." />
-														<div class="card-img-overlay ps-0"></div>
-														<div class="card-body ps-0 bg-200">
-															<h5 class="fw-bold text-1000 text-truncate">
-																Giants로고 올드스쿨 스냅백</h5>
-															<div class="fw-bold">
-																<span class="text-600 me-2 text-decoration-line-through">$200</span><span
-																	class="text-primary">$175</span>
-															</div>
-														</div>
-														<a class="stretched-link" href="#"></a>
-													</div>
-												</div>
-												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
-													<div class="card card-span h-100 text-white">
-														<img class="img-fluid h-100"
-															src="http://www.lottegiantsshop.com/shopimages/giant00/0010010000553.jpg?1657675959"
-															alt="..." />
-														<div class="card-img-overlay ps-0"></div>
-														<div class="card-body ps-0 bg-200">
-															<h5 class="fw-bold text-1000 text-truncate">홈 어센틱
-																유니폼</h5>
-															<div class="fw-bold">
-																<span class="text-600 me-2 text-decoration-line-through">$200</span><span
-																	class="text-primary">$175</span>
-															</div>
-														</div>
-														<a class="stretched-link" href="#"></a>
-													</div>
-												</div>
-												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
-													<div class="card card-span h-100 text-white">
-														<img class="img-fluid h-100"
-															src="http://openimage.interpark.com/goods_image/9/7/8/4/10046189784s.jpg"
-															alt="..." />
-														<div class="card-img-overlay ps-0"></div>
-														<div class="card-body ps-0 bg-200">
-															<h5 class="fw-bold text-1000 text-truncate">BE THE
-																HEROES 맨투맨</h5>
-															<div class="fw-bold">
-																<span class="text-600 me-2 text-decoration-line-through">$200</span><span
-																	class="text-primary">$175</span>
-															</div>
-														</div>
-														<a class="stretched-link" href="#"></a>
-													</div>
-												</div>
+												<%
+												}
+												}
+												}
+												%>
+
+
 											</div>
 										</div>
 
-										<!-- 키움 팀웨어 두번째 페이지 -->
-										<div class="carousel-item">
-											<div class="row h-100 align-items-center g-2">
-												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
-													<div class="card card-span h-100 text-white">
-														<img class="img-fluid h-100"
-															src="../assets/img/gallery/white-tshirt.png" alt="..." />
-														<div class="card-img-overlay ps-0"></div>
-														<div class="card-body ps-0 bg-200">
-															<h5 class="fw-bold text-1000 text-truncate">White
-																T-Shirt</h5>
-															<div class="fw-bold">
-																<span class="text-600 me-2 text-decoration-line-through">$200</span><span
-																	class="text-primary">$175</span>
-															</div>
-														</div>
-														<a class="stretched-link" href="#"></a>
-													</div>
-												</div>
-												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
-													<div class="card card-span h-100 text-white">
-														<img class="img-fluid h-100"
-															src="../assets/img/gallery/sky-tshirt.png" alt="..." />
-														<div class="card-img-overlay ps-0"></div>
-														<div class="card-body ps-0 bg-200">
-															<h5 class="fw-bold text-1000 text-truncate">Sky
-																T-Shirt</h5>
-															<div class="fw-bold">
-																<span class="text-600 me-2 text-decoration-line-through">$200</span><span
-																	class="text-primary">$175</span>
-															</div>
-														</div>
-														<a class="stretched-link" href="#"></a>
-													</div>
-												</div>
-												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
-													<div class="card card-span h-100 text-white">
-														<img class="img-fluid h-100"
-															src="../assets/img/gallery/yellow-tshirt.png" alt="..." />
-														<div class="card-img-overlay ps-0"></div>
-														<div class="card-body ps-0 bg-200">
-															<h5 class="fw-bold text-1000 text-truncate">Yellow
-																T-Shirt</h5>
-															<div class="fw-bold">
-																<span class="text-600 me-2 text-decoration-line-through">$200</span><span
-																	class="text-primary">$175</span>
-															</div>
-														</div>
-														<a class="stretched-link" href="#"></a>
-													</div>
-												</div>
-												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
-													<div class="card card-span h-100 text-white">
-														<img class="img-fluid h-100"
-															src="../assets/img/gallery/black-tshirt.png" alt="..." />
-														<div class="card-img-overlay ps-0"></div>
-														<div class="card-body ps-0 bg-200">
-															<h5 class="fw-bold text-1000 text-truncate">Black
-																T-Shirt</h5>
-															<div class="fw-bold">
-																<span class="text-600 me-2 text-decoration-line-through">$200</span><span
-																	class="text-primary">$175</span>
-															</div>
-														</div>
-														<a class="stretched-link" href="#"></a>
-													</div>
-												</div>
-											</div>
-										</div>
 
-										<!-- 키움 팀웨어 좌우이동 -->
-										<div class="row">
-											<button class="carousel-control-prev" type="button"
-												data-bs-target="#carouselCategoryKiwoomTeamwear"
-												data-bs-slide="prev">
-												<span class="carousel-control-prev-icon" aria-hidden="true"></span><span
-													class="visually-hidden">Previous</span>
-											</button>
-											<button class="carousel-control-next" type="button"
-												data-bs-target="#carouselCategoryKiwoomTeamwear"
-												data-bs-slide="next">
-												<span class="carousel-control-next-icon" aria-hidden="true"></span><span
-													class="visually-hidden">Next </span>
-											</button>
-										</div>
 									</div>
 								</div>
 							</div>
@@ -2370,157 +840,37 @@
 										<!-- 키움 응원용품 첫번째 페이지 -->
 										<div class="carousel-item active" data-bs-interval="10000">
 											<div class="row h-100 align-items-center g-2">
+												<%
+												for (ProductDto dto : list) {
+													if (dto.getTeamName().equals("키움 히어로즈")) {
+														if (dto.getpCategory().equals("응원용품")) {
+												%>
 												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
 													<div class="card card-span h-100 text-white">
-														<img class="img-fluid h-100"
-															src="http://openimage.interpark.com/goods_image/9/7/8/4/10046189784s.jpg"
+														<img class="img-fluid h-100" src="<%=dto.getpImage()%>"
 															alt="..." />
 														<div class="card-img-overlay ps-0"></div>
 														<div class="card-body ps-0 bg-200">
-															<h5 class="fw-bold text-1000 text-truncate">키움 맨투맨</h5>
+															<h5 class="fw-bold text-1000 text-truncate"><%=dto.getpName()%></h5>
 															<div class="fw-bold">
-																<span class="text-600 me-2 text-decoration-line-through">$200</span><span
-																	class="text-primary">$175</span>
+																<span class="text-primary"><%=nf.format(dto.getPrice())%></span>
 															</div>
 														</div>
-														<a class="stretched-link" href="#"></a>
+														<a class="stretched-link"
+															href="product_detailPage.jsp?pId=<%=dto.getpId()%>"></a>
 													</div>
 												</div>
-												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
-													<div class="card card-span h-100 text-white">
-														<img class="img-fluid h-100"
-															src="../assets/img/gallery/shirt-6.png" alt="..." />
-														<div class="card-img-overlay ps-0"></div>
-														<div class="card-body ps-0 bg-200">
-															<h5 class="fw-bold text-1000 text-truncate">Gray
-																Shirt</h5>
-															<div class="fw-bold">
-																<span class="text-600 me-2 text-decoration-line-through">$200</span><span
-																	class="text-primary">$175</span>
-															</div>
-														</div>
-														<a class="stretched-link" href="#"></a>
-													</div>
-												</div>
-												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
-													<div class="card card-span h-100 text-white">
-														<img class="img-fluid h-100"
-															src="../assets/img/gallery/shirt-7.png" alt="..." />
-														<div class="card-img-overlay ps-0"></div>
-														<div class="card-body ps-0 bg-200">
-															<h5 class="fw-bold text-1000 text-truncate">White
-																Shirt</h5>
-															<div class="fw-bold">
-																<span class="text-600 me-2 text-decoration-line-through">$200</span><span
-																	class="text-primary">$175</span>
-															</div>
-														</div>
-														<a class="stretched-link" href="#"></a>
-													</div>
-												</div>
-												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
-													<div class="card card-span h-100 text-white">
-														<img class="img-fluid h-100"
-															src="../assets/img/gallery/shirt-8.png" alt="..." />
-														<div class="card-img-overlay ps-0"></div>
-														<div class="card-body ps-0 bg-200">
-															<h5 class="fw-bold text-1000 text-truncate">Black
-																Shirt</h5>
-															<div class="fw-bold">
-																<span class="text-600 me-2 text-decoration-line-through">$500</span><span
-																	class="text-primary">$275</span>
-															</div>
-														</div>
-														<a class="stretched-link" href="#"></a>
-													</div>
-												</div>
+												<%
+												}
+												}
+												}
+												%>
+
+
 											</div>
 										</div>
 
-										<!-- 키움 응원용품 두번째 페이지-->
-										<div class="carousel-item">
-											<div class="row h-100 align-items-center g-2">
-												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
-													<div class="card card-span h-100 text-white">
-														<img class="img-fluid h-100"
-															src="../assets/img/gallery/shirt-5.png" alt="..." />
-														<div class="card-img-overlay ps-0"></div>
-														<div class="card-body ps-0 bg-200">
-															<h5 class="fw-bold text-1000 text-truncate">Shirt</h5>
-															<div class="fw-bold">
-																<span class="text-600 me-2 text-decoration-line-through">$200</span><span
-																	class="text-primary">$175</span>
-															</div>
-														</div>
-														<a class="stretched-link" href="#"></a>
-													</div>
-												</div>
-												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
-													<div class="card card-span h-100 text-white">
-														<img class="img-fluid h-100"
-															src="../assets/img/gallery/shirt-6.png" alt="..." />
-														<div class="card-img-overlay ps-0"></div>
-														<div class="card-body ps-0 bg-200">
-															<h5 class="fw-bold text-1000 text-truncate">Gray
-																Shirt</h5>
-															<div class="fw-bold">
-																<span class="text-600 me-2 text-decoration-line-through">$200</span><span
-																	class="text-primary">$175</span>
-															</div>
-														</div>
-														<a class="stretched-link" href="#"></a>
-													</div>
-												</div>
-												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
-													<div class="card card-span h-100 text-white">
-														<img class="img-fluid h-100"
-															src="../assets/img/gallery/shirt-7.png" alt="..." />
-														<div class="card-img-overlay ps-0"></div>
-														<div class="card-body ps-0 bg-200">
-															<h5 class="fw-bold text-1000 text-truncate">White
-																Shirt</h5>
-															<div class="fw-bold">
-																<span class="text-600 me-2 text-decoration-line-through">$200</span><span
-																	class="text-primary">$175</span>
-															</div>
-														</div>
-														<a class="stretched-link" href="#"></a>
-													</div>
-												</div>
-												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
-													<div class="card card-span h-100 text-white">
-														<img class="img-fluid h-100"
-															src="../assets/img/gallery/shirt-8.png" alt="..." />
-														<div class="card-img-overlay ps-0"></div>
-														<div class="card-body ps-0 bg-200">
-															<h5 class="fw-bold text-1000 text-truncate">Black
-																Shirt</h5>
-															<div class="fw-bold">
-																<span class="text-600 me-2 text-decoration-line-through">$500</span><span
-																	class="text-primary">$275</span>
-															</div>
-														</div>
-														<a class="stretched-link" href="#"></a>
-													</div>
-												</div>
-											</div>
-										</div>
 
-										<!-- 키움 응원용품 좌우이동-->
-										<div class="row">
-											<button class="carousel-control-prev" type="button"
-												data-bs-target="#carouselCategoryKiwoomCheering"
-												data-bs-slide="prev">
-												<span class="carousel-control-prev-icon" aria-hidden="true"></span><span
-													class="visually-hidden">Previous</span>
-											</button>
-											<button class="carousel-control-next" type="button"
-												data-bs-target="#carouselCategoryKiwoomCheering"
-												data-bs-slide="next">
-												<span class="carousel-control-next-icon" aria-hidden="true"></span><span
-													class="visually-hidden">Next </span>
-											</button>
-										</div>
 									</div>
 								</div>
 							</div>
@@ -2535,151 +885,37 @@
 										<!-- 키움 야구용품 첫번째 페이지 -->
 										<div class="carousel-item active" data-bs-interval="10000">
 											<div class="row h-100 align-items-center g-2">
+												<%
+												for (ProductDto dto : list) {
+													if (dto.getTeamName().equals("키움 히어로즈")) {
+														if (dto.getpCategory().equals("야구용품")) {
+												%>
 												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
 													<div class="card card-span h-100 text-white">
-														<img class="img-fluid h-100"
-															src="http://openimage.interpark.com/goods_image/9/7/8/4/10046189784s.jpg"
+														<img class="img-fluid h-100" src="<%=dto.getpImage()%>"
 															alt="..." />
 														<div class="card-img-overlay ps-0"></div>
 														<div class="card-body ps-0 bg-200">
-															<h5 class="fw-bold text-1000 text-truncate">키움 맨투맨</h5>
+															<h5 class="fw-bold text-1000 text-truncate"><%=dto.getpName()%></h5>
 															<div class="fw-bold">
-																<span class="text-600 me-2 text-decoration-line-through">$200</span><span
-																	class="text-primary">$175</span>
+																<span class="text-primary"><%=nf.format(dto.getPrice())%></span>
 															</div>
 														</div>
-														<a class="stretched-link" href="#"></a>
+														<a class="stretched-link"
+															href="product_detailPage.jsp?pId=<%=dto.getpId()%>"></a>
 													</div>
 												</div>
-												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
-													<div class="card card-span h-100 text-white">
-														<img class="img-fluid h-100"
-															src="../assets/img/gallery/shoe-6.png" alt="..." />
-														<div class="card-img-overlay ps-0"></div>
-														<div class="card-body ps-0 bg-200">
-															<h5 class="fw-bold text-1000 text-truncate">Shoe</h5>
-															<div class="fw-bold">
-																<span class="text-600 me-2 text-decoration-line-through">$500</span><span
-																	class="text-primary">$275</span>
-															</div>
-														</div>
-														<a class="stretched-link" href="#"></a>
-													</div>
-												</div>
-												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
-													<div class="card card-span h-100 text-white">
-														<img class="img-fluid h-100"
-															src="../assets/img/gallery/shoe-7.png" alt="..." />
-														<div class="card-img-overlay ps-0"></div>
-														<div class="card-body ps-0 bg-200">
-															<h5 class="fw-bold text-1000 text-truncate">Shoe</h5>
-															<div class="fw-bold">
-																<span class="text-600 me-2 text-decoration-line-through">$200</span><span
-																	class="text-primary">$175</span>
-															</div>
-														</div>
-														<a class="stretched-link" href="#"></a>
-													</div>
-												</div>
-												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
-													<div class="card card-span h-100 text-white">
-														<img class="img-fluid h-100"
-															src="../assets/img/gallery/shoe-8.png" alt="..." />
-														<div class="card-img-overlay ps-0"></div>
-														<div class="card-body ps-0 bg-200">
-															<h5 class="fw-bold text-1000 text-truncate">Shoe</h5>
-															<div class="fw-bold">
-																<span class="text-600 me-2 text-decoration-line-through">$500</span><span
-																	class="text-primary">$275</span>
-															</div>
-														</div>
-														<a class="stretched-link" href="#"></a>
-													</div>
-												</div>
+												<%
+												}
+												}
+												}
+												%>
+
+
 											</div>
 										</div>
 
-										<!-- 키움 야구용품 두번째 페이지 -->
-										<div class="carousel-item">
-											<div class="row h-100 align-items-center g-2">
-												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
-													<div class="card card-span h-100 text-white">
-														<img class="img-fluid h-100"
-															src="../assets/img/gallery/shoe-5.png" alt="..." />
-														<div class="card-img-overlay ps-0"></div>
-														<div class="card-body ps-0 bg-200">
-															<h5 class="fw-bold text-1000 text-truncate">Shoe</h5>
-															<div class="fw-bold">
-																<span class="text-600 me-2 text-decoration-line-through">$200</span><span
-																	class="text-primary">$175</span>
-															</div>
-														</div>
-														<a class="stretched-link" href="#"></a>
-													</div>
-												</div>
-												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
-													<div class="card card-span h-100 text-white">
-														<img class="img-fluid h-100"
-															src="../assets/img/gallery/shoe-6.png" alt="..." />
-														<div class="card-img-overlay ps-0"></div>
-														<div class="card-body ps-0 bg-200">
-															<h5 class="fw-bold text-1000 text-truncate">Shoe</h5>
-															<div class="fw-bold">
-																<span class="text-600 me-2 text-decoration-line-through">$500</span><span
-																	class="text-primary">$275</span>
-															</div>
-														</div>
-														<a class="stretched-link" href="#"></a>
-													</div>
-												</div>
-												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
-													<div class="card card-span h-100 text-white">
-														<img class="img-fluid h-100"
-															src="../assets/img/gallery/shoe-7.png" alt="..." />
-														<div class="card-img-overlay ps-0"></div>
-														<div class="card-body ps-0 bg-200">
-															<h5 class="fw-bold text-1000 text-truncate">Shoe</h5>
-															<div class="fw-bold">
-																<span class="text-600 me-2 text-decoration-line-through">$200</span><span
-																	class="text-primary">$175</span>
-															</div>
-														</div>
-														<a class="stretched-link" href="#"></a>
-													</div>
-												</div>
-												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
-													<div class="card card-span h-100 text-white">
-														<img class="img-fluid h-100"
-															src="../assets/img/gallery/shoe-8.png" alt="..." />
-														<div class="card-img-overlay ps-0"></div>
-														<div class="card-body ps-0 bg-200">
-															<h5 class="fw-bold text-1000 text-truncate">Shoe</h5>
-															<div class="fw-bold">
-																<span class="text-600 me-2 text-decoration-line-through">$500</span><span
-																	class="text-primary">$275</span>
-															</div>
-														</div>
-														<a class="stretched-link" href="#"></a>
-													</div>
-												</div>
-											</div>
-										</div>
 
-										<!-- 키움 야구용품 좌우이동 -->
-										<div class="row">
-											<button class="carousel-control-prev" type="button"
-												data-bs-target="#carouselCategoryKiwoombaseball"
-												data-bs-slide="prev">
-												<span class="carousel-control-prev-icon" aria-hidden="true"></span><span
-													class="visually-hidden">Previous</span>
-											</button>
-											<button class="carousel-control-next" type="button"
-												data-bs-target="#carouselCategoryKiwoombaseball"
-												data-bs-slide="next">
-												<span class="carousel-control-next-icon" aria-hidden="true"></span><span
-													class="visually-hidden">Next </span>
-											</button>
-										</div>
 									</div>
 								</div>
 
@@ -2696,151 +932,37 @@
 										<!-- 키움 기념상품 첫번째 페이지 -->
 										<div class="carousel-item active" data-bs-interval="10000">
 											<div class="row h-100 align-items-center g-2">
+												<%
+												for (ProductDto dto : list) {
+													if (dto.getTeamName().equals("키움 히어로즈")) {
+														if (dto.getpCategory().equals("기념상품")) {
+												%>
 												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
 													<div class="card card-span h-100 text-white">
-														<img class="img-fluid h-100"
-															src="http://openimage.interpark.com/goods_image/9/7/8/4/10046189784s.jpg"
+														<img class="img-fluid h-100" src="<%=dto.getpImage()%>"
 															alt="..." />
 														<div class="card-img-overlay ps-0"></div>
 														<div class="card-body ps-0 bg-200">
-															<h5 class="fw-bold text-1000 text-truncate">키움 맨투맨</h5>
+															<h5 class="fw-bold text-1000 text-truncate"><%=dto.getpName()%></h5>
 															<div class="fw-bold">
-																<span class="text-600 me-2 text-decoration-line-through">$500</span><span
-																	class="text-primary">$275</span>
+																<span class="text-primary"><%=nf.format(dto.getPrice())%></span>
 															</div>
 														</div>
-														<a class="stretched-link" href="#"></a>
+														<a class="stretched-link"
+															href="product_detailPage.jsp?pId=<%=dto.getpId()%>"></a>
 													</div>
 												</div>
-												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
-													<div class="card card-span h-100 text-white">
-														<img class="img-fluid h-100"
-															src="../assets/img/gallery/watch-6.png" alt="..." />
-														<div class="card-img-overlay ps-0"></div>
-														<div class="card-body ps-0 bg-200">
-															<h5 class="fw-bold text-1000 text-truncate">Watch</h5>
-															<div class="fw-bold">
-																<span class="text-600 me-2 text-decoration-line-through">$500</span><span
-																	class="text-primary">$275</span>
-															</div>
-														</div>
-														<a class="stretched-link" href="#"></a>
-													</div>
-												</div>
-												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
-													<div class="card card-span h-100 text-white">
-														<img class="img-fluid h-100"
-															src="../assets/img/gallery/watch-7.png" alt="..." />
-														<div class="card-img-overlay ps-0"></div>
-														<div class="card-body ps-0 bg-200">
-															<h5 class="fw-bold text-1000 text-truncate">Watch</h5>
-															<div class="fw-bold">
-																<span class="text-600 me-2 text-decoration-line-through">$500</span><span
-																	class="text-primary">$275</span>
-															</div>
-														</div>
-														<a class="stretched-link" href="#"></a>
-													</div>
-												</div>
-												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
-													<div class="card card-span h-100 text-white">
-														<img class="img-fluid h-100"
-															src="../assets/img/gallery/watch-8.png" alt="..." />
-														<div class="card-img-overlay ps-0"></div>
-														<div class="card-body ps-0 bg-200">
-															<h5 class="fw-bold text-1000 text-truncate">Watch</h5>
-															<div class="fw-bold">
-																<span class="text-600 me-2 text-decoration-line-through">$500</span><span
-																	class="text-primary">$275</span>
-															</div>
-														</div>
-														<a class="stretched-link" href="#"></a>
-													</div>
-												</div>
+												<%
+												}
+												}
+												}
+												%>
+
+
 											</div>
 										</div>
 
-										<!-- 키움 기념상품 두번째 페이지 -->
-										<div class="carousel-item">
-											<div class="row h-100 align-items-center g-2">
-												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
-													<div class="card card-span h-100 text-white">
-														<img class="img-fluid h-100"
-															src="../assets/img/gallery/watch-5.png" alt="..." />
-														<div class="card-img-overlay ps-0"></div>
-														<div class="card-body ps-0 bg-200">
-															<h5 class="fw-bold text-1000 text-truncate">Watch</h5>
-															<div class="fw-bold">
-																<span class="text-600 me-2 text-decoration-line-through">$500</span><span
-																	class="text-primary">$275</span>
-															</div>
-														</div>
-														<a class="stretched-link" href="#"></a>
-													</div>
-												</div>
-												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
-													<div class="card card-span h-100 text-white">
-														<img class="img-fluid h-100"
-															src="../assets/img/gallery/watch-6.png" alt="..." />
-														<div class="card-img-overlay ps-0"></div>
-														<div class="card-body ps-0 bg-200">
-															<h5 class="fw-bold text-1000 text-truncate">Watch</h5>
-															<div class="fw-bold">
-																<span class="text-600 me-2 text-decoration-line-through">$500</span><span
-																	class="text-primary">$275</span>
-															</div>
-														</div>
-														<a class="stretched-link" href="#"></a>
-													</div>
-												</div>
-												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
-													<div class="card card-span h-100 text-white">
-														<img class="img-fluid h-100"
-															src="../assets/img/gallery/watch-7.png" alt="..." />
-														<div class="card-img-overlay ps-0"></div>
-														<div class="card-body ps-0 bg-200">
-															<h5 class="fw-bold text-1000 text-truncate">Watch</h5>
-															<div class="fw-bold">
-																<span class="text-600 me-2 text-decoration-line-through">$500</span><span
-																	class="text-primary">$275</span>
-															</div>
-														</div>
-														<a class="stretched-link" href="#"></a>
-													</div>
-												</div>
-												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
-													<div class="card card-span h-100 text-white">
-														<img class="img-fluid h-100"
-															src="../assets/img/gallery/watch-8.png" alt="..." />
-														<div class="card-img-overlay ps-0"></div>
-														<div class="card-body ps-0 bg-200">
-															<h5 class="fw-bold text-1000 text-truncate">Watch</h5>
-															<div class="fw-bold">
-																<span class="text-600 me-2 text-decoration-line-through">$500</span><span
-																	class="text-primary">$275</span>
-															</div>
-														</div>
-														<a class="stretched-link" href="#"></a>
-													</div>
-												</div>
-											</div>
-										</div>
 
-										<!-- 키움 기념상품 좌우이동 -->
-										<div class="row">
-											<button class="carousel-control-prev" type="button"
-												data-bs-target="#carouselCategoryKiwoomCommemoration"
-												data-bs-slide="prev">
-												<span class="carousel-control-prev-icon" aria-hidden="true"></span><span
-													class="visually-hidden">Previous</span>
-											</button>
-											<button class="carousel-control-next" type="button"
-												data-bs-target="#carouselCategoryKiwoomCommemoration"
-												data-bs-slide="next">
-												<span class="carousel-control-next-icon" aria-hidden="true"></span><span
-													class="visually-hidden">Next </span>
-											</button>
-										</div>
 									</div>
 								</div>
 							</div>
@@ -2890,162 +1012,37 @@
 										<!-- 한화 팀웨어 첫번째 페이지 -->
 										<div class="carousel-item active" data-bs-interval="10000">
 											<div class="row h-100 align-items-center g-2">
+												<%
+												for (ProductDto dto : list) {
+													if (dto.getTeamName().equals("한화 이글스")) {
+														if (dto.getpCategory().equals("팀웨어")) {
+												%>
 												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
 													<div class="card card-span h-100 text-white">
-														<img class="img-fluid h-100"
-															src="https://cdn-pro-web-210-60.cdn-nhncommerce.com/wefan20073_godomall_com/data/goods/21/03/10/1000000003/1000000003_main_057.jpg"
+														<img class="img-fluid h-100" src="<%=dto.getpImage()%>"
 															alt="..." />
 														<div class="card-img-overlay ps-0"></div>
 														<div class="card-body ps-0 bg-200">
-															<h5 class="fw-bold text-1000 text-truncate">한화이글스 홈
-																어센틱 유니폼(오렌지)</h5>
+															<h5 class="fw-bold text-1000 text-truncate"><%=dto.getpName()%></h5>
 															<div class="fw-bold">
-																<span class="text-600 me-2 text-decoration-line-through">$200</span><span
-																	class="text-primary">$175</span>
+																<span class="text-primary"><%=nf.format(dto.getPrice())%></span>
 															</div>
 														</div>
-														<a class="stretched-link" href="#"></a>
+														<a class="stretched-link"
+															href="product_detailPage.jsp?pId=<%=dto.getpId()%>"></a>
 													</div>
 												</div>
-												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
-													<div class="card card-span h-100 text-white">
-														<img class="img-fluid h-100"
-															src="http://www.lottegiantsshop.com/shopimages/giant00/0020040001573.jpg?1659677052"
-															alt="..." />
-														<div class="card-img-overlay ps-0"></div>
-														<div class="card-body ps-0 bg-200">
-															<h5 class="fw-bold text-1000 text-truncate">
-																Giants로고 올드스쿨 스냅백</h5>
-															<div class="fw-bold">
-																<span class="text-600 me-2 text-decoration-line-through">$200</span><span
-																	class="text-primary">$175</span>
-															</div>
-														</div>
-														<a class="stretched-link" href="#"></a>
-													</div>
-												</div>
-												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
-													<div class="card card-span h-100 text-white">
-														<img class="img-fluid h-100"
-															src="http://www.lottegiantsshop.com/shopimages/giant00/0010010000553.jpg?1657675959"
-															alt="..." />
-														<div class="card-img-overlay ps-0"></div>
-														<div class="card-body ps-0 bg-200">
-															<h5 class="fw-bold text-1000 text-truncate">홈 어센틱
-																유니폼</h5>
-															<div class="fw-bold">
-																<span class="text-600 me-2 text-decoration-line-through">$200</span><span
-																	class="text-primary">$175</span>
-															</div>
-														</div>
-														<a class="stretched-link" href="#"></a>
-													</div>
-												</div>
-												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
-													<div class="card card-span h-100 text-white">
-														<img class="img-fluid h-100"
-															src="http://openimage.interpark.com/goods_image/9/7/8/4/10046189784s.jpg"
-															alt="..." />
-														<div class="card-img-overlay ps-0"></div>
-														<div class="card-body ps-0 bg-200">
-															<h5 class="fw-bold text-1000 text-truncate">BE THE
-																HEROES 맨투맨</h5>
-															<div class="fw-bold">
-																<span class="text-600 me-2 text-decoration-line-through">$200</span><span
-																	class="text-primary">$175</span>
-															</div>
-														</div>
-														<a class="stretched-link" href="#"></a>
-													</div>
-												</div>
+												<%
+												}
+												}
+												}
+												%>
+
+
 											</div>
 										</div>
 
-										<!-- 한화 팀웨어 두번째 페이지 -->
-										<div class="carousel-item">
-											<div class="row h-100 align-items-center g-2">
-												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
-													<div class="card card-span h-100 text-white">
-														<img class="img-fluid h-100"
-															src="../assets/img/gallery/white-tshirt.png" alt="..." />
-														<div class="card-img-overlay ps-0"></div>
-														<div class="card-body ps-0 bg-200">
-															<h5 class="fw-bold text-1000 text-truncate">White
-																T-Shirt</h5>
-															<div class="fw-bold">
-																<span class="text-600 me-2 text-decoration-line-through">$200</span><span
-																	class="text-primary">$175</span>
-															</div>
-														</div>
-														<a class="stretched-link" href="#"></a>
-													</div>
-												</div>
-												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
-													<div class="card card-span h-100 text-white">
-														<img class="img-fluid h-100"
-															src="../assets/img/gallery/sky-tshirt.png" alt="..." />
-														<div class="card-img-overlay ps-0"></div>
-														<div class="card-body ps-0 bg-200">
-															<h5 class="fw-bold text-1000 text-truncate">Sky
-																T-Shirt</h5>
-															<div class="fw-bold">
-																<span class="text-600 me-2 text-decoration-line-through">$200</span><span
-																	class="text-primary">$175</span>
-															</div>
-														</div>
-														<a class="stretched-link" href="#"></a>
-													</div>
-												</div>
-												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
-													<div class="card card-span h-100 text-white">
-														<img class="img-fluid h-100"
-															src="../assets/img/gallery/yellow-tshirt.png" alt="..." />
-														<div class="card-img-overlay ps-0"></div>
-														<div class="card-body ps-0 bg-200">
-															<h5 class="fw-bold text-1000 text-truncate">Yellow
-																T-Shirt</h5>
-															<div class="fw-bold">
-																<span class="text-600 me-2 text-decoration-line-through">$200</span><span
-																	class="text-primary">$175</span>
-															</div>
-														</div>
-														<a class="stretched-link" href="#"></a>
-													</div>
-												</div>
-												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
-													<div class="card card-span h-100 text-white">
-														<img class="img-fluid h-100"
-															src="../assets/img/gallery/black-tshirt.png" alt="..." />
-														<div class="card-img-overlay ps-0"></div>
-														<div class="card-body ps-0 bg-200">
-															<h5 class="fw-bold text-1000 text-truncate">Black
-																T-Shirt</h5>
-															<div class="fw-bold">
-																<span class="text-600 me-2 text-decoration-line-through">$200</span><span
-																	class="text-primary">$175</span>
-															</div>
-														</div>
-														<a class="stretched-link" href="#"></a>
-													</div>
-												</div>
-											</div>
-										</div>
 
-										<!-- 한화 팀웨어 좌우이동 -->
-										<div class="row">
-											<button class="carousel-control-prev" type="button"
-												data-bs-target="#carouselCategoryHanhwaTeamwear"
-												data-bs-slide="prev">
-												<span class="carousel-control-prev-icon" aria-hidden="true"></span><span
-													class="visually-hidden">Previous</span>
-											</button>
-											<button class="carousel-control-next" type="button"
-												data-bs-target="#carouselCategoryHanhwaTeamwear"
-												data-bs-slide="next">
-												<span class="carousel-control-next-icon" aria-hidden="true"></span><span
-													class="visually-hidden">Next </span>
-											</button>
-										</div>
 									</div>
 								</div>
 							</div>
@@ -3060,158 +1057,36 @@
 										<!-- 한화 응원용품 첫번째 페이지 -->
 										<div class="carousel-item active" data-bs-interval="10000">
 											<div class="row h-100 align-items-center g-2">
+												<%
+												for (ProductDto dto : list) {
+													if (dto.getTeamName().equals("한화 이글스")) {
+														if (dto.getpCategory().equals("응원용품")) {
+												%>
 												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
 													<div class="card card-span h-100 text-white">
-														<img class="img-fluid h-100"
-															src="http://openimage.interpark.com/goods_image/9/7/8/4/10046189784s.jpg"
+														<img class="img-fluid h-100" src="<%=dto.getpImage()%>"
 															alt="..." />
 														<div class="card-img-overlay ps-0"></div>
 														<div class="card-body ps-0 bg-200">
-															<h5 class="fw-bold text-1000 text-truncate">키움 맨투맨</h5>
+															<h5 class="fw-bold text-1000 text-truncate"><%=dto.getpName()%></h5>
 															<div class="fw-bold">
-																<span class="text-600 me-2 text-decoration-line-through">$200</span><span
-																	class="text-primary">$175</span>
+																<span class="text-primary"><%=nf.format(dto.getPrice())%></span>
 															</div>
 														</div>
-														<a class="stretched-link" href="#"></a>
+														<a class="stretched-link"
+															href="product_detailPage.jsp?pId=<%=dto.getpId()%>"></a>
 													</div>
 												</div>
-												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
-													<div class="card card-span h-100 text-white">
-														<img class="img-fluid h-100"
-															src="https://cdn-pro-web-210-60.cdn-nhncommerce.com/wefan20073_godomall_com/data/goods/21/03/10/1000000003/1000000003_main_057.jpg"
-															alt="..." />
-														<div class="card-img-overlay ps-0"></div>
-														<div class="card-body ps-0 bg-200">
-															<h5 class="fw-bold text-1000 text-truncate">한화이글스 홈
-																어센틱 유니폼(오렌지)</h5>
-															<div class="fw-bold">
-																<span class="text-600 me-2 text-decoration-line-through">$200</span><span
-																	class="text-primary">$175</span>
-															</div>
-														</div>
-														<a class="stretched-link" href="#"></a>
-													</div>
-												</div>
-												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
-													<div class="card card-span h-100 text-white">
-														<img class="img-fluid h-100"
-															src="../assets/img/gallery/shirt-7.png" alt="..." />
-														<div class="card-img-overlay ps-0"></div>
-														<div class="card-body ps-0 bg-200">
-															<h5 class="fw-bold text-1000 text-truncate">White
-																Shirt</h5>
-															<div class="fw-bold">
-																<span class="text-600 me-2 text-decoration-line-through">$200</span><span
-																	class="text-primary">$175</span>
-															</div>
-														</div>
-														<a class="stretched-link" href="#"></a>
-													</div>
-												</div>
-												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
-													<div class="card card-span h-100 text-white">
-														<img class="img-fluid h-100"
-															src="../assets/img/gallery/shirt-8.png" alt="..." />
-														<div class="card-img-overlay ps-0"></div>
-														<div class="card-body ps-0 bg-200">
-															<h5 class="fw-bold text-1000 text-truncate">Black
-																Shirt</h5>
-															<div class="fw-bold">
-																<span class="text-600 me-2 text-decoration-line-through">$500</span><span
-																	class="text-primary">$275</span>
-															</div>
-														</div>
-														<a class="stretched-link" href="#"></a>
-													</div>
-												</div>
+												<%
+												}
+												}
+												}
+												%>
+
+
 											</div>
 										</div>
 
-										<!-- 한화 응원용품 두번째 페이지-->
-										<div class="carousel-item">
-											<div class="row h-100 align-items-center g-2">
-												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
-													<div class="card card-span h-100 text-white">
-														<img class="img-fluid h-100"
-															src="../assets/img/gallery/shirt-5.png" alt="..." />
-														<div class="card-img-overlay ps-0"></div>
-														<div class="card-body ps-0 bg-200">
-															<h5 class="fw-bold text-1000 text-truncate">Shirt</h5>
-															<div class="fw-bold">
-																<span class="text-600 me-2 text-decoration-line-through">$200</span><span
-																	class="text-primary">$175</span>
-															</div>
-														</div>
-														<a class="stretched-link" href="#"></a>
-													</div>
-												</div>
-												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
-													<div class="card card-span h-100 text-white">
-														<img class="img-fluid h-100"
-															src="../assets/img/gallery/shirt-6.png" alt="..." />
-														<div class="card-img-overlay ps-0"></div>
-														<div class="card-body ps-0 bg-200">
-															<h5 class="fw-bold text-1000 text-truncate">Gray
-																Shirt</h5>
-															<div class="fw-bold">
-																<span class="text-600 me-2 text-decoration-line-through">$200</span><span
-																	class="text-primary">$175</span>
-															</div>
-														</div>
-														<a class="stretched-link" href="#"></a>
-													</div>
-												</div>
-												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
-													<div class="card card-span h-100 text-white">
-														<img class="img-fluid h-100"
-															src="../assets/img/gallery/shirt-7.png" alt="..." />
-														<div class="card-img-overlay ps-0"></div>
-														<div class="card-body ps-0 bg-200">
-															<h5 class="fw-bold text-1000 text-truncate">White
-																Shirt</h5>
-															<div class="fw-bold">
-																<span class="text-600 me-2 text-decoration-line-through">$200</span><span
-																	class="text-primary">$175</span>
-															</div>
-														</div>
-														<a class="stretched-link" href="#"></a>
-													</div>
-												</div>
-												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
-													<div class="card card-span h-100 text-white">
-														<img class="img-fluid h-100"
-															src="../assets/img/gallery/shirt-8.png" alt="..." />
-														<div class="card-img-overlay ps-0"></div>
-														<div class="card-body ps-0 bg-200">
-															<h5 class="fw-bold text-1000 text-truncate">Black
-																Shirt</h5>
-															<div class="fw-bold">
-																<span class="text-600 me-2 text-decoration-line-through">$500</span><span
-																	class="text-primary">$275</span>
-															</div>
-														</div>
-														<a class="stretched-link" href="#"></a>
-													</div>
-												</div>
-											</div>
-										</div>
-
-										<!-- 한화 응원용품 좌우이동-->
-										<div class="row">
-											<button class="carousel-control-prev" type="button"
-												data-bs-target="#carouselCategoryHanhwaCheering"
-												data-bs-slide="prev">
-												<span class="carousel-control-prev-icon" aria-hidden="true"></span><span
-													class="visually-hidden">Previous</span>
-											</button>
-											<button class="carousel-control-next" type="button"
-												data-bs-target="#carouselCategoryHanhwaCheering"
-												data-bs-slide="next">
-												<span class="carousel-control-next-icon" aria-hidden="true"></span><span
-													class="visually-hidden">Next </span>
-											</button>
-										</div>
 									</div>
 								</div>
 							</div>
@@ -3226,153 +1101,37 @@
 										<!-- 한화 야구용품 첫번째 페이지 -->
 										<div class="carousel-item active" data-bs-interval="10000">
 											<div class="row h-100 align-items-center g-2">
+												<%
+												for (ProductDto dto : list) {
+													if (dto.getTeamName().equals("한화 이글스")) {
+														if (dto.getpCategory().equals("야구용품")) {
+												%>
 												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
 													<div class="card card-span h-100 text-white">
-														<img class="img-fluid h-100"
-															src="http://openimage.interpark.com/goods_image/9/7/8/4/10046189784s.jpg"
+														<img class="img-fluid h-100" src="<%=dto.getpImage()%>"
 															alt="..." />
 														<div class="card-img-overlay ps-0"></div>
 														<div class="card-body ps-0 bg-200">
-															<h5 class="fw-bold text-1000 text-truncate">키움 맨투맨</h5>
+															<h5 class="fw-bold text-1000 text-truncate"><%=dto.getpName()%></h5>
 															<div class="fw-bold">
-																<span class="text-600 me-2 text-decoration-line-through">$200</span><span
-																	class="text-primary">$175</span>
+																<span class="text-primary"><%=nf.format(dto.getPrice())%></span>
 															</div>
 														</div>
-														<a class="stretched-link" href="#"></a>
+														<a class="stretched-link"
+															href="product_detailPage.jsp?pId=<%=dto.getpId()%>"></a>
 													</div>
 												</div>
-												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
-													<div class="card card-span h-100 text-white">
-														<img class="img-fluid h-100"
-															src="../assets/img/gallery/shoe-6.png" alt="..." />
-														<div class="card-img-overlay ps-0"></div>
-														<div class="card-body ps-0 bg-200">
-															<h5 class="fw-bold text-1000 text-truncate">Shoe</h5>
-															<div class="fw-bold">
-																<span class="text-600 me-2 text-decoration-line-through">$500</span><span
-																	class="text-primary">$275</span>
-															</div>
-														</div>
-														<a class="stretched-link" href="#"></a>
-													</div>
-												</div>
-												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
-													<div class="card card-span h-100 text-white">
-														<img class="img-fluid h-100"
-															src="https://cdn-pro-web-210-60.cdn-nhncommerce.com/wefan20073_godomall_com/data/goods/21/03/10/1000000003/1000000003_main_057.jpg"
-															alt="..." />
-														<div class="card-img-overlay ps-0"></div>
-														<div class="card-body ps-0 bg-200">
-															<h5 class="fw-bold text-1000 text-truncate">한화이글스 홈
-																어센틱 유니폼(오렌지)</h5>
-															<div class="fw-bold">
-																<span class="text-600 me-2 text-decoration-line-through">$200</span><span
-																	class="text-primary">$175</span>
-															</div>
-														</div>
-														<a class="stretched-link" href="#"></a>
-													</div>
-												</div>
-												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
-													<div class="card card-span h-100 text-white">
-														<img class="img-fluid h-100"
-															src="../assets/img/gallery/shoe-8.png" alt="..." />
-														<div class="card-img-overlay ps-0"></div>
-														<div class="card-body ps-0 bg-200">
-															<h5 class="fw-bold text-1000 text-truncate">Shoe</h5>
-															<div class="fw-bold">
-																<span class="text-600 me-2 text-decoration-line-through">$500</span><span
-																	class="text-primary">$275</span>
-															</div>
-														</div>
-														<a class="stretched-link" href="#"></a>
-													</div>
-												</div>
+												<%
+												}
+												}
+												}
+												%>
+
+
 											</div>
 										</div>
 
-										<!-- 한화 야구용품 두번째 페이지 -->
-										<div class="carousel-item">
-											<div class="row h-100 align-items-center g-2">
-												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
-													<div class="card card-span h-100 text-white">
-														<img class="img-fluid h-100"
-															src="../assets/img/gallery/shoe-5.png" alt="..." />
-														<div class="card-img-overlay ps-0"></div>
-														<div class="card-body ps-0 bg-200">
-															<h5 class="fw-bold text-1000 text-truncate">Shoe</h5>
-															<div class="fw-bold">
-																<span class="text-600 me-2 text-decoration-line-through">$200</span><span
-																	class="text-primary">$175</span>
-															</div>
-														</div>
-														<a class="stretched-link" href="#"></a>
-													</div>
-												</div>
-												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
-													<div class="card card-span h-100 text-white">
-														<img class="img-fluid h-100"
-															src="../assets/img/gallery/shoe-6.png" alt="..." />
-														<div class="card-img-overlay ps-0"></div>
-														<div class="card-body ps-0 bg-200">
-															<h5 class="fw-bold text-1000 text-truncate">Shoe</h5>
-															<div class="fw-bold">
-																<span class="text-600 me-2 text-decoration-line-through">$500</span><span
-																	class="text-primary">$275</span>
-															</div>
-														</div>
-														<a class="stretched-link" href="#"></a>
-													</div>
-												</div>
-												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
-													<div class="card card-span h-100 text-white">
-														<img class="img-fluid h-100"
-															src="../assets/img/gallery/shoe-7.png" alt="..." />
-														<div class="card-img-overlay ps-0"></div>
-														<div class="card-body ps-0 bg-200">
-															<h5 class="fw-bold text-1000 text-truncate">Shoe</h5>
-															<div class="fw-bold">
-																<span class="text-600 me-2 text-decoration-line-through">$200</span><span
-																	class="text-primary">$175</span>
-															</div>
-														</div>
-														<a class="stretched-link" href="#"></a>
-													</div>
-												</div>
-												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
-													<div class="card card-span h-100 text-white">
-														<img class="img-fluid h-100"
-															src="../assets/img/gallery/shoe-8.png" alt="..." />
-														<div class="card-img-overlay ps-0"></div>
-														<div class="card-body ps-0 bg-200">
-															<h5 class="fw-bold text-1000 text-truncate">Shoe</h5>
-															<div class="fw-bold">
-																<span class="text-600 me-2 text-decoration-line-through">$500</span><span
-																	class="text-primary">$275</span>
-															</div>
-														</div>
-														<a class="stretched-link" href="#"></a>
-													</div>
-												</div>
-											</div>
-										</div>
 
-										<!-- 한화 야구용품 좌우이동 -->
-										<div class="row">
-											<button class="carousel-control-prev" type="button"
-												data-bs-target="#carouselCategoryHanhwabaseball"
-												data-bs-slide="prev">
-												<span class="carousel-control-prev-icon" aria-hidden="true"></span><span
-													class="visually-hidden">Previous</span>
-											</button>
-											<button class="carousel-control-next" type="button"
-												data-bs-target="#carouselCategoryHanhwabaseball"
-												data-bs-slide="next">
-												<span class="carousel-control-next-icon" aria-hidden="true"></span><span
-													class="visually-hidden">Next </span>
-											</button>
-										</div>
 									</div>
 								</div>
 							</div>
@@ -3388,153 +1147,37 @@
 										<!-- 한화 기념상품 첫번째 페이지 -->
 										<div class="carousel-item active" data-bs-interval="10000">
 											<div class="row h-100 align-items-center g-2">
+												<%
+												for (ProductDto dto : list) {
+													if (dto.getTeamName().equals("한화 이글스")) {
+														if (dto.getpCategory().equals("기념상품")) {
+												%>
 												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
 													<div class="card card-span h-100 text-white">
-														<img class="img-fluid h-100"
-															src="http://openimage.interpark.com/goods_image/9/7/8/4/10046189784s.jpg"
+														<img class="img-fluid h-100" src="<%=dto.getpImage()%>"
 															alt="..." />
 														<div class="card-img-overlay ps-0"></div>
 														<div class="card-body ps-0 bg-200">
-															<h5 class="fw-bold text-1000 text-truncate">키움 맨투맨</h5>
+															<h5 class="fw-bold text-1000 text-truncate"><%=dto.getpName()%></h5>
 															<div class="fw-bold">
-																<span class="text-600 me-2 text-decoration-line-through">$500</span><span
-																	class="text-primary">$275</span>
+																<span class="text-primary"><%=nf.format(dto.getPrice())%></span>
 															</div>
 														</div>
-														<a class="stretched-link" href="#"></a>
+														<a class="stretched-link"
+															href="product_detailPage.jsp?pId=<%=dto.getpId()%>"></a>
 													</div>
 												</div>
-												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
-													<div class="card card-span h-100 text-white">
-														<img class="img-fluid h-100"
-															src="../assets/img/gallery/watch-6.png" alt="..." />
-														<div class="card-img-overlay ps-0"></div>
-														<div class="card-body ps-0 bg-200">
-															<h5 class="fw-bold text-1000 text-truncate">Watch</h5>
-															<div class="fw-bold">
-																<span class="text-600 me-2 text-decoration-line-through">$500</span><span
-																	class="text-primary">$275</span>
-															</div>
-														</div>
-														<a class="stretched-link" href="#"></a>
-													</div>
-												</div>
-												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
-													<div class="card card-span h-100 text-white">
-														<img class="img-fluid h-100"
-															src="../assets/img/gallery/watch-7.png" alt="..." />
-														<div class="card-img-overlay ps-0"></div>
-														<div class="card-body ps-0 bg-200">
-															<h5 class="fw-bold text-1000 text-truncate">Watch</h5>
-															<div class="fw-bold">
-																<span class="text-600 me-2 text-decoration-line-through">$500</span><span
-																	class="text-primary">$275</span>
-															</div>
-														</div>
-														<a class="stretched-link" href="#"></a>
-													</div>
-												</div>
-												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
-													<div class="card card-span h-100 text-white">
-														<img class="img-fluid h-100"
-															src="https://cdn-pro-web-210-60.cdn-nhncommerce.com/wefan20073_godomall_com/data/goods/21/03/10/1000000003/1000000003_main_057.jpg"
-															alt="..." />
-														<div class="card-img-overlay ps-0"></div>
-														<div class="card-body ps-0 bg-200">
-															<h5 class="fw-bold text-1000 text-truncate">한화이글스 홈
-																어센틱 유니폼(오렌지)</h5>
-															<div class="fw-bold">
-																<span class="text-600 me-2 text-decoration-line-through">$500</span><span
-																	class="text-primary">$275</span>
-															</div>
-														</div>
-														<a class="stretched-link" href="#"></a>
-													</div>
-												</div>
+												<%
+												}
+												}
+												}
+												%>
+
+
 											</div>
 										</div>
 
-										<!-- 한화 기념상품 두번째 페이지 -->
-										<div class="carousel-item">
-											<div class="row h-100 align-items-center g-2">
-												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
-													<div class="card card-span h-100 text-white">
-														<img class="img-fluid h-100"
-															src="../assets/img/gallery/watch-5.png" alt="..." />
-														<div class="card-img-overlay ps-0"></div>
-														<div class="card-body ps-0 bg-200">
-															<h5 class="fw-bold text-1000 text-truncate">Watch</h5>
-															<div class="fw-bold">
-																<span class="text-600 me-2 text-decoration-line-through">$500</span><span
-																	class="text-primary">$275</span>
-															</div>
-														</div>
-														<a class="stretched-link" href="#"></a>
-													</div>
-												</div>
-												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
-													<div class="card card-span h-100 text-white">
-														<img class="img-fluid h-100"
-															src="../assets/img/gallery/watch-6.png" alt="..." />
-														<div class="card-img-overlay ps-0"></div>
-														<div class="card-body ps-0 bg-200">
-															<h5 class="fw-bold text-1000 text-truncate">Watch</h5>
-															<div class="fw-bold">
-																<span class="text-600 me-2 text-decoration-line-through">$500</span><span
-																	class="text-primary">$275</span>
-															</div>
-														</div>
-														<a class="stretched-link" href="#"></a>
-													</div>
-												</div>
-												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
-													<div class="card card-span h-100 text-white">
-														<img class="img-fluid h-100"
-															src="../assets/img/gallery/watch-7.png" alt="..." />
-														<div class="card-img-overlay ps-0"></div>
-														<div class="card-body ps-0 bg-200">
-															<h5 class="fw-bold text-1000 text-truncate">Watch</h5>
-															<div class="fw-bold">
-																<span class="text-600 me-2 text-decoration-line-through">$500</span><span
-																	class="text-primary">$275</span>
-															</div>
-														</div>
-														<a class="stretched-link" href="#"></a>
-													</div>
-												</div>
-												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
-													<div class="card card-span h-100 text-white">
-														<img class="img-fluid h-100"
-															src="../assets/img/gallery/watch-8.png" alt="..." />
-														<div class="card-img-overlay ps-0"></div>
-														<div class="card-body ps-0 bg-200">
-															<h5 class="fw-bold text-1000 text-truncate">Watch</h5>
-															<div class="fw-bold">
-																<span class="text-600 me-2 text-decoration-line-through">$500</span><span
-																	class="text-primary">$275</span>
-															</div>
-														</div>
-														<a class="stretched-link" href="#"></a>
-													</div>
-												</div>
-											</div>
-										</div>
 
-										<!-- 한화 기념상품 좌우이동 -->
-										<div class="row">
-											<button class="carousel-control-prev" type="button"
-												data-bs-target="#carouselCategoryHanhwaCommemoration"
-												data-bs-slide="prev">
-												<span class="carousel-control-prev-icon" aria-hidden="true"></span><span
-													class="visually-hidden">Previous</span>
-											</button>
-											<button class="carousel-control-next" type="button"
-												data-bs-target="#carouselCategoryHanhwaCommemoration"
-												data-bs-slide="next">
-												<span class="carousel-control-next-icon" aria-hidden="true"></span><span
-													class="visually-hidden">Next </span>
-											</button>
-										</div>
 									</div>
 								</div>
 							</div>
@@ -3583,162 +1226,37 @@
 										<!-- KIA 팀웨어 첫번째 페이지 -->
 										<div class="carousel-item active" data-bs-interval="10000">
 											<div class="row h-100 align-items-center g-2">
+												<%
+												for (ProductDto dto : list) {
+													if (dto.getTeamName().equals("KIA 타이거즈")) {
+														if (dto.getpCategory().equals("팀웨어")) {
+												%>
 												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
 													<div class="card card-span h-100 text-white">
-														<img class="img-fluid h-100"
-															src="https://tigerstr9934.cdn-nhncommerce.com/data/goods/23/01/01/1000003040/1000003040_add3_021.jpg"
+														<img class="img-fluid h-100" src="<%=dto.getpImage()%>"
 															alt="..." />
 														<div class="card-img-overlay ps-0"></div>
 														<div class="card-body ps-0 bg-200">
-															<h5 class="fw-bold text-1000 text-truncate">2022
-																KIA타이거즈 어센틱 광복절 유니폼</h5>
+															<h5 class="fw-bold text-1000 text-truncate"><%=dto.getpName()%></h5>
 															<div class="fw-bold">
-																<span class="text-600 me-2 text-decoration-line-through">$200</span><span
-																	class="text-primary">$175</span>
+																<span class="text-primary"><%=nf.format(dto.getPrice())%></span>
 															</div>
 														</div>
-														<a class="stretched-link" href="#"></a>
+														<a class="stretched-link"
+															href="product_detailPage.jsp?pId=<%=dto.getpId()%>"></a>
 													</div>
 												</div>
-												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
-													<div class="card card-span h-100 text-white">
-														<img class="img-fluid h-100"
-															src="http://www.lottegiantsshop.com/shopimages/giant00/0020040001573.jpg?1659677052"
-															alt="..." />
-														<div class="card-img-overlay ps-0"></div>
-														<div class="card-body ps-0 bg-200">
-															<h5 class="fw-bold text-1000 text-truncate">
-																Giants로고 올드스쿨 스냅백</h5>
-															<div class="fw-bold">
-																<span class="text-600 me-2 text-decoration-line-through">$200</span><span
-																	class="text-primary">$175</span>
-															</div>
-														</div>
-														<a class="stretched-link" href="#"></a>
-													</div>
-												</div>
-												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
-													<div class="card card-span h-100 text-white">
-														<img class="img-fluid h-100"
-															src="http://www.lottegiantsshop.com/shopimages/giant00/0010010000553.jpg?1657675959"
-															alt="..." />
-														<div class="card-img-overlay ps-0"></div>
-														<div class="card-body ps-0 bg-200">
-															<h5 class="fw-bold text-1000 text-truncate">홈 어센틱
-																유니폼</h5>
-															<div class="fw-bold">
-																<span class="text-600 me-2 text-decoration-line-through">$200</span><span
-																	class="text-primary">$175</span>
-															</div>
-														</div>
-														<a class="stretched-link" href="#"></a>
-													</div>
-												</div>
-												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
-													<div class="card card-span h-100 text-white">
-														<img class="img-fluid h-100"
-															src="http://openimage.interpark.com/goods_image/9/7/8/4/10046189784s.jpg"
-															alt="..." />
-														<div class="card-img-overlay ps-0"></div>
-														<div class="card-body ps-0 bg-200">
-															<h5 class="fw-bold text-1000 text-truncate">BE THE
-																HEROES 맨투맨</h5>
-															<div class="fw-bold">
-																<span class="text-600 me-2 text-decoration-line-through">$200</span><span
-																	class="text-primary">$175</span>
-															</div>
-														</div>
-														<a class="stretched-link" href="#"></a>
-													</div>
-												</div>
+												<%
+												}
+												}
+												}
+												%>
+
+
 											</div>
 										</div>
 
-										<!-- KIA 팀웨어 두번째 페이지 -->
-										<div class="carousel-item">
-											<div class="row h-100 align-items-center g-2">
-												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
-													<div class="card card-span h-100 text-white">
-														<img class="img-fluid h-100"
-															src="../assets/img/gallery/white-tshirt.png" alt="..." />
-														<div class="card-img-overlay ps-0"></div>
-														<div class="card-body ps-0 bg-200">
-															<h5 class="fw-bold text-1000 text-truncate">White
-																T-Shirt</h5>
-															<div class="fw-bold">
-																<span class="text-600 me-2 text-decoration-line-through">$200</span><span
-																	class="text-primary">$175</span>
-															</div>
-														</div>
-														<a class="stretched-link" href="#"></a>
-													</div>
-												</div>
-												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
-													<div class="card card-span h-100 text-white">
-														<img class="img-fluid h-100"
-															src="../assets/img/gallery/sky-tshirt.png" alt="..." />
-														<div class="card-img-overlay ps-0"></div>
-														<div class="card-body ps-0 bg-200">
-															<h5 class="fw-bold text-1000 text-truncate">Sky
-																T-Shirt</h5>
-															<div class="fw-bold">
-																<span class="text-600 me-2 text-decoration-line-through">$200</span><span
-																	class="text-primary">$175</span>
-															</div>
-														</div>
-														<a class="stretched-link" href="#"></a>
-													</div>
-												</div>
-												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
-													<div class="card card-span h-100 text-white">
-														<img class="img-fluid h-100"
-															src="../assets/img/gallery/yellow-tshirt.png" alt="..." />
-														<div class="card-img-overlay ps-0"></div>
-														<div class="card-body ps-0 bg-200">
-															<h5 class="fw-bold text-1000 text-truncate">Yellow
-																T-Shirt</h5>
-															<div class="fw-bold">
-																<span class="text-600 me-2 text-decoration-line-through">$200</span><span
-																	class="text-primary">$175</span>
-															</div>
-														</div>
-														<a class="stretched-link" href="#"></a>
-													</div>
-												</div>
-												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
-													<div class="card card-span h-100 text-white">
-														<img class="img-fluid h-100"
-															src="../assets/img/gallery/black-tshirt.png" alt="..." />
-														<div class="card-img-overlay ps-0"></div>
-														<div class="card-body ps-0 bg-200">
-															<h5 class="fw-bold text-1000 text-truncate">Black
-																T-Shirt</h5>
-															<div class="fw-bold">
-																<span class="text-600 me-2 text-decoration-line-through">$200</span><span
-																	class="text-primary">$175</span>
-															</div>
-														</div>
-														<a class="stretched-link" href="#"></a>
-													</div>
-												</div>
-											</div>
-										</div>
 
-										<!-- KIA 팀웨어 좌우이동 -->
-										<div class="row">
-											<button class="carousel-control-prev" type="button"
-												data-bs-target="#carouselCategoryKiaTeamwear"
-												data-bs-slide="prev">
-												<span class="carousel-control-prev-icon" aria-hidden="true"></span><span
-													class="visually-hidden">Previous</span>
-											</button>
-											<button class="carousel-control-next" type="button"
-												data-bs-target="#carouselCategoryKiaTeamwear"
-												data-bs-slide="next">
-												<span class="carousel-control-next-icon" aria-hidden="true"></span><span
-													class="visually-hidden">Next </span>
-											</button>
-										</div>
 									</div>
 								</div>
 							</div>
@@ -3753,158 +1271,37 @@
 										<!-- KIA 응원용품 첫번째 페이지 -->
 										<div class="carousel-item active" data-bs-interval="10000">
 											<div class="row h-100 align-items-center g-2">
+												<%
+												for (ProductDto dto : list) {
+													if (dto.getTeamName().equals("KIA 타이거즈")) {
+														if (dto.getpCategory().equals("응원용품")) {
+												%>
 												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
 													<div class="card card-span h-100 text-white">
-														<img class="img-fluid h-100"
-															src="http://openimage.interpark.com/goods_image/9/7/8/4/10046189784s.jpg"
+														<img class="img-fluid h-100" src="<%=dto.getpImage()%>"
 															alt="..." />
 														<div class="card-img-overlay ps-0"></div>
 														<div class="card-body ps-0 bg-200">
-															<h5 class="fw-bold text-1000 text-truncate">키움 맨투맨</h5>
+															<h5 class="fw-bold text-1000 text-truncate"><%=dto.getpName()%></h5>
 															<div class="fw-bold">
-																<span class="text-600 me-2 text-decoration-line-through">$200</span><span
-																	class="text-primary">$175</span>
+																<span class="text-primary"><%=nf.format(dto.getPrice())%></span>
 															</div>
 														</div>
-														<a class="stretched-link" href="#"></a>
+														<a class="stretched-link"
+															href="product_detailPage.jsp?pId=<%=dto.getpId()%>"></a>
 													</div>
 												</div>
-												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
-													<div class="card card-span h-100 text-white">
-														<img class="img-fluid h-100"
-															src="https://tigerstr9934.cdn-nhncommerce.com/data/goods/23/01/01/1000003040/1000003040_add3_021.jpg"
-															alt="..." />
-														<div class="card-img-overlay ps-0"></div>
-														<div class="card-body ps-0 bg-200">
-															<h5 class="fw-bold text-1000 text-truncate">2022
-																KIA타이거즈 어센틱 광복절 유니폼</h5>
-															<div class="fw-bold">
-																<span class="text-600 me-2 text-decoration-line-through">$200</span><span
-																	class="text-primary">$175</span>
-															</div>
-														</div>
-														<a class="stretched-link" href="#"></a>
-													</div>
-												</div>
-												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
-													<div class="card card-span h-100 text-white">
-														<img class="img-fluid h-100"
-															src="../assets/img/gallery/shirt-7.png" alt="..." />
-														<div class="card-img-overlay ps-0"></div>
-														<div class="card-body ps-0 bg-200">
-															<h5 class="fw-bold text-1000 text-truncate">White
-																Shirt</h5>
-															<div class="fw-bold">
-																<span class="text-600 me-2 text-decoration-line-through">$200</span><span
-																	class="text-primary">$175</span>
-															</div>
-														</div>
-														<a class="stretched-link" href="#"></a>
-													</div>
-												</div>
-												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
-													<div class="card card-span h-100 text-white">
-														<img class="img-fluid h-100"
-															src="../assets/img/gallery/shirt-8.png" alt="..." />
-														<div class="card-img-overlay ps-0"></div>
-														<div class="card-body ps-0 bg-200">
-															<h5 class="fw-bold text-1000 text-truncate">Black
-																Shirt</h5>
-															<div class="fw-bold">
-																<span class="text-600 me-2 text-decoration-line-through">$500</span><span
-																	class="text-primary">$275</span>
-															</div>
-														</div>
-														<a class="stretched-link" href="#"></a>
-													</div>
-												</div>
+												<%
+												}
+												}
+												}
+												%>
+
+
 											</div>
 										</div>
 
-										<!-- KIA 응원용품 두번째 페이지-->
-										<div class="carousel-item">
-											<div class="row h-100 align-items-center g-2">
-												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
-													<div class="card card-span h-100 text-white">
-														<img class="img-fluid h-100"
-															src="../assets/img/gallery/shirt-5.png" alt="..." />
-														<div class="card-img-overlay ps-0"></div>
-														<div class="card-body ps-0 bg-200">
-															<h5 class="fw-bold text-1000 text-truncate">Shirt</h5>
-															<div class="fw-bold">
-																<span class="text-600 me-2 text-decoration-line-through">$200</span><span
-																	class="text-primary">$175</span>
-															</div>
-														</div>
-														<a class="stretched-link" href="#"></a>
-													</div>
-												</div>
-												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
-													<div class="card card-span h-100 text-white">
-														<img class="img-fluid h-100"
-															src="../assets/img/gallery/shirt-6.png" alt="..." />
-														<div class="card-img-overlay ps-0"></div>
-														<div class="card-body ps-0 bg-200">
-															<h5 class="fw-bold text-1000 text-truncate">Gray
-																Shirt</h5>
-															<div class="fw-bold">
-																<span class="text-600 me-2 text-decoration-line-through">$200</span><span
-																	class="text-primary">$175</span>
-															</div>
-														</div>
-														<a class="stretched-link" href="#"></a>
-													</div>
-												</div>
-												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
-													<div class="card card-span h-100 text-white">
-														<img class="img-fluid h-100"
-															src="../assets/img/gallery/shirt-7.png" alt="..." />
-														<div class="card-img-overlay ps-0"></div>
-														<div class="card-body ps-0 bg-200">
-															<h5 class="fw-bold text-1000 text-truncate">White
-																Shirt</h5>
-															<div class="fw-bold">
-																<span class="text-600 me-2 text-decoration-line-through">$200</span><span
-																	class="text-primary">$175</span>
-															</div>
-														</div>
-														<a class="stretched-link" href="#"></a>
-													</div>
-												</div>
-												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
-													<div class="card card-span h-100 text-white">
-														<img class="img-fluid h-100"
-															src="../assets/img/gallery/shirt-8.png" alt="..." />
-														<div class="card-img-overlay ps-0"></div>
-														<div class="card-body ps-0 bg-200">
-															<h5 class="fw-bold text-1000 text-truncate">Black
-																Shirt</h5>
-															<div class="fw-bold">
-																<span class="text-600 me-2 text-decoration-line-through">$500</span><span
-																	class="text-primary">$275</span>
-															</div>
-														</div>
-														<a class="stretched-link" href="#"></a>
-													</div>
-												</div>
-											</div>
-										</div>
 
-										<!-- KIA 응원용품 좌우이동-->
-										<div class="row">
-											<button class="carousel-control-prev" type="button"
-												data-bs-target="#carouselCategoryKiaCheering"
-												data-bs-slide="prev">
-												<span class="carousel-control-prev-icon" aria-hidden="true"></span><span
-													class="visually-hidden">Previous</span>
-											</button>
-											<button class="carousel-control-next" type="button"
-												data-bs-target="#carouselCategoryKiaCheering"
-												data-bs-slide="next">
-												<span class="carousel-control-next-icon" aria-hidden="true"></span><span
-													class="visually-hidden">Next </span>
-											</button>
-										</div>
 									</div>
 								</div>
 							</div>
@@ -3919,153 +1316,37 @@
 										<!-- KIA 야구용품 첫번째 페이지 -->
 										<div class="carousel-item active" data-bs-interval="10000">
 											<div class="row h-100 align-items-center g-2">
+												<%
+												for (ProductDto dto : list) {
+													if (dto.getTeamName().equals("KIA 타이거즈")) {
+														if (dto.getpCategory().equals("야구용품")) {
+												%>
 												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
 													<div class="card card-span h-100 text-white">
-														<img class="img-fluid h-100"
-															src="http://openimage.interpark.com/goods_image/9/7/8/4/10046189784s.jpg"
+														<img class="img-fluid h-100" src="<%=dto.getpImage()%>"
 															alt="..." />
 														<div class="card-img-overlay ps-0"></div>
 														<div class="card-body ps-0 bg-200">
-															<h5 class="fw-bold text-1000 text-truncate">키움 맨투맨</h5>
+															<h5 class="fw-bold text-1000 text-truncate"><%=dto.getpName()%></h5>
 															<div class="fw-bold">
-																<span class="text-600 me-2 text-decoration-line-through">$200</span><span
-																	class="text-primary">$175</span>
+																<span class="text-primary"><%=nf.format(dto.getPrice())%></span>
 															</div>
 														</div>
-														<a class="stretched-link" href="#"></a>
+														<a class="stretched-link"
+															href="product_detailPage.jsp?pId=<%=dto.getpId()%>"></a>
 													</div>
 												</div>
-												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
-													<div class="card card-span h-100 text-white">
-														<img class="img-fluid h-100"
-															src="../assets/img/gallery/shoe-6.png" alt="..." />
-														<div class="card-img-overlay ps-0"></div>
-														<div class="card-body ps-0 bg-200">
-															<h5 class="fw-bold text-1000 text-truncate">Shoe</h5>
-															<div class="fw-bold">
-																<span class="text-600 me-2 text-decoration-line-through">$500</span><span
-																	class="text-primary">$275</span>
-															</div>
-														</div>
-														<a class="stretched-link" href="#"></a>
-													</div>
-												</div>
-												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
-													<div class="card card-span h-100 text-white">
-														<img class="img-fluid h-100"
-															src="https://tigerstr9934.cdn-nhncommerce.com/data/goods/23/01/01/1000003040/1000003040_add3_021.jpg"
-															alt="..." />
-														<div class="card-img-overlay ps-0"></div>
-														<div class="card-body ps-0 bg-200">
-															<h5 class="fw-bold text-1000 text-truncate">2022
-																KIA타이거즈 어센틱 광복절 유니폼</h5>
-															<div class="fw-bold">
-																<span class="text-600 me-2 text-decoration-line-through">$200</span><span
-																	class="text-primary">$175</span>
-															</div>
-														</div>
-														<a class="stretched-link" href="#"></a>
-													</div>
-												</div>
-												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
-													<div class="card card-span h-100 text-white">
-														<img class="img-fluid h-100"
-															src="../assets/img/gallery/shoe-8.png" alt="..." />
-														<div class="card-img-overlay ps-0"></div>
-														<div class="card-body ps-0 bg-200">
-															<h5 class="fw-bold text-1000 text-truncate">Shoe</h5>
-															<div class="fw-bold">
-																<span class="text-600 me-2 text-decoration-line-through">$500</span><span
-																	class="text-primary">$275</span>
-															</div>
-														</div>
-														<a class="stretched-link" href="#"></a>
-													</div>
-												</div>
+												<%
+												}
+												}
+												}
+												%>
+
+
 											</div>
 										</div>
 
-										<!-- KIA 야구용품 두번째 페이지 -->
-										<div class="carousel-item">
-											<div class="row h-100 align-items-center g-2">
-												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
-													<div class="card card-span h-100 text-white">
-														<img class="img-fluid h-100"
-															src="../assets/img/gallery/shoe-5.png" alt="..." />
-														<div class="card-img-overlay ps-0"></div>
-														<div class="card-body ps-0 bg-200">
-															<h5 class="fw-bold text-1000 text-truncate">Shoe</h5>
-															<div class="fw-bold">
-																<span class="text-600 me-2 text-decoration-line-through">$200</span><span
-																	class="text-primary">$175</span>
-															</div>
-														</div>
-														<a class="stretched-link" href="#"></a>
-													</div>
-												</div>
-												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
-													<div class="card card-span h-100 text-white">
-														<img class="img-fluid h-100"
-															src="../assets/img/gallery/shoe-6.png" alt="..." />
-														<div class="card-img-overlay ps-0"></div>
-														<div class="card-body ps-0 bg-200">
-															<h5 class="fw-bold text-1000 text-truncate">Shoe</h5>
-															<div class="fw-bold">
-																<span class="text-600 me-2 text-decoration-line-through">$500</span><span
-																	class="text-primary">$275</span>
-															</div>
-														</div>
-														<a class="stretched-link" href="#"></a>
-													</div>
-												</div>
-												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
-													<div class="card card-span h-100 text-white">
-														<img class="img-fluid h-100"
-															src="../assets/img/gallery/shoe-7.png" alt="..." />
-														<div class="card-img-overlay ps-0"></div>
-														<div class="card-body ps-0 bg-200">
-															<h5 class="fw-bold text-1000 text-truncate">Shoe</h5>
-															<div class="fw-bold">
-																<span class="text-600 me-2 text-decoration-line-through">$200</span><span
-																	class="text-primary">$175</span>
-															</div>
-														</div>
-														<a class="stretched-link" href="#"></a>
-													</div>
-												</div>
-												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
-													<div class="card card-span h-100 text-white">
-														<img class="img-fluid h-100"
-															src="../assets/img/gallery/shoe-8.png" alt="..." />
-														<div class="card-img-overlay ps-0"></div>
-														<div class="card-body ps-0 bg-200">
-															<h5 class="fw-bold text-1000 text-truncate">Shoe</h5>
-															<div class="fw-bold">
-																<span class="text-600 me-2 text-decoration-line-through">$500</span><span
-																	class="text-primary">$275</span>
-															</div>
-														</div>
-														<a class="stretched-link" href="#"></a>
-													</div>
-												</div>
-											</div>
-										</div>
 
-										<!-- KIA 야구용품 좌우이동 -->
-										<div class="row">
-											<button class="carousel-control-prev" type="button"
-												data-bs-target="#carouselCategoryKiabaseball"
-												data-bs-slide="prev">
-												<span class="carousel-control-prev-icon" aria-hidden="true"></span><span
-													class="visually-hidden">Previous</span>
-											</button>
-											<button class="carousel-control-next" type="button"
-												data-bs-target="#carouselCategoryKiabaseball"
-												data-bs-slide="next">
-												<span class="carousel-control-next-icon" aria-hidden="true"></span><span
-													class="visually-hidden">Next </span>
-											</button>
-										</div>
 									</div>
 								</div>
 							</div>
@@ -4081,153 +1362,36 @@
 										<!-- KIA 기념상품 첫번째 페이지 -->
 										<div class="carousel-item active" data-bs-interval="10000">
 											<div class="row h-100 align-items-center g-2">
+												<%
+												for (ProductDto dto : list) {
+													if (dto.getTeamName().equals("KIA 타이거즈")) {
+														if (dto.getpCategory().equals("기념상품")) {
+												%>
 												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
 													<div class="card card-span h-100 text-white">
-														<img class="img-fluid h-100"
-															src="http://openimage.interpark.com/goods_image/9/7/8/4/10046189784s.jpg"
+														<img class="img-fluid h-100" src="<%=dto.getpImage()%>"
 															alt="..." />
 														<div class="card-img-overlay ps-0"></div>
 														<div class="card-body ps-0 bg-200">
-															<h5 class="fw-bold text-1000 text-truncate">키움 맨투맨</h5>
+															<h5 class="fw-bold text-1000 text-truncate"><%=dto.getpName()%></h5>
 															<div class="fw-bold">
-																<span class="text-600 me-2 text-decoration-line-through">$500</span><span
-																	class="text-primary">$275</span>
+																<span class="text-primary"><%=nf.format(dto.getPrice())%></span>
 															</div>
 														</div>
-														<a class="stretched-link" href="#"></a>
+														<a class="stretched-link"
+															href="product_detailPage.jsp?pId=<%=dto.getpId()%>"></a>
 													</div>
 												</div>
-												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
-													<div class="card card-span h-100 text-white">
-														<img class="img-fluid h-100"
-															src="../assets/img/gallery/watch-6.png" alt="..." />
-														<div class="card-img-overlay ps-0"></div>
-														<div class="card-body ps-0 bg-200">
-															<h5 class="fw-bold text-1000 text-truncate">Watch</h5>
-															<div class="fw-bold">
-																<span class="text-600 me-2 text-decoration-line-through">$500</span><span
-																	class="text-primary">$275</span>
-															</div>
-														</div>
-														<a class="stretched-link" href="#"></a>
-													</div>
-												</div>
-												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
-													<div class="card card-span h-100 text-white">
-														<img class="img-fluid h-100"
-															src="../assets/img/gallery/watch-7.png" alt="..." />
-														<div class="card-img-overlay ps-0"></div>
-														<div class="card-body ps-0 bg-200">
-															<h5 class="fw-bold text-1000 text-truncate">Watch</h5>
-															<div class="fw-bold">
-																<span class="text-600 me-2 text-decoration-line-through">$500</span><span
-																	class="text-primary">$275</span>
-															</div>
-														</div>
-														<a class="stretched-link" href="#"></a>
-													</div>
-												</div>
-												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
-													<div class="card card-span h-100 text-white">
-														<img class="img-fluid h-100"
-															src="https://tigerstr9934.cdn-nhncommerce.com/data/goods/23/01/01/1000003040/1000003040_add3_021.jpg"
-															alt="..." />
-														<div class="card-img-overlay ps-0"></div>
-														<div class="card-body ps-0 bg-200">
-															<h5 class="fw-bold text-1000 text-truncate">2022
-																KIA타이거즈 어센틱 광복절 유니폼</h5>
-															<div class="fw-bold">
-																<span class="text-600 me-2 text-decoration-line-through">$500</span><span
-																	class="text-primary">$275</span>
-															</div>
-														</div>
-														<a class="stretched-link" href="#"></a>
-													</div>
-												</div>
+												<%
+												}
+												}
+												}
+												%>
+
 											</div>
 										</div>
 
-										<!-- KIA 기념상품 두번째 페이지 -->
-										<div class="carousel-item">
-											<div class="row h-100 align-items-center g-2">
-												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
-													<div class="card card-span h-100 text-white">
-														<img class="img-fluid h-100"
-															src="../assets/img/gallery/watch-5.png" alt="..." />
-														<div class="card-img-overlay ps-0"></div>
-														<div class="card-body ps-0 bg-200">
-															<h5 class="fw-bold text-1000 text-truncate">Watch</h5>
-															<div class="fw-bold">
-																<span class="text-600 me-2 text-decoration-line-through">$500</span><span
-																	class="text-primary">$275</span>
-															</div>
-														</div>
-														<a class="stretched-link" href="#"></a>
-													</div>
-												</div>
-												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
-													<div class="card card-span h-100 text-white">
-														<img class="img-fluid h-100"
-															src="../assets/img/gallery/watch-6.png" alt="..." />
-														<div class="card-img-overlay ps-0"></div>
-														<div class="card-body ps-0 bg-200">
-															<h5 class="fw-bold text-1000 text-truncate">Watch</h5>
-															<div class="fw-bold">
-																<span class="text-600 me-2 text-decoration-line-through">$500</span><span
-																	class="text-primary">$275</span>
-															</div>
-														</div>
-														<a class="stretched-link" href="#"></a>
-													</div>
-												</div>
-												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
-													<div class="card card-span h-100 text-white">
-														<img class="img-fluid h-100"
-															src="../assets/img/gallery/watch-7.png" alt="..." />
-														<div class="card-img-overlay ps-0"></div>
-														<div class="card-body ps-0 bg-200">
-															<h5 class="fw-bold text-1000 text-truncate">Watch</h5>
-															<div class="fw-bold">
-																<span class="text-600 me-2 text-decoration-line-through">$500</span><span
-																	class="text-primary">$275</span>
-															</div>
-														</div>
-														<a class="stretched-link" href="#"></a>
-													</div>
-												</div>
-												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
-													<div class="card card-span h-100 text-white">
-														<img class="img-fluid h-100"
-															src="../assets/img/gallery/watch-8.png" alt="..." />
-														<div class="card-img-overlay ps-0"></div>
-														<div class="card-body ps-0 bg-200">
-															<h5 class="fw-bold text-1000 text-truncate">Watch</h5>
-															<div class="fw-bold">
-																<span class="text-600 me-2 text-decoration-line-through">$500</span><span
-																	class="text-primary">$275</span>
-															</div>
-														</div>
-														<a class="stretched-link" href="#"></a>
-													</div>
-												</div>
-											</div>
-										</div>
 
-										<!-- KIA 기념상품 좌우이동 -->
-										<div class="row">
-											<button class="carousel-control-prev" type="button"
-												data-bs-target="#carouselCategoryKiaCommemoration"
-												data-bs-slide="prev">
-												<span class="carousel-control-prev-icon" aria-hidden="true"></span><span
-													class="visually-hidden">Previous</span>
-											</button>
-											<button class="carousel-control-next" type="button"
-												data-bs-target="#carouselCategoryKiaCommemoration"
-												data-bs-slide="next">
-												<span class="carousel-control-next-icon" aria-hidden="true"></span><span
-													class="visually-hidden">Next </span>
-											</button>
-										</div>
 									</div>
 								</div>
 							</div>
@@ -4276,162 +1440,37 @@
 										<!-- KT 팀웨어 첫번째 페이지 -->
 										<div class="carousel-item active" data-bs-interval="10000">
 											<div class="row h-100 align-items-center g-2">
+												<%
+												for (ProductDto dto : list) {
+													if (dto.getTeamName().equals("KT WIZ")) {
+														if (dto.getpCategory().equals("팀웨어")) {
+												%>
 												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
 													<div class="card card-span h-100 text-white">
-														<img class="img-fluid h-100"
-															src="https://ktwizstore.co.kr/web/product/big/202212/cd10c2c1da07b53bcb820ebc3e26ba5b.jpg"
+														<img class="img-fluid h-100" src="<%=dto.getpImage()%>"
 															alt="..." />
 														<div class="card-img-overlay ps-0"></div>
 														<div class="card-body ps-0 bg-200">
-															<h5 class="fw-bold text-1000 text-truncate">케이티위즈
-																2022 포스트시즌 기념구</h5>
+															<h5 class="fw-bold text-1000 text-truncate"><%=dto.getpName()%></h5>
 															<div class="fw-bold">
-																<span class="text-600 me-2 text-decoration-line-through">$200</span><span
-																	class="text-primary">$175</span>
+																<span class="text-primary"><%=nf.format(dto.getPrice())%></span>
 															</div>
 														</div>
-														<a class="stretched-link" href="#"></a>
+														<a class="stretched-link"
+															href="product_detailPage.jsp?pId=<%=dto.getpId()%>"></a>
 													</div>
 												</div>
-												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
-													<div class="card card-span h-100 text-white">
-														<img class="img-fluid h-100"
-															src="http://www.lottegiantsshop.com/shopimages/giant00/0020040001573.jpg?1659677052"
-															alt="..." />
-														<div class="card-img-overlay ps-0"></div>
-														<div class="card-body ps-0 bg-200">
-															<h5 class="fw-bold text-1000 text-truncate">
-																Giants로고 올드스쿨 스냅백</h5>
-															<div class="fw-bold">
-																<span class="text-600 me-2 text-decoration-line-through">$200</span><span
-																	class="text-primary">$175</span>
-															</div>
-														</div>
-														<a class="stretched-link" href="#"></a>
-													</div>
-												</div>
-												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
-													<div class="card card-span h-100 text-white">
-														<img class="img-fluid h-100"
-															src="http://www.lottegiantsshop.com/shopimages/giant00/0010010000553.jpg?1657675959"
-															alt="..." />
-														<div class="card-img-overlay ps-0"></div>
-														<div class="card-body ps-0 bg-200">
-															<h5 class="fw-bold text-1000 text-truncate">홈 어센틱
-																유니폼</h5>
-															<div class="fw-bold">
-																<span class="text-600 me-2 text-decoration-line-through">$200</span><span
-																	class="text-primary">$175</span>
-															</div>
-														</div>
-														<a class="stretched-link" href="#"></a>
-													</div>
-												</div>
-												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
-													<div class="card card-span h-100 text-white">
-														<img class="img-fluid h-100"
-															src="http://openimage.interpark.com/goods_image/9/7/8/4/10046189784s.jpg"
-															alt="..." />
-														<div class="card-img-overlay ps-0"></div>
-														<div class="card-body ps-0 bg-200">
-															<h5 class="fw-bold text-1000 text-truncate">BE THE
-																HEROES 맨투맨</h5>
-															<div class="fw-bold">
-																<span class="text-600 me-2 text-decoration-line-through">$200</span><span
-																	class="text-primary">$175</span>
-															</div>
-														</div>
-														<a class="stretched-link" href="#"></a>
-													</div>
-												</div>
+												<%
+												}
+												}
+												}
+												%>
+
+
 											</div>
 										</div>
 
-										<!-- KT 팀웨어 두번째 페이지 -->
-										<div class="carousel-item">
-											<div class="row h-100 align-items-center g-2">
-												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
-													<div class="card card-span h-100 text-white">
-														<img class="img-fluid h-100"
-															src="../assets/img/gallery/white-tshirt.png" alt="..." />
-														<div class="card-img-overlay ps-0"></div>
-														<div class="card-body ps-0 bg-200">
-															<h5 class="fw-bold text-1000 text-truncate">White
-																T-Shirt</h5>
-															<div class="fw-bold">
-																<span class="text-600 me-2 text-decoration-line-through">$200</span><span
-																	class="text-primary">$175</span>
-															</div>
-														</div>
-														<a class="stretched-link" href="#"></a>
-													</div>
-												</div>
-												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
-													<div class="card card-span h-100 text-white">
-														<img class="img-fluid h-100"
-															src="../assets/img/gallery/sky-tshirt.png" alt="..." />
-														<div class="card-img-overlay ps-0"></div>
-														<div class="card-body ps-0 bg-200">
-															<h5 class="fw-bold text-1000 text-truncate">Sky
-																T-Shirt</h5>
-															<div class="fw-bold">
-																<span class="text-600 me-2 text-decoration-line-through">$200</span><span
-																	class="text-primary">$175</span>
-															</div>
-														</div>
-														<a class="stretched-link" href="#"></a>
-													</div>
-												</div>
-												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
-													<div class="card card-span h-100 text-white">
-														<img class="img-fluid h-100"
-															src="../assets/img/gallery/yellow-tshirt.png" alt="..." />
-														<div class="card-img-overlay ps-0"></div>
-														<div class="card-body ps-0 bg-200">
-															<h5 class="fw-bold text-1000 text-truncate">Yellow
-																T-Shirt</h5>
-															<div class="fw-bold">
-																<span class="text-600 me-2 text-decoration-line-through">$200</span><span
-																	class="text-primary">$175</span>
-															</div>
-														</div>
-														<a class="stretched-link" href="#"></a>
-													</div>
-												</div>
-												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
-													<div class="card card-span h-100 text-white">
-														<img class="img-fluid h-100"
-															src="../assets/img/gallery/black-tshirt.png" alt="..." />
-														<div class="card-img-overlay ps-0"></div>
-														<div class="card-body ps-0 bg-200">
-															<h5 class="fw-bold text-1000 text-truncate">Black
-																T-Shirt</h5>
-															<div class="fw-bold">
-																<span class="text-600 me-2 text-decoration-line-through">$200</span><span
-																	class="text-primary">$175</span>
-															</div>
-														</div>
-														<a class="stretched-link" href="#"></a>
-													</div>
-												</div>
-											</div>
-										</div>
 
-										<!-- KT 팀웨어 좌우이동 -->
-										<div class="row">
-											<button class="carousel-control-prev" type="button"
-												data-bs-target="#carouselCategoryKtTeamwear"
-												data-bs-slide="prev">
-												<span class="carousel-control-prev-icon" aria-hidden="true"></span><span
-													class="visually-hidden">Previous</span>
-											</button>
-											<button class="carousel-control-next" type="button"
-												data-bs-target="#carouselCategoryKtTeamwear"
-												data-bs-slide="next">
-												<span class="carousel-control-next-icon" aria-hidden="true"></span><span
-													class="visually-hidden">Next </span>
-											</button>
-										</div>
 									</div>
 								</div>
 							</div>
@@ -4446,158 +1485,37 @@
 										<!-- KT 응원용품 첫번째 페이지 -->
 										<div class="carousel-item active" data-bs-interval="10000">
 											<div class="row h-100 align-items-center g-2">
+												<%
+												for (ProductDto dto : list) {
+													if (dto.getTeamName().equals("KT WIZ")) {
+														if (dto.getpCategory().equals("응원용품")) {
+												%>
 												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
 													<div class="card card-span h-100 text-white">
-														<img class="img-fluid h-100"
-															src="http://openimage.interpark.com/goods_image/9/7/8/4/10046189784s.jpg"
+														<img class="img-fluid h-100" src="<%=dto.getpImage()%>"
 															alt="..." />
 														<div class="card-img-overlay ps-0"></div>
 														<div class="card-body ps-0 bg-200">
-															<h5 class="fw-bold text-1000 text-truncate">키움 맨투맨</h5>
+															<h5 class="fw-bold text-1000 text-truncate"><%=dto.getpName()%></h5>
 															<div class="fw-bold">
-																<span class="text-600 me-2 text-decoration-line-through">$200</span><span
-																	class="text-primary">$175</span>
+																<span class="text-primary"><%=nf.format(dto.getPrice())%></span>
 															</div>
 														</div>
-														<a class="stretched-link" href="#"></a>
+														<a class="stretched-link"
+															href="product_detailPage.jsp?pId=<%=dto.getpId()%>"></a>
 													</div>
 												</div>
-												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
-													<div class="card card-span h-100 text-white">
-														<img class="img-fluid h-100"
-															src="https://ktwizstore.co.kr/web/product/big/202212/cd10c2c1da07b53bcb820ebc3e26ba5b.jpg"
-															alt="..." />
-														<div class="card-img-overlay ps-0"></div>
-														<div class="card-body ps-0 bg-200">
-															<h5 class="fw-bold text-1000 text-truncate">케이티위즈
-																2022 포스트시즌 기념구</h5>
-															<div class="fw-bold">
-																<span class="text-600 me-2 text-decoration-line-through">$200</span><span
-																	class="text-primary">$175</span>
-															</div>
-														</div>
-														<a class="stretched-link" href="#"></a>
-													</div>
-												</div>
-												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
-													<div class="card card-span h-100 text-white">
-														<img class="img-fluid h-100"
-															src="../assets/img/gallery/shirt-7.png" alt="..." />
-														<div class="card-img-overlay ps-0"></div>
-														<div class="card-body ps-0 bg-200">
-															<h5 class="fw-bold text-1000 text-truncate">White
-																Shirt</h5>
-															<div class="fw-bold">
-																<span class="text-600 me-2 text-decoration-line-through">$200</span><span
-																	class="text-primary">$175</span>
-															</div>
-														</div>
-														<a class="stretched-link" href="#"></a>
-													</div>
-												</div>
-												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
-													<div class="card card-span h-100 text-white">
-														<img class="img-fluid h-100"
-															src="../assets/img/gallery/shirt-8.png" alt="..." />
-														<div class="card-img-overlay ps-0"></div>
-														<div class="card-body ps-0 bg-200">
-															<h5 class="fw-bold text-1000 text-truncate">Black
-																Shirt</h5>
-															<div class="fw-bold">
-																<span class="text-600 me-2 text-decoration-line-through">$500</span><span
-																	class="text-primary">$275</span>
-															</div>
-														</div>
-														<a class="stretched-link" href="#"></a>
-													</div>
-												</div>
+												<%
+												}
+												}
+												}
+												%>
+
+
 											</div>
 										</div>
 
-										<!-- KT 응원용품 두번째 페이지-->
-										<div class="carousel-item">
-											<div class="row h-100 align-items-center g-2">
-												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
-													<div class="card card-span h-100 text-white">
-														<img class="img-fluid h-100"
-															src="../assets/img/gallery/shirt-5.png" alt="..." />
-														<div class="card-img-overlay ps-0"></div>
-														<div class="card-body ps-0 bg-200">
-															<h5 class="fw-bold text-1000 text-truncate">Shirt</h5>
-															<div class="fw-bold">
-																<span class="text-600 me-2 text-decoration-line-through">$200</span><span
-																	class="text-primary">$175</span>
-															</div>
-														</div>
-														<a class="stretched-link" href="#"></a>
-													</div>
-												</div>
-												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
-													<div class="card card-span h-100 text-white">
-														<img class="img-fluid h-100"
-															src="../assets/img/gallery/shirt-6.png" alt="..." />
-														<div class="card-img-overlay ps-0"></div>
-														<div class="card-body ps-0 bg-200">
-															<h5 class="fw-bold text-1000 text-truncate">Gray
-																Shirt</h5>
-															<div class="fw-bold">
-																<span class="text-600 me-2 text-decoration-line-through">$200</span><span
-																	class="text-primary">$175</span>
-															</div>
-														</div>
-														<a class="stretched-link" href="#"></a>
-													</div>
-												</div>
-												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
-													<div class="card card-span h-100 text-white">
-														<img class="img-fluid h-100"
-															src="../assets/img/gallery/shirt-7.png" alt="..." />
-														<div class="card-img-overlay ps-0"></div>
-														<div class="card-body ps-0 bg-200">
-															<h5 class="fw-bold text-1000 text-truncate">White
-																Shirt</h5>
-															<div class="fw-bold">
-																<span class="text-600 me-2 text-decoration-line-through">$200</span><span
-																	class="text-primary">$175</span>
-															</div>
-														</div>
-														<a class="stretched-link" href="#"></a>
-													</div>
-												</div>
-												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
-													<div class="card card-span h-100 text-white">
-														<img class="img-fluid h-100"
-															src="../assets/img/gallery/shirt-8.png" alt="..." />
-														<div class="card-img-overlay ps-0"></div>
-														<div class="card-body ps-0 bg-200">
-															<h5 class="fw-bold text-1000 text-truncate">Black
-																Shirt</h5>
-															<div class="fw-bold">
-																<span class="text-600 me-2 text-decoration-line-through">$500</span><span
-																	class="text-primary">$275</span>
-															</div>
-														</div>
-														<a class="stretched-link" href="#"></a>
-													</div>
-												</div>
-											</div>
-										</div>
 
-										<!-- KT 응원용품 좌우이동-->
-										<div class="row">
-											<button class="carousel-control-prev" type="button"
-												data-bs-target="#carouselCategoryKtCheering"
-												data-bs-slide="prev">
-												<span class="carousel-control-prev-icon" aria-hidden="true"></span><span
-													class="visually-hidden">Previous</span>
-											</button>
-											<button class="carousel-control-next" type="button"
-												data-bs-target="#carouselCategoryKtCheering"
-												data-bs-slide="next">
-												<span class="carousel-control-next-icon" aria-hidden="true"></span><span
-													class="visually-hidden">Next </span>
-											</button>
-										</div>
 									</div>
 								</div>
 							</div>
@@ -4612,153 +1530,37 @@
 										<!-- KT 야구용품 첫번째 페이지 -->
 										<div class="carousel-item active" data-bs-interval="10000">
 											<div class="row h-100 align-items-center g-2">
+												<%
+												for (ProductDto dto : list) {
+													if (dto.getTeamName().equals("KT WIZ")) {
+														if (dto.getpCategory().equals("야구용품")) {
+												%>
 												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
 													<div class="card card-span h-100 text-white">
-														<img class="img-fluid h-100"
-															src="http://openimage.interpark.com/goods_image/9/7/8/4/10046189784s.jpg"
+														<img class="img-fluid h-100" src="<%=dto.getpImage()%>"
 															alt="..." />
 														<div class="card-img-overlay ps-0"></div>
 														<div class="card-body ps-0 bg-200">
-															<h5 class="fw-bold text-1000 text-truncate">키움 맨투맨</h5>
+															<h5 class="fw-bold text-1000 text-truncate"><%=dto.getpName()%></h5>
 															<div class="fw-bold">
-																<span class="text-600 me-2 text-decoration-line-through">$200</span><span
-																	class="text-primary">$175</span>
+																<span class="text-primary"><%=nf.format(dto.getPrice())%></span>
 															</div>
 														</div>
-														<a class="stretched-link" href="#"></a>
+														<a class="stretched-link"
+															href="product_detailPage.jsp?pId=<%=dto.getpId()%>"></a>
 													</div>
 												</div>
-												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
-													<div class="card card-span h-100 text-white">
-														<img class="img-fluid h-100"
-															src="../assets/img/gallery/shoe-6.png" alt="..." />
-														<div class="card-img-overlay ps-0"></div>
-														<div class="card-body ps-0 bg-200">
-															<h5 class="fw-bold text-1000 text-truncate">Shoe</h5>
-															<div class="fw-bold">
-																<span class="text-600 me-2 text-decoration-line-through">$500</span><span
-																	class="text-primary">$275</span>
-															</div>
-														</div>
-														<a class="stretched-link" href="#"></a>
-													</div>
-												</div>
-												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
-													<div class="card card-span h-100 text-white">
-														<img class="img-fluid h-100"
-															src="https://ktwizstore.co.kr/web/product/big/202212/cd10c2c1da07b53bcb820ebc3e26ba5b.jpg"
-															alt="..." />
-														<div class="card-img-overlay ps-0"></div>
-														<div class="card-body ps-0 bg-200">
-															<h5 class="fw-bold text-1000 text-truncate">케이티위즈
-																2022 포스트시즌 기념구</h5>
-															<div class="fw-bold">
-																<span class="text-600 me-2 text-decoration-line-through">$200</span><span
-																	class="text-primary">$175</span>
-															</div>
-														</div>
-														<a class="stretched-link" href="#"></a>
-													</div>
-												</div>
-												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
-													<div class="card card-span h-100 text-white">
-														<img class="img-fluid h-100"
-															src="../assets/img/gallery/shoe-8.png" alt="..." />
-														<div class="card-img-overlay ps-0"></div>
-														<div class="card-body ps-0 bg-200">
-															<h5 class="fw-bold text-1000 text-truncate">Shoe</h5>
-															<div class="fw-bold">
-																<span class="text-600 me-2 text-decoration-line-through">$500</span><span
-																	class="text-primary">$275</span>
-															</div>
-														</div>
-														<a class="stretched-link" href="#"></a>
-													</div>
-												</div>
+												<%
+												}
+												}
+												}
+												%>
+
+
 											</div>
 										</div>
 
-										<!-- KT 야구용품 두번째 페이지 -->
-										<div class="carousel-item">
-											<div class="row h-100 align-items-center g-2">
-												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
-													<div class="card card-span h-100 text-white">
-														<img class="img-fluid h-100"
-															src="../assets/img/gallery/shoe-5.png" alt="..." />
-														<div class="card-img-overlay ps-0"></div>
-														<div class="card-body ps-0 bg-200">
-															<h5 class="fw-bold text-1000 text-truncate">Shoe</h5>
-															<div class="fw-bold">
-																<span class="text-600 me-2 text-decoration-line-through">$200</span><span
-																	class="text-primary">$175</span>
-															</div>
-														</div>
-														<a class="stretched-link" href="#"></a>
-													</div>
-												</div>
-												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
-													<div class="card card-span h-100 text-white">
-														<img class="img-fluid h-100"
-															src="../assets/img/gallery/shoe-6.png" alt="..." />
-														<div class="card-img-overlay ps-0"></div>
-														<div class="card-body ps-0 bg-200">
-															<h5 class="fw-bold text-1000 text-truncate">Shoe</h5>
-															<div class="fw-bold">
-																<span class="text-600 me-2 text-decoration-line-through">$500</span><span
-																	class="text-primary">$275</span>
-															</div>
-														</div>
-														<a class="stretched-link" href="#"></a>
-													</div>
-												</div>
-												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
-													<div class="card card-span h-100 text-white">
-														<img class="img-fluid h-100"
-															src="../assets/img/gallery/shoe-7.png" alt="..." />
-														<div class="card-img-overlay ps-0"></div>
-														<div class="card-body ps-0 bg-200">
-															<h5 class="fw-bold text-1000 text-truncate">Shoe</h5>
-															<div class="fw-bold">
-																<span class="text-600 me-2 text-decoration-line-through">$200</span><span
-																	class="text-primary">$175</span>
-															</div>
-														</div>
-														<a class="stretched-link" href="#"></a>
-													</div>
-												</div>
-												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
-													<div class="card card-span h-100 text-white">
-														<img class="img-fluid h-100"
-															src="../assets/img/gallery/shoe-8.png" alt="..." />
-														<div class="card-img-overlay ps-0"></div>
-														<div class="card-body ps-0 bg-200">
-															<h5 class="fw-bold text-1000 text-truncate">Shoe</h5>
-															<div class="fw-bold">
-																<span class="text-600 me-2 text-decoration-line-through">$500</span><span
-																	class="text-primary">$275</span>
-															</div>
-														</div>
-														<a class="stretched-link" href="#"></a>
-													</div>
-												</div>
-											</div>
-										</div>
 
-										<!-- KT 야구용품 좌우이동 -->
-										<div class="row">
-											<button class="carousel-control-prev" type="button"
-												data-bs-target="#carouselCategoryKtbaseball"
-												data-bs-slide="prev">
-												<span class="carousel-control-prev-icon" aria-hidden="true"></span><span
-													class="visually-hidden">Previous</span>
-											</button>
-											<button class="carousel-control-next" type="button"
-												data-bs-target="#carouselCategoryKtbaseball"
-												data-bs-slide="next">
-												<span class="carousel-control-next-icon" aria-hidden="true"></span><span
-													class="visually-hidden">Next </span>
-											</button>
-										</div>
 									</div>
 								</div>
 							</div>
@@ -4773,153 +1575,37 @@
 										<!-- KT 기념상품 첫번째 페이지 -->
 										<div class="carousel-item active" data-bs-interval="10000">
 											<div class="row h-100 align-items-center g-2">
+												<%
+												for (ProductDto dto : list) {
+													if (dto.getTeamName().equals("KT WIZ")) {
+														if (dto.getpCategory().equals("기념상품")) {
+												%>
 												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
 													<div class="card card-span h-100 text-white">
-														<img class="img-fluid h-100"
-															src="http://openimage.interpark.com/goods_image/9/7/8/4/10046189784s.jpg"
+														<img class="img-fluid h-100" src="<%=dto.getpImage()%>"
 															alt="..." />
 														<div class="card-img-overlay ps-0"></div>
 														<div class="card-body ps-0 bg-200">
-															<h5 class="fw-bold text-1000 text-truncate">키움 맨투맨</h5>
+															<h5 class="fw-bold text-1000 text-truncate"><%=dto.getpName()%></h5>
 															<div class="fw-bold">
-																<span class="text-600 me-2 text-decoration-line-through">$500</span><span
-																	class="text-primary">$275</span>
+																<span class="text-primary"><%=nf.format(dto.getPrice())%></span>
 															</div>
 														</div>
-														<a class="stretched-link" href="#"></a>
+														<a class="stretched-link"
+															href="product_detailPage.jsp?pId=<%=dto.getpId()%>"></a>
 													</div>
 												</div>
-												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
-													<div class="card card-span h-100 text-white">
-														<img class="img-fluid h-100"
-															src="../assets/img/gallery/watch-6.png" alt="..." />
-														<div class="card-img-overlay ps-0"></div>
-														<div class="card-body ps-0 bg-200">
-															<h5 class="fw-bold text-1000 text-truncate">Watch</h5>
-															<div class="fw-bold">
-																<span class="text-600 me-2 text-decoration-line-through">$500</span><span
-																	class="text-primary">$275</span>
-															</div>
-														</div>
-														<a class="stretched-link" href="#"></a>
-													</div>
-												</div>
-												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
-													<div class="card card-span h-100 text-white">
-														<img class="img-fluid h-100"
-															src="../assets/img/gallery/watch-7.png" alt="..." />
-														<div class="card-img-overlay ps-0"></div>
-														<div class="card-body ps-0 bg-200">
-															<h5 class="fw-bold text-1000 text-truncate">Watch</h5>
-															<div class="fw-bold">
-																<span class="text-600 me-2 text-decoration-line-through">$500</span><span
-																	class="text-primary">$275</span>
-															</div>
-														</div>
-														<a class="stretched-link" href="#"></a>
-													</div>
-												</div>
-												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
-													<div class="card card-span h-100 text-white">
-														<img class="img-fluid h-100"
-															src="https://ktwizstore.co.kr/web/product/big/202212/cd10c2c1da07b53bcb820ebc3e26ba5b.jpg"
-															alt="..." />
-														<div class="card-img-overlay ps-0"></div>
-														<div class="card-body ps-0 bg-200">
-															<h5 class="fw-bold text-1000 text-truncate">케이티위즈
-																2022 포스트시즌 기념구</h5>
-															<div class="fw-bold">
-																<span class="text-600 me-2 text-decoration-line-through">$500</span><span
-																	class="text-primary">$275</span>
-															</div>
-														</div>
-														<a class="stretched-link" href="#"></a>
-													</div>
-												</div>
+												<%
+												}
+												}
+												}
+												%>
+
+
 											</div>
 										</div>
 
-										<!-- KT 기념상품 두번째 페이지 -->
-										<div class="carousel-item">
-											<div class="row h-100 align-items-center g-2">
-												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
-													<div class="card card-span h-100 text-white">
-														<img class="img-fluid h-100"
-															src="../assets/img/gallery/watch-5.png" alt="..." />
-														<div class="card-img-overlay ps-0"></div>
-														<div class="card-body ps-0 bg-200">
-															<h5 class="fw-bold text-1000 text-truncate">Watch</h5>
-															<div class="fw-bold">
-																<span class="text-600 me-2 text-decoration-line-through">$500</span><span
-																	class="text-primary">$275</span>
-															</div>
-														</div>
-														<a class="stretched-link" href="#"></a>
-													</div>
-												</div>
-												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
-													<div class="card card-span h-100 text-white">
-														<img class="img-fluid h-100"
-															src="../assets/img/gallery/watch-6.png" alt="..." />
-														<div class="card-img-overlay ps-0"></div>
-														<div class="card-body ps-0 bg-200">
-															<h5 class="fw-bold text-1000 text-truncate">Watch</h5>
-															<div class="fw-bold">
-																<span class="text-600 me-2 text-decoration-line-through">$500</span><span
-																	class="text-primary">$275</span>
-															</div>
-														</div>
-														<a class="stretched-link" href="#"></a>
-													</div>
-												</div>
-												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
-													<div class="card card-span h-100 text-white">
-														<img class="img-fluid h-100"
-															src="../assets/img/gallery/watch-7.png" alt="..." />
-														<div class="card-img-overlay ps-0"></div>
-														<div class="card-body ps-0 bg-200">
-															<h5 class="fw-bold text-1000 text-truncate">Watch</h5>
-															<div class="fw-bold">
-																<span class="text-600 me-2 text-decoration-line-through">$500</span><span
-																	class="text-primary">$275</span>
-															</div>
-														</div>
-														<a class="stretched-link" href="#"></a>
-													</div>
-												</div>
-												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
-													<div class="card card-span h-100 text-white">
-														<img class="img-fluid h-100"
-															src="../assets/img/gallery/watch-8.png" alt="..." />
-														<div class="card-img-overlay ps-0"></div>
-														<div class="card-body ps-0 bg-200">
-															<h5 class="fw-bold text-1000 text-truncate">Watch</h5>
-															<div class="fw-bold">
-																<span class="text-600 me-2 text-decoration-line-through">$500</span><span
-																	class="text-primary">$275</span>
-															</div>
-														</div>
-														<a class="stretched-link" href="#"></a>
-													</div>
-												</div>
-											</div>
-										</div>
 
-										<!-- KT 기념상품 좌우이동 -->
-										<div class="row">
-											<button class="carousel-control-prev" type="button"
-												data-bs-target="#carouselCategoryKtCommemoration"
-												data-bs-slide="prev">
-												<span class="carousel-control-prev-icon" aria-hidden="true"></span><span
-													class="visually-hidden">Previous</span>
-											</button>
-											<button class="carousel-control-next" type="button"
-												data-bs-target="#carouselCategoryKtCommemoration"
-												data-bs-slide="next">
-												<span class="carousel-control-next-icon" aria-hidden="true"></span><span
-													class="visually-hidden">Next </span>
-											</button>
-										</div>
 									</div>
 								</div>
 							</div>
@@ -4968,162 +1654,37 @@
 										<!-- LG 팀웨어 첫번째 페이지 -->
 										<div class="carousel-item active" data-bs-interval="10000">
 											<div class="row h-100 align-items-center g-2">
+												<%
+												for (ProductDto dto : list) {
+													if (dto.getTeamName().equals("LG 트윈스")) {
+														if (dto.getpCategory().equals("팀웨어")) {
+												%>
 												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
 													<div class="card card-span h-100 text-white">
-														<img class="img-fluid h-100"
-															src="https://cdn-pro-web-228-207.cdn-nhncommerce.com/keienkorea4_godomall_com/data/goods/22/05/18//1000002415/register_detail_081.jpg"
+														<img class="img-fluid h-100" src="<%=dto.getpImage()%>"
 															alt="..." />
 														<div class="card-img-overlay ps-0"></div>
 														<div class="card-body ps-0 bg-200">
-															<h5 class="fw-bold text-1000 text-truncate">2022
-																LG트윈스 어센틱 백팩</h5>
+															<h5 class="fw-bold text-1000 text-truncate"><%=dto.getpName()%></h5>
 															<div class="fw-bold">
-																<span class="text-600 me-2 text-decoration-line-through">$200</span><span
-																	class="text-primary">$175</span>
+																<span class="text-primary"><%=nf.format(dto.getPrice())%></span>
 															</div>
 														</div>
-														<a class="stretched-link" href="#"></a>
+														<a class="stretched-link"
+															href="product_detailPage.jsp?pId=<%=dto.getpId()%>"></a>
 													</div>
 												</div>
-												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
-													<div class="card card-span h-100 text-white">
-														<img class="img-fluid h-100"
-															src="http://www.lottegiantsshop.com/shopimages/giant00/0020040001573.jpg?1659677052"
-															alt="..." />
-														<div class="card-img-overlay ps-0"></div>
-														<div class="card-body ps-0 bg-200">
-															<h5 class="fw-bold text-1000 text-truncate">
-																Giants로고 올드스쿨 스냅백</h5>
-															<div class="fw-bold">
-																<span class="text-600 me-2 text-decoration-line-through">$200</span><span
-																	class="text-primary">$175</span>
-															</div>
-														</div>
-														<a class="stretched-link" href="#"></a>
-													</div>
-												</div>
-												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
-													<div class="card card-span h-100 text-white">
-														<img class="img-fluid h-100"
-															src="http://www.lottegiantsshop.com/shopimages/giant00/0010010000553.jpg?1657675959"
-															alt="..." />
-														<div class="card-img-overlay ps-0"></div>
-														<div class="card-body ps-0 bg-200">
-															<h5 class="fw-bold text-1000 text-truncate">홈 어센틱
-																유니폼</h5>
-															<div class="fw-bold">
-																<span class="text-600 me-2 text-decoration-line-through">$200</span><span
-																	class="text-primary">$175</span>
-															</div>
-														</div>
-														<a class="stretched-link" href="#"></a>
-													</div>
-												</div>
-												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
-													<div class="card card-span h-100 text-white">
-														<img class="img-fluid h-100"
-															src="http://openimage.interpark.com/goods_image/9/7/8/4/10046189784s.jpg"
-															alt="..." />
-														<div class="card-img-overlay ps-0"></div>
-														<div class="card-body ps-0 bg-200">
-															<h5 class="fw-bold text-1000 text-truncate">BE THE
-																HEROES 맨투맨</h5>
-															<div class="fw-bold">
-																<span class="text-600 me-2 text-decoration-line-through">$200</span><span
-																	class="text-primary">$175</span>
-															</div>
-														</div>
-														<a class="stretched-link" href="#"></a>
-													</div>
-												</div>
+												<%
+												}
+												}
+												}
+												%>
+
+
 											</div>
 										</div>
 
-										<!-- LG 팀웨어 두번째 페이지 -->
-										<div class="carousel-item">
-											<div class="row h-100 align-items-center g-2">
-												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
-													<div class="card card-span h-100 text-white">
-														<img class="img-fluid h-100"
-															src="../assets/img/gallery/white-tshirt.png" alt="..." />
-														<div class="card-img-overlay ps-0"></div>
-														<div class="card-body ps-0 bg-200">
-															<h5 class="fw-bold text-1000 text-truncate">White
-																T-Shirt</h5>
-															<div class="fw-bold">
-																<span class="text-600 me-2 text-decoration-line-through">$200</span><span
-																	class="text-primary">$175</span>
-															</div>
-														</div>
-														<a class="stretched-link" href="#"></a>
-													</div>
-												</div>
-												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
-													<div class="card card-span h-100 text-white">
-														<img class="img-fluid h-100"
-															src="../assets/img/gallery/sky-tshirt.png" alt="..." />
-														<div class="card-img-overlay ps-0"></div>
-														<div class="card-body ps-0 bg-200">
-															<h5 class="fw-bold text-1000 text-truncate">Sky
-																T-Shirt</h5>
-															<div class="fw-bold">
-																<span class="text-600 me-2 text-decoration-line-through">$200</span><span
-																	class="text-primary">$175</span>
-															</div>
-														</div>
-														<a class="stretched-link" href="#"></a>
-													</div>
-												</div>
-												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
-													<div class="card card-span h-100 text-white">
-														<img class="img-fluid h-100"
-															src="../assets/img/gallery/yellow-tshirt.png" alt="..." />
-														<div class="card-img-overlay ps-0"></div>
-														<div class="card-body ps-0 bg-200">
-															<h5 class="fw-bold text-1000 text-truncate">Yellow
-																T-Shirt</h5>
-															<div class="fw-bold">
-																<span class="text-600 me-2 text-decoration-line-through">$200</span><span
-																	class="text-primary">$175</span>
-															</div>
-														</div>
-														<a class="stretched-link" href="#"></a>
-													</div>
-												</div>
-												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
-													<div class="card card-span h-100 text-white">
-														<img class="img-fluid h-100"
-															src="../assets/img/gallery/black-tshirt.png" alt="..." />
-														<div class="card-img-overlay ps-0"></div>
-														<div class="card-body ps-0 bg-200">
-															<h5 class="fw-bold text-1000 text-truncate">Black
-																T-Shirt</h5>
-															<div class="fw-bold">
-																<span class="text-600 me-2 text-decoration-line-through">$200</span><span
-																	class="text-primary">$175</span>
-															</div>
-														</div>
-														<a class="stretched-link" href="#"></a>
-													</div>
-												</div>
-											</div>
-										</div>
 
-										<!-- LG 팀웨어 좌우이동 -->
-										<div class="row">
-											<button class="carousel-control-prev" type="button"
-												data-bs-target="#carouselCategoryLgTeamwear"
-												data-bs-slide="prev">
-												<span class="carousel-control-prev-icon" aria-hidden="true"></span><span
-													class="visually-hidden">Previous</span>
-											</button>
-											<button class="carousel-control-next" type="button"
-												data-bs-target="#carouselCategoryLgTeamwear"
-												data-bs-slide="next">
-												<span class="carousel-control-next-icon" aria-hidden="true"></span><span
-													class="visually-hidden">Next </span>
-											</button>
-										</div>
 									</div>
 								</div>
 							</div>
@@ -5138,158 +1699,37 @@
 										<!-- LG 응원용품 첫번째 페이지 -->
 										<div class="carousel-item active" data-bs-interval="10000">
 											<div class="row h-100 align-items-center g-2">
+												<%
+												for (ProductDto dto : list) {
+													if (dto.getTeamName().equals("LG 트윈스")) {
+														if (dto.getpCategory().equals("응원용품")) {
+												%>
 												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
 													<div class="card card-span h-100 text-white">
-														<img class="img-fluid h-100"
-															src="http://openimage.interpark.com/goods_image/9/7/8/4/10046189784s.jpg"
+														<img class="img-fluid h-100" src="<%=dto.getpImage()%>"
 															alt="..." />
 														<div class="card-img-overlay ps-0"></div>
 														<div class="card-body ps-0 bg-200">
-															<h5 class="fw-bold text-1000 text-truncate">키움 맨투맨</h5>
+															<h5 class="fw-bold text-1000 text-truncate"><%=dto.getpName()%></h5>
 															<div class="fw-bold">
-																<span class="text-600 me-2 text-decoration-line-through">$200</span><span
-																	class="text-primary">$175</span>
+																<span class="text-primary"><%=nf.format(dto.getPrice())%></span>
 															</div>
 														</div>
-														<a class="stretched-link" href="#"></a>
+														<a class="stretched-link"
+															href="product_detailPage.jsp?pId=<%=dto.getpId()%>"></a>
 													</div>
 												</div>
-												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
-													<div class="card card-span h-100 text-white">
-														<img class="img-fluid h-100"
-															src="https://cdn-pro-web-228-207.cdn-nhncommerce.com/keienkorea4_godomall_com/data/goods/22/05/18//1000002415/register_detail_081.jpg"
-															alt="..." />
-														<div class="card-img-overlay ps-0"></div>
-														<div class="card-body ps-0 bg-200">
-															<h5 class="fw-bold text-1000 text-truncate">2022
-																LG트윈스 어센틱 백팩</h5>
-															<div class="fw-bold">
-																<span class="text-600 me-2 text-decoration-line-through">$200</span><span
-																	class="text-primary">$175</span>
-															</div>
-														</div>
-														<a class="stretched-link" href="#"></a>
-													</div>
-												</div>
-												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
-													<div class="card card-span h-100 text-white">
-														<img class="img-fluid h-100"
-															src="../assets/img/gallery/shirt-7.png" alt="..." />
-														<div class="card-img-overlay ps-0"></div>
-														<div class="card-body ps-0 bg-200">
-															<h5 class="fw-bold text-1000 text-truncate">White
-																Shirt</h5>
-															<div class="fw-bold">
-																<span class="text-600 me-2 text-decoration-line-through">$200</span><span
-																	class="text-primary">$175</span>
-															</div>
-														</div>
-														<a class="stretched-link" href="#"></a>
-													</div>
-												</div>
-												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
-													<div class="card card-span h-100 text-white">
-														<img class="img-fluid h-100"
-															src="../assets/img/gallery/shirt-8.png" alt="..." />
-														<div class="card-img-overlay ps-0"></div>
-														<div class="card-body ps-0 bg-200">
-															<h5 class="fw-bold text-1000 text-truncate">Black
-																Shirt</h5>
-															<div class="fw-bold">
-																<span class="text-600 me-2 text-decoration-line-through">$500</span><span
-																	class="text-primary">$275</span>
-															</div>
-														</div>
-														<a class="stretched-link" href="#"></a>
-													</div>
-												</div>
+												<%
+												}
+												}
+												}
+												%>
+
+
 											</div>
 										</div>
 
-										<!-- LG 응원용품 두번째 페이지-->
-										<div class="carousel-item">
-											<div class="row h-100 align-items-center g-2">
-												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
-													<div class="card card-span h-100 text-white">
-														<img class="img-fluid h-100"
-															src="../assets/img/gallery/shirt-5.png" alt="..." />
-														<div class="card-img-overlay ps-0"></div>
-														<div class="card-body ps-0 bg-200">
-															<h5 class="fw-bold text-1000 text-truncate">Shirt</h5>
-															<div class="fw-bold">
-																<span class="text-600 me-2 text-decoration-line-through">$200</span><span
-																	class="text-primary">$175</span>
-															</div>
-														</div>
-														<a class="stretched-link" href="#"></a>
-													</div>
-												</div>
-												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
-													<div class="card card-span h-100 text-white">
-														<img class="img-fluid h-100"
-															src="../assets/img/gallery/shirt-6.png" alt="..." />
-														<div class="card-img-overlay ps-0"></div>
-														<div class="card-body ps-0 bg-200">
-															<h5 class="fw-bold text-1000 text-truncate">Gray
-																Shirt</h5>
-															<div class="fw-bold">
-																<span class="text-600 me-2 text-decoration-line-through">$200</span><span
-																	class="text-primary">$175</span>
-															</div>
-														</div>
-														<a class="stretched-link" href="#"></a>
-													</div>
-												</div>
-												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
-													<div class="card card-span h-100 text-white">
-														<img class="img-fluid h-100"
-															src="../assets/img/gallery/shirt-7.png" alt="..." />
-														<div class="card-img-overlay ps-0"></div>
-														<div class="card-body ps-0 bg-200">
-															<h5 class="fw-bold text-1000 text-truncate">White
-																Shirt</h5>
-															<div class="fw-bold">
-																<span class="text-600 me-2 text-decoration-line-through">$200</span><span
-																	class="text-primary">$175</span>
-															</div>
-														</div>
-														<a class="stretched-link" href="#"></a>
-													</div>
-												</div>
-												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
-													<div class="card card-span h-100 text-white">
-														<img class="img-fluid h-100"
-															src="../assets/img/gallery/shirt-8.png" alt="..." />
-														<div class="card-img-overlay ps-0"></div>
-														<div class="card-body ps-0 bg-200">
-															<h5 class="fw-bold text-1000 text-truncate">Black
-																Shirt</h5>
-															<div class="fw-bold">
-																<span class="text-600 me-2 text-decoration-line-through">$500</span><span
-																	class="text-primary">$275</span>
-															</div>
-														</div>
-														<a class="stretched-link" href="#"></a>
-													</div>
-												</div>
-											</div>
-										</div>
 
-										<!-- LG 응원용품 좌우이동-->
-										<div class="row">
-											<button class="carousel-control-prev" type="button"
-												data-bs-target="#carouselCategoryLgCheering"
-												data-bs-slide="prev">
-												<span class="carousel-control-prev-icon" aria-hidden="true"></span><span
-													class="visually-hidden">Previous</span>
-											</button>
-											<button class="carousel-control-next" type="button"
-												data-bs-target="#carouselCategoryLgCheering"
-												data-bs-slide="next">
-												<span class="carousel-control-next-icon" aria-hidden="true"></span><span
-													class="visually-hidden">Next </span>
-											</button>
-										</div>
 									</div>
 								</div>
 							</div>
@@ -5304,153 +1744,37 @@
 										<!-- LG 야구용품 첫번째 페이지 -->
 										<div class="carousel-item active" data-bs-interval="10000">
 											<div class="row h-100 align-items-center g-2">
+												<%
+												for (ProductDto dto : list) {
+													if (dto.getTeamName().equals("LG 트윈스")) {
+														if (dto.getpCategory().equals("야구용품")) {
+												%>
 												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
 													<div class="card card-span h-100 text-white">
-														<img class="img-fluid h-100"
-															src="http://openimage.interpark.com/goods_image/9/7/8/4/10046189784s.jpg"
+														<img class="img-fluid h-100" src="<%=dto.getpImage()%>"
 															alt="..." />
 														<div class="card-img-overlay ps-0"></div>
 														<div class="card-body ps-0 bg-200">
-															<h5 class="fw-bold text-1000 text-truncate">키움 맨투맨</h5>
+															<h5 class="fw-bold text-1000 text-truncate"><%=dto.getpName()%></h5>
 															<div class="fw-bold">
-																<span class="text-600 me-2 text-decoration-line-through">$200</span><span
-																	class="text-primary">$175</span>
+																<span class="text-primary"><%=nf.format(dto.getPrice())%></span>
 															</div>
 														</div>
-														<a class="stretched-link" href="#"></a>
+														<a class="stretched-link"
+															href="product_detailPage.jsp?pId=<%=dto.getpId()%>"></a>
 													</div>
 												</div>
-												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
-													<div class="card card-span h-100 text-white">
-														<img class="img-fluid h-100"
-															src="../assets/img/gallery/shoe-6.png" alt="..." />
-														<div class="card-img-overlay ps-0"></div>
-														<div class="card-body ps-0 bg-200">
-															<h5 class="fw-bold text-1000 text-truncate">Shoe</h5>
-															<div class="fw-bold">
-																<span class="text-600 me-2 text-decoration-line-through">$500</span><span
-																	class="text-primary">$275</span>
-															</div>
-														</div>
-														<a class="stretched-link" href="#"></a>
-													</div>
-												</div>
-												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
-													<div class="card card-span h-100 text-white">
-														<img class="img-fluid h-100"
-															src="https://cdn-pro-web-228-207.cdn-nhncommerce.com/keienkorea4_godomall_com/data/goods/22/05/18//1000002415/register_detail_081.jpg"
-															alt="..." />
-														<div class="card-img-overlay ps-0"></div>
-														<div class="card-body ps-0 bg-200">
-															<h5 class="fw-bold text-1000 text-truncate">2022
-																LG트윈스 어센틱 백팩</h5>
-															<div class="fw-bold">
-																<span class="text-600 me-2 text-decoration-line-through">$200</span><span
-																	class="text-primary">$175</span>
-															</div>
-														</div>
-														<a class="stretched-link" href="#"></a>
-													</div>
-												</div>
-												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
-													<div class="card card-span h-100 text-white">
-														<img class="img-fluid h-100"
-															src="../assets/img/gallery/shoe-8.png" alt="..." />
-														<div class="card-img-overlay ps-0"></div>
-														<div class="card-body ps-0 bg-200">
-															<h5 class="fw-bold text-1000 text-truncate">Shoe</h5>
-															<div class="fw-bold">
-																<span class="text-600 me-2 text-decoration-line-through">$500</span><span
-																	class="text-primary">$275</span>
-															</div>
-														</div>
-														<a class="stretched-link" href="#"></a>
-													</div>
-												</div>
+												<%
+												}
+												}
+												}
+												%>
+
+
 											</div>
 										</div>
 
-										<!-- LG 야구용품 두번째 페이지 -->
-										<div class="carousel-item">
-											<div class="row h-100 align-items-center g-2">
-												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
-													<div class="card card-span h-100 text-white">
-														<img class="img-fluid h-100"
-															src="../assets/img/gallery/shoe-5.png" alt="..." />
-														<div class="card-img-overlay ps-0"></div>
-														<div class="card-body ps-0 bg-200">
-															<h5 class="fw-bold text-1000 text-truncate">Shoe</h5>
-															<div class="fw-bold">
-																<span class="text-600 me-2 text-decoration-line-through">$200</span><span
-																	class="text-primary">$175</span>
-															</div>
-														</div>
-														<a class="stretched-link" href="#"></a>
-													</div>
-												</div>
-												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
-													<div class="card card-span h-100 text-white">
-														<img class="img-fluid h-100"
-															src="../assets/img/gallery/shoe-6.png" alt="..." />
-														<div class="card-img-overlay ps-0"></div>
-														<div class="card-body ps-0 bg-200">
-															<h5 class="fw-bold text-1000 text-truncate">Shoe</h5>
-															<div class="fw-bold">
-																<span class="text-600 me-2 text-decoration-line-through">$500</span><span
-																	class="text-primary">$275</span>
-															</div>
-														</div>
-														<a class="stretched-link" href="#"></a>
-													</div>
-												</div>
-												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
-													<div class="card card-span h-100 text-white">
-														<img class="img-fluid h-100"
-															src="../assets/img/gallery/shoe-7.png" alt="..." />
-														<div class="card-img-overlay ps-0"></div>
-														<div class="card-body ps-0 bg-200">
-															<h5 class="fw-bold text-1000 text-truncate">Shoe</h5>
-															<div class="fw-bold">
-																<span class="text-600 me-2 text-decoration-line-through">$200</span><span
-																	class="text-primary">$175</span>
-															</div>
-														</div>
-														<a class="stretched-link" href="#"></a>
-													</div>
-												</div>
-												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
-													<div class="card card-span h-100 text-white">
-														<img class="img-fluid h-100"
-															src="../assets/img/gallery/shoe-8.png" alt="..." />
-														<div class="card-img-overlay ps-0"></div>
-														<div class="card-body ps-0 bg-200">
-															<h5 class="fw-bold text-1000 text-truncate">Shoe</h5>
-															<div class="fw-bold">
-																<span class="text-600 me-2 text-decoration-line-through">$500</span><span
-																	class="text-primary">$275</span>
-															</div>
-														</div>
-														<a class="stretched-link" href="#"></a>
-													</div>
-												</div>
-											</div>
-										</div>
 
-										<!-- LG 야구용품 좌우이동 -->
-										<div class="row">
-											<button class="carousel-control-prev" type="button"
-												data-bs-target="#carouselCategoryLgbaseball"
-												data-bs-slide="prev">
-												<span class="carousel-control-prev-icon" aria-hidden="true"></span><span
-													class="visually-hidden">Previous</span>
-											</button>
-											<button class="carousel-control-next" type="button"
-												data-bs-target="#carouselCategoryLgbaseball"
-												data-bs-slide="next">
-												<span class="carousel-control-next-icon" aria-hidden="true"></span><span
-													class="visually-hidden">Next </span>
-											</button>
-										</div>
 									</div>
 								</div>
 
@@ -5466,153 +1790,35 @@
 										<!-- LG 기념상품 첫번째 페이지 -->
 										<div class="carousel-item active" data-bs-interval="10000">
 											<div class="row h-100 align-items-center g-2">
+												<%
+												for (ProductDto dto : list) {
+													if (dto.getTeamName().equals("LG 트윈스")) {
+														if (dto.getpCategory().equals("기념상품")) {
+												%>
 												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
 													<div class="card card-span h-100 text-white">
-														<img class="img-fluid h-100"
-															src="http://openimage.interpark.com/goods_image/9/7/8/4/10046189784s.jpg"
+														<img class="img-fluid h-100" src="<%=dto.getpImage()%>"
 															alt="..." />
 														<div class="card-img-overlay ps-0"></div>
 														<div class="card-body ps-0 bg-200">
-															<h5 class="fw-bold text-1000 text-truncate">키움 맨투맨</h5>
+															<h5 class="fw-bold text-1000 text-truncate"><%=dto.getpName()%></h5>
 															<div class="fw-bold">
-																<span class="text-600 me-2 text-decoration-line-through">$500</span><span
-																	class="text-primary">$275</span>
+																<span class="text-primary"><%=nf.format(dto.getPrice())%></span>
 															</div>
 														</div>
-														<a class="stretched-link" href="#"></a>
+														<a class="stretched-link"
+															href="product_detailPage.jsp?pId=<%=dto.getpId()%>"></a>
 													</div>
 												</div>
-												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
-													<div class="card card-span h-100 text-white">
-														<img class="img-fluid h-100"
-															src="../assets/img/gallery/watch-6.png" alt="..." />
-														<div class="card-img-overlay ps-0"></div>
-														<div class="card-body ps-0 bg-200">
-															<h5 class="fw-bold text-1000 text-truncate">Watch</h5>
-															<div class="fw-bold">
-																<span class="text-600 me-2 text-decoration-line-through">$500</span><span
-																	class="text-primary">$275</span>
-															</div>
-														</div>
-														<a class="stretched-link" href="#"></a>
-													</div>
-												</div>
-												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
-													<div class="card card-span h-100 text-white">
-														<img class="img-fluid h-100"
-															src="../assets/img/gallery/watch-7.png" alt="..." />
-														<div class="card-img-overlay ps-0"></div>
-														<div class="card-body ps-0 bg-200">
-															<h5 class="fw-bold text-1000 text-truncate">Watch</h5>
-															<div class="fw-bold">
-																<span class="text-600 me-2 text-decoration-line-through">$500</span><span
-																	class="text-primary">$275</span>
-															</div>
-														</div>
-														<a class="stretched-link" href="#"></a>
-													</div>
-												</div>
-												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
-													<div class="card card-span h-100 text-white">
-														<img class="img-fluid h-100"
-															src="https://cdn-pro-web-228-207.cdn-nhncommerce.com/keienkorea4_godomall_com/data/goods/22/05/18//1000002415/register_detail_081.jpg"
-															alt="..." />
-														<div class="card-img-overlay ps-0"></div>
-														<div class="card-body ps-0 bg-200">
-															<h5 class="fw-bold text-1000 text-truncate">2022
-																LG트윈스 어센틱 백팩</h5>
-															<div class="fw-bold">
-																<span class="text-600 me-2 text-decoration-line-through">$500</span><span
-																	class="text-primary">$275</span>
-															</div>
-														</div>
-														<a class="stretched-link" href="#"></a>
-													</div>
-												</div>
+												<%
+												}
+												}
+												}
+												%>
+
 											</div>
 										</div>
 
-										<!-- LG 기념상품 두번째 페이지 -->
-										<div class="carousel-item">
-											<div class="row h-100 align-items-center g-2">
-												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
-													<div class="card card-span h-100 text-white">
-														<img class="img-fluid h-100"
-															src="../assets/img/gallery/watch-5.png" alt="..." />
-														<div class="card-img-overlay ps-0"></div>
-														<div class="card-body ps-0 bg-200">
-															<h5 class="fw-bold text-1000 text-truncate">Watch</h5>
-															<div class="fw-bold">
-																<span class="text-600 me-2 text-decoration-line-through">$500</span><span
-																	class="text-primary">$275</span>
-															</div>
-														</div>
-														<a class="stretched-link" href="#"></a>
-													</div>
-												</div>
-												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
-													<div class="card card-span h-100 text-white">
-														<img class="img-fluid h-100"
-															src="../assets/img/gallery/watch-6.png" alt="..." />
-														<div class="card-img-overlay ps-0"></div>
-														<div class="card-body ps-0 bg-200">
-															<h5 class="fw-bold text-1000 text-truncate">Watch</h5>
-															<div class="fw-bold">
-																<span class="text-600 me-2 text-decoration-line-through">$500</span><span
-																	class="text-primary">$275</span>
-															</div>
-														</div>
-														<a class="stretched-link" href="#"></a>
-													</div>
-												</div>
-												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
-													<div class="card card-span h-100 text-white">
-														<img class="img-fluid h-100"
-															src="../assets/img/gallery/watch-7.png" alt="..." />
-														<div class="card-img-overlay ps-0"></div>
-														<div class="card-body ps-0 bg-200">
-															<h5 class="fw-bold text-1000 text-truncate">Watch</h5>
-															<div class="fw-bold">
-																<span class="text-600 me-2 text-decoration-line-through">$500</span><span
-																	class="text-primary">$275</span>
-															</div>
-														</div>
-														<a class="stretched-link" href="#"></a>
-													</div>
-												</div>
-												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
-													<div class="card card-span h-100 text-white">
-														<img class="img-fluid h-100"
-															src="../assets/img/gallery/watch-8.png" alt="..." />
-														<div class="card-img-overlay ps-0"></div>
-														<div class="card-body ps-0 bg-200">
-															<h5 class="fw-bold text-1000 text-truncate">Watch</h5>
-															<div class="fw-bold">
-																<span class="text-600 me-2 text-decoration-line-through">$500</span><span
-																	class="text-primary">$275</span>
-															</div>
-														</div>
-														<a class="stretched-link" href="#"></a>
-													</div>
-												</div>
-											</div>
-										</div>
-
-										<!-- LG 기념상품 좌우이동 -->
-										<div class="row">
-											<button class="carousel-control-prev" type="button"
-												data-bs-target="#carouselCategoryLgCommemoration"
-												data-bs-slide="prev">
-												<span class="carousel-control-prev-icon" aria-hidden="true"></span><span
-													class="visually-hidden">Previous</span>
-											</button>
-											<button class="carousel-control-next" type="button"
-												data-bs-target="#carouselCategoryLgCommemoration"
-												data-bs-slide="next">
-												<span class="carousel-control-next-icon" aria-hidden="true"></span><span
-													class="visually-hidden">Next </span>
-											</button>
-										</div>
 									</div>
 								</div>
 
@@ -5662,162 +1868,37 @@
 										<!-- NC 팀웨어 첫번째 페이지 -->
 										<div class="carousel-item active" data-bs-interval="10000">
 											<div class="row h-100 align-items-center g-2">
+												<%
+												for (ProductDto dto : list) {
+													if (dto.getTeamName().equals("NC 다이노스")) {
+														if (dto.getpCategory().equals("팀웨어")) {
+												%>
 												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
 													<div class="card card-span h-100 text-white">
-														<img class="img-fluid h-100"
-															src="https://d29trs2nbedcfj.cloudfront.net/erp/shop/7a1749c7-a1a8-48c2-b354-c3a2bf6f29fa20230217.jpg"
+														<img class="img-fluid h-100" src="<%=dto.getpImage()%>"
 															alt="..." />
 														<div class="card-img-overlay ps-0"></div>
 														<div class="card-body ps-0 bg-200">
-															<h5 class="fw-bold text-1000 text-truncate">2023 어센틱
-																CAMP 2 홈 유니폼</h5>
+															<h5 class="fw-bold text-1000 text-truncate"><%=dto.getpName()%></h5>
 															<div class="fw-bold">
-																<span class="text-600 me-2 text-decoration-line-through">$200</span><span
-																	class="text-primary">$175</span>
+																<span class="text-primary"><%=nf.format(dto.getPrice())%></span>
 															</div>
 														</div>
-														<a class="stretched-link" href="#"></a>
+														<a class="stretched-link"
+															href="product_detailPage.jsp?pId=<%=dto.getpId()%>"></a>
 													</div>
 												</div>
-												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
-													<div class="card card-span h-100 text-white">
-														<img class="img-fluid h-100"
-															src="http://www.lottegiantsshop.com/shopimages/giant00/0020040001573.jpg?1659677052"
-															alt="..." />
-														<div class="card-img-overlay ps-0"></div>
-														<div class="card-body ps-0 bg-200">
-															<h5 class="fw-bold text-1000 text-truncate">
-																Giants로고 올드스쿨 스냅백</h5>
-															<div class="fw-bold">
-																<span class="text-600 me-2 text-decoration-line-through">$200</span><span
-																	class="text-primary">$175</span>
-															</div>
-														</div>
-														<a class="stretched-link" href="#"></a>
-													</div>
-												</div>
-												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
-													<div class="card card-span h-100 text-white">
-														<img class="img-fluid h-100"
-															src="http://www.lottegiantsshop.com/shopimages/giant00/0010010000553.jpg?1657675959"
-															alt="..." />
-														<div class="card-img-overlay ps-0"></div>
-														<div class="card-body ps-0 bg-200">
-															<h5 class="fw-bold text-1000 text-truncate">홈 어센틱
-																유니폼</h5>
-															<div class="fw-bold">
-																<span class="text-600 me-2 text-decoration-line-through">$200</span><span
-																	class="text-primary">$175</span>
-															</div>
-														</div>
-														<a class="stretched-link" href="#"></a>
-													</div>
-												</div>
-												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
-													<div class="card card-span h-100 text-white">
-														<img class="img-fluid h-100"
-															src="http://openimage.interpark.com/goods_image/9/7/8/4/10046189784s.jpg"
-															alt="..." />
-														<div class="card-img-overlay ps-0"></div>
-														<div class="card-body ps-0 bg-200">
-															<h5 class="fw-bold text-1000 text-truncate">BE THE
-																HEROES 맨투맨</h5>
-															<div class="fw-bold">
-																<span class="text-600 me-2 text-decoration-line-through">$200</span><span
-																	class="text-primary">$175</span>
-															</div>
-														</div>
-														<a class="stretched-link" href="#"></a>
-													</div>
-												</div>
+												<%
+												}
+												}
+												}
+												%>
+
+
 											</div>
 										</div>
 
-										<!-- NC 팀웨어 두번째 페이지 -->
-										<div class="carousel-item">
-											<div class="row h-100 align-items-center g-2">
-												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
-													<div class="card card-span h-100 text-white">
-														<img class="img-fluid h-100"
-															src="../assets/img/gallery/white-tshirt.png" alt="..." />
-														<div class="card-img-overlay ps-0"></div>
-														<div class="card-body ps-0 bg-200">
-															<h5 class="fw-bold text-1000 text-truncate">White
-																T-Shirt</h5>
-															<div class="fw-bold">
-																<span class="text-600 me-2 text-decoration-line-through">$200</span><span
-																	class="text-primary">$175</span>
-															</div>
-														</div>
-														<a class="stretched-link" href="#"></a>
-													</div>
-												</div>
-												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
-													<div class="card card-span h-100 text-white">
-														<img class="img-fluid h-100"
-															src="../assets/img/gallery/sky-tshirt.png" alt="..." />
-														<div class="card-img-overlay ps-0"></div>
-														<div class="card-body ps-0 bg-200">
-															<h5 class="fw-bold text-1000 text-truncate">Sky
-																T-Shirt</h5>
-															<div class="fw-bold">
-																<span class="text-600 me-2 text-decoration-line-through">$200</span><span
-																	class="text-primary">$175</span>
-															</div>
-														</div>
-														<a class="stretched-link" href="#"></a>
-													</div>
-												</div>
-												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
-													<div class="card card-span h-100 text-white">
-														<img class="img-fluid h-100"
-															src="../assets/img/gallery/yellow-tshirt.png" alt="..." />
-														<div class="card-img-overlay ps-0"></div>
-														<div class="card-body ps-0 bg-200">
-															<h5 class="fw-bold text-1000 text-truncate">Yellow
-																T-Shirt</h5>
-															<div class="fw-bold">
-																<span class="text-600 me-2 text-decoration-line-through">$200</span><span
-																	class="text-primary">$175</span>
-															</div>
-														</div>
-														<a class="stretched-link" href="#"></a>
-													</div>
-												</div>
-												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
-													<div class="card card-span h-100 text-white">
-														<img class="img-fluid h-100"
-															src="../assets/img/gallery/black-tshirt.png" alt="..." />
-														<div class="card-img-overlay ps-0"></div>
-														<div class="card-body ps-0 bg-200">
-															<h5 class="fw-bold text-1000 text-truncate">Black
-																T-Shirt</h5>
-															<div class="fw-bold">
-																<span class="text-600 me-2 text-decoration-line-through">$200</span><span
-																	class="text-primary">$175</span>
-															</div>
-														</div>
-														<a class="stretched-link" href="#"></a>
-													</div>
-												</div>
-											</div>
-										</div>
 
-										<!-- NC 팀웨어 좌우이동 -->
-										<div class="row">
-											<button class="carousel-control-prev" type="button"
-												data-bs-target="#carouselCategoryNcTeamwear"
-												data-bs-slide="prev">
-												<span class="carousel-control-prev-icon" aria-hidden="true"></span><span
-													class="visually-hidden">Previous</span>
-											</button>
-											<button class="carousel-control-next" type="button"
-												data-bs-target="#carouselCategoryNcTeamwear"
-												data-bs-slide="next">
-												<span class="carousel-control-next-icon" aria-hidden="true"></span><span
-													class="visually-hidden">Next </span>
-											</button>
-										</div>
 									</div>
 								</div>
 							</div>
@@ -5832,158 +1913,37 @@
 										<!-- NC 응원용품 첫번째 페이지 -->
 										<div class="carousel-item active" data-bs-interval="10000">
 											<div class="row h-100 align-items-center g-2">
+												<%
+												for (ProductDto dto : list) {
+													if (dto.getTeamName().equals("NC 다이노스")) {
+														if (dto.getpCategory().equals("응원용품")) {
+												%>
 												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
 													<div class="card card-span h-100 text-white">
-														<img class="img-fluid h-100"
-															src="http://openimage.interpark.com/goods_image/9/7/8/4/10046189784s.jpg"
+														<img class="img-fluid h-100" src="<%=dto.getpImage()%>"
 															alt="..." />
 														<div class="card-img-overlay ps-0"></div>
 														<div class="card-body ps-0 bg-200">
-															<h5 class="fw-bold text-1000 text-truncate">키움 맨투맨</h5>
+															<h5 class="fw-bold text-1000 text-truncate"><%=dto.getpName()%></h5>
 															<div class="fw-bold">
-																<span class="text-600 me-2 text-decoration-line-through">$200</span><span
-																	class="text-primary">$175</span>
+																<span class="text-primary"><%=nf.format(dto.getPrice())%></span>
 															</div>
 														</div>
-														<a class="stretched-link" href="#"></a>
+														<a class="stretched-link"
+															href="product_detailPage.jsp?pId=<%=dto.getpId()%>"></a>
 													</div>
 												</div>
-												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
-													<div class="card card-span h-100 text-white">
-														<img class="img-fluid h-100"
-															src="https://d29trs2nbedcfj.cloudfront.net/erp/shop/7a1749c7-a1a8-48c2-b354-c3a2bf6f29fa20230217.jpg"
-															alt="..." />
-														<div class="card-img-overlay ps-0"></div>
-														<div class="card-body ps-0 bg-200">
-															<h5 class="fw-bold text-1000 text-truncate">2023 어센틱
-																CAMP 2 홈 유니폼</h5>
-															<div class="fw-bold">
-																<span class="text-600 me-2 text-decoration-line-through">$200</span><span
-																	class="text-primary">$175</span>
-															</div>
-														</div>
-														<a class="stretched-link" href="#"></a>
-													</div>
-												</div>
-												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
-													<div class="card card-span h-100 text-white">
-														<img class="img-fluid h-100"
-															src="../assets/img/gallery/shirt-7.png" alt="..." />
-														<div class="card-img-overlay ps-0"></div>
-														<div class="card-body ps-0 bg-200">
-															<h5 class="fw-bold text-1000 text-truncate">White
-																Shirt</h5>
-															<div class="fw-bold">
-																<span class="text-600 me-2 text-decoration-line-through">$200</span><span
-																	class="text-primary">$175</span>
-															</div>
-														</div>
-														<a class="stretched-link" href="#"></a>
-													</div>
-												</div>
-												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
-													<div class="card card-span h-100 text-white">
-														<img class="img-fluid h-100"
-															src="../assets/img/gallery/shirt-8.png" alt="..." />
-														<div class="card-img-overlay ps-0"></div>
-														<div class="card-body ps-0 bg-200">
-															<h5 class="fw-bold text-1000 text-truncate">Black
-																Shirt</h5>
-															<div class="fw-bold">
-																<span class="text-600 me-2 text-decoration-line-through">$500</span><span
-																	class="text-primary">$275</span>
-															</div>
-														</div>
-														<a class="stretched-link" href="#"></a>
-													</div>
-												</div>
+												<%
+												}
+												}
+												}
+												%>
+
+
 											</div>
 										</div>
 
-										<!-- NC 응원용품 두번째 페이지-->
-										<div class="carousel-item">
-											<div class="row h-100 align-items-center g-2">
-												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
-													<div class="card card-span h-100 text-white">
-														<img class="img-fluid h-100"
-															src="../assets/img/gallery/shirt-5.png" alt="..." />
-														<div class="card-img-overlay ps-0"></div>
-														<div class="card-body ps-0 bg-200">
-															<h5 class="fw-bold text-1000 text-truncate">Shirt</h5>
-															<div class="fw-bold">
-																<span class="text-600 me-2 text-decoration-line-through">$200</span><span
-																	class="text-primary">$175</span>
-															</div>
-														</div>
-														<a class="stretched-link" href="#"></a>
-													</div>
-												</div>
-												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
-													<div class="card card-span h-100 text-white">
-														<img class="img-fluid h-100"
-															src="../assets/img/gallery/shirt-6.png" alt="..." />
-														<div class="card-img-overlay ps-0"></div>
-														<div class="card-body ps-0 bg-200">
-															<h5 class="fw-bold text-1000 text-truncate">Gray
-																Shirt</h5>
-															<div class="fw-bold">
-																<span class="text-600 me-2 text-decoration-line-through">$200</span><span
-																	class="text-primary">$175</span>
-															</div>
-														</div>
-														<a class="stretched-link" href="#"></a>
-													</div>
-												</div>
-												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
-													<div class="card card-span h-100 text-white">
-														<img class="img-fluid h-100"
-															src="../assets/img/gallery/shirt-7.png" alt="..." />
-														<div class="card-img-overlay ps-0"></div>
-														<div class="card-body ps-0 bg-200">
-															<h5 class="fw-bold text-1000 text-truncate">White
-																Shirt</h5>
-															<div class="fw-bold">
-																<span class="text-600 me-2 text-decoration-line-through">$200</span><span
-																	class="text-primary">$175</span>
-															</div>
-														</div>
-														<a class="stretched-link" href="#"></a>
-													</div>
-												</div>
-												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
-													<div class="card card-span h-100 text-white">
-														<img class="img-fluid h-100"
-															src="../assets/img/gallery/shirt-8.png" alt="..." />
-														<div class="card-img-overlay ps-0"></div>
-														<div class="card-body ps-0 bg-200">
-															<h5 class="fw-bold text-1000 text-truncate">Black
-																Shirt</h5>
-															<div class="fw-bold">
-																<span class="text-600 me-2 text-decoration-line-through">$500</span><span
-																	class="text-primary">$275</span>
-															</div>
-														</div>
-														<a class="stretched-link" href="#"></a>
-													</div>
-												</div>
-											</div>
-										</div>
 
-										<!-- NC 응원용품 좌우이동-->
-										<div class="row">
-											<button class="carousel-control-prev" type="button"
-												data-bs-target="#carouselCategoryNcCheering"
-												data-bs-slide="prev">
-												<span class="carousel-control-prev-icon" aria-hidden="true"></span><span
-													class="visually-hidden">Previous</span>
-											</button>
-											<button class="carousel-control-next" type="button"
-												data-bs-target="#carouselCategoryNcCheering"
-												data-bs-slide="next">
-												<span class="carousel-control-next-icon" aria-hidden="true"></span><span
-													class="visually-hidden">Next </span>
-											</button>
-										</div>
 									</div>
 								</div>
 							</div>
@@ -5998,153 +1958,37 @@
 										<!-- NC 야구용품 첫번째 페이지 -->
 										<div class="carousel-item active" data-bs-interval="10000">
 											<div class="row h-100 align-items-center g-2">
+												<%
+												for (ProductDto dto : list) {
+													if (dto.getTeamName().equals("NC 다이노스")) {
+														if (dto.getpCategory().equals("야구용품")) {
+												%>
 												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
 													<div class="card card-span h-100 text-white">
-														<img class="img-fluid h-100"
-															src="http://openimage.interpark.com/goods_image/9/7/8/4/10046189784s.jpg"
+														<img class="img-fluid h-100" src="<%=dto.getpImage()%>"
 															alt="..." />
 														<div class="card-img-overlay ps-0"></div>
 														<div class="card-body ps-0 bg-200">
-															<h5 class="fw-bold text-1000 text-truncate">키움 맨투맨</h5>
+															<h5 class="fw-bold text-1000 text-truncate"><%=dto.getpName()%></h5>
 															<div class="fw-bold">
-																<span class="text-600 me-2 text-decoration-line-through">$200</span><span
-																	class="text-primary">$175</span>
+																<span class="text-primary"><%=nf.format(dto.getPrice())%></span>
 															</div>
 														</div>
-														<a class="stretched-link" href="#"></a>
+														<a class="stretched-link"
+															href="product_detailPage.jsp?pId=<%=dto.getpId()%>"></a>
 													</div>
 												</div>
-												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
-													<div class="card card-span h-100 text-white">
-														<img class="img-fluid h-100"
-															src="../assets/img/gallery/shoe-6.png" alt="..." />
-														<div class="card-img-overlay ps-0"></div>
-														<div class="card-body ps-0 bg-200">
-															<h5 class="fw-bold text-1000 text-truncate">Shoe</h5>
-															<div class="fw-bold">
-																<span class="text-600 me-2 text-decoration-line-through">$500</span><span
-																	class="text-primary">$275</span>
-															</div>
-														</div>
-														<a class="stretched-link" href="#"></a>
-													</div>
-												</div>
-												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
-													<div class="card card-span h-100 text-white">
-														<img class="img-fluid h-100"
-															src="https://d29trs2nbedcfj.cloudfront.net/erp/shop/7a1749c7-a1a8-48c2-b354-c3a2bf6f29fa20230217.jpg"
-															alt="..." />
-														<div class="card-img-overlay ps-0"></div>
-														<div class="card-body ps-0 bg-200">
-															<h5 class="fw-bold text-1000 text-truncate">2023 어센틱
-																CAMP 2 홈 유니폼</h5>
-															<div class="fw-bold">
-																<span class="text-600 me-2 text-decoration-line-through">$200</span><span
-																	class="text-primary">$175</span>
-															</div>
-														</div>
-														<a class="stretched-link" href="#"></a>
-													</div>
-												</div>
-												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
-													<div class="card card-span h-100 text-white">
-														<img class="img-fluid h-100"
-															src="../assets/img/gallery/shoe-8.png" alt="..." />
-														<div class="card-img-overlay ps-0"></div>
-														<div class="card-body ps-0 bg-200">
-															<h5 class="fw-bold text-1000 text-truncate">Shoe</h5>
-															<div class="fw-bold">
-																<span class="text-600 me-2 text-decoration-line-through">$500</span><span
-																	class="text-primary">$275</span>
-															</div>
-														</div>
-														<a class="stretched-link" href="#"></a>
-													</div>
-												</div>
+												<%
+												}
+												}
+												}
+												%>
+
+
 											</div>
 										</div>
 
-										<!-- NC 야구용품 두번째 페이지 -->
-										<div class="carousel-item">
-											<div class="row h-100 align-items-center g-2">
-												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
-													<div class="card card-span h-100 text-white">
-														<img class="img-fluid h-100"
-															src="../assets/img/gallery/shoe-5.png" alt="..." />
-														<div class="card-img-overlay ps-0"></div>
-														<div class="card-body ps-0 bg-200">
-															<h5 class="fw-bold text-1000 text-truncate">Shoe</h5>
-															<div class="fw-bold">
-																<span class="text-600 me-2 text-decoration-line-through">$200</span><span
-																	class="text-primary">$175</span>
-															</div>
-														</div>
-														<a class="stretched-link" href="#"></a>
-													</div>
-												</div>
-												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
-													<div class="card card-span h-100 text-white">
-														<img class="img-fluid h-100"
-															src="../assets/img/gallery/shoe-6.png" alt="..." />
-														<div class="card-img-overlay ps-0"></div>
-														<div class="card-body ps-0 bg-200">
-															<h5 class="fw-bold text-1000 text-truncate">Shoe</h5>
-															<div class="fw-bold">
-																<span class="text-600 me-2 text-decoration-line-through">$500</span><span
-																	class="text-primary">$275</span>
-															</div>
-														</div>
-														<a class="stretched-link" href="#"></a>
-													</div>
-												</div>
-												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
-													<div class="card card-span h-100 text-white">
-														<img class="img-fluid h-100"
-															src="../assets/img/gallery/shoe-7.png" alt="..." />
-														<div class="card-img-overlay ps-0"></div>
-														<div class="card-body ps-0 bg-200">
-															<h5 class="fw-bold text-1000 text-truncate">Shoe</h5>
-															<div class="fw-bold">
-																<span class="text-600 me-2 text-decoration-line-through">$200</span><span
-																	class="text-primary">$175</span>
-															</div>
-														</div>
-														<a class="stretched-link" href="#"></a>
-													</div>
-												</div>
-												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
-													<div class="card card-span h-100 text-white">
-														<img class="img-fluid h-100"
-															src="../assets/img/gallery/shoe-8.png" alt="..." />
-														<div class="card-img-overlay ps-0"></div>
-														<div class="card-body ps-0 bg-200">
-															<h5 class="fw-bold text-1000 text-truncate">Shoe</h5>
-															<div class="fw-bold">
-																<span class="text-600 me-2 text-decoration-line-through">$500</span><span
-																	class="text-primary">$275</span>
-															</div>
-														</div>
-														<a class="stretched-link" href="#"></a>
-													</div>
-												</div>
-											</div>
-										</div>
 
-										<!-- NC 야구용품 좌우이동 -->
-										<div class="row">
-											<button class="carousel-control-prev" type="button"
-												data-bs-target="#carouselCategoryNcbaseball"
-												data-bs-slide="prev">
-												<span class="carousel-control-prev-icon" aria-hidden="true"></span><span
-													class="visually-hidden">Previous</span>
-											</button>
-											<button class="carousel-control-next" type="button"
-												data-bs-target="#carouselCategoryNcbaseball"
-												data-bs-slide="next">
-												<span class="carousel-control-next-icon" aria-hidden="true"></span><span
-													class="visually-hidden">Next </span>
-											</button>
-										</div>
 									</div>
 								</div>
 							</div>
@@ -6159,153 +2003,37 @@
 										<!-- NC 기념상품 첫번째 페이지 -->
 										<div class="carousel-item active" data-bs-interval="10000">
 											<div class="row h-100 align-items-center g-2">
+												<%
+												for (ProductDto dto : list) {
+													if (dto.getTeamName().equals("NC 다이노스")) {
+														if (dto.getpCategory().equals("기념상품")) {
+												%>
 												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
 													<div class="card card-span h-100 text-white">
-														<img class="img-fluid h-100"
-															src="http://openimage.interpark.com/goods_image/9/7/8/4/10046189784s.jpg"
+														<img class="img-fluid h-100" src="<%=dto.getpImage()%>"
 															alt="..." />
 														<div class="card-img-overlay ps-0"></div>
 														<div class="card-body ps-0 bg-200">
-															<h5 class="fw-bold text-1000 text-truncate">키움 맨투맨</h5>
+															<h5 class="fw-bold text-1000 text-truncate"><%=dto.getpName()%></h5>
 															<div class="fw-bold">
-																<span class="text-600 me-2 text-decoration-line-through">$500</span><span
-																	class="text-primary">$275</span>
+																<span class="text-primary"><%=nf.format(dto.getPrice())%></span>
 															</div>
 														</div>
-														<a class="stretched-link" href="#"></a>
+														<a class="stretched-link"
+															href="product_detailPage.jsp?pId=<%=dto.getpId()%>"></a>
 													</div>
 												</div>
-												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
-													<div class="card card-span h-100 text-white">
-														<img class="img-fluid h-100"
-															src="../assets/img/gallery/watch-6.png" alt="..." />
-														<div class="card-img-overlay ps-0"></div>
-														<div class="card-body ps-0 bg-200">
-															<h5 class="fw-bold text-1000 text-truncate">Watch</h5>
-															<div class="fw-bold">
-																<span class="text-600 me-2 text-decoration-line-through">$500</span><span
-																	class="text-primary">$275</span>
-															</div>
-														</div>
-														<a class="stretched-link" href="#"></a>
-													</div>
-												</div>
-												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
-													<div class="card card-span h-100 text-white">
-														<img class="img-fluid h-100"
-															src="../assets/img/gallery/watch-7.png" alt="..." />
-														<div class="card-img-overlay ps-0"></div>
-														<div class="card-body ps-0 bg-200">
-															<h5 class="fw-bold text-1000 text-truncate">Watch</h5>
-															<div class="fw-bold">
-																<span class="text-600 me-2 text-decoration-line-through">$500</span><span
-																	class="text-primary">$275</span>
-															</div>
-														</div>
-														<a class="stretched-link" href="#"></a>
-													</div>
-												</div>
-												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
-													<div class="card card-span h-100 text-white">
-														<img class="img-fluid h-100"
-															src="https://d29trs2nbedcfj.cloudfront.net/erp/shop/7a1749c7-a1a8-48c2-b354-c3a2bf6f29fa20230217.jpg"
-															alt="..." />
-														<div class="card-img-overlay ps-0"></div>
-														<div class="card-body ps-0 bg-200">
-															<h5 class="fw-bold text-1000 text-truncate">2023 어센틱
-																CAMP 2 홈 유니폼</h5>
-															<div class="fw-bold">
-																<span class="text-600 me-2 text-decoration-line-through">$500</span><span
-																	class="text-primary">$275</span>
-															</div>
-														</div>
-														<a class="stretched-link" href="#"></a>
-													</div>
-												</div>
+												<%
+												}
+												}
+												}
+												%>
+
+
 											</div>
 										</div>
 
-										<!-- NC 기념상품 두번째 페이지 -->
-										<div class="carousel-item">
-											<div class="row h-100 align-items-center g-2">
-												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
-													<div class="card card-span h-100 text-white">
-														<img class="img-fluid h-100"
-															src="../assets/img/gallery/watch-5.png" alt="..." />
-														<div class="card-img-overlay ps-0"></div>
-														<div class="card-body ps-0 bg-200">
-															<h5 class="fw-bold text-1000 text-truncate">Watch</h5>
-															<div class="fw-bold">
-																<span class="text-600 me-2 text-decoration-line-through">$500</span><span
-																	class="text-primary">$275</span>
-															</div>
-														</div>
-														<a class="stretched-link" href="#"></a>
-													</div>
-												</div>
-												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
-													<div class="card card-span h-100 text-white">
-														<img class="img-fluid h-100"
-															src="../assets/img/gallery/watch-6.png" alt="..." />
-														<div class="card-img-overlay ps-0"></div>
-														<div class="card-body ps-0 bg-200">
-															<h5 class="fw-bold text-1000 text-truncate">Watch</h5>
-															<div class="fw-bold">
-																<span class="text-600 me-2 text-decoration-line-through">$500</span><span
-																	class="text-primary">$275</span>
-															</div>
-														</div>
-														<a class="stretched-link" href="#"></a>
-													</div>
-												</div>
-												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
-													<div class="card card-span h-100 text-white">
-														<img class="img-fluid h-100"
-															src="../assets/img/gallery/watch-7.png" alt="..." />
-														<div class="card-img-overlay ps-0"></div>
-														<div class="card-body ps-0 bg-200">
-															<h5 class="fw-bold text-1000 text-truncate">Watch</h5>
-															<div class="fw-bold">
-																<span class="text-600 me-2 text-decoration-line-through">$500</span><span
-																	class="text-primary">$275</span>
-															</div>
-														</div>
-														<a class="stretched-link" href="#"></a>
-													</div>
-												</div>
-												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
-													<div class="card card-span h-100 text-white">
-														<img class="img-fluid h-100"
-															src="../assets/img/gallery/watch-8.png" alt="..." />
-														<div class="card-img-overlay ps-0"></div>
-														<div class="card-body ps-0 bg-200">
-															<h5 class="fw-bold text-1000 text-truncate">Watch</h5>
-															<div class="fw-bold">
-																<span class="text-600 me-2 text-decoration-line-through">$500</span><span
-																	class="text-primary">$275</span>
-															</div>
-														</div>
-														<a class="stretched-link" href="#"></a>
-													</div>
-												</div>
-											</div>
-										</div>
 
-										<!-- NC 기념상품 좌우이동 -->
-										<div class="row">
-											<button class="carousel-control-prev" type="button"
-												data-bs-target="#carouselCategoryNcCommemoration"
-												data-bs-slide="prev">
-												<span class="carousel-control-prev-icon" aria-hidden="true"></span><span
-													class="visually-hidden">Previous</span>
-											</button>
-											<button class="carousel-control-next" type="button"
-												data-bs-target="#carouselCategoryNcCommemoration"
-												data-bs-slide="next">
-												<span class="carousel-control-next-icon" aria-hidden="true"></span><span
-													class="visually-hidden">Next </span>
-											</button>
-										</div>
 									</div>
 								</div>
 
@@ -6355,162 +2083,38 @@
 										<!-- SSG 팀웨어 첫번째 페이지 -->
 										<div class="carousel-item active" data-bs-interval="10000">
 											<div class="row h-100 align-items-center g-2">
+												<%
+												for (ProductDto dto : list) {
+													if (dto.getTeamName().equals("SSG 랜더스")) {
+														if (dto.getpCategory().equals("팀웨어")) {
+												%>
 												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
 													<div class="card card-span h-100 text-white">
-														<img class="img-fluid h-100"
-															src="https://cdn-pro-web-251-119.cdn-nhncommerce.com/wyverntr9322_godomall_com/data/goods/22/03/13//1000001099/register_detail_015.jpg"
+														<img class="img-fluid h-100" src="<%=dto.getpImage()%>"
 															alt="..." />
 														<div class="card-img-overlay ps-0"></div>
 														<div class="card-body ps-0 bg-200">
-															<h5 class="fw-bold text-1000 text-truncate">2022 시즌
-																어웨이 어센틱 유니폼</h5>
+															<h5 class="fw-bold text-1000 text-truncate"><%=dto.getpName()%></h5>
 															<div class="fw-bold">
-																<span class="text-600 me-2 text-decoration-line-through">$200</span><span
-																	class="text-primary">$175</span>
+																<span class="text-primary"><%=nf.format(dto.getPrice())%></span>
 															</div>
 														</div>
-														<a class="stretched-link" href="#"></a>
+														<a class="stretched-link"
+															href="product_detailPage.jsp?pId=<%=dto.getpId()%>"></a>
 													</div>
 												</div>
-												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
-													<div class="card card-span h-100 text-white">
-														<img class="img-fluid h-100"
-															src="http://www.lottegiantsshop.com/shopimages/giant00/0020040001573.jpg?1659677052"
-															alt="..." />
-														<div class="card-img-overlay ps-0"></div>
-														<div class="card-body ps-0 bg-200">
-															<h5 class="fw-bold text-1000 text-truncate">
-																Giants로고 올드스쿨 스냅백</h5>
-															<div class="fw-bold">
-																<span class="text-600 me-2 text-decoration-line-through">$200</span><span
-																	class="text-primary">$175</span>
-															</div>
-														</div>
-														<a class="stretched-link" href="#"></a>
-													</div>
-												</div>
-												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
-													<div class="card card-span h-100 text-white">
-														<img class="img-fluid h-100"
-															src="http://www.lottegiantsshop.com/shopimages/giant00/0010010000553.jpg?1657675959"
-															alt="..." />
-														<div class="card-img-overlay ps-0"></div>
-														<div class="card-body ps-0 bg-200">
-															<h5 class="fw-bold text-1000 text-truncate">홈 어센틱
-																유니폼</h5>
-															<div class="fw-bold">
-																<span class="text-600 me-2 text-decoration-line-through">$200</span><span
-																	class="text-primary">$175</span>
-															</div>
-														</div>
-														<a class="stretched-link" href="#"></a>
-													</div>
-												</div>
-												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
-													<div class="card card-span h-100 text-white">
-														<img class="img-fluid h-100"
-															src="http://openimage.interpark.com/goods_image/9/7/8/4/10046189784s.jpg"
-															alt="..." />
-														<div class="card-img-overlay ps-0"></div>
-														<div class="card-body ps-0 bg-200">
-															<h5 class="fw-bold text-1000 text-truncate">BE THE
-																HEROES 맨투맨</h5>
-															<div class="fw-bold">
-																<span class="text-600 me-2 text-decoration-line-through">$200</span><span
-																	class="text-primary">$175</span>
-															</div>
-														</div>
-														<a class="stretched-link" href="#"></a>
-													</div>
-												</div>
+												<%
+												}
+												}
+												}
+												%>
+
+
+
 											</div>
 										</div>
 
-										<!-- SSG 팀웨어 두번째 페이지 -->
-										<div class="carousel-item">
-											<div class="row h-100 align-items-center g-2">
-												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
-													<div class="card card-span h-100 text-white">
-														<img class="img-fluid h-100"
-															src="../assets/img/gallery/white-tshirt.png" alt="..." />
-														<div class="card-img-overlay ps-0"></div>
-														<div class="card-body ps-0 bg-200">
-															<h5 class="fw-bold text-1000 text-truncate">White
-																T-Shirt</h5>
-															<div class="fw-bold">
-																<span class="text-600 me-2 text-decoration-line-through">$200</span><span
-																	class="text-primary">$175</span>
-															</div>
-														</div>
-														<a class="stretched-link" href="#"></a>
-													</div>
-												</div>
-												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
-													<div class="card card-span h-100 text-white">
-														<img class="img-fluid h-100"
-															src="../assets/img/gallery/sky-tshirt.png" alt="..." />
-														<div class="card-img-overlay ps-0"></div>
-														<div class="card-body ps-0 bg-200">
-															<h5 class="fw-bold text-1000 text-truncate">Sky
-																T-Shirt</h5>
-															<div class="fw-bold">
-																<span class="text-600 me-2 text-decoration-line-through">$200</span><span
-																	class="text-primary">$175</span>
-															</div>
-														</div>
-														<a class="stretched-link" href="#"></a>
-													</div>
-												</div>
-												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
-													<div class="card card-span h-100 text-white">
-														<img class="img-fluid h-100"
-															src="../assets/img/gallery/yellow-tshirt.png" alt="..." />
-														<div class="card-img-overlay ps-0"></div>
-														<div class="card-body ps-0 bg-200">
-															<h5 class="fw-bold text-1000 text-truncate">Yellow
-																T-Shirt</h5>
-															<div class="fw-bold">
-																<span class="text-600 me-2 text-decoration-line-through">$200</span><span
-																	class="text-primary">$175</span>
-															</div>
-														</div>
-														<a class="stretched-link" href="#"></a>
-													</div>
-												</div>
-												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
-													<div class="card card-span h-100 text-white">
-														<img class="img-fluid h-100"
-															src="../assets/img/gallery/black-tshirt.png" alt="..." />
-														<div class="card-img-overlay ps-0"></div>
-														<div class="card-body ps-0 bg-200">
-															<h5 class="fw-bold text-1000 text-truncate">Black
-																T-Shirt</h5>
-															<div class="fw-bold">
-																<span class="text-600 me-2 text-decoration-line-through">$200</span><span
-																	class="text-primary">$175</span>
-															</div>
-														</div>
-														<a class="stretched-link" href="#"></a>
-													</div>
-												</div>
-											</div>
-										</div>
 
-										<!-- SSG 팀웨어 좌우이동 -->
-										<div class="row">
-											<button class="carousel-control-prev" type="button"
-												data-bs-target="#carouselCategorySsgTeamwear"
-												data-bs-slide="prev">
-												<span class="carousel-control-prev-icon" aria-hidden="true"></span><span
-													class="visually-hidden">Previous</span>
-											</button>
-											<button class="carousel-control-next" type="button"
-												data-bs-target="#carouselCategorySsgTeamwear"
-												data-bs-slide="next">
-												<span class="carousel-control-next-icon" aria-hidden="true"></span><span
-													class="visually-hidden">Next </span>
-											</button>
-										</div>
 									</div>
 								</div>
 							</div>
@@ -6525,158 +2129,37 @@
 										<!-- SSG 응원용품 첫번째 페이지 -->
 										<div class="carousel-item active" data-bs-interval="10000">
 											<div class="row h-100 align-items-center g-2">
+												<%
+												for (ProductDto dto : list) {
+													if (dto.getTeamName().equals("SSG 랜더스")) {
+														if (dto.getpCategory().equals("응원용품")) {
+												%>
 												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
 													<div class="card card-span h-100 text-white">
-														<img class="img-fluid h-100"
-															src="http://openimage.interpark.com/goods_image/9/7/8/4/10046189784s.jpg"
+														<img class="img-fluid h-100" src="<%=dto.getpImage()%>"
 															alt="..." />
 														<div class="card-img-overlay ps-0"></div>
 														<div class="card-body ps-0 bg-200">
-															<h5 class="fw-bold text-1000 text-truncate">키움 맨투맨</h5>
+															<h5 class="fw-bold text-1000 text-truncate"><%=dto.getpName()%></h5>
 															<div class="fw-bold">
-																<span class="text-600 me-2 text-decoration-line-through">$200</span><span
-																	class="text-primary">$175</span>
+																<span class="text-primary"><%=nf.format(dto.getPrice())%></span>
 															</div>
 														</div>
-														<a class="stretched-link" href="#"></a>
+														<a class="stretched-link"
+															href="product_detailPage.jsp?pId=<%=dto.getpId()%>"></a>
 													</div>
 												</div>
-												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
-													<div class="card card-span h-100 text-white">
-														<img class="img-fluid h-100"
-															src="https://cdn-pro-web-251-119.cdn-nhncommerce.com/wyverntr9322_godomall_com/data/goods/22/03/13//1000001099/register_detail_015.jpg"
-															alt="..." />
-														<div class="card-img-overlay ps-0"></div>
-														<div class="card-body ps-0 bg-200">
-															<h5 class="fw-bold text-1000 text-truncate">2022 시즌
-																어웨이 어센틱 유니폼</h5>
-															<div class="fw-bold">
-																<span class="text-600 me-2 text-decoration-line-through">$200</span><span
-																	class="text-primary">$175</span>
-															</div>
-														</div>
-														<a class="stretched-link" href="#"></a>
-													</div>
-												</div>
-												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
-													<div class="card card-span h-100 text-white">
-														<img class="img-fluid h-100"
-															src="../assets/img/gallery/shirt-7.png" alt="..." />
-														<div class="card-img-overlay ps-0"></div>
-														<div class="card-body ps-0 bg-200">
-															<h5 class="fw-bold text-1000 text-truncate">White
-																Shirt</h5>
-															<div class="fw-bold">
-																<span class="text-600 me-2 text-decoration-line-through">$200</span><span
-																	class="text-primary">$175</span>
-															</div>
-														</div>
-														<a class="stretched-link" href="#"></a>
-													</div>
-												</div>
-												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
-													<div class="card card-span h-100 text-white">
-														<img class="img-fluid h-100"
-															src="../assets/img/gallery/shirt-8.png" alt="..." />
-														<div class="card-img-overlay ps-0"></div>
-														<div class="card-body ps-0 bg-200">
-															<h5 class="fw-bold text-1000 text-truncate">Black
-																Shirt</h5>
-															<div class="fw-bold">
-																<span class="text-600 me-2 text-decoration-line-through">$500</span><span
-																	class="text-primary">$275</span>
-															</div>
-														</div>
-														<a class="stretched-link" href="#"></a>
-													</div>
-												</div>
+												<%
+												}
+												}
+												}
+												%>
+
+
 											</div>
 										</div>
 
-										<!-- SSG 응원용품 두번째 페이지-->
-										<div class="carousel-item">
-											<div class="row h-100 align-items-center g-2">
-												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
-													<div class="card card-span h-100 text-white">
-														<img class="img-fluid h-100"
-															src="../assets/img/gallery/shirt-5.png" alt="..." />
-														<div class="card-img-overlay ps-0"></div>
-														<div class="card-body ps-0 bg-200">
-															<h5 class="fw-bold text-1000 text-truncate">Shirt</h5>
-															<div class="fw-bold">
-																<span class="text-600 me-2 text-decoration-line-through">$200</span><span
-																	class="text-primary">$175</span>
-															</div>
-														</div>
-														<a class="stretched-link" href="#"></a>
-													</div>
-												</div>
-												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
-													<div class="card card-span h-100 text-white">
-														<img class="img-fluid h-100"
-															src="../assets/img/gallery/shirt-6.png" alt="..." />
-														<div class="card-img-overlay ps-0"></div>
-														<div class="card-body ps-0 bg-200">
-															<h5 class="fw-bold text-1000 text-truncate">Gray
-																Shirt</h5>
-															<div class="fw-bold">
-																<span class="text-600 me-2 text-decoration-line-through">$200</span><span
-																	class="text-primary">$175</span>
-															</div>
-														</div>
-														<a class="stretched-link" href="#"></a>
-													</div>
-												</div>
-												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
-													<div class="card card-span h-100 text-white">
-														<img class="img-fluid h-100"
-															src="../assets/img/gallery/shirt-7.png" alt="..." />
-														<div class="card-img-overlay ps-0"></div>
-														<div class="card-body ps-0 bg-200">
-															<h5 class="fw-bold text-1000 text-truncate">White
-																Shirt</h5>
-															<div class="fw-bold">
-																<span class="text-600 me-2 text-decoration-line-through">$200</span><span
-																	class="text-primary">$175</span>
-															</div>
-														</div>
-														<a class="stretched-link" href="#"></a>
-													</div>
-												</div>
-												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
-													<div class="card card-span h-100 text-white">
-														<img class="img-fluid h-100"
-															src="../assets/img/gallery/shirt-8.png" alt="..." />
-														<div class="card-img-overlay ps-0"></div>
-														<div class="card-body ps-0 bg-200">
-															<h5 class="fw-bold text-1000 text-truncate">Black
-																Shirt</h5>
-															<div class="fw-bold">
-																<span class="text-600 me-2 text-decoration-line-through">$500</span><span
-																	class="text-primary">$275</span>
-															</div>
-														</div>
-														<a class="stretched-link" href="#"></a>
-													</div>
-												</div>
-											</div>
-										</div>
 
-										<!-- SSG 응원용품 좌우이동-->
-										<div class="row">
-											<button class="carousel-control-prev" type="button"
-												data-bs-target="#carouselCategorySsgCheering"
-												data-bs-slide="prev">
-												<span class="carousel-control-prev-icon" aria-hidden="true"></span><span
-													class="visually-hidden">Previous</span>
-											</button>
-											<button class="carousel-control-next" type="button"
-												data-bs-target="#carouselCategorySsgCheering"
-												data-bs-slide="next">
-												<span class="carousel-control-next-icon" aria-hidden="true"></span><span
-													class="visually-hidden">Next </span>
-											</button>
-										</div>
 									</div>
 								</div>
 							</div>
@@ -6691,153 +2174,37 @@
 										<!-- SSG 야구용품 첫번째 페이지 -->
 										<div class="carousel-item active" data-bs-interval="10000">
 											<div class="row h-100 align-items-center g-2">
+												<%
+												for (ProductDto dto : list) {
+													if (dto.getTeamName().equals("SSG 랜더스")) {
+														if (dto.getpCategory().equals("야구용품")) {
+												%>
 												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
 													<div class="card card-span h-100 text-white">
-														<img class="img-fluid h-100"
-															src="http://openimage.interpark.com/goods_image/9/7/8/4/10046189784s.jpg"
+														<img class="img-fluid h-100" src="<%=dto.getpImage()%>"
 															alt="..." />
 														<div class="card-img-overlay ps-0"></div>
 														<div class="card-body ps-0 bg-200">
-															<h5 class="fw-bold text-1000 text-truncate">키움 맨투맨</h5>
+															<h5 class="fw-bold text-1000 text-truncate"><%=dto.getpName()%></h5>
 															<div class="fw-bold">
-																<span class="text-600 me-2 text-decoration-line-through">$200</span><span
-																	class="text-primary">$175</span>
+																<span class="text-primary"><%=nf.format(dto.getPrice())%></span>
 															</div>
 														</div>
-														<a class="stretched-link" href="#"></a>
+														<a class="stretched-link"
+															href="product_detailPage.jsp?pId=<%=dto.getpId()%>"></a>
 													</div>
 												</div>
-												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
-													<div class="card card-span h-100 text-white">
-														<img class="img-fluid h-100"
-															src="../assets/img/gallery/shoe-6.png" alt="..." />
-														<div class="card-img-overlay ps-0"></div>
-														<div class="card-body ps-0 bg-200">
-															<h5 class="fw-bold text-1000 text-truncate">Shoe</h5>
-															<div class="fw-bold">
-																<span class="text-600 me-2 text-decoration-line-through">$500</span><span
-																	class="text-primary">$275</span>
-															</div>
-														</div>
-														<a class="stretched-link" href="#"></a>
-													</div>
-												</div>
-												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
-													<div class="card card-span h-100 text-white">
-														<img class="img-fluid h-100"
-															src="https://cdn-pro-web-251-119.cdn-nhncommerce.com/wyverntr9322_godomall_com/data/goods/22/03/13//1000001099/register_detail_015.jpg"
-															alt="..." />
-														<div class="card-img-overlay ps-0"></div>
-														<div class="card-body ps-0 bg-200">
-															<h5 class="fw-bold text-1000 text-truncate">2022 시즌
-																어웨이 어센틱 유니폼</h5>
-															<div class="fw-bold">
-																<span class="text-600 me-2 text-decoration-line-through">$200</span><span
-																	class="text-primary">$175</span>
-															</div>
-														</div>
-														<a class="stretched-link" href="#"></a>
-													</div>
-												</div>
-												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
-													<div class="card card-span h-100 text-white">
-														<img class="img-fluid h-100"
-															src="../assets/img/gallery/shoe-8.png" alt="..." />
-														<div class="card-img-overlay ps-0"></div>
-														<div class="card-body ps-0 bg-200">
-															<h5 class="fw-bold text-1000 text-truncate">Shoe</h5>
-															<div class="fw-bold">
-																<span class="text-600 me-2 text-decoration-line-through">$500</span><span
-																	class="text-primary">$275</span>
-															</div>
-														</div>
-														<a class="stretched-link" href="#"></a>
-													</div>
-												</div>
+												<%
+												}
+												}
+												}
+												%>
+
+
 											</div>
 										</div>
 
-										<!-- SSG 야구용품 두번째 페이지 -->
-										<div class="carousel-item">
-											<div class="row h-100 align-items-center g-2">
-												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
-													<div class="card card-span h-100 text-white">
-														<img class="img-fluid h-100"
-															src="../assets/img/gallery/shoe-5.png" alt="..." />
-														<div class="card-img-overlay ps-0"></div>
-														<div class="card-body ps-0 bg-200">
-															<h5 class="fw-bold text-1000 text-truncate">Shoe</h5>
-															<div class="fw-bold">
-																<span class="text-600 me-2 text-decoration-line-through">$200</span><span
-																	class="text-primary">$175</span>
-															</div>
-														</div>
-														<a class="stretched-link" href="#"></a>
-													</div>
-												</div>
-												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
-													<div class="card card-span h-100 text-white">
-														<img class="img-fluid h-100"
-															src="../assets/img/gallery/shoe-6.png" alt="..." />
-														<div class="card-img-overlay ps-0"></div>
-														<div class="card-body ps-0 bg-200">
-															<h5 class="fw-bold text-1000 text-truncate">Shoe</h5>
-															<div class="fw-bold">
-																<span class="text-600 me-2 text-decoration-line-through">$500</span><span
-																	class="text-primary">$275</span>
-															</div>
-														</div>
-														<a class="stretched-link" href="#"></a>
-													</div>
-												</div>
-												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
-													<div class="card card-span h-100 text-white">
-														<img class="img-fluid h-100"
-															src="../assets/img/gallery/shoe-7.png" alt="..." />
-														<div class="card-img-overlay ps-0"></div>
-														<div class="card-body ps-0 bg-200">
-															<h5 class="fw-bold text-1000 text-truncate">Shoe</h5>
-															<div class="fw-bold">
-																<span class="text-600 me-2 text-decoration-line-through">$200</span><span
-																	class="text-primary">$175</span>
-															</div>
-														</div>
-														<a class="stretched-link" href="#"></a>
-													</div>
-												</div>
-												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
-													<div class="card card-span h-100 text-white">
-														<img class="img-fluid h-100"
-															src="../assets/img/gallery/shoe-8.png" alt="..." />
-														<div class="card-img-overlay ps-0"></div>
-														<div class="card-body ps-0 bg-200">
-															<h5 class="fw-bold text-1000 text-truncate">Shoe</h5>
-															<div class="fw-bold">
-																<span class="text-600 me-2 text-decoration-line-through">$500</span><span
-																	class="text-primary">$275</span>
-															</div>
-														</div>
-														<a class="stretched-link" href="#"></a>
-													</div>
-												</div>
-											</div>
-										</div>
 
-										<!-- SSG 야구용품 좌우이동 -->
-										<div class="row">
-											<button class="carousel-control-prev" type="button"
-												data-bs-target="#carouselCategorySsgbaseball"
-												data-bs-slide="prev">
-												<span class="carousel-control-prev-icon" aria-hidden="true"></span><span
-													class="visually-hidden">Previous</span>
-											</button>
-											<button class="carousel-control-next" type="button"
-												data-bs-target="#carouselCategorySsgbaseball"
-												data-bs-slide="next">
-												<span class="carousel-control-next-icon" aria-hidden="true"></span><span
-													class="visually-hidden">Next </span>
-											</button>
-										</div>
 									</div>
 								</div>
 							</div>
@@ -6853,160 +2220,43 @@
 										<!-- SSG 기념상품 첫번째 페이지 -->
 										<div class="carousel-item active" data-bs-interval="10000">
 											<div class="row h-100 align-items-center g-2">
+												<%
+												for (ProductDto dto : list) {
+													if (dto.getTeamName().equals("SSG 랜더스")) {
+														if (dto.getpCategory().equals("기념상품")) {
+												%>
 												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
 													<div class="card card-span h-100 text-white">
-														<img class="img-fluid h-100"
-															src="http://openimage.interpark.com/goods_image/9/7/8/4/10046189784s.jpg"
+														<img class="img-fluid h-100" src="<%=dto.getpImage()%>"
 															alt="..." />
 														<div class="card-img-overlay ps-0"></div>
 														<div class="card-body ps-0 bg-200">
-															<h5 class="fw-bold text-1000 text-truncate">키움 맨투맨</h5>
+															<h5 class="fw-bold text-1000 text-truncate"><%=dto.getpName()%></h5>
 															<div class="fw-bold">
-																<span class="text-600 me-2 text-decoration-line-through">$500</span><span
-																	class="text-primary">$275</span>
+																<span class="text-primary"><%=nf.format(dto.getPrice())%></span>
 															</div>
 														</div>
-														<a class="stretched-link" href="#"></a>
+														<a class="stretched-link"
+															href="product_detailPage.jsp?pId=<%=dto.getpId()%>"></a>
 													</div>
 												</div>
-												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
-													<div class="card card-span h-100 text-white">
-														<img class="img-fluid h-100"
-															src="../assets/img/gallery/watch-6.png" alt="..." />
-														<div class="card-img-overlay ps-0"></div>
-														<div class="card-body ps-0 bg-200">
-															<h5 class="fw-bold text-1000 text-truncate">Watch</h5>
-															<div class="fw-bold">
-																<span class="text-600 me-2 text-decoration-line-through">$500</span><span
-																	class="text-primary">$275</span>
-															</div>
-														</div>
-														<a class="stretched-link" href="#"></a>
-													</div>
-												</div>
-												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
-													<div class="card card-span h-100 text-white">
-														<img class="img-fluid h-100"
-															src="../assets/img/gallery/watch-7.png" alt="..." />
-														<div class="card-img-overlay ps-0"></div>
-														<div class="card-body ps-0 bg-200">
-															<h5 class="fw-bold text-1000 text-truncate">Watch</h5>
-															<div class="fw-bold">
-																<span class="text-600 me-2 text-decoration-line-through">$500</span><span
-																	class="text-primary">$275</span>
-															</div>
-														</div>
-														<a class="stretched-link" href="#"></a>
-													</div>
-												</div>
-												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
-													<div class="card card-span h-100 text-white">
-														<img class="img-fluid h-100"
-															src="https://cdn-pro-web-251-119.cdn-nhncommerce.com/wyverntr9322_godomall_com/data/goods/22/03/13//1000001099/register_detail_015.jpg"
-															alt="..." />
-														<div class="card-img-overlay ps-0"></div>
-														<div class="card-body ps-0 bg-200">
-															<h5 class="fw-bold text-1000 text-truncate">2022 시즌
-																어웨이 어센틱 유니폼</h5>
-															<div class="fw-bold">
-																<span class="text-600 me-2 text-decoration-line-through">$500</span><span
-																	class="text-primary">$275</span>
-															</div>
-														</div>
-														<a class="stretched-link" href="#"></a>
-													</div>
-												</div>
+												<%
+												}
+												}
+												}
+												%>
+
+
 											</div>
 										</div>
 
-										<!-- SSG 기념상품 두번째 페이지 -->
-										<div class="carousel-item">
-											<div class="row h-100 align-items-center g-2">
-												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
-													<div class="card card-span h-100 text-white">
-														<img class="img-fluid h-100"
-															src="../assets/img/gallery/watch-5.png" alt="..." />
-														<div class="card-img-overlay ps-0"></div>
-														<div class="card-body ps-0 bg-200">
-															<h5 class="fw-bold text-1000 text-truncate">Watch</h5>
-															<div class="fw-bold">
-																<span class="text-600 me-2 text-decoration-line-through">$500</span><span
-																	class="text-primary">$275</span>
-															</div>
-														</div>
-														<a class="stretched-link" href="#"></a>
-													</div>
-												</div>
-												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
-													<div class="card card-span h-100 text-white">
-														<img class="img-fluid h-100"
-															src="../assets/img/gallery/watch-6.png" alt="..." />
-														<div class="card-img-overlay ps-0"></div>
-														<div class="card-body ps-0 bg-200">
-															<h5 class="fw-bold text-1000 text-truncate">Watch</h5>
-															<div class="fw-bold">
-																<span class="text-600 me-2 text-decoration-line-through">$500</span><span
-																	class="text-primary">$275</span>
-															</div>
-														</div>
-														<a class="stretched-link" href="#"></a>
-													</div>
-												</div>
-												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
-													<div class="card card-span h-100 text-white">
-														<img class="img-fluid h-100"
-															src="../assets/img/gallery/watch-7.png" alt="..." />
-														<div class="card-img-overlay ps-0"></div>
-														<div class="card-body ps-0 bg-200">
-															<h5 class="fw-bold text-1000 text-truncate">Watch</h5>
-															<div class="fw-bold">
-																<span class="text-600 me-2 text-decoration-line-through">$500</span><span
-																	class="text-primary">$275</span>
-															</div>
-														</div>
-														<a class="stretched-link" href="#"></a>
-													</div>
-												</div>
-												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
-													<div class="card card-span h-100 text-white">
-														<img class="img-fluid h-100"
-															src="../assets/img/gallery/watch-8.png" alt="..." />
-														<div class="card-img-overlay ps-0"></div>
-														<div class="card-body ps-0 bg-200">
-															<h5 class="fw-bold text-1000 text-truncate">Watch</h5>
-															<div class="fw-bold">
-																<span class="text-600 me-2 text-decoration-line-through">$500</span><span
-																	class="text-primary">$275</span>
-															</div>
-														</div>
-														<a class="stretched-link" href="#"></a>
-													</div>
-												</div>
-											</div>
-										</div>
 
-										<!-- SSG 기념상품 좌우이동 -->
-										<div class="row">
-											<button class="carousel-control-prev" type="button"
-												data-bs-target="#carouselCategorySsgCommemoration"
-												data-bs-slide="prev">
-												<span class="carousel-control-prev-icon" aria-hidden="true"></span><span
-													class="visually-hidden">Previous</span>
-											</button>
-											<button class="carousel-control-next" type="button"
-												data-bs-target="#carouselCategorySsgCommemoration"
-												data-bs-slide="next">
-												<span class="carousel-control-next-icon" aria-hidden="true"></span><span
-													class="visually-hidden">Next </span>
-											</button>
-										</div>
 									</div>
 								</div>
 							</div>
 						</div>
 					</div>
 				</div>
-
 				</navv>
 			</div>
 		</div>

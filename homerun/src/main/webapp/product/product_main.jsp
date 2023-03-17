@@ -8,7 +8,26 @@
 <link href="../assets/css/theme.css" rel="stylesheet" />
 
 <style>
-
+#navv-doosan, #navv-kiwoom, #navv-samsung, #navv-lg, #navv-kt, #navv-ssg,
+	#navv-nc, #navv-lotte, #navv-kia, #navv-hanhwa, #pills-doosan_teamwear,
+	#pills-doosan_cheering, #pills-doosan_baseball,
+	#pills-doosan_commemoration, #pills-lotte_teamwear,
+	#pills-lotte_cheering, #pills-lotte_baseball,
+	#pills-lotte_commemoration, #pills-samsung_teamwear,
+	#pills-samsung_cheering, #pills-samsung_baseball,
+	#pills-samsung_commemoration, #pills-kiwoom_teamwear,
+	#pills-kiwoom_cheering, #pills-kiwoom_baseball,
+	#pills-kiwoom_commemoration, #pills-lg_teamwear, #pills-lg_cheering,
+	#pills-lg_baseball, #pills-lg_commemoration, #pills-nc_teamwear,
+	#pills-nc_cheering, #pills-nc_baseball, #pills-nc_commemoration,
+	#pills-hanhwa_teamwear, #pills-hanhwa_cheering, #pills-hanhwa_baseball,
+	#pills-hanhwa_commemoration, #pills-kia_teamwear, #pills-kia_cheering,
+	#pills-kia_baseball, #pills-kia_commemoration, #pills-kt_teamwear,
+	#pills-kt_cheering, #pills-kt_baseball, #pills-kt_commemoration,
+	#pills-ssg_teamwear, #pills-ssg_cheering, #pills-ssg_baseball,
+	#pills-ssg_commemoration {
+	opacity: 1;
+}
 </style>
 
 </head>
@@ -222,7 +241,7 @@
 						aria-controls="navv-kia" aria-selected="false">KIA 타이거즈</button>
 					<button class="navv-link" id="navv-kt-tab" data-bs-toggle="tab"
 						data-bs-target="#navv-kt" type="button" role="tab"
-						aria-controls="navv-kt" aria-selected="false">KT 위즈</button>
+						aria-controls="navv-kt" aria-selected="false">KT WIZ</button>
 					<button class="navv-link" id="navv-lg-tab" data-bs-toggle="tab"
 						data-bs-target="#navv-lg" type="button" role="tab"
 						aria-controls="navv-lg" aria-selected="false">LG 트윈스</button>
@@ -278,8 +297,6 @@
 										<!-- 두산 팀웨어 첫번째 페이지 -->
 										<div class="carousel-item active" data-bs-interval="10000">
 											<div class="row h-100 align-items-center g-2">
-											<%for(int i=0;i<5;i++){
-												%>
 												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
 													<div class="card card-span h-100 text-white">
 														<img class="img-fluid h-100"
@@ -297,7 +314,7 @@
 														<a class="stretched-link" href="detailpage.html"></a>
 													</div>
 												</div>
-												<%} %>
+												
 												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
 													<div class="card card-span h-100 text-white">
 														<img class="img-fluid h-100"
