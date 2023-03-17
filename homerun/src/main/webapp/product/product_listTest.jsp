@@ -1,3 +1,7 @@
+<%@page import="java.text.NumberFormat"%>
+<%@page import="data.dto.ProductDto"%>
+<%@page import="java.util.List"%>
+<%@page import="data.dao.ProductDao"%>
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
 	pageEncoding="EUC-KR"%>
 <!DOCTYPE html>
@@ -7,189 +11,40 @@
 <title>HOMERUN | ShopList</title>
 <link href="../assets/css/theme.css" rel="stylesheet" />
 
-<style>
+<link href="../assets/css/styles_footer.css" rel="stylesheet" />
 
+<style>
+#navv-doosan, #navv-kiwoom, #navv-samsung, #navv-lg, #navv-kt, #navv-ssg,
+	#navv-nc, #navv-lotte, #navv-kia, #navv-hanhwa, #pills-doosan_teamwear,
+	#pills-doosan_cheering, #pills-doosan_baseball,
+	#pills-doosan_commemoration, #pills-lotte_teamwear,
+	#pills-lotte_cheering, #pills-lotte_baseball,
+	#pills-lotte_commemoration, #pills-samsung_teamwear,
+	#pills-samsung_cheering, #pills-samsung_baseball,
+	#pills-samsung_commemoration, #pills-kiwoom_teamwear,
+	#pills-kiwoom_cheering, #pills-kiwoom_baseball,
+	#pills-kiwoom_commemoration, #pills-lg_teamwear, #pills-lg_cheering,
+	#pills-lg_baseball, #pills-lg_commemoration, #pills-nc_teamwear,
+	#pills-nc_cheering, #pills-nc_baseball, #pills-nc_commemoration,
+	#pills-hanhwa_teamwear, #pills-hanhwa_cheering, #pills-hanhwa_baseball,
+	#pills-hanhwa_commemoration, #pills-kia_teamwear, #pills-kia_cheering,
+	#pills-kia_baseball, #pills-kia_commemoration, #pills-kt_teamwear,
+	#pills-kt_cheering, #pills-kt_baseball, #pills-kt_commemoration,
+	#pills-ssg_teamwear, #pills-ssg_cheering, #pills-ssg_baseball,
+	#pills-ssg_commemoration {
+	opacity: 1;
+}
 </style>
 
 </head>
+<%
+ProductDao dao=new ProductDao();
+List<ProductDto> list= dao.selectAllProduct();
+
+NumberFormat nf=NumberFormat.getCurrencyInstance();
+%>
 <body>
-	<!-- <main class="main" id="top"> -->
-	<section style="margin-bottom: 20px;">
-		<div class="row h-30 g-0">
-			<div class="h-30">
-				<div
-					class="bg-300 p-4 h-30 d-flex flex-column justify-content-center">
-					<h4 class="text-800">KBO Online Store</h4>
-					<h1 class="fw-semi-bold lh-sm fs-4 fs-lg-5 fs-xl-6">23시즌
-						온라인스토어</h1>
-					<p class="mb-5 fs-1">23시즌 전 구단의 팀 스토어 상품을 구매할 수 있습니다.</p>
-					<div class="d-grid gap-2 d-md-block">
-						<a style="background-color: #0b214e; color: white"
-							class="btn btn-lg" href="product_listPage.jsp" role="button">Explore</a>
-					</div>
-				</div>
-			</div>
-		</div>
-	</section>
-
-	<section class="py-0">
-		<div class="row h-100">
-			<div class="col-lg-7 mx-auto text-center mb-5">
-				<h5 class="fw-bold fs-3 fs-lg-5 lh-sm">Best Sellers</h5>
-			</div>
-			<div class="col-12">
-				<div class="row h-100 align-items-center g-2">
-					<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
-						<div class="card card-span text-white">
-							<img class="img-fluid h-100"
-								src="https://www.ktwizstore.co.kr/web/product/big/202204/05feabbf22d3ba44b5ae41ea7f6089e4.jpg"
-								alt="..." />
-							<div class="card-img-overlay ps-0"></div>
-							<div class="card-body ps-0 bg-200">
-								<h5 class="fw-bold text-1000 text-truncate">케이티위즈 2022 어센틱
-									홈 유니폼</h5>
-								<div class="fw-bold">
-									<span class="text-600 me-2 text-decoration-line-through">109,900원</span><span
-										class="text-primary">89,900원</span>
-								</div>
-							</div>
-							<a class="stretched-link" href="product_detailPage.jsp"></a>
-						</div>
-					</div>
-					<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
-						<div class="card card-span text-white">
-							<img class="img-fluid h-100"
-								src="https://cdn-pro-web-251-119.cdn-nhncommerce.com/wyverntr9322_godomall_com/data/goods/23/02/07/1000001258/register_detail_069.jpg"
-								alt="..." />
-							<div class="card-img-overlay ps-0"></div>
-							<div class="card-body ps-0 bg-200">
-								<h5 class="fw-bold text-1000 text-truncate">랜더스 23 스프링캠프 모자</h5>
-								<div class="fw-bold">
-									<span class="text-600 me-2 text-decoration-line-through">39,000원</span><span
-										class="text-primary">35,000원</span>
-								</div>
-							</div>
-							<a class="stretched-link" href="#"></a>
-						</div>
-					</div>
-					<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
-						<div class="card card-span text-white">
-							<img class="img-fluid h-100"
-								src="http://openimage.interpark.com/goods_image/0/9/7/6/9803880976s.jpg"
-								alt="..." />
-							<div class="card-img-overlay ps-0"></div>
-							<div class="card-body ps-0 bg-200">
-								<h5 class="fw-bold text-1000 text-truncate">오리지널 모자</h5>
-								<div class="fw-bold">
-									<span class="text-600 me-2 text-decoration-line-through">30,000원</span><span
-										class="text-primary">29,000원</span>
-								</div>
-							</div>
-							<a class="stretched-link" href="#"></a>
-						</div>
-					</div>
-					<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
-						<div class="card card-span text-white">
-							<img class="img-fluid h-100"
-								src="http://openimage.interpark.com/goods_image/0/9/3/5/9598780935s.jpg"
-								alt="..." />
-							<div class="card-img-overlay ps-0"></div>
-							<div class="card-body ps-0 bg-200">
-								<h5 class="fw-bold text-1000 text-truncate">응원배트</h5>
-								<div class="fw-bold">
-									<span class="text-600 me-2 text-decoration-line-through">10,000원</span><span
-										class="text-primary">8,000원</span>
-								</div>
-							</div>
-							<a class="stretched-link" href="#"></a>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-		<!-- end of .container-->
-	</section>
-
-	<section class="py-0">
-
-		<div class="row h-100">
-			<div class="col-lg-7 mx-auto text-center mt-8 mb-5">
-				<h5 class="fw-bold fs-3 fs-lg-5 lh-sm">New Arrivals</h5>
-			</div>
-			<div class="col-12">
-				<div class="row h-100 align-items-center g-2">
-					<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
-						<div class="card card-span text-white">
-							<img class="img-fluid h-100"
-								src="http://openimage.interpark.com/goods_image/4/5/9/3/10098314593s.jpg"
-								alt="..." />
-							<div class="card-img-overlay ps-0"></div>
-							<div class="card-body ps-0 bg-200">
-								<h5 class="fw-bold text-1000 text-truncate">심볼 바람막이 (블랙)</h5>
-								<div class="fw-bold">
-									<span class="text-600 me-2 text-decoration-line-through">55000원</span><span
-										class="text-primary">45000원</span>
-								</div>
-							</div>
-							<a class="stretched-link" href="#"></a>
-						</div>
-					</div>
-					<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
-						<div class="card card-span text-white">
-							<img class="img-fluid h-100"
-								src="http://openimage.interpark.com/goods_image/0/5/9/8/9134140598s.jpg"
-								alt="..." />
-							<div class="card-img-overlay ps-0"></div>
-							<div class="card-body ps-0 bg-200">
-								<h5 class="fw-bold text-1000 text-truncate">유광 점퍼 (동계)</h5>
-								<div class="fw-bold">
-									<span class="text-600 me-2 text-decoration-line-through">135,000원</span><span
-										class="text-primary">120,000원</span>
-								</div>
-							</div>
-							<a class="stretched-link" href="#"></a>
-						</div>
-					</div>
-					<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
-						<div class="card card-span text-white">
-							<img class="img-fluid h-100"
-								src="http://openimage.interpark.com/goods_image/0/9/7/6/9803880976s.jpg"
-								alt="..." />
-							<div class="card-img-overlay ps-0"></div>
-							<div class="card-body ps-0 bg-200">
-								<h5 class="fw-bold text-1000 text-truncate">오리지널 모자</h5>
-								<div class="fw-bold">
-									<span class="text-600 me-2 text-decoration-line-through">30,000원</span><span
-										class="text-primary">29,000원</span>
-								</div>
-							</div>
-							<a class="stretched-link" href="#"></a>
-						</div>
-					</div>
-					<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
-						<div class="card card-span text-white">
-							<img class="img-fluid h-100"
-								src="http://openimage.interpark.com/goods_image/0/9/3/5/9598780935s.jpg"
-								alt="..." />
-							<div class="card-img-overlay ps-0"></div>
-							<div class="card-body ps-0 bg-200">
-								<h5 class="fw-bold text-1000 text-truncate">응원배트</h5>
-								<div class="fw-bold">
-									<span class="text-600 me-2 text-decoration-line-through">10,000원</span><span
-										class="text-primary">8,000원</span>
-								</div>
-							</div>
-							<a class="stretched-link" href="#"></a>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-
-		<!-- end of .container-->
-	</section>
-
-	<section id="categoryWomen" style="margin-top: 20px;">
+	<section id="categoryWomen">
 
 		<div class="row h-100">
 			<div class="col-lg-7 mx-auto text-center mt-5 mb-6">
@@ -278,168 +133,28 @@
 										<!-- 두산 팀웨어 첫번째 페이지 -->
 										<div class="carousel-item active" data-bs-interval="10000">
 											<div class="row h-100 align-items-center g-2">
-											<%for(int i=0;i<5;i++){
-												%>
+											<%for(ProductDto dto:list){ %>
 												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
 													<div class="card card-span h-100 text-white">
 														<img class="img-fluid h-100"
-															src="https://ktwizstore.co.kr/web/product/big/202204/05feabbf22d3ba44b5ae41ea7f6089e4.jpg"
+															src="<%=dto.getpImage() %>"
 															alt="..." />
 														<div class="card-img-overlay ps-0"></div>
 														<div class="card-body ps-0 bg-200">
-															<h5 class="fw-bold text-1000 text-truncate">for문
-																유니폼</h5>
+															<h5 class="fw-bold text-1000 text-truncate"><%=dto.getpName() %></h5>
 															<div class="fw-bold">
-																<span class="text-600 me-2 text-decoration-line-through">$200</span><span
-																	class="text-primary">$175</span>
+																<span
+																	class="text-primary"><%=nf.format(dto.getPrice()) %></span>
 															</div>
 														</div>
-														<a class="stretched-link" href="detailpage.html"></a>
+														<a class="stretched-link" href="product_detailPage.jsp?pId=<%= dto.getpId() %>"></a>
 													</div>
 												</div>
 												<%} %>
-												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
-													<div class="card card-span h-100 text-white">
-														<img class="img-fluid h-100"
-															src="https://ktwizstore.co.kr/web/product/big/202204/01cc6e31eb89089880b620519b6073ae.jpg"
-															alt="..." />
-														<div class="card-img-overlay ps-0"></div>
-														<div class="card-body ps-0 bg-200">
-															<h5 class="fw-bold text-1000 text-truncate">어센틱 어웨이
-																유니폼</h5>
-															<div class="fw-bold">
-																<span class="text-600 me-2 text-decoration-line-through">$200</span><span
-																	class="text-primary">$175</span>
-															</div>
-														</div>
-														<a class="stretched-link" href="#"></a>
-													</div>
-												</div>
-												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
-													<div class="card card-span h-100 text-white">
-														<img class="img-fluid h-100"
-															src="https://ktwizstore.co.kr/web/product/big/202201/4d32839c4f3435b90f9c16ff35c9e135.jpg"
-															alt="..." />
-														<div class="card-img-overlay ps-0"></div>
-														<div class="card-body ps-0 bg-200">
-															<h5 class="fw-bold text-1000 text-truncate">어센틱 야구가방</h5>
-															<div class="fw-bold">
-																<span class="text-600 me-2 text-decoration-line-through">$200</span><span
-																	class="text-primary">$175</span>
-															</div>
-														</div>
-														<a class="stretched-link" href="#"></a>
-													</div>
-												</div>
-												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
-													<div class="card card-span h-100 text-white">
-														<img class="img-fluid h-100"
-															src="https://ktwizstore.co.kr/web/product/big/202201/b6935cecfecf97821160d70300adf7ba.jpg"
-															alt="..." />
-														<div class="card-img-overlay ps-0"></div>
-														<div class="card-body ps-0 bg-200">
-															<h5 class="fw-bold text-1000 text-truncate">어센틱 삭스</h5>
-															<div class="fw-bold">
-																<span class="text-600 me-2 text-decoration-line-through">$200</span><span
-																	class="text-primary">$175</span>
-															</div>
-														</div>
-														<a class="stretched-link" href="#"></a>
-													</div>
-												</div>
+												
 											</div>
-										</div>
-										<!-- 두산 팀웨어 두번째 페이지 -->
-										<div class="carousel-item">
-											<div class="row h-100 align-items-center g-2">
-												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
-													<div class="card card-span h-100 text-white">
-														<img class="img-fluid h-100"
-															src="../assets/img/gallery/red-tshirt.png" alt="..." />
-														<div class="card-img-overlay ps-0"></div>
-														<div class="card-body ps-0 bg-200">
-															<h5 class="fw-bold text-1000 text-truncate">Red
-																T-Shirt</h5>
-															<div class="fw-bold">
-																<span class="text-600 me-2 text-decoration-line-through">$200</span><span
-																	class="text-primary">$175</span>
-															</div>
-														</div>
-														<a class="stretched-link" href="#"></a>
-													</div>
-												</div>
-												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
-													<div class="card card-span h-100 text-white">
-														<img class="img-fluid h-100"
-															src="../assets/img/gallery/pink-tshirt.png" alt="..." />
-														<div class="card-img-overlay ps-0"></div>
-														<div class="card-body ps-0 bg-200">
-															<h5 class="fw-bold text-1000 text-truncate">Pink
-																T-Shirt</h5>
-															<div class="fw-bold">
-																<span class="text-600 me-2 text-decoration-line-through">$200</span><span
-																	class="text-primary">$175</span>
-															</div>
-														</div>
-														<a class="stretched-link" href="#"></a>
-													</div>
-												</div>
-												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
-													<div class="card card-span h-100 text-white">
-														<img class="img-fluid h-100"
-															src="../assets/img/gallery/orange-tshirt.png" alt="..." />
-														<div class="card-img-overlay ps-0"></div>
-														<div class="card-body ps-0 bg-200">
-															<h5 class="fw-bold text-1000 text-truncate">Orange
-																T-Shirt</h5>
-															<div class="fw-bold">
-																<span class="text-600 me-2 text-decoration-line-through">$200</span><span
-																	class="text-primary">$175</span>
-															</div>
-														</div>
-														<a class="stretched-link" href="#"></a>
-													</div>
-												</div>
-												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
-													<div class="card card-span h-100 text-white">
-														<img class="img-fluid h-100"
-															src="../assets/img/gallery/purple-tshirt.png" alt="..." />
-														<div class="card-img-overlay ps-0"></div>
-														<div class="card-body ps-0 bg-200">
-															<h5 class="fw-bold text-1000 text-truncate">Purple
-																T-Shirt</h5>
-															<div class="fw-bold">
-																<span class="text-600 me-2 text-decoration-line-through">$200</span><span
-																	class="text-primary">$175</span>
-															</div>
-														</div>
-														<a class="stretched-link" href="#"></a>
-													</div>
-												</div>
-											</div>
-										</div>
-
-										<!-- 두산 팀웨어 좌우이동 -->
-										<div class="row">
-											<button class="carousel-control-prev" type="button"
-												data-bs-target="#carouselCategoryDoosanTeamwear"
-												data-bs-slide="prev">
-												<span class="carousel-control-prev-icon" aria-hidden="true"></span><span
-													class="visually-hidden">Previous</span>
-											</button>
-											<button class="carousel-control-next" type="button"
-												data-bs-target="#carouselCategoryDoosanTeamwear"
-												data-bs-slide="next">
-												<span class="carousel-control-next-icon" aria-hidden="true"></span><span
-													class="visually-hidden">Next </span>
-											</button>
 										</div>
 									</div>
-								</div>
-
-								<!-- 두산 팀웨어 view all -->
-								<div class="col-12 d-flex justify-content-center mt-5">
-									<a class="btn btn-lg btn-dark" href="#!">View All </a>
 								</div>
 							</div>
 
@@ -606,11 +321,6 @@
 										</div>
 									</div>
 								</div>
-
-								<!-- 두산 응원용품 view all -->
-								<div class="col-12 d-flex justify-content-center mt-5">
-									<a class="btn btn-lg btn-dark" href="#!">View All </a>
-								</div>
 							</div>
 
 							<!-- 두산 야구용품 -->
@@ -769,11 +479,6 @@
 											</button>
 										</div>
 									</div>
-								</div>
-
-								<!-- 두산 야구용품 view all-->
-								<div class="col-12 d-flex justify-content-center mt-5">
-									<a class="btn btn-lg btn-dark" href="#!">View All </a>
 								</div>
 							</div>
 
@@ -937,10 +642,6 @@
 									</div>
 								</div>
 
-								<!-- 두산 기념상품 view all-->
-								<div class="col-12 d-flex justify-content-center mt-5">
-									<a class="btn btn-lg btn-dark" href="#!">View All </a>
-								</div>
 							</div>
 						</div>
 					</div>
@@ -1147,10 +848,6 @@
 									</div>
 								</div>
 
-								<!-- 롯데 팀웨어 view all -->
-								<div class="col-12 d-flex justify-content-center mt-5">
-									<a class="btn btn-lg btn-dark" href="#!">View All </a>
-								</div>
 							</div>
 
 							<!-- 롯데 응원용품 -->
@@ -1319,10 +1016,6 @@
 									</div>
 								</div>
 
-								<!-- 롯데 응원용품 view all -->
-								<div class="col-12 d-flex justify-content-center mt-5">
-									<a class="btn btn-lg btn-dark" href="#!">View All </a>
-								</div>
 							</div>
 
 							<!-- 롯데 야구용품 -->
@@ -1482,11 +1175,6 @@
 											</button>
 										</div>
 									</div>
-								</div>
-
-								<!-- 롯데 야구용품 view all -->
-								<div class="col-12 d-flex justify-content-center mt-5">
-									<a class="btn btn-lg btn-dark" href="#!">View All </a>
 								</div>
 							</div>
 
@@ -1648,11 +1336,6 @@
 											</button>
 										</div>
 									</div>
-								</div>
-
-								<!-- 롯데 기념상품 view all -->
-								<div class="col-12 d-flex justify-content-center mt-5">
-									<a class="btn btn-lg btn-dark" href="#!">View All </a>
 								</div>
 							</div>
 						</div>
@@ -1860,11 +1543,6 @@
 										</div>
 									</div>
 								</div>
-
-								<!-- 삼성 팀웨어 view all -->
-								<div class="col-12 d-flex justify-content-center mt-5">
-									<a class="btn btn-lg btn-dark" href="#!">View All </a>
-								</div>
 							</div>
 
 							<!-- 삼성 응원용품 -->
@@ -2031,11 +1709,6 @@
 										</div>
 									</div>
 								</div>
-
-								<!-- 삼성 응원용품 view all -->
-								<div class="col-12 d-flex justify-content-center mt-5">
-									<a class="btn btn-lg btn-dark" href="#!">View All </a>
-								</div>
 							</div>
 
 							<!-- 삼성 야구용품 -->
@@ -2195,11 +1868,6 @@
 											</button>
 										</div>
 									</div>
-								</div>
-
-								<!-- 삼성 야구용품 view all -->
-								<div class="col-12 d-flex justify-content-center mt-5">
-									<a class="btn btn-lg btn-dark" href="#!">View All </a>
 								</div>
 							</div>
 
@@ -2362,11 +2030,6 @@
 											</button>
 										</div>
 									</div>
-								</div>
-
-								<!-- 삼성 기념상품 view all -->
-								<div class="col-12 d-flex justify-content-center mt-5">
-									<a class="btn btn-lg btn-dark" href="#!">View All </a>
 								</div>
 							</div>
 						</div>
@@ -2573,11 +2236,6 @@
 										</div>
 									</div>
 								</div>
-
-								<!-- 키움 팀웨어 view all -->
-								<div class="col-12 d-flex justify-content-center mt-5">
-									<a class="btn btn-lg btn-dark" href="#!">View All </a>
-								</div>
 							</div>
 
 							<!-- 키움 응원용품 -->
@@ -2743,11 +2401,6 @@
 										</div>
 									</div>
 								</div>
-
-								<!-- 키움 응원용품 view all -->
-								<div class="col-12 d-flex justify-content-center mt-5">
-									<a class="btn btn-lg btn-dark" href="#!">View All </a>
-								</div>
 							</div>
 
 							<!-- 키움 야구용품 -->
@@ -2908,10 +2561,6 @@
 									</div>
 								</div>
 
-								<!-- 키움 야구용품 view all -->
-								<div class="col-12 d-flex justify-content-center mt-5">
-									<a class="btn btn-lg btn-dark" href="#!">View All </a>
-								</div>
 							</div>
 
 							<!-- 키움 기념상품 -->
@@ -3071,11 +2720,6 @@
 											</button>
 										</div>
 									</div>
-								</div>
-
-								<!-- 키움 기념상품 view all -->
-								<div class="col-12 d-flex justify-content-center mt-5">
-									<a class="btn btn-lg btn-dark" href="#!">View All </a>
 								</div>
 							</div>
 						</div>
@@ -3282,11 +2926,6 @@
 										</div>
 									</div>
 								</div>
-
-								<!-- 한화 팀웨어 view all -->
-								<div class="col-12 d-flex justify-content-center mt-5">
-									<a class="btn btn-lg btn-dark" href="#!">View All </a>
-								</div>
 							</div>
 
 							<!-- 한화 응원용품 -->
@@ -3453,11 +3092,6 @@
 										</div>
 									</div>
 								</div>
-
-								<!-- 한화 응원용품 view all -->
-								<div class="col-12 d-flex justify-content-center mt-5">
-									<a class="btn btn-lg btn-dark" href="#!">View All </a>
-								</div>
 							</div>
 
 							<!-- 한화 야구용품 -->
@@ -3618,11 +3252,6 @@
 											</button>
 										</div>
 									</div>
-								</div>
-
-								<!-- 한화 야구용품 view all -->
-								<div class="col-12 d-flex justify-content-center mt-5">
-									<a class="btn btn-lg btn-dark" href="#!">View All </a>
 								</div>
 							</div>
 
@@ -3785,11 +3414,6 @@
 											</button>
 										</div>
 									</div>
-								</div>
-
-								<!-- 한화 기념상품 view all -->
-								<div class="col-12 d-flex justify-content-center mt-5">
-									<a class="btn btn-lg btn-dark" href="#!">View All </a>
 								</div>
 							</div>
 						</div>
@@ -3995,11 +3619,6 @@
 										</div>
 									</div>
 								</div>
-
-								<!-- KIA 팀웨어 view all -->
-								<div class="col-12 d-flex justify-content-center mt-5">
-									<a class="btn btn-lg btn-dark" href="#!">View All </a>
-								</div>
 							</div>
 
 							<!-- KIA 응원용품 -->
@@ -4166,11 +3785,6 @@
 										</div>
 									</div>
 								</div>
-
-								<!-- KIA 응원용품 view all -->
-								<div class="col-12 d-flex justify-content-center mt-5">
-									<a class="btn btn-lg btn-dark" href="#!">View All </a>
-								</div>
 							</div>
 
 							<!-- KIA 야구용품 -->
@@ -4331,11 +3945,6 @@
 											</button>
 										</div>
 									</div>
-								</div>
-
-								<!-- KIA 야구용품 view all -->
-								<div class="col-12 d-flex justify-content-center mt-5">
-									<a class="btn btn-lg btn-dark" href="#!">View All </a>
 								</div>
 							</div>
 
@@ -4498,11 +4107,6 @@
 											</button>
 										</div>
 									</div>
-								</div>
-
-								<!-- KIA 기념상품 view all -->
-								<div class="col-12 d-flex justify-content-center mt-5">
-									<a class="btn btn-lg btn-dark" href="#!">View All </a>
 								</div>
 							</div>
 						</div>
@@ -4708,11 +4312,6 @@
 										</div>
 									</div>
 								</div>
-
-								<!-- KT 팀웨어 view all -->
-								<div class="col-12 d-flex justify-content-center mt-5">
-									<a class="btn btn-lg btn-dark" href="#!">View All </a>
-								</div>
 							</div>
 
 							<!-- KT 응원용품 -->
@@ -4879,11 +4478,6 @@
 										</div>
 									</div>
 								</div>
-
-								<!-- KT 응원용품 view all -->
-								<div class="col-12 d-flex justify-content-center mt-5">
-									<a class="btn btn-lg btn-dark" href="#!">View All </a>
-								</div>
 							</div>
 
 							<!-- KT 야구용품 -->
@@ -5045,11 +4639,6 @@
 										</div>
 									</div>
 								</div>
-
-								<!-- KT 야구용품 view all -->
-								<div class="col-12 d-flex justify-content-center mt-5">
-									<a class="btn btn-lg btn-dark" href="#!">View All </a>
-								</div>
 							</div>
 
 							<!-- KT 기념상품 -->
@@ -5210,11 +4799,6 @@
 											</button>
 										</div>
 									</div>
-								</div>
-
-								<!-- KT 기념상품 view all -->
-								<div class="col-12 d-flex justify-content-center mt-5">
-									<a class="btn btn-lg btn-dark" href="#!">View All </a>
 								</div>
 							</div>
 						</div>
@@ -5420,11 +5004,6 @@
 										</div>
 									</div>
 								</div>
-
-								<!-- LG 팀웨어 view all -->
-								<div class="col-12 d-flex justify-content-center mt-5">
-									<a class="btn btn-lg btn-dark" href="#!">View All </a>
-								</div>
 							</div>
 
 							<!-- LG 응원용품 -->
@@ -5591,11 +5170,6 @@
 										</div>
 									</div>
 								</div>
-
-								<!-- LG 응원용품 view all -->
-								<div class="col-12 d-flex justify-content-center mt-5">
-									<a class="btn btn-lg btn-dark" href="#!">View All </a>
-								</div>
 							</div>
 
 							<!-- LG 야구용품 -->
@@ -5758,10 +5332,6 @@
 									</div>
 								</div>
 
-								<!-- LG 야구용품 view all -->
-								<div class="col-12 d-flex justify-content-center mt-5">
-									<a class="btn btn-lg btn-dark" href="#!">View All </a>
-								</div>
 							</div>
 
 							<!-- LG 기념상품 -->
@@ -5924,10 +5494,6 @@
 									</div>
 								</div>
 
-								<!-- LG 기념상품 view all -->
-								<div class="col-12 d-flex justify-content-center mt-5">
-									<a class="btn btn-lg btn-dark" href="#!">View All </a>
-								</div>
 							</div>
 						</div>
 					</div>
@@ -6132,11 +5698,6 @@
 										</div>
 									</div>
 								</div>
-
-								<!-- NC 팀웨어 view all -->
-								<div class="col-12 d-flex justify-content-center mt-5">
-									<a class="btn btn-lg btn-dark" href="#!">View All </a>
-								</div>
 							</div>
 
 							<!-- NC 응원용품 -->
@@ -6303,11 +5864,6 @@
 										</div>
 									</div>
 								</div>
-
-								<!-- NC 응원용품 view all -->
-								<div class="col-12 d-flex justify-content-center mt-5">
-									<a class="btn btn-lg btn-dark" href="#!">View All </a>
-								</div>
 							</div>
 
 							<!-- NC 야구용품 -->
@@ -6468,11 +6024,6 @@
 											</button>
 										</div>
 									</div>
-								</div>
-
-								<!-- KT 야구용품 view all -->
-								<div class="col-12 d-flex justify-content-center mt-5">
-									<a class="btn btn-lg btn-dark" href="#!">View All </a>
 								</div>
 							</div>
 
@@ -6636,10 +6187,6 @@
 									</div>
 								</div>
 
-								<!-- LG 기념상품 view all -->
-								<div class="col-12 d-flex justify-content-center mt-5">
-									<a class="btn btn-lg btn-dark" href="#!">View All </a>
-								</div>
 							</div>
 						</div>
 					</div>
@@ -6844,11 +6391,6 @@
 										</div>
 									</div>
 								</div>
-
-								<!-- SSG 팀웨어 view all -->
-								<div class="col-12 d-flex justify-content-center mt-5">
-									<a class="btn btn-lg btn-dark" href="#!">View All </a>
-								</div>
 							</div>
 
 							<!-- SSG 응원용품 -->
@@ -7015,11 +6557,6 @@
 										</div>
 									</div>
 								</div>
-
-								<!-- SSG 응원용품 view all -->
-								<div class="col-12 d-flex justify-content-center mt-5">
-									<a class="btn btn-lg btn-dark" href="#!">View All </a>
-								</div>
 							</div>
 
 							<!-- SSG 야구용품 -->
@@ -7180,11 +6717,6 @@
 											</button>
 										</div>
 									</div>
-								</div>
-
-								<!-- SSG 야구용품 view all -->
-								<div class="col-12 d-flex justify-content-center mt-5">
-									<a class="btn btn-lg btn-dark" href="#!">View All </a>
 								</div>
 							</div>
 
@@ -7347,11 +6879,6 @@
 											</button>
 										</div>
 									</div>
-								</div>
-
-								<!-- SSG 기념상품 view all -->
-								<div class="col-12 d-flex justify-content-center mt-5">
-									<a class="btn btn-lg btn-dark" href="#!">View All </a>
 								</div>
 							</div>
 						</div>
