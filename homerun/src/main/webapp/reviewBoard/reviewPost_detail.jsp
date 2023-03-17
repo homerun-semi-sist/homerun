@@ -144,17 +144,37 @@
 			});
 			
 			// 신고수 증가
-			$("#reportCnt").click(function() {
+			$("#report").click(function() {
+			var login = '<%=loginok%>';
 				
-				var num = $(this).attr("num");
-				var tag = $(this);	
+				if(login == "yes")  {
+					
+					var num = $(this).attr("num");
+					var tag = $(this);	
+					
+					// alert(num);
+					
+					$.ajax({
+						
+						type : "get",
+						dataType : "json",
+						url : "reviewPost_report.jsp",
+						data : {"num" : num},
+						success : function(res) {
+							
+							// alert(res.flag);
+							
+							if(res.flag == true)
+								alert("게시글을 신고하였습니다")
+							else 
+								alert("이미 신고한 게시글입니다")
+		
+							tag.css("background-color", "pink");	
+						}
+					});
+				} else
+					alert("로그인 후 이용 가능합니다");
 				
-				alert(num);
-				<%
-				//fbDao.updateReport(fbNum);			
-				%>
-				
-				$(this).css("background-color", "pink");
 			});
 			
 			// 찜

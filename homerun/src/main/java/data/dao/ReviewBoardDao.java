@@ -254,8 +254,8 @@ public class ReviewBoardDao {
 	// search - rbContent
 
 	// 페이징 처리
-	// FB totalCount
-	public int getFBTotalCount() {
+	// RB totalCount
+	public int getRBTotalCount() {
 		int n = 0;
 		
 		Connection conn = db.getConnection();
@@ -282,7 +282,7 @@ public class ReviewBoardDao {
 	}
 		
 	// FB List(start, perPage)
-	public List<ReviewBoardDto> getFBList(int start, int perPage) {
+	public List<ReviewBoardDto> getRBList(int start, int perPage) {
 		List<ReviewBoardDto> list = new Vector<>();
 
 		Connection conn = db.getConnection();

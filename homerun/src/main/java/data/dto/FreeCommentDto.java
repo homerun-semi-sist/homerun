@@ -1,5 +1,7 @@
 package data.dto;
 
+import java.sql.Timestamp;
+
 public class FreeCommentDto {
 
 	private String fcIdx;
@@ -8,7 +10,7 @@ public class FreeCommentDto {
 	private String fcContent;
 	private String fcLike;
 	private String fcDislike;
-	private String fcWriteday;
+	private Timestamp fcWriteday;
 	private String fcReport;
 	
 	public String getFcIdx() {
@@ -47,10 +49,10 @@ public class FreeCommentDto {
 	public void setFcDislike(String fcDislike) {
 		this.fcDislike = fcDislike;
 	}
-	public String getFcWriteday() {
+	public Timestamp getFcWriteday() {
 		return fcWriteday;
 	}
-	public void setFcWriteday(String fcWriteday) {
+	public void setFcWriteday(Timestamp fcWriteday) {
 		this.fcWriteday = fcWriteday;
 	}
 	public String getFcReport() {

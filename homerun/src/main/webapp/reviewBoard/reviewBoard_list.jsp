@@ -95,11 +95,60 @@
 	String loginok = (String)session.getAttribute("loginok");
 
 	ReviewBoardDao rbDao = new ReviewBoardDao();
-	List<ReviewBoardDto> rbList = rbDao.getAllRBs();
 	
 	TeamDao tDao = new TeamDao();
 	
 	SimpleDateFormat sdf = new SimpleDateFormat("yy.MM.dd"); 
+	
+	// 페이징 처리		
+	int totalCount;
+	int totalPage;      // 총 페이지 수 
+	int startPage;      // 각 블럭의 시작 페이지
+	int endPage;        // 각 블럭의 마지막 페이지
+	int start;          // 각 페이지의 시작 번호 
+	int perPage = 15;    // 한 페이지에 보여질 글의 개수
+	int perBlock = 5;   // 한 블럭당 보여지는 페이지 개수
+	int currentPage;    // 현재 페이지
+	int no;
+	
+	// 총 개수 
+	totalCount = rbDao.getRBTotalCount();
+
+	// 현재 페이지 번호 읽기, null일 때는 1페이지로
+	if(request.getParameter("currentPage") == null)
+		currentPage = 1;
+	else
+		currentPage = Integer.parseInt(request.getParameter("currentPage"));
+
+	// 총 페이지 개수
+	totalPage = totalCount / perPage + (totalCount % perPage == 0 ? 0 : 1);
+	  
+	// 각 블럭의 시작 페이지 ex) 현재 페이지가 3일 때(start:1, end:5), 6일 때(start:6, end:10)
+	startPage = (currentPage - 1) / perBlock * perBlock + 1;
+	endPage = startPage + perBlock - 1;
+	    
+	// 총 페이지가 8일 때(6 ~ 10 -> endPage를 8로 수정해주어야 함)
+	if(endPage > totalPage)
+		endPage = totalPage;
+
+	// 각 페이지에서 불러올 시작 번호
+	start = (currentPage - 1) * perPage;
+
+	// 각 페이지에서 필요한 게시글 가져오기
+	List<ReviewBoardDto> rbList = rbDao.getRBList(start, perPage);
+	
+	no = totalCount - (currentPage - 1) * perPage;
+	
+	/* // 댓글에 대한 dao
+	SmartAnswerDao aDao = new SmartAnswerDao();
+	
+	for(SmartDto dto : list) {
+		
+		// 댓글 변수에 댓글 총 개수 넣기
+		int aCount = aDao.getAllAnswers(dto.getNum()).size();
+		dto.setAnswerCount(aCount);
+				
+	} */
 %>
     <!-- Layout wrapper -->
     <div class="layout-wrapper layout-content-navbar">
@@ -113,19 +162,19 @@
                     <!-- Bootstrap Table with Header - Light -->
                     <div class="card">
                         <h5 class="card-header">후기게시판 목록</h5>
-                        <div class="table-responsive text-nowrap">
+                        <div class="table-responsive text-nowrap" style="width: 100%">
                             <table class="table">
                                 <thead class="table-light">
                                     <tr>
-                                        <th style="text-align: center; width: 80px;">No.</th>
+                                        <th style="text-align: center; width: 40px;">No.</th>
                                         <th style="text-align: center; width: 100px;">경기일</th>
-                                        <th style="text-align: center; width: 100px;">경기팀</th>
+                                        <th style="text-align: center; width: 200px;">경기팀</th>
                                         <th style="text-align: center;">제목</th>
-                                        <th style="text-align: center; width: 200px;">작성자</th>
-                                        <th style="text-align: center; width: 200px;">날짜</th>
-                                        <th style="text-align: center; width: 80px;">조회수</th>
-                                        <th style="text-align: center; width: 80px;">추천</th>
-                                        <th style="text-align: center; width: 80px;">비추천</th>
+                                        <th style="text-align: center; width: 100px;">작성자</th>
+                                        <th style="text-align: center; width: 100px;">날짜</th>
+                                        <th style="text-align: center; width: 40px;">조회수</th>
+                                        <th style="text-align: center; width: 40px;">추천</th>
+                                        <th style="text-align: center; width: 40px;">비추천</th>
                                     </tr>
                                 </thead>
                                 <tbody class="table-border-bottom-0">
@@ -137,6 +186,10 @@
                                 		
                                 		UserDao uDao = new UserDao();
                                 		String nickname = uDao.getUser(rbDto.getUId()).getNickname();
+                                		
+                                		String year = gDto.getgDay().substring(2, 4);
+                                		String month = gDto.getgDay().substring(5, 7);
+                                		String day = gDto.getgDay().substring(8, 10);
                                 		
                                 %>
 
@@ -153,20 +206,20 @@
                          
                                      <tr>
                                         <td style="text-align: center;"><%=rbDto.getRbNum() %></td>
-                                        <td style="text-align: center;"><%=gDto.getgDay() %></td>
+                                        <td style="text-align: center;"><%=year %>.<%=month %>.<%=day %></td>
                                         <td style="text-align: center;">
                                         
                                         <%
                                         	if(gDto.getHome().equals("한화")) {	
                                         %>
                                         		<img src="<%=tDao.getTeam(gDto.getHome()).getTeamLogo() %>" style="width: 50px;">
-                                        		&nbsp;vs&nbsp;
+                                        		vs&nbsp;
                                             	<img src="<%=tDao.getTeam(gDto.getAway()).getTeamLogo() %>" style="width: 40px;">      
                                         <%		
                                         	} else if(gDto.getAway().equals("한화")) {
                                         %>
                                         		<img src="<%=tDao.getTeam(gDto.getHome()).getTeamLogo() %>" style="width: 40px;">
-                                        		&nbsp;vs&nbsp;
+                                        		&nbsp;vs
                                             	<img src="<%=tDao.getTeam(gDto.getAway()).getTeamLogo() %>" style="width: 50px;"> 
                                         <%			
                                         	} else {
@@ -201,7 +254,46 @@
 								<button type="button" class="btn btn-default" id="insertBtn" style="border: 1px solid gray;">글쓰기</button>
 							</div>
                         </div>
-                        <div class="bPaging">페이징 처리</div>
+                        <!-- 페이징 처리 -->
+							<div style="width: 900px; text-align: center;">
+								<ul class="pagination">
+									<% 
+										// 이전
+										if(startPage > 1) {
+									%>
+										<li>
+											<a href="reviewBoard_listPage.jsp?currentPage=<%=startPage-1 %>">이전</a>
+										</li>
+									<%
+										}
+										
+										for(int pp = startPage; pp <= endPage; pp++) {
+											if(pp == currentPage) {
+									%>
+												<li class="active">
+													<a href="reviewBoard_listPage.jsp?currentPage=<%=pp %>"><%=pp %></a>
+												</li>
+									<%
+											} else {
+									%>
+												<li>
+													<a href="reviewBoard_listPage.jsp?currentPage=<%=pp %>"><%=pp %></a>
+												</li>
+									<%
+											}
+										}
+										
+										// 다음
+										if(endPage < totalPage) {
+									%>
+											<li>
+												<a href="reviewBoard_listPage.jsp?currentPage=<%=endPage+1 %>">다음</a>
+											</li>
+									<%
+										}
+									%>
+								</ul>
+							</div>
                     </div>
                     <!-- Bootstrap Table with Header - Light -->
 
