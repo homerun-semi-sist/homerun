@@ -49,8 +49,8 @@
 						<div class="nav-item dropdown">
 							<a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">게시판</a>
 							<div class="dropdown-menu bg-light m-0">
-								<a href="<%=root %>/board/freeBoard_list.jsp" class="dropdown-item">자유게시판</a>
-								<a href="<%=root %>/board/reviewBoard_list.jsp" class="dropdown-item">후기게시판</a>
+								<a href="<%=root %>/board/freeBoard_listPage.jsp" class="dropdown-item">자유게시판</a>
+								<a href="<%=root %>/board/reviewBoardPage_list.jsp" class="dropdown-item">후기게시판</a>
 							</div>
 						</div>
 						<div class="nav-item dropdown">

@@ -51,7 +51,7 @@ public class BookMarkDao {
 				
 	}
 	
-	// FB select 
+	// FBMK cnt
 	public int getFBBMcnt(String uId, String fbNum) {
 		int n = 0;
 		
@@ -59,7 +59,7 @@ public class BookMarkDao {
  		PreparedStatement pstmt = null;
  		ResultSet rs = null;
  		
- 		String sql = "select * from BOOKMARKPOST where uId=?' and fbNum=?";
+ 		String sql = "select * from BOOKMARKPOST where uId=? and fbNum=?";
 
  		try {
  			pstmt = conn.prepareStatement(sql);
@@ -81,7 +81,7 @@ public class BookMarkDao {
 				
 	}
 	
-	// RB select 
+	// RBMK cnt
 	public int getRBBMcnt(String uId, String rbNum) {
 		int n = 0;
 		
@@ -89,7 +89,7 @@ public class BookMarkDao {
  		PreparedStatement pstmt = null;
  		ResultSet rs = null;
  		
- 		String sql = "select count(*) from BOOKMARKPOST where uId=?' and rbNum=?";
+ 		String sql = "select count(*) from BOOKMARKPOST where uId=? and rbNum=?";
 
  		try {
  			pstmt = conn.prepareStatement(sql);
@@ -176,5 +176,7 @@ public class BookMarkDao {
 		}
 		
 	}
-
+	
+	// 페이징 처리
+	
 }

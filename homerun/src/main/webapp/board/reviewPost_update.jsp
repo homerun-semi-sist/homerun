@@ -1,11 +1,10 @@
-<%@page import="data.dto.UserDto"%>
-<%@page import="data.dao.UserDao"%>
+<%@page import="data.dto.ReviewBoardDto"%>
+<%@page import="data.dao.ReviewBoardDao"%>
+<%@page import="data.dto.GameDto"%>
+<%@page import="data.dao.GameDao"%>
 <%@page import="java.sql.Array"%>
 <%@page import="java.util.List"%>
-<%@page import="data.dto.FreeBoardDto"%>
-<%@page import="data.dao.FreeBoardDao"%>
-<%@page import="data.dto.TeamDto"%>
-<%@page import="data.dao.TeamDao"%>
+
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -25,40 +24,44 @@
 </head>
 <body>
 <%
-	String fbNum = request.getParameter("fbNum");
+	String rbNum = request.getParameter("rbNum");
 	// String currentPage = request.getParameter("currentPage");
 	
-	FreeBoardDao fbDao = new FreeBoardDao();
-	FreeBoardDto fbDto = fbDao.getFB(fbNum);
-
-	String uId = fbDto.getUId();
+	ReviewBoardDao rbDao = new ReviewBoardDao();
+	ReviewBoardDto rbDto = rbDao.getRB(rbNum);
+	
+	GameDao gDao = new GameDao();
+	
+	String uId = rbDto.getUId();
 %>
-<form action="freeBoard_updateAction.jsp" method="post">
-	<input type="hidden" name="fbNum" value="<%=uId %>">
+<form action="reviewBoard_updateAction.jsp" method="post">
+	<input type="hidden" name="rbNum" value="<%=rbNum %>">
 	
 	<!-- hiddend으로 nickname / value 값 변경 필요 -->
 	<input type="hidden" name="uId" value="<%=uId %>">	
 	<%-- <input type="hidden" name="currentPage" value="<%=currentPage %>"> --%>
 	
 	<table class="table table-bordered" style="height:30px; width: 1000px; height:700px; margin-left: 100px;">
-		<caption style="caption-side: top;"><h3>자유 게시판 작성글 수정</h3></caption>
+		<caption style="caption-side: top;"><h3>후기 게시판 작성글 수정</h3></caption>
 		<tr>
-			<th bgcolor="#E1EEDD" width="100" style="height:30px; text-align: center; line-height: 30px;">카테고리</th>
-			<td width="100" style="height:30px; text-align: center; line-height: 30px;">
-				<%=fbDto.getFbCategory() %>
+			<th bgcolor="#E1EEDD" width="200" style="height:30px; text-align: center; line-height: 30px;">경기일 경기팀</th>
+			<td>
+				<%=gDao.getGame(rbDto.getgId()).getgDay() %> <%=gDao.getGame(rbDto.getgId()).getHome() %> vs <%=gDao.getGame(rbDto.getgId()).getAway() %>
 			</td>
-	
+		</tr>
+		
+		<tr>
 			<th bgcolor="#E1EEDD" width="100" style="height:30px; text-align: center; line-height: 30px;">제목</th>
 			<td>
 				<input type="text" name="subject" class="form-control"
-					required="required" style="width: 500px;" value="<%=fbDto.getFbSubject() %>">
+					required="required" style="width: 500px;" value="<%=rbDto.getRbSubject() %>">
 			</td>
 		</tr>
 		<tr>
 			<td colspan="4">
 				<textarea name="content" id="content"		
 					required="required"			
-					style="width: 100%; height: 600px; display: none;"><%=fbDto.getFbContent() %></textarea>		
+					style="width: 100%; height: 600px; display: none;"><%=rbDto.getRbContent() %></textarea>		
 			</td>
 		</tr>
 		<tr>
@@ -69,7 +72,7 @@
 				
 				<button type="button" class="btn btn-default"
 					style="width: 120px;"
-					onclick="location.href='freeBoard_list.jsp'">목록</button>
+					onclick="location.href='reviewBoard_listPage.jsp'">목록</button>
 			</td>
 		</tr>
 		

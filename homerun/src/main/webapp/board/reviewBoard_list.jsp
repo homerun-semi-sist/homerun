@@ -92,6 +92,8 @@
 
 <body>
 <%	
+	String loginok = (String)session.getAttribute("loginok");
+
 	ReviewBoardDao rbDao = new ReviewBoardDao();
 	List<ReviewBoardDto> rbList = rbDao.getAllRBs();
 	
@@ -176,7 +178,7 @@
                                         	}
                                         %>                                      
                                         </td>
-                                        <td><a href="reviewPost_detail.jsp?rbNum=<%=rbDto.getRbNum() %>"><%=rbDto.getRbSubject() %></a></td>
+                                        <td><a href="reviewPost_detailPage.jsp?rbNum=<%=rbDto.getRbNum() %>"><%=rbDto.getRbSubject() %></a></td>
                                         <td style=" text-align: center;"><%=nickname %></td>
                                         <td style="text-align: center;"><%=sdf.format(rbDto.getRbWriteday()) %></td>
                                         <td style="text-align: center;"><%=rbDto.getRbReadCnt() %></td>
@@ -196,7 +198,7 @@
                                 <div class="bSearch">검색창</div>
                             </div>
                             <div class="bInsert">
-								<button type="button" class="btn btn-default" style="border: 1px solid gray;" onclick="location.href='reviewBoard_insert.jsp'">글쓰기</button>
+								<button type="button" class="btn btn-default" id="insertBtn" style="border: 1px solid gray;">글쓰기</button>
 							</div>
                         </div>
                         <div class="bPaging">페이징 처리</div>
@@ -210,6 +212,21 @@
         </div>
         <!-- / Layout page -->
     </div>
+
+	<script type="text/javascript">
+		
+		$("#insertBtn").click(function() {
+			var login = '<%=loginok %>';
+			
+			// alert(login);
+			if(login == "yes") {
+				location.href="reviewPost_insertPage.jsp"
+			} else 
+				alert("로그인 후 이용 가능합니다");
+			
+		});
+		
+	</script>
 
 	<!-- Core JS -->
     <!-- build:js assets/vendor/js/core.js -->

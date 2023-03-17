@@ -1,7 +1,6 @@
 <%@page import="org.json.simple.JSONObject"%>
 <%@page import="data.dao.FreeBoardDao"%>
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
 <%-- <%
 	// num 
@@ -10,10 +9,10 @@
 	// dao
 	FreeBoardDao dao = new FreeBoardDao();
 	
-	// num¿¡ ÇØ´çÇÏ´Â like Áõ°¡
+	// numì— í•´ë‹¹í•˜ëŠ” like ì¦ê°€
 	dao.updateLike(num);
 	
-	// num¿¡ ÇØ´çÇÏ´Â chu°ª json Çü½ÄÀ¸·Î ¹ÝÈ¯
+	// numì— í•´ë‹¹í•˜ëŠ” chuê°’ json í˜•ì‹ìœ¼ë¡œ ë°˜í™˜
 	String like = dao.getFB(num).getFbLike();
 	
 	JSONObject ob = new JSONObject();

@@ -20,8 +20,8 @@
 		<%
 			request.setCharacterEncoding("UTF-8");
 		
-			// num 읽기
 			String fbNum = request.getParameter("fbNum");
+			String currentPage = request.getParameter("currentPage");
 			
 			// dao
 			FreeBoardDao fbDao = new FreeBoardDao();
@@ -35,7 +35,8 @@
 			SimpleDateFormat sdf = new SimpleDateFormat("yy.MM.dd HH:mm");
 			
 			String uId = (String)session.getAttribute("myid");
-						
+			String loginok = (String)session.getAttribute("loginok");
+			
 			UserDao uDao = new UserDao();
 			UserDto uDto = uDao.getUser(uId);	
 			
@@ -75,107 +76,147 @@
 			<button type="button" class="btn btn-default" id="bookmark" num="<%=fbNum %>">찜</button>
 			
 			<br><br>
-			<button type="button" class="btn btn-default" onclick="location.href='freeBoard_insert.jsp'">글쓰기</button>
-			<button type="button" class="btn btn-default" onclick="location.href='freeBoard_list.jsp'">목록</button>
-			<button type="button" class="btn btn-default" onclick="location.href='freeBoard_update.jsp?fbNum=<%=fbDto.getFbNum() %>'">수정</button>
-			<button type="button" class="btn btn-default" onclick="location.href='freeBoard_delete.jsp?fbNum=<%=fbDto.getFbNum() %>'">삭제</button>
+			<button type="button" class="btn btn-default" onclick="location.href='freeBoard_listPage.jsp?currentPage=<%=currentPage %>'">목록</button>
+			
+			<% 
+				if(loginok != null && fbDto.getUId().equals(uId)) {
+			%>
+					<button type="button" class="btn btn-default" onclick="location.href='freePost_updatePage.jsp?fbNum=<%=fbDto.getFbNum() %>'">수정</button>
+					<button type="button" class="btn btn-default" onclick="funDel(<%=fbNum%>, <%=currentPage %>)">삭제</button>
+			<% 
+				}
+			%>
 		</div>
 		
 		<script type="text/javascript">
+		
 			// 추천수 증가
 			$("#likeCnt").click(function() {
+				var login = '<%=loginok %>';
 				
-				var num = $(this).attr("num");
-				var tag = $(this);
+				// alert(login);
+				if(login == "yes") {
 				
-				// alert(num);
-			 	
-				$.ajax({
+					var num = $(this).attr("num");
+					var tag = $(this);
 					
-					type : "get",
-					dataType : "json",
-					url : "freePost_like.jsp",
-					data : {"num" : num},
-					success : function(res) {
-					
-						// alert(res.like);
-						tag.next().text(res.like);
-						tag.css("background-color", "pink");
+					// alert(num);
+				 	
+					$.ajax({
 						
-					}
-					
-				}); 
-
+						type : "get",
+						dataType : "json",
+						url : "freePost_like.jsp",
+						data : {"num" : num},
+						success : function(res) {
+						
+							// alert(res.like);
+							tag.next().text(res.like);
+							tag.css("background-color", "pink");
+							
+						}
+						
+					}); 
+				}
+				else 
+					alert("로그인 후 이용 가능합니다");
+				
 			});
 
 			// 비추천수 증가
 			$("#dislikeCnt").click(function() {
+				var login = '<%=loginok %>';
 				
-				var num = $(this).attr("num");
-				var tag = $(this);	
-				
-				// alert(num);
-				
-				$.ajax({
+				if(login == "yes") {
 					
-					type : "get",
-					dataType : "json",
-					url : "freePost_dislike.jsp",
-					data : {"num" : num},
-					success : function(res) {
+					var num = $(this).attr("num");
+					var tag = $(this);	
 					
-						// alert(res.dislike);
-						tag.next().text(res.dislike);
-						tag.css("background-color", "pink");
+					// alert(num);
+					
+					$.ajax({
 						
-					}
-					
-				});  
+						type : "get",
+						dataType : "json",
+						url : "freePost_dislike.jsp",
+						data : {"num" : num},
+						success : function(res) {
+						
+							// alert(res.dislike);
+							tag.next().text(res.dislike);
+							tag.css("background-color", "pink");
+							
+						}
+						
+					});  
+				} else 
+					alert("로그인 후 이용 가능합니다");
 			});
 			
 			// 신고수 증가
 			$("#reportCnt").click(function() {
+				var login = '<%=loginok %>';
 				
-				var num = $(this).attr("num");
-				var tag = $(this);	
+				if(login == "yes") {
+					
+					var num = $(this).attr("num");
+					var tag = $(this);	
+					
+					alert(num);
+					<%
+					//fbDao.updateReport(fbNum);			
+					%>
+					
+					$(this).css("background-color", "pink");
+				} else 
+					alert("로그인 후 이용 가능합니다");
 				
-				alert(num);
-				<%
-				//fbDao.updateReport(fbNum);			
-				%>
-				
-				$(this).css("background-color", "pink");
 			});
 			
 			// 찜
 			$("#bookmark").click(function() {
+				var login = '<%=loginok %>';
 				
-				var num = $(this).attr("num");
-				var tag = $(this);	
-				
-				alert(num);
-				
-				$.ajax({
+				if(login == "yes")  {
 					
-					type : "get",
-					dataType : "json",
-					url : "freePost_bookmark.jsp",
-					data : {"num" : num},
-					success : function(res) {
+					var num = $(this).attr("num");
+					var tag = $(this);	
+					
+					// alert(num);
+					
+					$.ajax({
 						
-						alert(res.flag);
-						
-						if(res.flag == true)
-							alert("찜한 게시글은 마이페이지에서 확인가능합니다")
-						else 
-							alert("이미 찜한 게시글입니다. 마이페이지에서 확인해주세요")
-
-						tag.css("background-color", "pink");
-						
-					}
-				});
+						type : "get",
+						dataType : "json",
+						url : "freePost_bookmark.jsp",
+						data : {"num" : num},
+						success : function(res) {
+							
+							// alert(res.flag);
+							
+							if(res.flag == true)
+								alert("찜한 게시글은 마이페이지에서 확인가능합니다")
+							else 
+								alert("이미 찜한 게시글입니다. 마이페이지에서 확인해주세요")
+		
+							tag.css("background-color", "pink");	
+						}
+					});
+				} else
+					alert("로그인 후 이용 가능합니다");
+				
 			});
 			
+			
+			
+			function funDel(num, currentPage) {
+				
+				var a = confirm("삭제하려면 [확인]을 눌러주세요");
+				
+				if(a) {
+					location.href="freePost_delete.jsp?fbNum=<%=fbDto.getFbNum() %>";
+				}
+			}
 		</script>
 	</body>
 </html>

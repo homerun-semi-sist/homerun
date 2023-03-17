@@ -22,6 +22,9 @@
 		<%
 			request.setCharacterEncoding("UTF-8");
 		
+			String uId = (String)session.getAttribute("myid");
+			String loginok = (String)session.getAttribute("loginok");
+		
 			// num 읽기
 			String rbNum = request.getParameter("rbNum");
 			
@@ -36,9 +39,7 @@
 			ReviewBoardDto rbDto = rbDao.getRB(rbNum);
 			
 			SimpleDateFormat sdf = new SimpleDateFormat("yy.MM.dd HH:mm");
-			
-			String uId = (String)session.getAttribute("myid");
-			
+		
 			UserDao uDao = new UserDao();
 			UserDto uDto = uDao.getUser(uId);	
 		%>
@@ -67,10 +68,123 @@
 		</table>
 		
 		<div style="margin-left: 400px;">
-			<button type="button" class="btn btn-default" onclick="location.href='reviewBoard_insert.jsp'">글쓰기</button>
-			<button type="button" class="btn btn-default" onclick="location.href='reviewBoard_list.jsp'">목록</button>
-			<button type="button" class="btn btn-default" onclick="location.href='reviewBoard_update.jsp?rbNum=<%=rbDto.getRbNum() %>'">수정</button>
-			<button type="button" class="btn btn-default" onclick="location.href='reviewBoard_delete.jsp?rbNum=<%=rbDto.getRbNum() %>'">삭제</button>
+			<button type="button" class="btn btn-default" id="likeCnt" num="<%=rbNum %>">추천</button>
+			<span class="like"><%=rbDto.getRbLike() %></span>
+			
+			<button type="button" class="btn btn-default" id="dislikeCnt" num="<%=rbNum %>">비추천</button>
+			<span class="dislike"><%=rbDto.getRbDislike() %></span>
+			
+			<button type="button" class="btn btn-default" id="reportCnt" num="<%=rbNum %>">신고</button>
+			<span class="report"><%=rbDto.getRbReport() %></span>
+			
+			<button type="button" class="btn btn-default" id="bookmark" num="<%=rbNum %>">찜</button>
+			
+			<br><br>
+			<button type="button" class="btn btn-default" onclick="location.href='reviewBoard_listPage.jsp'">목록</button>
+			<% 
+				if(loginok != null && rbDto.getUId().equals(uId)) {
+			%>
+				<button type="button" class="btn btn-default" onclick="location.href='reviewPost_updatePage.jsp?fbNum=<%=rbDto.getRbNum() %>'">수정</button>
+				<button type="button" class="btn btn-default" onclick="location.href='reviewPost_delete.jsp?fbNum=<%=rbDto.getRbNum() %>'">삭제</button>
+			<%
+				}
+			%>
 		</div>
+		
+		<script type="text/javascript">
+			// 추천수 증가
+			$("#likeCnt").click(function() {
+				
+				var num = $(this).attr("num");
+				var tag = $(this);
+				
+				// alert(num);
+			 	
+				$.ajax({
+					
+					type : "get",
+					dataType : "json",
+					url : "reviewPost_like.jsp",
+					data : {"num" : num},
+					success : function(res) {
+					
+						// alert(res.like);
+						tag.next().text(res.like);
+						tag.css("background-color", "pink");
+						
+					}
+					
+				}); 
+
+			});
+
+			// 비추천수 증가
+			$("#dislikeCnt").click(function() {
+				
+				var num = $(this).attr("num");
+				var tag = $(this);	
+				
+				// alert(num);
+				
+				$.ajax({
+					
+					type : "get",
+					dataType : "json",
+					url : "reviewPost_dislike.jsp",
+					data : {"num" : num},
+					success : function(res) {
+					
+						// alert(res.dislike);
+						tag.next().text(res.dislike);
+						tag.css("background-color", "pink");
+						
+					}
+					
+				});  
+			});
+			
+			// 신고수 증가
+			$("#reportCnt").click(function() {
+				
+				var num = $(this).attr("num");
+				var tag = $(this);	
+				
+				alert(num);
+				<%
+				//fbDao.updateReport(fbNum);			
+				%>
+				
+				$(this).css("background-color", "pink");
+			});
+			
+			// 찜
+			$("#bookmark").click(function() {
+				
+				var num = $(this).attr("num");
+				var tag = $(this);	
+				
+				// alert(num);
+				
+				$.ajax({
+					
+					type : "get",
+					dataType : "json",
+					url : "reviewPost_bookmark.jsp",
+					data : {"num" : num},
+					success : function(res) {
+						
+						// alert(res.flag);
+						
+						if(res.flag == true)
+							alert("찜한 게시글은 마이페이지에서 확인가능합니다")
+						else 
+							alert("이미 찜한 게시글입니다. 마이페이지에서 확인해주세요")
+
+						tag.css("background-color", "pink");	
+					}
+				});
+			});
+			
+		</script>
 	</body>
 </html>

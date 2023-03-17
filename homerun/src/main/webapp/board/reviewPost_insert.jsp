@@ -94,7 +94,7 @@
 				
 				<button type="button" class="btn btn-default"
 					style="width: 120px;"
-					onclick="location.href='reviewBoard_list.jsp'">목록</button>
+					onclick="location.href='reviewBoard_listPage.jsp'">목록</button>
 			</td>
 		</tr>
 		

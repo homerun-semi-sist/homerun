@@ -23,7 +23,7 @@ public class FreeBoardDao {
  		PreparedStatement pstmt = null;
  		ResultSet rs = null;
  		
- 		String sql = "select * from FREEBOARD order by fbNum";
+ 		String sql = "select * from FREEBOARD order by fbNum desc";
  		// where nickname=''
  		
  		try {
@@ -256,5 +256,78 @@ public class FreeBoardDao {
 	// search - fbContent
 
 	// 페이징 처리
+	// FB totalCount
+	public int getFBTotalCount() {
+		int n = 0;
+		
+		Connection conn = db.getConnection();
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		String sql = "select count(*) from FREEBOARD";
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+		
+			rs =  pstmt.executeQuery();
+		
+			if(rs.next()) 
+				n = rs.getInt(1);
+			
+			} catch (SQLException e) {
+				e.printStackTrace();
+			} finally {
+				db.dbClose(rs, pstmt, conn);
+		}
+			
+		return n; 
+	}
+		
+	// FB List(start, perPage)
+	public List<FreeBoardDto> getFBList(int start, int perPage) {
+		List<FreeBoardDto> list = new Vector<>();
+
+		Connection conn = db.getConnection();
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		String sql = "select * from FREEBOARD order by fbNum desc limit ?, ?";
+		// select * from simpleboard order by num desc limit i, j => i번부터 j번까지 조회
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			// 바인딩
+			pstmt.setInt(1, start);
+			pstmt.setInt(2, perPage);
+			
+			rs = pstmt.executeQuery();
+				
+			while(rs.next()) {
+				FreeBoardDto dto = new FreeBoardDto();
+				
+				dto.setFbNum(rs.getString("fbNum"));
+            	dto.setUId(rs.getString("uId"));
+                dto.setFbCategory(rs.getString("fbCategory"));
+                dto.setFbSubject(rs.getString("fbSubject"));
+                dto.setFbContent(rs.getString("fbContent"));
+                dto.setFbPhoto(rs.getString("fbPhoto"));
+                dto.setFbReadCnt(rs.getString("fbReadCnt"));
+                dto.setFbLike(rs.getString("fbLike"));
+                dto.setFbDislike(rs.getString("fbDislike"));
+                dto.setFbWriteday(rs.getTimestamp("fbWriteday"));
+                dto.setFbReport(rs.getString("fbReport"));
+				
+				list.add(dto);
+			}
+			
+			} catch (SQLException e) {
+				e.printStackTrace();
+			} finally {
+				db.dbClose(rs, pstmt, conn);
+			}
+			
+		return list;
+	}
 	
 }

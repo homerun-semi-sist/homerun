@@ -12,16 +12,16 @@
 	
 	// dao
 	BookMarkDao dao = new BookMarkDao();
-	int n = dao.getFBBMcnt(uId, num);
+	int n = dao.getRBBMcnt(uId, num);
 		
 	System.out.println(n);
 	if(n == 0) {
 		BookMarkDto dto = new BookMarkDto();
 		
 		dto.setuId(uId);
-		dto.setFbNum(num);
+		dto.setRbNum(num);
 		
-		dao.insertFBBM(dto);
+		dao.insertRBBM(dto);
 		
 		flag = true;
 	} else { 

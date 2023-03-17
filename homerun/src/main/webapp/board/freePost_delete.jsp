@@ -1,4 +1,3 @@
-<%@page import="data.dao.ReviewBoardDao"%>
 <%@page import="data.dao.FreeBoardDao"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -16,15 +15,15 @@
 		<%
 			request.setCharacterEncoding("UTF-8");
 		
-			String rbNum = request.getParameter("rbNum");
+			String fbNum = request.getParameter("fbNum");
 			
-		 	ReviewBoardDao dao = new ReviewBoardDao();
+		 	FreeBoardDao dao = new FreeBoardDao();
 			
 			// dao 삭제
-			dao.deleteRB(rbNum);
+			dao.deleteFB(fbNum);
 			
 			// 페이지 이동
-			response.sendRedirect("reviewBoard_list.jsp");
+			response.sendRedirect("freeBoard_listPage.jsp");
 		%>
 	</body>
 </html>

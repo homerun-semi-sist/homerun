@@ -34,7 +34,7 @@
 			// 페이징 처리
 			/* int num = dao.getMaxNum(); */
 			
-			response.sendRedirect("reviewBoard_list.jsp");
+			response.sendRedirect("reviewBoard_listPage.jsp");
 		%>
 
 	</body>

@@ -1,10 +1,8 @@
-<%@page import="data.dto.ReviewBoardDto"%>
-<%@page import="data.dao.ReviewBoardDao"%>
-<%@page import="data.dto.GameDto"%>
-<%@page import="data.dao.GameDao"%>
-<%@page import="java.sql.Array"%>
+<%@page import="data.dto.UserDto"%>
+<%@page import="data.dao.UserDao"%>
+<%@page import="data.dto.TeamDto"%>
 <%@page import="java.util.List"%>
-
+<%@page import="data.dao.TeamDao"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -23,56 +21,59 @@
 	charset="utf-8"></script>	
 </head>
 <body>
-<%
-	String rbNum = request.getParameter("rbNum");
-	// String currentPage = request.getParameter("currentPage");
+	<%
+		//프로젝트의 경로
+		// String root=request.getContextPath();
 	
-	ReviewBoardDao rbDao = new ReviewBoardDao();
-	ReviewBoardDto rbDto = rbDao.getRB(rbNum);
+		TeamDao tDao = new TeamDao();	
+		List<TeamDto> list = tDao.getAllTeams();
 	
-	GameDao gDao = new GameDao();
-	
-	String uId = rbDto.getUId();
-%>
-<form action="reviewBoard_updateAction.jsp" method="post">
-	<input type="hidden" name="rbNum" value="<%=rbNum %>">
-	
+		String uId = (String)session.getAttribute("myid");
+	%>
+
+<form action="freeBoard_insertAction.jsp" method="post">	
 	<!-- hiddend으로 nickname / value 값 변경 필요 -->
-	<input type="hidden" name="uId" value="<%=uId %>">	
-	<%-- <input type="hidden" name="currentPage" value="<%=currentPage %>"> --%>
-	
-	<table class="table table-bordered" style="height:30px; width: 1000px; height:700px; margin-left: 100px;">
-		<caption style="caption-side: top;"><h3>후기 게시판 작성글 수정</h3></caption>
+	<input type="hidden" name="uId" value="<%=uId %>">
+	<table class="table table-bordered" style="width: 1000px; height:700px; margin-left: 100px;">
+		<caption style="caption-side: top;"><h3>자유게시판 게시글 등록</h3></caption>
 		<tr>
-			<th bgcolor="#E1EEDD" width="200" style="height:30px; text-align: center; line-height: 30px;">경기일 경기팀</th>
+			<th bgcolor="#E1EEDD" width="100" style="height:30px; text-align: center; line-height: 30px;">카테고리</th>
 			<td>
-				<%=gDao.getGame(rbDto.getgId()).getgDay() %> <%=gDao.getGame(rbDto.getgId()).getHome() %> vs <%=gDao.getGame(rbDto.getgId()).getAway() %>
+				<select name="category" class="form-control" style="width: 220px;">
+					<option value="전체" selected="selected">전체</option>
+					<%
+						for(TeamDto tDto : list) {
+							String category = tDto.getTeamNick();	
+					%>
+						<option value="<%=category %>"><%=category %></option>
+					<%
+						}
+					%>
+				</select>
 			</td>
-		</tr>
-		
-		<tr>
+	
 			<th bgcolor="#E1EEDD" width="100" style="height:30px; text-align: center; line-height: 30px;">제목</th>
 			<td>
 				<input type="text" name="subject" class="form-control"
-					required="required" style="width: 500px;" value="<%=rbDto.getRbSubject() %>">
+					required="required" style="width: 500px;">
 			</td>
 		</tr>
 		<tr>
 			<td colspan="4">
 				<textarea name="content" id="content"		
 					required="required"			
-					style="width: 100%; height: 600px; display: none;"><%=rbDto.getRbContent() %></textarea>		
+					style="width: 100%; height: 600px; display: none;"></textarea>		
 			</td>
 		</tr>
 		<tr>
 			<td colspan="4" align="center">
 				<button type="button" class="btn btn-default"
 					style="width: 120px;"
-					onclick="submitContents(this)">수정</button>
+					onclick="submitContents(this)">DB 저장</button>
 				
 				<button type="button" class="btn btn-default"
 					style="width: 120px;"
-					onclick="location.href='reviewBoard_list.jsp'">목록</button>
+					onclick="location.href='freeBoard_listPage.jsp'">목록</button>
 			</td>
 		</tr>
 		
@@ -119,7 +120,7 @@ function submitContents(elClickedObj) {
 // textArea에 이미지 첨부
 
 function pasteHTML(filepath){
-    var sHTML = '<img src="../photoSave/'+filepath+'">';
+    var sHTML = '<img src="../save/'+filepath+'">';
     oEditors.getById["content"].exec("PASTE_HTML", [sHTML]); 
 
 }

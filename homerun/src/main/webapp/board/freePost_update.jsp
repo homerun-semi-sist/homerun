@@ -1,7 +1,10 @@
 <%@page import="data.dto.UserDto"%>
 <%@page import="data.dao.UserDao"%>
-<%@page import="data.dto.TeamDto"%>
+<%@page import="java.sql.Array"%>
 <%@page import="java.util.List"%>
+<%@page import="data.dto.FreeBoardDto"%>
+<%@page import="data.dao.FreeBoardDao"%>
+<%@page import="data.dto.TeamDto"%>
 <%@page import="data.dao.TeamDao"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
@@ -21,59 +24,52 @@
 	charset="utf-8"></script>	
 </head>
 <body>
-	<%
-		//프로젝트의 경로
-		// String root=request.getContextPath();
+<%
+	String fbNum = request.getParameter("fbNum");
+	// String currentPage = request.getParameter("currentPage");
 	
-		TeamDao tDao = new TeamDao();	
-		List<TeamDto> list = tDao.getAllTeams();
-	
-		String uId = (String)session.getAttribute("myid");
-	%>
+	FreeBoardDao fbDao = new FreeBoardDao();
+	FreeBoardDto fbDto = fbDao.getFB(fbNum);
 
-<form action="freeBoard_insertAction.jsp" method="post">	
+	String uId = fbDto.getUId();
+%>
+<form action="freeBoard_updateAction.jsp" method="post">
+	<input type="hidden" name="fbNum" value="<%=uId %>">
+	
 	<!-- hiddend으로 nickname / value 값 변경 필요 -->
-	<input type="hidden" name="uId" value="<%=uId %>">
-	<table class="table table-bordered" style="width: 1000px; height:700px; margin-left: 100px;">
-		<caption style="caption-side: top;"><h3>자유게시판 게시글 등록</h3></caption>
+	<input type="hidden" name="uId" value="<%=uId %>">	
+	<%-- <input type="hidden" name="currentPage" value="<%=currentPage %>"> --%>
+	
+	<table class="table table-bordered" style="height:30px; width: 1000px; height:700px; margin-left: 100px;">
+		<caption style="caption-side: top;"><h3>자유 게시판 작성글 수정</h3></caption>
 		<tr>
 			<th bgcolor="#E1EEDD" width="100" style="height:30px; text-align: center; line-height: 30px;">카테고리</th>
-			<td>
-				<select name="category" class="form-control" style="width: 220px;">
-					<option value="전체" selected="selected">전체</option>
-					<%
-						for(TeamDto tDto : list) {
-							String category = tDto.getTeamNick();	
-					%>
-						<option value="<%=category %>"><%=category %></option>
-					<%
-						}
-					%>
-				</select>
+			<td width="100" style="height:30px; text-align: center; line-height: 30px;">
+				<%=fbDto.getFbCategory() %>
 			</td>
 	
 			<th bgcolor="#E1EEDD" width="100" style="height:30px; text-align: center; line-height: 30px;">제목</th>
 			<td>
 				<input type="text" name="subject" class="form-control"
-					required="required" style="width: 500px;">
+					required="required" style="width: 500px;" value="<%=fbDto.getFbSubject() %>">
 			</td>
 		</tr>
 		<tr>
 			<td colspan="4">
 				<textarea name="content" id="content"		
 					required="required"			
-					style="width: 100%; height: 600px; display: none;"></textarea>		
+					style="width: 100%; height: 600px; display: none;"><%=fbDto.getFbContent() %></textarea>		
 			</td>
 		</tr>
 		<tr>
 			<td colspan="4" align="center">
 				<button type="button" class="btn btn-default"
 					style="width: 120px;"
-					onclick="submitContents(this)">DB 저장</button>
+					onclick="submitContents(this)">수정</button>
 				
 				<button type="button" class="btn btn-default"
 					style="width: 120px;"
-					onclick="location.href='freeBoard_list.jsp'">목록</button>
+					onclick="location.href='freeBoard_listPage.jsp'">목록</button>
 			</td>
 		</tr>
 		
@@ -120,7 +116,7 @@ function submitContents(elClickedObj) {
 // textArea에 이미지 첨부
 
 function pasteHTML(filepath){
-    var sHTML = '<img src="../save/'+filepath+'">';
+    var sHTML = '<img src="../photoSave/'+filepath+'">';
     oEditors.getById["content"].exec("PASTE_HTML", [sHTML]); 
 
 }
