@@ -416,22 +416,41 @@ NumberFormat nf = NumberFormat.getCurrencyInstance();
 										<!-- 두산 응원용품 첫번째 페이지 -->
 										<div class="carousel-item active" data-bs-interval="10000">
 											<div class="row h-100 align-items-center g-2">
-													<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
+													<%
+												List<ProductDto> subListbase_dc = new ArrayList<>();
+												for (int i = 0; i < list.size(); i++) {
+													ProductDto dto = list.get(i);
+													if (dto.getTeamName().equals("두산 베어스")) {
+														if (dto.getpCategory().equals("응원용품")) {
+
+															subListbase_dc.add(dto);
+														}
+													}
+												}
+												%>
+												<%
+												List<ProductDto> subList_1_dc = new ArrayList<ProductDto>(subListbase_dc.subList(0, 4));
+												for (int j = 0; j < subList_1_dc.size(); j++) {
+													ProductDto dto = subList_1_dc.get(j);
+												%>
+												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
 													<div class="card card-span h-100 text-white">
-														<img class="img-fluid h-100"
-															src="https://www.doosanbearswefan.shop/shop/data/goods/1393576360193s0.JPG"
+														<img class="img-fluid h-100" src="<%=dto.getpImage()%>"
 															alt="..." />
 														<div class="card-img-overlay ps-0"></div>
 														<div class="card-body ps-0 bg-200">
-															<h5 class="fw-bold text-1000 text-truncate">투명우산</h5>
+															<h5 class="fw-bold text-1000 text-truncate"><%=dto.getpName()%></h5>
 															<div class="fw-bold">
-																<span class="text-600 me-2 text-decoration-line-through">$200</span><span
-																	class="text-primary">$175</span>
+																<span class="text-primary"><%=nf.format(dto.getPrice())%></span>
 															</div>
 														</div>
-														<a class="stretched-link" href="#"></a>
+														<a class="stretched-link"
+															href="product_detailPage.jsp?pId=<%=dto.getpId()%>"></a>
 													</div>
 												</div>
+												<%
+												}
+												%>
 												
 												
 											</div>
@@ -440,21 +459,30 @@ NumberFormat nf = NumberFormat.getCurrencyInstance();
 										<!-- 두산 응원용품 두번째 페이지-->
 										<div class="carousel-item">
 											<div class="row h-100 align-items-center g-2">
+												<%
+												int last_dc = subListbase_dc.size() >= 8 ? 9 : subListbase_dc.size();
+												List<ProductDto> subList_2_dc = new ArrayList<ProductDto>(subListbase_dc.subList(5, last_dc));
+												for (int j = 0; j < subList_2_dc.size(); j++) {
+													ProductDto dto = subList_2_dc.get(j);
+												%>
 												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
 													<div class="card card-span h-100 text-white">
-														<img class="img-fluid h-100"
-															src="../assets/img/gallery/shirt-1.png" alt="..." />
+														<img class="img-fluid h-100" src="<%=dto.getpImage()%>"
+															alt="..." />
 														<div class="card-img-overlay ps-0"></div>
 														<div class="card-body ps-0 bg-200">
-															<h5 class="fw-bold text-1000 text-truncate">Shirt</h5>
+															<h5 class="fw-bold text-1000 text-truncate"><%=dto.getpName()%></h5>
 															<div class="fw-bold">
-																<span class="text-600 me-2 text-decoration-line-through">$200</span><span
-																	class="text-primary">$175</span>
+																<span class="text-primary"><%=nf.format(dto.getPrice())%></span>
 															</div>
 														</div>
-														<a class="stretched-link" href="#"></a>
+														<a class="stretched-link"
+															href="product_detailPage.jsp?pId=<%=dto.getpId()%>"></a>
 													</div>
 												</div>
+												<%
+												}
+												%>
 												
 												
 											</div>
