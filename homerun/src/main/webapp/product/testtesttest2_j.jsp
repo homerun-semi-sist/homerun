@@ -365,10 +365,12 @@ NumberFormat nf = NumberFormat.getCurrencyInstance();
 										<div class="carousel-item">
 											<div class="row h-100 align-items-center g-2">
 											<%
-											for(int i=4;i<pList.size();i++){
+											int a = (pList.size() > 8 ? 8 : pList.size());
+											System.out.println(pList.size());
+											for(int i=4;i<a;i++){
 												ProductDto pDto=pList.get(i);
 												//if(i < 4) {
-													System.out.println(i);
+												// System.out.println(i);
 											%>
 												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
 													<div class="card card-span h-100 text-white">
