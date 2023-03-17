@@ -1,3 +1,5 @@
+<%@page import="data.dto.ProductDto"%>
+<%@page import="data.dao.ProductDao"%>
 <%@ page language="java" contentType="text/html; charset=utf-8"
 	pageEncoding="utf-8"%>
 <!DOCTYPE html>
@@ -11,25 +13,30 @@
 <!-- Core theme CSS (includes Bootstrap)-->
 <link href="../assets/css/styles_detail.css" rel="stylesheet" />
 </head>
+<%
+String pId = request.getParameter("pId");
+
+ProductDao dao = new ProductDao();
+ProductDto dto = dao.getProduct(pId);
+%>
 <body>
 	<section class="py-5">
 		<div class="px-4 px-lg-5 my-5">
 			<div class="row gx-4 gx-lg-5 align-items-center">
 				<div class="col-md-6">
 					<img class="card-img-top mb-5 mb-md-0"
-						src="https://www.ktwizstore.co.kr/web/product/big/202204/05feabbf22d3ba44b5ae41ea7f6089e4.jpg"
+						src="<%=dto.getpImage() %>"
 						alt="..." />
 				</div>
 				<div class="col-md-6">
-					<div class="small mb-1">KT WIZ - 팀웨어</div>
+					<div class="small mb-1"><%=dto.getTeamName() %> - <%=dto.getpCategory() %></div>
 					<h1 class="display-6 fw-bolder">
-						케이티위즈<br />2022 어센틱 홈 유니폼
+						<%=dto.getpName() %>
 					</h1>
 					<div class="fs-5 mb-5">
-						<span class="text-decoration-line-through">109,900원</span> <span>89,900원</span>
+						<span><%=dto.getPrice() %></span>
 					</div>
-					<p class="lead">어센틱 유니폼은 선수에게 지급되는 상품과 동일한 원단, 부자재 등으로 제작한
-						상품입니다. 마킹카트 부착 서비스 구매 시 유니폼 제작은 2주가량 소요됩니다.</p>
+					<p class="lead"><%=dto.getpDetail() %></p>
 					<div class="d-flex">
 						<input class="form-control text-center me-4" id="inputQuantity"
 							type="number" value="1" style="max-width: 4rem" />
@@ -67,8 +74,7 @@
 						<!-- Product actions-->
 						<div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
 							<div class="text-center">
-								<a class="btn btn-outline-dark mt-auto" href="#">장바구니
-									담기</a>
+								<a class="btn btn-outline-dark mt-auto" href="#">장바구니 담기</a>
 							</div>
 						</div>
 					</div>
@@ -93,8 +99,7 @@
 						<!-- Product actions-->
 						<div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
 							<div class="text-center">
-								<a class="btn btn-outline-dark mt-auto" href="#">장바구니
-									담기</a>
+								<a class="btn btn-outline-dark mt-auto" href="#">장바구니 담기</a>
 							</div>
 						</div>
 					</div>
@@ -119,8 +124,7 @@
 						<!-- Product actions-->
 						<div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
 							<div class="text-center">
-								<a class="btn btn-outline-dark mt-auto" href="#">장바구니
-									담기</a>
+								<a class="btn btn-outline-dark mt-auto" href="#">장바구니 담기</a>
 							</div>
 						</div>
 					</div>
@@ -145,8 +149,7 @@
 						<!-- Product actions-->
 						<div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
 							<div class="text-center">
-								<a class="btn btn-outline-dark mt-auto" href="#">장바구니
-									담기</a>
+								<a class="btn btn-outline-dark mt-auto" href="#">장바구니 담기</a>
 							</div>
 						</div>
 					</div>
