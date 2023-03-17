@@ -42,6 +42,7 @@ div{
 	width: 100%;
 	height: 100%;
 	object-fit: cover;
+	cursor: pointer;
 }
 
 .summaryContainer{
@@ -102,6 +103,7 @@ div{
 	width: 100px;
 	height: 100px;
 	margin-bottom: 10px;
+	cursor: pointer;
 }
 
 .name {
@@ -172,6 +174,10 @@ div{
 					<div class="col-sm-2" style="border: 1px solid red;">left</div>
 					<div class="col-sm-8" style="border: 1px solid pink;">
 						<!-- write here -->
+<%
+	String uid=(String)session.getAttribute("uid");
+
+%>
 <div class="wrap">
 
 <div class="head">
@@ -204,7 +210,7 @@ div{
         </div>
         <div class="modal-footer">
         	<button type="button" class="btn btn-default" data-dismiss="modal"
-        	onclick="location.href='../mypage/mypage_unregistform.jsp'">탈퇴하기</button>
+        	onclick="location.href='../mypage/mypage_unregistaction.jsp'">탈퇴하기</button>
           <button type="button" class="btn btn-default" data-dismiss="modal">취소</button>
         </div>
       </div>
@@ -213,16 +219,18 @@ div{
   </div>
 						
 		<button type="button" class="btn2"
-			onclick="location.href='../index.jsp'">로그아웃</button>
+			onclick="location.href='../user/user_logoutaction.jsp'">로그아웃</button>
 		
 	  <div class="profile">
-	 	<img class="photo" src="../assets/img/프로필.png">
-	 	<br><br>
+	  	<a onclick="location.href='../mypage/mypage_modifyform.jsp'">
+	 		<img class="photo" src="../assets/img/프로필.png">
+	 		<br><br>
+	 	</a>
 	  </div>
 	  
 	  <div class="name"><b>이름</b></div>
 	  <br><br>
-	  <div class="nickname"><b>닉네임</b>님 환영합니다</div>
+	  <div class="nickname"><b><%=uid %></b>님 환영합니다</div>
   </div>
   
   <div class="shippingStatusContainer">

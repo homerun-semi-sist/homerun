@@ -189,4 +189,69 @@ public class UserDao {
 			db.dbClose(pstmt, conn);
 		}
 	}
+	
+	//id로 데이터 불러오기
+	public UserDto getData(String uid)
+	{
+		UserDto dto=new UserDto();
+		
+		Connection conn=db.getConnection();
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		
+		String sql="select * from USER where uid=?";
+		
+		try {
+			pstmt=conn.prepareStatement(sql);
+			
+			pstmt.setString(1, uid);
+			
+			rs=pstmt.executeQuery();
+			
+			if(rs.next())
+			{
+				dto.setUid(rs.getString("uid"));
+				dto.setPw(rs.getString("pw"));
+				dto.setuName(rs.getString("uName"));
+				dto.setNickname(rs.getString("nickname"));
+				dto.setGender(rs.getString("gender"));
+				dto.setBirth(rs.getString("birth"));
+				dto.setHp(rs.getString("hp"));
+				dto.setAddr(rs.getString("addr"));
+				dto.setuPhoto(rs.getString("uPhoto"));
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			db.dbClose(rs, pstmt, conn);
+		}
+		return dto;
+	}
+	
+	//회원정보 수정
+	public void updateUser(UserDto dto)
+	{
+		Connection conn=db.getConnection();
+		PreparedStatement pstmt=null;
+		
+		String sql="update USER set uName=?,nickname=?,addr=? where uid=?";
+		
+		try {
+			pstmt=conn.prepareStatement(sql);
+			
+			pstmt.setString(1, dto.getuName());
+			pstmt.setString(2, dto.getNickname());
+			pstmt.setString(3, dto.getAddr());
+			pstmt.setString(4, dto.getUid());
+			
+			pstmt.execute();
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			db.dbClose(pstmt, conn);
+		}
+	}
 }

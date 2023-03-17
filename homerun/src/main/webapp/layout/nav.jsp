@@ -71,14 +71,6 @@
                         <a href="#" class="dropdown-item">Page 1-3</a>
                     </div>
                 </div>
-                <div class="nav-item dropdown">
-                    <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">관리자페이지</a>
-                    <div class="dropdown-menu bg-light m-0">
-                        <a href="#" class="dropdown-item">Page 1-1</a>
-                        <a href="#" class="dropdown-item">Page 1-2</a>
-                        <a href="#" class="dropdown-item">Page 1-3</a>
-                    </div>
-                </div>
             </div>
         </div>
     </nav>

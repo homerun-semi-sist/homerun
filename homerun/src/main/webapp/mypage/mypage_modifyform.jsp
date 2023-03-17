@@ -1,3 +1,5 @@
+<%@page import="data.dto.UserDto"%>
+<%@page import="data.dao.UserDao"%>
 <%@ page import="data.dao.ProductDao"%>
 <%@ page import="java.util.List"%>
 <%@ page import="data.dto.ProductDto"%>
@@ -22,7 +24,7 @@
 			$.ajax({
 				
 				type:"get",
-				url:"regist_search.jsp",
+				url:"../regist/regist_search.jsp",
 				dataType:"json",
 				data:{"uid":uid},
 				success:function(res){
@@ -49,7 +51,7 @@ $("#btnnck").click(function(){
 			$.ajax({
 				
 				type:"get",
-				url:"regist_search.jsp",
+				url:"../regist/regist_search.jsp",
 				dataType:"json",
 				data:{"nickname":nickname},
 				success:function(res){
@@ -306,30 +308,37 @@ $("#btnnck").click(function(){
 					<div class="col-sm-8" style="border: 1px solid pink;">
 						
 						<!-- write here -->
-						<form action="regist_registaction.jsp" method="post" class="joinForm" 
+<%
+	String uid=request.getParameter("uid");
+
+	UserDao dao=new UserDao();
+	
+	UserDto dto=dao.getData(uid);
+%>
+						<form action="../mypage/mypage_modifyaction.jsp" method="post" class="joinForm" 
 		onsubmit="return passcheck(this)" name="f">
                                                                                                
-      <h2>회원가입</h2>
+      <h2>회원정보 수정</h2>
       
       <div class="textForm">
-        <input name="uid" type="text" class="uid" id="uid" placeholder="아이디 (특수문자,공백 제외 8자 이하)" required="required">
+        <input name="uid" type="text" class="uid" id="uid" placeholder="아이디 (특수문자,공백 제외 8자 이하)" required="required" value="<%=uid%>">
         <button type="button" class="btnck" id="btnck" >중복체크</button>
       </div>
       
       <div class="textForm">
-        <input name="pw1" type="password" class="pw" placeholder="비밀번호 (특수문자 포함 10자 이상)" required="required">
+        <input name="pw1" type="password" class="pw" placeholder="비밀번호 (특수문자 포함 10자 이상)" required="required" >
       </div>
       
        <div class="textForm">
-        <input name="pw2" type="password" class="pw" placeholder="비밀번호 확인" required="required">
+        <input name="pw2" type="password" class="pw" placeholder="비밀번호 확인" required="required" >
       </div>
       
       <div class="textForm">
-        <input name="name" type="text" class="name" placeholder="이름" required="required">
+        <input name="name" type="text" class="name" placeholder="이름" required="required" value="<%=dto.getuName()%>">
       </div>
       
       <div class="textForm">
-        <input name="nickname" type="text" class="nickname" placeholder="닉네임 (특수문자,공백 제외 8자 이하)" required="required">
+        <input name="nickname" type="text" class="nickname" placeholder="닉네임 (특수문자,공백 제외 8자 이하)" required="required" value="<%=dto.getNickname()%>">
         <button type="button" class="btnnck" id="btnnck">중복체크</button>      
       </div>
       
@@ -438,10 +447,10 @@ $("#btnnck").click(function(){
       </div> -->
       
        <div class="textForm">
-        <input name="addr" type="text" class="addr" placeholder="주소" required="required">
+        <input name="addr" type="text" class="addr" placeholder="주소" required="required" value="<%=dto.getAddr()%>">
        </div>
-
-       <button type="submit" class="btn1" onclick="passcheck(f)">회원가입</button>
+    
+       <button type="submit" class="btn1" onclick="passcheck(f)">수정하기</button>
        <button type="button" class="btn2"  onclick="location.href='../index.jsp'">메인으로</button>
    
     </form>

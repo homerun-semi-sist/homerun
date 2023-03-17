@@ -24,7 +24,7 @@
 		
 		session.setMaxInactiveInterval(60*60*8);
 		session.setAttribute("loginok", "yes");
-		session.setAttribute("myid", uid);
+		session.setAttribute("uid", uid);
 		session.setAttribute("saveok", cbsave==null?null:"yes");
 		
 		response.sendRedirect("../index.jsp");
@@ -36,6 +36,6 @@
 	</script>
 	<%}
 %>
-%>
+
 </body>
 </html>
