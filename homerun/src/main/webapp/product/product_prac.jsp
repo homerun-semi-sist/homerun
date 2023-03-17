@@ -324,7 +324,8 @@ NumberFormat nf = NumberFormat.getCurrencyInstance();
 												}
 												%>
 												<%
-												List<ProductDto> subList_1_dt = new ArrayList<ProductDto>(subListbase_dt.subList(0, 4));
+												int last_dt_1 = subListbase_dt.size() <= 4 ? subListbase_dt.size() : 4;
+												List<ProductDto> subList_1_dt = new ArrayList<ProductDto>(subListbase_dt.subList(0, last_dt_1));
 												for (int j = 0; j < subList_1_dt.size(); j++) {
 													ProductDto dto = subList_1_dt.get(j);
 												%>
@@ -351,7 +352,9 @@ NumberFormat nf = NumberFormat.getCurrencyInstance();
 											</div>
 										</div>
 
-
+<%
+										if(subListbase_dt.size()>=5){
+										%>
 										<!-- 두산 팀웨어 두번째 페이지 -->
 										<div class="carousel-item">
 											<div class="row h-100 align-items-center g-2">
@@ -399,7 +402,8 @@ NumberFormat nf = NumberFormat.getCurrencyInstance();
 													class="visually-hidden">Next </span>
 											</button>
 										</div>
-
+										
+										<%} %>
 
 									</div>
 								</div>
@@ -411,12 +415,13 @@ NumberFormat nf = NumberFormat.getCurrencyInstance();
 								role="tabpanel" aria-labelledby="pills-doosan_cheering-tab">
 								<div class="carousel slide" id="carouselCategoryDoosanCheering"
 									data-bs-touch="false" data-bs-interval="false">
+
 									<!-- 두산 응원용품 시작 -->
 									<div class="carousel-inner">
 										<!-- 두산 응원용품 첫번째 페이지 -->
 										<div class="carousel-item active" data-bs-interval="10000">
 											<div class="row h-100 align-items-center g-2">
-													<%
+												<%
 												List<ProductDto> subListbase_dc = new ArrayList<>();
 												for (int i = 0; i < list.size(); i++) {
 													ProductDto dto = list.get(i);
@@ -429,7 +434,8 @@ NumberFormat nf = NumberFormat.getCurrencyInstance();
 												}
 												%>
 												<%
-												List<ProductDto> subList_1_dc = new ArrayList<ProductDto>(subListbase_dc.subList(0, 4));
+												int last_dc_1 = subListbase_dc.size() <= 4 ? subListbase_dc.size() : 4;
+												List<ProductDto> subList_1_dc = new ArrayList<ProductDto>(subListbase_dc.subList(0, last_dc_1));
 												for (int j = 0; j < subList_1_dc.size(); j++) {
 													ProductDto dto = subList_1_dc.get(j);
 												%>
@@ -451,17 +457,20 @@ NumberFormat nf = NumberFormat.getCurrencyInstance();
 												<%
 												}
 												%>
-												
-												
+
+
 											</div>
 										</div>
 
-										<!-- 두산 응원용품 두번째 페이지-->
+										<%
+										if(subListbase_dc.size()>=5){
+										%>
+										<!-- 두산 응원용품 두번째 페이지 -->
 										<div class="carousel-item">
 											<div class="row h-100 align-items-center g-2">
 												<%
-												int last_dc = subListbase_dc.size() >= 8 ? 9 : subListbase_dc.size();
-												List<ProductDto> subList_2_dc = new ArrayList<ProductDto>(subListbase_dc.subList(5, last_dc));
+												int last_dc_2 = subListbase_dc.size() >= 8 ? 9 : subListbase_dc.size();
+												List<ProductDto> subList_2_dc = new ArrayList<ProductDto>(subListbase_dc.subList(5, last_dc_2));
 												for (int j = 0; j < subList_2_dc.size(); j++) {
 													ProductDto dto = subList_2_dc.get(j);
 												%>
@@ -483,12 +492,12 @@ NumberFormat nf = NumberFormat.getCurrencyInstance();
 												<%
 												}
 												%>
-												
-												
+
 											</div>
 										</div>
 
-										<!-- 두산 응원용품 좌우이동-->
+
+										<!-- 두산 응원용품 좌우이동 -->
 										<div class="row">
 											<button class="carousel-control-prev" type="button"
 												data-bs-target="#carouselCategoryDoosanCheering"
@@ -503,10 +512,11 @@ NumberFormat nf = NumberFormat.getCurrencyInstance();
 													class="visually-hidden">Next </span>
 											</button>
 										</div>
+										<%} %>
+
 									</div>
 								</div>
 
-								
 							</div>
 
 							<!-- 두산 야구용품 -->

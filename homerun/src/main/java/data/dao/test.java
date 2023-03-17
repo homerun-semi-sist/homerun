@@ -19,7 +19,7 @@ public class test {
 		list.add(5);
 		list.add(6);
 		
-		List subList = new ArrayList<>(list.subList(2, 5));  
+		List subList = new ArrayList<>(list.subList(0, 1));  
 		System.out.println(subList);  
 		/*
 		 * list.remove(0); System.out.println(subList);
