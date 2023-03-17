@@ -309,11 +309,10 @@ $("#btnnck").click(function(){
 						
 						<!-- write here -->
 <%
-	String uid=request.getParameter("uid");
-
-	UserDao dao=new UserDao();
-	
-	UserDto dto=dao.getData(uid);
+	String uid=(String)session.getAttribute("uid");
+	String uName=(String)session.getAttribute("uName");
+	String nickname=(String)session.getAttribute("nickname");
+	String addr=(String)session.getAttribute("addr");
 %>
 						<form action="../mypage/mypage_modifyaction.jsp" method="post" class="joinForm" 
 		onsubmit="return passcheck(this)" name="f">
@@ -334,11 +333,11 @@ $("#btnnck").click(function(){
       </div>
       
       <div class="textForm">
-        <input name="name" type="text" class="name" placeholder="이름" required="required" value="<%=dto.getuName()%>">
+        <input name="name" type="text" class="name" placeholder="이름" required="required" value="<%=uName%>">
       </div>
       
       <div class="textForm">
-        <input name="nickname" type="text" class="nickname" placeholder="닉네임 (특수문자,공백 제외 8자 이하)" required="required" value="<%=dto.getNickname()%>">
+        <input name="nickname" type="text" class="nickname" placeholder="닉네임 (특수문자,공백 제외 8자 이하)" required="required" value="<%=nickname%>">
         <button type="button" class="btnnck" id="btnnck">중복체크</button>      
       </div>
       
@@ -447,7 +446,7 @@ $("#btnnck").click(function(){
       </div> -->
       
        <div class="textForm">
-        <input name="addr" type="text" class="addr" placeholder="주소" required="required" value="<%=dto.getAddr()%>">
+        <input name="addr" type="text" class="addr" placeholder="주소" required="required" value="<%=addr%>">
        </div>
     
        <button type="submit" class="btn1" onclick="passcheck(f)">수정하기</button>

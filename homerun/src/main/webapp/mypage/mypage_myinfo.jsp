@@ -1,3 +1,4 @@
+<%@page import="data.dao.UserDao"%>
 <%@ page import="data.dao.ProductDao"%>
 <%@ page import="java.util.List"%>
 <%@ page import="data.dto.ProductDto"%>
@@ -176,7 +177,8 @@ div{
 						<!-- write here -->
 <%
 	String uid=(String)session.getAttribute("uid");
-
+	UserDao dao=new UserDao();
+	String uName=dao.getuName(uid);
 %>
 <div class="wrap">
 
@@ -228,7 +230,7 @@ div{
 	 	</a>
 	  </div>
 	  
-	  <div class="name"><b>이름</b></div>
+	  <div class="name"><b><%=uName %></b></div>
 	  <br><br>
 	  <div class="nickname"><b><%=uid %></b>님 환영합니다</div>
   </div>
