@@ -1,3 +1,4 @@
+<%@page import="java.util.Locale"%>
 <%@page import="data.dao.UserDao"%>
 <%@page import="java.text.NumberFormat"%>
 <%@page import="java.util.HashMap"%>
@@ -81,9 +82,8 @@ div.pName, span.del {
 				.click(
 						function() {
 
-							var shopnum = $(this).attr("pId");
-							location.href = "index.jsp?main=product/product_detailPage.jsp?pId="
-									+ pId;
+							var pName = $(this).attr("pId");
+							location.href = "index.jsp?main=product/product_detailPage.jsp?pId="+ pId;
 
 						});
 
@@ -132,10 +132,9 @@ div.pName, span.del {
 			type : "get",
 			dataType : "html",
 			url : "product/product_cartdelete.jsp",
-			data : {
-				"cId" : cId
-			},
+			data : {"cId" : cId	},
 			success : function() {
+				
 			}
 
 		});
@@ -144,8 +143,7 @@ div.pName, span.del {
 </head>
 <%
 UserDao udao = new UserDao();
-//String uid=(String)session.getAttribute("uid");
-String uid = "111";
+String uid=(String)session.getAttribute("uid");
 
 //String name=udao.getuName(uid);
 
@@ -233,10 +231,10 @@ NumberFormat nf = NumberFormat.getInstance();
 										<%
 										int price = Integer.parseInt(map.get("price"));
 										price *= cQTY;
-										total = total + price * cQTY;
+										total = total + price ;
 										%>
 										<h4>
-											<%=nf.format(price)%>원 <span
+											<%=nf.getCurrencyInstance(Locale.KOREA).format(price)%> <span
 												class="glyphicon glyphicon-trash del" style="color: red;"
 												cId="<%=map.get("cId")%>"></span>
 										</h4>
@@ -253,9 +251,11 @@ NumberFormat nf = NumberFormat.getInstance();
 									<td colspan="3">
 										<button type="button" class="btn1" style="margin-left: 800px;"
 											id="btncartdel">선택상품삭제</button>
+											<button type="button" class="btn1" style="margin-left: 800px;"
+											id="btncartdel" onclick="location.href='product_success.jsp'">구매하기</button>
 										<h3 style="font-size: 2em;">
 											총 주문금액:
-											<%=nf.format(total)%></h3>
+											<%=nf.getCurrencyInstance(Locale.KOREA).format(total)%></h3>
 									</td>
 								</tr>
 

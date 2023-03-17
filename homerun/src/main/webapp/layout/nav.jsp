@@ -1,3 +1,4 @@
+
 <%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8" %>
 <!DOCTYPE html>
 <html lang="en">
@@ -63,19 +64,11 @@
                     </div>
                 </div>
                 <div class="nav-item dropdown">
-                    <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">예약</a>
+                    <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">ooo</a>
                     <div class="dropdown-menu bg-light m-0">
                         <a href="#" class="dropdown-item">Page 1-1</a>
                         <a href="#" class="dropdown-item">Page 1-2</a>
                         <a href="#" class="dropdown-item">Page 1-3</a>
-                    </div>
-                </div>
-                <div class="nav-item dropdown">
-                    <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">관리자페이지</a>
-                    <div class="dropdown-menu bg-light m-0">
-                        <a href="#" class="dropdown-item">회원관리</a>
-                        <a href="#" class="dropdown-item">재고관리</a>
-                        <a href="#" class="dropdown-item">게시글관리</a>
                     </div>
                 </div>
             </div>

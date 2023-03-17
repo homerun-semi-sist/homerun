@@ -33,14 +33,12 @@
 
 <%
 String root = request.getContextPath();
-
-UserDao udao = new UserDao();
-String uId=(String)session.getAttribute("uId");
-String name=udao.getuName(uId);
 %>
 
 <body>
 	<!-- Topbar Start -->
+
+
 	<div class="container-fluid px-5 d-none d-lg-block"
 		style="background-color: #0b214e; height: 150px;">
 		<div class=" gx-5 align-items-center">
@@ -53,15 +51,68 @@ String name=udao.getuName(uId);
 						src="<%=root%>/assets/img/로고.png" style="width: 150px;" />
 					</a>
 				</div>
-			</div>
+			</div>		
+<%
+	// loginok 가져오기
+	String loginok=(String)session.getAttribute("loginok");
+	String uid=(String)session.getAttribute("uid");
+
+	if(loginok==null)	//로그아웃
+	{%>
+				
+	<%}else if(loginok!=null && uid.equals("admin")){%>
+		
 			<div class="col-lg-3" style="margin-top: 20px;">
 				<div class="d-flex align-items-center justify-content-end">
-					<span class="me-3"><span class="uname_title"><%=uId %></span><span
-						class="a_title">님</span></span> <a class="a_title" href="#"><span>마이페이지</span></a><span
-						class="a_title">&nbsp;|&nbsp;</span> <a style="color: white;"
-						href="../product/product_cartlist.jsp"><span>장바구니</span></a>
+					<span class="me-3">
+					
+						<span class="uname_title"><%=uid %></span>
+						
+						<span class="a_title">님</span>
+						
+					</span>
+						
+						 <a class="a_title" href="../homerun/admin/admin_adminform.jsp">
+						 
+						 <span>관리자페이지</span>
+						 
+						 </a>
+						 
 				</div>
 			</div>
+			
+	<%}else{%>
+	
+		<div class="col-lg-3" style="margin-top: 20px;">
+				<div class="d-flex align-items-center justify-content-end">
+					<span class="me-3">
+					
+						<span class="uname_title"><%=uid %></span>
+						
+						<span class="a_title">님</span>
+						
+					</span>
+						
+						 <a class="a_title" href="../homerun/mypage/mypage_myinfo.jsp">
+						 
+						 <span>마이페이지</span>
+						 
+						 </a>
+						 
+						 <span class="a_title">&nbsp;|&nbsp;</span> 
+						 
+						 <a style="color: white;" href="../homerun/product/product_cartlist.jsp">
+						 
+						 <span >장바구니</span>
+						 
+						 </a>
+				</div>
+			</div>
+		
+	<%}
+%>
+
+			
 		</div>
 	</div>
 	<!-- Topbar End -->

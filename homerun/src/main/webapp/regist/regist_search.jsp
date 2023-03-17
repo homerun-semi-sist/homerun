@@ -1,62 +1,18 @@
-<%@ page import="data.dao.ProductDao"%>
-<%@ page import="java.util.List"%>
-<%@ page import="data.dto.ProductDto"%>
+<%@page import="org.json.simple.JSONObject"%>
+<%@page import="data.dao.UserDao"%>
 <%@ page language="java" contentType="text/html; charset=utf-8"
-	pageEncoding="utf-8"%>
-<!DOCTYPE html>
-<html>
-	<head>
-		<meta charset="utf-8">
-		<title>Insert title here</title>
-		<link rel="stylesheet"
-			href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" />
-		<script src="https://code.jquery.com/jquery-3.6.3.js"></script>
-		<link href="../assets/css/index.css" rel="stylesheet">
-	</head>
-	<body style="overflow-x: hidden;">
-		<%
-			String mainPage = "../layout/main.jsp";
-		
-			// url?? ????? main???? ???? ???????????? ???
-			if (request.getParameter("main") != null) {
-				mainPage = request.getParameter("main");
-			}
-			String root = request.getContextPath();
-		%>
-		<header class="main_title">
-			<jsp:include page="../layout/title.jsp" />
-		</header>
-		<div class="main_nav">
-			<jsp:include page="../layout/nav.jsp" />
-		</div>
-		<div id="wrap">
-			<div id="content-wrap">
-				<div class="row">
-					<div class="col-sm-2" style="border: 1px solid red;">left</div>
-					<div class="col-sm-8" style="border: 1px solid pink;">
-						<!-- write here -->
-						
-						<%
-							ProductDao dao = new ProductDao();
-							List<ProductDto> list = dao.selectAllProduct();
-						
-							for (ProductDto dto : list) {
-						%>
-							<%=dto.getpId()%>
-							<%=dto.getpImage()%>
-						<%
-							}
-						%>
-						
-						<!-- the end -->
-					</div>
-					<div class="col-sm-2" style="border: 1px solid blue;">right</div>
-				</div>
-			</div>
-		</div>
+    pageEncoding="utf-8"%>
+<%
+	String uid=request.getParameter("uid");
+	String nickname=request.getParameter("nickname");
+	UserDao dao=new UserDao();
+	
+	int count=dao.isIDCheck(uid);
+	int Ncount=dao.isNICKCheck(nickname);
+	
+	JSONObject ob=new JSONObject();
+	ob.put("Ncount", Ncount);
+	ob.put("count", count);
+%>
 
-		<div class="main_footer">
-			<jsp:include page="../layout/footer.jsp" />
-		</div>
-	</body>
-</html>
+<%=ob.toString() %>
