@@ -134,7 +134,7 @@ NumberFormat nf = NumberFormat.getCurrencyInstance();
 				<div class="container-xxl flex-grow-1 container-p-y">
 					<!-- Bootstrap Table with Header - Light -->
 					<div class="card">
-						<h5 class="card-header">재고목록</h5>
+						<h3 class="card-header"><b>재고목록</b></h3>
 						<div class="table-responsive text-nowrap">
 							<table class="table">
 								<thead class="table-light">
@@ -156,7 +156,7 @@ NumberFormat nf = NumberFormat.getCurrencyInstance();
 									<tr>
 										<td style="text-align: center;"><%=dto.getpId()%></td>
 										<td style="text-align: center;"><a
-											href="post_detail.html"><b><%=dto.getpName()%></b></a></td>
+											href="../product/product_detailPage.jsp?pId=<%=dto.getpId()%>"><b><%=dto.getpName()%></b></a></td>
 										<td style="text-align: center;"><%=dto.getTeamName()%></td>
 										<td style="text-align: center;"><%=dto.getpCategory()%></td>
 										<td style="text-align: center;"><%=dto.getpOption()%></td>

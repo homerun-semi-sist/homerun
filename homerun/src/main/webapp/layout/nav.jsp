@@ -71,8 +71,7 @@
 						data-bs-toggle="dropdown">응원용품</a>
 					<div class="dropdown-menu bg-light m-0">
 						<a href="<%=root%>/product/product_mainPage.jsp"
-							class="dropdown-item">상품메인</a> <a href="#" class="dropdown-item">Page
-							1-2</a> <a href="#" class="dropdown-item">Page 1-3</a>
+							class="dropdown-item">상품메인</a> <a href="<%=root%>/product/product_listPage.jsp" class="dropdown-item">상품목록</a>
 					</div>
 				</div>
 				<div class="nav-item dropdown">

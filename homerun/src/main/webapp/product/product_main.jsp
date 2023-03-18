@@ -15,22 +15,19 @@
 <style>
 #navv-doosan, #navv-kiwoom, #navv-samsung, #navv-lg, #navv-kt, #navv-ssg,
 	#navv-nc, #navv-lotte, #navv-kia, #navv-hanhwa, #pills-doosan_teamwear,
-	#pills-doosan_cheering, #pills-doosan_baseball,
-	#pills-doosan_commemoration, #pills-lotte_teamwear,
-	#pills-lotte_cheering, #pills-lotte_baseball,
-	#pills-lotte_commemoration, #pills-samsung_teamwear,
-	#pills-samsung_cheering, #pills-samsung_baseball,
-	#pills-samsung_commemoration, #pills-kiwoom_teamwear,
-	#pills-kiwoom_cheering, #pills-kiwoom_baseball,
-	#pills-kiwoom_commemoration, #pills-lg_teamwear, #pills-lg_cheering,
-	#pills-lg_baseball, #pills-lg_commemoration, #pills-nc_teamwear,
-	#pills-nc_cheering, #pills-nc_baseball, #pills-nc_commemoration,
-	#pills-hanhwa_teamwear, #pills-hanhwa_cheering, #pills-hanhwa_baseball,
-	#pills-hanhwa_commemoration, #pills-kia_teamwear, #pills-kia_cheering,
-	#pills-kia_baseball, #pills-kia_commemoration, #pills-kt_teamwear,
-	#pills-kt_cheering, #pills-kt_baseball, #pills-kt_commemoration,
-	#pills-ssg_teamwear, #pills-ssg_cheering, #pills-ssg_baseball,
-	#pills-ssg_commemoration {
+	#pills-doosan_cheering, #pills-doosan_baseball, #pills-doosan_memory,
+	#pills-lotte_teamwear, #pills-lotte_cheering, #pills-lotte_baseball,
+	#pills-lotte_memory, #pills-samsung_teamwear, #pills-samsung_cheering,
+	#pills-samsung_baseball, #pills-samsung_memory, #pills-kiwoom_teamwear,
+	#pills-kiwoom_cheering, #pills-kiwoom_baseball, #pills-kiwoom_memory,
+	#pills-lg_teamwear, #pills-lg_cheering, #pills-lg_baseball,
+	#pills-lg_memory, #pills-nc_teamwear, #pills-nc_cheering,
+	#pills-nc_baseball, #pills-nc_memory, #pills-hanhwa_teamwear,
+	#pills-hanhwa_cheering, #pills-hanhwa_baseball, #pills-hanhwa_memory,
+	#pills-kia_teamwear, #pills-kia_cheering, #pills-kia_baseball,
+	#pills-kia_memory, #pills-kt_teamwear, #pills-kt_cheering,
+	#pills-kt_baseball, #pills-kt_memory, #pills-ssg_teamwear,
+	#pills-ssg_cheering, #pills-ssg_baseball, #pills-ssg_memory {
 	opacity: 1;
 }
 </style>
@@ -292,10 +289,9 @@ NumberFormat nf = NumberFormat.getCurrencyInstance();
 									aria-selected="false">야구용품</button>
 							</li>
 							<li class="navv-item" role="presentation">
-								<button class="navv-link" id="pills-doosan_commemoration-tab"
-									data-bs-toggle="pill"
-									data-bs-target="#pills-doosan_commemoration" type="button"
-									role="tab" aria-controls="pills-doosan_commemoration"
+								<button class="navv-link" id="pills-doosan_memory-tab"
+									data-bs-toggle="pill" data-bs-target="#pills-doosan_memory"
+									type="button" role="tab" aria-controls="pills-doosan_memory"
 									aria-selected="false">기념상품</button>
 							</li>
 						</ul>
@@ -324,7 +320,7 @@ NumberFormat nf = NumberFormat.getCurrencyInstance();
 												}
 												%>
 												<%
-												int last_dt_1 = subListbase_dt.size() <= 4 ? subListbase_dt.size() : 4;
+												int last_dt_1 = subListbase_dt.size() < 4 ? subListbase_dt.size() : 4;
 												List<ProductDto> subList_1_dt = new ArrayList<ProductDto>(subListbase_dt.subList(0, last_dt_1));
 												for (int j = 0; j < subList_1_dt.size(); j++) {
 													ProductDto dto = subList_1_dt.get(j);
@@ -353,14 +349,14 @@ NumberFormat nf = NumberFormat.getCurrencyInstance();
 										</div>
 
 										<%
-										if (subListbase_dt.size() >= 5) {
+										if (subListbase_dt.size() > 4) {
 										%>
 										<!-- 두산 팀웨어 두번째 페이지 -->
 										<div class="carousel-item">
 											<div class="row h-100 align-items-center g-2">
 												<%
-												int last_dt = subListbase_dt.size() >= 8 ? 9 : subListbase_dt.size();
-												List<ProductDto> subList_2_dt = new ArrayList<ProductDto>(subListbase_dt.subList(5, last_dt));
+												int last_dt_2 = subListbase_dt.size() > 8 ? 8 : subListbase_dt.size();
+												List<ProductDto> subList_2_dt = new ArrayList<ProductDto>(subListbase_dt.subList(4, last_dt_2));
 												for (int j = 0; j < subList_2_dt.size(); j++) {
 													ProductDto dto = subList_2_dt.get(j);
 												%>
@@ -436,7 +432,7 @@ NumberFormat nf = NumberFormat.getCurrencyInstance();
 												}
 												%>
 												<%
-												int last_dc_1 = subListbase_dc.size() <= 4 ? subListbase_dc.size() : 4;
+												int last_dc_1 = subListbase_dc.size() < 4 ? subListbase_dc.size() : 4;
 												List<ProductDto> subList_1_dc = new ArrayList<ProductDto>(subListbase_dc.subList(0, last_dc_1));
 												for (int j = 0; j < subList_1_dc.size(); j++) {
 													ProductDto dto = subList_1_dc.get(j);
@@ -461,18 +457,19 @@ NumberFormat nf = NumberFormat.getCurrencyInstance();
 												%>
 
 
+
 											</div>
 										</div>
 
 										<%
-										if (subListbase_dc.size() >= 5) {
+										if (subListbase_dc.size() > 4) {
 										%>
 										<!-- 두산 응원용품 두번째 페이지 -->
 										<div class="carousel-item">
 											<div class="row h-100 align-items-center g-2">
 												<%
-												int last_dc_2 = subListbase_dc.size() >= 8 ? 9 : subListbase_dc.size();
-												List<ProductDto> subList_2_dc = new ArrayList<ProductDto>(subListbase_dc.subList(5, last_dc_2));
+												int last_dc_2 = subListbase_dc.size() > 8 ? 8 : subListbase_dc.size();
+												List<ProductDto> subList_2_dc = new ArrayList<ProductDto>(subListbase_dc.subList(4, last_dc_2));
 												for (int j = 0; j < subList_2_dc.size(); j++) {
 													ProductDto dto = subList_2_dc.get(j);
 												%>
@@ -533,46 +530,76 @@ NumberFormat nf = NumberFormat.getCurrencyInstance();
 										<!-- 두산 야구용품 첫번째 페이지-->
 										<div class="carousel-item active" data-bs-interval="10000">
 											<div class="row h-100 align-items-center g-2">
+												<%
+												List<ProductDto> subListbase_db = new ArrayList<>();
+												for (int i = 0; i < list.size(); i++) {
+													ProductDto dto = list.get(i);
+													if (dto.getTeamName().equals("두산 베어스")) {
+														if (dto.getpCategory().equals("야구용품")) {
+
+													subListbase_db.add(dto);
+														}
+													}
+												}
+												%>
+												<%
+												int last_db_1 = subListbase_db.size() < 4 ? subListbase_db.size() : 4;
+												List<ProductDto> subList_1_db = new ArrayList<ProductDto>(subListbase_db.subList(0, last_db_1));
+												for (int j = 0; j < subList_1_db.size(); j++) {
+													ProductDto dto = subList_1_db.get(j);
+												%>
 												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
 													<div class="card card-span h-100 text-white">
-														<img class="img-fluid h-100"
-															src="https://www.doosanbearswefan.shop/shop/data/goods/1527557404826m0.jpg"
+														<img class="img-fluid h-100" src="<%=dto.getpImage()%>"
 															alt="..." />
 														<div class="card-img-overlay ps-0"></div>
 														<div class="card-body ps-0 bg-200">
-															<h5 class="fw-bold text-1000 text-truncate">어센틱 배트가방</h5>
+															<h5 class="fw-bold text-1000 text-truncate"><%=dto.getpName()%></h5>
 															<div class="fw-bold">
-																<span class="text-600 me-2 text-decoration-line-through">$200</span><span
-																	class="text-primary">$175</span>
+																<span class="text-primary"><%=nf.format(dto.getPrice())%></span>
 															</div>
 														</div>
-														<a class="stretched-link" href="#"></a>
+														<a class="stretched-link"
+															href="product_detailPage.jsp?pId=<%=dto.getpId()%>"></a>
 													</div>
 												</div>
-
+												<%
+												}
+												%>
 
 											</div>
 										</div>
 
-										<!-- 두산 야구용품 두번째 페이지-->
+										<%
+										if (subListbase_db.size() > 4) {
+										%>
+										<!-- 두산 응원용품 두번째 페이지 -->
 										<div class="carousel-item">
 											<div class="row h-100 align-items-center g-2">
+												<%
+												int last_db_2 = subListbase_db.size() > 8 ? 8 : subListbase_db.size();
+												List<ProductDto> subList_2_db = new ArrayList<ProductDto>(subListbase_db.subList(4, last_db_2));
+												for (int j = 0; j < subList_2_db.size(); j++) {
+													ProductDto dto = subList_2_db.get(j);
+												%>
 												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
 													<div class="card card-span h-100 text-white">
-														<img class="img-fluid h-100"
-															src="../assets/img/gallery/shoe-1.png" alt="..." />
+														<img class="img-fluid h-100" src="<%=dto.getpImage()%>"
+															alt="..." />
 														<div class="card-img-overlay ps-0"></div>
 														<div class="card-body ps-0 bg-200">
-															<h5 class="fw-bold text-1000 text-truncate">Shoe</h5>
+															<h5 class="fw-bold text-1000 text-truncate"><%=dto.getpName()%></h5>
 															<div class="fw-bold">
-																<span class="text-600 me-2 text-decoration-line-through">$200</span><span
-																	class="text-primary">$175</span>
+																<span class="text-primary"><%=nf.format(dto.getPrice())%></span>
 															</div>
 														</div>
-														<a class="stretched-link" href="#"></a>
+														<a class="stretched-link"
+															href="product_detailPage.jsp?pId=<%=dto.getpId()%>"></a>
 													</div>
 												</div>
-
+												<%
+												}
+												%>
 
 											</div>
 										</div>
@@ -592,6 +619,9 @@ NumberFormat nf = NumberFormat.getCurrencyInstance();
 													class="visually-hidden">Next </span>
 											</button>
 										</div>
+										<%
+										}
+										%>
 									</div>
 								</div>
 
@@ -599,56 +629,85 @@ NumberFormat nf = NumberFormat.getCurrencyInstance();
 							</div>
 
 							<!-- 두산 기념상품-->
-							<div class="tab-pane fade" id="pills-doosan_commemoration"
-								role="tabpanel" aria-labelledby="pills-doosan_commemoration-tab">
-								<div class="carousel slide"
-									id="carouselCategoryDoosanCommemoration" data-bs-touch="false"
-									data-bs-interval="false">
+							<div class="tab-pane fade" id="pills-doosan_memory"
+								role="tabpanel" aria-labelledby="pills-doosan_memory-tab">
+								<div class="carousel slide" id="carouselCategoryDoosanMemory"
+									data-bs-touch="false" data-bs-interval="false">
 									<!-- 두산 기념상품 시작-->
 									<div class="carousel-inner">
 										<!-- 두산 기념상품 첫번째 페이지-->
 										<div class="carousel-item active" data-bs-interval="10000">
 											<div class="row h-100 align-items-center g-2">
+												<%
+												List<ProductDto> subListbase_dm = new ArrayList<>();
+												for (int i = 0; i < list.size(); i++) {
+													ProductDto dto = list.get(i);
+													if (dto.getTeamName().equals("두산 베어스")) {
+														if (dto.getpCategory().equals("기념상품")) {
+
+													subListbase_dm.add(dto);
+														}
+													}
+												}
+												%>
+												<%
+												int last_dm_1 = subListbase_dm.size() < 4 ? subListbase_dm.size() : 4;
+												List<ProductDto> subList_1_dm = new ArrayList<ProductDto>(subListbase_dm.subList(0, last_dm_1));
+												for (int j = 0; j < subList_1_dm.size(); j++) {
+													ProductDto dto = subList_1_dm.get(j);
+												%>
 												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
 													<div class="card card-span h-100 text-white">
-														<img class="img-fluid h-100"
-															src="https://www.doosanbearswefan.shop/shop/data/goods/1474879985163s0.jpg"
+														<img class="img-fluid h-100" src="<%=dto.getpImage()%>"
 															alt="..." />
 														<div class="card-img-overlay ps-0"></div>
 														<div class="card-body ps-0 bg-200">
-															<h5 class="fw-bold text-1000 text-truncate">2016
-																정규시즌 우승 기념 모자</h5>
+															<h5 class="fw-bold text-1000 text-truncate"><%=dto.getpName()%></h5>
 															<div class="fw-bold">
-																<span class="text-600 me-2 text-decoration-line-through">$500</span><span
-																	class="text-primary">$275</span>
+																<span class="text-primary"><%=nf.format(dto.getPrice())%></span>
 															</div>
 														</div>
-														<a class="stretched-link" href="#"></a>
+														<a class="stretched-link"
+															href="product_detailPage.jsp?pId=<%=dto.getpId()%>"></a>
 													</div>
 												</div>
-
+												<%
+												}
+												%>
 
 											</div>
 										</div>
 
-										<!-- 두산 기념상품 두번째 페이지-->
+										<%
+										if (subListbase_dm.size() > 4) {
+										%>
+										<!-- 두산 기념상품 두번째 페이지 -->
 										<div class="carousel-item">
 											<div class="row h-100 align-items-center g-2">
+												<%
+												int last_dm_2 = subListbase_dm.size() > 8 ? 8 : subListbase_dm.size();
+												List<ProductDto> subList_2_dm = new ArrayList<ProductDto>(subListbase_dm.subList(4, last_dm_2));
+												for (int j = 0; j < subList_2_dm.size(); j++) {
+													ProductDto dto = subList_2_dm.get(j);
+												%>
 												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
 													<div class="card card-span h-100 text-white">
-														<img class="img-fluid h-100"
-															src="../assets/img/gallery/watch-1.png" alt="..." />
+														<img class="img-fluid h-100" src="<%=dto.getpImage()%>"
+															alt="..." />
 														<div class="card-img-overlay ps-0"></div>
 														<div class="card-body ps-0 bg-200">
-															<h5 class="fw-bold text-1000 text-truncate">Watch</h5>
+															<h5 class="fw-bold text-1000 text-truncate"><%=dto.getpName()%></h5>
 															<div class="fw-bold">
-																<span class="text-600 me-2 text-decoration-line-through">$500</span><span
-																	class="text-primary">$275</span>
+																<span class="text-primary"><%=nf.format(dto.getPrice())%></span>
 															</div>
 														</div>
-														<a class="stretched-link" href="#"></a>
+														<a class="stretched-link"
+															href="product_detailPage.jsp?pId=<%=dto.getpId()%>"></a>
 													</div>
 												</div>
+												<%
+												}
+												%>
 
 
 											</div>
@@ -657,18 +716,21 @@ NumberFormat nf = NumberFormat.getCurrencyInstance();
 										<!-- 두산 기념상품 좌우이동-->
 										<div class="row">
 											<button class="carousel-control-prev" type="button"
-												data-bs-target="#carouselCategoryDoosanCommemoration"
+												data-bs-target="#carouselCategoryDoosanMemory"
 												data-bs-slide="prev">
 												<span class="carousel-control-prev-icon" aria-hidden="true"></span><span
 													class="visually-hidden">Previous</span>
 											</button>
 											<button class="carousel-control-next" type="button"
-												data-bs-target="#carouselCategoryDoosanCommemoration"
+												data-bs-target="#carouselCategoryDoosanMemory"
 												data-bs-slide="next">
 												<span class="carousel-control-next-icon" aria-hidden="true"></span><span
 													class="visually-hidden">Next </span>
 											</button>
 										</div>
+										<%
+										}
+										%>
 									</div>
 								</div>
 
@@ -701,10 +763,9 @@ NumberFormat nf = NumberFormat.getCurrencyInstance();
 									aria-selected="false">야구용품</button>
 							</li>
 							<li class="navv-item" role="presentation">
-								<button class="navv-link" id="pills-lotte_commemoration-tab"
-									data-bs-toggle="pill"
-									data-bs-target="#pills-lotte_commemoration" type="button"
-									role="tab" aria-controls="pills-lotte_commemoration"
+								<button class="navv-link" id="pills-lotte_memory-tab"
+									data-bs-toggle="pill" data-bs-target="#pills-lotte_memory"
+									type="button" role="tab" aria-controls="pills-lotte_memory"
 									aria-selected="false">기념상품</button>
 							</li>
 						</ul>
@@ -941,12 +1002,11 @@ NumberFormat nf = NumberFormat.getCurrencyInstance();
 							</div>
 
 							<!-- 롯데 기념상품 -->
-							<div class="tab-pane fade" id="pills-lotte_commemoration"
+							<div class="tab-pane fade" id="pills-lotte_memory"
 								style="opacity: 1" role="tabpanel"
-								aria-labelledby="pills-lotte_commemoration-tab">
-								<div class="carousel slide"
-									id="carouselCategoryLotteCommemoration" data-bs-touch="false"
-									data-bs-interval="false">
+								aria-labelledby="pills-lotte_memory-tab">
+								<div class="carousel slide" id="carouselCategoryLotteMemory"
+									data-bs-touch="false" data-bs-interval="false">
 									<!-- 롯데 기념상품 시작 -->
 									<div class="carousel-inner">
 										<!-- 롯데 기념상품 첫번째 페이지 -->
@@ -999,13 +1059,13 @@ NumberFormat nf = NumberFormat.getCurrencyInstance();
 										<!-- 롯데 기념상품 좌우이동 -->
 										<div class="row">
 											<button class="carousel-control-prev" type="button"
-												data-bs-target="#carouselCategoryLotteCommemoration"
+												data-bs-target="#carouselCategoryLotteMemory"
 												data-bs-slide="prev">
 												<span class="carousel-control-prev-icon" aria-hidden="true"></span><span
 													class="visually-hidden">Previous</span>
 											</button>
 											<button class="carousel-control-next" type="button"
-												data-bs-target="#carouselCategoryLotteCommemoration"
+												data-bs-target="#carouselCategoryLotteMemory"
 												data-bs-slide="next">
 												<span class="carousel-control-next-icon" aria-hidden="true"></span><span
 													class="visually-hidden">Next </span>
@@ -1043,10 +1103,9 @@ NumberFormat nf = NumberFormat.getCurrencyInstance();
 									aria-selected="false">야구용품</button>
 							</li>
 							<li class="navv-item" role="presentation">
-								<button class="navv-link" id="pills-samsung_commemoration-tab"
-									data-bs-toggle="pill"
-									data-bs-target="#pills-samsung_commemoration" type="button"
-									role="tab" aria-controls="pills-samsung_commemoration"
+								<button class="navv-link" id="pills-samsung_memory-tab"
+									data-bs-toggle="pill" data-bs-target="#pills-samsung_memory"
+									type="button" role="tab" aria-controls="pills-samsung_memory"
 									aria-selected="false">기념상품</button>
 							</li>
 						</ul>
@@ -1283,12 +1342,10 @@ NumberFormat nf = NumberFormat.getCurrencyInstance();
 							</div>
 
 							<!-- 삼성 기념상품 -->
-							<div class="tab-pane fade" id="pills-samsung_commemoration"
-								role="tabpanel"
-								aria-labelledby="pills-samsung_commemoration-tab">
-								<div class="carousel slide"
-									id="carouselCategorySamsungCommemoration" data-bs-touch="false"
-									data-bs-interval="false">
+							<div class="tab-pane fade" id="pills-samsung_memory"
+								role="tabpanel" aria-labelledby="pills-samsung_memory-tab">
+								<div class="carousel slide" id="carouselCategorySamsungMemory"
+									data-bs-touch="false" data-bs-interval="false">
 									<!-- 삼성 기념상품 시작 -->
 									<div class="carousel-inner">
 										<!-- 삼성 기념상품 첫번째 페이지 -->
@@ -1342,13 +1399,13 @@ NumberFormat nf = NumberFormat.getCurrencyInstance();
 										<!-- 삼성 기념상품 좌우이동 -->
 										<div class="row">
 											<button class="carousel-control-prev" type="button"
-												data-bs-target="#carouselCategorySamsungCommemoration"
+												data-bs-target="#carouselCategorySamsungMemory"
 												data-bs-slide="prev">
 												<span class="carousel-control-prev-icon" aria-hidden="true"></span><span
 													class="visually-hidden">Previous</span>
 											</button>
 											<button class="carousel-control-next" type="button"
-												data-bs-target="#carouselCategorySamsungCommemoration"
+												data-bs-target="#carouselCategorySamsungMemory"
 												data-bs-slide="next">
 												<span class="carousel-control-next-icon" aria-hidden="true"></span><span
 													class="visually-hidden">Next </span>
@@ -1386,10 +1443,9 @@ NumberFormat nf = NumberFormat.getCurrencyInstance();
 									aria-selected="false">야구용품</button>
 							</li>
 							<li class="navv-item" role="presentation">
-								<button class="navv-link" id="pills-kiwoom_commemoration-tab"
-									data-bs-toggle="pill"
-									data-bs-target="#pills-kiwoom_commemoration" type="button"
-									role="tab" aria-controls="pills-kiwoom_commemoration"
+								<button class="navv-link" id="pills-kiwoom_memory-tab"
+									data-bs-toggle="pill" data-bs-target="#pills-kiwoom_memory"
+									type="button" role="tab" aria-controls="pills-kiwoom_memory"
 									aria-selected="false">기념상품</button>
 							</li>
 						</ul>
@@ -1623,11 +1679,10 @@ NumberFormat nf = NumberFormat.getCurrencyInstance();
 							</div>
 
 							<!-- 키움 기념상품 -->
-							<div class="tab-pane fade" id="pills-kiwoom_commemoration"
-								role="tabpanel" aria-labelledby="pills-kiwoom_commemoration-tab">
-								<div class="carousel slide"
-									id="carouselCategoryKiwoomCommemoration" data-bs-touch="false"
-									data-bs-interval="false">
+							<div class="tab-pane fade" id="pills-kiwoom_memory"
+								role="tabpanel" aria-labelledby="pills-kiwoom_memory-tab">
+								<div class="carousel slide" id="carouselCategoryKiwoomMemory"
+									data-bs-touch="false" data-bs-interval="false">
 									<!-- 키움 기념상품 시작 -->
 									<div class="carousel-inner">
 										<!-- 키움 기념상품 첫번째 페이지 -->
@@ -1680,13 +1735,13 @@ NumberFormat nf = NumberFormat.getCurrencyInstance();
 										<!-- 키움 기념상품 좌우이동 -->
 										<div class="row">
 											<button class="carousel-control-prev" type="button"
-												data-bs-target="#carouselCategoryKiwoomCommemoration"
+												data-bs-target="#carouselCategoryKiwoomMemory"
 												data-bs-slide="prev">
 												<span class="carousel-control-prev-icon" aria-hidden="true"></span><span
 													class="visually-hidden">Previous</span>
 											</button>
 											<button class="carousel-control-next" type="button"
-												data-bs-target="#carouselCategoryKiwoomCommemoration"
+												data-bs-target="#carouselCategoryKiwoomMemory"
 												data-bs-slide="next">
 												<span class="carousel-control-next-icon" aria-hidden="true"></span><span
 													class="visually-hidden">Next </span>
@@ -1724,10 +1779,9 @@ NumberFormat nf = NumberFormat.getCurrencyInstance();
 									aria-selected="false">야구용품</button>
 							</li>
 							<li class="navv-item" role="presentation">
-								<button class="navv-link" id="pills-hanhwa_commemoration-tab"
-									data-bs-toggle="pill"
-									data-bs-target="#pills-hanhwa_commemoration" type="button"
-									role="tab" aria-controls="pills-hanhwa_commemoration"
+								<button class="navv-link" id="pills-hanhwa_memory-tab"
+									data-bs-toggle="pill" data-bs-target="#pills-hanhwa_memory"
+									type="button" role="tab" aria-controls="pills-hanhwa_memory"
 									aria-selected="false">기념상품</button>
 							</li>
 						</ul>
@@ -1956,11 +2010,10 @@ NumberFormat nf = NumberFormat.getCurrencyInstance();
 							</div>
 
 							<!-- 한화 기념상품 -->
-							<div class="tab-pane fade" id="pills-hanhwa_commemoration"
-								role="tabpanel" aria-labelledby="pills-hanhwa_commemoration-tab">
-								<div class="carousel slide"
-									id="carouselCategoryHanhwaCommemoration" data-bs-touch="false"
-									data-bs-interval="false">
+							<div class="tab-pane fade" id="pills-hanhwa_memory"
+								role="tabpanel" aria-labelledby="pills-hanhwa_memory-tab">
+								<div class="carousel slide" id="carouselCategoryHanhwaMemory"
+									data-bs-touch="false" data-bs-interval="false">
 									<!-- 한화 기념상품 시작 -->
 									<div class="carousel-inner">
 										<!-- 한화 기념상품 첫번째 페이지 -->
@@ -2011,13 +2064,13 @@ NumberFormat nf = NumberFormat.getCurrencyInstance();
 										<!-- 한화 기념상품 좌우이동 -->
 										<div class="row">
 											<button class="carousel-control-prev" type="button"
-												data-bs-target="#carouselCategoryHanhwaCommemoration"
+												data-bs-target="#carouselCategoryHanhwaMemory"
 												data-bs-slide="prev">
 												<span class="carousel-control-prev-icon" aria-hidden="true"></span><span
 													class="visually-hidden">Previous</span>
 											</button>
 											<button class="carousel-control-next" type="button"
-												data-bs-target="#carouselCategoryHanhwaCommemoration"
+												data-bs-target="#carouselCategoryHanhwaMemory"
 												data-bs-slide="next">
 												<span class="carousel-control-next-icon" aria-hidden="true"></span><span
 													class="visually-hidden">Next </span>
@@ -2055,10 +2108,10 @@ NumberFormat nf = NumberFormat.getCurrencyInstance();
 									aria-selected="false">야구용품</button>
 							</li>
 							<li class="navv-item" role="presentation">
-								<button class="navv-link" id="pills-kia_commemoration-tab"
-									data-bs-toggle="pill" data-bs-target="#pills-kia_commemoration"
-									type="button" role="tab"
-									aria-controls="pills-kia_commemoration" aria-selected="false">기념상품</button>
+								<button class="navv-link" id="pills-kia_memory-tab"
+									data-bs-toggle="pill" data-bs-target="#pills-kia_memory"
+									type="button" role="tab" aria-controls="pills-kia_memory"
+									aria-selected="false">기념상품</button>
 							</li>
 						</ul>
 
@@ -2285,11 +2338,10 @@ NumberFormat nf = NumberFormat.getCurrencyInstance();
 							</div>
 
 							<!-- KIA 기념상품 -->
-							<div class="tab-pane fade" id="pills-kia_commemoration"
-								role="tabpanel" aria-labelledby="pills-kia_commemoration-tab">
-								<div class="carousel slide"
-									id="carouselCategoryKiaCommemoration" data-bs-touch="false"
-									data-bs-interval="false">
+							<div class="tab-pane fade" id="pills-kia_memory" role="tabpanel"
+								aria-labelledby="pills-kia_memory-tab">
+								<div class="carousel slide" id="carouselCategoryKiaMemory"
+									data-bs-touch="false" data-bs-interval="false">
 									<!-- KIA 기념상품 시작 -->
 									<div class="carousel-inner">
 										<!-- KIA 기념상품 첫번째 페이지 -->
@@ -2340,13 +2392,13 @@ NumberFormat nf = NumberFormat.getCurrencyInstance();
 										<!-- KIA 기념상품 좌우이동 -->
 										<div class="row">
 											<button class="carousel-control-prev" type="button"
-												data-bs-target="#carouselCategoryKiaCommemoration"
+												data-bs-target="#carouselCategoryKiaMemory"
 												data-bs-slide="prev">
 												<span class="carousel-control-prev-icon" aria-hidden="true"></span><span
 													class="visually-hidden">Previous</span>
 											</button>
 											<button class="carousel-control-next" type="button"
-												data-bs-target="#carouselCategoryKiaCommemoration"
+												data-bs-target="#carouselCategoryKiaMemory"
 												data-bs-slide="next">
 												<span class="carousel-control-next-icon" aria-hidden="true"></span><span
 													class="visually-hidden">Next </span>
@@ -2384,9 +2436,9 @@ NumberFormat nf = NumberFormat.getCurrencyInstance();
 									aria-selected="false">야구용품</button>
 							</li>
 							<li class="navv-item" role="presentation">
-								<button class="navv-link" id="pills-kt_commemoration-tab"
-									data-bs-toggle="pill" data-bs-target="#pills-kt_commemoration"
-									type="button" role="tab" aria-controls="pills-kt_commemoration"
+								<button class="navv-link" id="pills-kt_memory-tab"
+									data-bs-toggle="pill" data-bs-target="#pills-kt_memory"
+									type="button" role="tab" aria-controls="pills-kt_memory"
 									aria-selected="false">기념상품</button>
 							</li>
 						</ul>
@@ -2614,9 +2666,9 @@ NumberFormat nf = NumberFormat.getCurrencyInstance();
 							</div>
 
 							<!-- KT 기념상품 -->
-							<div class="tab-pane fade" id="pills-kt_commemoration"
-								role="tabpanel" aria-labelledby="pills-kt_commemoration-tab">
-								<div class="carousel slide" id="carouselCategoryKtCommemoration"
+							<div class="tab-pane fade" id="pills-kt_memory" role="tabpanel"
+								aria-labelledby="pills-kt_memory-tab">
+								<div class="carousel slide" id="carouselCategoryKtMemory"
 									data-bs-touch="false" data-bs-interval="false">
 									<!-- KT 기념상품 시작 -->
 									<div class="carousel-inner">
@@ -2668,13 +2720,13 @@ NumberFormat nf = NumberFormat.getCurrencyInstance();
 										<!-- KT 기념상품 좌우이동 -->
 										<div class="row">
 											<button class="carousel-control-prev" type="button"
-												data-bs-target="#carouselCategoryKtCommemoration"
+												data-bs-target="#carouselCategoryKtMemory"
 												data-bs-slide="prev">
 												<span class="carousel-control-prev-icon" aria-hidden="true"></span><span
 													class="visually-hidden">Previous</span>
 											</button>
 											<button class="carousel-control-next" type="button"
-												data-bs-target="#carouselCategoryKtCommemoration"
+												data-bs-target="#carouselCategoryKtMemory"
 												data-bs-slide="next">
 												<span class="carousel-control-next-icon" aria-hidden="true"></span><span
 													class="visually-hidden">Next </span>
@@ -2712,9 +2764,9 @@ NumberFormat nf = NumberFormat.getCurrencyInstance();
 									aria-selected="false">야구용품</button>
 							</li>
 							<li class="navv-item" role="presentation">
-								<button class="navv-link" id="pills-lg_commemoration-tab"
-									data-bs-toggle="pill" data-bs-target="#pills-lg_commemoration"
-									type="button" role="tab" aria-controls="pills-lg_commemoration"
+								<button class="navv-link" id="pills-lg_memory-tab"
+									data-bs-toggle="pill" data-bs-target="#pills-lg_memory"
+									type="button" role="tab" aria-controls="pills-lg_memory"
 									aria-selected="false">기념상품</button>
 							</li>
 						</ul>
@@ -2942,9 +2994,9 @@ NumberFormat nf = NumberFormat.getCurrencyInstance();
 							</div>
 
 							<!-- LG 기념상품 -->
-							<div class="tab-pane fade" id="pills-lg_commemoration"
-								role="tabpanel" aria-labelledby="pills-lg_commemoration-tab">
-								<div class="carousel slide" id="carouselCategoryLgCommemoration"
+							<div class="tab-pane fade" id="pills-lg_memory" role="tabpanel"
+								aria-labelledby="pills-lg_memory-tab">
+								<div class="carousel slide" id="carouselCategoryLgMemory"
 									data-bs-touch="false" data-bs-interval="false">
 									<!-- LG 기념상품 시작 -->
 									<div class="carousel-inner">
@@ -2996,13 +3048,13 @@ NumberFormat nf = NumberFormat.getCurrencyInstance();
 										<!-- LG 기념상품 좌우이동 -->
 										<div class="row">
 											<button class="carousel-control-prev" type="button"
-												data-bs-target="#carouselCategoryLgCommemoration"
+												data-bs-target="#carouselCategoryLgMemory"
 												data-bs-slide="prev">
 												<span class="carousel-control-prev-icon" aria-hidden="true"></span><span
 													class="visually-hidden">Previous</span>
 											</button>
 											<button class="carousel-control-next" type="button"
-												data-bs-target="#carouselCategoryLgCommemoration"
+												data-bs-target="#carouselCategoryLgMemory"
 												data-bs-slide="next">
 												<span class="carousel-control-next-icon" aria-hidden="true"></span><span
 													class="visually-hidden">Next </span>
@@ -3040,9 +3092,9 @@ NumberFormat nf = NumberFormat.getCurrencyInstance();
 									aria-selected="false">야구용품</button>
 							</li>
 							<li class="navv-item" role="presentation">
-								<button class="navv-link" id="pills-nc_commemoration-tab"
-									data-bs-toggle="pill" data-bs-target="#pills-nc_commemoration"
-									type="button" role="tab" aria-controls="pills-nc_commemoration"
+								<button class="navv-link" id="pills-nc_memory-tab"
+									data-bs-toggle="pill" data-bs-target="#pills-nc_memory"
+									type="button" role="tab" aria-controls="pills-nc_memory"
 									aria-selected="false">기념상품</button>
 							</li>
 						</ul>
@@ -3270,9 +3322,9 @@ NumberFormat nf = NumberFormat.getCurrencyInstance();
 							</div>
 
 							<!-- NC 기념상품 -->
-							<div class="tab-pane fade" id="pills-nc_commemoration"
-								role="tabpanel" aria-labelledby="pills-nc_commemoration-tab">
-								<div class="carousel slide" id="carouselCategoryNcCommemoration"
+							<div class="tab-pane fade" id="pills-nc_memory" role="tabpanel"
+								aria-labelledby="pills-nc_memory-tab">
+								<div class="carousel slide" id="carouselCategoryNcMemory"
 									data-bs-touch="false" data-bs-interval="false">
 									<!-- NC 기념상품 시작 -->
 									<div class="carousel-inner">
@@ -3324,13 +3376,13 @@ NumberFormat nf = NumberFormat.getCurrencyInstance();
 										<!-- NC 기념상품 좌우이동 -->
 										<div class="row">
 											<button class="carousel-control-prev" type="button"
-												data-bs-target="#carouselCategoryNcCommemoration"
+												data-bs-target="#carouselCategoryNcMemory"
 												data-bs-slide="prev">
 												<span class="carousel-control-prev-icon" aria-hidden="true"></span><span
 													class="visually-hidden">Previous</span>
 											</button>
 											<button class="carousel-control-next" type="button"
-												data-bs-target="#carouselCategoryNcCommemoration"
+												data-bs-target="#carouselCategoryNcMemory"
 												data-bs-slide="next">
 												<span class="carousel-control-next-icon" aria-hidden="true"></span><span
 													class="visually-hidden">Next </span>
@@ -3368,10 +3420,10 @@ NumberFormat nf = NumberFormat.getCurrencyInstance();
 									aria-selected="false">야구용품</button>
 							</li>
 							<li class="navv-item" role="presentation">
-								<button class="navv-link" id="pills-ssg_commemoration-tab"
-									data-bs-toggle="pill" data-bs-target="#pills-ssg_commemoration"
-									type="button" role="tab"
-									aria-controls="pills-ssg_commemoration" aria-selected="false">기념상품</button>
+								<button class="navv-link" id="pills-ssg_memory-tab"
+									data-bs-toggle="pill" data-bs-target="#pills-ssg_memory"
+									type="button" role="tab" aria-controls="pills-ssg_memory"
+									aria-selected="false">기념상품</button>
 							</li>
 						</ul>
 
@@ -3598,11 +3650,10 @@ NumberFormat nf = NumberFormat.getCurrencyInstance();
 							</div>
 
 							<!-- SSG 기념상품 -->
-							<div class="tab-pane fade" id="pills-ssg_commemoration"
-								role="tabpanel" aria-labelledby="pills-ssg_commemoration-tab">
-								<div class="carousel slide"
-									id="carouselCategorySsgCommemoration" data-bs-touch="false"
-									data-bs-interval="false">
+							<div class="tab-pane fade" id="pills-ssg_memory" role="tabpanel"
+								aria-labelledby="pills-ssg_memory-tab">
+								<div class="carousel slide" id="carouselCategorySsgMemory"
+									data-bs-touch="false" data-bs-interval="false">
 									<!-- SSG 기념상품 시작 -->
 									<div class="carousel-inner">
 										<!-- SSG 기념상품 첫번째 페이지 -->
@@ -3653,13 +3704,13 @@ NumberFormat nf = NumberFormat.getCurrencyInstance();
 										<!-- SSG 기념상품 좌우이동 -->
 										<div class="row">
 											<button class="carousel-control-prev" type="button"
-												data-bs-target="#carouselCategorySsgCommemoration"
+												data-bs-target="#carouselCategorySsgMemory"
 												data-bs-slide="prev">
 												<span class="carousel-control-prev-icon" aria-hidden="true"></span><span
 													class="visually-hidden">Previous</span>
 											</button>
 											<button class="carousel-control-next" type="button"
-												data-bs-target="#carouselCategorySsgCommemoration"
+												data-bs-target="#carouselCategorySsgMemory"
 												data-bs-slide="next">
 												<span class="carousel-control-next-icon" aria-hidden="true"></span><span
 													class="visually-hidden">Next </span>
