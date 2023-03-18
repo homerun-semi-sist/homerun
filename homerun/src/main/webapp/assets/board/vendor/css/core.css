@@ -3264,9 +3264,8 @@ textarea.form-control-lg {
   flex-direction: column;
   min-width: 0;
   word-wrap: break-word;
-  background-color: #fff;
+  background-color: #F8F9FA;
   background-clip: border-box;
-  border: 0 solid #d9dee3;
   border-radius: 0.5rem;
 }
 .card > hr {
@@ -7408,6 +7407,7 @@ button.list-group-item-gray.active {
 }
 
 .card {
+  background-color: #F8F9FA;
   background-clip: padding-box;
   box-shadow: 0 2px 6px 0 rgba(67, 89, 113, 0.12);
 }
@@ -13767,7 +13767,7 @@ body {
 .media,
 .flex-column,
 .tab-content {
-    min-height: 1px;
+    min-height: 500px;
   }
 
   img {

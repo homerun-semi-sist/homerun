@@ -1,3 +1,5 @@
+<%@page import="data.dto.FreeCommentDto"%>
+<%@page import="data.dao.FreeCommentDao"%>
 <%@page import="data.dto.UserDto"%>
 <%@page import="data.dao.UserDao"%>
 <%@page import="data.dao.TeamDao"%>
@@ -99,6 +101,8 @@
 		
 		SimpleDateFormat sdf = new SimpleDateFormat("yy.MM.dd"); 
 		
+		FreeCommentDao fcDao = new FreeCommentDao();
+		
 		// 페이징 처리		
 		int totalCount;
 		int totalPage;      // 총 페이지 수 
@@ -183,6 +187,8 @@
                                 	for(FreeBoardDto fbDto : fbList) {
                                 		UserDao uDao = new UserDao();
                                 		String nickname = uDao.getUser(fbDto.getUId()).getNickname();
+                                		
+                                		int fcCnt = fcDao.getAllFCs(fbDto.getFbNum()).size();
                                 %>
                                 
                                 <!-- 
@@ -232,7 +238,8 @@
                                         	}
                                      
                                         %>
-                                    	<td><a href="freePost_detailPage.jsp?fbNum=<%=fbDto.getFbNum() %>&currentPage=<%=currentPage%>"><%=fbDto.getFbSubject() %></a></td>
+                                                                         
+                                        <td><a href="freePost_detailPage.jsp?fbNum=<%=fbDto.getFbNum() %>&currentPage=<%=currentPage%>"><%=fbDto.getFbSubject() %></a><span style="color: tomato;">&nbsp;&nbsp;[<%=fcCnt %>]</span></td>
                                         <td style="text-align: center;"><%=nickname %></td>
                                         <td style="text-align: center;"><%=sdf.format(fbDto.getFbWriteday()) %></td>
                                         <td style="text-align: center;"><%=fbDto.getFbReadCnt() %></td>

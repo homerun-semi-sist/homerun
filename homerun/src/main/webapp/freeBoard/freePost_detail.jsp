@@ -1,48 +1,73 @@
+<%@page import="data.dto.FreeCommentDto"%>
+<%@page import="java.util.List"%>
+<%@page import="data.dao.FreeCommentDao"%>
+<%@page import="data.dto.BookMarkDto"%>
+<%@page import="data.dao.BookMarkDao"%>
 <%@page import="data.dto.UserDto"%>
 <%@page import="data.dao.UserDao"%>
+<%@page import="java.text.SimpleDateFormat"%>
 <%@page import="data.dto.FreeBoardDto"%>
 <%@page import="data.dao.FreeBoardDao"%>
-<%@page import="java.text.SimpleDateFormat"%>
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=utf-8"
+	pageEncoding="utf-8"%>
 <!DOCTYPE html>
-<html>
+<html lang="en">
+
 <head>
-<meta charset="UTF-8">
-<link
-	href="https://fonts.googleapis.com/css2?family=Dongle&family=Hi+Melody&family=Jua&family=Nanum+Gothic&family=Noto+Serif+KR&family=Poor+Story&family=Stylish&family=Sunflower&display=swap"
-	rel="stylesheet">
-<link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-<script src="https://code.jquery.com/jquery-3.6.3.js"></script>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-<title>Insert title here</title>
+    <title>게시글 상세페이지</title>
+    <meta content="" name="description">
+    <meta content="" name="keywords">
 
-<style type="text/css">
-span.day {
-	color: gray;
-	font-size: 0.8em;
-}
+    <!-- Vendor CSS Files -->
+    <link href="../assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <!-- <link href="../assets/detail/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet"> -->
+    
+    <link href="../assets/detail/vendor/aos/aos.css" rel="stylesheet">
+    <link href="../assets/detail/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
+    <link href="../assets/detail/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
 
-div.aList {
-	margin-left: 10px;
-}
+ 	<!-- Core CSS -->
+	<link rel="stylesheet" href="../assets/board/vendor/css/core.css" class="template-customizer-core-css" />
+    <link rel="stylesheet" href="../assets/board/vendor/css/theme-default.css" class="template-customizer-theme-css" />
+    <link rel="stylesheet" href="../assets/board/css/demo.css" />
+    
+    <!-- Template Main CSS File -->
+    <link href="../assets/detail/css/main.css" rel="stylesheet">
+    
+    <script src="https://kit.fontawesome.com/8dcaa4675e.js" crossorigin="anonymous"></script>
+    
+    <style type="text/css">
+    	.listBtn {
+			border-radius: 4px;
+			padding: 10px 20px;
+			border: 1px solid #0b214e;
+			background-color: #0b214e;
+		  	color: #F8F9FA;
+		  	width: 80px; 
+		  	height: 40px; 
+		  	line-height: 20px;
+		  	margin-left: 1065px;
+		}
 
-span.fcDay {
-	/*  float: right; */
-	font-size: 0.8em;
-	color: gray;
-	margin-left: 10px;
-}
-</style>
-
-<script type="text/javascript">
+		.listBtn:hover {
+		 	color: #0b214e;
+		  	background-color: #f8f9fa;
+		}
+		
+		.cday {
+			color: #6c757d;
+			font-size: 0.7rem;
+		}
+    </style>
+    
+    <script type="text/javascript">
 		$(function() {
-			// 처음 시작시 리스트 호출
-			list();
 			
 			// 댓글 부분에 넣을 num 출력 호출
-			var num = $("#num").val();
+			var num = $("#fbNum").val();
 			// alert(num);
 			
 			// 댓글 insert
@@ -50,8 +75,9 @@ span.fcDay {
 				
 				var uId = $("#uId").val();
 				var content = $("#content").val();
+				// alert("클릭");
+				// alert(num + ", "+ uId + ", " + content);
 				
-				 alert(num + ", "+ uId + ", " + content);
 				$.ajax({
 					type : "get",
 					dataType : "html",
@@ -60,7 +86,6 @@ span.fcDay {
 					success : function (res) {
 
 						// 기존 입력값 지우기
-						$("#nickname").val("");
 						$("#content").val("");
 						
 						// 댓글 추가한 후 댓글 목록 다시 출력
@@ -70,98 +95,13 @@ span.fcDay {
 				})
 			});
 			
-			/* // 댓글 delete
-			$(document).on("click", ".aDel", function() {
-				var a = confirm("댓글을 삭제하려면 [확인]을 눌러주세요");
-				
-				var idx = $(this).attr("idx");
-				// alert(idx);
-				
-				if(a) {
-					$.ajax({
-						
-						type : "get",
-						url : "smartAnswer/deleteAnswer.jsp",
-						dataType : "html",
-						data : {"idx" : idx},
-						success : function() {
-							list();
-						}
-					});
-				}
-			}); */
-			
-			/* // 댓글 update
-			$(document).on("click", "#btnUpdate", function() {
-				
-				var nickname = $("#uNickname").val();
-				var content = $("#uContent").val();
-				// alert(uNickname + ", " + uContent);
-				
-				$.ajax({
-				
-					type : "get",
-					url : "smartAnswer/updateAnswer.jsp",
-					dataType : "html",
-					data : {"idx" : idx, "nickname" : nickname, "content" : content},
-					success : function () {
-						
-						alert("성공")
-						list();
-					}, 
-					statusCode : {
-						404 : function() {
-							alert("파일을 찾을 수 없음");
-						},
-						500 : function() {
-							alert("서버 오류, 코드 다시 확인 필요");
-						}
-					}
-					
-				});
-			}) */
-			
 		});		
-		
-		// list 사용자 정의 함수
-		function list() {
-
-			$.ajax({
-				
-				type : "get",
-			    url : "freeComment_list.jsp",
-			    dataType : "json",
-			    data : {"num" : $("#fbNum").val()},
-			    success:function(res){
-					// alert("성공");
-					
-					//댓글갯수출력
-					$("b.FCcnt>span").text(res.length);
-					
-					var s="";
-					
-					$.each(res,function(idx, item){
-						
-						s+="<div>" + item.nickname + " : " + item.fcContent;
-						s+="<span class='fcDay'>" + item.fcWriteday + "</sapn>&nbsp;";
-						s+="<span>추천수 : " + item.fcLike + " 비추천수 : " + item.fcDislike + 
-						s+="<span style='color: red; cursor:pointer;' class='glyphicon glyphicon-remove-circle aDel' idx=" + item.fcIdx + "></span>&nbsp;";
-						s+="<span style='color: green; cursor:pointer;' class='glyphicon glyphicon-edit aMod' idx=" + item.fcIdx + "></span>";
-						s+="<span style='color: blue; cursor:pointer;' class='	glyphicon glyphicon-bell report' idx=" + item.fcIdx + "></span>";
-						s+="</div>";
-					});
-					
-					$("div.aList").html(s);
-				}
-			   
-			});
-		}
 		
 	</script>
 </head>
 
 <body>
-	<%
+<%
 	request.setCharacterEncoding("UTF-8");
 
 	String fbNum = request.getParameter("fbNum");
@@ -183,263 +123,402 @@ span.fcDay {
 
 	UserDao uDao = new UserDao();
 	UserDto uDto = uDao.getUser(fbDto.getUId());
+	
+	BookMarkDao bDao = new BookMarkDao();
+	int bookmark = bDao.getFBBMcnt(uId, fbNum);
+	
+	FreeCommentDao fcDao = new FreeCommentDao();
+	List<FreeCommentDto> fcList = fcDao.getAllFCs(fbNum);
+%>
+	<input type="hidden" id="fbNum" name="fbNum" value="<%=fbNum %>">
+	<input type="hidden" id="uId" name="uId" value="<%=uId %>">
+	
+<!-- Layout wrapper -->
+    <div class="layout-wrapper">
+        <div class="layout-container">
 
-	%>
-	<input type="hidden" id="fbNum" name="fbNum" value="<%=fbNum%>">
+            <!-- Content wrapper -->
+            <div class="content-wrapper"">
+                <!-- Content -->
 
-	<table class="table table-condensed" style="width: 650px;">
-		<tr>
-			<td style="width: 500px;">
-				<h2>
-					[<%=fbDto.getFbCategory()%>]
-					<%=fbDto.getFbSubject()%></h2> <span style="font-size: 9pt;"><b><%=uDto.getNickname()%></b></span>
-				<span style="color: gray; font-size: 9pt;"><%=sdf.format(fbDto.getFbWriteday())%></span>&nbsp;&nbsp;&nbsp;&nbsp;
-				<span style="font-size: 9pt;">조회 : <%=fbDto.getFbReadCnt()%></span>
-				<span style="font-size: 9pt;">추천 : <%=fbDto.getFbLike()%></span> <span
-				style="font-size: 9pt;">비추천 : <%=fbDto.getFbDislike()%></span>
-			</td>
-		</tr>
+                <div class="container-xxl flex-grow-1 container-p-y">
+<!--  <main id="main"> -->
+        <!-- ======= Blog Details Section ======= -->
+        <div id="blog" class="blog col">
+            <div class="container" data-aos="fade-up" data-aos-delay="100">
+                <div class="row">
 
-		<tr>
-			<td colspan="2"><%=fbDto.getFbContent().replace("\n", "<br>")%>
-			</td>
-		</tr>
+                    <div class="col">
 
-		<tr>
-			<td colspan="2">
-				<%
-				if (!fbDto.getUId().equals(uId)) {
-				%>
-				<button type="button" class="btn btn-default" id="likeCnt"
-					num="<%=fbNum%>">추천</button> <span class="like"><%=fbDto.getFbLike()%></span>
+                        <article class="blog-details">
+                            <span class="title">[<%=fbDto.getFbCategory()%>] <%=fbDto.getFbSubject()%></span>
+                            
+                            <% 
+                            	if(loginok != null && fbDto.getUId().equals(uId)) {
+                            %>
+                            		<span style="float: right; margin-top: 20px;" onclick="funDel(<%=fbNum%>, <%=currentPage%>)">삭제</span>
+                            		<span style="float: right; margin-top: 20px;">&nbsp;&nbsp;|&nbsp;&nbsp;</span>
+                            		<span style="float: right; margin-top: 20px;" onclick="location.href='freePost_updatePage.jsp?fbNum=<%=fbDto.getFbNum()%>'">수정</span>                            		
+                            <%	
+                            	} else {
+                            %>
+                            		<span style="float: right; margin-top: 20px; color:red;">신고&nbsp;<i class="fa-solid fa-bullhorn"></i><!-- <i class="fa-solid fa-bell-concierge"></i> --></span>
+                            <%
+                            	}
+                            %>
+                           
+                            
+                            <div class="meta-top">
+                                <span style="font-size: 17px;"><i class="fa-regular fa-user"></i><%=uDto.getNickname()%></span>                   
+                                <span id="dlcnt" style="float: right;"><i class="fa-regular fa-thumbs-down"></i><%=fbDto.getFbDislike()%></span>
+                                <span style="float: right;">&nbsp;&nbsp;|&nbsp;&nbsp;</span>
+                                <span id="lcnt" style="float: right;"><i class="fa-regular fa-thumbs-up"></i><%=fbDto.getFbLike()%></span>
+                                <span style="float: right;">&nbsp;&nbsp;|&nbsp;&nbsp;</span>
+                                <span style="float: right;"><i class="fa-regular fa-eye"></i><%=fbDto.getFbReadCnt()%></span>
+                                <span style="float: right;">&nbsp;&nbsp;|&nbsp;&nbsp;</span>
+                                <span style="float: right;"><i class="fa-regular fa-calendar"></i><%=sdf.format(fbDto.getFbWriteday())%></span>
+                            </div><!-- End meta top -->
+							<hr>
+                            <div class="content" style="min-height: 500px;">
+                                <%=fbDto.getFbContent().replace("\n", "<br>")%>
 
-				<button type="button" class="btn btn-default" id="dislikeCnt"
-					num="<%=fbNum%>">비추천</button> <span class="dislike"><%=fbDto.getFbDislike()%></span>
+                            </div><!-- End post content -->
 
-				<button type="button" class="btn btn-default" id="report"
-					num="<%=fbNum%>">신고</button> <span class="report"><%=fbDto.getFbReport()%></span>
+                            <div class="meta-bottom" style="text-align: center; height: 100px;">
+                                <%-- <span style="font-size: 30px; margin: 20px; cursor: pointer;" id="likeCnt"
+					num="<%=fbNum%>"><i class="fa-regular fa-thumbs-up"  style="color: blue;"></i></span> --%>
+								<span class="fa-regular fa-thumbs-up" style="font-size: 30px; margin: 20px; cursor: pointer;color: blue;" id="likeCnt"
+					num="<%=fbNum%>"></span>
+                                <span class="fa-regular fa-thumbs-down" style="font-size: 30px; margin: 20px; cursor: pointer; color: red;" id="dislikeCnt"
+					num="<%=fbNum%>"></span>
+								
+								<%
+									if(bookmark != 0) {
+								%>
+									<span class="fa-solid fa-heart" style="font-size: 30px; margin: 20px; cursor: pointer; color: pink;" id="bookmark"
+					num="<%=fbNum%>"></span>
+								<%
+									} else {
+								%>
+										<span class="fa-regular fa-heart" style="font-size: 30px; margin: 20px; cursor: pointer; color: pink;" id="bookmark"
+					num="<%=fbNum%>"></span>
+								<%
+									}
+								%>
+					
+                                
+             
+                            </div><!-- End meta bottom -->
 
-				<button type="button" class="btn btn-default" id="bookmark"
-					num="<%=fbNum%>">찜</button> <%
- }
- %>
+                        </article><!-- End blog post -->
 
-				<button type="button" class="btn btn-default"
-					onclick="location.href='freeBoard_listPage.jsp?currentPage=<%=currentPage%>'">목록</button>
+   
+					    <div style="margin-top: 30px;">
+					   		<button type="button" class="listBtn" onclick="location.href='freeBoard_listPage.jsp?currentPage=<%=currentPage%>'">목록</button> 
+					    </div>
+						
+                        
+                        <div class="comments">
+                            <div class="card" style="border: 0px solid gray;">
+                                <div class="card-body">
+                                
+                                	<div class="d-flex">
+                                        <div class="ms-3">
+                                            <span><i class="fa-regular fa-comment-dots"></i>&nbsp;댓글&nbsp;<b><%=fcList.size() %></b>개</a></span>
+                                        </div>
+                                    </div><hr>
+         				
+	                   				<%
+	                   					for(FreeCommentDto fcDto : fcList) {
+	                   						int i = 1;
+	                   						
+	                   						String fcNick = uDao.getUser(fcDto.getUId()).getNickname();
+	                   						
+	                   						// 로그인 한 사용자 = 댓글 작성자
+	                   						if(loginok != null && fcNick.equals(uDao.getUser(uId).getNickname())) {
+	                   				%>
+	                   							<div class="d-flex">
+			                                        <div class="ms-3">
+			                                            <div class="fw-bold"><i class="fa-solid fa-user"></i>&nbsp;<%=i %>. <%=fcNick %> <span class="cday"><%=sdf.format(fcDto.getFcWriteday()) %> | <span>수정</span> | <span> 삭제 </span></span></div>
+			                                            <%=fcDto.getFcContent() %>
+			                                        </div>
+			                                    </div><br>
+	                   				<%		
+	                   						// 글 작성자 = 댓글 작성자			
+	                   						} else if(fcNick.equals(uDao.getUser((fbDao.getFB(fbNum).getUId())).getNickname())) {
+	                   				%>
+	                   							<div class="d-flex">
+			                                        <div class="ms-3">
+			                                            <div class="fw-bold"><i class="fa-solid fa-user"></i>&nbsp;<%=i %>. <%=fcNick %> <span style="color: red; border: 1px solid red; border-radius: 5px;">작성자</span> <span class="cday"><%=sdf.format(fcDto.getFcWriteday()) %> | <span>수정</span> | <span> 삭제 </span></span></div>
+			                                            <%=fcDto.getFcContent() %>
+			                                        </div>
+			                                    </div><br>
+	                   				<%		
+	                   						// 일반 회원
+	                   						} else {
+	                   				%>
+		                   						<div class="d-flex">
+			                                        <div class="ms-3">
+			                                            <div class="fw-bold"><i class="fa-solid fa-user"></i>&nbsp;<%=i %>. <%=fcNick %> <span class="cday"><%=sdf.format(fcDto.getFcWriteday()) %> | <span>추천</span> | <span> 비추천 </span> | <span> 신고 </span></span></div>
+			                                            <%=fcDto.getFcContent() %>
+			                                        </div>
+			                                    </div><br>
+	                   				<%				
+	                   						}
+	                   						
+	                   					i++; 
+										} 
+									%>
+									<!--
+                                    <div class="d-flex">                                   
+                                        <div class="ms-3">
+                                            <div class="fw-bold"><i class="fa-solid fa-user"></i>&nbsp;1. 닉네임 <span class="cday">날짜 | <span>수정</span> | <span> 삭제 </span></span></div>
+                                            댓글 내용1
+                                        </div>
+                                    </div><br>
+									
+                                    <div class="d-flex">
+                                        <div class="flex-shrink-0"><img class="rounded-circle"
+                                                src="https://dummyimage.com/50x50/ced4da/6c757d.jpg" alt="..." /></div>
+                                        <div class="ms-3">
+                                            <div class="fw-bold">2. 닉네임</div>
+                                            댓글 내용2
+                                        </div>
+                                    </div>  -->
+                                    
+                                </div>
+                            </div>
 
-				<%
-				if (loginok != null && fbDto.getUId().equals(uId)) {
-				%>
-				<button type="button" class="btn btn-default"
-					onclick="location.href='freePost_updatePage.jsp?fbNum=<%=fbDto.getFbNum()%>'">수정</button>
-				<button type="button" class="btn btn-default"
-					onclick="funDel(<%=fbNum%>, <%=currentPage%>)">삭제</button> <%
- }
- %>
-			</td>
-		</tr>
+                        </div>
+                        
+                        <%
+                        	if(loginok == null) {
+                        %>
+                        		<div class="comments">
+		                        	<div class="reply-form">	                           
+			                            <div class="row">
+			                            	<span>&nbsp;<i class="fa-solid fa-user-pen"></i>&nbsp;비회원</span>
+			                            </div>
+			                            <div class="row" style="margin-top: 20px;">
+		                    				<div class="col-11 form-group">
+		                      					<textarea name="content" id="content" class="form-control" placeholder="비회원은 로그인 후 이용 가능합니다" readonly="readonly"></textarea>
+						                    </div>
+						                    <div class="col-1">
+						                      <button type="button" id="loginNoBtn" class="btn btn-primary" style="width: 80px; height: 40px; line-height: 20px;">입력</button>
+						                    </div>
+		                 				 </div>	                          
+		                        	</div>
+								</div>      
+                        <%
+                        	} else {
+                        %>
+                        		<div class="comments">
+		                        	<div class="reply-form">	                           
+			                            <div class="row">
+			                            	<span>&nbsp;&nbsp;<i class="fa-solid fa-user-pen"></i>&nbsp;&nbsp;<b><%=uDao.getUser(uId).getNickname() %></b></span>
+			                            </div>
+			                            <div class="row" style="margin-top: 20px;">
+		                    				<div class="col-11 form-group">
+		                      					<textarea name="content" id="content" class="form-control" placeholder="댓글 입력"></textarea>
+						                    </div>
+						                    <div class="col-1">
+						                      <button type="button" id="cInsertBtn" class="btn btn-primary" style="width: 80px; height: 40px; line-height: 20px;">입력</button>
+						                    </div>
+		                 				 </div>	                          
+		                        	</div>
+								</div>             
+                        <%		
+                        	}
+                        %>
+                                             
+                    </div>
+                </div>
+            </div>
+        </div><!-- End Blog Details Section -->
 
-		<!-- 댓글 -->
-		<tr>
-			<td>
-				<b class="FCcnt">댓글 <span>0</span></b>
-				<div class="aForm form-inline">
-					<input type="hidden" id="num" name="num" value="<%=fbNum%>">
-					<input type="hidden" id="uId" name="uId" value="<%=uId%>">
-					<span><%=uDao.getUser(uId).getNickname()%></span> <input
-						type="text" id="content" class="form-control"
-						style="width: 400px;" placeholder="댓글 입력">&nbsp;&nbsp;
-					<button type="button" id="cInsertBtn" class="btn btn-info">입력</button>
-				</div>
-				<div class="aList">댓글 목록</div>
-			</td>
-		</tr>
-	</table>
-
-
-
-
-	<%-- <div style="margin-left: 400px;">
-		<%
-			if(!fbDto.getUId().equals(uId)) {
-		%>
-				<button type="button" class="btn btn-default" id="likeCnt"
-					num="<%=fbNum%>">추천</button>
-				<span class="like"><%=fbDto.getFbLike()%></span>
-		
-				<button type="button" class="btn btn-default" id="dislikeCnt"
-					num="<%=fbNum%>">비추천</button>
-				<span class="dislike"><%=fbDto.getFbDislike()%></span>
-		
-				<button type="button" class="btn btn-default" id="report"
-					num="<%=fbNum%>">신고</button>
-				<span class="report"><%=fbDto.getFbReport()%></span>
-		
-				<button type="button" class="btn btn-default" id="bookmark"
-					num="<%=fbNum%>">찜</button>
-		<%
-			}
-		%>
-		
-		<br> <br>
-		<button type="button" class="btn btn-default"
-			onclick="location.href='freeBoard_listPage.jsp?currentPage=<%=currentPage%>'">목록</button>
-
-		<%
-			if(loginok != null && fbDto.getUId().equals(uId)) {
-		%>
-			<button type="button" class="btn btn-default"
-				onclick="location.href='freePost_updatePage.jsp?fbNum=<%=fbDto.getFbNum()%>'">수정</button>
-			<button type="button" class="btn btn-default"
-				onclick="funDel(<%=fbNum%>, <%=currentPage%>)">삭제</button>
-		<%
-			}
-		%>
-	</div> --%>
-
+   <!--  </main> --><!-- End #main -->
+    
+    </div>
+    </div>
+</div>
+    </div>
 	<script type="text/javascript">
-		
-			// 추천수 증가
-			$("#likeCnt").click(function() {
-				var login = '<%=loginok%>';
-				
-				// alert(login);
-				if(login == "yes") {
-				
-					var num = $(this).attr("num");
-					var tag = $(this);
-					
-					// alert(num);
-				 	
-					$.ajax({
-						
-						type : "get",
-						dataType : "json",
-						url : "freePost_like.jsp",
-						data : {"num" : num},
-						success : function(res) {
-						
-							// alert(res.like);
-							tag.next().text(res.like);
-							tag.css("background-color", "pink");
-							
-						}
-						
-					}); 
-				}
-				else 
-					alert("로그인 후 이용 가능합니다");
-				
-			});
-
-			// 비추천수 증가
-			$("#dislikeCnt").click(function() {
-				var login = '<%=loginok%>';
-				
-				if(login == "yes") {
-					
-					var num = $(this).attr("num");
-					var tag = $(this);	
-					
-					// alert(num);
-					
-					$.ajax({
-						
-						type : "get",
-						dataType : "json",
-						url : "freePost_dislike.jsp",
-						data : {"num" : num},
-						success : function(res) {
-						
-							// alert(res.dislike);
-							tag.next().text(res.dislike);
-							tag.css("background-color", "pink");
-							
-						}
-						
-					});  
-				} else 
-					alert("로그인 후 이용 가능합니다");
-			});
-			
-			// 신고수 증가
-			$("#report").click(function() {
+	
+		// 추천수 증가
+		$("#likeCnt").click(function() {
 			var login = '<%=loginok%>';
+			
+			/* $(this).removeClass("fa-regular");
+			$(this).addClass("fa-solid").css("color", "blue").animate({"font-size" : "40px"}, 1000, function() {
+				$(this).removeClass("fa-solid");
+				$(this).addClass("fa-regular").css("font-size", "30px");
+			}); */
+			
+			
+			// alert(login);
+			if(login == "yes") {
+			
+				var num = $(this).attr("num");
+				var tag = $(this);
 				
-				if(login == "yes")  {
+				// alert(num);
+			 	
+				$.ajax({
 					
-					var num = $(this).attr("num");
-					var tag = $(this);	
+					type : "get",
+					dataType : "json",
+					url : "freePost_like.jsp",
+					data : {"num" : num},
+					success : function(res) {
 					
-					// alert(num);
-					
-					$.ajax({
+						// alert(res.like);
 						
-						type : "get",
-						dataType : "json",
-						url : "freePost_report.jsp",
-						data : {"num" : num},
-						success : function(res) {
-							
-							// alert(res.flag);
-							
-							if(res.flag == true)
-								alert("게시글을 신고하였습니다")
-							else 
-								alert("이미 신고한 게시글입니다")
-		
-							tag.css("background-color", "pink");	
-						}
-					});
-				} else
-					alert("로그인 후 이용 가능합니다");
-				
-			});
-			
-			// 찜
-			$("#bookmark").click(function() {
-				var login = '<%=loginok%>';
-				
-				if(login == "yes")  {
-					
-					var num = $(this).attr("num");
-					var tag = $(this);	
-					
-					// alert(num);
-					
-					$.ajax({
+						tag.addClass("fa-solid").animate({"color" : "blue"}, 1000, function() {
+							tag.removeClass("fa-solid");
+							tag.addClass("fa-regular").css("font-size", "30px");
+						});
 						
-						type : "get",
-						dataType : "json",
-						url : "freePost_bookmark.jsp",
-						data : {"num" : num},
-						success : function(res) {
-							
-							// alert(res.flag);
-							
-							if(res.flag == true)
-								alert("찜한 게시글은 마이페이지에서 확인가능합니다")
-							else 
-								alert("이미 찜한 게시글입니다. 마이페이지에서 확인해주세요")
-		
-							tag.css("background-color", "pink");	
-						}
-					});
-				} else
-					alert("로그인 후 이용 가능합니다");
-				
-			});
-			
-			
-			
-			function funDel(num, currentPage) {
-				
-				var a = confirm("삭제하려면 [확인]을 눌러주세요");
-				
-				if(a) {
-					location.href="freePost_delete.jsp?fbNum=<%=fbDto.getFbNum()%>";
-				}
+					}
+					
+				});
 			}
-		</script>
+			//else 
+				//alert("로그인 후 이용 가능합니다");
+			
+			//tag.innerHTML = "<i class="fa-solid fa-thumbs-up"></i>"
+		});
+
+		// 비추천수 증가
+		$("#dislikeCnt").click(function() {
+			var login = '<%=loginok%>';
+			
+			if(login == "yes") {
+				
+				var num = $(this).attr("num");
+				var tag = $(this);	
+				
+				// alert(num);
+				
+				$.ajax({
+					
+					type : "get",
+					dataType : "json",
+					url : "freePost_dislike.jsp",
+					data : {"num" : num},
+					success : function(res) {
+					
+						// alert(res.dislike);
+				
+						tag.addClass("fa-solid").animate({"color" : "red"}, 1000, function() {
+							tag.removeClass("fa-solid");
+							tag.addClass("fa-regular").css("font-size", "30px");
+						});
+						
+					}
+					
+				});
+			} else 
+				alert("로그인 후 이용 가능합니다");
+		});
+		
+		// 신고수 증가
+		$("#report").click(function() {
+		var login = '<%=loginok%>';
+			
+			if(login == "yes")  {
+				
+				var num = $(this).attr("num");
+				var tag = $(this);	
+				
+				// alert(num);
+				
+				$.ajax({
+					
+					type : "get",
+					dataType : "json",
+					url : "freePost_report.jsp",
+					data : {"num" : num},
+					success : function(res) {
+						
+						// alert(res.flag);
+						
+						if(res.flag == true) {
+							var a = confirm("신고하려면 [확인]을 눌러주세요\n한번 신고한 글을 취소가 불가능합니다");
+							
+							if(a)
+								alert("게시글을 신고하였습니다");
+						}
+						else 
+							alert("이미 신고한 게시글입니다");
+	
+					}
+				}); 
+			} else
+				alert("로그인 후 이용 가능합니다");
+			
+		});
+		
+		// 찜
+		$("#bookmark").click(function() {
+			var login = '<%=loginok%>';
+			
+			if(login == "yes")  {
+				
+				var num = $(this).attr("num");
+				var tag = $(this);	
+				
+				// alert(num);
+				
+				$.ajax({
+					
+					type : "get",
+					dataType : "json",
+					url : "freePost_bookmark.jsp",
+					data : {"num" : num},
+					success : function(res) {
+						
+						// alert(res.flag);
+						
+						if(res.flag == true) {
+							tag.addClass("fa-solid").css("color", "pink");
+							
+							alert("찜한 게시글은 마이페이지에서 확인가능합니다");
+						}
+						else  
+							alert("이미 찜한 게시글입니다. 마이페이지에서 확인해주세요")
+
+					}
+				}); 
+			} else
+				alert("로그인 후 이용 가능합니다");
+			
+		});
+		
+		
+		
+		function funDel(num, currentPage) {
+			
+			var a = confirm("삭제하려면 [확인]을 눌러주세요");
+			
+			if(a) {
+				location.href="freePost_delete.jsp?fbNum=<%=fbDto.getFbNum()%>";
+			}
+		}
+	</script>
+		
+
+    <!-- Vendor JS Files -->
+    <script src="../assets/detail/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="../assets/detail/vendor/aos/aos.js"></script>
+    <script src="../assets/detail/vendor/glightbox/js/glightbox.min.js"></script>
+    <script src="../assets/detail/vendor/isotope-layout/isotope.pkgd.min.js"></script>
+    <script src="../assets/detail/vendor/swiper/swiper-bundle.min.js"></script>
+    <script src="../assets/detail/vendor/purecounter/purecounter_vanilla.js"></script>
+    <script src="../assets/detail/vendor/php-email-form/validate.js"></script>
+
+    <!-- Template Main JS File -->
+    <script src="../assets/detail/js/main.js"></script>
+
 </body>
+
 </html>
