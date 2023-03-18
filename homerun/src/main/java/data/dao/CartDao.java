@@ -72,11 +72,12 @@ public class CartDao {
 		Connection conn = db.getConnection();
 		PreparedStatement pstmt=null;
 		
-		String sql="delete from cart where cId=?";
+		String sql="delete from CART where cId=?";
 		
 		try {
 			pstmt=conn.prepareStatement(sql);
 			pstmt.setString(1, cId);
+			pstmt.execute();
 			
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -96,6 +97,7 @@ public class CartDao {
 			pstmt=conn.prepareStatement(sql);
 			pstmt.setInt(1, dto.getcId());
 			pstmt.setInt(2, dto.getoQTY());
+			pstmt.execute();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

@@ -3,7 +3,7 @@ package data.dto;
 import java.sql.Timestamp;
 
 public class CartDto {
-	private int cId; //cart id
+	private String cId; //cart id
 	private String uId; //user id
 	private String pId; //상품 id 
 	private int cQTY; // 
@@ -15,10 +15,10 @@ public class CartDto {
 	public void setCartDay(Timestamp cartDay) {
 		this.cartDay = cartDay;
 	}
-	public int getcId() {
+	public String getcId() {
 		return cId;
 	}
-	public void setcId(int cId) {
+	public void setcId(String cId) {
 		this.cId = cId;
 	}
 	public String getuId() {

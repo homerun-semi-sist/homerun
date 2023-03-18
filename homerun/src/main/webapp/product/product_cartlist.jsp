@@ -55,7 +55,8 @@ div.pName, span.del {
 }
 
 #usercart {
-	width: 86.5%; height : 50px;
+	width: 86.5%;
+	height: 50px;
 	background-color: #0b214e;
 	border: 1px solid black;
 	color: white;
@@ -74,7 +75,7 @@ div.pName, span.del {
 
 			var chk = $(this).is(":checked");
 
-			$(".cId").prop("checked", chk);
+			$("td.cId").prop("checked", chk);
 		});
 
 		//상품선택시 디테일페이지 이동
@@ -83,7 +84,8 @@ div.pName, span.del {
 						function() {
 
 							var pName = $(this).attr("pId");
-							location.href = "index.jsp?main=product/product_detailPage.jsp?pId="+ pId;
+							location.href = "index.jsp?main=product/product_detailPage.jsp?pId="
+									+ pId;
 
 						});
 
@@ -104,9 +106,9 @@ div.pName, span.del {
 		//선택한 상품 삭제버튼
 		$("#btncartdel").click(function() {
 
-			//체크한 갯수
+			//체크한 개수
 			var cQTY = $(".cId:checked").length;
-			//alert(cnt);
+			alert(cQTY);
 			if (cQTY == 0) {
 
 				alert("삭제할 상품을 선택해주세요");
@@ -131,10 +133,12 @@ div.pName, span.del {
 
 			type : "get",
 			dataType : "html",
-			url : "product/product_cartdelete.jsp",
-			data : {"cId" : cId	},
+			url : "produnct/product_cartdelete.jsp",
+			data : {
+				"cId" : cId
+			},
 			success : function() {
-				
+
 			}
 
 		});
@@ -143,7 +147,7 @@ div.pName, span.del {
 </head>
 <%
 UserDao udao = new UserDao();
-String uid=(String)session.getAttribute("uid");
+String uid = (String) session.getAttribute("uid");
 
 //String name=udao.getuName(uid);
 
@@ -195,8 +199,9 @@ NumberFormat nf = NumberFormat.getInstance();
 								<tr>
 									<th style="width: 30px;"><input type="checkbox"
 										id="allcheck"></th>
-									<th style="width: 200px; font-size: 1.2em;">상품정보</th>
-									<th style="width: 200px; font-size: 1.2em;">상품금액</th>
+									<th style="width: 400px; font-size: 1.2em; text-align: center;">상품정보</th>
+									<th style="width: 150px; font-size: 1.2em; text-align: center;">상품옵션</th>
+									<th style="width: 200px; font-size: 1.2em; text-align: center;">상품금액</th>
 								</tr>
 
 								<%
@@ -213,17 +218,20 @@ NumberFormat nf = NumberFormat.getInstance();
 									<td><input type="checkbox" name="cId" class="cId"
 										cId="<%=map.get("cId")%>"></td>
 
-									<td>
+									<td style="line-height: 100px;">
 										<div pId="<%=map.get("pId")%>" class="pName">
-											<img src="<%=photo %>" class="photo" align="left" hspace="20">
+											<img src="<%=photo%>" class="photo" align="left" hspace="20">
 
 											<h5>
-												상품명: <%=map.get("pName")%>
+												상품명:
+												<%=map.get("pName")%>
 											</h5>
-											<h5>
-												개수: <%=cQTY%>개
-												
-											</h5>
+											<td>
+												<h5>
+													개수:
+													<%=cQTY%>개
+												</h5>
+											</td>
 										</div>
 									</td>
 
@@ -231,15 +239,15 @@ NumberFormat nf = NumberFormat.getInstance();
 										<%
 										int price = Integer.parseInt(map.get("price"));
 										price *= cQTY;
-										total = total + price ;
+										total = total + price;
 										%>
-										<h4>
-											<%=nf.getCurrencyInstance(Locale.KOREA).format(price)%> <span
-												class="glyphicon glyphicon-trash del" style="color: red;"
-												cId="<%=map.get("cId")%>"></span>
-										</h4>
+										<div>
+											<%=nf.getCurrencyInstance(Locale.KOREA).format(price)%>
+											<span class="glyphicon glyphicon-trash del"
+												style="color: red;" cId="<%=map.get("cId")%>"></span>
+										</div>
 
-										<hr>
+
 									</td>
 								</tr>
 
@@ -248,14 +256,14 @@ NumberFormat nf = NumberFormat.getInstance();
 								%>
 
 								<tr>
-									<td colspan="3">
+									<td colspan="4" >
 										<button type="button" class="btn1" style="margin-left: 800px;"
 											id="btncartdel">선택상품삭제</button>
-											<button type="button" class="btn1" style="margin-left: 800px;"
-											id="btncartdel" onclick="location.href='product_success.jsp'">구매하기</button>
-										<h3 style="font-size: 2em;">
+										<button type="button" class="btn1" style="margin-left: 800px;"
+											onclick="location.href='product_success.jsp'">구매하기</button>
+										<span style="font-size: 2em;"><b><br>
 											총 주문금액:
-											<%=nf.getCurrencyInstance(Locale.KOREA).format(total)%></h3>
+											<%=nf.getCurrencyInstance(Locale.KOREA).format(total)%></b></span>
 									</td>
 								</tr>
 
@@ -271,8 +279,6 @@ NumberFormat nf = NumberFormat.getInstance();
 	<div class="main_footer">
 		<jsp:include page="../layout/footer.jsp" />
 	</div>
-	<script type="text/javascript">
-		alert('<%=cartSize %>' + " : "+ '<%=uid %>' + " : " + );
-	</script>
+
 </body>
 </html>
