@@ -770,7 +770,7 @@ NumberFormat nf = NumberFormat.getCurrencyInstance();
 											<div class="row h-100 align-items-center g-2">
 												<%
 												int last_lt = subListbase_lt.size() > 8 ? 8 : subListbase_lt.size();
-												List<ProductDto> subList_2_lt = new ArrayList<ProductDto>(subListbase_lt.subList(5, last_lt));
+												List<ProductDto> subList_2_lt = new ArrayList<ProductDto>(subListbase_lt.subList(4, last_lt));
 												for (int j = 0; j < subList_2_lt.size(); j++) {
 													ProductDto dto = subList_2_lt.get(j);
 												%>
