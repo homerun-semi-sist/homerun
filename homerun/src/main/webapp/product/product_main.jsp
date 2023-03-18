@@ -318,13 +318,14 @@ NumberFormat nf = NumberFormat.getCurrencyInstance();
 													if (dto.getTeamName().equals("두산 베어스")) {
 														if (dto.getpCategory().equals("팀웨어")) {
 
-															subListbase_dt.add(dto);
+													subListbase_dt.add(dto);
 														}
 													}
 												}
 												%>
 												<%
-												List<ProductDto> subList_1_dt = new ArrayList<ProductDto>(subListbase_dt.subList(0, 4));
+												int last_dt_1 = subListbase_dt.size() <= 4 ? subListbase_dt.size() : 4;
+												List<ProductDto> subList_1_dt = new ArrayList<ProductDto>(subListbase_dt.subList(0, last_dt_1));
 												for (int j = 0; j < subList_1_dt.size(); j++) {
 													ProductDto dto = subList_1_dt.get(j);
 												%>
@@ -351,7 +352,9 @@ NumberFormat nf = NumberFormat.getCurrencyInstance();
 											</div>
 										</div>
 
-
+										<%
+										if (subListbase_dt.size() >= 5) {
+										%>
 										<!-- 두산 팀웨어 두번째 페이지 -->
 										<div class="carousel-item">
 											<div class="row h-100 align-items-center g-2">
@@ -400,6 +403,9 @@ NumberFormat nf = NumberFormat.getCurrencyInstance();
 											</button>
 										</div>
 
+										<%
+										}
+										%>
 
 									</div>
 								</div>
@@ -411,56 +417,89 @@ NumberFormat nf = NumberFormat.getCurrencyInstance();
 								role="tabpanel" aria-labelledby="pills-doosan_cheering-tab">
 								<div class="carousel slide" id="carouselCategoryDoosanCheering"
 									data-bs-touch="false" data-bs-interval="false">
+
 									<!-- 두산 응원용품 시작 -->
 									<div class="carousel-inner">
 										<!-- 두산 응원용품 첫번째 페이지 -->
 										<div class="carousel-item active" data-bs-interval="10000">
 											<div class="row h-100 align-items-center g-2">
-													<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
+												<%
+												List<ProductDto> subListbase_dc = new ArrayList<>();
+												for (int i = 0; i < list.size(); i++) {
+													ProductDto dto = list.get(i);
+													if (dto.getTeamName().equals("두산 베어스")) {
+														if (dto.getpCategory().equals("응원용품")) {
+
+													subListbase_dc.add(dto);
+														}
+													}
+												}
+												%>
+												<%
+												int last_dc_1 = subListbase_dc.size() <= 4 ? subListbase_dc.size() : 4;
+												List<ProductDto> subList_1_dc = new ArrayList<ProductDto>(subListbase_dc.subList(0, last_dc_1));
+												for (int j = 0; j < subList_1_dc.size(); j++) {
+													ProductDto dto = subList_1_dc.get(j);
+												%>
+												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
 													<div class="card card-span h-100 text-white">
-														<img class="img-fluid h-100"
-															src="https://www.doosanbearswefan.shop/shop/data/goods/1393576360193s0.JPG"
+														<img class="img-fluid h-100" src="<%=dto.getpImage()%>"
 															alt="..." />
 														<div class="card-img-overlay ps-0"></div>
 														<div class="card-body ps-0 bg-200">
-															<h5 class="fw-bold text-1000 text-truncate">투명우산</h5>
+															<h5 class="fw-bold text-1000 text-truncate"><%=dto.getpName()%></h5>
 															<div class="fw-bold">
-																<span class="text-600 me-2 text-decoration-line-through">$200</span><span
-																	class="text-primary">$175</span>
+																<span class="text-primary"><%=nf.format(dto.getPrice())%></span>
 															</div>
 														</div>
-														<a class="stretched-link" href="#"></a>
+														<a class="stretched-link"
+															href="product_detailPage.jsp?pId=<%=dto.getpId()%>"></a>
 													</div>
 												</div>
-												
-												
+												<%
+												}
+												%>
+
+
 											</div>
 										</div>
 
-										<!-- 두산 응원용품 두번째 페이지-->
+										<%
+										if (subListbase_dc.size() >= 5) {
+										%>
+										<!-- 두산 응원용품 두번째 페이지 -->
 										<div class="carousel-item">
 											<div class="row h-100 align-items-center g-2">
+												<%
+												int last_dc_2 = subListbase_dc.size() >= 8 ? 9 : subListbase_dc.size();
+												List<ProductDto> subList_2_dc = new ArrayList<ProductDto>(subListbase_dc.subList(5, last_dc_2));
+												for (int j = 0; j < subList_2_dc.size(); j++) {
+													ProductDto dto = subList_2_dc.get(j);
+												%>
 												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
 													<div class="card card-span h-100 text-white">
-														<img class="img-fluid h-100"
-															src="../assets/img/gallery/shirt-1.png" alt="..." />
+														<img class="img-fluid h-100" src="<%=dto.getpImage()%>"
+															alt="..." />
 														<div class="card-img-overlay ps-0"></div>
 														<div class="card-body ps-0 bg-200">
-															<h5 class="fw-bold text-1000 text-truncate">Shirt</h5>
+															<h5 class="fw-bold text-1000 text-truncate"><%=dto.getpName()%></h5>
 															<div class="fw-bold">
-																<span class="text-600 me-2 text-decoration-line-through">$200</span><span
-																	class="text-primary">$175</span>
+																<span class="text-primary"><%=nf.format(dto.getPrice())%></span>
 															</div>
 														</div>
-														<a class="stretched-link" href="#"></a>
+														<a class="stretched-link"
+															href="product_detailPage.jsp?pId=<%=dto.getpId()%>"></a>
 													</div>
 												</div>
-												
-												
+												<%
+												}
+												%>
+
 											</div>
 										</div>
 
-										<!-- 두산 응원용품 좌우이동-->
+
+										<!-- 두산 응원용품 좌우이동 -->
 										<div class="row">
 											<button class="carousel-control-prev" type="button"
 												data-bs-target="#carouselCategoryDoosanCheering"
@@ -475,10 +514,13 @@ NumberFormat nf = NumberFormat.getCurrencyInstance();
 													class="visually-hidden">Next </span>
 											</button>
 										</div>
+										<%
+										}
+										%>
+
 									</div>
 								</div>
 
-								
 							</div>
 
 							<!-- 두산 야구용품 -->
@@ -507,8 +549,8 @@ NumberFormat nf = NumberFormat.getCurrencyInstance();
 														<a class="stretched-link" href="#"></a>
 													</div>
 												</div>
-												
-												
+
+
 											</div>
 										</div>
 
@@ -530,8 +572,8 @@ NumberFormat nf = NumberFormat.getCurrencyInstance();
 														<a class="stretched-link" href="#"></a>
 													</div>
 												</div>
-												
-												
+
+
 											</div>
 										</div>
 
@@ -553,7 +595,7 @@ NumberFormat nf = NumberFormat.getCurrencyInstance();
 									</div>
 								</div>
 
-								
+
 							</div>
 
 							<!-- 두산 기념상품-->
@@ -584,8 +626,8 @@ NumberFormat nf = NumberFormat.getCurrencyInstance();
 														<a class="stretched-link" href="#"></a>
 													</div>
 												</div>
-												
-												
+
+
 											</div>
 										</div>
 
@@ -607,8 +649,8 @@ NumberFormat nf = NumberFormat.getCurrencyInstance();
 														<a class="stretched-link" href="#"></a>
 													</div>
 												</div>
-												
-											
+
+
 											</div>
 										</div>
 
@@ -630,7 +672,7 @@ NumberFormat nf = NumberFormat.getCurrencyInstance();
 									</div>
 								</div>
 
-								
+
 							</div>
 						</div>
 					</div>
@@ -695,8 +737,8 @@ NumberFormat nf = NumberFormat.getCurrencyInstance();
 														<a class="stretched-link" href="#"></a>
 													</div>
 												</div>
-												
-												
+
+
 											</div>
 										</div>
 
@@ -719,8 +761,8 @@ NumberFormat nf = NumberFormat.getCurrencyInstance();
 														<a class="stretched-link" href="#"></a>
 													</div>
 												</div>
-												
-												
+
+
 											</div>
 										</div>
 
@@ -742,7 +784,7 @@ NumberFormat nf = NumberFormat.getCurrencyInstance();
 									</div>
 								</div>
 
-								
+
 							</div>
 
 							<!-- 롯데 응원용품 -->
@@ -773,8 +815,8 @@ NumberFormat nf = NumberFormat.getCurrencyInstance();
 														<a class="stretched-link" href="#"></a>
 													</div>
 												</div>
-												
-												
+
+
 											</div>
 										</div>
 
@@ -796,8 +838,8 @@ NumberFormat nf = NumberFormat.getCurrencyInstance();
 														<a class="stretched-link" href="#"></a>
 													</div>
 												</div>
-												
-												
+
+
 											</div>
 										</div>
 
@@ -819,7 +861,7 @@ NumberFormat nf = NumberFormat.getCurrencyInstance();
 									</div>
 								</div>
 
-								
+
 							</div>
 
 							<!-- 롯데 야구용품 -->
@@ -849,8 +891,8 @@ NumberFormat nf = NumberFormat.getCurrencyInstance();
 														<a class="stretched-link" href="#"></a>
 													</div>
 												</div>
-												
-												
+
+
 											</div>
 										</div>
 
@@ -872,8 +914,8 @@ NumberFormat nf = NumberFormat.getCurrencyInstance();
 														<a class="stretched-link" href="#"></a>
 													</div>
 												</div>
-												
-												
+
+
 											</div>
 										</div>
 
@@ -895,7 +937,7 @@ NumberFormat nf = NumberFormat.getCurrencyInstance();
 									</div>
 								</div>
 
-								
+
 							</div>
 
 							<!-- 롯데 기념상품 -->
@@ -926,8 +968,8 @@ NumberFormat nf = NumberFormat.getCurrencyInstance();
 														<a class="stretched-link" href="#"></a>
 													</div>
 												</div>
-												
-												
+
+
 											</div>
 										</div>
 
@@ -949,8 +991,8 @@ NumberFormat nf = NumberFormat.getCurrencyInstance();
 														<a class="stretched-link" href="#"></a>
 													</div>
 												</div>
-												
-												
+
+
 											</div>
 										</div>
 
@@ -972,7 +1014,7 @@ NumberFormat nf = NumberFormat.getCurrencyInstance();
 									</div>
 								</div>
 
-								
+
 							</div>
 						</div>
 					</div>
@@ -1038,8 +1080,8 @@ NumberFormat nf = NumberFormat.getCurrencyInstance();
 														<a class="stretched-link" href="#"></a>
 													</div>
 												</div>
-												
-												
+
+
 											</div>
 										</div>
 
@@ -1062,8 +1104,8 @@ NumberFormat nf = NumberFormat.getCurrencyInstance();
 														<a class="stretched-link" href="#"></a>
 													</div>
 												</div>
-												
-												
+
+
 											</div>
 										</div>
 
@@ -1085,7 +1127,7 @@ NumberFormat nf = NumberFormat.getCurrencyInstance();
 									</div>
 								</div>
 
-								
+
 							</div>
 
 							<!-- 삼성 응원용품 -->
@@ -1115,8 +1157,8 @@ NumberFormat nf = NumberFormat.getCurrencyInstance();
 														<a class="stretched-link" href="#"></a>
 													</div>
 												</div>
-												
-												
+
+
 											</div>
 										</div>
 
@@ -1138,8 +1180,8 @@ NumberFormat nf = NumberFormat.getCurrencyInstance();
 														<a class="stretched-link" href="#"></a>
 													</div>
 												</div>
-												
-												
+
+
 											</div>
 										</div>
 
@@ -1161,7 +1203,7 @@ NumberFormat nf = NumberFormat.getCurrencyInstance();
 									</div>
 								</div>
 
-								
+
 							</div>
 
 							<!-- 삼성 야구용품 -->
@@ -1191,8 +1233,8 @@ NumberFormat nf = NumberFormat.getCurrencyInstance();
 														<a class="stretched-link" href="#"></a>
 													</div>
 												</div>
-											
-												
+
+
 											</div>
 										</div>
 
@@ -1214,8 +1256,8 @@ NumberFormat nf = NumberFormat.getCurrencyInstance();
 														<a class="stretched-link" href="#"></a>
 													</div>
 												</div>
-												
-												
+
+
 											</div>
 										</div>
 
@@ -1237,7 +1279,7 @@ NumberFormat nf = NumberFormat.getCurrencyInstance();
 									</div>
 								</div>
 
-								
+
 							</div>
 
 							<!-- 삼성 기념상품 -->
@@ -1269,8 +1311,8 @@ NumberFormat nf = NumberFormat.getCurrencyInstance();
 														<a class="stretched-link" href="#"></a>
 													</div>
 												</div>
-												
-												
+
+
 											</div>
 										</div>
 
@@ -1292,8 +1334,8 @@ NumberFormat nf = NumberFormat.getCurrencyInstance();
 														<a class="stretched-link" href="#"></a>
 													</div>
 												</div>
-												
-												
+
+
 											</div>
 										</div>
 
@@ -1315,7 +1357,7 @@ NumberFormat nf = NumberFormat.getCurrencyInstance();
 									</div>
 								</div>
 
-								
+
 							</div>
 						</div>
 					</div>
@@ -1380,8 +1422,8 @@ NumberFormat nf = NumberFormat.getCurrencyInstance();
 														<a class="stretched-link" href="#"></a>
 													</div>
 												</div>
-												
-												
+
+
 											</div>
 										</div>
 
@@ -1404,8 +1446,8 @@ NumberFormat nf = NumberFormat.getCurrencyInstance();
 														<a class="stretched-link" href="#"></a>
 													</div>
 												</div>
-												
-												
+
+
 											</div>
 										</div>
 
@@ -1427,7 +1469,7 @@ NumberFormat nf = NumberFormat.getCurrencyInstance();
 									</div>
 								</div>
 
-								
+
 							</div>
 
 							<!-- 키움 응원용품 -->
@@ -1456,8 +1498,8 @@ NumberFormat nf = NumberFormat.getCurrencyInstance();
 														<a class="stretched-link" href="#"></a>
 													</div>
 												</div>
-												
-												
+
+
 											</div>
 										</div>
 
@@ -1479,8 +1521,8 @@ NumberFormat nf = NumberFormat.getCurrencyInstance();
 														<a class="stretched-link" href="#"></a>
 													</div>
 												</div>
-												
-												
+
+
 											</div>
 										</div>
 
@@ -1502,7 +1544,7 @@ NumberFormat nf = NumberFormat.getCurrencyInstance();
 									</div>
 								</div>
 
-								
+
 							</div>
 
 							<!-- 키움 야구용품 -->
@@ -1531,8 +1573,8 @@ NumberFormat nf = NumberFormat.getCurrencyInstance();
 														<a class="stretched-link" href="#"></a>
 													</div>
 												</div>
-												
-												
+
+
 											</div>
 										</div>
 
@@ -1554,8 +1596,8 @@ NumberFormat nf = NumberFormat.getCurrencyInstance();
 														<a class="stretched-link" href="#"></a>
 													</div>
 												</div>
-												
-												
+
+
 											</div>
 										</div>
 
@@ -1577,7 +1619,7 @@ NumberFormat nf = NumberFormat.getCurrencyInstance();
 									</div>
 								</div>
 
-								
+
 							</div>
 
 							<!-- 키움 기념상품 -->
@@ -1607,8 +1649,8 @@ NumberFormat nf = NumberFormat.getCurrencyInstance();
 														<a class="stretched-link" href="#"></a>
 													</div>
 												</div>
-												
-												
+
+
 											</div>
 										</div>
 
@@ -1630,8 +1672,8 @@ NumberFormat nf = NumberFormat.getCurrencyInstance();
 														<a class="stretched-link" href="#"></a>
 													</div>
 												</div>
-												
-												
+
+
 											</div>
 										</div>
 
@@ -1653,7 +1695,7 @@ NumberFormat nf = NumberFormat.getCurrencyInstance();
 									</div>
 								</div>
 
-								
+
 							</div>
 						</div>
 					</div>
@@ -1718,8 +1760,8 @@ NumberFormat nf = NumberFormat.getCurrencyInstance();
 														<a class="stretched-link" href="#"></a>
 													</div>
 												</div>
-												
-												
+
+
 											</div>
 										</div>
 
@@ -1742,7 +1784,7 @@ NumberFormat nf = NumberFormat.getCurrencyInstance();
 														<a class="stretched-link" href="#"></a>
 													</div>
 												</div>
-												
+
 											</div>
 										</div>
 
@@ -1764,7 +1806,7 @@ NumberFormat nf = NumberFormat.getCurrencyInstance();
 									</div>
 								</div>
 
-								
+
 							</div>
 
 							<!-- 한화 응원용품 -->
@@ -1793,7 +1835,7 @@ NumberFormat nf = NumberFormat.getCurrencyInstance();
 														<a class="stretched-link" href="#"></a>
 													</div>
 												</div>
-												
+
 											</div>
 										</div>
 
@@ -1815,7 +1857,7 @@ NumberFormat nf = NumberFormat.getCurrencyInstance();
 														<a class="stretched-link" href="#"></a>
 													</div>
 												</div>
-												
+
 											</div>
 										</div>
 
@@ -1837,7 +1879,7 @@ NumberFormat nf = NumberFormat.getCurrencyInstance();
 									</div>
 								</div>
 
-								
+
 							</div>
 
 							<!-- 한화 야구용품 -->
@@ -1866,7 +1908,7 @@ NumberFormat nf = NumberFormat.getCurrencyInstance();
 														<a class="stretched-link" href="#"></a>
 													</div>
 												</div>
-												
+
 											</div>
 										</div>
 
@@ -1888,7 +1930,7 @@ NumberFormat nf = NumberFormat.getCurrencyInstance();
 														<a class="stretched-link" href="#"></a>
 													</div>
 												</div>
-												
+
 											</div>
 										</div>
 
@@ -1910,7 +1952,7 @@ NumberFormat nf = NumberFormat.getCurrencyInstance();
 									</div>
 								</div>
 
-								
+
 							</div>
 
 							<!-- 한화 기념상품 -->
@@ -1940,7 +1982,7 @@ NumberFormat nf = NumberFormat.getCurrencyInstance();
 														<a class="stretched-link" href="#"></a>
 													</div>
 												</div>
-												
+
 											</div>
 										</div>
 
@@ -1962,7 +2004,7 @@ NumberFormat nf = NumberFormat.getCurrencyInstance();
 														<a class="stretched-link" href="#"></a>
 													</div>
 												</div>
-												
+
 											</div>
 										</div>
 
@@ -1984,7 +2026,7 @@ NumberFormat nf = NumberFormat.getCurrencyInstance();
 									</div>
 								</div>
 
-								
+
 							</div>
 						</div>
 					</div>
@@ -2048,7 +2090,7 @@ NumberFormat nf = NumberFormat.getCurrencyInstance();
 														<a class="stretched-link" href="#"></a>
 													</div>
 												</div>
-											
+
 											</div>
 										</div>
 
@@ -2071,7 +2113,7 @@ NumberFormat nf = NumberFormat.getCurrencyInstance();
 														<a class="stretched-link" href="#"></a>
 													</div>
 												</div>
-												
+
 											</div>
 										</div>
 
@@ -2093,7 +2135,7 @@ NumberFormat nf = NumberFormat.getCurrencyInstance();
 									</div>
 								</div>
 
-								
+
 							</div>
 
 							<!-- KIA 응원용품 -->
@@ -2122,7 +2164,7 @@ NumberFormat nf = NumberFormat.getCurrencyInstance();
 														<a class="stretched-link" href="#"></a>
 													</div>
 												</div>
-											
+
 											</div>
 										</div>
 
@@ -2144,7 +2186,7 @@ NumberFormat nf = NumberFormat.getCurrencyInstance();
 														<a class="stretched-link" href="#"></a>
 													</div>
 												</div>
-											
+
 											</div>
 										</div>
 
@@ -2166,7 +2208,7 @@ NumberFormat nf = NumberFormat.getCurrencyInstance();
 									</div>
 								</div>
 
-								
+
 							</div>
 
 							<!-- KIA 야구용품 -->
@@ -2195,7 +2237,7 @@ NumberFormat nf = NumberFormat.getCurrencyInstance();
 														<a class="stretched-link" href="#"></a>
 													</div>
 												</div>
-											
+
 											</div>
 										</div>
 
@@ -2217,7 +2259,7 @@ NumberFormat nf = NumberFormat.getCurrencyInstance();
 														<a class="stretched-link" href="#"></a>
 													</div>
 												</div>
-												
+
 											</div>
 										</div>
 
@@ -2239,7 +2281,7 @@ NumberFormat nf = NumberFormat.getCurrencyInstance();
 									</div>
 								</div>
 
-								
+
 							</div>
 
 							<!-- KIA 기념상품 -->
@@ -2269,7 +2311,7 @@ NumberFormat nf = NumberFormat.getCurrencyInstance();
 														<a class="stretched-link" href="#"></a>
 													</div>
 												</div>
-												
+
 											</div>
 										</div>
 
@@ -2291,7 +2333,7 @@ NumberFormat nf = NumberFormat.getCurrencyInstance();
 														<a class="stretched-link" href="#"></a>
 													</div>
 												</div>
-											
+
 											</div>
 										</div>
 
@@ -2313,7 +2355,7 @@ NumberFormat nf = NumberFormat.getCurrencyInstance();
 									</div>
 								</div>
 
-								
+
 							</div>
 						</div>
 					</div>
@@ -2377,7 +2419,7 @@ NumberFormat nf = NumberFormat.getCurrencyInstance();
 														<a class="stretched-link" href="#"></a>
 													</div>
 												</div>
-												
+
 											</div>
 										</div>
 
@@ -2400,7 +2442,7 @@ NumberFormat nf = NumberFormat.getCurrencyInstance();
 														<a class="stretched-link" href="#"></a>
 													</div>
 												</div>
-												
+
 											</div>
 										</div>
 
@@ -2422,7 +2464,7 @@ NumberFormat nf = NumberFormat.getCurrencyInstance();
 									</div>
 								</div>
 
-								
+
 							</div>
 
 							<!-- KT 응원용품 -->
@@ -2451,7 +2493,7 @@ NumberFormat nf = NumberFormat.getCurrencyInstance();
 														<a class="stretched-link" href="#"></a>
 													</div>
 												</div>
-												
+
 											</div>
 										</div>
 
@@ -2473,7 +2515,7 @@ NumberFormat nf = NumberFormat.getCurrencyInstance();
 														<a class="stretched-link" href="#"></a>
 													</div>
 												</div>
-											
+
 											</div>
 										</div>
 
@@ -2495,7 +2537,7 @@ NumberFormat nf = NumberFormat.getCurrencyInstance();
 									</div>
 								</div>
 
-								
+
 							</div>
 
 							<!-- KT 야구용품 -->
@@ -2524,7 +2566,7 @@ NumberFormat nf = NumberFormat.getCurrencyInstance();
 														<a class="stretched-link" href="#"></a>
 													</div>
 												</div>
-											
+
 											</div>
 										</div>
 
@@ -2546,7 +2588,7 @@ NumberFormat nf = NumberFormat.getCurrencyInstance();
 														<a class="stretched-link" href="#"></a>
 													</div>
 												</div>
-											
+
 											</div>
 										</div>
 
@@ -2568,7 +2610,7 @@ NumberFormat nf = NumberFormat.getCurrencyInstance();
 									</div>
 								</div>
 
-								
+
 							</div>
 
 							<!-- KT 기념상품 -->
@@ -2597,7 +2639,7 @@ NumberFormat nf = NumberFormat.getCurrencyInstance();
 														<a class="stretched-link" href="#"></a>
 													</div>
 												</div>
-												
+
 											</div>
 										</div>
 
@@ -2619,7 +2661,7 @@ NumberFormat nf = NumberFormat.getCurrencyInstance();
 														<a class="stretched-link" href="#"></a>
 													</div>
 												</div>
-										
+
 											</div>
 										</div>
 
@@ -2641,7 +2683,7 @@ NumberFormat nf = NumberFormat.getCurrencyInstance();
 									</div>
 								</div>
 
-								
+
 							</div>
 						</div>
 					</div>
@@ -2705,7 +2747,7 @@ NumberFormat nf = NumberFormat.getCurrencyInstance();
 														<a class="stretched-link" href="#"></a>
 													</div>
 												</div>
-												
+
 											</div>
 										</div>
 
@@ -2728,7 +2770,7 @@ NumberFormat nf = NumberFormat.getCurrencyInstance();
 														<a class="stretched-link" href="#"></a>
 													</div>
 												</div>
-												
+
 											</div>
 										</div>
 
@@ -2750,7 +2792,7 @@ NumberFormat nf = NumberFormat.getCurrencyInstance();
 									</div>
 								</div>
 
-								
+
 							</div>
 
 							<!-- LG 응원용품 -->
@@ -2779,7 +2821,7 @@ NumberFormat nf = NumberFormat.getCurrencyInstance();
 														<a class="stretched-link" href="#"></a>
 													</div>
 												</div>
-												
+
 											</div>
 										</div>
 
@@ -2801,7 +2843,7 @@ NumberFormat nf = NumberFormat.getCurrencyInstance();
 														<a class="stretched-link" href="#"></a>
 													</div>
 												</div>
-											
+
 											</div>
 										</div>
 
@@ -2823,7 +2865,7 @@ NumberFormat nf = NumberFormat.getCurrencyInstance();
 									</div>
 								</div>
 
-								
+
 							</div>
 
 							<!-- LG 야구용품 -->
@@ -2852,7 +2894,7 @@ NumberFormat nf = NumberFormat.getCurrencyInstance();
 														<a class="stretched-link" href="#"></a>
 													</div>
 												</div>
-												
+
 											</div>
 										</div>
 
@@ -2874,7 +2916,7 @@ NumberFormat nf = NumberFormat.getCurrencyInstance();
 														<a class="stretched-link" href="#"></a>
 													</div>
 												</div>
-										
+
 											</div>
 										</div>
 
@@ -2896,7 +2938,7 @@ NumberFormat nf = NumberFormat.getCurrencyInstance();
 									</div>
 								</div>
 
-								
+
 							</div>
 
 							<!-- LG 기념상품 -->
@@ -2925,7 +2967,7 @@ NumberFormat nf = NumberFormat.getCurrencyInstance();
 														<a class="stretched-link" href="#"></a>
 													</div>
 												</div>
-											
+
 											</div>
 										</div>
 
@@ -2947,7 +2989,7 @@ NumberFormat nf = NumberFormat.getCurrencyInstance();
 														<a class="stretched-link" href="#"></a>
 													</div>
 												</div>
-												
+
 											</div>
 										</div>
 
@@ -2969,7 +3011,7 @@ NumberFormat nf = NumberFormat.getCurrencyInstance();
 									</div>
 								</div>
 
-								
+
 							</div>
 						</div>
 					</div>
@@ -3033,7 +3075,7 @@ NumberFormat nf = NumberFormat.getCurrencyInstance();
 														<a class="stretched-link" href="#"></a>
 													</div>
 												</div>
-												
+
 											</div>
 										</div>
 
@@ -3056,7 +3098,7 @@ NumberFormat nf = NumberFormat.getCurrencyInstance();
 														<a class="stretched-link" href="#"></a>
 													</div>
 												</div>
-												
+
 											</div>
 										</div>
 
@@ -3078,7 +3120,7 @@ NumberFormat nf = NumberFormat.getCurrencyInstance();
 									</div>
 								</div>
 
-								
+
 							</div>
 
 							<!-- NC 응원용품 -->
@@ -3107,7 +3149,7 @@ NumberFormat nf = NumberFormat.getCurrencyInstance();
 														<a class="stretched-link" href="#"></a>
 													</div>
 												</div>
-												
+
 											</div>
 										</div>
 
@@ -3129,7 +3171,7 @@ NumberFormat nf = NumberFormat.getCurrencyInstance();
 														<a class="stretched-link" href="#"></a>
 													</div>
 												</div>
-												
+
 											</div>
 										</div>
 
@@ -3151,7 +3193,7 @@ NumberFormat nf = NumberFormat.getCurrencyInstance();
 									</div>
 								</div>
 
-							
+
 							</div>
 
 							<!-- NC 야구용품 -->
@@ -3180,7 +3222,7 @@ NumberFormat nf = NumberFormat.getCurrencyInstance();
 														<a class="stretched-link" href="#"></a>
 													</div>
 												</div>
-											
+
 											</div>
 										</div>
 
@@ -3202,7 +3244,7 @@ NumberFormat nf = NumberFormat.getCurrencyInstance();
 														<a class="stretched-link" href="#"></a>
 													</div>
 												</div>
-												
+
 											</div>
 										</div>
 
@@ -3224,7 +3266,7 @@ NumberFormat nf = NumberFormat.getCurrencyInstance();
 									</div>
 								</div>
 
-								
+
 							</div>
 
 							<!-- NC 기념상품 -->
@@ -3253,7 +3295,7 @@ NumberFormat nf = NumberFormat.getCurrencyInstance();
 														<a class="stretched-link" href="#"></a>
 													</div>
 												</div>
-												
+
 											</div>
 										</div>
 
@@ -3275,7 +3317,7 @@ NumberFormat nf = NumberFormat.getCurrencyInstance();
 														<a class="stretched-link" href="#"></a>
 													</div>
 												</div>
-												
+
 											</div>
 										</div>
 
@@ -3297,7 +3339,7 @@ NumberFormat nf = NumberFormat.getCurrencyInstance();
 									</div>
 								</div>
 
-								
+
 							</div>
 						</div>
 					</div>
@@ -3361,7 +3403,7 @@ NumberFormat nf = NumberFormat.getCurrencyInstance();
 														<a class="stretched-link" href="#"></a>
 													</div>
 												</div>
-										
+
 											</div>
 										</div>
 
@@ -3384,7 +3426,7 @@ NumberFormat nf = NumberFormat.getCurrencyInstance();
 														<a class="stretched-link" href="#"></a>
 													</div>
 												</div>
-											
+
 											</div>
 										</div>
 
@@ -3406,7 +3448,7 @@ NumberFormat nf = NumberFormat.getCurrencyInstance();
 									</div>
 								</div>
 
-								
+
 							</div>
 
 							<!-- SSG 응원용품 -->
@@ -3435,7 +3477,7 @@ NumberFormat nf = NumberFormat.getCurrencyInstance();
 														<a class="stretched-link" href="#"></a>
 													</div>
 												</div>
-												
+
 											</div>
 										</div>
 
@@ -3457,7 +3499,7 @@ NumberFormat nf = NumberFormat.getCurrencyInstance();
 														<a class="stretched-link" href="#"></a>
 													</div>
 												</div>
-										
+
 											</div>
 										</div>
 
@@ -3479,7 +3521,7 @@ NumberFormat nf = NumberFormat.getCurrencyInstance();
 									</div>
 								</div>
 
-								
+
 							</div>
 
 							<!-- SSG 야구용품 -->
@@ -3508,7 +3550,7 @@ NumberFormat nf = NumberFormat.getCurrencyInstance();
 														<a class="stretched-link" href="#"></a>
 													</div>
 												</div>
-												
+
 											</div>
 										</div>
 
@@ -3530,7 +3572,7 @@ NumberFormat nf = NumberFormat.getCurrencyInstance();
 														<a class="stretched-link" href="#"></a>
 													</div>
 												</div>
-											
+
 											</div>
 										</div>
 
@@ -3552,7 +3594,7 @@ NumberFormat nf = NumberFormat.getCurrencyInstance();
 									</div>
 								</div>
 
-								
+
 							</div>
 
 							<!-- SSG 기념상품 -->
@@ -3582,7 +3624,7 @@ NumberFormat nf = NumberFormat.getCurrencyInstance();
 														<a class="stretched-link" href="#"></a>
 													</div>
 												</div>
-											
+
 											</div>
 										</div>
 
@@ -3604,7 +3646,7 @@ NumberFormat nf = NumberFormat.getCurrencyInstance();
 														<a class="stretched-link" href="#"></a>
 													</div>
 												</div>
-											
+
 											</div>
 										</div>
 
@@ -3626,19 +3668,20 @@ NumberFormat nf = NumberFormat.getCurrencyInstance();
 									</div>
 								</div>
 
-								
-								
+
+
 							</div>
 						</div>
 					</div>
 				</div>
 
 				</navv>
-			
-			<div class="col-12 d-flex justify-content-center mt-4">
-									<a class="btn btn-lg btn-dark" href="product_listPage.jsp">View All </a>
-								</div>
-			
+
+				<div class="col-12 d-flex justify-content-center mt-4">
+					<a class="btn btn-lg btn-dark" href="product_listPage.jsp">View
+						All </a>
+				</div>
+
 			</div>
 		</div>
 
