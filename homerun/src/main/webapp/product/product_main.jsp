@@ -3,8 +3,8 @@
 <%@page import="data.dto.ProductDto"%>
 <%@page import="java.util.List"%>
 <%@page import="data.dao.ProductDao"%>
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-	pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=utf-8"
+	pageEncoding="utf-8"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -52,9 +52,9 @@ NumberFormat nf = NumberFormat.getCurrencyInstance();
 				<div
 					class="bg-300 p-4 h-30 d-flex flex-column justify-content-center">
 					<h4 class="text-800">KBO Online Store</h4>
-					<h1 class="fw-semi-bold lh-sm fs-4 fs-lg-5 fs-xl-6">23½ÃÁğ
-						¿Â¶óÀÎ½ºÅä¾î</h1>
-					<p class="mb-5 fs-1">23½ÃÁğ Àü ±¸´ÜÀÇ ÆÀ ½ºÅä¾î »óÇ°À» ±¸¸ÅÇÒ ¼ö ÀÖ½À´Ï´Ù.</p>
+					<h1 class="fw-semi-bold lh-sm fs-4 fs-lg-5 fs-xl-6">23ì‹œì¦Œ
+						ì˜¨ë¼ì¸ìŠ¤í† ì–´</h1>
+					<p class="mb-5 fs-1">23ì‹œì¦Œ ì „ êµ¬ë‹¨ì˜ íŒ€ ìŠ¤í† ì–´ ìƒí’ˆì„ êµ¬ë§¤í•  ìˆ˜ ìˆìŠµë‹ˆë‹¤.</p>
 					<div class="d-grid gap-2 d-md-block">
 						<a style="background-color: #0b214e; color: white"
 							class="btn btn-lg" href="product_listPage.jsp" role="button">Explore</a>
@@ -78,11 +78,11 @@ NumberFormat nf = NumberFormat.getCurrencyInstance();
 								alt="..." />
 							<div class="card-img-overlay ps-0"></div>
 							<div class="card-body ps-0 bg-200">
-								<h5 class="fw-bold text-1000 text-truncate">ÄÉÀÌÆ¼À§Áî 2022 ¾î¼¾Æ½
-									È¨ À¯´ÏÆû</h5>
+								<h5 class="fw-bold text-1000 text-truncate">ì¼€ì´í‹°ìœ„ì¦ˆ 2022 ì–´ì„¼í‹±
+									í™ˆ ìœ ë‹ˆí¼</h5>
 								<div class="fw-bold">
-									<span class="text-600 me-2 text-decoration-line-through">109,900¿ø</span><span
-										class="text-primary">89,900¿ø</span>
+									<span class="text-600 me-2 text-decoration-line-through">109,900ì›</span><span
+										class="text-primary">89,900ì›</span>
 								</div>
 							</div>
 							<a class="stretched-link" href="product_detailPage.jsp"></a>
@@ -95,10 +95,10 @@ NumberFormat nf = NumberFormat.getCurrencyInstance();
 								alt="..." />
 							<div class="card-img-overlay ps-0"></div>
 							<div class="card-body ps-0 bg-200">
-								<h5 class="fw-bold text-1000 text-truncate">·£´õ½º 23 ½ºÇÁ¸µÄ·ÇÁ ¸ğÀÚ</h5>
+								<h5 class="fw-bold text-1000 text-truncate">ëœë”ìŠ¤ 23 ìŠ¤í”„ë§ìº í”„ ëª¨ì</h5>
 								<div class="fw-bold">
-									<span class="text-600 me-2 text-decoration-line-through">39,000¿ø</span><span
-										class="text-primary">35,000¿ø</span>
+									<span class="text-600 me-2 text-decoration-line-through">39,000ì›</span><span
+										class="text-primary">35,000ì›</span>
 								</div>
 							</div>
 							<a class="stretched-link" href="#"></a>
@@ -111,10 +111,10 @@ NumberFormat nf = NumberFormat.getCurrencyInstance();
 								alt="..." />
 							<div class="card-img-overlay ps-0"></div>
 							<div class="card-body ps-0 bg-200">
-								<h5 class="fw-bold text-1000 text-truncate">¿À¸®Áö³Î ¸ğÀÚ</h5>
+								<h5 class="fw-bold text-1000 text-truncate">ì˜¤ë¦¬ì§€ë„ ëª¨ì</h5>
 								<div class="fw-bold">
-									<span class="text-600 me-2 text-decoration-line-through">30,000¿ø</span><span
-										class="text-primary">29,000¿ø</span>
+									<span class="text-600 me-2 text-decoration-line-through">30,000ì›</span><span
+										class="text-primary">29,000ì›</span>
 								</div>
 							</div>
 							<a class="stretched-link" href="#"></a>
@@ -127,10 +127,10 @@ NumberFormat nf = NumberFormat.getCurrencyInstance();
 								alt="..." />
 							<div class="card-img-overlay ps-0"></div>
 							<div class="card-body ps-0 bg-200">
-								<h5 class="fw-bold text-1000 text-truncate">ÀÀ¿ø¹èÆ®</h5>
+								<h5 class="fw-bold text-1000 text-truncate">ì‘ì›ë°°íŠ¸</h5>
 								<div class="fw-bold">
-									<span class="text-600 me-2 text-decoration-line-through">10,000¿ø</span><span
-										class="text-primary">8,000¿ø</span>
+									<span class="text-600 me-2 text-decoration-line-through">10,000ì›</span><span
+										class="text-primary">8,000ì›</span>
 								</div>
 							</div>
 							<a class="stretched-link" href="#"></a>
@@ -157,10 +157,10 @@ NumberFormat nf = NumberFormat.getCurrencyInstance();
 								alt="..." />
 							<div class="card-img-overlay ps-0"></div>
 							<div class="card-body ps-0 bg-200">
-								<h5 class="fw-bold text-1000 text-truncate">½Éº¼ ¹Ù¶÷¸·ÀÌ (ºí·¢)</h5>
+								<h5 class="fw-bold text-1000 text-truncate">ì‹¬ë³¼ ë°”ëŒë§‰ì´ (ë¸”ë™)</h5>
 								<div class="fw-bold">
-									<span class="text-600 me-2 text-decoration-line-through">55000¿ø</span><span
-										class="text-primary">45000¿ø</span>
+									<span class="text-600 me-2 text-decoration-line-through">55000ì›</span><span
+										class="text-primary">45000ì›</span>
 								</div>
 							</div>
 							<a class="stretched-link" href="#"></a>
@@ -173,10 +173,10 @@ NumberFormat nf = NumberFormat.getCurrencyInstance();
 								alt="..." />
 							<div class="card-img-overlay ps-0"></div>
 							<div class="card-body ps-0 bg-200">
-								<h5 class="fw-bold text-1000 text-truncate">À¯±¤ Á¡ÆÛ (µ¿°è)</h5>
+								<h5 class="fw-bold text-1000 text-truncate">ìœ ê´‘ ì í¼ (ë™ê³„)</h5>
 								<div class="fw-bold">
-									<span class="text-600 me-2 text-decoration-line-through">135,000¿ø</span><span
-										class="text-primary">120,000¿ø</span>
+									<span class="text-600 me-2 text-decoration-line-through">135,000ì›</span><span
+										class="text-primary">120,000ì›</span>
 								</div>
 							</div>
 							<a class="stretched-link" href="#"></a>
@@ -189,10 +189,10 @@ NumberFormat nf = NumberFormat.getCurrencyInstance();
 								alt="..." />
 							<div class="card-img-overlay ps-0"></div>
 							<div class="card-body ps-0 bg-200">
-								<h5 class="fw-bold text-1000 text-truncate">¿À¸®Áö³Î ¸ğÀÚ</h5>
+								<h5 class="fw-bold text-1000 text-truncate">ì˜¤ë¦¬ì§€ë„ ëª¨ì</h5>
 								<div class="fw-bold">
-									<span class="text-600 me-2 text-decoration-line-through">30,000¿ø</span><span
-										class="text-primary">29,000¿ø</span>
+									<span class="text-600 me-2 text-decoration-line-through">30,000ì›</span><span
+										class="text-primary">29,000ì›</span>
 								</div>
 							</div>
 							<a class="stretched-link" href="#"></a>
@@ -205,10 +205,10 @@ NumberFormat nf = NumberFormat.getCurrencyInstance();
 								alt="..." />
 							<div class="card-img-overlay ps-0"></div>
 							<div class="card-body ps-0 bg-200">
-								<h5 class="fw-bold text-1000 text-truncate">ÀÀ¿ø¹èÆ®</h5>
+								<h5 class="fw-bold text-1000 text-truncate">ì‘ì›ë°°íŠ¸</h5>
 								<div class="fw-bold">
-									<span class="text-600 me-2 text-decoration-line-through">10,000¿ø</span><span
-										class="text-primary">8,000¿ø</span>
+									<span class="text-600 me-2 text-decoration-line-through">10,000ì›</span><span
+										class="text-primary">8,000ì›</span>
 								</div>
 							</div>
 							<a class="stretched-link" href="#"></a>
@@ -235,39 +235,39 @@ NumberFormat nf = NumberFormat.getCurrencyInstance();
 					<button class="navv-link active" id="navv-doosan-tab"
 						data-bs-toggle="tab" data-bs-target="#navv-doosan" type="button"
 						role="tab" aria-controls="navv-doosan" aria-selected="true">
-						µÎ»ê º£¾î½º</button>
+						ë‘ì‚° ë² ì–´ìŠ¤</button>
 					<button class="navv-link" id="navv-lotte-tab" data-bs-toggle="tab"
 						data-bs-target="#navv-lotte" type="button" role="tab"
-						aria-controls="navv-lotte" aria-selected="false">·Ôµ¥ ÀÚÀÌ¾ğÃ÷</button>
+						aria-controls="navv-lotte" aria-selected="false">ë¡¯ë° ìì´ì–¸ì¸ </button>
 					<button class="navv-link" id="navv-samsung-tab"
 						data-bs-toggle="tab" data-bs-target="#navv-samsung" type="button"
-						role="tab" aria-controls="navv-samsung" aria-selected="false">»ï¼º
-						¶óÀÌ¿ÂÁî</button>
+						role="tab" aria-controls="navv-samsung" aria-selected="false">ì‚¼ì„±
+						ë¼ì´ì˜¨ì¦ˆ</button>
 					<button class="navv-link" id="navv-kiwoom-tab" data-bs-toggle="tab"
 						data-bs-target="#navv-kiwoom" type="button" role="tab"
-						aria-controls="navv-kiwoom" aria-selected="false">Å°¿ò È÷¾î·ÎÁî</button>
+						aria-controls="navv-kiwoom" aria-selected="false">í‚¤ì›€ íˆì–´ë¡œì¦ˆ</button>
 					<button class="navv-link" id="navv-hanhwa-tab" data-bs-toggle="tab"
 						data-bs-target="#navv-hanhwa" type="button" role="tab"
-						aria-controls="navv-hanhwa" aria-selected="false">ÇÑÈ­ ÀÌ±Û½º</button>
+						aria-controls="navv-hanhwa" aria-selected="false">í•œí™” ì´ê¸€ìŠ¤</button>
 					<button class="navv-link" id="navv-kia-tab" data-bs-toggle="tab"
 						data-bs-target="#navv-kia" type="button" role="tab"
-						aria-controls="navv-kia" aria-selected="false">KIA Å¸ÀÌ°ÅÁî</button>
+						aria-controls="navv-kia" aria-selected="false">KIA íƒ€ì´ê±°ì¦ˆ</button>
 					<button class="navv-link" id="navv-kt-tab" data-bs-toggle="tab"
 						data-bs-target="#navv-kt" type="button" role="tab"
 						aria-controls="navv-kt" aria-selected="false">KT WIZ</button>
 					<button class="navv-link" id="navv-lg-tab" data-bs-toggle="tab"
 						data-bs-target="#navv-lg" type="button" role="tab"
-						aria-controls="navv-lg" aria-selected="false">LG Æ®À©½º</button>
+						aria-controls="navv-lg" aria-selected="false">LG íŠ¸ìœˆìŠ¤</button>
 					<button class="navv-link" id="navv-nc-tab" data-bs-toggle="tab"
 						data-bs-target="#navv-nc" type="button" role="tab"
-						aria-controls="navv-nc" aria-selected="false">NC ´ÙÀÌ³ë½º</button>
+						aria-controls="navv-nc" aria-selected="false">NC ë‹¤ì´ë…¸ìŠ¤</button>
 					<button class="navv-link" id="navv-ssg-tab" data-bs-toggle="tab"
 						data-bs-target="#navv-ssg" type="button" role="tab"
-						aria-controls="navv-ssg" aria-selected="false">SSG ·£´õ½º</button>
+						aria-controls="navv-ssg" aria-selected="false">SSG ëœë”ìŠ¤</button>
 				</div>
 
 				<div class="tab-content" id="navv-tabContent">
-					<!-- µÎ»ê -->
+					<!-- ë‘ì‚° -->
 					<div class="tab-pane fade show active" id="navv-doosan"
 						style="opacity: 1" role="tabpanel"
 						aria-labelledby="navv-doosan-tab">
@@ -277,46 +277,46 @@ NumberFormat nf = NumberFormat.getCurrencyInstance();
 								<button class="navv-link active" id="pills-doosan_teamwear-tab"
 									data-bs-toggle="pill" data-bs-target="#pills-doosan_teamwear"
 									type="button" role="tab" aria-controls="pills-doosan_teamwear"
-									aria-selected="true">ÆÀ¿ş¾î</button>
+									aria-selected="true">íŒ€ì›¨ì–´</button>
 							</li>
 							<li class="navv-item" role="presentation">
 								<button class="navv-link" id="pills-doosan_cheering-tab"
 									data-bs-toggle="pill" data-bs-target="#pills-doosan_cheering"
 									type="button" role="tab" aria-controls="pills-doosan_cheering"
-									aria-selected="false">ÀÀ¿ø¿ëÇ°</button>
+									aria-selected="false">ì‘ì›ìš©í’ˆ</button>
 							</li>
 							<li class="navv-item" role="presentation">
 								<button class="navv-link" id="pills-doosan_baseball-tab"
 									data-bs-toggle="pill" data-bs-target="#pills-doosan_baseball"
 									type="button" role="tab" aria-controls="pills-doosan_baseball"
-									aria-selected="false">¾ß±¸¿ëÇ°</button>
+									aria-selected="false">ì•¼êµ¬ìš©í’ˆ</button>
 							</li>
 							<li class="navv-item" role="presentation">
 								<button class="navv-link" id="pills-doosan_commemoration-tab"
 									data-bs-toggle="pill"
 									data-bs-target="#pills-doosan_commemoration" type="button"
 									role="tab" aria-controls="pills-doosan_commemoration"
-									aria-selected="false">±â³ä»óÇ°</button>
+									aria-selected="false">ê¸°ë…ìƒí’ˆ</button>
 							</li>
 						</ul>
 						<div class="tab-content" id="pills-tabContentDoosan">
-							<!-- µÎ»ê ÆÀ¿ş¾î -->
+							<!-- ë‘ì‚° íŒ€ì›¨ì–´ -->
 							<div class="tab-pane fade show active" id="pills-doosan_teamwear"
 								role="tabpanel" aria-labelledby="pills-doosan_teamwear-tab">
 								<div class="carousel slide" id="carouselCategoryDoosanTeamwear"
 									data-bs-touch="false" data-bs-interval="false">
 
-									<!-- µÎ»ê ÆÀ¿ş¾î ½ÃÀÛ -->
+									<!-- ë‘ì‚° íŒ€ì›¨ì–´ ì‹œì‘ -->
 									<div class="carousel-inner">
-										<!-- µÎ»ê ÆÀ¿ş¾î Ã¹¹øÂ° ÆäÀÌÁö -->
+										<!-- ë‘ì‚° íŒ€ì›¨ì–´ ì²«ë²ˆì§¸ í˜ì´ì§€ -->
 										<div class="carousel-item active" data-bs-interval="10000">
 											<div class="row h-100 align-items-center g-2">
 												<%
 												List<ProductDto> subListbase_dt = new ArrayList<>();
 												for (int i = 0; i < list.size(); i++) {
 													ProductDto dto = list.get(i);
-													if (dto.getTeamName().equals("µÎ»ê º£¾î½º")) {
-														if (dto.getpCategory().equals("ÆÀ¿ş¾î")) {
+													if (dto.getTeamName().equals("ë‘ì‚° ë² ì–´ìŠ¤")) {
+														if (dto.getpCategory().equals("íŒ€ì›¨ì–´")) {
 
 													subListbase_dt.add(dto);
 														}
@@ -355,7 +355,7 @@ NumberFormat nf = NumberFormat.getCurrencyInstance();
 										<%
 										if (subListbase_dt.size() >= 5) {
 										%>
-										<!-- µÎ»ê ÆÀ¿ş¾î µÎ¹øÂ° ÆäÀÌÁö -->
+										<!-- ë‘ì‚° íŒ€ì›¨ì–´ ë‘ë²ˆì§¸ í˜ì´ì§€ -->
 										<div class="carousel-item">
 											<div class="row h-100 align-items-center g-2">
 												<%
@@ -387,7 +387,7 @@ NumberFormat nf = NumberFormat.getCurrencyInstance();
 										</div>
 
 
-										<!-- µÎ»ê ÆÀ¿ş¾î ÁÂ¿ìÀÌµ¿ -->
+										<!-- ë‘ì‚° íŒ€ì›¨ì–´ ì¢Œìš°ì´ë™ -->
 										<div class="row">
 											<button class="carousel-control-prev" type="button"
 												data-bs-target="#carouselCategoryDoosanTeamwear"
@@ -412,23 +412,23 @@ NumberFormat nf = NumberFormat.getCurrencyInstance();
 
 							</div>
 
-							<!-- µÎ»ê ÀÀ¿ø¿ëÇ° -->
+							<!-- ë‘ì‚° ì‘ì›ìš©í’ˆ -->
 							<div class="tab-pane fade" id="pills-doosan_cheering"
 								role="tabpanel" aria-labelledby="pills-doosan_cheering-tab">
 								<div class="carousel slide" id="carouselCategoryDoosanCheering"
 									data-bs-touch="false" data-bs-interval="false">
 
-									<!-- µÎ»ê ÀÀ¿ø¿ëÇ° ½ÃÀÛ -->
+									<!-- ë‘ì‚° ì‘ì›ìš©í’ˆ ì‹œì‘ -->
 									<div class="carousel-inner">
-										<!-- µÎ»ê ÀÀ¿ø¿ëÇ° Ã¹¹øÂ° ÆäÀÌÁö -->
+										<!-- ë‘ì‚° ì‘ì›ìš©í’ˆ ì²«ë²ˆì§¸ í˜ì´ì§€ -->
 										<div class="carousel-item active" data-bs-interval="10000">
 											<div class="row h-100 align-items-center g-2">
 												<%
 												List<ProductDto> subListbase_dc = new ArrayList<>();
 												for (int i = 0; i < list.size(); i++) {
 													ProductDto dto = list.get(i);
-													if (dto.getTeamName().equals("µÎ»ê º£¾î½º")) {
-														if (dto.getpCategory().equals("ÀÀ¿ø¿ëÇ°")) {
+													if (dto.getTeamName().equals("ë‘ì‚° ë² ì–´ìŠ¤")) {
+														if (dto.getpCategory().equals("ì‘ì›ìš©í’ˆ")) {
 
 													subListbase_dc.add(dto);
 														}
@@ -467,7 +467,7 @@ NumberFormat nf = NumberFormat.getCurrencyInstance();
 										<%
 										if (subListbase_dc.size() >= 5) {
 										%>
-										<!-- µÎ»ê ÀÀ¿ø¿ëÇ° µÎ¹øÂ° ÆäÀÌÁö -->
+										<!-- ë‘ì‚° ì‘ì›ìš©í’ˆ ë‘ë²ˆì§¸ í˜ì´ì§€ -->
 										<div class="carousel-item">
 											<div class="row h-100 align-items-center g-2">
 												<%
@@ -499,7 +499,7 @@ NumberFormat nf = NumberFormat.getCurrencyInstance();
 										</div>
 
 
-										<!-- µÎ»ê ÀÀ¿ø¿ëÇ° ÁÂ¿ìÀÌµ¿ -->
+										<!-- ë‘ì‚° ì‘ì›ìš©í’ˆ ì¢Œìš°ì´ë™ -->
 										<div class="row">
 											<button class="carousel-control-prev" type="button"
 												data-bs-target="#carouselCategoryDoosanCheering"
@@ -523,14 +523,14 @@ NumberFormat nf = NumberFormat.getCurrencyInstance();
 
 							</div>
 
-							<!-- µÎ»ê ¾ß±¸¿ëÇ° -->
+							<!-- ë‘ì‚° ì•¼êµ¬ìš©í’ˆ -->
 							<div class="tab-pane fade" id="pills-doosan_baseball"
 								role="tabpanel" aria-labelledby="pills-doosan_baseball-tab">
 								<div class="carousel slide" id="carouselCategoryDoosanbaseball"
 									data-bs-touch="false" data-bs-interval="false">
-									<!-- µÎ»ê ¾ß±¸¿ëÇ° ½ÃÀÛ-->
+									<!-- ë‘ì‚° ì•¼êµ¬ìš©í’ˆ ì‹œì‘-->
 									<div class="carousel-inner">
-										<!-- µÎ»ê ¾ß±¸¿ëÇ° Ã¹¹øÂ° ÆäÀÌÁö-->
+										<!-- ë‘ì‚° ì•¼êµ¬ìš©í’ˆ ì²«ë²ˆì§¸ í˜ì´ì§€-->
 										<div class="carousel-item active" data-bs-interval="10000">
 											<div class="row h-100 align-items-center g-2">
 												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
@@ -540,7 +540,7 @@ NumberFormat nf = NumberFormat.getCurrencyInstance();
 															alt="..." />
 														<div class="card-img-overlay ps-0"></div>
 														<div class="card-body ps-0 bg-200">
-															<h5 class="fw-bold text-1000 text-truncate">¾î¼¾Æ½ ¹èÆ®°¡¹æ</h5>
+															<h5 class="fw-bold text-1000 text-truncate">ì–´ì„¼í‹± ë°°íŠ¸ê°€ë°©</h5>
 															<div class="fw-bold">
 																<span class="text-600 me-2 text-decoration-line-through">$200</span><span
 																	class="text-primary">$175</span>
@@ -554,7 +554,7 @@ NumberFormat nf = NumberFormat.getCurrencyInstance();
 											</div>
 										</div>
 
-										<!-- µÎ»ê ¾ß±¸¿ëÇ° µÎ¹øÂ° ÆäÀÌÁö-->
+										<!-- ë‘ì‚° ì•¼êµ¬ìš©í’ˆ ë‘ë²ˆì§¸ í˜ì´ì§€-->
 										<div class="carousel-item">
 											<div class="row h-100 align-items-center g-2">
 												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
@@ -577,7 +577,7 @@ NumberFormat nf = NumberFormat.getCurrencyInstance();
 											</div>
 										</div>
 
-										<!-- µÎ»ê ¾ß±¸¿ëÇ° ÁÂ¿ìÀÌµ¿ -->
+										<!-- ë‘ì‚° ì•¼êµ¬ìš©í’ˆ ì¢Œìš°ì´ë™ -->
 										<div class="row">
 											<button class="carousel-control-prev" type="button"
 												data-bs-target="#carouselCategoryDoosanbaseball"
@@ -598,15 +598,15 @@ NumberFormat nf = NumberFormat.getCurrencyInstance();
 
 							</div>
 
-							<!-- µÎ»ê ±â³ä»óÇ°-->
+							<!-- ë‘ì‚° ê¸°ë…ìƒí’ˆ-->
 							<div class="tab-pane fade" id="pills-doosan_commemoration"
 								role="tabpanel" aria-labelledby="pills-doosan_commemoration-tab">
 								<div class="carousel slide"
 									id="carouselCategoryDoosanCommemoration" data-bs-touch="false"
 									data-bs-interval="false">
-									<!-- µÎ»ê ±â³ä»óÇ° ½ÃÀÛ-->
+									<!-- ë‘ì‚° ê¸°ë…ìƒí’ˆ ì‹œì‘-->
 									<div class="carousel-inner">
-										<!-- µÎ»ê ±â³ä»óÇ° Ã¹¹øÂ° ÆäÀÌÁö-->
+										<!-- ë‘ì‚° ê¸°ë…ìƒí’ˆ ì²«ë²ˆì§¸ í˜ì´ì§€-->
 										<div class="carousel-item active" data-bs-interval="10000">
 											<div class="row h-100 align-items-center g-2">
 												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
@@ -617,7 +617,7 @@ NumberFormat nf = NumberFormat.getCurrencyInstance();
 														<div class="card-img-overlay ps-0"></div>
 														<div class="card-body ps-0 bg-200">
 															<h5 class="fw-bold text-1000 text-truncate">2016
-																Á¤±Ô½ÃÁğ ¿ì½Â ±â³ä ¸ğÀÚ</h5>
+																ì •ê·œì‹œì¦Œ ìš°ìŠ¹ ê¸°ë… ëª¨ì</h5>
 															<div class="fw-bold">
 																<span class="text-600 me-2 text-decoration-line-through">$500</span><span
 																	class="text-primary">$275</span>
@@ -631,7 +631,7 @@ NumberFormat nf = NumberFormat.getCurrencyInstance();
 											</div>
 										</div>
 
-										<!-- µÎ»ê ±â³ä»óÇ° µÎ¹øÂ° ÆäÀÌÁö-->
+										<!-- ë‘ì‚° ê¸°ë…ìƒí’ˆ ë‘ë²ˆì§¸ í˜ì´ì§€-->
 										<div class="carousel-item">
 											<div class="row h-100 align-items-center g-2">
 												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
@@ -654,7 +654,7 @@ NumberFormat nf = NumberFormat.getCurrencyInstance();
 											</div>
 										</div>
 
-										<!-- µÎ»ê ±â³ä»óÇ° ÁÂ¿ìÀÌµ¿-->
+										<!-- ë‘ì‚° ê¸°ë…ìƒí’ˆ ì¢Œìš°ì´ë™-->
 										<div class="row">
 											<button class="carousel-control-prev" type="button"
 												data-bs-target="#carouselCategoryDoosanCommemoration"
@@ -677,7 +677,7 @@ NumberFormat nf = NumberFormat.getCurrencyInstance();
 						</div>
 					</div>
 
-					<!-- ·Ôµ¥ -->
+					<!-- ë¡¯ë° -->
 					<div class="tab-pane fade" id="navv-lotte" role="tabpanel"
 						style="opacity: 1" aria-labelledby="navv-lotte-tab">
 						<ul class="navv navv-pills mb-5 justify-content-center"
@@ -686,38 +686,38 @@ NumberFormat nf = NumberFormat.getCurrencyInstance();
 								<button class="navv-link active" id="pills-lotte_teamwear-tab"
 									data-bs-toggle="pill" data-bs-target="#pills-lotte_teamwear"
 									type="button" role="tab" aria-controls="pills-lotte_teamwear"
-									aria-selected="true">ÆÀ¿ş¾î</button>
+									aria-selected="true">íŒ€ì›¨ì–´</button>
 							</li>
 							<li class="navv-item" role="presentation">
 								<button class="navv-link" id="pills-lotte_cheering-tab"
 									data-bs-toggle="pill" data-bs-target="#pills-lotte_cheering"
 									type="button" role="tab" aria-controls="pills-lotte_cheering"
-									aria-selected="false">ÀÀ¿ø¿ëÇ°</button>
+									aria-selected="false">ì‘ì›ìš©í’ˆ</button>
 							</li>
 							<li class="navv-item" role="presentation">
 								<button class="navv-link" id="pills-lotte_baseball-tab"
 									data-bs-toggle="pill" data-bs-target="#pills-lotte_baseball"
 									type="button" role="tab" aria-controls="pills-lotte_baseball"
-									aria-selected="false">¾ß±¸¿ëÇ°</button>
+									aria-selected="false">ì•¼êµ¬ìš©í’ˆ</button>
 							</li>
 							<li class="navv-item" role="presentation">
 								<button class="navv-link" id="pills-lotte_commemoration-tab"
 									data-bs-toggle="pill"
 									data-bs-target="#pills-lotte_commemoration" type="button"
 									role="tab" aria-controls="pills-lotte_commemoration"
-									aria-selected="false">±â³ä»óÇ°</button>
+									aria-selected="false">ê¸°ë…ìƒí’ˆ</button>
 							</li>
 						</ul>
 						<div class="tab-content" id="pills-tabContentLotte">
-							<!-- ·Ôµ¥ ÆÀ¿ş¾î -->
+							<!-- ë¡¯ë° íŒ€ì›¨ì–´ -->
 							<div class="tab-pane fade show active" id="pills-lotte_teamwear"
 								style="opacity: 1" role="tabpanel"
 								aria-labelledby="pills-lotte_teamwear-tab">
 								<div class="carousel slide" id="carouselCategoryLotteTeamwear"
 									data-bs-touch="false" data-bs-interval="false">
-									<!-- ·Ôµ¥ ÆÀ¿ş¾î ½ÃÀÛ -->
+									<!-- ë¡¯ë° íŒ€ì›¨ì–´ ì‹œì‘ -->
 									<div class="carousel-inner">
-										<!-- ·Ôµ¥ ÆÀ¿ş¾î Ã¹¹øÂ° ÆäÀÌÁö -->
+										<!-- ë¡¯ë° íŒ€ì›¨ì–´ ì²«ë²ˆì§¸ í˜ì´ì§€ -->
 										<div class="carousel-item active" data-bs-interval="10000">
 											<div class="row h-100 align-items-center g-2">
 												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
@@ -727,8 +727,8 @@ NumberFormat nf = NumberFormat.getCurrencyInstance();
 															alt="..." />
 														<div class="card-img-overlay ps-0"></div>
 														<div class="card-body ps-0 bg-200">
-															<h5 class="fw-bold text-1000 text-truncate">G·Î°í º£ÀÌÁ÷
-																¹öÅ¶ÇŞ</h5>
+															<h5 class="fw-bold text-1000 text-truncate">Gë¡œê³  ë² ì´ì§
+																ë²„í‚·í–‡</h5>
 															<div class="fw-bold">
 																<span class="text-600 me-2 text-decoration-line-through">$200</span><span
 																	class="text-primary">$175</span>
@@ -742,7 +742,7 @@ NumberFormat nf = NumberFormat.getCurrencyInstance();
 											</div>
 										</div>
 
-										<!-- ·Ôµ¥ ÆÀ¿ş¾î µÎ¹øÂ° ÆäÀÌÁö -->
+										<!-- ë¡¯ë° íŒ€ì›¨ì–´ ë‘ë²ˆì§¸ í˜ì´ì§€ -->
 										<div class="carousel-item">
 											<div class="row h-100 align-items-center g-2">
 												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
@@ -766,7 +766,7 @@ NumberFormat nf = NumberFormat.getCurrencyInstance();
 											</div>
 										</div>
 
-										<!-- ·Ôµ¥ ÆÀ¿ş¾î ÁÂ¿ìÀÌµ¿ -->
+										<!-- ë¡¯ë° íŒ€ì›¨ì–´ ì¢Œìš°ì´ë™ -->
 										<div class="row">
 											<button class="carousel-control-prev" type="button"
 												data-bs-target="#carouselCategoryLotteTeamwear"
@@ -787,15 +787,15 @@ NumberFormat nf = NumberFormat.getCurrencyInstance();
 
 							</div>
 
-							<!-- ·Ôµ¥ ÀÀ¿ø¿ëÇ° -->
+							<!-- ë¡¯ë° ì‘ì›ìš©í’ˆ -->
 							<div class="tab-pane fade" id="pills-lotte_cheering"
 								style="opacity: 1" role="tabpanel"
 								aria-labelledby="pills-lotte_cheering-tab">
 								<div class="carousel slide" id="carouselCategoryLotteCheering"
 									data-bs-touch="false" data-bs-interval="false">
-									<!-- ·Ôµ¥ ÀÀ¿ø¿ëÇ° ½ÃÀÛ -->
+									<!-- ë¡¯ë° ì‘ì›ìš©í’ˆ ì‹œì‘ -->
 									<div class="carousel-inner">
-										<!-- ·Ôµ¥ ÀÀ¿ø¿ëÇ° Ã¹¹øÂ° ÆäÀÌÁö -->
+										<!-- ë¡¯ë° ì‘ì›ìš©í’ˆ ì²«ë²ˆì§¸ í˜ì´ì§€ -->
 										<div class="carousel-item active" data-bs-interval="10000">
 											<div class="row h-100 align-items-center g-2">
 												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
@@ -805,8 +805,8 @@ NumberFormat nf = NumberFormat.getCurrencyInstance();
 															alt="..." />
 														<div class="card-img-overlay ps-0"></div>
 														<div class="card-body ps-0 bg-200">
-															<h5 class="fw-bold text-1000 text-truncate">¿ì.¼±.ÀÀ.¿ø
-																ÆĞÄ¡</h5>
+															<h5 class="fw-bold text-1000 text-truncate">ìš°.ì„ .ì‘.ì›
+																íŒ¨ì¹˜</h5>
 															<div class="fw-bold">
 																<span class="text-600 me-2 text-decoration-line-through">$200</span><span
 																	class="text-primary">$175</span>
@@ -820,7 +820,7 @@ NumberFormat nf = NumberFormat.getCurrencyInstance();
 											</div>
 										</div>
 
-										<!-- ·Ôµ¥ ÀÀ¿ø¿ëÇ° µÎ¹øÂ° ÆäÀÌÁö-->
+										<!-- ë¡¯ë° ì‘ì›ìš©í’ˆ ë‘ë²ˆì§¸ í˜ì´ì§€-->
 										<div class="carousel-item">
 											<div class="row h-100 align-items-center g-2">
 												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
@@ -843,7 +843,7 @@ NumberFormat nf = NumberFormat.getCurrencyInstance();
 											</div>
 										</div>
 
-										<!-- ·Ôµ¥ ÀÀ¿ø¿ëÇ° ÁÂ¿ìÀÌµ¿-->
+										<!-- ë¡¯ë° ì‘ì›ìš©í’ˆ ì¢Œìš°ì´ë™-->
 										<div class="row">
 											<button class="carousel-control-prev" type="button"
 												data-bs-target="#carouselCategoryLotteCheering"
@@ -864,15 +864,15 @@ NumberFormat nf = NumberFormat.getCurrencyInstance();
 
 							</div>
 
-							<!-- ·Ôµ¥ ¾ß±¸¿ëÇ° -->
+							<!-- ë¡¯ë° ì•¼êµ¬ìš©í’ˆ -->
 							<div class="tab-pane fade" id="pills-lotte_baseball"
 								style="opacity: 1" role="tabpanel"
 								aria-labelledby="pills-lotte_baseball-tab">
 								<div class="carousel slide" id="carouselCategoryLottebaseball"
 									data-bs-touch="false" data-bs-interval="false">
-									<!-- ·Ôµ¥ ¾ß±¸¿ëÇ° ½ÃÀÛ -->
+									<!-- ë¡¯ë° ì•¼êµ¬ìš©í’ˆ ì‹œì‘ -->
 									<div class="carousel-inner">
-										<!-- ·Ôµ¥ ¾ß±¸¿ëÇ° Ã¹¹øÂ° ÆäÀÌÁö -->
+										<!-- ë¡¯ë° ì•¼êµ¬ìš©í’ˆ ì²«ë²ˆì§¸ í˜ì´ì§€ -->
 										<div class="carousel-item active" data-bs-interval="10000">
 											<div class="row h-100 align-items-center g-2">
 												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
@@ -882,7 +882,7 @@ NumberFormat nf = NumberFormat.getCurrencyInstance();
 															alt="..." />
 														<div class="card-img-overlay ps-0"></div>
 														<div class="card-body ps-0 bg-200">
-															<h5 class="fw-bold text-1000 text-truncate">±âº» ·Î°íº¼</h5>
+															<h5 class="fw-bold text-1000 text-truncate">ê¸°ë³¸ ë¡œê³ ë³¼</h5>
 															<div class="fw-bold">
 																<span class="text-600 me-2 text-decoration-line-through">$200</span><span
 																	class="text-primary">$175</span>
@@ -896,7 +896,7 @@ NumberFormat nf = NumberFormat.getCurrencyInstance();
 											</div>
 										</div>
 
-										<!-- ·Ôµ¥ ¾ß±¸¿ëÇ° µÎ¹øÂ° ÆäÀÌÁö -->
+										<!-- ë¡¯ë° ì•¼êµ¬ìš©í’ˆ ë‘ë²ˆì§¸ í˜ì´ì§€ -->
 										<div class="carousel-item">
 											<div class="row h-100 align-items-center g-2">
 												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
@@ -919,7 +919,7 @@ NumberFormat nf = NumberFormat.getCurrencyInstance();
 											</div>
 										</div>
 
-										<!-- ·Ôµ¥ ¾ß±¸¿ëÇ° ÁÂ¿ìÀÌµ¿ -->
+										<!-- ë¡¯ë° ì•¼êµ¬ìš©í’ˆ ì¢Œìš°ì´ë™ -->
 										<div class="row">
 											<button class="carousel-control-prev" type="button"
 												data-bs-target="#carouselCategoryLottebaseball"
@@ -940,16 +940,16 @@ NumberFormat nf = NumberFormat.getCurrencyInstance();
 
 							</div>
 
-							<!-- ·Ôµ¥ ±â³ä»óÇ° -->
+							<!-- ë¡¯ë° ê¸°ë…ìƒí’ˆ -->
 							<div class="tab-pane fade" id="pills-lotte_commemoration"
 								style="opacity: 1" role="tabpanel"
 								aria-labelledby="pills-lotte_commemoration-tab">
 								<div class="carousel slide"
 									id="carouselCategoryLotteCommemoration" data-bs-touch="false"
 									data-bs-interval="false">
-									<!-- ·Ôµ¥ ±â³ä»óÇ° ½ÃÀÛ -->
+									<!-- ë¡¯ë° ê¸°ë…ìƒí’ˆ ì‹œì‘ -->
 									<div class="carousel-inner">
-										<!-- ·Ôµ¥ ±â³ä»óÇ° Ã¹¹øÂ° ÆäÀÌÁö -->
+										<!-- ë¡¯ë° ê¸°ë…ìƒí’ˆ ì²«ë²ˆì§¸ í˜ì´ì§€ -->
 										<div class="carousel-item active" data-bs-interval="10000">
 											<div class="row h-100 align-items-center g-2">
 												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
@@ -959,7 +959,7 @@ NumberFormat nf = NumberFormat.getCurrencyInstance();
 															alt="..." />
 														<div class="card-img-overlay ps-0"></div>
 														<div class="card-body ps-0 bg-200">
-															<h5 class="fw-bold text-1000 text-truncate">°ñÇÁ ÆĞÅ°Áö¹Ú½º</h5>
+															<h5 class="fw-bold text-1000 text-truncate">ê³¨í”„ íŒ¨í‚¤ì§€ë°•ìŠ¤</h5>
 															<div class="fw-bold">
 																<span class="text-600 me-2 text-decoration-line-through">$500</span><span
 																	class="text-primary">$275</span>
@@ -973,7 +973,7 @@ NumberFormat nf = NumberFormat.getCurrencyInstance();
 											</div>
 										</div>
 
-										<!-- ·Ôµ¥ ±â³ä»óÇ° µÎ¹øÂ° ÆäÀÌÁö -->
+										<!-- ë¡¯ë° ê¸°ë…ìƒí’ˆ ë‘ë²ˆì§¸ í˜ì´ì§€ -->
 										<div class="carousel-item">
 											<div class="row h-100 align-items-center g-2">
 												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
@@ -996,7 +996,7 @@ NumberFormat nf = NumberFormat.getCurrencyInstance();
 											</div>
 										</div>
 
-										<!-- ·Ôµ¥ ±â³ä»óÇ° ÁÂ¿ìÀÌµ¿ -->
+										<!-- ë¡¯ë° ê¸°ë…ìƒí’ˆ ì¢Œìš°ì´ë™ -->
 										<div class="row">
 											<button class="carousel-control-prev" type="button"
 												data-bs-target="#carouselCategoryLotteCommemoration"
@@ -1019,7 +1019,7 @@ NumberFormat nf = NumberFormat.getCurrencyInstance();
 						</div>
 					</div>
 
-					<!-- »ï¼º -->
+					<!-- ì‚¼ì„± -->
 					<div class="tab-pane fade" id="navv-samsung" role="tabpanel"
 						style="opacity: 1" aria-labelledby="navv-samsung-tab">
 						<ul class="navv navv-pills mb-5 justify-content-center"
@@ -1028,39 +1028,39 @@ NumberFormat nf = NumberFormat.getCurrencyInstance();
 								<button class="navv-link active" id="pills-samsung_teamwear-tab"
 									data-bs-toggle="pill" data-bs-target="#pills-samsung_teamwear"
 									type="button" role="tab" aria-controls="pills-samsung_teamwear"
-									aria-selected="true">ÆÀ¿ş¾î</button>
+									aria-selected="true">íŒ€ì›¨ì–´</button>
 							</li>
 							<li class="navv-item" role="presentation">
 								<button class="navv-link" id="pills-samsung_cheering-tab"
 									data-bs-toggle="pill" data-bs-target="#pills-samsung_cheering"
 									type="button" role="tab" aria-controls="pills-samsung_cheering"
-									aria-selected="false">ÀÀ¿ø¿ëÇ°</button>
+									aria-selected="false">ì‘ì›ìš©í’ˆ</button>
 							</li>
 							<li class="navv-item" role="presentation">
 								<button class="navv-link" id="pills-samsung_baseball-tab"
 									data-bs-toggle="pill" data-bs-target="#pills-samsung_baseball"
 									type="button" role="tab" aria-controls="pills-samsung_baseball"
-									aria-selected="false">¾ß±¸¿ëÇ°</button>
+									aria-selected="false">ì•¼êµ¬ìš©í’ˆ</button>
 							</li>
 							<li class="navv-item" role="presentation">
 								<button class="navv-link" id="pills-samsung_commemoration-tab"
 									data-bs-toggle="pill"
 									data-bs-target="#pills-samsung_commemoration" type="button"
 									role="tab" aria-controls="pills-samsung_commemoration"
-									aria-selected="false">±â³ä»óÇ°</button>
+									aria-selected="false">ê¸°ë…ìƒí’ˆ</button>
 							</li>
 						</ul>
 
 						<div class="tab-content" id="pills-tabContentSamsung">
-							<!-- »ï¼º ÆÀ¿ş¾î -->
+							<!-- ì‚¼ì„± íŒ€ì›¨ì–´ -->
 							<div class="tab-pane fade show active"
 								id="pills-samsung_teamwear" role="tabpanel"
 								aria-labelledby="pills-samsung_teamwear-tab">
 								<div class="carousel slide" id="carouselCategorySamsungTeamwear"
 									data-bs-touch="false" data-bs-interval="false">
-									<!-- »ï¼º ÆÀ¿ş¾î ½ÃÀÛ -->
+									<!-- ì‚¼ì„± íŒ€ì›¨ì–´ ì‹œì‘ -->
 									<div class="carousel-inner">
-										<!-- »ï¼º ÆÀ¿ş¾î Ã¹¹øÂ° ÆäÀÌÁö -->
+										<!-- ì‚¼ì„± íŒ€ì›¨ì–´ ì²«ë²ˆì§¸ í˜ì´ì§€ -->
 										<div class="carousel-item active" data-bs-interval="10000">
 											<div class="row h-100 align-items-center g-2">
 												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
@@ -1070,8 +1070,8 @@ NumberFormat nf = NumberFormat.getCurrencyInstance();
 															alt="..." />
 														<div class="card-img-overlay ps-0"></div>
 														<div class="card-body ps-0 bg-200">
-															<h5 class="fw-bold text-1000 text-truncate">»ï¼º¶óÀÌ¿ÂÁî
-																2023 ÇÁ·ÎÆä¼Å³Î ¾î¿şÀÌ À¯´ÏÆû</h5>
+															<h5 class="fw-bold text-1000 text-truncate">ì‚¼ì„±ë¼ì´ì˜¨ì¦ˆ
+																2023 í”„ë¡œí˜ì…”ë„ ì–´ì›¨ì´ ìœ ë‹ˆí¼</h5>
 															<div class="fw-bold">
 																<span class="text-600 me-2 text-decoration-line-through">$200</span><span
 																	class="text-primary">$175</span>
@@ -1085,7 +1085,7 @@ NumberFormat nf = NumberFormat.getCurrencyInstance();
 											</div>
 										</div>
 
-										<!-- »ï¼º ÆÀ¿ş¾î µÎ¹øÂ° ÆäÀÌÁö -->
+										<!-- ì‚¼ì„± íŒ€ì›¨ì–´ ë‘ë²ˆì§¸ í˜ì´ì§€ -->
 										<div class="carousel-item">
 											<div class="row h-100 align-items-center g-2">
 												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
@@ -1109,7 +1109,7 @@ NumberFormat nf = NumberFormat.getCurrencyInstance();
 											</div>
 										</div>
 
-										<!-- »ï¼º ÆÀ¿ş¾î ÁÂ¿ìÀÌµ¿ -->
+										<!-- ì‚¼ì„± íŒ€ì›¨ì–´ ì¢Œìš°ì´ë™ -->
 										<div class="row">
 											<button class="carousel-control-prev" type="button"
 												data-bs-target="#carouselCategorySamsungTeamwear"
@@ -1130,14 +1130,14 @@ NumberFormat nf = NumberFormat.getCurrencyInstance();
 
 							</div>
 
-							<!-- »ï¼º ÀÀ¿ø¿ëÇ° -->
+							<!-- ì‚¼ì„± ì‘ì›ìš©í’ˆ -->
 							<div class="tab-pane fade" id="pills-samsung_cheering"
 								role="tabpanel" aria-labelledby="pills-samsung_cheering-tab">
 								<div class="carousel slide" id="carouselCategorySamsungCheering"
 									data-bs-touch="false" data-bs-interval="false">
-									<!-- »ï¼º ÀÀ¿ø¿ëÇ° ½ÃÀÛ -->
+									<!-- ì‚¼ì„± ì‘ì›ìš©í’ˆ ì‹œì‘ -->
 									<div class="carousel-inner">
-										<!-- »ï¼º ÀÀ¿ø¿ëÇ° Ã¹¹øÂ° ÆäÀÌÁö -->
+										<!-- ì‚¼ì„± ì‘ì›ìš©í’ˆ ì²«ë²ˆì§¸ í˜ì´ì§€ -->
 										<div class="carousel-item active" data-bs-interval="10000">
 											<div class="row h-100 align-items-center g-2">
 												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
@@ -1147,8 +1147,8 @@ NumberFormat nf = NumberFormat.getCurrencyInstance();
 															alt="..." />
 														<div class="card-img-overlay ps-0"></div>
 														<div class="card-body ps-0 bg-200">
-															<h5 class="fw-bold text-1000 text-truncate">»ï¼º¶óÀÌ¿ÂÁî
-																SL ºò·Î°í ¸ñ°ÉÀÌ</h5>
+															<h5 class="fw-bold text-1000 text-truncate">ì‚¼ì„±ë¼ì´ì˜¨ì¦ˆ
+																SL ë¹…ë¡œê³  ëª©ê±¸ì´</h5>
 															<div class="fw-bold">
 																<span class="text-600 me-2 text-decoration-line-through">$200</span><span
 																	class="text-primary">$175</span>
@@ -1162,7 +1162,7 @@ NumberFormat nf = NumberFormat.getCurrencyInstance();
 											</div>
 										</div>
 
-										<!-- »ï¼º ÀÀ¿ø¿ëÇ° µÎ¹øÂ° ÆäÀÌÁö-->
+										<!-- ì‚¼ì„± ì‘ì›ìš©í’ˆ ë‘ë²ˆì§¸ í˜ì´ì§€-->
 										<div class="carousel-item">
 											<div class="row h-100 align-items-center g-2">
 												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
@@ -1185,7 +1185,7 @@ NumberFormat nf = NumberFormat.getCurrencyInstance();
 											</div>
 										</div>
 
-										<!-- »ï¼º ÀÀ¿ø¿ëÇ° ÁÂ¿ìÀÌµ¿-->
+										<!-- ì‚¼ì„± ì‘ì›ìš©í’ˆ ì¢Œìš°ì´ë™-->
 										<div class="row">
 											<button class="carousel-control-prev" type="button"
 												data-bs-target="#carouselCategorySamsungCheering"
@@ -1206,14 +1206,14 @@ NumberFormat nf = NumberFormat.getCurrencyInstance();
 
 							</div>
 
-							<!-- »ï¼º ¾ß±¸¿ëÇ° -->
+							<!-- ì‚¼ì„± ì•¼êµ¬ìš©í’ˆ -->
 							<div class="tab-pane fade" id="pills-samsung_baseball"
 								role="tabpanel" aria-labelledby="pills-samsung_baseball-tab">
 								<div class="carousel slide" id="carouselCategorySamsungbaseball"
 									data-bs-touch="false" data-bs-interval="false">
-									<!-- »ï¼º ¾ß±¸¿ëÇ° ½ÃÀÛ -->
+									<!-- ì‚¼ì„± ì•¼êµ¬ìš©í’ˆ ì‹œì‘ -->
 									<div class="carousel-inner">
-										<!-- »ï¼º ¾ß±¸¿ëÇ° Ã¹¹øÂ° ÆäÀÌÁö -->
+										<!-- ì‚¼ì„± ì•¼êµ¬ìš©í’ˆ ì²«ë²ˆì§¸ í˜ì´ì§€ -->
 										<div class="carousel-item active" data-bs-interval="10000">
 											<div class="row h-100 align-items-center g-2">
 												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
@@ -1223,8 +1223,8 @@ NumberFormat nf = NumberFormat.getCurrencyInstance();
 															alt="..." />
 														<div class="card-img-overlay ps-0"></div>
 														<div class="card-body ps-0 bg-200">
-															<h5 class="fw-bold text-1000 text-truncate">»ï¼º ¶óÀÌ¿ÂÁî
-																2022 ¾ß±¸±Û·¯ºê</h5>
+															<h5 class="fw-bold text-1000 text-truncate">ì‚¼ì„± ë¼ì´ì˜¨ì¦ˆ
+																2022 ì•¼êµ¬ê¸€ëŸ¬ë¸Œ</h5>
 															<div class="fw-bold">
 																<span class="text-600 me-2 text-decoration-line-through">$200</span><span
 																	class="text-primary">$175</span>
@@ -1238,7 +1238,7 @@ NumberFormat nf = NumberFormat.getCurrencyInstance();
 											</div>
 										</div>
 
-										<!-- »ï¼º ¾ß±¸¿ëÇ° µÎ¹øÂ° ÆäÀÌÁö -->
+										<!-- ì‚¼ì„± ì•¼êµ¬ìš©í’ˆ ë‘ë²ˆì§¸ í˜ì´ì§€ -->
 										<div class="carousel-item">
 											<div class="row h-100 align-items-center g-2">
 												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
@@ -1261,7 +1261,7 @@ NumberFormat nf = NumberFormat.getCurrencyInstance();
 											</div>
 										</div>
 
-										<!-- »ï¼º ¾ß±¸¿ëÇ° ÁÂ¿ìÀÌµ¿ -->
+										<!-- ì‚¼ì„± ì•¼êµ¬ìš©í’ˆ ì¢Œìš°ì´ë™ -->
 										<div class="row">
 											<button class="carousel-control-prev" type="button"
 												data-bs-target="#carouselCategorySamsungbaseball"
@@ -1282,16 +1282,16 @@ NumberFormat nf = NumberFormat.getCurrencyInstance();
 
 							</div>
 
-							<!-- »ï¼º ±â³ä»óÇ° -->
+							<!-- ì‚¼ì„± ê¸°ë…ìƒí’ˆ -->
 							<div class="tab-pane fade" id="pills-samsung_commemoration"
 								role="tabpanel"
 								aria-labelledby="pills-samsung_commemoration-tab">
 								<div class="carousel slide"
 									id="carouselCategorySamsungCommemoration" data-bs-touch="false"
 									data-bs-interval="false">
-									<!-- »ï¼º ±â³ä»óÇ° ½ÃÀÛ -->
+									<!-- ì‚¼ì„± ê¸°ë…ìƒí’ˆ ì‹œì‘ -->
 									<div class="carousel-inner">
-										<!-- »ï¼º ±â³ä»óÇ° Ã¹¹øÂ° ÆäÀÌÁö -->
+										<!-- ì‚¼ì„± ê¸°ë…ìƒí’ˆ ì²«ë²ˆì§¸ í˜ì´ì§€ -->
 										<div class="carousel-item active" data-bs-interval="10000">
 											<div class="row h-100 align-items-center g-2">
 												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
@@ -1301,8 +1301,8 @@ NumberFormat nf = NumberFormat.getCurrencyInstance();
 															alt="..." />
 														<div class="card-img-overlay ps-0"></div>
 														<div class="card-body ps-0 bg-200">
-															<h5 class="fw-bold text-1000 text-truncate">»ï¼º ¶óÀÌ¿ÂÁî
-																¾çÃ¢¼· ÆĞÄ¡</h5>
+															<h5 class="fw-bold text-1000 text-truncate">ì‚¼ì„± ë¼ì´ì˜¨ì¦ˆ
+																ì–‘ì°½ì„­ íŒ¨ì¹˜</h5>
 															<div class="fw-bold">
 																<span class="text-600 me-2 text-decoration-line-through">$500</span><span
 																	class="text-primary">$275</span>
@@ -1316,7 +1316,7 @@ NumberFormat nf = NumberFormat.getCurrencyInstance();
 											</div>
 										</div>
 
-										<!-- »ï¼º ±â³ä»óÇ° µÎ¹øÂ° ÆäÀÌÁö -->
+										<!-- ì‚¼ì„± ê¸°ë…ìƒí’ˆ ë‘ë²ˆì§¸ í˜ì´ì§€ -->
 										<div class="carousel-item">
 											<div class="row h-100 align-items-center g-2">
 												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
@@ -1339,7 +1339,7 @@ NumberFormat nf = NumberFormat.getCurrencyInstance();
 											</div>
 										</div>
 
-										<!-- »ï¼º ±â³ä»óÇ° ÁÂ¿ìÀÌµ¿ -->
+										<!-- ì‚¼ì„± ê¸°ë…ìƒí’ˆ ì¢Œìš°ì´ë™ -->
 										<div class="row">
 											<button class="carousel-control-prev" type="button"
 												data-bs-target="#carouselCategorySamsungCommemoration"
@@ -1362,7 +1362,7 @@ NumberFormat nf = NumberFormat.getCurrencyInstance();
 						</div>
 					</div>
 
-					<!-- Å°¿ò -->
+					<!-- í‚¤ì›€ -->
 					<div class="tab-pane fade" id="navv-kiwoom" role="tabpanel"
 						aria-labelledby="navv-kiwoom-tab">
 						<ul class="navv navv-pills mb-5 justify-content-center"
@@ -1371,38 +1371,38 @@ NumberFormat nf = NumberFormat.getCurrencyInstance();
 								<button class="navv-link active" id="pills-kiwoom_teamwear-tab"
 									data-bs-toggle="pill" data-bs-target="#pills-kiwoom_teamwear"
 									type="button" role="tab" aria-controls="pills-kiwoom_teamwear"
-									aria-selected="true">ÆÀ¿ş¾î</button>
+									aria-selected="true">íŒ€ì›¨ì–´</button>
 							</li>
 							<li class="navv-item" role="presentation">
 								<button class="navv-link" id="pills-kiwoom_cheering-tab"
 									data-bs-toggle="pill" data-bs-target="#pills-kiwoom_cheering"
 									type="button" role="tab" aria-controls="pills-kiwoom_cheering"
-									aria-selected="false">ÀÀ¿ø¿ëÇ°</button>
+									aria-selected="false">ì‘ì›ìš©í’ˆ</button>
 							</li>
 							<li class="navv-item" role="presentation">
 								<button class="navv-link" id="pills-kiwoom_baseball-tab"
 									data-bs-toggle="pill" data-bs-target="#pills-kiwoom_baseball"
 									type="button" role="tab" aria-controls="pills-kiwoom_baseball"
-									aria-selected="false">¾ß±¸¿ëÇ°</button>
+									aria-selected="false">ì•¼êµ¬ìš©í’ˆ</button>
 							</li>
 							<li class="navv-item" role="presentation">
 								<button class="navv-link" id="pills-kiwoom_commemoration-tab"
 									data-bs-toggle="pill"
 									data-bs-target="#pills-kiwoom_commemoration" type="button"
 									role="tab" aria-controls="pills-kiwoom_commemoration"
-									aria-selected="false">±â³ä»óÇ°</button>
+									aria-selected="false">ê¸°ë…ìƒí’ˆ</button>
 							</li>
 						</ul>
 
 						<div class="tab-content" id="pills-tabContentKiwoom">
-							<!-- Å°¿ò ÆÀ¿ş¾î -->
+							<!-- í‚¤ì›€ íŒ€ì›¨ì–´ -->
 							<div class="tab-pane fade show active" id="pills-kiwoom_teamwear"
 								role="tabpanel" aria-labelledby="pills-kiwoom_teamwear-tab">
 								<div class="carousel slide" id="carouselCategoryKiwoomTeamwear"
 									data-bs-touch="false" data-bs-interval="false">
-									<!-- Å°¿ò ÆÀ¿ş¾î ½ÃÀÛ -->
+									<!-- í‚¤ì›€ íŒ€ì›¨ì–´ ì‹œì‘ -->
 									<div class="carousel-inner">
-										<!-- Å°¿ò ÆÀ¿ş¾î Ã¹¹øÂ° ÆäÀÌÁö -->
+										<!-- í‚¤ì›€ íŒ€ì›¨ì–´ ì²«ë²ˆì§¸ í˜ì´ì§€ -->
 										<div class="carousel-item active" data-bs-interval="10000">
 											<div class="row h-100 align-items-center g-2">
 												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
@@ -1412,8 +1412,8 @@ NumberFormat nf = NumberFormat.getCurrencyInstance();
 															alt="..." />
 														<div class="card-img-overlay ps-0"></div>
 														<div class="card-body ps-0 bg-200">
-															<h5 class="fw-bold text-1000 text-truncate">»ï¼º¶óÀÌ¿ÂÁî
-																2023 ÇÁ·ÎÆä¼Å³Î ¾î¿şÀÌ À¯´ÏÆû</h5>
+															<h5 class="fw-bold text-1000 text-truncate">ì‚¼ì„±ë¼ì´ì˜¨ì¦ˆ
+																2023 í”„ë¡œí˜ì…”ë„ ì–´ì›¨ì´ ìœ ë‹ˆí¼</h5>
 															<div class="fw-bold">
 																<span class="text-600 me-2 text-decoration-line-through">$200</span><span
 																	class="text-primary">$175</span>
@@ -1427,7 +1427,7 @@ NumberFormat nf = NumberFormat.getCurrencyInstance();
 											</div>
 										</div>
 
-										<!-- Å°¿ò ÆÀ¿ş¾î µÎ¹øÂ° ÆäÀÌÁö -->
+										<!-- í‚¤ì›€ íŒ€ì›¨ì–´ ë‘ë²ˆì§¸ í˜ì´ì§€ -->
 										<div class="carousel-item">
 											<div class="row h-100 align-items-center g-2">
 												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
@@ -1451,7 +1451,7 @@ NumberFormat nf = NumberFormat.getCurrencyInstance();
 											</div>
 										</div>
 
-										<!-- Å°¿ò ÆÀ¿ş¾î ÁÂ¿ìÀÌµ¿ -->
+										<!-- í‚¤ì›€ íŒ€ì›¨ì–´ ì¢Œìš°ì´ë™ -->
 										<div class="row">
 											<button class="carousel-control-prev" type="button"
 												data-bs-target="#carouselCategoryKiwoomTeamwear"
@@ -1472,14 +1472,14 @@ NumberFormat nf = NumberFormat.getCurrencyInstance();
 
 							</div>
 
-							<!-- Å°¿ò ÀÀ¿ø¿ëÇ° -->
+							<!-- í‚¤ì›€ ì‘ì›ìš©í’ˆ -->
 							<div class="tab-pane fade" id="pills-kiwoom_cheering"
 								role="tabpanel" aria-labelledby="pills-kiwoom_cheering-tab">
 								<div class="carousel slide" id="carouselCategoryKiwoomCheering"
 									data-bs-touch="false" data-bs-interval="false">
-									<!-- Å°¿ò ÀÀ¿ø¿ëÇ° ½ÃÀÛ -->
+									<!-- í‚¤ì›€ ì‘ì›ìš©í’ˆ ì‹œì‘ -->
 									<div class="carousel-inner">
-										<!-- Å°¿ò ÀÀ¿ø¿ëÇ° Ã¹¹øÂ° ÆäÀÌÁö -->
+										<!-- í‚¤ì›€ ì‘ì›ìš©í’ˆ ì²«ë²ˆì§¸ í˜ì´ì§€ -->
 										<div class="carousel-item active" data-bs-interval="10000">
 											<div class="row h-100 align-items-center g-2">
 												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
@@ -1489,7 +1489,7 @@ NumberFormat nf = NumberFormat.getCurrencyInstance();
 															alt="..." />
 														<div class="card-img-overlay ps-0"></div>
 														<div class="card-body ps-0 bg-200">
-															<h5 class="fw-bold text-1000 text-truncate">Å°¿ò ¸ÇÅõ¸Ç</h5>
+															<h5 class="fw-bold text-1000 text-truncate">í‚¤ì›€ ë§¨íˆ¬ë§¨</h5>
 															<div class="fw-bold">
 																<span class="text-600 me-2 text-decoration-line-through">$200</span><span
 																	class="text-primary">$175</span>
@@ -1503,7 +1503,7 @@ NumberFormat nf = NumberFormat.getCurrencyInstance();
 											</div>
 										</div>
 
-										<!-- Å°¿ò ÀÀ¿ø¿ëÇ° µÎ¹øÂ° ÆäÀÌÁö-->
+										<!-- í‚¤ì›€ ì‘ì›ìš©í’ˆ ë‘ë²ˆì§¸ í˜ì´ì§€-->
 										<div class="carousel-item">
 											<div class="row h-100 align-items-center g-2">
 												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
@@ -1526,7 +1526,7 @@ NumberFormat nf = NumberFormat.getCurrencyInstance();
 											</div>
 										</div>
 
-										<!-- Å°¿ò ÀÀ¿ø¿ëÇ° ÁÂ¿ìÀÌµ¿-->
+										<!-- í‚¤ì›€ ì‘ì›ìš©í’ˆ ì¢Œìš°ì´ë™-->
 										<div class="row">
 											<button class="carousel-control-prev" type="button"
 												data-bs-target="#carouselCategoryKiwoomCheering"
@@ -1547,14 +1547,14 @@ NumberFormat nf = NumberFormat.getCurrencyInstance();
 
 							</div>
 
-							<!-- Å°¿ò ¾ß±¸¿ëÇ° -->
+							<!-- í‚¤ì›€ ì•¼êµ¬ìš©í’ˆ -->
 							<div class="tab-pane fade" id="pills-kiwoom_baseball"
 								role="tabpanel" aria-labelledby="pills-kiwoom_baseball-tab">
 								<div class="carousel slide" id="carouselCategoryKiwoombaseball"
 									data-bs-touch="false" data-bs-interval="false">
-									<!-- Å°¿ò ¾ß±¸¿ëÇ° ½ÃÀÛ -->
+									<!-- í‚¤ì›€ ì•¼êµ¬ìš©í’ˆ ì‹œì‘ -->
 									<div class="carousel-inner">
-										<!-- Å°¿ò ¾ß±¸¿ëÇ° Ã¹¹øÂ° ÆäÀÌÁö -->
+										<!-- í‚¤ì›€ ì•¼êµ¬ìš©í’ˆ ì²«ë²ˆì§¸ í˜ì´ì§€ -->
 										<div class="carousel-item active" data-bs-interval="10000">
 											<div class="row h-100 align-items-center g-2">
 												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
@@ -1564,7 +1564,7 @@ NumberFormat nf = NumberFormat.getCurrencyInstance();
 															alt="..." />
 														<div class="card-img-overlay ps-0"></div>
 														<div class="card-body ps-0 bg-200">
-															<h5 class="fw-bold text-1000 text-truncate">Å°¿ò ¸ÇÅõ¸Ç</h5>
+															<h5 class="fw-bold text-1000 text-truncate">í‚¤ì›€ ë§¨íˆ¬ë§¨</h5>
 															<div class="fw-bold">
 																<span class="text-600 me-2 text-decoration-line-through">$200</span><span
 																	class="text-primary">$175</span>
@@ -1578,7 +1578,7 @@ NumberFormat nf = NumberFormat.getCurrencyInstance();
 											</div>
 										</div>
 
-										<!-- Å°¿ò ¾ß±¸¿ëÇ° µÎ¹øÂ° ÆäÀÌÁö -->
+										<!-- í‚¤ì›€ ì•¼êµ¬ìš©í’ˆ ë‘ë²ˆì§¸ í˜ì´ì§€ -->
 										<div class="carousel-item">
 											<div class="row h-100 align-items-center g-2">
 												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
@@ -1601,7 +1601,7 @@ NumberFormat nf = NumberFormat.getCurrencyInstance();
 											</div>
 										</div>
 
-										<!-- Å°¿ò ¾ß±¸¿ëÇ° ÁÂ¿ìÀÌµ¿ -->
+										<!-- í‚¤ì›€ ì•¼êµ¬ìš©í’ˆ ì¢Œìš°ì´ë™ -->
 										<div class="row">
 											<button class="carousel-control-prev" type="button"
 												data-bs-target="#carouselCategoryKiwoombaseball"
@@ -1622,15 +1622,15 @@ NumberFormat nf = NumberFormat.getCurrencyInstance();
 
 							</div>
 
-							<!-- Å°¿ò ±â³ä»óÇ° -->
+							<!-- í‚¤ì›€ ê¸°ë…ìƒí’ˆ -->
 							<div class="tab-pane fade" id="pills-kiwoom_commemoration"
 								role="tabpanel" aria-labelledby="pills-kiwoom_commemoration-tab">
 								<div class="carousel slide"
 									id="carouselCategoryKiwoomCommemoration" data-bs-touch="false"
 									data-bs-interval="false">
-									<!-- Å°¿ò ±â³ä»óÇ° ½ÃÀÛ -->
+									<!-- í‚¤ì›€ ê¸°ë…ìƒí’ˆ ì‹œì‘ -->
 									<div class="carousel-inner">
-										<!-- Å°¿ò ±â³ä»óÇ° Ã¹¹øÂ° ÆäÀÌÁö -->
+										<!-- í‚¤ì›€ ê¸°ë…ìƒí’ˆ ì²«ë²ˆì§¸ í˜ì´ì§€ -->
 										<div class="carousel-item active" data-bs-interval="10000">
 											<div class="row h-100 align-items-center g-2">
 												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
@@ -1640,7 +1640,7 @@ NumberFormat nf = NumberFormat.getCurrencyInstance();
 															alt="..." />
 														<div class="card-img-overlay ps-0"></div>
 														<div class="card-body ps-0 bg-200">
-															<h5 class="fw-bold text-1000 text-truncate">Å°¿ò ¸ÇÅõ¸Ç</h5>
+															<h5 class="fw-bold text-1000 text-truncate">í‚¤ì›€ ë§¨íˆ¬ë§¨</h5>
 															<div class="fw-bold">
 																<span class="text-600 me-2 text-decoration-line-through">$500</span><span
 																	class="text-primary">$275</span>
@@ -1654,7 +1654,7 @@ NumberFormat nf = NumberFormat.getCurrencyInstance();
 											</div>
 										</div>
 
-										<!-- Å°¿ò ±â³ä»óÇ° µÎ¹øÂ° ÆäÀÌÁö -->
+										<!-- í‚¤ì›€ ê¸°ë…ìƒí’ˆ ë‘ë²ˆì§¸ í˜ì´ì§€ -->
 										<div class="carousel-item">
 											<div class="row h-100 align-items-center g-2">
 												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
@@ -1677,7 +1677,7 @@ NumberFormat nf = NumberFormat.getCurrencyInstance();
 											</div>
 										</div>
 
-										<!-- Å°¿ò ±â³ä»óÇ° ÁÂ¿ìÀÌµ¿ -->
+										<!-- í‚¤ì›€ ê¸°ë…ìƒí’ˆ ì¢Œìš°ì´ë™ -->
 										<div class="row">
 											<button class="carousel-control-prev" type="button"
 												data-bs-target="#carouselCategoryKiwoomCommemoration"
@@ -1700,7 +1700,7 @@ NumberFormat nf = NumberFormat.getCurrencyInstance();
 						</div>
 					</div>
 
-					<!-- ÇÑÈ­ -->
+					<!-- í•œí™” -->
 					<div class="tab-pane fade" id="navv-hanhwa" role="tabpanel"
 						style="opacity: 1" aria-labelledby="navv-hanhwa-tab">
 						<ul class="navv navv-pills mb-5 justify-content-center"
@@ -1709,38 +1709,38 @@ NumberFormat nf = NumberFormat.getCurrencyInstance();
 								<button class="navv-link active" id="pills-hanhwa_teamwear-tab"
 									data-bs-toggle="pill" data-bs-target="#pills-hanhwa_teamwear"
 									type="button" role="tab" aria-controls="pills-hanhwa_teamwear"
-									aria-selected="true">ÆÀ¿ş¾î</button>
+									aria-selected="true">íŒ€ì›¨ì–´</button>
 							</li>
 							<li class="navv-item" role="presentation">
 								<button class="navv-link" id="pills-hanhwa_cheering-tab"
 									data-bs-toggle="pill" data-bs-target="#pills-hanhwa_cheering"
 									type="button" role="tab" aria-controls="pills-hanhwa_cheering"
-									aria-selected="false">ÀÀ¿ø¿ëÇ°</button>
+									aria-selected="false">ì‘ì›ìš©í’ˆ</button>
 							</li>
 							<li class="navv-item" role="presentation">
 								<button class="navv-link" id="pills-hanhwa_baseball-tab"
 									data-bs-toggle="pill" data-bs-target="#pills-hanhwa_baseball"
 									type="button" role="tab" aria-controls="pills-hanhwa_baseball"
-									aria-selected="false">¾ß±¸¿ëÇ°</button>
+									aria-selected="false">ì•¼êµ¬ìš©í’ˆ</button>
 							</li>
 							<li class="navv-item" role="presentation">
 								<button class="navv-link" id="pills-hanhwa_commemoration-tab"
 									data-bs-toggle="pill"
 									data-bs-target="#pills-hanhwa_commemoration" type="button"
 									role="tab" aria-controls="pills-hanhwa_commemoration"
-									aria-selected="false">±â³ä»óÇ°</button>
+									aria-selected="false">ê¸°ë…ìƒí’ˆ</button>
 							</li>
 						</ul>
 
 						<div class="tab-content" id="pills-tabContentHanhwa">
-							<!-- ÇÑÈ­ ÆÀ¿ş¾î -->
+							<!-- í•œí™” íŒ€ì›¨ì–´ -->
 							<div class="tab-pane fade show active" id="pills-hanhwa_teamwear"
 								role="tabpanel" aria-labelledby="pills-hanhwa_teamwear-tab">
 								<div class="carousel slide" id="carouselCategoryHanhwaTeamwear"
 									data-bs-touch="false" data-bs-interval="false">
-									<!-- ÇÑÈ­ ÆÀ¿ş¾î ½ÃÀÛ -->
+									<!-- í•œí™” íŒ€ì›¨ì–´ ì‹œì‘ -->
 									<div class="carousel-inner">
-										<!-- ÇÑÈ­ ÆÀ¿ş¾î Ã¹¹øÂ° ÆäÀÌÁö -->
+										<!-- í•œí™” íŒ€ì›¨ì–´ ì²«ë²ˆì§¸ í˜ì´ì§€ -->
 										<div class="carousel-item active" data-bs-interval="10000">
 											<div class="row h-100 align-items-center g-2">
 												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
@@ -1750,8 +1750,8 @@ NumberFormat nf = NumberFormat.getCurrencyInstance();
 															alt="..." />
 														<div class="card-img-overlay ps-0"></div>
 														<div class="card-body ps-0 bg-200">
-															<h5 class="fw-bold text-1000 text-truncate">ÇÑÈ­ÀÌ±Û½º È¨
-																¾î¼¾Æ½ À¯´ÏÆû(¿À·»Áö)</h5>
+															<h5 class="fw-bold text-1000 text-truncate">í•œí™”ì´ê¸€ìŠ¤ í™ˆ
+																ì–´ì„¼í‹± ìœ ë‹ˆí¼(ì˜¤ë Œì§€)</h5>
 															<div class="fw-bold">
 																<span class="text-600 me-2 text-decoration-line-through">$200</span><span
 																	class="text-primary">$175</span>
@@ -1765,7 +1765,7 @@ NumberFormat nf = NumberFormat.getCurrencyInstance();
 											</div>
 										</div>
 
-										<!-- ÇÑÈ­ ÆÀ¿ş¾î µÎ¹øÂ° ÆäÀÌÁö -->
+										<!-- í•œí™” íŒ€ì›¨ì–´ ë‘ë²ˆì§¸ í˜ì´ì§€ -->
 										<div class="carousel-item">
 											<div class="row h-100 align-items-center g-2">
 												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
@@ -1788,7 +1788,7 @@ NumberFormat nf = NumberFormat.getCurrencyInstance();
 											</div>
 										</div>
 
-										<!-- ÇÑÈ­ ÆÀ¿ş¾î ÁÂ¿ìÀÌµ¿ -->
+										<!-- í•œí™” íŒ€ì›¨ì–´ ì¢Œìš°ì´ë™ -->
 										<div class="row">
 											<button class="carousel-control-prev" type="button"
 												data-bs-target="#carouselCategoryHanhwaTeamwear"
@@ -1809,14 +1809,14 @@ NumberFormat nf = NumberFormat.getCurrencyInstance();
 
 							</div>
 
-							<!-- ÇÑÈ­ ÀÀ¿ø¿ëÇ° -->
+							<!-- í•œí™” ì‘ì›ìš©í’ˆ -->
 							<div class="tab-pane fade" id="pills-hanhwa_cheering"
 								role="tabpanel" aria-labelledby="pills-hanhwa_cheering-tab">
 								<div class="carousel slide" id="carouselCategoryHanhwaCheering"
 									data-bs-touch="false" data-bs-interval="false">
-									<!-- ÇÑÈ­ ÀÀ¿ø¿ëÇ° ½ÃÀÛ -->
+									<!-- í•œí™” ì‘ì›ìš©í’ˆ ì‹œì‘ -->
 									<div class="carousel-inner">
-										<!-- ÇÑÈ­ ÀÀ¿ø¿ëÇ° Ã¹¹øÂ° ÆäÀÌÁö -->
+										<!-- í•œí™” ì‘ì›ìš©í’ˆ ì²«ë²ˆì§¸ í˜ì´ì§€ -->
 										<div class="carousel-item active" data-bs-interval="10000">
 											<div class="row h-100 align-items-center g-2">
 												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
@@ -1826,7 +1826,7 @@ NumberFormat nf = NumberFormat.getCurrencyInstance();
 															alt="..." />
 														<div class="card-img-overlay ps-0"></div>
 														<div class="card-body ps-0 bg-200">
-															<h5 class="fw-bold text-1000 text-truncate">Å°¿ò ¸ÇÅõ¸Ç</h5>
+															<h5 class="fw-bold text-1000 text-truncate">í‚¤ì›€ ë§¨íˆ¬ë§¨</h5>
 															<div class="fw-bold">
 																<span class="text-600 me-2 text-decoration-line-through">$200</span><span
 																	class="text-primary">$175</span>
@@ -1839,7 +1839,7 @@ NumberFormat nf = NumberFormat.getCurrencyInstance();
 											</div>
 										</div>
 
-										<!-- ÇÑÈ­ ÀÀ¿ø¿ëÇ° µÎ¹øÂ° ÆäÀÌÁö-->
+										<!-- í•œí™” ì‘ì›ìš©í’ˆ ë‘ë²ˆì§¸ í˜ì´ì§€-->
 										<div class="carousel-item">
 											<div class="row h-100 align-items-center g-2">
 												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
@@ -1861,7 +1861,7 @@ NumberFormat nf = NumberFormat.getCurrencyInstance();
 											</div>
 										</div>
 
-										<!-- ÇÑÈ­ ÀÀ¿ø¿ëÇ° ÁÂ¿ìÀÌµ¿-->
+										<!-- í•œí™” ì‘ì›ìš©í’ˆ ì¢Œìš°ì´ë™-->
 										<div class="row">
 											<button class="carousel-control-prev" type="button"
 												data-bs-target="#carouselCategoryHanhwaCheering"
@@ -1882,14 +1882,14 @@ NumberFormat nf = NumberFormat.getCurrencyInstance();
 
 							</div>
 
-							<!-- ÇÑÈ­ ¾ß±¸¿ëÇ° -->
+							<!-- í•œí™” ì•¼êµ¬ìš©í’ˆ -->
 							<div class="tab-pane fade" id="pills-hanhwa_baseball"
 								role="tabpanel" aria-labelledby="pills-hanhwa_baseball-tab">
 								<div class="carousel slide" id="carouselCategoryHanhwabaseball"
 									data-bs-touch="false" data-bs-interval="false">
-									<!-- ÇÑÈ­ ¾ß±¸¿ëÇ° ½ÃÀÛ -->
+									<!-- í•œí™” ì•¼êµ¬ìš©í’ˆ ì‹œì‘ -->
 									<div class="carousel-inner">
-										<!-- ÇÑÈ­ ¾ß±¸¿ëÇ° Ã¹¹øÂ° ÆäÀÌÁö -->
+										<!-- í•œí™” ì•¼êµ¬ìš©í’ˆ ì²«ë²ˆì§¸ í˜ì´ì§€ -->
 										<div class="carousel-item active" data-bs-interval="10000">
 											<div class="row h-100 align-items-center g-2">
 												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
@@ -1899,7 +1899,7 @@ NumberFormat nf = NumberFormat.getCurrencyInstance();
 															alt="..." />
 														<div class="card-img-overlay ps-0"></div>
 														<div class="card-body ps-0 bg-200">
-															<h5 class="fw-bold text-1000 text-truncate">Å°¿ò ¸ÇÅõ¸Ç</h5>
+															<h5 class="fw-bold text-1000 text-truncate">í‚¤ì›€ ë§¨íˆ¬ë§¨</h5>
 															<div class="fw-bold">
 																<span class="text-600 me-2 text-decoration-line-through">$200</span><span
 																	class="text-primary">$175</span>
@@ -1912,7 +1912,7 @@ NumberFormat nf = NumberFormat.getCurrencyInstance();
 											</div>
 										</div>
 
-										<!-- ÇÑÈ­ ¾ß±¸¿ëÇ° µÎ¹øÂ° ÆäÀÌÁö -->
+										<!-- í•œí™” ì•¼êµ¬ìš©í’ˆ ë‘ë²ˆì§¸ í˜ì´ì§€ -->
 										<div class="carousel-item">
 											<div class="row h-100 align-items-center g-2">
 												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
@@ -1934,7 +1934,7 @@ NumberFormat nf = NumberFormat.getCurrencyInstance();
 											</div>
 										</div>
 
-										<!-- ÇÑÈ­ ¾ß±¸¿ëÇ° ÁÂ¿ìÀÌµ¿ -->
+										<!-- í•œí™” ì•¼êµ¬ìš©í’ˆ ì¢Œìš°ì´ë™ -->
 										<div class="row">
 											<button class="carousel-control-prev" type="button"
 												data-bs-target="#carouselCategoryHanhwabaseball"
@@ -1955,15 +1955,15 @@ NumberFormat nf = NumberFormat.getCurrencyInstance();
 
 							</div>
 
-							<!-- ÇÑÈ­ ±â³ä»óÇ° -->
+							<!-- í•œí™” ê¸°ë…ìƒí’ˆ -->
 							<div class="tab-pane fade" id="pills-hanhwa_commemoration"
 								role="tabpanel" aria-labelledby="pills-hanhwa_commemoration-tab">
 								<div class="carousel slide"
 									id="carouselCategoryHanhwaCommemoration" data-bs-touch="false"
 									data-bs-interval="false">
-									<!-- ÇÑÈ­ ±â³ä»óÇ° ½ÃÀÛ -->
+									<!-- í•œí™” ê¸°ë…ìƒí’ˆ ì‹œì‘ -->
 									<div class="carousel-inner">
-										<!-- ÇÑÈ­ ±â³ä»óÇ° Ã¹¹øÂ° ÆäÀÌÁö -->
+										<!-- í•œí™” ê¸°ë…ìƒí’ˆ ì²«ë²ˆì§¸ í˜ì´ì§€ -->
 										<div class="carousel-item active" data-bs-interval="10000">
 											<div class="row h-100 align-items-center g-2">
 												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
@@ -1973,7 +1973,7 @@ NumberFormat nf = NumberFormat.getCurrencyInstance();
 															alt="..." />
 														<div class="card-img-overlay ps-0"></div>
 														<div class="card-body ps-0 bg-200">
-															<h5 class="fw-bold text-1000 text-truncate">Å°¿ò ¸ÇÅõ¸Ç</h5>
+															<h5 class="fw-bold text-1000 text-truncate">í‚¤ì›€ ë§¨íˆ¬ë§¨</h5>
 															<div class="fw-bold">
 																<span class="text-600 me-2 text-decoration-line-through">$500</span><span
 																	class="text-primary">$275</span>
@@ -1986,7 +1986,7 @@ NumberFormat nf = NumberFormat.getCurrencyInstance();
 											</div>
 										</div>
 
-										<!-- ÇÑÈ­ ±â³ä»óÇ° µÎ¹øÂ° ÆäÀÌÁö -->
+										<!-- í•œí™” ê¸°ë…ìƒí’ˆ ë‘ë²ˆì§¸ í˜ì´ì§€ -->
 										<div class="carousel-item">
 											<div class="row h-100 align-items-center g-2">
 												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
@@ -2008,7 +2008,7 @@ NumberFormat nf = NumberFormat.getCurrencyInstance();
 											</div>
 										</div>
 
-										<!-- ÇÑÈ­ ±â³ä»óÇ° ÁÂ¿ìÀÌµ¿ -->
+										<!-- í•œí™” ê¸°ë…ìƒí’ˆ ì¢Œìš°ì´ë™ -->
 										<div class="row">
 											<button class="carousel-control-prev" type="button"
 												data-bs-target="#carouselCategoryHanhwaCommemoration"
@@ -2040,37 +2040,37 @@ NumberFormat nf = NumberFormat.getCurrencyInstance();
 								<button class="navv-link active" id="pills-kia_teamwear-tab"
 									data-bs-toggle="pill" data-bs-target="#pills-kia_teamwear"
 									type="button" role="tab" aria-controls="pills-kia_teamwear"
-									aria-selected="true">ÆÀ¿ş¾î</button>
+									aria-selected="true">íŒ€ì›¨ì–´</button>
 							</li>
 							<li class="navv-item" role="presentation">
 								<button class="navv-link" id="pills-kia_cheering-tab"
 									data-bs-toggle="pill" data-bs-target="#pills-kia_cheering"
 									type="button" role="tab" aria-controls="pills-kia_cheering"
-									aria-selected="false">ÀÀ¿ø¿ëÇ°</button>
+									aria-selected="false">ì‘ì›ìš©í’ˆ</button>
 							</li>
 							<li class="navv-item" role="presentation">
 								<button class="navv-link" id="pills-kia_baseball-tab"
 									data-bs-toggle="pill" data-bs-target="#pills-kia_baseball"
 									type="button" role="tab" aria-controls="pills-kia_baseball"
-									aria-selected="false">¾ß±¸¿ëÇ°</button>
+									aria-selected="false">ì•¼êµ¬ìš©í’ˆ</button>
 							</li>
 							<li class="navv-item" role="presentation">
 								<button class="navv-link" id="pills-kia_commemoration-tab"
 									data-bs-toggle="pill" data-bs-target="#pills-kia_commemoration"
 									type="button" role="tab"
-									aria-controls="pills-kia_commemoration" aria-selected="false">±â³ä»óÇ°</button>
+									aria-controls="pills-kia_commemoration" aria-selected="false">ê¸°ë…ìƒí’ˆ</button>
 							</li>
 						</ul>
 
 						<div class="tab-content" id="pills-tabContentKia">
-							<!-- KIA ÆÀ¿ş¾î -->
+							<!-- KIA íŒ€ì›¨ì–´ -->
 							<div class="tab-pane fade show active" id="pills-kia_teamwear"
 								role="tabpanel" aria-labelledby="pills-kia_teamwear-tab">
 								<div class="carousel slide" id="carouselCategoryKiaTeamwear"
 									data-bs-touch="false" data-bs-interval="false">
-									<!-- KIA ÆÀ¿ş¾î ½ÃÀÛ -->
+									<!-- KIA íŒ€ì›¨ì–´ ì‹œì‘ -->
 									<div class="carousel-inner">
-										<!-- KIA ÆÀ¿ş¾î Ã¹¹øÂ° ÆäÀÌÁö -->
+										<!-- KIA íŒ€ì›¨ì–´ ì²«ë²ˆì§¸ í˜ì´ì§€ -->
 										<div class="carousel-item active" data-bs-interval="10000">
 											<div class="row h-100 align-items-center g-2">
 												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
@@ -2081,7 +2081,7 @@ NumberFormat nf = NumberFormat.getCurrencyInstance();
 														<div class="card-img-overlay ps-0"></div>
 														<div class="card-body ps-0 bg-200">
 															<h5 class="fw-bold text-1000 text-truncate">2022
-																KIAÅ¸ÀÌ°ÅÁî ¾î¼¾Æ½ ±¤º¹Àı À¯´ÏÆû</h5>
+																KIAíƒ€ì´ê±°ì¦ˆ ì–´ì„¼í‹± ê´‘ë³µì ˆ ìœ ë‹ˆí¼</h5>
 															<div class="fw-bold">
 																<span class="text-600 me-2 text-decoration-line-through">$200</span><span
 																	class="text-primary">$175</span>
@@ -2094,7 +2094,7 @@ NumberFormat nf = NumberFormat.getCurrencyInstance();
 											</div>
 										</div>
 
-										<!-- KIA ÆÀ¿ş¾î µÎ¹øÂ° ÆäÀÌÁö -->
+										<!-- KIA íŒ€ì›¨ì–´ ë‘ë²ˆì§¸ í˜ì´ì§€ -->
 										<div class="carousel-item">
 											<div class="row h-100 align-items-center g-2">
 												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
@@ -2117,7 +2117,7 @@ NumberFormat nf = NumberFormat.getCurrencyInstance();
 											</div>
 										</div>
 
-										<!-- KIA ÆÀ¿ş¾î ÁÂ¿ìÀÌµ¿ -->
+										<!-- KIA íŒ€ì›¨ì–´ ì¢Œìš°ì´ë™ -->
 										<div class="row">
 											<button class="carousel-control-prev" type="button"
 												data-bs-target="#carouselCategoryKiaTeamwear"
@@ -2138,14 +2138,14 @@ NumberFormat nf = NumberFormat.getCurrencyInstance();
 
 							</div>
 
-							<!-- KIA ÀÀ¿ø¿ëÇ° -->
+							<!-- KIA ì‘ì›ìš©í’ˆ -->
 							<div class="tab-pane fade" id="pills-kia_cheering"
 								role="tabpanel" aria-labelledby="pills-kia_cheering-tab">
 								<div class="carousel slide" id="carouselCategoryKiaCheering"
 									data-bs-touch="false" data-bs-interval="false">
-									<!-- KIA ÀÀ¿ø¿ëÇ° ½ÃÀÛ -->
+									<!-- KIA ì‘ì›ìš©í’ˆ ì‹œì‘ -->
 									<div class="carousel-inner">
-										<!-- KIA ÀÀ¿ø¿ëÇ° Ã¹¹øÂ° ÆäÀÌÁö -->
+										<!-- KIA ì‘ì›ìš©í’ˆ ì²«ë²ˆì§¸ í˜ì´ì§€ -->
 										<div class="carousel-item active" data-bs-interval="10000">
 											<div class="row h-100 align-items-center g-2">
 												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
@@ -2155,7 +2155,7 @@ NumberFormat nf = NumberFormat.getCurrencyInstance();
 															alt="..." />
 														<div class="card-img-overlay ps-0"></div>
 														<div class="card-body ps-0 bg-200">
-															<h5 class="fw-bold text-1000 text-truncate">Å°¿ò ¸ÇÅõ¸Ç</h5>
+															<h5 class="fw-bold text-1000 text-truncate">í‚¤ì›€ ë§¨íˆ¬ë§¨</h5>
 															<div class="fw-bold">
 																<span class="text-600 me-2 text-decoration-line-through">$200</span><span
 																	class="text-primary">$175</span>
@@ -2168,7 +2168,7 @@ NumberFormat nf = NumberFormat.getCurrencyInstance();
 											</div>
 										</div>
 
-										<!-- KIA ÀÀ¿ø¿ëÇ° µÎ¹øÂ° ÆäÀÌÁö-->
+										<!-- KIA ì‘ì›ìš©í’ˆ ë‘ë²ˆì§¸ í˜ì´ì§€-->
 										<div class="carousel-item">
 											<div class="row h-100 align-items-center g-2">
 												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
@@ -2190,7 +2190,7 @@ NumberFormat nf = NumberFormat.getCurrencyInstance();
 											</div>
 										</div>
 
-										<!-- KIA ÀÀ¿ø¿ëÇ° ÁÂ¿ìÀÌµ¿-->
+										<!-- KIA ì‘ì›ìš©í’ˆ ì¢Œìš°ì´ë™-->
 										<div class="row">
 											<button class="carousel-control-prev" type="button"
 												data-bs-target="#carouselCategoryKiaCheering"
@@ -2211,14 +2211,14 @@ NumberFormat nf = NumberFormat.getCurrencyInstance();
 
 							</div>
 
-							<!-- KIA ¾ß±¸¿ëÇ° -->
+							<!-- KIA ì•¼êµ¬ìš©í’ˆ -->
 							<div class="tab-pane fade" id="pills-kia_baseball"
 								role="tabpanel" aria-labelledby="pills-kia_baseball-tab">
 								<div class="carousel slide" id="carouselCategoryKiabaseball"
 									data-bs-touch="false" data-bs-interval="false">
-									<!-- KIA ¾ß±¸¿ëÇ° ½ÃÀÛ -->
+									<!-- KIA ì•¼êµ¬ìš©í’ˆ ì‹œì‘ -->
 									<div class="carousel-inner">
-										<!-- KIA ¾ß±¸¿ëÇ° Ã¹¹øÂ° ÆäÀÌÁö -->
+										<!-- KIA ì•¼êµ¬ìš©í’ˆ ì²«ë²ˆì§¸ í˜ì´ì§€ -->
 										<div class="carousel-item active" data-bs-interval="10000">
 											<div class="row h-100 align-items-center g-2">
 												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
@@ -2228,7 +2228,7 @@ NumberFormat nf = NumberFormat.getCurrencyInstance();
 															alt="..." />
 														<div class="card-img-overlay ps-0"></div>
 														<div class="card-body ps-0 bg-200">
-															<h5 class="fw-bold text-1000 text-truncate">Å°¿ò ¸ÇÅõ¸Ç</h5>
+															<h5 class="fw-bold text-1000 text-truncate">í‚¤ì›€ ë§¨íˆ¬ë§¨</h5>
 															<div class="fw-bold">
 																<span class="text-600 me-2 text-decoration-line-through">$200</span><span
 																	class="text-primary">$175</span>
@@ -2241,7 +2241,7 @@ NumberFormat nf = NumberFormat.getCurrencyInstance();
 											</div>
 										</div>
 
-										<!-- KIA ¾ß±¸¿ëÇ° µÎ¹øÂ° ÆäÀÌÁö -->
+										<!-- KIA ì•¼êµ¬ìš©í’ˆ ë‘ë²ˆì§¸ í˜ì´ì§€ -->
 										<div class="carousel-item">
 											<div class="row h-100 align-items-center g-2">
 												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
@@ -2263,7 +2263,7 @@ NumberFormat nf = NumberFormat.getCurrencyInstance();
 											</div>
 										</div>
 
-										<!-- KIA ¾ß±¸¿ëÇ° ÁÂ¿ìÀÌµ¿ -->
+										<!-- KIA ì•¼êµ¬ìš©í’ˆ ì¢Œìš°ì´ë™ -->
 										<div class="row">
 											<button class="carousel-control-prev" type="button"
 												data-bs-target="#carouselCategoryKiabaseball"
@@ -2284,15 +2284,15 @@ NumberFormat nf = NumberFormat.getCurrencyInstance();
 
 							</div>
 
-							<!-- KIA ±â³ä»óÇ° -->
+							<!-- KIA ê¸°ë…ìƒí’ˆ -->
 							<div class="tab-pane fade" id="pills-kia_commemoration"
 								role="tabpanel" aria-labelledby="pills-kia_commemoration-tab">
 								<div class="carousel slide"
 									id="carouselCategoryKiaCommemoration" data-bs-touch="false"
 									data-bs-interval="false">
-									<!-- KIA ±â³ä»óÇ° ½ÃÀÛ -->
+									<!-- KIA ê¸°ë…ìƒí’ˆ ì‹œì‘ -->
 									<div class="carousel-inner">
-										<!-- KIA ±â³ä»óÇ° Ã¹¹øÂ° ÆäÀÌÁö -->
+										<!-- KIA ê¸°ë…ìƒí’ˆ ì²«ë²ˆì§¸ í˜ì´ì§€ -->
 										<div class="carousel-item active" data-bs-interval="10000">
 											<div class="row h-100 align-items-center g-2">
 												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
@@ -2302,7 +2302,7 @@ NumberFormat nf = NumberFormat.getCurrencyInstance();
 															alt="..." />
 														<div class="card-img-overlay ps-0"></div>
 														<div class="card-body ps-0 bg-200">
-															<h5 class="fw-bold text-1000 text-truncate">Å°¿ò ¸ÇÅõ¸Ç</h5>
+															<h5 class="fw-bold text-1000 text-truncate">í‚¤ì›€ ë§¨íˆ¬ë§¨</h5>
 															<div class="fw-bold">
 																<span class="text-600 me-2 text-decoration-line-through">$500</span><span
 																	class="text-primary">$275</span>
@@ -2315,7 +2315,7 @@ NumberFormat nf = NumberFormat.getCurrencyInstance();
 											</div>
 										</div>
 
-										<!-- KIA ±â³ä»óÇ° µÎ¹øÂ° ÆäÀÌÁö -->
+										<!-- KIA ê¸°ë…ìƒí’ˆ ë‘ë²ˆì§¸ í˜ì´ì§€ -->
 										<div class="carousel-item">
 											<div class="row h-100 align-items-center g-2">
 												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
@@ -2337,7 +2337,7 @@ NumberFormat nf = NumberFormat.getCurrencyInstance();
 											</div>
 										</div>
 
-										<!-- KIA ±â³ä»óÇ° ÁÂ¿ìÀÌµ¿ -->
+										<!-- KIA ê¸°ë…ìƒí’ˆ ì¢Œìš°ì´ë™ -->
 										<div class="row">
 											<button class="carousel-control-prev" type="button"
 												data-bs-target="#carouselCategoryKiaCommemoration"
@@ -2369,37 +2369,37 @@ NumberFormat nf = NumberFormat.getCurrencyInstance();
 								<button class="navv-link active" id="pills-kt_teamwear-tab"
 									data-bs-toggle="pill" data-bs-target="#pills-kt_teamwear"
 									type="button" role="tab" aria-controls="pills-kt_teamwear"
-									aria-selected="true">ÆÀ¿ş¾î</button>
+									aria-selected="true">íŒ€ì›¨ì–´</button>
 							</li>
 							<li class="navv-item" role="presentation">
 								<button class="navv-link" id="pills-kt_cheering-tab"
 									data-bs-toggle="pill" data-bs-target="#pills-kt_cheering"
 									type="button" role="tab" aria-controls="pills-kt_cheering"
-									aria-selected="false">ÀÀ¿ø¿ëÇ°</button>
+									aria-selected="false">ì‘ì›ìš©í’ˆ</button>
 							</li>
 							<li class="navv-item" role="presentation">
 								<button class="navv-link" id="pills-kt_baseball-tab"
 									data-bs-toggle="pill" data-bs-target="#pills-kt_baseball"
 									type="button" role="tab" aria-controls="pills-kt_baseball"
-									aria-selected="false">¾ß±¸¿ëÇ°</button>
+									aria-selected="false">ì•¼êµ¬ìš©í’ˆ</button>
 							</li>
 							<li class="navv-item" role="presentation">
 								<button class="navv-link" id="pills-kt_commemoration-tab"
 									data-bs-toggle="pill" data-bs-target="#pills-kt_commemoration"
 									type="button" role="tab" aria-controls="pills-kt_commemoration"
-									aria-selected="false">±â³ä»óÇ°</button>
+									aria-selected="false">ê¸°ë…ìƒí’ˆ</button>
 							</li>
 						</ul>
 
 						<div class="tab-content" id="pills-tabContentKt">
-							<!-- KT ÆÀ¿ş¾î -->
+							<!-- KT íŒ€ì›¨ì–´ -->
 							<div class="tab-pane fade show active" id="pills-kt_teamwear"
 								role="tabpanel" aria-labelledby="pills-kt_teamwear-tab">
 								<div class="carousel slide" id="carouselCategoryKtTeamwear"
 									data-bs-touch="false" data-bs-interval="false">
-									<!-- KT ÆÀ¿ş¾î ½ÃÀÛ -->
+									<!-- KT íŒ€ì›¨ì–´ ì‹œì‘ -->
 									<div class="carousel-inner">
-										<!-- KT ÆÀ¿ş¾î Ã¹¹øÂ° ÆäÀÌÁö -->
+										<!-- KT íŒ€ì›¨ì–´ ì²«ë²ˆì§¸ í˜ì´ì§€ -->
 										<div class="carousel-item active" data-bs-interval="10000">
 											<div class="row h-100 align-items-center g-2">
 												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
@@ -2409,8 +2409,8 @@ NumberFormat nf = NumberFormat.getCurrencyInstance();
 															alt="..." />
 														<div class="card-img-overlay ps-0"></div>
 														<div class="card-body ps-0 bg-200">
-															<h5 class="fw-bold text-1000 text-truncate">ÄÉÀÌÆ¼À§Áî
-																2022 Æ÷½ºÆ®½ÃÁğ ±â³ä±¸</h5>
+															<h5 class="fw-bold text-1000 text-truncate">ì¼€ì´í‹°ìœ„ì¦ˆ
+																2022 í¬ìŠ¤íŠ¸ì‹œì¦Œ ê¸°ë…êµ¬</h5>
 															<div class="fw-bold">
 																<span class="text-600 me-2 text-decoration-line-through">$200</span><span
 																	class="text-primary">$175</span>
@@ -2423,7 +2423,7 @@ NumberFormat nf = NumberFormat.getCurrencyInstance();
 											</div>
 										</div>
 
-										<!-- KT ÆÀ¿ş¾î µÎ¹øÂ° ÆäÀÌÁö -->
+										<!-- KT íŒ€ì›¨ì–´ ë‘ë²ˆì§¸ í˜ì´ì§€ -->
 										<div class="carousel-item">
 											<div class="row h-100 align-items-center g-2">
 												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
@@ -2446,7 +2446,7 @@ NumberFormat nf = NumberFormat.getCurrencyInstance();
 											</div>
 										</div>
 
-										<!-- KT ÆÀ¿ş¾î ÁÂ¿ìÀÌµ¿ -->
+										<!-- KT íŒ€ì›¨ì–´ ì¢Œìš°ì´ë™ -->
 										<div class="row">
 											<button class="carousel-control-prev" type="button"
 												data-bs-target="#carouselCategoryKtTeamwear"
@@ -2467,14 +2467,14 @@ NumberFormat nf = NumberFormat.getCurrencyInstance();
 
 							</div>
 
-							<!-- KT ÀÀ¿ø¿ëÇ° -->
+							<!-- KT ì‘ì›ìš©í’ˆ -->
 							<div class="tab-pane fade" id="pills-kt_cheering" role="tabpanel"
 								aria-labelledby="pills-kt_cheering-tab">
 								<div class="carousel slide" id="carouselCategoryKtCheering"
 									data-bs-touch="false" data-bs-interval="false">
-									<!-- KT ÀÀ¿ø¿ëÇ° ½ÃÀÛ -->
+									<!-- KT ì‘ì›ìš©í’ˆ ì‹œì‘ -->
 									<div class="carousel-inner">
-										<!-- KT ÀÀ¿ø¿ëÇ° Ã¹¹øÂ° ÆäÀÌÁö -->
+										<!-- KT ì‘ì›ìš©í’ˆ ì²«ë²ˆì§¸ í˜ì´ì§€ -->
 										<div class="carousel-item active" data-bs-interval="10000">
 											<div class="row h-100 align-items-center g-2">
 												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
@@ -2484,7 +2484,7 @@ NumberFormat nf = NumberFormat.getCurrencyInstance();
 															alt="..." />
 														<div class="card-img-overlay ps-0"></div>
 														<div class="card-body ps-0 bg-200">
-															<h5 class="fw-bold text-1000 text-truncate">Å°¿ò ¸ÇÅõ¸Ç</h5>
+															<h5 class="fw-bold text-1000 text-truncate">í‚¤ì›€ ë§¨íˆ¬ë§¨</h5>
 															<div class="fw-bold">
 																<span class="text-600 me-2 text-decoration-line-through">$200</span><span
 																	class="text-primary">$175</span>
@@ -2497,7 +2497,7 @@ NumberFormat nf = NumberFormat.getCurrencyInstance();
 											</div>
 										</div>
 
-										<!-- KT ÀÀ¿ø¿ëÇ° µÎ¹øÂ° ÆäÀÌÁö-->
+										<!-- KT ì‘ì›ìš©í’ˆ ë‘ë²ˆì§¸ í˜ì´ì§€-->
 										<div class="carousel-item">
 											<div class="row h-100 align-items-center g-2">
 												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
@@ -2519,7 +2519,7 @@ NumberFormat nf = NumberFormat.getCurrencyInstance();
 											</div>
 										</div>
 
-										<!-- KT ÀÀ¿ø¿ëÇ° ÁÂ¿ìÀÌµ¿-->
+										<!-- KT ì‘ì›ìš©í’ˆ ì¢Œìš°ì´ë™-->
 										<div class="row">
 											<button class="carousel-control-prev" type="button"
 												data-bs-target="#carouselCategoryKtCheering"
@@ -2540,14 +2540,14 @@ NumberFormat nf = NumberFormat.getCurrencyInstance();
 
 							</div>
 
-							<!-- KT ¾ß±¸¿ëÇ° -->
+							<!-- KT ì•¼êµ¬ìš©í’ˆ -->
 							<div class="tab-pane fade" id="pills-kt_baseball" role="tabpanel"
 								aria-labelledby="pills-kt_baseball-tab">
 								<div class="carousel slide" id="carouselCategoryKtbaseball"
 									data-bs-touch="false" data-bs-interval="false">
-									<!-- KT ¾ß±¸¿ëÇ° ½ÃÀÛ -->
+									<!-- KT ì•¼êµ¬ìš©í’ˆ ì‹œì‘ -->
 									<div class="carousel-inner">
-										<!-- KT ¾ß±¸¿ëÇ° Ã¹¹øÂ° ÆäÀÌÁö -->
+										<!-- KT ì•¼êµ¬ìš©í’ˆ ì²«ë²ˆì§¸ í˜ì´ì§€ -->
 										<div class="carousel-item active" data-bs-interval="10000">
 											<div class="row h-100 align-items-center g-2">
 												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
@@ -2557,7 +2557,7 @@ NumberFormat nf = NumberFormat.getCurrencyInstance();
 															alt="..." />
 														<div class="card-img-overlay ps-0"></div>
 														<div class="card-body ps-0 bg-200">
-															<h5 class="fw-bold text-1000 text-truncate">Å°¿ò ¸ÇÅõ¸Ç</h5>
+															<h5 class="fw-bold text-1000 text-truncate">í‚¤ì›€ ë§¨íˆ¬ë§¨</h5>
 															<div class="fw-bold">
 																<span class="text-600 me-2 text-decoration-line-through">$200</span><span
 																	class="text-primary">$175</span>
@@ -2570,7 +2570,7 @@ NumberFormat nf = NumberFormat.getCurrencyInstance();
 											</div>
 										</div>
 
-										<!-- KT ¾ß±¸¿ëÇ° µÎ¹øÂ° ÆäÀÌÁö -->
+										<!-- KT ì•¼êµ¬ìš©í’ˆ ë‘ë²ˆì§¸ í˜ì´ì§€ -->
 										<div class="carousel-item">
 											<div class="row h-100 align-items-center g-2">
 												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
@@ -2592,7 +2592,7 @@ NumberFormat nf = NumberFormat.getCurrencyInstance();
 											</div>
 										</div>
 
-										<!-- KT ¾ß±¸¿ëÇ° ÁÂ¿ìÀÌµ¿ -->
+										<!-- KT ì•¼êµ¬ìš©í’ˆ ì¢Œìš°ì´ë™ -->
 										<div class="row">
 											<button class="carousel-control-prev" type="button"
 												data-bs-target="#carouselCategoryKtbaseball"
@@ -2613,14 +2613,14 @@ NumberFormat nf = NumberFormat.getCurrencyInstance();
 
 							</div>
 
-							<!-- KT ±â³ä»óÇ° -->
+							<!-- KT ê¸°ë…ìƒí’ˆ -->
 							<div class="tab-pane fade" id="pills-kt_commemoration"
 								role="tabpanel" aria-labelledby="pills-kt_commemoration-tab">
 								<div class="carousel slide" id="carouselCategoryKtCommemoration"
 									data-bs-touch="false" data-bs-interval="false">
-									<!-- KT ±â³ä»óÇ° ½ÃÀÛ -->
+									<!-- KT ê¸°ë…ìƒí’ˆ ì‹œì‘ -->
 									<div class="carousel-inner">
-										<!-- KT ±â³ä»óÇ° Ã¹¹øÂ° ÆäÀÌÁö -->
+										<!-- KT ê¸°ë…ìƒí’ˆ ì²«ë²ˆì§¸ í˜ì´ì§€ -->
 										<div class="carousel-item active" data-bs-interval="10000">
 											<div class="row h-100 align-items-center g-2">
 												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
@@ -2630,7 +2630,7 @@ NumberFormat nf = NumberFormat.getCurrencyInstance();
 															alt="..." />
 														<div class="card-img-overlay ps-0"></div>
 														<div class="card-body ps-0 bg-200">
-															<h5 class="fw-bold text-1000 text-truncate">Å°¿ò ¸ÇÅõ¸Ç</h5>
+															<h5 class="fw-bold text-1000 text-truncate">í‚¤ì›€ ë§¨íˆ¬ë§¨</h5>
 															<div class="fw-bold">
 																<span class="text-600 me-2 text-decoration-line-through">$500</span><span
 																	class="text-primary">$275</span>
@@ -2643,7 +2643,7 @@ NumberFormat nf = NumberFormat.getCurrencyInstance();
 											</div>
 										</div>
 
-										<!-- KT ±â³ä»óÇ° µÎ¹øÂ° ÆäÀÌÁö -->
+										<!-- KT ê¸°ë…ìƒí’ˆ ë‘ë²ˆì§¸ í˜ì´ì§€ -->
 										<div class="carousel-item">
 											<div class="row h-100 align-items-center g-2">
 												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
@@ -2665,7 +2665,7 @@ NumberFormat nf = NumberFormat.getCurrencyInstance();
 											</div>
 										</div>
 
-										<!-- KT ±â³ä»óÇ° ÁÂ¿ìÀÌµ¿ -->
+										<!-- KT ê¸°ë…ìƒí’ˆ ì¢Œìš°ì´ë™ -->
 										<div class="row">
 											<button class="carousel-control-prev" type="button"
 												data-bs-target="#carouselCategoryKtCommemoration"
@@ -2697,37 +2697,37 @@ NumberFormat nf = NumberFormat.getCurrencyInstance();
 								<button class="navv-link active" id="pills-lg_teamwear-tab"
 									data-bs-toggle="pill" data-bs-target="#pills-lg_teamwear"
 									type="button" role="tab" aria-controls="pills-lg_teamwear"
-									aria-selected="true">ÆÀ¿ş¾î</button>
+									aria-selected="true">íŒ€ì›¨ì–´</button>
 							</li>
 							<li class="navv-item" role="presentation">
 								<button class="navv-link" id="pills-lg_cheering-tab"
 									data-bs-toggle="pill" data-bs-target="#pills-lg_cheering"
 									type="button" role="tab" aria-controls="pills-lg_cheering"
-									aria-selected="false">ÀÀ¿ø¿ëÇ°</button>
+									aria-selected="false">ì‘ì›ìš©í’ˆ</button>
 							</li>
 							<li class="navv-item" role="presentation">
 								<button class="navv-link" id="pills-lg_baseball-tab"
 									data-bs-toggle="pill" data-bs-target="#pills-lg_baseball"
 									type="button" role="tab" aria-controls="pills-lg_baseball"
-									aria-selected="false">¾ß±¸¿ëÇ°</button>
+									aria-selected="false">ì•¼êµ¬ìš©í’ˆ</button>
 							</li>
 							<li class="navv-item" role="presentation">
 								<button class="navv-link" id="pills-lg_commemoration-tab"
 									data-bs-toggle="pill" data-bs-target="#pills-lg_commemoration"
 									type="button" role="tab" aria-controls="pills-lg_commemoration"
-									aria-selected="false">±â³ä»óÇ°</button>
+									aria-selected="false">ê¸°ë…ìƒí’ˆ</button>
 							</li>
 						</ul>
 
 						<div class="tab-content" id="pills-tabContentLg">
-							<!-- LG ÆÀ¿ş¾î -->
+							<!-- LG íŒ€ì›¨ì–´ -->
 							<div class="tab-pane fade show active" id="pills-lg_teamwear"
 								role="tabpanel" aria-labelledby="pills-lg_teamwear-tab">
 								<div class="carousel slide" id="carouselCategoryLgTeamwear"
 									data-bs-touch="false" data-bs-interval="false">
-									<!-- LG ÆÀ¿ş¾î ½ÃÀÛ -->
+									<!-- LG íŒ€ì›¨ì–´ ì‹œì‘ -->
 									<div class="carousel-inner">
-										<!-- LG ÆÀ¿ş¾î Ã¹¹øÂ° ÆäÀÌÁö -->
+										<!-- LG íŒ€ì›¨ì–´ ì²«ë²ˆì§¸ í˜ì´ì§€ -->
 										<div class="carousel-item active" data-bs-interval="10000">
 											<div class="row h-100 align-items-center g-2">
 												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
@@ -2738,7 +2738,7 @@ NumberFormat nf = NumberFormat.getCurrencyInstance();
 														<div class="card-img-overlay ps-0"></div>
 														<div class="card-body ps-0 bg-200">
 															<h5 class="fw-bold text-1000 text-truncate">2022
-																LGÆ®À©½º ¾î¼¾Æ½ ¹éÆÑ</h5>
+																LGíŠ¸ìœˆìŠ¤ ì–´ì„¼í‹± ë°±íŒ©</h5>
 															<div class="fw-bold">
 																<span class="text-600 me-2 text-decoration-line-through">$200</span><span
 																	class="text-primary">$175</span>
@@ -2751,7 +2751,7 @@ NumberFormat nf = NumberFormat.getCurrencyInstance();
 											</div>
 										</div>
 
-										<!-- LG ÆÀ¿ş¾î µÎ¹øÂ° ÆäÀÌÁö -->
+										<!-- LG íŒ€ì›¨ì–´ ë‘ë²ˆì§¸ í˜ì´ì§€ -->
 										<div class="carousel-item">
 											<div class="row h-100 align-items-center g-2">
 												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
@@ -2774,7 +2774,7 @@ NumberFormat nf = NumberFormat.getCurrencyInstance();
 											</div>
 										</div>
 
-										<!-- LG ÆÀ¿ş¾î ÁÂ¿ìÀÌµ¿ -->
+										<!-- LG íŒ€ì›¨ì–´ ì¢Œìš°ì´ë™ -->
 										<div class="row">
 											<button class="carousel-control-prev" type="button"
 												data-bs-target="#carouselCategoryLgTeamwear"
@@ -2795,14 +2795,14 @@ NumberFormat nf = NumberFormat.getCurrencyInstance();
 
 							</div>
 
-							<!-- LG ÀÀ¿ø¿ëÇ° -->
+							<!-- LG ì‘ì›ìš©í’ˆ -->
 							<div class="tab-pane fade" id="pills-lg_cheering" role="tabpanel"
 								aria-labelledby="pills-lg_cheering-tab">
 								<div class="carousel slide" id="carouselCategoryLgCheering"
 									data-bs-touch="false" data-bs-interval="false">
-									<!-- LG ÀÀ¿ø¿ëÇ° ½ÃÀÛ -->
+									<!-- LG ì‘ì›ìš©í’ˆ ì‹œì‘ -->
 									<div class="carousel-inner">
-										<!-- LG ÀÀ¿ø¿ëÇ° Ã¹¹øÂ° ÆäÀÌÁö -->
+										<!-- LG ì‘ì›ìš©í’ˆ ì²«ë²ˆì§¸ í˜ì´ì§€ -->
 										<div class="carousel-item active" data-bs-interval="10000">
 											<div class="row h-100 align-items-center g-2">
 												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
@@ -2812,7 +2812,7 @@ NumberFormat nf = NumberFormat.getCurrencyInstance();
 															alt="..." />
 														<div class="card-img-overlay ps-0"></div>
 														<div class="card-body ps-0 bg-200">
-															<h5 class="fw-bold text-1000 text-truncate">Å°¿ò ¸ÇÅõ¸Ç</h5>
+															<h5 class="fw-bold text-1000 text-truncate">í‚¤ì›€ ë§¨íˆ¬ë§¨</h5>
 															<div class="fw-bold">
 																<span class="text-600 me-2 text-decoration-line-through">$200</span><span
 																	class="text-primary">$175</span>
@@ -2825,7 +2825,7 @@ NumberFormat nf = NumberFormat.getCurrencyInstance();
 											</div>
 										</div>
 
-										<!-- LG ÀÀ¿ø¿ëÇ° µÎ¹øÂ° ÆäÀÌÁö-->
+										<!-- LG ì‘ì›ìš©í’ˆ ë‘ë²ˆì§¸ í˜ì´ì§€-->
 										<div class="carousel-item">
 											<div class="row h-100 align-items-center g-2">
 												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
@@ -2847,7 +2847,7 @@ NumberFormat nf = NumberFormat.getCurrencyInstance();
 											</div>
 										</div>
 
-										<!-- LG ÀÀ¿ø¿ëÇ° ÁÂ¿ìÀÌµ¿-->
+										<!-- LG ì‘ì›ìš©í’ˆ ì¢Œìš°ì´ë™-->
 										<div class="row">
 											<button class="carousel-control-prev" type="button"
 												data-bs-target="#carouselCategoryLgCheering"
@@ -2868,14 +2868,14 @@ NumberFormat nf = NumberFormat.getCurrencyInstance();
 
 							</div>
 
-							<!-- LG ¾ß±¸¿ëÇ° -->
+							<!-- LG ì•¼êµ¬ìš©í’ˆ -->
 							<div class="tab-pane fade" id="pills-lg_baseball" role="tabpanel"
 								aria-labelledby="pills-lg_baseball-tab">
 								<div class="carousel slide" id="carouselCategoryLgbaseball"
 									data-bs-touch="false" data-bs-interval="false">
-									<!-- LG ¾ß±¸¿ëÇ° ½ÃÀÛ -->
+									<!-- LG ì•¼êµ¬ìš©í’ˆ ì‹œì‘ -->
 									<div class="carousel-inner">
-										<!-- LG ¾ß±¸¿ëÇ° Ã¹¹øÂ° ÆäÀÌÁö -->
+										<!-- LG ì•¼êµ¬ìš©í’ˆ ì²«ë²ˆì§¸ í˜ì´ì§€ -->
 										<div class="carousel-item active" data-bs-interval="10000">
 											<div class="row h-100 align-items-center g-2">
 												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
@@ -2885,7 +2885,7 @@ NumberFormat nf = NumberFormat.getCurrencyInstance();
 															alt="..." />
 														<div class="card-img-overlay ps-0"></div>
 														<div class="card-body ps-0 bg-200">
-															<h5 class="fw-bold text-1000 text-truncate">Å°¿ò ¸ÇÅõ¸Ç</h5>
+															<h5 class="fw-bold text-1000 text-truncate">í‚¤ì›€ ë§¨íˆ¬ë§¨</h5>
 															<div class="fw-bold">
 																<span class="text-600 me-2 text-decoration-line-through">$200</span><span
 																	class="text-primary">$175</span>
@@ -2898,7 +2898,7 @@ NumberFormat nf = NumberFormat.getCurrencyInstance();
 											</div>
 										</div>
 
-										<!-- LG ¾ß±¸¿ëÇ° µÎ¹øÂ° ÆäÀÌÁö -->
+										<!-- LG ì•¼êµ¬ìš©í’ˆ ë‘ë²ˆì§¸ í˜ì´ì§€ -->
 										<div class="carousel-item">
 											<div class="row h-100 align-items-center g-2">
 												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
@@ -2920,7 +2920,7 @@ NumberFormat nf = NumberFormat.getCurrencyInstance();
 											</div>
 										</div>
 
-										<!-- LG ¾ß±¸¿ëÇ° ÁÂ¿ìÀÌµ¿ -->
+										<!-- LG ì•¼êµ¬ìš©í’ˆ ì¢Œìš°ì´ë™ -->
 										<div class="row">
 											<button class="carousel-control-prev" type="button"
 												data-bs-target="#carouselCategoryLgbaseball"
@@ -2941,14 +2941,14 @@ NumberFormat nf = NumberFormat.getCurrencyInstance();
 
 							</div>
 
-							<!-- LG ±â³ä»óÇ° -->
+							<!-- LG ê¸°ë…ìƒí’ˆ -->
 							<div class="tab-pane fade" id="pills-lg_commemoration"
 								role="tabpanel" aria-labelledby="pills-lg_commemoration-tab">
 								<div class="carousel slide" id="carouselCategoryLgCommemoration"
 									data-bs-touch="false" data-bs-interval="false">
-									<!-- LG ±â³ä»óÇ° ½ÃÀÛ -->
+									<!-- LG ê¸°ë…ìƒí’ˆ ì‹œì‘ -->
 									<div class="carousel-inner">
-										<!-- LG ±â³ä»óÇ° Ã¹¹øÂ° ÆäÀÌÁö -->
+										<!-- LG ê¸°ë…ìƒí’ˆ ì²«ë²ˆì§¸ í˜ì´ì§€ -->
 										<div class="carousel-item active" data-bs-interval="10000">
 											<div class="row h-100 align-items-center g-2">
 												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
@@ -2958,7 +2958,7 @@ NumberFormat nf = NumberFormat.getCurrencyInstance();
 															alt="..." />
 														<div class="card-img-overlay ps-0"></div>
 														<div class="card-body ps-0 bg-200">
-															<h5 class="fw-bold text-1000 text-truncate">Å°¿ò ¸ÇÅõ¸Ç</h5>
+															<h5 class="fw-bold text-1000 text-truncate">í‚¤ì›€ ë§¨íˆ¬ë§¨</h5>
 															<div class="fw-bold">
 																<span class="text-600 me-2 text-decoration-line-through">$500</span><span
 																	class="text-primary">$275</span>
@@ -2971,7 +2971,7 @@ NumberFormat nf = NumberFormat.getCurrencyInstance();
 											</div>
 										</div>
 
-										<!-- LG ±â³ä»óÇ° µÎ¹øÂ° ÆäÀÌÁö -->
+										<!-- LG ê¸°ë…ìƒí’ˆ ë‘ë²ˆì§¸ í˜ì´ì§€ -->
 										<div class="carousel-item">
 											<div class="row h-100 align-items-center g-2">
 												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
@@ -2993,7 +2993,7 @@ NumberFormat nf = NumberFormat.getCurrencyInstance();
 											</div>
 										</div>
 
-										<!-- LG ±â³ä»óÇ° ÁÂ¿ìÀÌµ¿ -->
+										<!-- LG ê¸°ë…ìƒí’ˆ ì¢Œìš°ì´ë™ -->
 										<div class="row">
 											<button class="carousel-control-prev" type="button"
 												data-bs-target="#carouselCategoryLgCommemoration"
@@ -3025,37 +3025,37 @@ NumberFormat nf = NumberFormat.getCurrencyInstance();
 								<button class="navv-link active" id="pills-nc_teamwear-tab"
 									data-bs-toggle="pill" data-bs-target="#pills-nc_teamwear"
 									type="button" role="tab" aria-controls="pills-nc_teamwear"
-									aria-selected="true">ÆÀ¿ş¾î</button>
+									aria-selected="true">íŒ€ì›¨ì–´</button>
 							</li>
 							<li class="navv-item" role="presentation">
 								<button class="navv-link" id="pills-nc_cheering-tab"
 									data-bs-toggle="pill" data-bs-target="#pills-nc_cheering"
 									type="button" role="tab" aria-controls="pills-nc_cheering"
-									aria-selected="false">ÀÀ¿ø¿ëÇ°</button>
+									aria-selected="false">ì‘ì›ìš©í’ˆ</button>
 							</li>
 							<li class="navv-item" role="presentation">
 								<button class="navv-link" id="pills-nc_baseball-tab"
 									data-bs-toggle="pill" data-bs-target="#pills-nc_baseball"
 									type="button" role="tab" aria-controls="pills-nc_baseball"
-									aria-selected="false">¾ß±¸¿ëÇ°</button>
+									aria-selected="false">ì•¼êµ¬ìš©í’ˆ</button>
 							</li>
 							<li class="navv-item" role="presentation">
 								<button class="navv-link" id="pills-nc_commemoration-tab"
 									data-bs-toggle="pill" data-bs-target="#pills-nc_commemoration"
 									type="button" role="tab" aria-controls="pills-nc_commemoration"
-									aria-selected="false">±â³ä»óÇ°</button>
+									aria-selected="false">ê¸°ë…ìƒí’ˆ</button>
 							</li>
 						</ul>
 
 						<div class="tab-content" id="pills-tabContentNc">
-							<!-- NC ÆÀ¿ş¾î -->
+							<!-- NC íŒ€ì›¨ì–´ -->
 							<div class="tab-pane fade show active" id="pills-nc_teamwear"
 								role="tabpanel" aria-labelledby="pills-nc_teamwear-tab">
 								<div class="carousel slide" id="carouselCategoryNcTeamwear"
 									data-bs-touch="false" data-bs-interval="false">
-									<!-- NC ÆÀ¿ş¾î ½ÃÀÛ -->
+									<!-- NC íŒ€ì›¨ì–´ ì‹œì‘ -->
 									<div class="carousel-inner">
-										<!-- NC ÆÀ¿ş¾î Ã¹¹øÂ° ÆäÀÌÁö -->
+										<!-- NC íŒ€ì›¨ì–´ ì²«ë²ˆì§¸ í˜ì´ì§€ -->
 										<div class="carousel-item active" data-bs-interval="10000">
 											<div class="row h-100 align-items-center g-2">
 												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
@@ -3065,8 +3065,8 @@ NumberFormat nf = NumberFormat.getCurrencyInstance();
 															alt="..." />
 														<div class="card-img-overlay ps-0"></div>
 														<div class="card-body ps-0 bg-200">
-															<h5 class="fw-bold text-1000 text-truncate">2023 ¾î¼¾Æ½
-																CAMP 2 È¨ À¯´ÏÆû</h5>
+															<h5 class="fw-bold text-1000 text-truncate">2023 ì–´ì„¼í‹±
+																CAMP 2 í™ˆ ìœ ë‹ˆí¼</h5>
 															<div class="fw-bold">
 																<span class="text-600 me-2 text-decoration-line-through">$200</span><span
 																	class="text-primary">$175</span>
@@ -3079,7 +3079,7 @@ NumberFormat nf = NumberFormat.getCurrencyInstance();
 											</div>
 										</div>
 
-										<!-- NC ÆÀ¿ş¾î µÎ¹øÂ° ÆäÀÌÁö -->
+										<!-- NC íŒ€ì›¨ì–´ ë‘ë²ˆì§¸ í˜ì´ì§€ -->
 										<div class="carousel-item">
 											<div class="row h-100 align-items-center g-2">
 												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
@@ -3102,7 +3102,7 @@ NumberFormat nf = NumberFormat.getCurrencyInstance();
 											</div>
 										</div>
 
-										<!-- NC ÆÀ¿ş¾î ÁÂ¿ìÀÌµ¿ -->
+										<!-- NC íŒ€ì›¨ì–´ ì¢Œìš°ì´ë™ -->
 										<div class="row">
 											<button class="carousel-control-prev" type="button"
 												data-bs-target="#carouselCategoryNcTeamwear"
@@ -3123,14 +3123,14 @@ NumberFormat nf = NumberFormat.getCurrencyInstance();
 
 							</div>
 
-							<!-- NC ÀÀ¿ø¿ëÇ° -->
+							<!-- NC ì‘ì›ìš©í’ˆ -->
 							<div class="tab-pane fade" id="pills-nc_cheering" role="tabpanel"
 								aria-labelledby="pills-nc_cheering-tab">
 								<div class="carousel slide" id="carouselCategoryNcCheering"
 									data-bs-touch="false" data-bs-interval="false">
-									<!-- NC ÀÀ¿ø¿ëÇ° ½ÃÀÛ -->
+									<!-- NC ì‘ì›ìš©í’ˆ ì‹œì‘ -->
 									<div class="carousel-inner">
-										<!-- NC ÀÀ¿ø¿ëÇ° Ã¹¹øÂ° ÆäÀÌÁö -->
+										<!-- NC ì‘ì›ìš©í’ˆ ì²«ë²ˆì§¸ í˜ì´ì§€ -->
 										<div class="carousel-item active" data-bs-interval="10000">
 											<div class="row h-100 align-items-center g-2">
 												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
@@ -3140,7 +3140,7 @@ NumberFormat nf = NumberFormat.getCurrencyInstance();
 															alt="..." />
 														<div class="card-img-overlay ps-0"></div>
 														<div class="card-body ps-0 bg-200">
-															<h5 class="fw-bold text-1000 text-truncate">Å°¿ò ¸ÇÅõ¸Ç</h5>
+															<h5 class="fw-bold text-1000 text-truncate">í‚¤ì›€ ë§¨íˆ¬ë§¨</h5>
 															<div class="fw-bold">
 																<span class="text-600 me-2 text-decoration-line-through">$200</span><span
 																	class="text-primary">$175</span>
@@ -3153,7 +3153,7 @@ NumberFormat nf = NumberFormat.getCurrencyInstance();
 											</div>
 										</div>
 
-										<!-- NC ÀÀ¿ø¿ëÇ° µÎ¹øÂ° ÆäÀÌÁö-->
+										<!-- NC ì‘ì›ìš©í’ˆ ë‘ë²ˆì§¸ í˜ì´ì§€-->
 										<div class="carousel-item">
 											<div class="row h-100 align-items-center g-2">
 												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
@@ -3175,7 +3175,7 @@ NumberFormat nf = NumberFormat.getCurrencyInstance();
 											</div>
 										</div>
 
-										<!-- NC ÀÀ¿ø¿ëÇ° ÁÂ¿ìÀÌµ¿-->
+										<!-- NC ì‘ì›ìš©í’ˆ ì¢Œìš°ì´ë™-->
 										<div class="row">
 											<button class="carousel-control-prev" type="button"
 												data-bs-target="#carouselCategoryNcCheering"
@@ -3196,14 +3196,14 @@ NumberFormat nf = NumberFormat.getCurrencyInstance();
 
 							</div>
 
-							<!-- NC ¾ß±¸¿ëÇ° -->
+							<!-- NC ì•¼êµ¬ìš©í’ˆ -->
 							<div class="tab-pane fade" id="pills-nc_baseball" role="tabpanel"
 								aria-labelledby="pills-nc_baseball-tab">
 								<div class="carousel slide" id="carouselCategoryNcbaseball"
 									data-bs-touch="false" data-bs-interval="false">
-									<!-- NC ¾ß±¸¿ëÇ° ½ÃÀÛ -->
+									<!-- NC ì•¼êµ¬ìš©í’ˆ ì‹œì‘ -->
 									<div class="carousel-inner">
-										<!-- NC ¾ß±¸¿ëÇ° Ã¹¹øÂ° ÆäÀÌÁö -->
+										<!-- NC ì•¼êµ¬ìš©í’ˆ ì²«ë²ˆì§¸ í˜ì´ì§€ -->
 										<div class="carousel-item active" data-bs-interval="10000">
 											<div class="row h-100 align-items-center g-2">
 												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
@@ -3213,7 +3213,7 @@ NumberFormat nf = NumberFormat.getCurrencyInstance();
 															alt="..." />
 														<div class="card-img-overlay ps-0"></div>
 														<div class="card-body ps-0 bg-200">
-															<h5 class="fw-bold text-1000 text-truncate">Å°¿ò ¸ÇÅõ¸Ç</h5>
+															<h5 class="fw-bold text-1000 text-truncate">í‚¤ì›€ ë§¨íˆ¬ë§¨</h5>
 															<div class="fw-bold">
 																<span class="text-600 me-2 text-decoration-line-through">$200</span><span
 																	class="text-primary">$175</span>
@@ -3226,7 +3226,7 @@ NumberFormat nf = NumberFormat.getCurrencyInstance();
 											</div>
 										</div>
 
-										<!-- NC ¾ß±¸¿ëÇ° µÎ¹øÂ° ÆäÀÌÁö -->
+										<!-- NC ì•¼êµ¬ìš©í’ˆ ë‘ë²ˆì§¸ í˜ì´ì§€ -->
 										<div class="carousel-item">
 											<div class="row h-100 align-items-center g-2">
 												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
@@ -3248,7 +3248,7 @@ NumberFormat nf = NumberFormat.getCurrencyInstance();
 											</div>
 										</div>
 
-										<!-- NC ¾ß±¸¿ëÇ° ÁÂ¿ìÀÌµ¿ -->
+										<!-- NC ì•¼êµ¬ìš©í’ˆ ì¢Œìš°ì´ë™ -->
 										<div class="row">
 											<button class="carousel-control-prev" type="button"
 												data-bs-target="#carouselCategoryNcbaseball"
@@ -3269,14 +3269,14 @@ NumberFormat nf = NumberFormat.getCurrencyInstance();
 
 							</div>
 
-							<!-- NC ±â³ä»óÇ° -->
+							<!-- NC ê¸°ë…ìƒí’ˆ -->
 							<div class="tab-pane fade" id="pills-nc_commemoration"
 								role="tabpanel" aria-labelledby="pills-nc_commemoration-tab">
 								<div class="carousel slide" id="carouselCategoryNcCommemoration"
 									data-bs-touch="false" data-bs-interval="false">
-									<!-- NC ±â³ä»óÇ° ½ÃÀÛ -->
+									<!-- NC ê¸°ë…ìƒí’ˆ ì‹œì‘ -->
 									<div class="carousel-inner">
-										<!-- NC ±â³ä»óÇ° Ã¹¹øÂ° ÆäÀÌÁö -->
+										<!-- NC ê¸°ë…ìƒí’ˆ ì²«ë²ˆì§¸ í˜ì´ì§€ -->
 										<div class="carousel-item active" data-bs-interval="10000">
 											<div class="row h-100 align-items-center g-2">
 												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
@@ -3286,7 +3286,7 @@ NumberFormat nf = NumberFormat.getCurrencyInstance();
 															alt="..." />
 														<div class="card-img-overlay ps-0"></div>
 														<div class="card-body ps-0 bg-200">
-															<h5 class="fw-bold text-1000 text-truncate">Å°¿ò ¸ÇÅõ¸Ç</h5>
+															<h5 class="fw-bold text-1000 text-truncate">í‚¤ì›€ ë§¨íˆ¬ë§¨</h5>
 															<div class="fw-bold">
 																<span class="text-600 me-2 text-decoration-line-through">$500</span><span
 																	class="text-primary">$275</span>
@@ -3299,7 +3299,7 @@ NumberFormat nf = NumberFormat.getCurrencyInstance();
 											</div>
 										</div>
 
-										<!-- NC ±â³ä»óÇ° µÎ¹øÂ° ÆäÀÌÁö -->
+										<!-- NC ê¸°ë…ìƒí’ˆ ë‘ë²ˆì§¸ í˜ì´ì§€ -->
 										<div class="carousel-item">
 											<div class="row h-100 align-items-center g-2">
 												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
@@ -3321,7 +3321,7 @@ NumberFormat nf = NumberFormat.getCurrencyInstance();
 											</div>
 										</div>
 
-										<!-- NC ±â³ä»óÇ° ÁÂ¿ìÀÌµ¿ -->
+										<!-- NC ê¸°ë…ìƒí’ˆ ì¢Œìš°ì´ë™ -->
 										<div class="row">
 											<button class="carousel-control-prev" type="button"
 												data-bs-target="#carouselCategoryNcCommemoration"
@@ -3353,37 +3353,37 @@ NumberFormat nf = NumberFormat.getCurrencyInstance();
 								<button class="navv-link active" id="pills-ssg_teamwear-tab"
 									data-bs-toggle="pill" data-bs-target="#pills-ssg_teamwear"
 									type="button" role="tab" aria-controls="pills-ssg_teamwear"
-									aria-selected="true">ÆÀ¿ş¾î</button>
+									aria-selected="true">íŒ€ì›¨ì–´</button>
 							</li>
 							<li class="navv-item" role="presentation">
 								<button class="navv-link" id="pills-ssg_cheering-tab"
 									data-bs-toggle="pill" data-bs-target="#pills-ssg_cheering"
 									type="button" role="tab" aria-controls="pills-ssg_cheering"
-									aria-selected="false">ÀÀ¿ø¿ëÇ°</button>
+									aria-selected="false">ì‘ì›ìš©í’ˆ</button>
 							</li>
 							<li class="navv-item" role="presentation">
 								<button class="navv-link" id="pills-ssg_baseball-tab"
 									data-bs-toggle="pill" data-bs-target="#pills-ssg_baseball"
 									type="button" role="tab" aria-controls="pills-ssg_baseball"
-									aria-selected="false">¾ß±¸¿ëÇ°</button>
+									aria-selected="false">ì•¼êµ¬ìš©í’ˆ</button>
 							</li>
 							<li class="navv-item" role="presentation">
 								<button class="navv-link" id="pills-ssg_commemoration-tab"
 									data-bs-toggle="pill" data-bs-target="#pills-ssg_commemoration"
 									type="button" role="tab"
-									aria-controls="pills-ssg_commemoration" aria-selected="false">±â³ä»óÇ°</button>
+									aria-controls="pills-ssg_commemoration" aria-selected="false">ê¸°ë…ìƒí’ˆ</button>
 							</li>
 						</ul>
 
 						<div class="tab-content" id="pills-tabContentSsg">
-							<!-- SSG ÆÀ¿ş¾î -->
+							<!-- SSG íŒ€ì›¨ì–´ -->
 							<div class="tab-pane fade show active" id="pills-ssg_teamwear"
 								role="tabpanel" aria-labelledby="pills-ssg_teamwear-tab">
 								<div class="carousel slide" id="carouselCategorySsgTeamwear"
 									data-bs-touch="false" data-bs-interval="false">
-									<!-- SSG ÆÀ¿ş¾î ½ÃÀÛ -->
+									<!-- SSG íŒ€ì›¨ì–´ ì‹œì‘ -->
 									<div class="carousel-inner">
-										<!-- SSG ÆÀ¿ş¾î Ã¹¹øÂ° ÆäÀÌÁö -->
+										<!-- SSG íŒ€ì›¨ì–´ ì²«ë²ˆì§¸ í˜ì´ì§€ -->
 										<div class="carousel-item active" data-bs-interval="10000">
 											<div class="row h-100 align-items-center g-2">
 												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
@@ -3393,8 +3393,8 @@ NumberFormat nf = NumberFormat.getCurrencyInstance();
 															alt="..." />
 														<div class="card-img-overlay ps-0"></div>
 														<div class="card-body ps-0 bg-200">
-															<h5 class="fw-bold text-1000 text-truncate">2022 ½ÃÁğ
-																¾î¿şÀÌ ¾î¼¾Æ½ À¯´ÏÆû</h5>
+															<h5 class="fw-bold text-1000 text-truncate">2022 ì‹œì¦Œ
+																ì–´ì›¨ì´ ì–´ì„¼í‹± ìœ ë‹ˆí¼</h5>
 															<div class="fw-bold">
 																<span class="text-600 me-2 text-decoration-line-through">$200</span><span
 																	class="text-primary">$175</span>
@@ -3407,7 +3407,7 @@ NumberFormat nf = NumberFormat.getCurrencyInstance();
 											</div>
 										</div>
 
-										<!-- SSG ÆÀ¿ş¾î µÎ¹øÂ° ÆäÀÌÁö -->
+										<!-- SSG íŒ€ì›¨ì–´ ë‘ë²ˆì§¸ í˜ì´ì§€ -->
 										<div class="carousel-item">
 											<div class="row h-100 align-items-center g-2">
 												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
@@ -3430,7 +3430,7 @@ NumberFormat nf = NumberFormat.getCurrencyInstance();
 											</div>
 										</div>
 
-										<!-- SSG ÆÀ¿ş¾î ÁÂ¿ìÀÌµ¿ -->
+										<!-- SSG íŒ€ì›¨ì–´ ì¢Œìš°ì´ë™ -->
 										<div class="row">
 											<button class="carousel-control-prev" type="button"
 												data-bs-target="#carouselCategorySsgTeamwear"
@@ -3451,14 +3451,14 @@ NumberFormat nf = NumberFormat.getCurrencyInstance();
 
 							</div>
 
-							<!-- SSG ÀÀ¿ø¿ëÇ° -->
+							<!-- SSG ì‘ì›ìš©í’ˆ -->
 							<div class="tab-pane fade" id="pills-ssg_cheering"
 								role="tabpanel" aria-labelledby="pills-ssg_cheering-tab">
 								<div class="carousel slide" id="carouselCategorySsgCheering"
 									data-bs-touch="false" data-bs-interval="false">
-									<!-- SSG ÀÀ¿ø¿ëÇ° ½ÃÀÛ -->
+									<!-- SSG ì‘ì›ìš©í’ˆ ì‹œì‘ -->
 									<div class="carousel-inner">
-										<!-- SSG ÀÀ¿ø¿ëÇ° Ã¹¹øÂ° ÆäÀÌÁö -->
+										<!-- SSG ì‘ì›ìš©í’ˆ ì²«ë²ˆì§¸ í˜ì´ì§€ -->
 										<div class="carousel-item active" data-bs-interval="10000">
 											<div class="row h-100 align-items-center g-2">
 												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
@@ -3468,7 +3468,7 @@ NumberFormat nf = NumberFormat.getCurrencyInstance();
 															alt="..." />
 														<div class="card-img-overlay ps-0"></div>
 														<div class="card-body ps-0 bg-200">
-															<h5 class="fw-bold text-1000 text-truncate">Å°¿ò ¸ÇÅõ¸Ç</h5>
+															<h5 class="fw-bold text-1000 text-truncate">í‚¤ì›€ ë§¨íˆ¬ë§¨</h5>
 															<div class="fw-bold">
 																<span class="text-600 me-2 text-decoration-line-through">$200</span><span
 																	class="text-primary">$175</span>
@@ -3481,7 +3481,7 @@ NumberFormat nf = NumberFormat.getCurrencyInstance();
 											</div>
 										</div>
 
-										<!-- SSG ÀÀ¿ø¿ëÇ° µÎ¹øÂ° ÆäÀÌÁö-->
+										<!-- SSG ì‘ì›ìš©í’ˆ ë‘ë²ˆì§¸ í˜ì´ì§€-->
 										<div class="carousel-item">
 											<div class="row h-100 align-items-center g-2">
 												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
@@ -3503,7 +3503,7 @@ NumberFormat nf = NumberFormat.getCurrencyInstance();
 											</div>
 										</div>
 
-										<!-- SSG ÀÀ¿ø¿ëÇ° ÁÂ¿ìÀÌµ¿-->
+										<!-- SSG ì‘ì›ìš©í’ˆ ì¢Œìš°ì´ë™-->
 										<div class="row">
 											<button class="carousel-control-prev" type="button"
 												data-bs-target="#carouselCategorySsgCheering"
@@ -3524,14 +3524,14 @@ NumberFormat nf = NumberFormat.getCurrencyInstance();
 
 							</div>
 
-							<!-- SSG ¾ß±¸¿ëÇ° -->
+							<!-- SSG ì•¼êµ¬ìš©í’ˆ -->
 							<div class="tab-pane fade" id="pills-ssg_baseball"
 								role="tabpanel" aria-labelledby="pills-ssg_baseball-tab">
 								<div class="carousel slide" id="carouselCategorySsgbaseball"
 									data-bs-touch="false" data-bs-interval="false">
-									<!-- SSG ¾ß±¸¿ëÇ° ½ÃÀÛ -->
+									<!-- SSG ì•¼êµ¬ìš©í’ˆ ì‹œì‘ -->
 									<div class="carousel-inner">
-										<!-- SSG ¾ß±¸¿ëÇ° Ã¹¹øÂ° ÆäÀÌÁö -->
+										<!-- SSG ì•¼êµ¬ìš©í’ˆ ì²«ë²ˆì§¸ í˜ì´ì§€ -->
 										<div class="carousel-item active" data-bs-interval="10000">
 											<div class="row h-100 align-items-center g-2">
 												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
@@ -3541,7 +3541,7 @@ NumberFormat nf = NumberFormat.getCurrencyInstance();
 															alt="..." />
 														<div class="card-img-overlay ps-0"></div>
 														<div class="card-body ps-0 bg-200">
-															<h5 class="fw-bold text-1000 text-truncate">Å°¿ò ¸ÇÅõ¸Ç</h5>
+															<h5 class="fw-bold text-1000 text-truncate">í‚¤ì›€ ë§¨íˆ¬ë§¨</h5>
 															<div class="fw-bold">
 																<span class="text-600 me-2 text-decoration-line-through">$200</span><span
 																	class="text-primary">$175</span>
@@ -3554,7 +3554,7 @@ NumberFormat nf = NumberFormat.getCurrencyInstance();
 											</div>
 										</div>
 
-										<!-- SSG ¾ß±¸¿ëÇ° µÎ¹øÂ° ÆäÀÌÁö -->
+										<!-- SSG ì•¼êµ¬ìš©í’ˆ ë‘ë²ˆì§¸ í˜ì´ì§€ -->
 										<div class="carousel-item">
 											<div class="row h-100 align-items-center g-2">
 												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
@@ -3576,7 +3576,7 @@ NumberFormat nf = NumberFormat.getCurrencyInstance();
 											</div>
 										</div>
 
-										<!-- SSG ¾ß±¸¿ëÇ° ÁÂ¿ìÀÌµ¿ -->
+										<!-- SSG ì•¼êµ¬ìš©í’ˆ ì¢Œìš°ì´ë™ -->
 										<div class="row">
 											<button class="carousel-control-prev" type="button"
 												data-bs-target="#carouselCategorySsgbaseball"
@@ -3597,15 +3597,15 @@ NumberFormat nf = NumberFormat.getCurrencyInstance();
 
 							</div>
 
-							<!-- SSG ±â³ä»óÇ° -->
+							<!-- SSG ê¸°ë…ìƒí’ˆ -->
 							<div class="tab-pane fade" id="pills-ssg_commemoration"
 								role="tabpanel" aria-labelledby="pills-ssg_commemoration-tab">
 								<div class="carousel slide"
 									id="carouselCategorySsgCommemoration" data-bs-touch="false"
 									data-bs-interval="false">
-									<!-- SSG ±â³ä»óÇ° ½ÃÀÛ -->
+									<!-- SSG ê¸°ë…ìƒí’ˆ ì‹œì‘ -->
 									<div class="carousel-inner">
-										<!-- SSG ±â³ä»óÇ° Ã¹¹øÂ° ÆäÀÌÁö -->
+										<!-- SSG ê¸°ë…ìƒí’ˆ ì²«ë²ˆì§¸ í˜ì´ì§€ -->
 										<div class="carousel-item active" data-bs-interval="10000">
 											<div class="row h-100 align-items-center g-2">
 												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
@@ -3615,7 +3615,7 @@ NumberFormat nf = NumberFormat.getCurrencyInstance();
 															alt="..." />
 														<div class="card-img-overlay ps-0"></div>
 														<div class="card-body ps-0 bg-200">
-															<h5 class="fw-bold text-1000 text-truncate">Å°¿ò ¸ÇÅõ¸Ç</h5>
+															<h5 class="fw-bold text-1000 text-truncate">í‚¤ì›€ ë§¨íˆ¬ë§¨</h5>
 															<div class="fw-bold">
 																<span class="text-600 me-2 text-decoration-line-through">$500</span><span
 																	class="text-primary">$275</span>
@@ -3628,7 +3628,7 @@ NumberFormat nf = NumberFormat.getCurrencyInstance();
 											</div>
 										</div>
 
-										<!-- SSG ±â³ä»óÇ° µÎ¹øÂ° ÆäÀÌÁö -->
+										<!-- SSG ê¸°ë…ìƒí’ˆ ë‘ë²ˆì§¸ í˜ì´ì§€ -->
 										<div class="carousel-item">
 											<div class="row h-100 align-items-center g-2">
 												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
@@ -3650,7 +3650,7 @@ NumberFormat nf = NumberFormat.getCurrencyInstance();
 											</div>
 										</div>
 
-										<!-- SSG ±â³ä»óÇ° ÁÂ¿ìÀÌµ¿ -->
+										<!-- SSG ê¸°ë…ìƒí’ˆ ì¢Œìš°ì´ë™ -->
 										<div class="row">
 											<button class="carousel-control-prev" type="button"
 												data-bs-target="#carouselCategorySsgCommemoration"
