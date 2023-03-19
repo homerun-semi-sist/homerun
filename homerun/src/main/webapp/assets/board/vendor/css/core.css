@@ -3268,6 +3268,19 @@ textarea.form-control-lg {
   background-clip: border-box;
   border-radius: 0.5rem;
 }
+
+/* .card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  word-wrap: break-word;
+  background-color: #fff;
+  background-clip: border-box;
+  border: 0 solid #d9dee3;
+  border-radius: 0.5rem;
+} */
+
 .card > hr {
   margin-right: 0;
   margin-left: 0;

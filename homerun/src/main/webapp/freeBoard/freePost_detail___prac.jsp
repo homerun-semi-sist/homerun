@@ -251,6 +251,7 @@ span.fcDay {
 						style="width: 400px;" placeholder="댓글 입력">&nbsp;&nbsp;
 					<button type="button" id="cInsertBtn" class="btn btn-info">입력</button>
 				</div>
+				
 				<div class="aList">댓글 목록</div>
 			</td>
 		</tr>

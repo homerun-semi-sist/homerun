@@ -17,7 +17,7 @@
 	UserDao uDao = new UserDao();
 	
 	JSONArray arr = new JSONArray();
-	SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+	SimpleDateFormat sdf = new SimpleDateFormat("yy.MM.dd HH:mm");
 	
 	for(FreeCommentDto dto : list) {
 		JSONObject ob = new JSONObject();
@@ -26,6 +26,7 @@
 		
 		ob.put("fcIdx", dto.getFcIdx());
 		ob.put("fbNum", dto.getFbNum());
+		ob.put("fcUId", dto.getUId());
 		ob.put("nickname", nickname);
 		ob.put("fcContent", dto.getFcContent());
 		ob.put("fcLike", dto.getFcLike());

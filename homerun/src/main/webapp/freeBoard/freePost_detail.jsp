@@ -60,11 +60,15 @@
 		.cday {
 			color: #6c757d;
 			font-size: 0.7rem;
+			margin-left: 30px;
 		}
     </style>
     
     <script type="text/javascript">
 		$(function() {
+
+			// 처음 시작시 리스트 호출
+			list();
 			
 			// 댓글 부분에 넣을 num 출력 호출
 			var num = $("#fbNum").val();
@@ -95,7 +99,115 @@
 				})
 			});
 			
+			/* // 댓글 delete
+			$(document).on("click", ".aDel", function() {
+				var a = confirm("댓글을 삭제하려면 [확인]을 눌러주세요");
+				
+				var idx = $(this).attr("idx");
+				// alert(idx);
+				
+				if(a) {
+					$.ajax({
+						
+						type : "get",
+						url : "smartAnswer/deleteAnswer.jsp",
+						dataType : "html",
+						data : {"idx" : idx},
+						success : function() {
+							list();
+						}
+					});
+				}
+			}); */
+			
+			/* // 댓글 update
+			$(document).on("click", "#btnUpdate", function() {
+				
+				var nickname = $("#uNickname").val();
+				var content = $("#uContent").val();
+				// alert(uNickname + ", " + uContent);
+				
+				$.ajax({
+				
+					type : "get",
+					url : "smartAnswer/updateAnswer.jsp",
+					dataType : "html",
+					data : {"idx" : idx, "nickname" : nickname, "content" : content},
+					success : function () {
+						
+						alert("성공")
+						list();
+					}, 
+					statusCode : {
+						404 : function() {
+							alert("파일을 찾을 수 없음");
+						},
+						500 : function() {
+							alert("서버 오류, 코드 다시 확인 필요");
+						}
+					}
+					
+				});
+			}) */
+			
+			
 		});		
+		
+		// list 사용자 정의 함수
+		function list() {
+			
+			var loginok = $("#loginok").val();
+			var uId = $("#uId").val();
+			var fbUId = $("#fbUId").val();
+			fbUId
+			$.ajax({
+				
+				type : "get",
+			    url : "freeComment_list.jsp",
+			    dataType : "json",
+			    data : {"num" : $("#fbNum").val()},
+			    success:function(res){
+					// alert("성공");
+					
+					//댓글갯수출력
+					$("b.fcCnt").text(res.length);
+					
+					var s="";
+					
+					if(res.length == 0) 
+						s = "<div style='text-align: center; margin-top:50px; margin-bottom:30px;'><span>아직 작성된 댓글이 없습니다</span></div>";
+						
+					
+					$.each(res, function(idx, item){
+						
+						<%-- <div class="d-flex">
+                        <div class="ms-3">
+                            <div class="fw-bold"><i class="fa-solid fa-user"></i>&nbsp;<%=i %>. <%=fcNick %> <span class="cday"><%=sdf.format(fcDto.getFcWriteday()) %> | <span>수정</span> | <span> 삭제 </span></span></div>
+                            <%=fcDto.getFcContent() %>
+                        </div>
+                    </div><br> --%>
+						alert(uId + " : " + item.fcUId);
+						s+="<div class='d-flex'>";
+						s+="<div class='ms-3'>";
+						
+						// 로그인 한 사용자 = 댓글 작성자 
+                 		if(uId.equals(item.fcUId)) 
+							s+="<div class='fw-bold'><i class='fa-solid fa-user'></i>&nbsp;" + (idx + 1) + ". " + item.nickname + "<span class='cday'>" + item.fcWriteday + " | <span>수정</span> | <span> 삭제 </span></span></div>"; 
+						             		
+						s+= item.fcContent;
+						s+="</div>";
+						s+="</div><br>";
+					 
+                 		
+						
+		
+					});
+					
+					$("div.fcList").html(s);
+				}
+			   
+			});
+		}
 		
 	</script>
 </head>
@@ -130,8 +242,10 @@
 	FreeCommentDao fcDao = new FreeCommentDao();
 	List<FreeCommentDto> fcList = fcDao.getAllFCs(fbNum);
 %>
+	<input type="hidden" id="loginok" name="loginok" value="<%=loginok %>">
 	<input type="hidden" id="fbNum" name="fbNum" value="<%=fbNum %>">
 	<input type="hidden" id="uId" name="uId" value="<%=uId %>">
+	<input type="hidden" id="fbUId" name="fbUId" value="<%=fbDto.getUId() %>">
 	
 <!-- Layout wrapper -->
     <div class="layout-wrapper">
@@ -224,51 +338,11 @@
                                 
                                 	<div class="d-flex">
                                         <div class="ms-3">
-                                            <span><i class="fa-regular fa-comment-dots"></i>&nbsp;댓글&nbsp;<b><%=fcList.size() %></b>개</a></span>
+                                            <span><i class="fa-regular fa-comment-dots"></i>&nbsp;댓글&nbsp;<b class="fcCnt">0</b>개</a></span>
                                         </div>
                                     </div><hr>
          				
-	                   				<%
-	                   					for(FreeCommentDto fcDto : fcList) {
-	                   						int i = 1;
-	                   						
-	                   						String fcNick = uDao.getUser(fcDto.getUId()).getNickname();
-	                   						
-	                   						// 로그인 한 사용자 = 댓글 작성자
-	                   						if(loginok != null && fcNick.equals(uDao.getUser(uId).getNickname())) {
-	                   				%>
-	                   							<div class="d-flex">
-			                                        <div class="ms-3">
-			                                            <div class="fw-bold"><i class="fa-solid fa-user"></i>&nbsp;<%=i %>. <%=fcNick %> <span class="cday"><%=sdf.format(fcDto.getFcWriteday()) %> | <span>수정</span> | <span> 삭제 </span></span></div>
-			                                            <%=fcDto.getFcContent() %>
-			                                        </div>
-			                                    </div><br>
-	                   				<%		
-	                   						// 글 작성자 = 댓글 작성자			
-	                   						} else if(fcNick.equals(uDao.getUser((fbDao.getFB(fbNum).getUId())).getNickname())) {
-	                   				%>
-	                   							<div class="d-flex">
-			                                        <div class="ms-3">
-			                                            <div class="fw-bold"><i class="fa-solid fa-user"></i>&nbsp;<%=i %>. <%=fcNick %> <span style="color: red; border: 1px solid red; border-radius: 5px;">작성자</span> <span class="cday"><%=sdf.format(fcDto.getFcWriteday()) %> | <span>수정</span> | <span> 삭제 </span></span></div>
-			                                            <%=fcDto.getFcContent() %>
-			                                        </div>
-			                                    </div><br>
-	                   				<%		
-	                   						// 일반 회원
-	                   						} else {
-	                   				%>
-		                   						<div class="d-flex">
-			                                        <div class="ms-3">
-			                                            <div class="fw-bold"><i class="fa-solid fa-user"></i>&nbsp;<%=i %>. <%=fcNick %> <span class="cday"><%=sdf.format(fcDto.getFcWriteday()) %> | <span>추천</span> | <span> 비추천 </span> | <span> 신고 </span></span></div>
-			                                            <%=fcDto.getFcContent() %>
-			                                        </div>
-			                                    </div><br>
-	                   				<%				
-	                   						}
-	                   						
-	                   					i++; 
-										} 
-									%>
+	                   				<div class="fcList"></div>
 									<!--
                                     <div class="d-flex">                                   
                                         <div class="ms-3">
