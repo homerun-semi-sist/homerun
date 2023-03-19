@@ -4,20 +4,21 @@ import java.sql.Timestamp;
 
 public class OrderDto {
 	
-	private int oId;
-	private int cId;
+	private String oId;
+	private String cId;
 	private int oQTY;
 	private Timestamp oDay;
-	public int getoId() {
+	
+	public String getoId() {
 		return oId;
 	}
-	public void setoId(int oId) {
+	public void setoId(String oId) {
 		this.oId = oId;
 	}
-	public int getcId() {
+	public String getcId() {
 		return cId;
 	}
-	public void setcId(int cId) {
+	public void setcId(String cId) {
 		this.cId = cId;
 	}
 	public int getoQTY() {

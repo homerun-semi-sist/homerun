@@ -28,6 +28,12 @@ div.pName img.photo {
 div.pName, span.del {
 	cursor: pointer;
 }
+#noCart{
+border: 4px solid rgba(0,0,0,0.2) ;
+
+width:1000px;
+margin-right:100px;
+}
 
 .btn1 {
 	left: 40%;
@@ -52,6 +58,7 @@ div.pName, span.del {
 	font-weight: bold;
 	font-size: 2em;
 	line-height: 1.8;
+	margin-left:25px;
 }
 
 #usercart {
@@ -64,10 +71,19 @@ div.pName, span.del {
 	font-size: 2em;
 	line-height: 1.8;
 	height: 50px;
+	margin-left:25px;
+}
+
+#cQTYup {
+	cursor: pointer;
+}
+
+#cQTYdown {
+	cursor: pointer;
 }
 </style>
 
-<script type="text/javascript">
+<script>
 	$(function() {
 
 		//전체상품 선택,해제
@@ -75,7 +91,7 @@ div.pName, span.del {
 
 			var chk = $(this).is(":checked");
 
-			$("td.cId").prop("checked", chk);
+			$("td,cId").prop("checked", chk);
 		});
 
 		//상품선택시 디테일페이지 이동
@@ -90,7 +106,7 @@ div.pName, span.del {
 						});
 
 		//휴지통모양 개별삭제
-		$("span,del").click(function() {
+		$(".del").click(function() {
 
 			var cId = $(this).attr("cId");
 			//alert(cId);
@@ -124,6 +140,21 @@ div.pName, span.del {
 			location.reload();
 
 		});
+		
+		$("#cQTYup").click(function(){
+			cQTY=cQTY+1;
+			alter(cQTY);
+			location.reload();
+		});
+		
+		$("#cQTYdown").click(function(){
+			cQTY=cQTY-1;
+			location.reload();
+		});
+		
+		int totalMoney = $('input[type="checkbox"]:checked').map(function() {
+			  return this.value;
+			}).get();
 
 	});
 
@@ -193,81 +224,95 @@ NumberFormat nf = NumberFormat.getInstance();
 								총 <span style="color: yellow"><%=cartSize%></span>개의 상품이 담겨져
 								있습니다
 							</h4>
-
+							<%if (cartSize>0){ %>
 							<table class="table table-bordered"
 								style="width: 1000px; color: black; font-size: 1.2em;">
 								<tr>
 									<th style="width: 30px;"><input type="checkbox"
 										id="allcheck"></th>
-									<th style="width: 400px; font-size: 1.2em; text-align: center;">상품정보</th>
+									<th style="width: 500px; font-size: 1.2em; text-align: center;">상품정보</th>
 									<th style="width: 150px; font-size: 1.2em; text-align: center;">상품옵션</th>
 									<th style="width: 200px; font-size: 1.2em; text-align: center;">상품금액</th>
+									<th style="width: 200px; font-size: 1.2em; text-align: center;">총금액</th>
 								</tr>
 
 								<%
+								
+								
 								for (int i = 0; i < cartSize; i++) {//사이즈만큼
 
 									HashMap<String, String> map = list.get(i);
 									//사진얻기
 									String photo = map.get("pImage");//사진 받아와서
 
-									int cQTY = Integer.parseInt(map.get("cQTY"));
+									
 								%>
 
 								<tr>
-									<td><input type="checkbox" name="cId" class="cId"
-										cId="<%=map.get("cId")%>"></td>
+									<td style="line-height: 100px;"><input type="checkbox" name="cId" class="cId"
+										cId="<%=map.get("cId")%>" ></td>
 
 									<td style="line-height: 100px;">
 										<div pId="<%=map.get("pId")%>" class="pName">
 											<img src="<%=photo%>" class="photo" align="left" hspace="20">
 
-											<h5>
-												상품명:
-												<%=map.get("pName")%>
-											</h5>
-											<td>
-												<h5>
-													개수:
-													<%=cQTY%>개
-												</h5>
-											</td>
-										</div>
-									</td>
+											<h4 style="line-height: 80px;">
+												<b> 상품명: <%=map.get("pName")%>
+												</b>
+											</h4>
+											<td >
+													<span style="line-height:35px"
+														class="glyphicon glyphicon-triangle-top" id="cQTYup"></span><br>
+													<span><b> 개수: <%=map.get("cQTY")%>개</b></span> 
+														<br><span
+														class="glyphicon glyphicon-triangle-bottom" id="cQTYdown"></span>
+												</td>
+											<td><br>
+												<h4 style="line-height:30px">
+													<b> <%=nf.getCurrencyInstance(Locale.KOREA).format(Integer.parseInt(map.get("price")))%></b>
+												</h4>
+												</td>
 
-									<td align="left" style="padding-right: 400px;">
+									<td >
 										<%
 										int price = Integer.parseInt(map.get("price"));
+										int cQTY = Integer.parseInt(map.get("cQTY"));
 										price *= cQTY;
 										total = total + price;
 										%>
-										<div>
+										<h4 style="line-height: 80px;"><b>
 											<%=nf.getCurrencyInstance(Locale.KOREA).format(price)%>
 											<span class="glyphicon glyphicon-trash del"
 												style="color: red;" cId="<%=map.get("cId")%>"></span>
-										</div>
+												</b>
+										</h4>
 
 
 									</td>
+									</td>
 								</tr>
+								</div>
 
 								<%
 								}
 								%>
 
 								<tr>
-									<td colspan="4" >
+									<td colspan="5">
 										<button type="button" class="btn1" style="margin-left: 800px;"
 											id="btncartdel">선택상품삭제</button>
 										<button type="button" class="btn1" style="margin-left: 800px;"
-											onclick="location.href='product_success.jsp'">구매하기</button>
-										<span style="font-size: 2em;"><b><br>
-											총 주문금액:
-											<%=nf.getCurrencyInstance(Locale.KOREA).format(total)%></b></span>
+											onclick="location.href='product_success.jsp'">구매하기</button> <span
+										style="font-size: 2em;"><b><br> 총 주문금액: <%=nf.getCurrencyInstance(Locale.KOREA).format(total)%></b></span>
 									</td>
 								</tr>
 
 							</table>
+							<%}else{ %>
+							
+							<img src="../assets/img/빈장바구니.png" id="noCart">
+							
+							<%} %>
 						</div>
 						<!-- the end -->
 				</div>

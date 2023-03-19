@@ -17,96 +17,128 @@ import mysql.db.DbConnect;
 
 public class CartDao {
 	DbConnect db = new DbConnect();
-	
-	public List<HashMap<String, String>> getCartList(String uId){
-		
-		
-		 List<HashMap<String, String>> list=new ArrayList<>();
-		 
-		 Connection conn=db.getConnection();
-		 PreparedStatement pstmt =null;
-		 ResultSet rs=null;
-		 
-		 
-		 //cartday 상의.
-		 String sql="select c.cId,p.pName,p.pId,p.pImage,p.price,c.cQTY "
-		     		+ "from CART c,PRODUCT p,USER u "
-		     		+ "where c.pId=p.pId and c.uId=u.uId and u.uId=?";	
-		     
-		 
-		 try {
-			pstmt=conn.prepareStatement(sql);
+
+	public List<HashMap<String, String>> getCartList(String uId) {
+
+		List<HashMap<String, String>> list = new ArrayList<>();
+
+		Connection conn = db.getConnection();
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+
+		// cartday 상의.
+		String sql = "select c.cId,p.pName,p.pId,p.pImage,p.price,c.cQTY " + "from CART c,PRODUCT p,USER u "
+				+ "where c.pId=p.pId and c.uId=u.uId and u.uId=?";
+
+		try {
+			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, uId);
-			
-			rs=pstmt.executeQuery();
-			 while(rs.next()) {
-				 
-				 HashMap<String, String> map = new HashMap<>();
-				 
-				 	map.put("cId", rs.getString("cId"));
-				 	map.put("pId", rs.getString("pId"));
-					map.put("pName", rs.getString("pName"));
-					map.put("pImage", rs.getString("pImage"));
-					map.put("price", rs.getString("price"));
-					map.put("cQTY", rs.getString("cQTY"));
-						 	
-					list.add(map);
-				 
-			 }
+
+			rs = pstmt.executeQuery();
+			while (rs.next()) {
+
+				HashMap<String, String> map = new HashMap<>();
+
+				map.put("cId", rs.getString("cId"));
+				map.put("pId", rs.getString("pId"));
+				map.put("pName", rs.getString("pName"));
+				map.put("pImage", rs.getString("pImage"));
+				map.put("price", rs.getString("price"));
+				map.put("cQTY", rs.getString("cQTY"));
+
+				list.add(map);
+
+			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}finally {
-			
+		} finally {
+
 			db.dbClose(rs, pstmt, conn);
 		}
-		 
-		 
-		
+
 		return list;
-		
+
 	}
-	
-	
-	public void deleteCart(String cId) { //카트 삭제
+
+	public void deleteCart(String cId) { // 카트 삭제
 		Connection conn = db.getConnection();
-		PreparedStatement pstmt=null;
-		
-		String sql="delete from CART where cId=?";
-		
+		PreparedStatement pstmt = null;
+
+		String sql = "delete from CART where cId=?";
+
 		try {
-			pstmt=conn.prepareStatement(sql);
+			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, cId);
 			pstmt.execute();
-			
+
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}finally {
+		} finally {
 			db.dbClose(pstmt, conn);
 		}
-		
+
 	}
-	
+
 	public void insertOder(OrderDto dto) {
-		Connection conn=db.getConnection();
-		PreparedStatement pstmt=null;
-		
-		String sql="insert into ORDERS values(null,?,?,now())";
+		Connection conn = db.getConnection();
+		PreparedStatement pstmt = null;
+
+		String sql = "insert into ORDERS values(null,?,?,now())";
 		try {
-			pstmt=conn.prepareStatement(sql);
-			pstmt.setInt(1, dto.getcId());
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, dto.getcId());
 			pstmt.setInt(2, dto.getoQTY());
 			pstmt.execute();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}finally {
+		} finally {
 			db.dbClose(pstmt, conn);
 		}
-		
+
+	}
+
+	public List<HashMap<String, String>> getOrderList(String cId) {
+
+		List<HashMap<String, String>> list = new ArrayList<>();
+
+		Connection conn = db.getConnection();
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+
+		String sql = "select o.oId,c.cId,c.cQTY,o.oQTY ,o.oDay" 
+				+ "from ODEARS o,CART c, "
+				+ "where o.oId=c.cId and c.cId=?";
+
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, cId);
+
+			rs = pstmt.executeQuery();
+			while (rs.next()) {
+
+				HashMap<String, String> map = new HashMap<>();
+
+				map.put("oId", rs.getString("oId"));
+				map.put("cId", rs.getString("cId"));
+				map.put("price", rs.getString("price"));
+				map.put("cQTY", rs.getString("cQTY"));
+				map.put("oQTY", rs.getString("oQTY"));
+				map.put("oDay", rs.getString("oDay"));
+
+				list.add(map);
+
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+
+			db.dbClose(rs, pstmt, conn);
+		}
+
+		return list;
 	}
 }
-//	public List<HashMap<int, int>>
-//	
-//}
