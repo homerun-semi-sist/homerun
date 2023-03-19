@@ -164,12 +164,13 @@
                 <!-- Content -->
 
                 <div class="container-xxl flex-grow-1 container-p-y">
+                <h5 class="card-header">자유게시판 목록</h5>
                     <!-- Bootstrap Table with Header - Light -->
-                    <div class="card">
-                        <h5 class="card-header">자유게시판 목록</h5>
+                    <div class="card" style="background-color: #fff">
+                        
                         <div class="table-responsive text-nowrap">
                             <table class="table">
-                                <thead class="table-light">
+                                <thead style="background-color: #F8F9FA">
                                     <tr>
                                         <th style="text-align: center; width: 80px;">No.</th>
                                         <th style="text-align: center; width: 150px;">카테고리</th>

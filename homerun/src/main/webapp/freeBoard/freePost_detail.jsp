@@ -186,21 +186,21 @@
                             <%=fcDto.getFcContent() %>
                         </div>
                     </div><br> --%>
-						alert(uId + " : " + item.fcUId);
+						//alert(uId + " : " + item.fcUId);
+						
 						s+="<div class='d-flex'>";
 						s+="<div class='ms-3'>";
+						s+="<div class='fw-bold'><i class='fa-solid fa-user'></i>&nbsp;" + (idx + 1) + ". " + item.nickname + "<span class='cday'>" + item.fcWriteday + " | <span>수정</span> | <span> 삭제 </span></span></div>"; 
 						
-						// 로그인 한 사용자 = 댓글 작성자 
-                 		if(uId.equals(item.fcUId)) 
-							s+="<div class='fw-bold'><i class='fa-solid fa-user'></i>&nbsp;" + (idx + 1) + ". " + item.nickname + "<span class='cday'>" + item.fcWriteday + " | <span>수정</span> | <span> 삭제 </span></span></div>"; 
-						             		
+						/*
+						s+="<div class='fw-bold'><i class='fa-solid fa-user'></i>&nbsp;" + (idx + 1) + ". " + item.nickname + "<span style="color: red; border: 1px solid red; border-radius: 5px;">작성자</span> <span class='cday'>" + item.fcWriteday + " | <span>수정</span> | <span> 삭제 </span></span></div>"; 
+						s +="<div class='fw-bold'><i class='fa-solid fa-user'></i>&nbsp;" + (idx + 1) + ". " + item.nickname + "<span class='cday'>" + item.fcWriteday + " | <span>추천</span> | <span> 비추천 </span> | <span> 신고 </span></span></div>"; 
+						*/
+						
 						s+= item.fcContent;
 						s+="</div>";
 						s+="</div><br>";
-					 
-                 		
-						
-		
+
 					});
 					
 					$("div.fcList").html(s);
