@@ -1,3 +1,4 @@
+<%@page import="data.dao.TeamDao"%>
 <%@page import="data.dto.FreeCommentDto"%>
 <%@page import="java.util.List"%>
 <%@page import="data.dao.FreeCommentDao"%>
@@ -206,7 +207,7 @@
 						
 						/*
 						s+="<div class='fw-bold'><i class='fa-solid fa-user'></i>&nbsp;" + (idx + 1) + ". " + item.nickname + "<span style="color: red; border: 1px solid red; border-radius: 5px;">작성자</span> <span class='cday'>" + item.fcWriteday + " | <span>수정</span> | <span> 삭제 </span></span></div>"; 
-						s +="<div class='fw-bold'><i class='fa-solid fa-user'></i>&nbsp;" + (idx + 1) + ". " + item.nickname + "<span class='cday'>" + item.fcWriteday + " | <span>추천</span> | <span> 비추천 </span> | <span> 신고 </span></span></div>"; 
+						s+="<div class='fw-bold'><i class='fa-solid fa-user'></i>&nbsp;" + (idx + 1) + ". " + item.nickname + "<span class='cday'>" + item.fcWriteday + " | <span>추천</span> | <span> 비추천 </span> | <span> 신고 </span></span></div>"; 
 						*/
 						
 						s+= "<div id='fcContent' fcContent='"+ item.fcContent +"'>" + item.fcContent + "</div>";
@@ -233,7 +234,8 @@
 
 	// dao
 	FreeBoardDao fbDao = new FreeBoardDao();
-
+	TeamDao tDao = new TeamDao();
+	
 	// 조회수 증가
 	fbDao.updateReadCount(fbNum);
 
@@ -282,14 +284,24 @@
                     <div class="col">
 
                         <article class="blog-details" style="background-color: #fff;">
-                            <span class="title">[<%=fbDto.getFbCategory()%>] <%=fbDto.getFbSubject()%></span>
-                            
+                            <span class="title">
                             <% 
+                            	if(fbDto.getFbCategory().equals("한화")) {
+                            %>
+                        			<img src="<%=tDao.getTeam(fbDto.getFbCategory()).getTeamLogo() %>" width="60px;"> <%=fbDto.getFbSubject()%></span>                           
+                        	<%		
+                        		} else {
+                        	%>
+                        			<img src="<%=tDao.getTeam(fbDto.getFbCategory()).getTeamLogo() %>" width="50px;"> <%=fbDto.getFbSubject()%></span>
+                            
+                        	<%
+                        		}
+                        	
                             	if(loginok != null && fbDto.getUId().equals(uId)) {
                             %>
-                            		<span style="float: right; margin-top: 20px;" onclick="funDel(<%=fbNum%>, <%=currentPage%>)">삭제</span>
+                            		<span style="float: right; margin-top: 20px; cursor: pointer;" onclick="funDel(<%=fbNum%>, <%=currentPage%>)">삭제</span>
                             		<span style="float: right; margin-top: 20px;">&nbsp;&nbsp;|&nbsp;&nbsp;</span>
-                            		<span style="float: right; margin-top: 20px;" onclick="location.href='freePost_updatePage.jsp?fbNum=<%=fbDto.getFbNum()%>'">수정</span>                            		
+                            		<span style="float: right; margin-top: 20px; cursor: pointer;" onclick="location.href='freePost_updatePage.jsp?fbNum=<%=fbDto.getFbNum()%>'">수정</span>                            		
                             <%	
                             	} else {
                             %>

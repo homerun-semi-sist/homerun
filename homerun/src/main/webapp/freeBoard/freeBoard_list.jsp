@@ -74,20 +74,27 @@
             margin-left: auto;
         }
 
-        .bPaging {
-            border: 1px solid gray;
-            width: 300px;
-            height: 35px;
-            margin: auto;
-            margin-bottom: 10px;
-            line-height: 35px;
-            text-align: center;
-        }
-
         a {
             text-decoration: none;
             color: black;
         }
+        
+        #insertBtn {
+        	border-radius: 4px;
+			padding: 10px 20px;
+			border: 1px solid #0b214e;
+			background-color: #0b214e;
+		  	color: #F8F9FA;
+		  	width: 80px; 
+		  	height: 40px; 
+		  	line-height: 20px;
+        }
+        
+        
+        #insertBtn:hover {
+		 	color: #0b214e;
+		  	background-color: #f8f9fa;
+		}
     </style>
 </head>
 
@@ -265,48 +272,47 @@
 								<button type="button" class="btn btn-default" id="insertBtn" style="border: 1px solid gray;">글쓰기</button>
 							</div>
                         </div>
-                        <div class="bPaging">
-							<!-- 페이징 처리 -->
-							<div style="width: 900px; text-align: center;">
-								<ul class="pagination">
-									<% 
-										// 이전
-										if(startPage > 1) {
-									%>
-										<li>
-											<a href="freeBoard_listPage.jsp?currentPage=<%=startPage-1 %>">이전</a>
-										</li>
-									<%
-										}
-										
-										for(int pp = startPage; pp <= endPage; pp++) {
-											if(pp == currentPage) {
-									%>
-												<li class="active">
-													<a href="freeBoard_listPage.jsp?currentPage=<%=pp %>"><%=pp %></a>
-												</li>
-									<%
-											} else {
-									%>
-												<li>
-													<a href="freeBoard_listPage.jsp?currentPage=<%=pp %>"><%=pp %></a>
-												</li>
-									<%
-											}
-										}
-										
-										// 다음
-										if(endPage < totalPage) {
-									%>
-											<li>
-												<a href="freeBoard_listPage.jsp?currentPage=<%=endPage+1 %>">다음</a>
+                       <!-- 페이징 처리 -->
+						<div style="width: 500px; text-align: center;" class="container">
+							<ul class="pagination">
+								<% 
+									// 이전
+									if(startPage > 1) {
+								%>
+									<li>
+										<a href="freeBoard_listPage.jsp?currentPage=<%=startPage-1 %>">이전</a>
+									</li>
+								<%
+									}
+									
+									for(int pp = startPage; pp <= endPage; pp++) {
+										if(pp == currentPage) {
+								%>
+											<li class="active">
+												<a href="freeBoard_listPage.jsp?currentPage=<%=pp %>"><%=pp %></a>
 											</li>
-									<%
+								<%
+										} else {
+								%>
+											<li>
+												<a href="freeBoard_listPage.jsp?currentPage=<%=pp %>"><%=pp %></a>
+											</li>
+								<%
 										}
-									%>
-								</ul>
-							</div>
+									}
+									
+									// 다음
+									if(endPage < totalPage) {
+								%>
+										<li>
+											<a href="freeBoard_listPage.jsp?currentPage=<%=endPage+1 %>">다음</a>
+										</li>
+								<%
+									}
+								%>
+							</ul>
 						</div>
+                       
                     </div>
                 </div>
                 <!-- Bootstrap Table with Header - Light -->
