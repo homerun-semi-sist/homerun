@@ -1,4 +1,3 @@
-<%@page import="java.text.NumberFormat"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="java.util.List"%>
 <%@page import="data.dto.ProductDto"%>
@@ -21,8 +20,6 @@ String pId = request.getParameter("pId");
 
 ProductDao dao = new ProductDao();
 ProductDto dto = dao.getProduct(pId);
-
-NumberFormat nf=NumberFormat.getCurrencyInstance();
 %>
 <body>
 	<section class="py-5">
@@ -63,7 +60,7 @@ NumberFormat nf=NumberFormat.getCurrencyInstance();
 
 				<%
 				ProductDao dao_related = new ProductDao();
-				List<ProductDto> list_related = dao_related.selectRelatedProduct(dto.getTeamName(),dto.getpId());
+				List<ProductDto> list_related = dao_related.selectRelatedProduc(dto.getTeamName());
 
 				List<ProductDto> subListbase_related = new ArrayList<>();
 				for (int i = 0; i < list_related.size(); i++) {
@@ -89,7 +86,7 @@ NumberFormat nf=NumberFormat.getCurrencyInstance();
 								<!-- Product name-->
 								<h5 class="fw-bolder"><%=dto_related.getpName()%></h5>
 								<!-- Product price-->
-								<%=nf.format(dto_related.getPrice())%>
+								<%=dto_related.getPrice()%>
 							</div>
 						</div>
 
@@ -97,7 +94,7 @@ NumberFormat nf=NumberFormat.getCurrencyInstance();
 						<div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
 							<div class="text-center">
 								<a class="btn btn-outline-dark mt-auto"
-									href="product_detailPage.jsp?pId=<%=dto_related.getpId()%>">상품 보기</a>
+									href="test.jsp?pId=<%=dto_related.getpId()%>">상품 보기</a>
 							</div>
 						</div>
 					</div>

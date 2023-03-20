@@ -374,4 +374,43 @@ public class ProductDao {
 		return list;
 	}
 
+	public List<ProductDto> selectRelatedProduct(String teamName, String pId) {
+		List<ProductDto> list = new Vector<>();
+		Connection conn = db.getConnection();
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+
+		String sql = "select * from PRODUCT where teamName=? and not pId=?";
+
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, teamName);
+			pstmt.setString(2, pId);
+			rs = pstmt.executeQuery();
+
+			while (rs.next()) {
+				ProductDto dto = new ProductDto();
+
+				dto.setpId(rs.getString("pId"));
+				dto.setpName(rs.getString("pName"));
+				dto.setTeamName(rs.getString("teamName"));
+				dto.setpCategory(rs.getString("pCategory"));
+				dto.setpImage(rs.getString("pImage"));
+				dto.setpStock(rs.getInt("pStock"));
+				dto.setPrice(rs.getInt("price"));
+				dto.setpOption(rs.getString("pOption"));
+				dto.setpDetail(rs.getString("pDetail"));
+				dto.setpDay(rs.getTimestamp("pDay"));
+
+				list.add(dto);
+			}
+		} catch (SQLException e) {
+			throw new RuntimeException(e);
+		} finally {
+			db.dbClose(rs, pstmt, conn);
+		}
+
+		return list;
+	}
+
 }
