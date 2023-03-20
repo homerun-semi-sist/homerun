@@ -93,16 +93,6 @@
 	margin-left: auto;
 }
 
-.bPaging {
-	border: 1px solid gray;
-	width: 300px;
-	height: 35px;
-	margin: auto;
-	margin-bottom: 10px;
-	line-height: 35px;
-	text-align: center;
-}
-
 a {
 	text-decoration: none;
 	color: black;

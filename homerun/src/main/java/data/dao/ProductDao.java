@@ -42,7 +42,7 @@ public class ProductDao {
 
 	}
 
-/*	public List<ProductDto> selectAllProduct() {
+	public List<ProductDto> selectAllProduct() {
 		List<ProductDto> list = new Vector<>();
 		Connection conn = db.getConnection();
 		PreparedStatement pstmt = null;
@@ -77,7 +77,7 @@ public class ProductDao {
 
 		return list;
 	}
-*/
+
 	
 	public void deleteProduct(String pId) {
 		Connection conn = db.getConnection();
