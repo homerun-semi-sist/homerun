@@ -27,7 +27,7 @@ public class CartDao {
 		ResultSet rs = null;
 
 		// cartday 상의.
-		String sql = "select c.cId,p.pName,p.pId,p.pImage,p.price,c.cQTY " + "from CART c,PRODUCT p,USER u "
+		String sql = "select c.cId,p.pName,p.pId,p.pImage,p.price,p.pStock,c.cQTY " + "from CART c,PRODUCT p,USER u "
 				+ "where c.pId=p.pId and c.uId=u.uId and u.uId=?";
 
 		try {
@@ -44,6 +44,7 @@ public class CartDao {
 				map.put("pName", rs.getString("pName"));
 				map.put("pImage", rs.getString("pImage"));
 				map.put("price", rs.getString("price"));
+				map.put("pStock", rs.getString("pStock"));
 				map.put("cQTY", rs.getString("cQTY"));
 
 				list.add(map);
