@@ -1,3 +1,5 @@
+<%@page import="org.json.simple.JSONObject"%>
+<%@page import="org.json.simple.JSONArray"%>
 <%@page import="data.dao.FreeCommentDao"%>
 <%@page import="data.dto.FreeCommentDto"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
@@ -5,14 +7,16 @@
 
 <%
 	String fcIdx = request.getParameter("fcIdx");
-	String ucontent = request.getParameter("ucontent");
 	
 	// dao
 	FreeCommentDao dao = new FreeCommentDao();
-	FreeCommentDto dto = dao.getFC(fcIdx);
 	
-	dto.setFbNum(fcIdx);
-	dto.setFcContent(ucontent);
+	FreeCommentDto dto =  dao.getFC(fcIdx);
 	
-	dao.updateFC(dto);
+	JSONObject ob = new JSONObject();
+	
+	ob.put("fcIdx", dto.getFcIdx());
+	ob.put("fcContent", dto.getFcContent());	
 %>
+
+<%=ob.toString() %>

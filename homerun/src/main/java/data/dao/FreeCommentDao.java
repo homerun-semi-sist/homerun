@@ -127,7 +127,8 @@ public class FreeCommentDao {
 		try {
 			pstmt = conn.prepareStatement(sql);
 			
-			pstmt.setString(1, dto.getFcIdx());
+			pstmt.setString(1, dto.getFcContent());
+			pstmt.setString(2, dto.getFcIdx());
 
 			pstmt.execute();
 			

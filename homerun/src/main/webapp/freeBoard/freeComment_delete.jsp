@@ -4,17 +4,10 @@
 	pageEncoding="UTF-8"%>
 
 <%
-	String num = request.getParameter("num");
-	String uId = request.getParameter("uId");
-	String content = request.getParameter("content");
+	String fcIdx = request.getParameter("fcIdx");
 	
 	// dao
 	FreeCommentDao dao = new FreeCommentDao();
-	FreeCommentDto dto = new FreeCommentDto();
 	
-	dto.setFbNum(num);
-	dto.setUId(uId);
-	dto.setFcContent(content);
-	
-	dao.insertFC(dto);
+	dao.deleteFC(fcIdx);
 %>
