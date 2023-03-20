@@ -22,6 +22,8 @@
 
 <meta name="description" content="" />
 
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+
 <!-- Favicon -->
 <link rel="icon" type="image/x-icon"
 	href="../assets/board/img/favicon/favicon.ico" />
