@@ -199,7 +199,7 @@
                             <%=fcDto.getFcContent() %>
                         </div>
                     </div><br> --%>
-						//alert(uId + " : " + item.fcUId);
+						// alert(uId + " : " + item.fcUId);
 						
 						s+="<div class='d-flex'>";
 						s+="<div class='ms-3'>";
