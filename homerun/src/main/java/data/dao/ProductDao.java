@@ -18,7 +18,7 @@ public class ProductDao {
 		Connection conn = db.getConnection();
 		PreparedStatement pstmt = null;
 
-		String sql = "insert into PRODUCT values(?,?,?,?,?,?,?,?,?)";
+		String sql = "insert into PRODUCT values(?,?,?,?,?,?,?,?,?,now())";
 
 		try {
 			pstmt = conn.prepareStatement(sql);
@@ -42,13 +42,13 @@ public class ProductDao {
 
 	}
 
-	public List<ProductDto> selectAllProduct() {
+	public List<ProductDto> selectAllProduct_pDay() {
 		List<ProductDto> list = new Vector<>();
 		Connection conn = db.getConnection();
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 
-		String sql = "select * from PRODUCT order by pId";
+		String sql = "select * from PRODUCT order by pDay";
 
 		try {
 			pstmt = conn.prepareStatement(sql);
@@ -66,6 +66,44 @@ public class ProductDao {
 				dto.setPrice(rs.getInt("price"));
 				dto.setpOption(rs.getString("pOption"));
 				dto.setpDetail(rs.getString("pDetail"));
+				dto.setpDay(rs.getTimestamp("pDay"));	
+
+				list.add(dto);
+			}
+		} catch (SQLException e) {
+			throw new RuntimeException(e);
+		} finally {
+			db.dbClose(rs, pstmt, conn);
+		}
+
+		return list;
+	}
+	
+	public List<ProductDto> selectAllProduct_price() {
+		List<ProductDto> list = new Vector<>();
+		Connection conn = db.getConnection();
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+
+		String sql = "select * from PRODUCT order by price";
+
+		try {
+			pstmt = conn.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+
+			while (rs.next()) {
+				ProductDto dto = new ProductDto();
+
+				dto.setpId(rs.getString("pId"));
+				dto.setpName(rs.getString("pName"));
+				dto.setTeamName(rs.getString("teamName"));
+				dto.setpCategory(rs.getString("pCategory"));
+				dto.setpImage(rs.getString("pImage"));
+				dto.setpStock(rs.getInt("pStock"));
+				dto.setPrice(rs.getInt("price"));
+				dto.setpOption(rs.getString("pOption"));
+				dto.setpDetail(rs.getString("pDetail"));
+				dto.setpDay(rs.getTimestamp("pDay"));	
 
 				list.add(dto);
 			}
@@ -122,6 +160,7 @@ public class ProductDao {
 				dto.setPrice(rs.getInt("price"));
 				dto.setpOption(rs.getString("pOption"));
 				dto.setpDetail(rs.getString("pDetail"));
+				dto.setpDay(rs.getTimestamp("pDay"));
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -213,14 +252,14 @@ public class ProductDao {
 	}
 	
 	
-	public List<ProductDto> getList(int start, int perpage) {
+	public List<ProductDto> getList_pDay(int start, int perpage) {
 		List<ProductDto> list = new Vector<>();
 
 		Connection conn = db.getConnection();
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 
-		String sql = "select * from PRODUCT order by pId limit ?,?";
+		String sql = "select * from PRODUCT order by pDay limit ?,?";
 
 		try {
 			pstmt = conn.prepareStatement(sql);
@@ -242,7 +281,52 @@ public class ProductDao {
 				dto.setPrice(rs.getInt("price"));
 				dto.setpOption(rs.getString("pOption"));
 				dto.setpDetail(rs.getString("pDetail"));
+				dto.setpDay(rs.getTimestamp("pDay"));
+				
+				list.add(dto);
 
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			db.dbClose(rs, pstmt, conn);
+		}
+
+		return list;
+		}
+	
+	public List<ProductDto> getList_price(int start, int perpage) {
+		List<ProductDto> list = new Vector<>();
+
+		Connection conn = db.getConnection();
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+
+		String sql = "select * from PRODUCT order by price limit ?,?";
+
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, start);
+			pstmt.setInt(2, perpage);
+
+			rs = pstmt.executeQuery();
+
+			while (rs.next()) {
+
+				ProductDto dto = new ProductDto();
+
+				dto.setpId(rs.getString("pId"));
+				dto.setpName(rs.getString("pName"));
+				dto.setTeamName(rs.getString("teamName"));
+				dto.setpCategory(rs.getString("pCategory"));
+				dto.setpImage(rs.getString("pImage"));
+				dto.setpStock(rs.getInt("pStock"));
+				dto.setPrice(rs.getInt("price"));
+				dto.setpOption(rs.getString("pOption"));
+				dto.setpDetail(rs.getString("pDetail"));
+				dto.setpDay(rs.getTimestamp("pDay"));
+				
 				list.add(dto);
 
 			}

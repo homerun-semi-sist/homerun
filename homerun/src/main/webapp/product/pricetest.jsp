@@ -40,7 +40,7 @@
 NumberFormat nf = NumberFormat.getCurrencyInstance();
 
 ProductDao dao = new ProductDao();
-List<ProductDto> list = dao.selectAllProduct_pDay();
+List<ProductDto> list = dao.selectAllProduct();
 
 ProductDao dao_all = new ProductDao();
 
@@ -78,7 +78,7 @@ if (endPage > totalPage)
 start = (currentPage - 1) * perPage;
 
 //메서드 불러오기
-List<ProductDto> list_all = dao_all.getList_pDay(start, perPage);
+List<ProductDto> list_all = dao_all.getList(start, perPage);
 %>
 <body>
 	<section id="categoryWomen">

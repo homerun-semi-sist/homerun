@@ -36,7 +36,7 @@
 
 <%
 ProductDao dao = new ProductDao();
-List<ProductDto> list = dao.selectAllProduct();
+List<ProductDto> list = dao.selectAllProduct_pDay();
 
 NumberFormat nf = NumberFormat.getCurrencyInstance();
 %>
