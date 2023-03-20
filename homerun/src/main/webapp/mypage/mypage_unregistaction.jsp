@@ -17,7 +17,6 @@
 <body>			
 
 <%
-	request.setCharacterEncoding("utf-8");
 
 	String uid=request.getParameter("uid");
 	UserDao dao=new UserDao();

@@ -19,12 +19,12 @@
 		
 		String uid=request.getParameter("uid");
 		String pw=request.getParameter("pw1");
-		String uName=request.getParameter("name");
+		String uName=request.getParameter("uName");
 		String nickname=request.getParameter("nickname");
 		String gender=request.getParameter("gender");
 		String birth=request.getParameter("birth1")+"-"+request.getParameter("birth2")+"-"+request.getParameter("birth3");
 		String hp=request.getParameter("hp1")+"-"+request.getParameter("hp2")+"-"+request.getParameter("hp3");
-		String addr=request.getParameter("addr");
+		String addr="("+request.getParameter("addr1")+") "+request.getParameter("addr2")+" "+request.getParameter("addr3");
 		
 		dto.setUid(uid);
 		dto.setPw(pw);

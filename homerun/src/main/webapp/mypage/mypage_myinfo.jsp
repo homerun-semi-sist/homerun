@@ -37,6 +37,7 @@ div{
 	position: absolute;
 	left: 50%;
 	transform: translate(-50%, 0%); 
+	top: 200px;
 }
 
 .photo{
@@ -73,14 +74,14 @@ div{
 .shippingStatusContainer .title{
   font-size: 20px;
   font-weight: bold;
-  margin-bottom: 15px;
+  margin-bottom: 10px;
 }
 
 /* 장바구니 결제완료 배송중 구매확정 [로우] */
 .shippingStatusContainer .status{
   display: flex;
   justify-content: space-between;
-  margin-bottom: 21px;
+  margin: 50px;
 }
 /* 장바구니 결제완료 배송중 구매확정 [아이템]  */
 .shippingStatusContainer .item{
@@ -105,12 +106,13 @@ div{
 	height: 100px;
 	margin-bottom: 10px;
 	cursor: pointer;
+	
 }
 
 .name {
 	font-size: 40px;
 	text-align: center;
-	margin-top: 200px;
+	margin-top: 250px;
 }
 
 .nickname{
@@ -176,6 +178,7 @@ div{
 					<div class="col-sm-8" style="border: 1px solid pink;">
 						<!-- write here -->
 <%
+
 	String uid=(String)session.getAttribute("uid");
 	UserDao dao=new UserDao();
 	String uName=dao.getuName(uid);
@@ -224,11 +227,38 @@ div{
 			onclick="location.href='../user/user_logoutaction.jsp'">로그아웃</button>
 		
 	  <div class="profile">
-	  	<a onclick="location.href='../mypage/mypage_modifyform.jsp'">
+	  	<a data-toggle="modal" data-target="#myModal2">
 	 		<img class="photo" src="../assets/img/프로필.png">
 	 		<br><br>
 	 	</a>
 	  </div>
+	  
+	  <!-- Modal -->
+  <div class="modal fade" id="myModal2" role="dialog">
+    <div class="modal-dialog">
+    
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title"><b>회원정보 수정</b></h4>
+        </div>
+        <div class="modal-body">
+          <p><b style="font-size: 15pt;">비밀번호를 입력 해 주세요</b></p>
+        </div>
+        <div>
+        	&nbsp;&nbsp;&nbsp;&nbsp;<input type="password" placeholder="비밀번호 입력">
+        	<br>
+        	<br>
+        </div>
+        <div class="modal-footer">
+        	<button type="button" class="btn btn-default" data-dismiss="modal"
+        	onclick="location.href='../mypage/mypage_modifyform.jsp'">수정하기</button>
+          <button type="button" class="btn btn-default" data-dismiss="modal">취소</button>
+        </div>
+      </div>
+      
+    </div>
+  </div>
 	  
 	  <div class="name"><b><%=uName %></b></div>
 	  <br><br>

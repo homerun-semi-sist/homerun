@@ -15,6 +15,9 @@
 		<script src="https://code.jquery.com/jquery-3.6.3.js"></script>
 		<link href="../assets/css/index.css" rel="stylesheet">
 	</head>
+	<%
+	request.setCharacterEncoding("utf-8");
+	%>
 	<body style="overflow-x: hidden;">
 		<%
 			String mainPage = "../layout/main.jsp";
@@ -38,18 +41,25 @@
 					<div class="col-sm-8" style="border: 1px solid pink;">
 						<!-- write here -->
 <%
-	request.setCharacterEncoding("uft-8");
 
 	String uid=request.getParameter("uid");
-	String uName=request.getParameter("name");
+	String uName=request.getParameter("uName");
 	String nickname=request.getParameter("nickname");
-	String addr=request.getParameter("addr");
+	String pw=request.getParameter("pw1");
+	String gender=request.getParameter("gender");
+	String birth=request.getParameter("birth1")+"-"+request.getParameter("birth2")+"-"+request.getParameter("birth3");
+	String hp=request.getParameter("hp1")+"-"+request.getParameter("hp2")+"-"+request.getParameter("hp3");
+	String addr="("+request.getParameter("addr1")+") "+request.getParameter("addr2")+" "+request.getParameter("addr3");
 	
 	UserDto dto=new UserDto();
 	
 	dto.setUid(uid);
 	dto.setuName(uName);
 	dto.setNickname(nickname);
+	dto.setPw(pw);
+	dto.setGender(gender);
+	dto.setBirth(birth);
+	dto.setHp(hp);
 	dto.setAddr(addr);
 	
 	UserDao dao=new UserDao();

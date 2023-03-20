@@ -4,6 +4,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.List;
+import java.util.Vector;
 
 import data.dto.UserDto;
 import mysql.db.DbConnect;
@@ -235,15 +237,19 @@ public class UserDao {
 		Connection conn=db.getConnection();
 		PreparedStatement pstmt=null;
 		
-		String sql="update USER set uName=?,nickname=?,addr=? where uid=?";
+		String sql="update USER set uName=?,nickname=?,pw=?,gender=?,birth=?,hp=?,addr=? where uid=?";
 		
 		try {
 			pstmt=conn.prepareStatement(sql);
 			
 			pstmt.setString(1, dto.getuName());
 			pstmt.setString(2, dto.getNickname());
-			pstmt.setString(3, dto.getAddr());
-			pstmt.setString(4, dto.getUid());
+			pstmt.setString(3, dto.getPw());
+			pstmt.setString(4, dto.getGender());
+			pstmt.setString(5, dto.getBirth());
+			pstmt.setString(6, dto.getHp());
+			pstmt.setString(7, dto.getAddr());
+			pstmt.setString(8, dto.getUid());
 			
 			pstmt.execute();
 			
@@ -253,5 +259,113 @@ public class UserDao {
 		}finally {
 			db.dbClose(pstmt, conn);
 		}
+	}
+	
+	//전체 회원 수
+	public int getTotalCount()
+	{
+		int n=0;
+		
+		Connection conn=db.getConnection();
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		
+		String sql="select count(*) from USER";
+		
+		try {
+			pstmt=conn.prepareStatement(sql);
+			
+			rs=pstmt.executeQuery();
+			
+			if(rs.next())
+				n=rs.getInt(1);
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			db.dbClose(rs, pstmt, conn);
+		}
+		
+		return n;
+	}
+	
+	//전체 회원 목록
+	public List<UserDto> getAllUsers()
+	{
+		List<UserDto> list=new Vector<>();
+		
+		Connection conn=db.getConnection();
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		
+		String sql="select * from USER order by uid";
+		
+		try {
+			pstmt=conn.prepareStatement(sql);
+			rs=pstmt.executeQuery();
+			
+			while(rs.next())
+			{
+				UserDto dto=new UserDto();
+				
+				dto.setuName(rs.getString("uName"));
+				dto.setUid(rs.getString("uid"));
+				dto.setGender(rs.getString("gender"));
+				dto.setBirth(rs.getString("birth"));
+				dto.setHp(rs.getString("hp"));
+				dto.setAddr(rs.getString("addr"));
+				
+				list.add(dto);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			db.dbClose(rs, pstmt, conn);
+		}
+		
+		return list;
+	}
+	
+	//페이징 처리
+	public List<UserDto> getList(int start,int perpage)
+	{
+		List<UserDto> list=new Vector<>();
+		
+		Connection conn=db.getConnection();
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		
+		String sql="select * from USER limit ?,?";
+		
+		try {
+			pstmt=conn.prepareStatement(sql);
+			
+			pstmt.setInt(1, start);
+			pstmt.setInt(2, perpage);
+			
+			rs=pstmt.executeQuery();
+			
+			while(rs.next())
+			{
+				UserDto dto=new UserDto();
+				
+				dto.setuName(rs.getString("uName"));
+				dto.setUid(rs.getString("uid"));
+				dto.setGender(rs.getString("gender"));
+				dto.setBirth(rs.getString("birth"));
+				dto.setHp(rs.getString("hp"));
+				dto.setAddr(rs.getString("addr"));
+				
+				list.add(dto);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			db.dbClose(rs, pstmt, conn);
+		}
+		return list;
 	}
 }
