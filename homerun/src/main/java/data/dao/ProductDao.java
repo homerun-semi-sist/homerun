@@ -48,7 +48,7 @@ public class ProductDao {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 
-		String sql = "select * from PRODUCT order by pDay";
+		String sql = "select * from PRODUCT order by pDay desc";
 
 		try {
 			pstmt = conn.prepareStatement(sql);
@@ -85,7 +85,7 @@ public class ProductDao {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 
-		String sql = "select * from PRODUCT order by price";
+		String sql = "select * from PRODUCT order by price desc";
 
 		try {
 			pstmt = conn.prepareStatement(sql);
@@ -259,7 +259,7 @@ public class ProductDao {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 
-		String sql = "select * from PRODUCT order by pDay limit ?,?";
+		String sql = "select * from PRODUCT order by pDay desc limit ?,?";
 
 		try {
 			pstmt = conn.prepareStatement(sql);
@@ -303,7 +303,7 @@ public class ProductDao {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 
-		String sql = "select * from PRODUCT order by price limit ?,?";
+		String sql = "select * from PRODUCT order by price desc limit ?,?";
 
 		try {
 			pstmt = conn.prepareStatement(sql);

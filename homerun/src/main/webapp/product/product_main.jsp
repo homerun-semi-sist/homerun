@@ -147,70 +147,40 @@ NumberFormat nf = NumberFormat.getCurrencyInstance();
 			</div>
 			<div class="col-12">
 				<div class="row h-100 align-items-center g-2">
+					<%
+					List<ProductDto> subListbase_new = new ArrayList<>();
+					for (int i = 0; i < list.size(); i++) {
+						ProductDto dto = list.get(i);
+
+						subListbase_new.add(dto);
+
+					}
+					%>
+					<%
+					int last_new = subListbase_new.size() < 4 ? subListbase_new.size() : 4;
+					List<ProductDto> subList_new = new ArrayList<ProductDto>(subListbase_new.subList(0, last_new));
+					for (int j = 0; j < subList_new.size(); j++) {
+						ProductDto dto = subList_new.get(j);
+					%>
 					<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
-						<div class="card card-span text-white">
-							<img class="img-fluid h-100"
-								src="http://openimage.interpark.com/goods_image/4/5/9/3/10098314593s.jpg"
-								alt="..." />
+						<div class="card card-span h-100 text-white">
+							<img class="img-fluid h-100" src="<%=dto.getpImage()%>" alt="..." />
 							<div class="card-img-overlay ps-0"></div>
 							<div class="card-body ps-0 bg-200">
-								<h5 class="fw-bold text-1000 text-truncate">심볼 바람막이 (블랙)</h5>
+								<h5 class="fw-bold text-1000 text-truncate"><%=dto.getpName()%></h5>
 								<div class="fw-bold">
-									<span class="text-600 me-2 text-decoration-line-through">55000원</span><span
-										class="text-primary">45000원</span>
+									<span class="text-primary"><%=nf.format(dto.getPrice())%></span>
 								</div>
 							</div>
-							<a class="stretched-link" href="#"></a>
+							<a class="stretched-link"
+								href="product_detailPage.jsp?pId=<%=dto.getpId()%>"></a>
 						</div>
 					</div>
-					<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
-						<div class="card card-span text-white">
-							<img class="img-fluid h-100"
-								src="http://openimage.interpark.com/goods_image/0/5/9/8/9134140598s.jpg"
-								alt="..." />
-							<div class="card-img-overlay ps-0"></div>
-							<div class="card-body ps-0 bg-200">
-								<h5 class="fw-bold text-1000 text-truncate">유광 점퍼 (동계)</h5>
-								<div class="fw-bold">
-									<span class="text-600 me-2 text-decoration-line-through">135,000원</span><span
-										class="text-primary">120,000원</span>
-								</div>
-							</div>
-							<a class="stretched-link" href="#"></a>
-						</div>
-					</div>
-					<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
-						<div class="card card-span text-white">
-							<img class="img-fluid h-100"
-								src="http://openimage.interpark.com/goods_image/0/9/7/6/9803880976s.jpg"
-								alt="..." />
-							<div class="card-img-overlay ps-0"></div>
-							<div class="card-body ps-0 bg-200">
-								<h5 class="fw-bold text-1000 text-truncate">오리지널 모자</h5>
-								<div class="fw-bold">
-									<span class="text-600 me-2 text-decoration-line-through">30,000원</span><span
-										class="text-primary">29,000원</span>
-								</div>
-							</div>
-							<a class="stretched-link" href="#"></a>
-						</div>
-					</div>
-					<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
-						<div class="card card-span text-white">
-							<img class="img-fluid h-100"
-								src="http://openimage.interpark.com/goods_image/0/9/3/5/9598780935s.jpg"
-								alt="..." />
-							<div class="card-img-overlay ps-0"></div>
-							<div class="card-body ps-0 bg-200">
-								<h5 class="fw-bold text-1000 text-truncate">응원배트</h5>
-								<div class="fw-bold">
-									<span class="text-600 me-2 text-decoration-line-through">10,000원</span><span
-										class="text-primary">8,000원</span>
-								</div>
-							</div>
-							<a class="stretched-link" href="#"></a>
-						</div>
-					</div>
+					<%
+					}
+					%>
+
+
 				</div>
 			</div>
 		</div>

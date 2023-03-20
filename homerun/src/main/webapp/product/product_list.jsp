@@ -40,6 +40,7 @@
 NumberFormat nf = NumberFormat.getCurrencyInstance();
 
 ProductDao dao = new ProductDao();
+
 List<ProductDto> list = dao.selectAllProduct_pDay();
 
 ProductDao dao_all = new ProductDao();
