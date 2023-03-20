@@ -77,7 +77,7 @@ public class PostReportDao {
 		Connection conn = db.getConnection();
 		PreparedStatement pstmt = null;
 		
-		String sql = "insert into POSTREPORT(uId,fbNum,bDay) value(?,?,now());";
+		String sql = "insert into POSTREPORT(uId,fbNum,rDay) value(?,?,now());";
 		
 		try {
 			pstmt = conn.prepareStatement(sql);

@@ -66,7 +66,9 @@
     
     <script type="text/javascript">
 		$(function() {
-
+			
+			// 댓글 관련 method
+			
 			// 처음 시작시 리스트 호출
 			list();
 			$("div.commentUpdateForm").hide();
@@ -125,7 +127,7 @@
 			$(document).on("click", "#fcMod", function() {
 							
 				var fcIdx = $(this).attr("fcIdx");
-				 alert(fcIdx);
+				// alert(fcIdx);
 				
 				// 추가폼은 숨기고 수정폼은 나타냄
 				$("div.commentForm").hide();
@@ -160,10 +162,107 @@
 					success : function () {
 			
 						list();
-					}, 
+					}
 						
 				}); 
 			});
+			
+			// 댓글 추천수 증가
+			$(document).on("click", "#fcLike", function() {
+				var loginok = $("#loginok").val();
+				//alert(loginok);
+				
+				if(loginok == "yes") {
+					
+					var fcIdx = $(this).attr("fcIdx");
+					// alert(fcIdx);
+					
+					$.ajax({
+						
+						type : "get",
+						url : "freeComment_like.jsp",
+						dataType : "json",
+						data : {"fcIdx" : fcIdx},
+						success : function (res) {
+	
+							$("#fcLikeCnt").text(res.like);
+						}
+					})
+					
+				}
+				else 
+					alert("로그인 후 이용 가능합니다");
+		
+			});
+			
+			// 댓글 비추천수 증가
+			$(document).on("click", "#fcDislike", function() {
+				var loginok = $("#loginok").val();
+				//alert(loginok);
+				
+				if(loginok == "yes") {
+					
+					var fcIdx = $(this).attr("fcIdx");
+					// alert(fcIdx);
+					
+					$.ajax({
+						
+						type : "get",
+						url : "freeComment_dislike.jsp",
+						dataType : "json",
+						data : {"fcIdx" : fcIdx},
+						success : function (res) {
+	
+							$("#fcDislikeCnt").text(res.dislike);
+						}
+					})
+					
+				}
+				else 
+					alert("로그인 후 이용 가능합니다");
+		
+			});
+			
+			// 댓글 신고수 증가 
+			$(document).on("click", "#fcReport", function() {
+				var loginok = $("#loginok").val();
+				//alert(loginok);
+				
+				if(loginok == "yes") {
+					
+					var fcIdx = $(this).attr("fcIdx");
+					// alert(fcIdx);
+					
+					$.ajax({
+						
+						type : "get",
+						url : "freeComment_report.jsp",
+						dataType : "json",
+						data : {"fcIdx" : fcIdx},
+						success : function (res) {
+	
+							
+							
+							if(res.flag == true) {
+								var a = confirm("신고하려면 [확인]을 눌러주세요\n한번 신고한 댓글은 취소가 불가능합니다");
+								
+								if(a) {
+									$("#fcReportCnt").text(res.report);
+									alert("댓글을 신고하였습니다");
+								}
+							}
+							else 
+								alert("이미 신고한 댓글입니다");
+		
+						}
+					})
+					
+				}
+				else 
+					alert("로그인 후 이용 가능합니다");
+		
+			});
+			
 		});		
 		
 		// list 사용자 정의 함수
@@ -172,6 +271,8 @@
 			var loginok = $("#loginok").val();
 			var uId = $("#uId").val();
 			var fbUId = $("#fbUId").val();
+			
+			//alert(fbUId);
 			
 			$.ajax({
 				
@@ -199,16 +300,33 @@
                             <%=fcDto.getFcContent() %>
                         </div>
                     </div><br> --%>
-						// alert(uId + " : " + item.fcUId);
+						// alert(fbUId + " : " + item.fcUId);
 						
 						s+="<div class='d-flex'>";
 						s+="<div class='ms-3'>";
-						s+="<div class='fw-bold'><i class='fa-solid fa-user'></i>&nbsp;" + (idx + 1) + ". " + item.nickname + "<span class='cday'>" + item.fcWriteday + " | <span id='fcMod' fcIdx=" + item.fcIdx + " style='cursor: pointer'>수정</span> | <span id='fcDel' fcIdx=" + item.fcIdx + " style='cursor: pointer'> 삭제 </span></span></div>"; 
 						
 						/*
+						s+="<div class='fw-bold'><i class='fa-solid fa-user'></i>&nbsp;" + (idx + 1) + ". " + item.nickname + "<span class='cday'>" + item.fcWriteday + " | <span id='fcMod' fcIdx=" + item.fcIdx + " style='cursor: pointer'>수정</span> | <span id='fcDel' fcIdx=" + item.fcIdx + " style='cursor: pointer'> 삭제 </span></span></div>"; 
 						s+="<div class='fw-bold'><i class='fa-solid fa-user'></i>&nbsp;" + (idx + 1) + ". " + item.nickname + "<span style="color: red; border: 1px solid red; border-radius: 5px;">작성자</span> <span class='cday'>" + item.fcWriteday + " | <span>수정</span> | <span> 삭제 </span></span></div>"; 
-						s+="<div class='fw-bold'><i class='fa-solid fa-user'></i>&nbsp;" + (idx + 1) + ". " + item.nickname + "<span class='cday'>" + item.fcWriteday + " | <span>추천</span> | <span> 비추천 </span> | <span> 신고 </span></span></div>"; 
 						*/
+						
+						// 로그인 o && 댓글 작성자 == 로그인 한 아이디 -> 수정, 삭제 표시
+						if(loginok != null && uId == item.fcUId) {
+							if(item.fcUId == fbUId) 
+								s+="<div class='fw-bold'><i class='fa-solid fa-user'></i>&nbsp;" + (idx + 1) + ". " + item.nickname + "<span style='color: red; border: 1px solid red; border-radius: 5px; font-size: 0.7rem; margin-left: 3px;'>작성자</span> <span class='cday'>" + item.fcWriteday + " | <span id='fcMod' fcIdx=" + item.fcIdx + " style='cursor: pointer'>수정</span> | <span id='fcDel' fcIdx=" + item.fcIdx + " style='cursor: pointer'> 삭제 </span></span></div>"; 
+							
+							// 댓글 작성자 == 글 작성자 -> 작성자 표시	1.로그인했을때->수정삭제
+							else
+								s+="<div class='fw-bold'><i class='fa-solid fa-user'></i>&nbsp;" + (idx + 1) + ". " + item.nickname + "<span class='cday'>" + item.fcWriteday + " | <span id='fcMod' fcIdx=" + item.fcIdx + " style='cursor: pointer'>수정</span> | <span id='fcDel' fcIdx=" + item.fcIdx + " style='cursor: pointer'> 삭제 </span></span></div>";
+						}
+						
+						// 댓글 작성자 == 글 작성자 -> 작성자 표시	2.로그인안했을때 
+						else if(item.fcUId == fbUId) 
+							s+="<div class='fw-bold'><i class='fa-solid fa-user'></i>&nbsp;" + (idx + 1) + ". " + item.nickname + "<span style='color: red; border: 1px solid red; border-radius: 5px; font-size: 0.7rem; margin-left: 3px;'>작성자</span> <span class='cday'>" + item.fcWriteday + " | <span id='fcMod' fcIdx=" + item.fcIdx + " style='cursor: pointer'>수정</span> | <span id='fcDel' fcIdx=" + item.fcIdx + " style='cursor: pointer'> 삭제 </span></span></div>"; 
+						 
+						// 로그인 x
+						else
+							s+="<div class='fw-bold'><i class='fa-solid fa-user'></i>&nbsp;" + (idx + 1) + ". " + item.nickname + "<span class='cday'>" + item.fcWriteday + " | <span id='fcLike' fcIdx=" + item.fcIdx + " style='cursor: pointer'>추천 <span id='fcLikeCnt'> " + item.fcLike + "</span></span> | <span id='fcDislike' fcIdx=" + item.fcIdx + " style='cursor: pointer'> 비추천 <span id='fcDislikeCnt'> " + item.fcDislike + "</span> </span> | <span id='fcReport' fcIdx=" + item.fcIdx + " style='cursor: pointer'> 신고 <span id='fcReportCnt'>" + item.fcReport + "</span></span></span></div>"; 
 						
 						s+= "<div id='fcContent' fcContent='"+ item.fcContent +"'>" + item.fcContent + "</div>";
 						s+="</div>";
@@ -285,8 +403,15 @@
 
                         <article class="blog-details" style="background-color: #fff;">
                             <span class="title">
-                            <% 
-                            	if(fbDto.getFbCategory().equals("한화")) {
+                            
+                            <%
+                            	// 카테고리 : 전체 -> 야구공 png
+                                if(fbDto.getFbCategory().equals("전체")) {                                       		
+                            %>
+                                	<img src="https://cdn.icon-icons.com/icons2/2070/PNG/512/baseball_icon_126956.png" style="width: 40px;"> <%=fbDto.getFbSubject()%></span>
+                                        	
+							<%                        
+                                } else if(fbDto.getFbCategory().equals("한화")) {
                             %>
                         			<img src="<%=tDao.getTeam(fbDto.getFbCategory()).getTeamLogo() %>" width="60px;"> <%=fbDto.getFbSubject()%></span>                           
                         	<%		
@@ -305,7 +430,7 @@
                             <%	
                             	} else {
                             %>
-                            		<span style="float: right; margin-top: 20px; color:red;">신고&nbsp;<i class="fa-solid fa-bullhorn"></i><!-- <i class="fa-solid fa-bell-concierge"></i> --></span>
+                            		<span id="report" style="float: right; margin-top: 20px; color:red; cursor: pointer;">신고&nbsp;<i class="fa-solid fa-bullhorn"></i></span>
                             <%
                             	}
                             %>
@@ -460,17 +585,12 @@
 </div>
     </div>
 	<script type="text/javascript">
-	
+		
+		// 게시글 method
+		
 		// 추천수 증가
 		$("#likeCnt").click(function() {
 			var login = '<%=loginok%>';
-			
-			/* $(this).removeClass("fa-regular");
-			$(this).addClass("fa-solid").css("color", "blue").animate({"font-size" : "40px"}, 1000, function() {
-				$(this).removeClass("fa-solid");
-				$(this).addClass("fa-regular").css("font-size", "30px");
-			}); */
-			
 			
 			// alert(login);
 			if(login == "yes") {
@@ -499,10 +619,9 @@
 					
 				});
 			}
-			//else 
-				//alert("로그인 후 이용 가능합니다");
-			
-			//tag.innerHTML = "<i class="fa-solid fa-thumbs-up"></i>"
+			else 
+				alert("로그인 후 이용 가능합니다");
+	
 		});
 
 		// 비추천수 증가
@@ -544,8 +663,7 @@
 			
 			if(login == "yes")  {
 				
-				var num = $(this).attr("num");
-				var tag = $(this);	
+				var num = $("#fbNum").val();
 				
 				// alert(num);
 				
@@ -557,10 +675,10 @@
 					data : {"num" : num},
 					success : function(res) {
 						
-						// alert(res.flag);
+						// alert(res.report);
 						
 						if(res.flag == true) {
-							var a = confirm("신고하려면 [확인]을 눌러주세요\n한번 신고한 글을 취소가 불가능합니다");
+							var a = confirm("신고하려면 [확인]을 눌러주세요\n한번 신고한 글은 취소가 불가능합니다");
 							
 							if(a)
 								alert("게시글을 신고하였습니다");
@@ -611,8 +729,7 @@
 			
 		});
 		
-		
-		
+
 		function funDel(num, currentPage) {
 			
 			var a = confirm("삭제하려면 [확인]을 눌러주세요");

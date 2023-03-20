@@ -1,3 +1,4 @@
+<%@page import="data.dao.FreeBoardDao"%>
 <%@page import="data.dto.PostReportDto"%>
 <%@page import="data.dao.PostReportDao"%>
 <%@page import="java.util.List"%>
@@ -9,18 +10,21 @@
 	String num = request.getParameter("num");
 
 	boolean flag;
-
-	PostReportDao dao = new PostReportDao();
-	int n = dao.getFBRPcnt(uId, num);
+	
+	FreeBoardDao fbDao = new FreeBoardDao();
+	PostReportDao prDao = new PostReportDao();
+	
+	int n = prDao.getFBRPcnt(uId, num);
 		
-	System.out.println(n);
+	// System.out.println(n);
 	if(n == 0) {
-		PostReportDto dto = new PostReportDto();
+		PostReportDto prDto = new PostReportDto();
 		
-		dto.setuId(uId);
-		dto.setFbNum(num);
+		prDto.setuId(uId);
+		prDto.setFbNum(num);
 		
-		dao.insertFBPR(dto);
+		prDao.insertFBPR(prDto);
+		fbDao.updateReport(num);
 		
 		flag = true;
 	} else { 
@@ -30,6 +34,8 @@
 	JSONObject ob = new JSONObject();
 	
 	ob.put("flag", flag);
+	ob.put("report", fbDao.getFB(num).getFbReport());
+	
 %>
 
 <%=ob.toString() %>
