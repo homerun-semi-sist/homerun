@@ -42,7 +42,7 @@ public class ProductDao {
 
 	}
 
-	public List<ProductDto> selectAllProduct() {
+/*	public List<ProductDto> selectAllProduct() {
 		List<ProductDto> list = new Vector<>();
 		Connection conn = db.getConnection();
 		PreparedStatement pstmt = null;
@@ -77,7 +77,8 @@ public class ProductDao {
 
 		return list;
 	}
-
+*/
+	
 	public void deleteProduct(String pId) {
 		Connection conn = db.getConnection();
 		PreparedStatement pstmt = null;
@@ -182,5 +183,77 @@ public class ProductDao {
 		}
 		return ispId;
 	}
+	
+	
+	//페이징
+	public int getTotalCount() {
+		int n = 0;
+
+		Connection conn = db.getConnection();
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+
+		String sql = "select count(*) from PRODUCT";
+
+		try {
+			pstmt = conn.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+
+			if (rs.next()) 
+				n = rs.getInt(1);
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			db.dbClose(rs, pstmt, conn);
+		}
+		
+		return n;
+	}
+	
+	
+	public List<ProductDto> getList(int start, int perpage) {
+		List<ProductDto> list = new Vector<>();
+
+		Connection conn = db.getConnection();
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+
+		String sql = "select * from PRODUCT order by pId limit ?,?";
+
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, start);
+			pstmt.setInt(2, perpage);
+
+			rs = pstmt.executeQuery();
+
+			while (rs.next()) {
+
+				ProductDto dto = new ProductDto();
+
+				dto.setpId(rs.getString("pId"));
+				dto.setpName(rs.getString("pName"));
+				dto.setTeamName(rs.getString("teamName"));
+				dto.setpCategory(rs.getString("pCategory"));
+				dto.setpImage(rs.getString("pImage"));
+				dto.setpStock(rs.getInt("pStock"));
+				dto.setPrice(rs.getInt("price"));
+				dto.setpOption(rs.getString("pOption"));
+				dto.setpDetail(rs.getString("pDetail"));
+
+				list.add(dto);
+
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			db.dbClose(rs, pstmt, conn);
+		}
+
+		return list;
+		}
 	
 }
