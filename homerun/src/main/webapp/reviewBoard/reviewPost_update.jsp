@@ -21,11 +21,29 @@
 
 <script type="text/javascript" src="../smartEditor/photo_uploader/plugin/hp_SE2M_AttachQuickPhoto.js"
 	charset="utf-8"></script>	
+	
+<style type="text/css">
+	.listBtn, .insertBtn {
+			border-radius: 4px;
+			padding: 10px 20px;
+			border: 1px solid #0b214e;
+			background-color: #0b214e;
+		  	color: #F8F9FA;
+		  	width: 80px; 
+		  	height: 40px; 
+		  	line-height: 20px;
+		}
+
+		.listBtn:hover, .insertBtn:hover {
+		 	color: #0b214e;
+		  	background-color: #f8f9fa;
+		}
+</style>
 </head>
 <body>
 <%
 	String rbNum = request.getParameter("rbNum");
-	// String currentPage = request.getParameter("currentPage");
+	String currentPage = request.getParameter("currentPage");
 	
 	ReviewBoardDao rbDao = new ReviewBoardDao();
 	ReviewBoardDto rbDto = rbDao.getRB(rbNum);
@@ -66,13 +84,13 @@
 		</tr>
 		<tr>
 			<td colspan="4" align="center">
-				<button type="button" class="btn btn-default"
+				<button type="button" class="insertBtn"
 					style="width: 120px;"
 					onclick="submitContents(this)">수정</button>
 				
-				<button type="button" class="btn btn-default"
+				<button type="button" class="listBtn"
 					style="width: 120px;"
-					onclick="location.href='reviewBoard_listPage.jsp'">목록</button>
+					onclick="location.href='reviewBoard_listPage.jsp?currentPage=<%=currentPage %>'">목록</button>
 			</td>
 		</tr>
 		

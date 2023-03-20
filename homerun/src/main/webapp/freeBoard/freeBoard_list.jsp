@@ -1,3 +1,4 @@
+<%@page import="data.dto.TeamDto"%>
 <%@page import="data.dto.FreeCommentDto"%>
 <%@page import="data.dao.FreeCommentDao"%>
 <%@page import="data.dto.UserDto"%>
@@ -105,6 +106,7 @@
 		FreeBoardDao fbDao = new FreeBoardDao();
 		
 		TeamDao tDao = new TeamDao();
+		List<TeamDto> tList = tDao.getAllTeams();
 		
 		SimpleDateFormat sdf = new SimpleDateFormat("yy.MM.dd"); 
 		
@@ -147,19 +149,7 @@
 		// 각 페이지에서 필요한 게시글 가져오기
 		List<FreeBoardDto> fbList = fbDao.getFBList(start, perPage);
 		
-		no = totalCount - (currentPage - 1) * perPage;
-		
-		/* // 댓글에 대한 dao
-		SmartAnswerDao aDao = new SmartAnswerDao();
-		
-		for(SmartDto dto : list) {
-			
-			// 댓글 변수에 댓글 총 개수 넣기
-			int aCount = aDao.getAllAnswers(dto.getNum()).size();
-			dto.setAnswerCount(aCount);
-					
-		} */
-		
+		no = totalCount - (currentPage - 1) * perPage;		
 	%>
 
     <!-- Layout wrapper -->
@@ -171,10 +161,11 @@
                 <!-- Content -->
 
                 <div class="container-xxl flex-grow-1 container-p-y">
-                <h5 class="card-header">자유게시판 목록</h5>
-                    <!-- Bootstrap Table with Header - Light -->
+                <h3 style="margin-bottom: 30px;">자유게시판</h3>
+                
+                <!-- Bootstrap Table with Header - Light -->
                     <div class="card" style="background-color: #fff">
-                        
+
                         <div class="table-responsive text-nowrap">
                             <table class="table">
                                 <thead style="background-color: #F8F9FA">
@@ -219,7 +210,7 @@
                                         	// 카테고리 : 전체 -> 야구공 png
                                         	if(fbDto.getFbCategory().equals("전체")) {                                       		
                                         %>
-                                        		<td style="text-align: center;"><img
+                                        		<td style="text-align: center; vertical-align:middle;"><img
 	                                                src="https://cdn.icon-icons.com/icons2/2070/PNG/512/baseball_icon_126956.png"
 	                                                style="width: 30px;">
                                         		</td>
@@ -227,7 +218,7 @@
                                         <%
                                         	} else if(fbDto.getFbCategory().equals("한화")) {
                                         %>
-                                        		<td style="text-align: center;">
+                                        		<td style="text-align: center; vertical-align:middle;">
                                         		<img
 	                                                src="<%=tDao.getTeam(fbDto.getFbCategory()).getTeamLogo() %>"
 	                                                    style="width: 50px;">
@@ -237,7 +228,7 @@
                                         	
                                         	else {
                                         %>
-                                        		<td style="text-align: center;">
+                                        		<td style="text-align: center; vertical-align:middle;">
 	                                        		<img
 	                                                	src="<%=tDao.getTeam(fbDto.getFbCategory()).getTeamLogo() %>"
 	                                                    style="width: 40px;">
@@ -247,12 +238,12 @@
                                      
                                         %>
                                                                          
-                                        <td><a href="freePost_detailPage.jsp?fbNum=<%=fbDto.getFbNum() %>&currentPage=<%=currentPage%>"><%=fbDto.getFbSubject() %></a><span style="color: tomato;">&nbsp;&nbsp;[<%=fcCnt %>]</span></td>
-                                        <td style="text-align: center;"><%=nickname %></td>
-                                        <td style="text-align: center;"><%=sdf.format(fbDto.getFbWriteday()) %></td>
-                                        <td style="text-align: center;"><%=fbDto.getFbReadCnt() %></td>
-                                        <td style="text-align: center;"><%=fbDto.getFbLike() %></td>
-                                        <td style="text-align: center;"><%=fbDto.getFbDislike() %></td>
+                                        <td style="vertical-align:middle;"><a href="freePost_detailPage.jsp?fbNum=<%=fbDto.getFbNum() %>&currentPage=<%=currentPage%>"><%=fbDto.getFbSubject() %></a><span style="color: tomato;">&nbsp;&nbsp;[<%=fcCnt %>]</span></td>
+                                        <td style="text-align: center; vertical-align:middle;"><%=nickname %></td>
+                                        <td style="text-align: center; vertical-align:middle;"><%=sdf.format(fbDto.getFbWriteday()) %></td>
+                                        <td style="text-align: center; vertical-align:middle;"><%=fbDto.getFbReadCnt() %></td>
+                                        <td style="text-align: center; vertical-align:middle;"><%=fbDto.getFbLike() %></td>
+                                        <td style="text-align: center; vertical-align:middle;"><%=fbDto.getFbDislike() %></td>
                                     </tr>
                          
                                 <%
@@ -263,13 +254,13 @@
                             </table>
                         </div>
 
-                        <div class="bBottom">
+                        <div class="bBottom" style="margin-top: 30px;">
                             <div class="bsBox">
                                 <div class="bSelect">select</div>
                                 <div class="bSearch">검색창</div>
                             </div>
                             <div class="bInsert">
-								<button type="button" class="btn btn-default" id="insertBtn" style="border: 1px solid gray;">글쓰기</button>
+								<button type="button" class="btn btn-default" id="insertBtn">글쓰기</button>
 							</div>
                         </div>
                        <!-- 페이징 처리 -->

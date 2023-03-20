@@ -24,8 +24,7 @@ public class FreeBoardDao {
  		ResultSet rs = null;
  		
  		String sql = "select * from FREEBOARD order by fbNum desc";
- 		// where nickname=''
- 		
+ 		 		
  		try {
  			pstmt = conn.prepareStatement(sql);
  			rs = pstmt.executeQuery();
@@ -58,10 +57,88 @@ public class FreeBoardDao {
 	}
 	
 	// list - 최신순
-	
+		
 	// list - 추천순
+	public List<FreeBoardDto> getAllFBs_like() {
+		List<FreeBoardDto> list = new Vector<>();
+		
+		Connection conn = db.getConnection();
+ 		PreparedStatement pstmt = null;
+ 		ResultSet rs = null;
+ 		
+ 		String sql = "select * from FREEBOARD order by fbLike desc";
+ 		 		
+ 		try {
+ 			pstmt = conn.prepareStatement(sql);
+ 			rs = pstmt.executeQuery();
+ 		
+ 			while(rs.next()) {
+ 				FreeBoardDto dto = new FreeBoardDto();
+ 				
+ 				dto.setFbNum(rs.getString("fbNum"));
+ 				dto.setUId(rs.getString("uId"));
+                dto.setFbCategory(rs.getString("fbCategory"));
+                dto.setFbSubject(rs.getString("fbSubject"));
+                dto.setFbContent(rs.getString("fbContent"));
+                dto.setFbPhoto(rs.getString("fbPhoto"));
+                dto.setFbReadCnt(rs.getString("fbReadCnt"));
+                dto.setFbLike(rs.getString("fbLike"));
+                dto.setFbDislike(rs.getString("fbDislike"));
+                dto.setFbWriteday(rs.getTimestamp("fbWriteday"));
+                dto.setFbReport(rs.getString("fbReport"));
+                
+ 				// list 추가
+ 				list.add(dto);
+ 			}
+ 		} catch (SQLException e) {
+ 			e.printStackTrace();
+ 		} finally {
+ 			db.dbClose(rs, pstmt, conn);
+ 		}
+		return list;
+				
+	}
 	
 	// list - 조회수순
+	public List<FreeBoardDto> getAllFBs_readcnt() {
+		List<FreeBoardDto> list = new Vector<>();
+		
+		Connection conn = db.getConnection();
+ 		PreparedStatement pstmt = null;
+ 		ResultSet rs = null;
+ 		
+ 		String sql = "select * from FREEBOARD order by fbReadCnt desc;";
+ 		 		
+ 		try {
+ 			pstmt = conn.prepareStatement(sql);
+ 			rs = pstmt.executeQuery();
+ 		
+ 			while(rs.next()) {
+ 				FreeBoardDto dto = new FreeBoardDto();
+ 				
+ 				dto.setFbNum(rs.getString("fbNum"));
+ 				dto.setUId(rs.getString("uId"));
+                dto.setFbCategory(rs.getString("fbCategory"));
+                dto.setFbSubject(rs.getString("fbSubject"));
+                dto.setFbContent(rs.getString("fbContent"));
+                dto.setFbPhoto(rs.getString("fbPhoto"));
+                dto.setFbReadCnt(rs.getString("fbReadCnt"));
+                dto.setFbLike(rs.getString("fbLike"));
+                dto.setFbDislike(rs.getString("fbDislike"));
+                dto.setFbWriteday(rs.getTimestamp("fbWriteday"));
+                dto.setFbReport(rs.getString("fbReport"));
+                
+ 				// list 추가
+ 				list.add(dto);
+ 			}
+ 		} catch (SQLException e) {
+ 			e.printStackTrace();
+ 		} finally {
+ 			db.dbClose(rs, pstmt, conn);
+ 		}
+		return list;
+				
+	}
 	
 	// getFB 
 	public FreeBoardDto getFB(String fbNum) {
@@ -250,11 +327,14 @@ public class FreeBoardDao {
 	}
 	
 	// search - nickname
+	// select f.fbNum, f.uId, f.fbCategory, f.fbSubject, f.fbContent, f.fbReadCnt, f.fbLike, f.fbDislike, f.fbReport, f.fbWriteday from FREEBOARD f, USER u where f.uId=u.uId and u.nickname='스프링';
 	
 	// search - fbSubject
+	// select * from FREEBOARD where fbSubject Like "%?%";
 	
 	// search - fbContent
-
+	// select * from FREEBOARD where fbContent Like "%?%";
+	
 	// 페이징 처리
 	// FB totalCount
 	public int getFBTotalCount() {

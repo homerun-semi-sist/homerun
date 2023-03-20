@@ -1,18 +1,22 @@
-<%@page import="data.dto.ReviewCommentDto"%>
 <%@page import="data.dao.ReviewCommentDao"%>
+<%@page import="org.json.simple.JSONObject"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 
 <%
+	// num 
 	String rcIdx = request.getParameter("rcIdx");
-	String ucontent = request.getParameter("ucontent");
-	
+
 	// dao
 	ReviewCommentDao dao = new ReviewCommentDao();
-	ReviewCommentDto dto = dao.getRC(rcIdx);
+
+	dao.updateReport(rcIdx);
+
+	String report = dao.getRC(rcIdx).getRcReport();
 	
-	dto.setRbNum(rcIdx);
-	dto.setRcContent(ucontent);
+	JSONObject ob = new JSONObject();
 	
-	dao.updateRC(dto);
+	ob.put("report", report);
 %>
+
+<%=ob.toString() %>

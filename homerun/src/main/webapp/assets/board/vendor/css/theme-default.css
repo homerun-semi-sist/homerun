@@ -128,6 +128,7 @@ a.bg-primary:hover, a.bg-primary:focus {
   background-color: #0b214e;
   color: #fff;
   box-shadow: 0 0.125rem 0.25rem rgba(105, 108, 255, 0.4);
+  cursor: pointer;
 }
 
 .progress-bar {

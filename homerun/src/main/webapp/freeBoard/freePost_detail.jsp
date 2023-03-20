@@ -240,9 +240,7 @@
 						dataType : "json",
 						data : {"fcIdx" : fcIdx},
 						success : function (res) {
-	
-							
-							
+		
 							if(res.flag == true) {
 								var a = confirm("신고하려면 [확인]을 눌러주세요\n한번 신고한 댓글은 취소가 불가능합니다");
 								
@@ -253,7 +251,6 @@
 							}
 							else 
 								alert("이미 신고한 댓글입니다");
-		
 						}
 					})
 					
@@ -293,22 +290,11 @@
 						
 					
 					$.each(res, function(idx, item){
-						
-						<%-- <div class="d-flex">
-                        <div class="ms-3">
-                            <div class="fw-bold"><i class="fa-solid fa-user"></i>&nbsp;<%=i %>. <%=fcNick %> <span class="cday"><%=sdf.format(fcDto.getFcWriteday()) %> | <span>수정</span> | <span> 삭제 </span></span></div>
-                            <%=fcDto.getFcContent() %>
-                        </div>
-                    </div><br> --%>
+
 						// alert(fbUId + " : " + item.fcUId);
 						
 						s+="<div class='d-flex'>";
 						s+="<div class='ms-3'>";
-						
-						/*
-						s+="<div class='fw-bold'><i class='fa-solid fa-user'></i>&nbsp;" + (idx + 1) + ". " + item.nickname + "<span class='cday'>" + item.fcWriteday + " | <span id='fcMod' fcIdx=" + item.fcIdx + " style='cursor: pointer'>수정</span> | <span id='fcDel' fcIdx=" + item.fcIdx + " style='cursor: pointer'> 삭제 </span></span></div>"; 
-						s+="<div class='fw-bold'><i class='fa-solid fa-user'></i>&nbsp;" + (idx + 1) + ". " + item.nickname + "<span style="color: red; border: 1px solid red; border-radius: 5px;">작성자</span> <span class='cday'>" + item.fcWriteday + " | <span>수정</span> | <span> 삭제 </span></span></div>"; 
-						*/
 						
 						// 로그인 o && 댓글 작성자 == 로그인 한 아이디 -> 수정, 삭제 표시
 						if(loginok != null && uId == item.fcUId) {
@@ -426,7 +412,7 @@
                             %>
                             		<span style="float: right; margin-top: 20px; cursor: pointer;" onclick="funDel(<%=fbNum%>, <%=currentPage%>)">삭제</span>
                             		<span style="float: right; margin-top: 20px;">&nbsp;&nbsp;|&nbsp;&nbsp;</span>
-                            		<span style="float: right; margin-top: 20px; cursor: pointer;" onclick="location.href='freePost_updatePage.jsp?fbNum=<%=fbDto.getFbNum()%>'">수정</span>                            		
+                            		<span style="float: right; margin-top: 20px; cursor: pointer;" onclick="location.href='freePost_updatePage.jsp?fbNum=<%=fbDto.getFbNum()%>&currentPage=<%=currentPage%>'">수정</span>                            		
                             <%	
                             	} else {
                             %>
@@ -481,8 +467,8 @@
                         </article><!-- End blog post -->
                
                         <div class="comments">
-                            <div class="card" style="border: 0px solid gray;">
-                                <div class="card-body">
+                            <div class="card" style="border: 0px solid gray; ">
+                                <div class="card-body" style="background-color: #fff;">
                                 
                                 	<div class="d-flex">
                                         <div class="ms-3">
@@ -491,23 +477,7 @@
                                     </div><hr>
          				
 	                   				<div class="fcList"></div>
-									<!--
-                                    <div class="d-flex">                                   
-                                        <div class="ms-3">
-                                            <div class="fw-bold"><i class="fa-solid fa-user"></i>&nbsp;1. 닉네임 <span class="cday">날짜 | <span>수정</span> | <span> 삭제 </span></span></div>
-                                            댓글 내용1
-                                        </div>
-                                    </div><br>
-									
-                                    <div class="d-flex">
-                                        <div class="flex-shrink-0"><img class="rounded-circle"
-                                                src="https://dummyimage.com/50x50/ced4da/6c757d.jpg" alt="..." /></div>
-                                        <div class="ms-3">
-                                            <div class="fw-bold">2. 닉네임</div>
-                                            댓글 내용2
-                                        </div>
-                                    </div>  -->
-                                    
+								                                    
                                 </div>
                             </div>
 

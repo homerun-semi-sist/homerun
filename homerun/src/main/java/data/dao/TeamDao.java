@@ -56,7 +56,7 @@ public class TeamDao {
  		PreparedStatement pstmt = null;
  		ResultSet rs = null;
  		
- 		String sql = "select * from BASEBALLTEAM";
+ 		String sql = "select * from BASEBALLTEAM orber by teamNick";
  		
  		try {
  			pstmt = conn.prepareStatement(sql);

@@ -1,3 +1,4 @@
+<%@page import="data.dao.ReviewCommentDao"%>
 <%@page import="data.dao.UserDao"%>
 <%@page import="java.text.SimpleDateFormat"%>
 <%@page import="data.dto.TeamDto"%>
@@ -87,6 +88,23 @@
             text-decoration: none;
             color: black;
         }
+        
+        #insertBtn {
+        	border-radius: 4px;
+			padding: 10px 20px;
+			border: 1px solid #0b214e;
+			background-color: #0b214e;
+		  	color: #F8F9FA;
+		  	width: 80px; 
+		  	height: 40px; 
+		  	line-height: 20px;
+        }
+        
+        
+        #insertBtn:hover {
+		 	color: #0b214e;
+		  	background-color: #f8f9fa;
+		}
     </style>
 </head>
 
@@ -99,6 +117,8 @@
 	TeamDao tDao = new TeamDao();
 	
 	SimpleDateFormat sdf = new SimpleDateFormat("yy.MM.dd"); 
+	
+	ReviewCommentDao rcDao = new ReviewCommentDao();
 	
 	// 페이징 처리		
 	int totalCount;
@@ -138,17 +158,6 @@
 	List<ReviewBoardDto> rbList = rbDao.getRBList(start, perPage);
 	
 	no = totalCount - (currentPage - 1) * perPage;
-	
-	/* // 댓글에 대한 dao
-	SmartAnswerDao aDao = new SmartAnswerDao();
-	
-	for(SmartDto dto : list) {
-		
-		// 댓글 변수에 댓글 총 개수 넣기
-		int aCount = aDao.getAllAnswers(dto.getNum()).size();
-		dto.setAnswerCount(aCount);
-				
-	} */
 %>
     <!-- Layout wrapper -->
     <div class="layout-wrapper layout-content-navbar">
@@ -159,12 +168,14 @@
                 <!-- Content -->
 
                 <div class="container-xxl flex-grow-1 container-p-y">
+                <h3 style="margin-bottom: 30px;">후기게시판</h3>
                     <!-- Bootstrap Table with Header - Light -->
-                    <div class="card">
-                        <h5 class="card-header">후기게시판 목록</h5>
+                    <div class="card" style="background-color: #fff">
+                                      
                         <div class="table-responsive text-nowrap" style="width: 100%">
                             <table class="table">
-                                <thead class="table-light">
+                                <thead class="table">
+                                <thead style="background-color: #F8F9FA">
                                     <tr>
                                         <th style="text-align: center; width: 40px;">No.</th>
                                         <th style="text-align: center; width: 100px;">경기일</th>
@@ -191,52 +202,43 @@
                                 		String month = gDto.getgDay().substring(5, 7);
                                 		String day = gDto.getgDay().substring(8, 10);
                                 		
+                                		int rcCnt = rcDao.getAllRCs(rbDto.getRbNum()).size();
                                 %>
-
-                                	<%-- <tr>
-                                        <td style="text-align: center;"><%=rbDto.getRbNum() %></td>                             
-                                    	<td><a href="post_detail.jsp?rbNum=<%=fbDto.getFbNum() %>"><%=fbDto.getFbSubject() %></a></td>
-                                        <td style="text-align: center;"><%=fbDto.getNickname() %></td>
-                                        <td style="text-align: center;"><%=sdf.format(fbDto.getFbWriteday()) %></td>
-                                        <td style="text-align: center;"><%=fbDto.getFbReadCnt() %></td>
-                                        <td style="text-align: center;"><%=fbDto.getFbLike() %></td>
-                                        <td style="text-align: center;"><%=fbDto.getFbDislike() %></td>
-                                    </tr> --%>
-                         
-                         
+                   
                                      <tr>
-                                        <td style="text-align: center;"><%=rbDto.getRbNum() %></td>
-                                        <td style="text-align: center;"><%=year %>.<%=month %>.<%=day %></td>
-                                        <td style="text-align: center;">
+                                        <td style="text-align: center; vertical-align:middle;"><%=rbDto.getRbNum() %></td>
+                                        <td style="text-align: center; vertical-align:middle;"><%=year %>.<%=month %>.<%=day %></td>
+                                        <td style="text-align: center; vertical-align:middle;">
+                                        
                                         
                                         <%
                                         	if(gDto.getHome().equals("한화")) {	
                                         %>
-                                        		<img src="<%=tDao.getTeam(gDto.getHome()).getTeamLogo() %>" style="width: 50px;">
+                                        		<img src="<%=tDao.getTeam(gDto.getHome()).getTeamLogo() %>" style="width: 50px; vertical-align:middle;">
                                         		vs&nbsp;
-                                            	<img src="<%=tDao.getTeam(gDto.getAway()).getTeamLogo() %>" style="width: 40px;">      
+                                            	<img src="<%=tDao.getTeam(gDto.getAway()).getTeamLogo() %>" style="width: 40px; vertical-align:middle;">      
                                         <%		
                                         	} else if(gDto.getAway().equals("한화")) {
                                         %>
-                                        		<img src="<%=tDao.getTeam(gDto.getHome()).getTeamLogo() %>" style="width: 40px;">
+                                        		<img src="<%=tDao.getTeam(gDto.getHome()).getTeamLogo() %>" style="width: 40px; vertical-align:middle;">
                                         		&nbsp;vs
-                                            	<img src="<%=tDao.getTeam(gDto.getAway()).getTeamLogo() %>" style="width: 50px;"> 
+                                            	<img src="<%=tDao.getTeam(gDto.getAway()).getTeamLogo() %>" style="width: 50px; vertical-align:middle;"> 
                                         <%			
                                         	} else {
                                         %>
-                                        		<img src="<%=tDao.getTeam(gDto.getHome()).getTeamLogo() %>" style="width: 40px;">
+                                        		<img src="<%=tDao.getTeam(gDto.getHome()).getTeamLogo() %>" style="width: 40px; vertical-align:middle;">
                                         		&nbsp;vs&nbsp;
-                                            	<img src="<%=tDao.getTeam(gDto.getAway()).getTeamLogo() %>" style="width: 40px;"> 
+                                            	<img src="<%=tDao.getTeam(gDto.getAway()).getTeamLogo() %>" style="width: 40px; vertical-align:middle;"> 
                                         <%
                                         	}
                                         %>                                      
                                         </td>
-                                        <td><a href="reviewPost_detailPage.jsp?rbNum=<%=rbDto.getRbNum() %>"><%=rbDto.getRbSubject() %></a></td>
-                                        <td style=" text-align: center;"><%=nickname %></td>
-                                        <td style="text-align: center;"><%=sdf.format(rbDto.getRbWriteday()) %></td>
-                                        <td style="text-align: center;"><%=rbDto.getRbReadCnt() %></td>
-                                        <td style="text-align: center;"><%=rbDto.getRbLike() %></td>
-                                        <td style="text-align: center;"><%=rbDto.getRbDislike() %></td>
+                                        <td style="vertical-align:middle;"><a href="reviewPost_detailPage.jsp?rbNum=<%=rbDto.getRbNum() %>&currentPage=<%=currentPage%>"><%=rbDto.getRbSubject() %></a><span style="color: tomato;">&nbsp;&nbsp;[<%=rcCnt %>]</span></td>
+                                        <td style="text-align: center; vertical-align:middle;"><%=nickname %></td>
+                                        <td style="text-align: center; vertical-align:middle;"><%=sdf.format(rbDto.getRbWriteday()) %></td>
+                                        <td style="text-align: center; vertical-align:middle;"><%=rbDto.getRbReadCnt() %></td>
+                                        <td style="text-align: center; vertical-align:middle;"><%=rbDto.getRbLike() %></td>
+                                        <td style="text-align: center; vertical-align:middle;"><%=rbDto.getRbDislike() %></td>
                                     </tr>
                                 <%
                                 	}
@@ -245,17 +247,17 @@
                                 </tbody>
                             </table>
                         </div>
-                        <div class="bBottom">
+                        <div class="bBottom" style="margin-top: 30px;">
                             <div class="bsBox">
                                 <div class="bSelect">select</div>
                                 <div class="bSearch">검색창</div>
                             </div>
                             <div class="bInsert">
-								<button type="button" class="btn btn-default" id="insertBtn" style="border: 1px solid gray;">글쓰기</button>
+								<button type="button" class="btn btn-default" id="insertBtn">글쓰기</button>
 							</div>
                         </div>
                         <!-- 페이징 처리 -->
-							<div style="width: 900px; text-align: center;">
+							<div style="width: 500px; text-align: center;" class="container">
 								<ul class="pagination">
 									<% 
 										// 이전

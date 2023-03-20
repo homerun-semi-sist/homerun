@@ -44,7 +44,7 @@
 <body>
 <%
 	String fbNum = request.getParameter("fbNum");
-	// String currentPage = request.getParameter("currentPage");
+	String currentPage = request.getParameter("currentPage");
 	
 	FreeBoardDao fbDao = new FreeBoardDao();
 	FreeBoardDto fbDto = fbDao.getFB(fbNum);
@@ -98,7 +98,7 @@
 										
 										<button type="button" class="listBtn"
 											style="width: 120px;"
-											onclick="location.href='freeBoard_listPage.jsp'">목록</button>
+											onclick="location.href='freeBoard_listPage.jsp?currentPage=<%=currentPage %>'">목록</button>
 									</td>
 								</tr>
 								

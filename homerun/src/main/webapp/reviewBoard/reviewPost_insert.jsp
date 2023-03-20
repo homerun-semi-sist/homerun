@@ -21,6 +21,24 @@
 
 <script type="text/javascript" src="../smartEditor/photo_uploader/plugin/hp_SE2M_AttachQuickPhoto.js"
 	charset="utf-8"></script>	
+	
+<style type="text/css">
+	.listBtn, .insertBtn {
+			border-radius: 4px;
+			padding: 10px 20px;
+			border: 1px solid #0b214e;
+			background-color: #0b214e;
+		  	color: #F8F9FA;
+		  	width: 80px; 
+		  	height: 40px; 
+		  	line-height: 20px;
+		}
+
+		.listBtn:hover, .insertBtn:hover {
+		 	color: #0b214e;
+		  	background-color: #f8f9fa;
+		}
+</style>
 </head>
 
 <body>
@@ -40,7 +58,7 @@
 	<table class="table table-bordered" style="width: 1000px; height:700px; margin-left: 100px;">
 		<caption style="caption-side: top;"><h3>후기게시판 게시글 등록</h3></caption>
 		<tr>
-			<th bgcolor="#E1EEDD" width="100" style="height:30px; text-align: center; line-height: 30px;">경기일</th>
+			<th width="100" style="height:30px; text-align: center; line-height: 30px; background-color: #F8F9FA;">경기일</th>
 			<td width="300">
 				<input type="date" id="input_date" max="2023-12-31" min="2020-01-01" value="2023-04-01" style="width: 140px;">		
 				<input type="button" class="btn btn-default" onclick="inputDate()" value="확인" style="width: 50px; height: 30px;">	
@@ -54,7 +72,7 @@
 			
 			</td>
 			
-			<th bgcolor="#E1EEDD" width="100" style="height:30px; text-align: center; line-height: 30px;">경기팀</th>
+			<th width="100" style="height:30px; text-align: center; line-height: 30px; background-color: #F8F9FA;">경기팀</th>
 			<td>
 				<select name="gId" class="form-control" style="width: 300px;">
 					<option value="null">-</option>
@@ -71,7 +89,7 @@
 		</tr>	
 		
 		<tr>
-			<th bgcolor="#E1EEDD" width="100" style="height:30px; text-align: center; line-height: 30px;">제목</th>
+			<th width="100" style="height:30px; text-align: center; line-height: 30px; background-color: #F8F9FA;">제목</th>
 			<td colspan="4">
 				<input type="text" name="subject" class="form-control"
 					required="required" style="width: 500px;">
@@ -88,11 +106,11 @@
 		
 		<tr>
 			<td colspan="4" align="center">
-				<button type="button" class="btn btn-default"
+				<button type="button" class="insertBtn"
 					style="width: 120px;"
-					onclick="submitContents(this)">DB 저장</button>
+					onclick="submitContents(this)">등록</button>
 				
-				<button type="button" class="btn btn-default"
+				<button type="button" class="listBtn"
 					style="width: 120px;"
 					onclick="location.href='reviewBoard_listPage.jsp'">목록</button>
 			</td>
