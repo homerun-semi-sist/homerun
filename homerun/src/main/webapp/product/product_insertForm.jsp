@@ -11,40 +11,49 @@
 <script
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 <link href="../assets/css/styles_productinsert.css" rel="stylesheet">
+
 <script type="text/javascript">
 	$(function() {
-
+		
 		$(".btnDuplicate").click(function() {
-
 			var pId = $("#pId").val();
-
 			$.ajax({
-
 				type : "get",
 				url : "pIdSearch.jsp",
 				dataType : "json",
-				data : {
-					"pId" : pId
-				},
+				data : {"pId" : pId},
 				success : function(res) {
-
 					if (res.count == 1) {
-						alert("사용불가");
+						alert("사용 불가");
 						$("#pId").val("");
-
+						$("#check").val("");
+					} else if (res.count == 0 && res.pattern=="x") {
+						alert("상품아이디 형식은 'p + 숫자 4자리'입니다.");
+						$("#pId").val("");
+						$("#check").val("");
 					} else {
-						alert("사용가능");
+						alert("사용 가능");
+						$("#check").val("checked");
+						
 					}
 				}
 			});
 		});
 	})
+	
+	function duplicate_click(){
+
+		if(document.getElementById("check").value==''){
+		alert("아이디 중복확인을 해주세요.");
+		return false;
+		}
+	}	
 </script>
 </head>
 <body>
 	<form action="product_insertAction.jsp" method="post"
-		class="insertForm">
-
+		class="insertForm" onsubmit ="return duplicate_click()">
+		
 		<h2>재고입력</h2>
 		<div class="textForm teamNcategory">
 			<div style="width: 400px">
@@ -54,6 +63,7 @@
 			<div>
 				<button type="button" class="pinsertbtn btnDuplicate">중복확인</button>
 			</div>
+			<input type="hidden" id="check" value="" required="required">
 		</div>
 
 		<div class="textForm">
