@@ -6,4 +6,5 @@
 	String cId=request.getParameter("cId");
 	CartDao dao=new CartDao();
 	dao.deleteCart(cId);
+	//response.sendRedirect("product_cartlist.jsp");
 %>

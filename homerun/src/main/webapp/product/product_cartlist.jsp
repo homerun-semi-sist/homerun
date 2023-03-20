@@ -83,15 +83,15 @@ margin-right:100px;
 }
 </style>
 
-<script>
-	$(function() {
+<script type="text/javascript">
 
+	$(function() {
 		//전체상품 선택,해제
 		$("#allcheck").click(function() {
 
 			var chk = $(this).is(":checked");
 
-			$("td,cId").prop("checked", chk);
+			$(".cId").prop("checked",chk);
 		});
 
 		//상품선택시 디테일페이지 이동
@@ -118,13 +118,22 @@ margin-right:100px;
 				location.reload(); //
 			}
 		});
+		
+		$(".cId:checked").each(function(i, element) {
+
+			var cId = $(this).attr("cId");
+			var price=$(this).attr("price");
+			
+			
+		});
 
 		//선택한 상품 삭제버튼
 		$("#btncartdel").click(function() {
 
 			//체크한 개수
 			var cQTY = $(".cId:checked").length;
-			alert(cQTY);
+			
+			//alert(cQTY);
 			if (cQTY == 0) {
 
 				alert("삭제할 상품을 선택해주세요");
@@ -134,51 +143,86 @@ margin-right:100px;
 			$(".cId:checked").each(function(i, element) {
 
 				var cId = $(this).attr("cId");
-				//console.log(idx);
 				del(cId);
 			});
 			location.reload();
 
 		});
 		
+		$("#moneycheck").click(function(){
+			
+		$(".cId:checked").each(function(i, element) {
+
+			var price = $(this).attr("price");
+			total=total+price;
+		});
+		});
+		
+		
 		$("#cQTYup").click(function(){
-			cQTY=cQTY+1;
-			alter(cQTY);
-			location.reload();
+			var cId = $(this).attr("cId");
+			$.ajax({
+
+				type : "get",
+				dataType : "json",
+				url : "product_cQTYup.jsp",
+				data : {
+					"cId" : cId
+				},
+				success : function(res) {
+					location.reload();
+				}
+
+			});
+			
 		});
 		
 		$("#cQTYdown").click(function(){
-			cQTY=cQTY-1;
-			location.reload();
-		});
-		
-		int totalMoney = $('input[type="checkbox"]:checked').map(function() {
-			  return this.value;
-			}).get();
+			var cId = $(this).attr("cId");
+			
+			$.ajax({
+
+				type : "get",
+				dataType : "json",
+				url : "product_cQTYdown.jsp",
+				data : {
+					"cId" : cId
+				},
+				success : function(res) {
+					location.reload();
+				}
+
+			});
 
 	});
 
+	
 	function del(cId) {
 
 		$.ajax({
 
 			type : "get",
 			dataType : "html",
-			url : "produnct/product_cartdelete.jsp",
+			url : "product_cartdelete.jsp",
 			data : {
 				"cId" : cId
 			},
 			success : function() {
-
+				location.reload();
 			}
 
 		});
 	}
+	});	
+	
+	
+	
 </script>
 </head>
 <%
 UserDao udao = new UserDao();
 String uid = (String) session.getAttribute("uid");
+
 
 //String name=udao.getuName(uid);
 
@@ -186,6 +230,7 @@ CartDao cdao = new CartDao();
 int cartSize = cdao.getCartList(uid).size();
 
 List<HashMap<String, String>> list = cdao.getCartList(uid);
+
 
 int total = 0;
 
@@ -226,7 +271,7 @@ NumberFormat nf = NumberFormat.getInstance();
 							</h4>
 							<%if (cartSize>0){ %>
 							<table class="table table-bordered"
-								style="width: 1000px; color: black; font-size: 1.2em;">
+								style="width: 1000px; color: black; font-size: 1.2em; margin-left:25px;">
 								<tr>
 									<th style="width: 30px;"><input type="checkbox"
 										id="allcheck"></th>
@@ -244,13 +289,14 @@ NumberFormat nf = NumberFormat.getInstance();
 									HashMap<String, String> map = list.get(i);
 									//사진얻기
 									String photo = map.get("pImage");//사진 받아와서
+									
 
 									
 								%>
 
 								<tr>
 									<td style="line-height: 100px;"><input type="checkbox" name="cId" class="cId"
-										cId="<%=map.get("cId")%>" ></td>
+										cId="<%=map.get("cId")%>" id="moneycheck" ></td>
 
 									<td style="line-height: 100px;">
 										<div pId="<%=map.get("pId")%>" class="pName">
@@ -278,7 +324,8 @@ NumberFormat nf = NumberFormat.getInstance();
 										int price = Integer.parseInt(map.get("price"));
 										int cQTY = Integer.parseInt(map.get("cQTY"));
 										price *= cQTY;
-										total = total + price;
+										
+										
 										%>
 										<h4 style="line-height: 80px;"><b>
 											<%=nf.getCurrencyInstance(Locale.KOREA).format(price)%>
@@ -286,13 +333,10 @@ NumberFormat nf = NumberFormat.getInstance();
 												style="color: red;" cId="<%=map.get("cId")%>"></span>
 												</b>
 										</h4>
-
-
 									</td>
 									</td>
 								</tr>
 								</div>
-
 								<%
 								}
 								%>

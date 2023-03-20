@@ -60,6 +60,36 @@ public class CartDao {
 		return list;
 
 	}
+	
+	public CartDto getData(String cId) {
+		CartDto dto=new CartDto();
+		
+		Connection conn=db.getConnection();
+		PreparedStatement pstmt =null;
+		ResultSet rs=null;
+		
+		String sql="select * from CART where cId=?";
+		
+		try {
+			pstmt=conn.prepareStatement(sql);
+			pstmt.setString(1, cId);
+			
+			rs=pstmt.executeQuery();
+			
+			if(rs.next()) {
+				dto.setcId(rs.getString("cId"));
+				dto.setuId(rs.getString("uId"));
+				dto.setpId(rs.getString("pId"));
+				dto.setcQTY(rs.getInt("cQTY"));
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			db.dbClose(rs, pstmt, conn);
+		}
+		return dto;
+	}
 
 	public void deleteCart(String cId) { // 카트 삭제
 		Connection conn = db.getConnection();
@@ -99,6 +129,46 @@ public class CartDao {
 		}
 
 	}
+	public void cQTYup(String cId) {
+		Connection conn=db.getConnection();
+		PreparedStatement pstmt=null;
+		
+		String sql="update CART set cQTY=cQTY+1 where cId=?";
+		
+		try {
+			pstmt=conn.prepareStatement(sql);
+			pstmt.setString(1, cId);
+			
+			pstmt.execute();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			db.dbClose(pstmt, conn);
+		}
+		
+	}
+	
+	public void cQTYdown(String cId) {
+		Connection conn=db.getConnection();
+		PreparedStatement pstmt=null;
+		
+		String sql="update CART set cQTY=cQTY-1 where cId=?";
+		
+		try {
+			pstmt=conn.prepareStatement(sql);
+			pstmt.setString(1, cId);
+			
+			pstmt.execute();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			db.dbClose(pstmt, conn);
+		}
+		
+	}
+	
 
 	public List<HashMap<String, String>> getOrderList(String cId) {
 
