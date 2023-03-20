@@ -37,6 +37,7 @@
 <%
 ProductDao dao = new ProductDao();
 List<ProductDto> list = dao.selectAllProduct_pDay();
+List<ProductDto> list_best = dao.selectAllProduct_bseller();
 
 NumberFormat nf = NumberFormat.getCurrencyInstance();
 %>
@@ -68,71 +69,41 @@ NumberFormat nf = NumberFormat.getCurrencyInstance();
 			</div>
 			<div class="col-12">
 				<div class="row h-100 align-items-center g-2">
+					<%
+					List<ProductDto> subListbase_best = new ArrayList<>();
+					for (int i = 0; i < list_best.size(); i++) {
+						ProductDto dto = list_best.get(i);
+
+						subListbase_best.add(dto);
+
+					}
+					%>
+					<%
+					int last_best = subListbase_best.size() < 4 ? subListbase_best.size() : 4;
+					List<ProductDto> subList_best = new ArrayList<ProductDto>(subListbase_best.subList(0, last_best));
+					for (int j = 0; j < subList_best.size(); j++) {
+						ProductDto dto = subList_best.get(j);
+					%>
 					<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
-						<div class="card card-span text-white">
-							<img class="img-fluid h-100"
-								src="https://www.ktwizstore.co.kr/web/product/big/202204/05feabbf22d3ba44b5ae41ea7f6089e4.jpg"
-								alt="..." />
+						<div class="card card-span h-100 text-white">
+							<img class="img-fluid h-100" src="<%=dto.getpImage()%>" alt="..." />
 							<div class="card-img-overlay ps-0"></div>
 							<div class="card-body ps-0 bg-200">
-								<h5 class="fw-bold text-1000 text-truncate">케이티위즈 2022 어센틱
-									홈 유니폼</h5>
+								<h5 class="fw-bold text-1000 text-truncate"><%=dto.getpName()%></h5>
 								<div class="fw-bold">
-									<span class="text-600 me-2 text-decoration-line-through">109,900원</span><span
-										class="text-primary">89,900원</span>
+									<span class="text-primary"><%=nf.format(dto.getPrice())%></span>
 								</div>
 							</div>
-							<a class="stretched-link" href="product_detailPage.jsp"></a>
+							<a class="stretched-link"
+								href="product_detailPage.jsp?pId=<%=dto.getpId()%>"></a>
 						</div>
 					</div>
-					<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
-						<div class="card card-span text-white">
-							<img class="img-fluid h-100"
-								src="https://cdn-pro-web-251-119.cdn-nhncommerce.com/wyverntr9322_godomall_com/data/goods/23/02/07/1000001258/register_detail_069.jpg"
-								alt="..." />
-							<div class="card-img-overlay ps-0"></div>
-							<div class="card-body ps-0 bg-200">
-								<h5 class="fw-bold text-1000 text-truncate">랜더스 23 스프링캠프 모자</h5>
-								<div class="fw-bold">
-									<span class="text-600 me-2 text-decoration-line-through">39,000원</span><span
-										class="text-primary">35,000원</span>
-								</div>
-							</div>
-							<a class="stretched-link" href="#"></a>
-						</div>
-					</div>
-					<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
-						<div class="card card-span text-white">
-							<img class="img-fluid h-100"
-								src="http://openimage.interpark.com/goods_image/0/9/7/6/9803880976s.jpg"
-								alt="..." />
-							<div class="card-img-overlay ps-0"></div>
-							<div class="card-body ps-0 bg-200">
-								<h5 class="fw-bold text-1000 text-truncate">오리지널 모자</h5>
-								<div class="fw-bold">
-									<span class="text-600 me-2 text-decoration-line-through">30,000원</span><span
-										class="text-primary">29,000원</span>
-								</div>
-							</div>
-							<a class="stretched-link" href="#"></a>
-						</div>
-					</div>
-					<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
-						<div class="card card-span text-white">
-							<img class="img-fluid h-100"
-								src="http://openimage.interpark.com/goods_image/0/9/3/5/9598780935s.jpg"
-								alt="..." />
-							<div class="card-img-overlay ps-0"></div>
-							<div class="card-body ps-0 bg-200">
-								<h5 class="fw-bold text-1000 text-truncate">응원배트</h5>
-								<div class="fw-bold">
-									<span class="text-600 me-2 text-decoration-line-through">10,000원</span><span
-										class="text-primary">8,000원</span>
-								</div>
-							</div>
-							<a class="stretched-link" href="#"></a>
-						</div>
-					</div>
+					<%
+					}
+					%>
+
+					
+					
 				</div>
 			</div>
 		</div>

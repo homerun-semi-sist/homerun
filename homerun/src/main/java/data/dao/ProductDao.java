@@ -66,7 +66,7 @@ public class ProductDao {
 				dto.setPrice(rs.getInt("price"));
 				dto.setpOption(rs.getString("pOption"));
 				dto.setpDetail(rs.getString("pDetail"));
-				dto.setpDay(rs.getTimestamp("pDay"));	
+				dto.setpDay(rs.getTimestamp("pDay"));
 
 				list.add(dto);
 			}
@@ -78,7 +78,7 @@ public class ProductDao {
 
 		return list;
 	}
-	
+
 	public List<ProductDto> selectAllProduct_price() {
 		List<ProductDto> list = new Vector<>();
 		Connection conn = db.getConnection();
@@ -103,7 +103,7 @@ public class ProductDao {
 				dto.setPrice(rs.getInt("price"));
 				dto.setpOption(rs.getString("pOption"));
 				dto.setpDetail(rs.getString("pDetail"));
-				dto.setpDay(rs.getTimestamp("pDay"));	
+				dto.setpDay(rs.getTimestamp("pDay"));
 
 				list.add(dto);
 			}
@@ -116,7 +116,6 @@ public class ProductDao {
 		return list;
 	}
 
-	
 	public void deleteProduct(String pId) {
 		Connection conn = db.getConnection();
 		PreparedStatement pstmt = null;
@@ -222,9 +221,8 @@ public class ProductDao {
 		}
 		return ispId;
 	}
-	
-	
-	//페이징
+
+	// 페이징
 	public int getTotalCount() {
 		int n = 0;
 
@@ -238,20 +236,19 @@ public class ProductDao {
 			pstmt = conn.prepareStatement(sql);
 			rs = pstmt.executeQuery();
 
-			if (rs.next()) 
+			if (rs.next())
 				n = rs.getInt(1);
-			
+
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} finally {
 			db.dbClose(rs, pstmt, conn);
 		}
-		
+
 		return n;
 	}
-	
-	
+
 	public List<ProductDto> getList_pDay(int start, int perpage) {
 		List<ProductDto> list = new Vector<>();
 
@@ -282,7 +279,7 @@ public class ProductDao {
 				dto.setpOption(rs.getString("pOption"));
 				dto.setpDetail(rs.getString("pDetail"));
 				dto.setpDay(rs.getTimestamp("pDay"));
-				
+
 				list.add(dto);
 
 			}
@@ -294,8 +291,8 @@ public class ProductDao {
 		}
 
 		return list;
-		}
-	
+	}
+
 	public List<ProductDto> getList_price(int start, int perpage) {
 		List<ProductDto> list = new Vector<>();
 
@@ -326,7 +323,7 @@ public class ProductDao {
 				dto.setpOption(rs.getString("pOption"));
 				dto.setpDetail(rs.getString("pDetail"));
 				dto.setpDay(rs.getTimestamp("pDay"));
-				
+
 				list.add(dto);
 
 			}
@@ -338,31 +335,43 @@ public class ProductDao {
 		}
 
 		return list;
+	}
+
+	public List<ProductDto> selectAllProduct_bseller() {
+		List<ProductDto> list = new Vector<>();
+		Connection conn = db.getConnection();
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+
+		String sql = "SELECT o.oQTY, p.* FROM CART c INNER JOIN ORDERS o ON c.cId = o.cId INNER JOIN PRODUCT p ON c.pId = p.pId ORDER BY o.oQTY DESC";
+
+		try {
+			pstmt = conn.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+
+			while (rs.next()) {
+				ProductDto dto = new ProductDto();
+
+				dto.setpId(rs.getString("pId"));
+				dto.setpName(rs.getString("pName"));
+				dto.setTeamName(rs.getString("teamName"));
+				dto.setpCategory(rs.getString("pCategory"));
+				dto.setpImage(rs.getString("pImage"));
+				dto.setpStock(rs.getInt("pStock"));
+				dto.setPrice(rs.getInt("price"));
+				dto.setpOption(rs.getString("pOption"));
+				dto.setpDetail(rs.getString("pDetail"));
+				dto.setpDay(rs.getTimestamp("pDay"));
+
+				list.add(dto);
+			}
+		} catch (SQLException e) {
+			throw new RuntimeException(e);
+		} finally {
+			db.dbClose(rs, pstmt, conn);
 		}
-	
-		/*
-		 * public List<ProductDto> selectAllProduct_bseller() { List<ProductDto> list =
-		 * new Vector<>(); Connection conn = db.getConnection(); PreparedStatement pstmt
-		 * = null; ResultSet rs = null;
-		 * 
-		 * String sql = "select * from PRODUCT order by order desc";
-		 * 
-		 * try { pstmt = conn.prepareStatement(sql); rs = pstmt.executeQuery();
-		 * 
-		 * while (rs.next()) { ProductDto dto = new ProductDto();
-		 * 
-		 * dto.setpId(rs.getString("pId")); dto.setpName(rs.getString("pName"));
-		 * dto.setTeamName(rs.getString("teamName"));
-		 * dto.setpCategory(rs.getString("pCategory"));
-		 * dto.setpImage(rs.getString("pImage")); dto.setpStock(rs.getInt("pStock"));
-		 * dto.setPrice(rs.getInt("price")); dto.setpOption(rs.getString("pOption"));
-		 * dto.setpDetail(rs.getString("pDetail"));
-		 * dto.setpDay(rs.getTimestamp("pDay"));
-		 * 
-		 * list.add(dto); } } catch (SQLException e) { throw new RuntimeException(e); }
-		 * finally { db.dbClose(rs, pstmt, conn); }
-		 * 
-		 * return list; }
-		 */
-	
+
+		return list;
+	}
+
 }
