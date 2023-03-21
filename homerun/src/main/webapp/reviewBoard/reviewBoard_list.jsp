@@ -40,7 +40,7 @@
     <script src="../assets/board/js/config.js"></script>
     
     <style>
-                .bBottom {
+      	.bBottom {
             border: 0px solid gray;
             height: 35px;
             display: flex;
@@ -51,20 +51,19 @@
         .bsBox {
             border: 0px solid gray;
             display: flex;
-            width: 250px;
+            width: 500px;
             text-align: center;
             margin-left: 10px;
         }
 
         .bSelect {
-            border: 1px solid gray;
-            width: 80px;
+            border: 0px solid gray;
             margin-right: 5px;
         }
 
         .bSearch {
-            border: 1px solid gray;
-            width: 170px;
+            border: 0px solid gray;
+            
         }
 
         .bInsert {
@@ -74,22 +73,12 @@
             margin-left: auto;
         }
 
-        .bPaging {
-            border: 1px solid gray;
-            width: 300px;
-            height: 35px;
-            margin: auto;
-            margin-bottom: 10px;
-            line-height: 35px;
-            text-align: center;
-        }
-
         a {
             text-decoration: none;
             color: black;
         }
-        
-        #insertBtn {
+                
+        #insertBtn, #searchBtn {
         	border-radius: 4px;
 			padding: 10px 20px;
 			border: 1px solid #0b214e;
@@ -101,11 +90,188 @@
         }
         
         
-        #insertBtn:hover {
+        #insertBtn:hover, #searchBtn:hover {
 		 	color: #0b214e;
 		  	background-color: #f8f9fa;
 		}
     </style>
+    
+    <script type="text/javascript">
+    	$(function() {
+
+    		/* var val = $("#search :selected").val();
+    		alert(val); */
+    		rList();
+    		
+    		$("#searchBtn").click(function(){
+    			var val = $("#search :selected").val();
+        		var currentPage = $("#currentPage").val();
+        		var str = $("#search_str").val();
+        		alert(val + ", "+ currentPage + ", "+ str);
+    		    
+    		    $.ajax({
+    			
+	    			type : "get",
+	    			url : "reviewBoard_getSearchList.jsp",
+	    			dataType : "json",
+	    			data : {"val" : val, "str" : str},
+	    			success:function(res) {
+	    				// alert(val + ", "+ str +", " + res.length);
+	    				
+	    				var s="";
+	    				
+	    				s+="<div class='table-responsive text-nowrap'>";
+	    				s+="<table class='table'>";
+	    				s+="<thead style='background-color: #F8F9FA'>";
+	    				s+="<tr>";
+	    				s+="<th style='text-align: center; width: 40px;'>No.</th>";
+	    				s+="<th style='text-align: center; width: 100px;'>경기일</th>";
+	    				s+="<th style='text-align: center; width: 200px;'>경기팀</th>";
+	    				s+="<th style='text-align: center;'>제목</th>";
+	    				s+="<th style='text-align: center; width: 100px;'>작성자</th>";
+	    				s+="<th style='text-align: center; width: 100px;'>날짜</th>";
+	    				s+="<th style='text-align: center; width: 40px;'>조회수</th>";
+	    				s+="<th style='text-align: center; width: 40px;'>추천</th>";
+	    				s+="<th style='text-align: center; width: 40px;'>비추천</th>";
+	    				s+="</tr>";
+	    				s+="</thead>";
+						s+="<tbody class='table-border-bottom-0'>";
+	    				
+						if(res.length == 0) {
+							s+="<tr>";
+							s+="<td colspan='8' align='center' style='font-size: 18pt;'>\"" + str + "\" 검색 결과가 없습니다</td>";
+							s+="</tr>";
+						} else {
+							$.each(res, function(idx, item){
+								s+="<tr>";
+								s+="<td style='text-align: center;'>" + item.rbNum + "</td>";
+								s+="<td style='text-align: center; vertical-align:middle;'>" + item.year + "." + item.month + "." + item.day + "</td>"
+								
+								
+								if(item.home == "한화") {	
+									s+="<td style='text-align: center; vertical-align:middle;'>";
+									s+="<img src='" + item.homeImg + "' style='width: 50px; vertical-align:middle;'>";
+									s+="vs ";
+									s+="<img src='" + item.awayImg + "' style='width: 40px; vertical-align:middle;'>";
+									s+="</td>"; 						
+								} else if(item.away == "한화") {
+									s+="<td style='text-align: center; vertical-align:middle;'>";
+									s+="<img src='" + item.homeImg + "' style='width: 40px; vertical-align:middle;'>";
+									s+=" vs";
+									s+="<img src='" + item.awayImg + "' style='width: 50px; vertical-align:middle;'>";
+									s+="</td>"; 	
+								} else {
+									s+="<td style='text-align: center; vertical-align:middle;'>";
+									s+="<img src='" + item.homeImg + "' style='width: 40px; vertical-align:middle;'>";
+									s+=" vs";
+									s+="<img src='" + item.awayImg + "' style='width: 40px; vertical-align:middle;'>";
+									s+="</td>";
+								}
+	
+								s+="<td style='vertical-align:middle;'><a href='reviewPost_detailPage.jsp?rbNum=" + item.rbNum + "&currentPage=" + currentPage + "'>" + item.rbSubject + "</a><span style='color: tomato;'>&nbsp;&nbsp;[" + item.rcCnt + "]</span></td>";
+								s+="<td style='text-align: center; vertical-align:middle;'>" + item.nickname + "</td>";
+								s+="<td style='text-align: center; vertical-align:middle;'>" + item.rbWriteday + "</td>";
+								s+="<td style='text-align: center; vertical-align:middle;'>" + item.rbReadCnt + "</td>";
+								s+="<td style='text-align: center; vertical-align:middle;'>" + item.rbLike + "</td>";
+								s+="<td style='text-align: center; vertical-align:middle;'>" + item.rbDislike + "</td> ";							
+								s+="</tr>"		
+							});
+						}
+						
+	    				s+="</tbody>";
+	    				s+="</table>";
+	    				s+="</div>";
+	    				
+	    				$("div.rList").html(s);
+	    			}
+	    		});
+    		    
+    		});
+    		
+		})
+		
+		function rList() {
+    		var val = $("#search :selected").val();
+    		var currentPage = $("#currentPage").val();
+    		//alert(val + ", "+ currentPage);
+			
+    		$.ajax({
+    			
+    			type : "get",
+    			url : "reviewBoard_getList.jsp",
+    			dataType : "json",
+    			/* data : {"val" : val}, */
+    			success:function(res) {
+
+    				var s="";
+    				
+    				s+="<div class='table-responsive text-nowrap'>";
+    				s+="<table class='table'>";
+    				s+="<thead style='background-color: #F8F9FA'>";
+    				s+="<tr>";
+    				s+="<th style='text-align: center; width: 40px;'>No.</th>";
+    				s+="<th style='text-align: center; width: 100px;'>경기일</th>";
+    				s+="<th style='text-align: center; width: 200px;'>경기팀</th>";
+    				s+="<th style='text-align: center;'>제목</th>";
+    				s+="<th style='text-align: center; width: 100px;'>작성자</th>";
+    				s+="<th style='text-align: center; width: 100px;'>날짜</th>";
+    				s+="<th style='text-align: center; width: 40px;'>조회수</th>";
+    				s+="<th style='text-align: center; width: 40px;'>추천</th>";
+    				s+="<th style='text-align: center; width: 40px;'>비추천</th>";
+    				s+="</tr>";
+    				s+="</thead>";
+					s+="<tbody class='table-border-bottom-0'>";
+    				
+					if(res.length == 0) {
+						s+="<tr>";
+						s+="<td colspan='8' align='center' style='font-size: 18pt;'>아직 작성된 게시글이 없습니다</td>";
+						s+="</tr>";
+					} else {
+						$.each(res, function(idx, item){
+							s+="<tr>";
+							s+="<td style='text-align: center;'>" + item.rbNum + "</td>";
+							s+="<td style='text-align: center; vertical-align:middle;'>" + item.year + "." + item.month + "." + item.day + "</td>"
+							
+							
+							if(item.home == "한화") {	
+								s+="<td style='text-align: center; vertical-align:middle;'>";
+								s+="<img src='" + item.homeImg + "' style='width: 50px; vertical-align:middle;'>";
+								s+="vs ";
+								s+="<img src='" + item.awayImg + "' style='width: 40px; vertical-align:middle;'>";
+								s+="</td>"; 						
+							} else if(item.away == "한화") {
+								s+="<td style='text-align: center; vertical-align:middle;'>";
+								s+="<img src='" + item.homeImg + "' style='width: 40px; vertical-align:middle;'>";
+								s+=" vs";
+								s+="<img src='" + item.awayImg + "' style='width: 50px; vertical-align:middle;'>";
+								s+="</td>"; 	
+							} else {
+								s+="<td style='text-align: center; vertical-align:middle;'>";
+								s+="<img src='" + item.homeImg + "' style='width: 40px; vertical-align:middle;'>";
+								s+=" vs";
+								s+="<img src='" + item.awayImg + "' style='width: 40px; vertical-align:middle;'>";
+								s+="</td>";
+							}
+
+							s+="<td style='vertical-align:middle;'><a href='reviewPost_detailPage.jsp?rbNum=" + item.rbNum + "&currentPage=" + currentPage + "'>" + item.rbSubject + "</a><span style='color: tomato;'>&nbsp;&nbsp;[" + item.rcCnt + "]</span></td>";
+							s+="<td style='text-align: center; vertical-align:middle;'>" + item.nickname + "</td>";
+							s+="<td style='text-align: center; vertical-align:middle;'>" + item.rbWriteday + "</td>";
+							s+="<td style='text-align: center; vertical-align:middle;'>" + item.rbReadCnt + "</td>";
+							s+="<td style='text-align: center; vertical-align:middle;'>" + item.rbLike + "</td>";
+							s+="<td style='text-align: center; vertical-align:middle;'>" + item.rbDislike + "</td> ";							
+							s+="</tr>"		
+						});
+					}
+    				s+="</tbody>";
+    				s+="</table>";
+    				s+="</div>";
+    				
+    				$("div.rList").html(s);
+    			}
+    		});
+    		
+		}
+    </script>
 </head>
 
 <body>
@@ -159,6 +325,8 @@
 	
 	no = totalCount - (currentPage - 1) * perPage;
 %>
+<input type="hidden" id="currentPage" value="<%=currentPage %>">
+
     <!-- Layout wrapper -->
     <div class="layout-wrapper layout-content-navbar">
         <div class="layout-container">
@@ -172,85 +340,22 @@
                     <!-- Bootstrap Table with Header - Light -->
                     <div class="card" style="background-color: #fff">
                                       
-                        <div class="table-responsive text-nowrap" style="width: 100%">
-                            <table class="table">
-                                <thead class="table">
-                                <thead style="background-color: #F8F9FA">
-                                    <tr>
-                                        <th style="text-align: center; width: 40px;">No.</th>
-                                        <th style="text-align: center; width: 100px;">경기일</th>
-                                        <th style="text-align: center; width: 200px;">경기팀</th>
-                                        <th style="text-align: center;">제목</th>
-                                        <th style="text-align: center; width: 100px;">작성자</th>
-                                        <th style="text-align: center; width: 100px;">날짜</th>
-                                        <th style="text-align: center; width: 40px;">조회수</th>
-                                        <th style="text-align: center; width: 40px;">추천</th>
-                                        <th style="text-align: center; width: 40px;">비추천</th>
-                                    </tr>
-                                </thead>
-                                <tbody class="table-border-bottom-0">
-                                    
-                                <%                                	
-                                	for(ReviewBoardDto rbDto : rbList) {
-                                		GameDao gDao = new GameDao();
-                                		GameDto gDto = gDao.getGame(rbDto.getgId());
-                                		
-                                		UserDao uDao = new UserDao();
-                                		String nickname = uDao.getUser(rbDto.getUId()).getNickname();
-                                		
-                                		String year = gDto.getgDay().substring(2, 4);
-                                		String month = gDto.getgDay().substring(5, 7);
-                                		String day = gDto.getgDay().substring(8, 10);
-                                		
-                                		int rcCnt = rcDao.getAllRCs(rbDto.getRbNum()).size();
-                                %>
-                   
-                                     <tr>
-                                        <td style="text-align: center; vertical-align:middle;"><%=rbDto.getRbNum() %></td>
-                                        <td style="text-align: center; vertical-align:middle;"><%=year %>.<%=month %>.<%=day %></td>
-                                        <td style="text-align: center; vertical-align:middle;">
-                                        
-                                        
-                                        <%
-                                        	if(gDto.getHome().equals("한화")) {	
-                                        %>
-                                        		<img src="<%=tDao.getTeam(gDto.getHome()).getTeamLogo() %>" style="width: 50px; vertical-align:middle;">
-                                        		vs&nbsp;
-                                            	<img src="<%=tDao.getTeam(gDto.getAway()).getTeamLogo() %>" style="width: 40px; vertical-align:middle;">      
-                                        <%		
-                                        	} else if(gDto.getAway().equals("한화")) {
-                                        %>
-                                        		<img src="<%=tDao.getTeam(gDto.getHome()).getTeamLogo() %>" style="width: 40px; vertical-align:middle;">
-                                        		&nbsp;vs
-                                            	<img src="<%=tDao.getTeam(gDto.getAway()).getTeamLogo() %>" style="width: 50px; vertical-align:middle;"> 
-                                        <%			
-                                        	} else {
-                                        %>
-                                        		<img src="<%=tDao.getTeam(gDto.getHome()).getTeamLogo() %>" style="width: 40px; vertical-align:middle;">
-                                        		&nbsp;vs&nbsp;
-                                            	<img src="<%=tDao.getTeam(gDto.getAway()).getTeamLogo() %>" style="width: 40px; vertical-align:middle;"> 
-                                        <%
-                                        	}
-                                        %>                                      
-                                        </td>
-                                        <td style="vertical-align:middle;"><a href="reviewPost_detailPage.jsp?rbNum=<%=rbDto.getRbNum() %>&currentPage=<%=currentPage%>"><%=rbDto.getRbSubject() %></a><span style="color: tomato;">&nbsp;&nbsp;[<%=rcCnt %>]</span></td>
-                                        <td style="text-align: center; vertical-align:middle;"><%=nickname %></td>
-                                        <td style="text-align: center; vertical-align:middle;"><%=sdf.format(rbDto.getRbWriteday()) %></td>
-                                        <td style="text-align: center; vertical-align:middle;"><%=rbDto.getRbReadCnt() %></td>
-                                        <td style="text-align: center; vertical-align:middle;"><%=rbDto.getRbLike() %></td>
-                                        <td style="text-align: center; vertical-align:middle;"><%=rbDto.getRbDislike() %></td>
-                                    </tr>
-                                <%
-                                	}
-                                %>
-                                   
-                                </tbody>
-                            </table>
-                        </div>
+                        <div class="rList"></div>
+                        
                         <div class="bBottom" style="margin-top: 30px;">
                             <div class="bsBox">
-                                <div class="bSelect">select</div>
-                                <div class="bSearch">검색창</div>
+                                <div class="bSelect">
+									<select id="search" class="form-control" style="width: 100px; height: 40px; text-align: center;">
+										<option value="nickname" selected="selected">작성자</option>
+										<option value="subject">제목</option>
+										<option value="content">내용</option>
+									</select>
+								</div>
+                                <div class="bSearch">
+									<input type="text" id="search_str" class="form-control"
+											required="required" style="width: 200px; height: 40px;">
+								</div>
+								<button type="button" class="btn btn-default" id="searchBtn" style="margin-left: 5px;">검색</button>
                             </div>
                             <div class="bInsert">
 								<button type="button" class="btn btn-default" id="insertBtn">글쓰기</button>

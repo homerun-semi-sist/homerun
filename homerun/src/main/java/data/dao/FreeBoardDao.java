@@ -328,22 +328,24 @@ public class FreeBoardDao {
 	
 	// search - nickname
 	// select f.* from FREEBOARD f, USER u where f.uId=u.uId and u.nickname=?;
-	public FreeBoardDto search_nickname(String nickname) {
-		FreeBoardDto dto = new FreeBoardDto();
+	public List<FreeBoardDto> search_nickname(String nickname) {
+		List<FreeBoardDto> list = new Vector<>();
 
         Connection conn = db.getConnection();
         PreparedStatement pstmt = null;
         ResultSet rs = null;
 
-        String sql = "select f.*  from FREEBOARD f, USER u where f.uId=u.uId and u.nickname=?";
+        String sql = "select f.*  from FREEBOARD f, USER u where f.uId=u.uId and u.nickname Like ?";
 
         try {
             pstmt = conn.prepareStatement(sql);
 
-            pstmt.setString(1, nickname);
+            pstmt.setString(1, "%" + nickname + "%");
             rs = pstmt.executeQuery();
 
-            if(rs.next()) {
+            while(rs.next()) {
+            	FreeBoardDto dto = new FreeBoardDto();
+            	
             	dto.setFbNum(rs.getString("fbNum"));
             	dto.setUId(rs.getString("uId"));
                 dto.setFbCategory(rs.getString("fbCategory"));
@@ -355,6 +357,8 @@ public class FreeBoardDao {
                 dto.setFbDislike(rs.getString("fbDislike"));
                 dto.setFbWriteday(rs.getTimestamp("fbWriteday"));
                 dto.setFbReport(rs.getString("fbReport"));
+                
+                list.add(dto);
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -362,29 +366,31 @@ public class FreeBoardDao {
             db.dbClose(rs, pstmt, conn);
         }
 
-        return dto;
+        return list;
 				
 	}
 	
 	
 	// search - fbSubject
 	// select * from FREEBOARD where fbSubject Like "%?%";
-	public FreeBoardDto search_subject(String fbSubject) {
-		FreeBoardDto dto = new FreeBoardDto();
+	public List<FreeBoardDto> search_subject(String fbSubject) {
+		List<FreeBoardDto> list = new Vector<>();
 
         Connection conn = db.getConnection();
         PreparedStatement pstmt = null;
         ResultSet rs = null;
 
-        String sql = "select * from FREEBOARD where fbSubject Like %?%";
+        String sql = "select * from FREEBOARD where fbSubject Like ?";
 
         try {
             pstmt = conn.prepareStatement(sql);
 
-            pstmt.setString(1, fbSubject);
+            pstmt.setString(1, "%" + fbSubject + "%");
             rs = pstmt.executeQuery();
 
-            if(rs.next()) {
+            while(rs.next()) {
+            	FreeBoardDto dto = new FreeBoardDto();
+            	
             	dto.setFbNum(rs.getString("fbNum"));
             	dto.setUId(rs.getString("uId"));
                 dto.setFbCategory(rs.getString("fbCategory"));
@@ -396,6 +402,8 @@ public class FreeBoardDao {
                 dto.setFbDislike(rs.getString("fbDislike"));
                 dto.setFbWriteday(rs.getTimestamp("fbWriteday"));
                 dto.setFbReport(rs.getString("fbReport"));
+                
+                list.add(dto);
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -403,29 +411,31 @@ public class FreeBoardDao {
             db.dbClose(rs, pstmt, conn);
         }
 
-        return dto;
+        return list;
 				
 	}
 	
 	
 	// search - fbContent
 	// select * from FREEBOARD where fbContent Like "%?%";
-	public FreeBoardDto search_content(String fbContent) {
-		FreeBoardDto dto = new FreeBoardDto();
+	public List<FreeBoardDto> search_content(String fbContent) {
+		List<FreeBoardDto> list = new Vector<>();
 
         Connection conn = db.getConnection();
         PreparedStatement pstmt = null;
         ResultSet rs = null;
 
-        String sql = "select * from FREEBOARD where fbSubject Like %?%";
+        String sql = "select * from FREEBOARD where fbContent Like ?";
 
         try {
             pstmt = conn.prepareStatement(sql);
 
-            pstmt.setString(1, fbContent);
+            pstmt.setString(1, "%" + fbContent + "%");
             rs = pstmt.executeQuery();
 
-            if(rs.next()) {
+            while(rs.next()) {
+            	FreeBoardDto dto = new FreeBoardDto();
+            	
             	dto.setFbNum(rs.getString("fbNum"));
             	dto.setUId(rs.getString("uId"));
                 dto.setFbCategory(rs.getString("fbCategory"));
@@ -437,6 +447,8 @@ public class FreeBoardDao {
                 dto.setFbDislike(rs.getString("fbDislike"));
                 dto.setFbWriteday(rs.getTimestamp("fbWriteday"));
                 dto.setFbReport(rs.getString("fbReport"));
+                
+                list.add(dto);
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -444,7 +456,7 @@ public class FreeBoardDao {
             db.dbClose(rs, pstmt, conn);
         }
 
-        return dto;
+        return list;
 				
 	}
 	

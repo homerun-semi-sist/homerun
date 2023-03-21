@@ -12,9 +12,19 @@
 	pageEncoding="UTF-8"%>
 
 <%
+	String val = request.getParameter("val");
+	String str = request.getParameter("str");
 	
 	FreeBoardDao fbDao = new FreeBoardDao();
-	List<FreeBoardDto> list = fbDao.getAllFBs();
+	List<FreeBoardDto> list = new Vector<>();
+	
+	if(val.equals("nickname"))
+		list = fbDao.search_nickname(str);
+	else if(val.equals("subject"))
+		list = fbDao.search_subject(str);
+	else if(val.equals("content"))
+		list = fbDao.search_content(str);
+
 	
 	UserDao uDao = new UserDao();
 	TeamDao tDao = new TeamDao();
@@ -24,9 +34,15 @@
 	SimpleDateFormat sdf = new SimpleDateFormat("yy.MM.dd HH:mm");
 	
 	for(FreeBoardDto dto : list) {
-		JSONObject ob = new JSONObject();		
+		JSONObject ob = new JSONObject();
+		String teamLogoImg = "";
+		
 		String nickname = uDao.getUser(dto.getUId()).getNickname();
-		String teamLogoImg = tDao.getTeam(dto.getFbCategory()).getTeamLogo();
+		
+		if(dto.getFbCategory().equals("전체"))
+			teamLogoImg = "전체";
+		else 
+			teamLogoImg = tDao.getTeam(dto.getFbCategory()).getTeamLogo();
 		
 		int fcCnt = fcDao.getAllFCs(dto.getFbNum()).size();
 				

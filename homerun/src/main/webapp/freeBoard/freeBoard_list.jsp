@@ -104,11 +104,79 @@
     		alert(val); */
     		fList();
     		
-    		$("#search").change(function(){
-    		    // Value값 가져오기
-    		    val = $("#search :selected").val();
-    	    
-    		   	alert(val);
+    		$("#searchBtn").click(function(){
+    			var val = $("#search :selected").val();
+        		var currentPage = $("#currentPage").val();
+        		var str = $("#search_str").val();
+        		// alert(val + ", "+ currentPage + ", "+ str);
+    		    
+    		    $.ajax({
+    			
+	    			type : "get",
+	    			url : "freeBoard_getSearchList.jsp",
+	    			dataType : "json",
+	    			data : {"val" : val, "str" : str},
+	    			success:function(res) {
+	    				// alert(val + ", "+ str +", " + res.length);
+	    				
+	    				var s="";
+	    				
+	    				s+="<div class='table-responsive text-nowrap'>";
+	    				s+="<table class='table'>";
+	    				s+="<thead style='background-color: #F8F9FA'>";
+	    				s+="<tr>";
+	    				s+="<th style='text-align: center; width: 80px;'>No.</th>";
+	    				s+="<th style='text-align: center; width: 150px;'>카테고리</th>";
+	    				s+="<th style='text-align: center;'>제목</th>";
+	    				s+="<th style='text-align: center; width: 200px;'>작성자</th>";
+	    				s+="<th style='text-align: center; width: 200px;'>날짜</th>";
+	    				s+="<th style='text-align: center; width: 80px;'>조회수</th>";
+	    				s+="<th style='text-align: center; width: 80px;'>추천</th>";
+	    				s+="<th style='text-align: center; width: 80px;'>비추천</th>";
+	    				s+="</tr>";
+	    				s+="</thead>";
+						s+="<tbody class='table-border-bottom-0'>";
+	    				
+						if(res.length == 0) {
+							s+="<tr>";
+							s+="<td colspan='8' align='center' style='font-size: 18pt;'>\"" + str + "\" 검색 결과가 없습니다</td>";
+							s+="</tr>";
+						} else {
+							$.each(res, function(idx, item){
+								s+="<tr>";
+								s+="<td style='text-align: center;'>" + item.fbNum + "</td>";
+								
+								if(item.fbCategory == "전체") {   
+									s+="<td style='text-align: center; vertical-align:middle;'>";
+									s+="<img src='https://cdn.icon-icons.com/icons2/2070/PNG/512/baseball_icon_126956.png' style='width: 30px;'>";
+									   s+="</td>";
+								} else if(item.fbCategory == "한화") {
+									s+="<td style='text-align: center; vertical-align:middle;'>";
+									s+="<img src='" + item.teamLogoImg + "' style='width: 50px;'>";
+									s+="</td>";
+								} else {
+									s+="<td style='text-align: center; vertical-align:middle;'>";
+									s+="<img src='" + item.teamLogoImg + "' style='width: 40px;'>";
+									   s+="</td>";
+								}
+								
+								s+="<td style='vertical-align:middle;'><a href='freePost_detailPage.jsp?fbNum=" + item.fbNum + "&currentPage=" + currentPage + "'>" + item.fbSubject + "</a><span style='color: tomato;'>&nbsp;&nbsp;[" + item.fcCnt + "]</span></td>";
+								s+="<td style='text-align: center; vertical-align:middle;'>" + item.nickname + "</td>";
+								s+="<td style='text-align: center; vertical-align:middle;'>" + item.fbWriteday + "</td>";
+								s+="<td style='text-align: center; vertical-align:middle;'>" + item.fbReadCnt + "</td>";
+								s+="<td style='text-align: center; vertical-align:middle;'>" + item.fbLike + "</td>";
+								s+="<td style='text-align: center; vertical-align:middle;'>" + item.fbDislike + "</td> ";							
+								s+="</tr>"		
+							});
+						}
+						
+	    				s+="</tbody>";
+	    				s+="</table>";
+	    				s+="</div>";
+	    				
+	    				$("div.fList").html(s);
+	    			}
+	    		});
     		    
     		});
     		
@@ -117,14 +185,14 @@
 		function fList() {
     		var val = $("#search :selected").val();
     		var currentPage = $("#currentPage").val();
-    		// alert(val + ", "+ currentPage);
+    		//alert(val + ", "+ currentPage);
 			
     		$.ajax({
     			
     			type : "get",
     			url : "freeBoard_getList.jsp",
     			dataType : "json",
-    			data : {"val" : val},
+    			/* data : {"val" : val}, */
     			success:function(res) {
 
     				var s="";
@@ -145,33 +213,38 @@
     				s+="</thead>";
 					s+="<tbody class='table-border-bottom-0'>";
     				
-					$.each(res, function(idx, item){
+					if(res.length == 0) {
 						s+="<tr>";
-						s+="<td style='text-align: center;'>" + item.fbNum + "</td>";
-						
-						if(item.fbCategory == "전체") {   
-							s+="<td style='text-align: center; vertical-align:middle;'>";
-							s+="<img src='https://cdn.icon-icons.com/icons2/2070/PNG/512/baseball_icon_126956.png' style='width: 30px;'>";
-							   s+="</td>";
-						} else if(item.fbCategory == "한화") {
-							s+="<td style='text-align: center; vertical-align:middle;'>";
-							s+="<img src='" + item.teamLogoImg + "' style='width: 50px;'>";
-							s+="</td>";
-						} else {
-							s+="<td style='text-align: center; vertical-align:middle;'>";
-							s+="<img src='" + item.teamLogoImg + "' style='width: 40px;'>";
-							   s+="</td>";
-						}
-						
-						s+="<td style='vertical-align:middle;'><a href='freePost_detailPage.jsp?fbNum=" + item.fbNum + "&currentPage=" + "'>" + item.fbSubject + "</a><span style='color: tomato;'>&nbsp;&nbsp;[" + item.fcCnt + "]</span></td>";
-						s+="<td style='text-align: center; vertical-align:middle;'>" + item.nickname + "</td>";
-						s+="<td style='text-align: center; vertical-align:middle;'>" + item.fbWriteday + "</td>";
-						s+="<td style='text-align: center; vertical-align:middle;'>" + item.fbReadCnt + "</td>";
-						s+="<td style='text-align: center; vertical-align:middle;'>" + item.fbLike + "</td>";
-						s+="<td style='text-align: center; vertical-align:middle;'>" + item.fbDislike + "</td> ";							
-						s+="</tr>"		
-					});
-					
+						s+="<td colspan='8' align='center' style='font-size: 18pt;'>아직 작성된 게시글이 없습니다</td>";
+						s+="</tr>";
+					} else {
+						$.each(res, function(idx, item){
+							s+="<tr>";
+							s+="<td style='text-align: center;'>" + item.fbNum + "</td>";
+							
+							if(item.fbCategory == "전체") {   
+								s+="<td style='text-align: center; vertical-align:middle;'>";
+								s+="<img src='https://cdn.icon-icons.com/icons2/2070/PNG/512/baseball_icon_126956.png' style='width: 30px;'>";
+								   s+="</td>";
+							} else if(item.fbCategory == "한화") {
+								s+="<td style='text-align: center; vertical-align:middle;'>";
+								s+="<img src='" + item.teamLogoImg + "' style='width: 50px;'>";
+								s+="</td>";
+							} else {
+								s+="<td style='text-align: center; vertical-align:middle;'>";
+								s+="<img src='" + item.teamLogoImg + "' style='width: 40px;'>";
+								   s+="</td>";
+							}
+							
+							s+="<td style='vertical-align:middle;'><a href='freePost_detailPage.jsp?fbNum=" + item.fbNum + "&currentPage=" + currentPage + "'>" + item.fbSubject + "</a><span style='color: tomato;'>&nbsp;&nbsp;[" + item.fcCnt + "]</span></td>";
+							s+="<td style='text-align: center; vertical-align:middle;'>" + item.nickname + "</td>";
+							s+="<td style='text-align: center; vertical-align:middle;'>" + item.fbWriteday + "</td>";
+							s+="<td style='text-align: center; vertical-align:middle;'>" + item.fbReadCnt + "</td>";
+							s+="<td style='text-align: center; vertical-align:middle;'>" + item.fbLike + "</td>";
+							s+="<td style='text-align: center; vertical-align:middle;'>" + item.fbDislike + "</td> ";							
+							s+="</tr>"		
+						});
+					}
     				s+="</tbody>";
     				s+="</table>";
     				s+="</div>";
@@ -347,14 +420,13 @@
                             <div class="bsBox">
                                 <div class="bSelect">
 									<select id="search" class="form-control" style="width: 100px; height: 40px; text-align: center;">
-										<option value="all" selected="selected">전체</option>
-										<option value="nickname">작성자</option>
+										<option value="nickname" selected="selected">작성자</option>
 										<option value="subject">제목</option>
 										<option value="content">내용</option>
 									</select>
 								</div>
                                 <div class="bSearch">
-									<input type="text" name="serch_str" class="form-control"
+									<input type="text" id="search_str" class="form-control"
 											required="required" style="width: 200px; height: 40px;">
 								</div>
 								<button type="button" class="btn btn-default" id="searchBtn" style="margin-left: 5px;">검색</button>

@@ -7,7 +7,6 @@ import java.sql.SQLException;
 import java.util.List;
 import java.util.Vector;
 
-import data.dto.FreeBoardDto;
 import data.dto.ReviewBoardDto;
 import mysql.db.DbConnect;
 
@@ -247,12 +246,141 @@ public class ReviewBoardDao {
 			db.dbClose(pstmt, conn);
 		}
 	}
+	
 	// search - nickname
+	// select r.* from REVIEWBOARD r, USER u where r.uId=u.uId and u.nickname=?;
+	public List<ReviewBoardDto> search_nickname(String nickname) {
+		List<ReviewBoardDto> list = new Vector<>();
+
+        Connection conn = db.getConnection();
+        PreparedStatement pstmt = null;
+        ResultSet rs = null;
+
+        String sql = "select r.*  from REVIEWBOARD r, USER u where r.uId=u.uId and u.nickname Like ?";
+
+        try {
+            pstmt = conn.prepareStatement(sql);
+
+            pstmt.setString(1, "%" + nickname + "%");
+            rs = pstmt.executeQuery();
+
+            while(rs.next()) {
+            	ReviewBoardDto dto = new ReviewBoardDto();
+            	
+            	dto.setRbNum(rs.getString("rbNum"));
+                dto.setUId(rs.getString("uId"));
+                dto.setgId(rs.getString("gId"));
+                dto.setRbSubject(rs.getString("rbSubject"));
+                dto.setRbContent(rs.getString("rbContent"));
+                dto.setRbPhoto(rs.getString("rbPhoto"));
+                dto.setRbReadCnt(rs.getString("rbReadCnt"));
+                dto.setRbLike(rs.getString("rbLike"));
+                dto.setRbDislike(rs.getString("rbDislike"));
+                dto.setRbWriteday(rs.getTimestamp("rbWriteday"));
+                dto.setRbReport(rs.getString("rbReport"));
+                
+                list.add(dto);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            db.dbClose(rs, pstmt, conn);
+        }
+
+        return list;
+				
+	}
+	
 	
 	// search - rbSubject
+	// select * from REVIEWBOARD where rbSubject Like "%?%";
+	public List<ReviewBoardDto> search_subject(String fbSubject) {
+		List<ReviewBoardDto> list = new Vector<>();
+
+        Connection conn = db.getConnection();
+        PreparedStatement pstmt = null;
+        ResultSet rs = null;
+
+        String sql = "select * from REVIEWBOARD where rbSubject Like ?";
+
+        try {
+            pstmt = conn.prepareStatement(sql);
+
+            pstmt.setString(1, "%" + fbSubject + "%");
+            rs = pstmt.executeQuery();
+
+            while(rs.next()) {
+            	ReviewBoardDto dto = new ReviewBoardDto();
+            	
+            	dto.setRbNum(rs.getString("rbNum"));
+                dto.setUId(rs.getString("uId"));
+                dto.setgId(rs.getString("gId"));
+                dto.setRbSubject(rs.getString("rbSubject"));
+                dto.setRbContent(rs.getString("rbContent"));
+                dto.setRbPhoto(rs.getString("rbPhoto"));
+                dto.setRbReadCnt(rs.getString("rbReadCnt"));
+                dto.setRbLike(rs.getString("rbLike"));
+                dto.setRbDislike(rs.getString("rbDislike"));
+                dto.setRbWriteday(rs.getTimestamp("rbWriteday"));
+                dto.setRbReport(rs.getString("rbReport"));
+                
+                list.add(dto);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            db.dbClose(rs, pstmt, conn);
+        }
+
+        return list;
+				
+	}
+	
 	
 	// search - rbContent
+	// select * from REVIEWBOARD where rbContent Like "%?%";
+	public List<ReviewBoardDto> search_content(String rbContent) {
+		List<ReviewBoardDto> list = new Vector<>();
 
+        Connection conn = db.getConnection();
+        PreparedStatement pstmt = null;
+        ResultSet rs = null;
+
+        String sql = "select * from REVIEWBOARD where rbContent Like ?";
+
+        try {
+            pstmt = conn.prepareStatement(sql);
+
+            pstmt.setString(1, "%" + rbContent + "%");
+            rs = pstmt.executeQuery();
+
+            while(rs.next()) {
+            	ReviewBoardDto dto = new ReviewBoardDto();
+            	
+            	dto.setRbNum(rs.getString("rbNum"));
+                dto.setUId(rs.getString("uId"));
+                dto.setgId(rs.getString("gId"));
+                dto.setRbSubject(rs.getString("rbSubject"));
+                dto.setRbContent(rs.getString("rbContent"));
+                dto.setRbPhoto(rs.getString("rbPhoto"));
+                dto.setRbReadCnt(rs.getString("rbReadCnt"));
+                dto.setRbLike(rs.getString("rbLike"));
+                dto.setRbDislike(rs.getString("rbDislike"));
+                dto.setRbWriteday(rs.getTimestamp("rbWriteday"));
+                dto.setRbReport(rs.getString("rbReport"));
+                
+                list.add(dto);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            db.dbClose(rs, pstmt, conn);
+        }
+
+        return list;
+				
+	}
+	
 	// 페이징 처리
 	// RB totalCount
 	public int getRBTotalCount() {
