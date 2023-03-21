@@ -40,7 +40,7 @@ NumberFormat nf=NumberFormat.getCurrencyInstance();
 						<%=dto.getpName()%>
 					</h1>
 					<div class="fs-5 mb-5">
-						<span><%=dto.getPrice()%></span>
+						<span><%=nf.format(dto.getPrice())%></span>
 					</div>
 					<p class="lead"><%=dto.getpDetail()%></p>
 					<div class="d-flex">
