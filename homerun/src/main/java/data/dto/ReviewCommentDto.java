@@ -1,14 +1,16 @@
 package data.dto;
 
+import java.sql.Timestamp;
+
 public class ReviewCommentDto {
 
 	private String rcIdx;
 	private String rbNum;
-	private String nickname;
+	private String uId;
 	private String rcContent;
 	private String rcLike;
 	private String rcDislike;
-	private String rcWriteday;
+	private Timestamp rcWriteday;
 	private String rcReport;
 	
 	public String getRcIdx() {
@@ -23,11 +25,11 @@ public class ReviewCommentDto {
 	public void setRbNum(String rbNum) {
 		this.rbNum = rbNum;
 	}
-	public String getNickname() {
-		return nickname;
+	public String getUId() {
+		return uId;
 	}
-	public void setNickname(String nickname) {
-		this.nickname = nickname;
+	public void setUId(String uId) {
+		this.uId = uId;
 	}
 	public String getRcContent() {
 		return rcContent;
@@ -47,10 +49,10 @@ public class ReviewCommentDto {
 	public void setRcDislike(String rcDislike) {
 		this.rcDislike = rcDislike;
 	}
-	public String getRcWriteday() {
+	public Timestamp getRcWriteday() {
 		return rcWriteday;
 	}
-	public void setRcWriteday(String rcWriteday) {
+	public void setRcWriteday(Timestamp rcWriteday) {
 		this.rcWriteday = rcWriteday;
 	}
 	public String getRcReport() {

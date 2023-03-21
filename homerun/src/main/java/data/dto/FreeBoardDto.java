@@ -5,7 +5,7 @@ import java.sql.Timestamp;
 public class FreeBoardDto {
 	
 	private String fbNum;
-	private String nickname;
+	private String uId;
 	private String fbCategory;
 	private String fbSubject;
 	private String fbContent;
@@ -22,11 +22,11 @@ public class FreeBoardDto {
 	public void setFbNum(String fbNum) {
 		this.fbNum = fbNum;
 	}
-	public String getNickname() {
-		return nickname;
+	public String getUId() {
+		return uId;
 	}
-	public void setNickname(String nickname) {
-		this.nickname = nickname;
+	public void setUId(String uId) {
+		this.uId = uId;
 	}
 	public String getFbCategory() {
 		return fbCategory;
