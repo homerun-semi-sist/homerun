@@ -76,6 +76,16 @@ td {
 margin-top:50px;
 }
 </style>
+
+<script type="text/javascript">
+	$(function() {
+		
+		
+		
+		
+		
+	});
+	
 <body style="overflow-x: hidden;">
 	<%
 	String mainPage = "../layout/main.jsp";

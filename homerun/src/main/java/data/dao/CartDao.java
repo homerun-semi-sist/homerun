@@ -111,8 +111,28 @@ public class CartDao {
 		}
 
 	}
+	
+	public void successDelete() {
+		Connection conn = db.getConnection();
+		PreparedStatement pstmt = null;
 
-	public void insertOder(OrderDto dto) {
+		String sql = "delete from CART where cId=(Select MAX(cId) from CART)";
+
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.execute();
+
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			db.dbClose(pstmt, conn);
+		}
+
+	}
+	
+
+	public void insertOrder(CartDto dto) {
 		Connection conn = db.getConnection();
 		PreparedStatement pstmt = null;
 
@@ -120,7 +140,7 @@ public class CartDao {
 		try {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, dto.getcId());
-			pstmt.setInt(2, dto.getoQTY());
+			pstmt.setInt(2, dto.getcQTY());
 			pstmt.execute();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -217,7 +237,7 @@ public class CartDao {
 		Connection conn=db.getConnection();
 		PreparedStatement pstmt=null;
 		
-		String sql="UPDATE PRODUCT"
+		String sql="UPDATE PRODUCT "
 				+ "SET pStock = pStock - ("
 				+ "  SELECT SUM(cQTY)"
 				+ "  FROM CART "

@@ -162,8 +162,7 @@ div.pName, span.del {
 						function() {
 
 							var pName = $(this).attr("pId");
-							location.href = "index.jsp?main=product/product_detailPage.jsp?pId="
-									+ pId;
+							location.href = "product_detailPage.jsp?pId="+ pId;
 
 						});
 
@@ -288,11 +287,18 @@ div.pName, span.del {
 
 				var cId = $(this).attr("cId");
 				var pId = $(this).attr("pId");
-				console.log(pId);
+				var cQTY = $(this).attr("cQTY");
+				
 				stock(pId);
+				orderlist(cId,cQTY);
+				
 				del(cId);
+				
 			});
+			
 		});
+		
+		
 			
 		function stock(pId){
 			$.ajax({
@@ -304,7 +310,7 @@ div.pName, span.del {
 					"pId" : pId
 				},
 				success : function() {
-					//location.href="product_success.jsp";
+					location.href="product_success.jsp";
 				}
 					
 
@@ -313,6 +319,23 @@ div.pName, span.del {
 			
 		} 
 		
+		function orderlist(cId,cQTY){
+			$.ajax({
+
+				type : "get",
+				dataType : "html",
+				url : "product_insertOrder.jsp",
+				data : {
+					"cId" : cId,
+					"cQTY": cQTY
+				},
+				success : function() {
+					
+				}
+					
+
+			});
+		}
 		
 
 	});
@@ -396,11 +419,11 @@ NumberFormat nf = NumberFormat.getInstance();
 								<tr>
 									<td style="line-height: 100px;"><input type="checkbox"
 										name="cId" class="cId moneycheck" cId="<%=map.get("cId")%>"
-										price="<%=map.get("price")%>" cQTY="<%=map.get("cQTY")%>" pId="<%=map.get("pId")%>"></td>
+										price="<%=map.get("price")%>" cQTY="<%=map.get("cQTY")%>" pId="<%=map.get("pId")%>"pStock=<%=map.get("pStock") %>></td>
 
 									<td style="line-height: 100px;">
-										<div pId="<%=map.get("pId")%>" class="pName">
-											<img src="<%=photo%>" class="photo" align="left" hspace="20">
+										<div pId="<%=map.get("pId")%>" class="pName" >
+											<img src="<%=photo%>" class="photo" align="left" hspace="20" pId="<%=map.get("pId")%>">
 
 											<h4 style="line-height: 80px;">
 												<b> <%=map.get("pName")%> &nbsp;&nbsp;&nbsp;&nbsp;
