@@ -1,3 +1,5 @@
+<%@page import="data.dao.FreeCommentDao"%>
+<%@page import="data.dao.TeamDao"%>
 <%@page import="java.util.Vector"%>
 <%@page import="data.dao.UserDao"%>
 <%@page import="data.dto.FreeBoardDto"%>
@@ -15,10 +17,12 @@
 	FreeBoardDao FbDao = new FreeBoardDao();
 	List<FreeBoardDto> list = new Vector<>();
 	
-	if(val.equals("all")) 
+	//if(val.equals("all")) 
 		list = FbDao.getAllFBs();
 	
 	UserDao uDao = new UserDao();
+	TeamDao tDao = new TeamDao();
+	FreeCommentDao fcDao = new FreeCommentDao();
 	
 	JSONArray arr = new JSONArray();
 	SimpleDateFormat sdf = new SimpleDateFormat("yy.MM.dd HH:mm");
@@ -27,7 +31,9 @@
 		JSONObject ob = new JSONObject();
 		
 		String nickname = uDao.getUser(dto.getUId()).getNickname();
-		
+		String teamLogoImg = tDao.getTeam(dto.getFbCategory()).getTeamLogo();
+		int fcCnt = fcDao.getAllFCs(dto.getFbNum()).size();
+				
 		ob.put("fbNum", dto.getFbNum());
 		ob.put("fbUId", dto.getUId());
 		ob.put("nickname", nickname);
@@ -39,6 +45,8 @@
 		ob.put("fbDislike", dto.getFbDislike());
 		ob.put("fbWriteday", sdf.format(dto.getFbWriteday()));
 		ob.put("fbReport", dto.getFbReport());
+		ob.put("teamLogoImg", teamLogoImg);
+		ob.put("fcCnt", fcCnt);
 		
 		arr.add(ob);
 	}

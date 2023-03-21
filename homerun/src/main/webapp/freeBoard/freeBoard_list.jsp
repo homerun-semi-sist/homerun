@@ -116,49 +116,70 @@
 		
 		function fList() {
     		var val = $("#search :selected").val();
-    		// alert(val);
+    		var currentPage = $("#currentPage").val();
+    		// alert(val + ", "+ currentPage);
 			
     		$.ajax({
-				
-				type : "get",
-			    url : "freeBoard_getList.jsp",
-			    dataType : "json",
-			    data : {"val" : val},
-			    success:function(res){
+    			
+    			type : "get",
+    			url : "freeBoard_getList.jsp",
+    			dataType : "json",
+    			data : {"val" : val},
+    			success:function(res) {
 
-					// alert(res.length);
-					
-					var s="";
-					
-					s+="<div class='table-responsive text-nowrap'>";
-					s+="<table class='table'>";
-					s+="<thead style='background-color: #F8F9FA'>";
-					s+="<tr>";
-					s+="<th style='text-align: center; width: 80px;'>No.</th>";
-					s+="<th style='text-align: center; width: 150px;'>카테고리</th>";
-					s+="<th style='text-align: center;'>제목</th>";
-					s+="<th style='text-align: center; width: 200px;'>작성자</th>";
-					s+="<th style='text-align: center; width: 200px;'>날짜</th>";
-					s+="<th style='text-align: center; width: 80px;'>조회수</th>";
-					s+="<th style='text-align: center; width: 80px;'>추천</th>";
-					s+="<th style='text-align: center; width: 80px;'>비추천</th>";
-					s+="</tr>";
-					s+="</thead>";
-					s+="</table>";
-										
-
+    				var s="";
+    				
+    				s+="<div class='table-responsive text-nowrap'>";
+    				s+="<table class='table'>";
+    				s+="<thead style='background-color: #F8F9FA'>";
+    				s+="<tr>";
+    				s+="<th style='text-align: center; width: 80px;'>No.</th>";
+    				s+="<th style='text-align: center; width: 150px;'>카테고리</th>";
+    				s+="<th style='text-align: center;'>제목</th>";
+    				s+="<th style='text-align: center; width: 200px;'>작성자</th>";
+    				s+="<th style='text-align: center; width: 200px;'>날짜</th>";
+    				s+="<th style='text-align: center; width: 80px;'>조회수</th>";
+    				s+="<th style='text-align: center; width: 80px;'>추천</th>";
+    				s+="<th style='text-align: center; width: 80px;'>비추천</th>";
+    				s+="</tr>";
+    				s+="</thead>";
 					s+="<tbody class='table-border-bottom-0'>";
-					s+="<tr><td>";
-					s+="<span>아직 작성된 게시글이 없습니다</span>";
-					s+="</td></tr>";
-					s+="</tbody>";
-
-					$("div.fList").html(s);
+    				
+					$.each(res, function(idx, item){
+						s+="<tr>";
+						s+="<td style='text-align: center;'>" + item.fbNum + "</td>";
+						
+						if(item.fbCategory == "전체") {   
+							s+="<td style='text-align: center; vertical-align:middle;'>";
+							s+="<img src='https://cdn.icon-icons.com/icons2/2070/PNG/512/baseball_icon_126956.png' style='width: 30px;'>";
+							   s+="</td>";
+						} else if(item.fbCategory == "한화") {
+							s+="<td style='text-align: center; vertical-align:middle;'>";
+							s+="<img src='" + item.teamLogoImg + "' style='width: 50px;'>";
+							s+="</td>";
+						} else {
+							s+="<td style='text-align: center; vertical-align:middle;'>";
+							s+="<img src='" + item.teamLogoImg + "' style='width: 40px;'>";
+							   s+="</td>";
+						}
+						
+						s+="<td style='vertical-align:middle;'><a href='freePost_detailPage.jsp?fbNum=" + item.fbNum + "&currentPage=" + "'>" + item.fbSubject + "</a><span style='color: tomato;'>&nbsp;&nbsp;[" + item.fcCnt + "]</span></td>";
+						s+="<td style='text-align: center; vertical-align:middle;'>" + item.nickname + "</td>";
+						s+="<td style='text-align: center; vertical-align:middle;'>" + item.fbWriteday + "</td>";
+						s+="<td style='text-align: center; vertical-align:middle;'>" + item.fbReadCnt + "</td>";
+						s+="<td style='text-align: center; vertical-align:middle;'>" + item.fbLike + "</td>";
+						s+="<td style='text-align: center; vertical-align:middle;'>" + item.fbDislike + "</td> ";							
+						s+="</tr>"		
+					});
 					
-				}
-			   
-			});
- 
+    				s+="</tbody>";
+    				s+="</table>";
+    				s+="</div>";
+    				
+    				$("div.fList").html(s);
+    			}
+    		});
+    		
 		}
     </script>
 </head>
@@ -215,7 +236,8 @@
 		
 		no = totalCount - (currentPage - 1) * perPage;		
 	%>
-
+	<input type="hidden" id="currentPage" value="<%=currentPage %>">
+	
     <!-- Layout wrapper -->
     <div class="layout-wrapper layout-content-navbar">
         <div class="layout-container">
