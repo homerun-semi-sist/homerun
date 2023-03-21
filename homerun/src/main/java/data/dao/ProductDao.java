@@ -404,5 +404,125 @@ public class ProductDao {
 
 		return list;
 	}
+	
+	public List<ProductDto> search_pId(String pId) {
+		List<ProductDto> list = new Vector<>();
+
+        Connection conn = db.getConnection();
+        PreparedStatement pstmt = null;
+        ResultSet rs = null;
+
+        String sql = "select * from PRODUCT where pId Like ?";
+
+        try {
+            pstmt = conn.prepareStatement(sql);
+
+            pstmt.setString(1, "%" + pId + "%");
+            rs = pstmt.executeQuery();
+
+            while(rs.next()) {
+            	ProductDto dto = new ProductDto();
+            	
+            	dto.setpId(rs.getString("pId"));
+				dto.setpName(rs.getString("pName"));
+				dto.setTeamName(rs.getString("teamName"));
+				dto.setpCategory(rs.getString("pCategory"));
+				dto.setpImage(rs.getString("pImage"));
+				dto.setpStock(rs.getInt("pStock"));
+				dto.setPrice(rs.getInt("price"));
+				dto.setpDetail(rs.getString("pDetail"));
+				dto.setpDay(rs.getTimestamp("pDay"));
+                
+                list.add(dto);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            db.dbClose(rs, pstmt, conn);
+        }
+
+        return list;
+				
+	}
+	
+	public List<ProductDto> search_pCategory(String pCategory) {
+		List<ProductDto> list = new Vector<>();
+
+        Connection conn = db.getConnection();
+        PreparedStatement pstmt = null;
+        ResultSet rs = null;
+
+        String sql = "select * from PRODUCT where pCategory Like ?";
+
+        try {
+            pstmt = conn.prepareStatement(sql);
+
+            pstmt.setString(1, "%" + pCategory + "%");
+            rs = pstmt.executeQuery();
+
+            while(rs.next()) {
+            	ProductDto dto = new ProductDto();
+            	
+            	dto.setpId(rs.getString("pId"));
+				dto.setpName(rs.getString("pName"));
+				dto.setTeamName(rs.getString("teamName"));
+				dto.setpCategory(rs.getString("pCategory"));
+				dto.setpImage(rs.getString("pImage"));
+				dto.setpStock(rs.getInt("pStock"));
+				dto.setPrice(rs.getInt("price"));
+				dto.setpDetail(rs.getString("pDetail"));
+				dto.setpDay(rs.getTimestamp("pDay"));
+                
+                list.add(dto);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            db.dbClose(rs, pstmt, conn);
+        }
+
+        return list;
+				
+	}
+	
+	public List<ProductDto> search_teamName(String teamName) {
+		List<ProductDto> list = new Vector<>();
+
+        Connection conn = db.getConnection();
+        PreparedStatement pstmt = null;
+        ResultSet rs = null;
+
+        String sql = "select * from PRODUCT where teamName Like ?";
+
+        try {
+            pstmt = conn.prepareStatement(sql);
+
+            pstmt.setString(1, "%" + teamName + "%");
+            rs = pstmt.executeQuery();
+
+            while(rs.next()) {
+            	ProductDto dto = new ProductDto();
+            	
+            	dto.setpId(rs.getString("pId"));
+				dto.setpName(rs.getString("pName"));
+				dto.setTeamName(rs.getString("teamName"));
+				dto.setpCategory(rs.getString("pCategory"));
+				dto.setpImage(rs.getString("pImage"));
+				dto.setpStock(rs.getInt("pStock"));
+				dto.setPrice(rs.getInt("price"));
+				dto.setpDetail(rs.getString("pDetail"));
+				dto.setpDay(rs.getTimestamp("pDay"));
+                
+                list.add(dto);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            db.dbClose(rs, pstmt, conn);
+        }
+
+        return list;
+				
+	}
 
 }
