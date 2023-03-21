@@ -24,8 +24,8 @@
     <meta name="description" content="" />
 
     <!-- Core CSS -->
-    <link rel="stylesheet" href="../assets/board/vendor/css/core2.css" class="template-customizer-core-css" />
-    <link rel="stylesheet" href="../assets/board/vendor/css/theme-default2.css" class="template-customizer-theme-css" />
+    <link rel="stylesheet" href="../assets/board/vendor/css/core.css" class="template-customizer-core-css" />
+    <link rel="stylesheet" href="../assets/board/vendor/css/theme-default.css" class="template-customizer-theme-css" />
     <link rel="stylesheet" href="../assets/board/css/demo.css" />
 
 	<!-- Vendors CSS -->
