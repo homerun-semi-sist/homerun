@@ -115,7 +115,7 @@
 	    			type : "get",
 	    			url : "freeBoard_getSearchList.jsp",
 	    			dataType : "json",
-	    			data : {"val" : val, "str" : str},
+	    			data : {"val" : val, "str" : str, "currentPage" : currentPage},
 	    			success:function(res) {
 	    				// alert(val + ", "+ str +", " + res.length);
 	    				
