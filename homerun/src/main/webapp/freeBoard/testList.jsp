@@ -20,26 +20,27 @@
         content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0" />
 
     <title>자유게시판 목록</title>
+	 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <meta content="" name="description">
+    <meta content="" name="keywords">
 
-    <meta name="description" content="" />
+    <!-- Vendor CSS Files -->
+    <link href="../assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <!-- <link href="../assets/detail/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet"> -->
+    
+    <link href="../assets/detail/vendor/aos/aos.css" rel="stylesheet">
+    <link href="../assets/detail/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
+    <link href="../assets/detail/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
 
-    <!-- Core CSS -->
-    <link rel="stylesheet" href="../assets/board/vendor/css/core2.css" class="template-customizer-core-css" />
-    <link rel="stylesheet" href="../assets/board/vendor/css/theme-default2.css" class="template-customizer-theme-css" />
+ 	<!-- Core CSS -->
+	<link rel="stylesheet" href="../assets/board/vendor/css/core.css" class="template-customizer-core-css" />
+    <link rel="stylesheet" href="../assets/board/vendor/css/theme-default.css" class="template-customizer-theme-css" />
     <link rel="stylesheet" href="../assets/board/css/demo.css" />
-
-	<!-- Vendors CSS -->
-<link rel="stylesheet"
-	href="../assets/board/vendor/libs/perfect-scrollbar/perfect-scrollbar.css" />
-    <!-- Page CSS -->
-
-    <!-- Helpers -->
-    <script src="../assets/board/vendor/js/helpers.js"></script>
-
-    <!--! Template customizer & Theme config files MUST be included after core stylesheets and helpers.js in the <head> section -->
-    <!--? Config:  Mandatory theme config file contain global vars & default theme options, Set your preferred theme option in this file.  -->
-    <script src="../assets/board/js/config.js"></script>
-
+    
+    <!-- Template Main CSS File -->
+    <link href="../assets/detail/css/main.css" rel="stylesheet">
+    
+    <script src="https://kit.fontawesome.com/8dcaa4675e.js" crossorigin="anonymous"></script>
     <style>
         .bBottom {
             border: 0px solid gray;
@@ -102,7 +103,7 @@
 
     		/* var val = $("#search :selected").val();
     		alert(val); */
-    		fList();
+    		//fList();
     		
     		$("#searchBtn").click(function(){
     			var val = $("#search :selected").val();
@@ -312,7 +313,7 @@
 	<input type="hidden" id="currentPage" value="<%=currentPage %>">
 	
     <!-- Layout wrapper -->
-    <div class="layout-wrapper layout-content-navbar">
+    <div class="layout-wrapper layout-content-navvvbar">
         <div class="layout-container">
 
             <!-- Content wrapper -->
@@ -320,12 +321,81 @@
                 <!-- Content -->
 
                 <div class="container-xxl flex-grow-1 container-p-y">
-                <h3 style="margin-bottom: 30px;">자유게시판</h3>            
-                
+                <h3 style="margin-bottom: 30px;">자유게시판</h3>
+	            
                 <!-- Bootstrap Table with Header - Light -->
                     <div class="card" style="background-color: #fff">
+	
+					<ul class="nav nav-tabs" role="tablist">
+                      <li class="nav-item">
+                        <button
+                          type="button"
+                          class="nav-link active"
+                          role="tab"
+                          data-bs-toggle="tab"
+                          data-bs-target="#navs-top-home"
+                          aria-controls="navs-top-home"
+                          aria-selected="true"
+                        >
+                          Home
+                        </button>
+                      </li>
+                      <li class="nav-item">
+                        <button
+                          type="button"
+                          class="nav-link"
+                          role="tab"
+                          data-bs-toggle="tab"
+                          data-bs-target="#navs-top-profile"
+                          aria-controls="navs-top-profile"
+                          aria-selected="false"
+                        >
+                          Profile
+                        </button>
+                      </li>
+                      <li class="nav-item">
+                        <button
+                          type="button"
+                          class="nav-link"
+                          role="tab"
+                          data-bs-toggle="tab"
+                          data-bs-target="#navs-top-messages"
+                          aria-controls="navs-top-messages"
+                          aria-selected="false"
+                        >
+                          Messages
+                        </button>
+                      </li>
+                    </ul>
+                    <div class="tab-content">
+                      <div class="tab-pane fade show active" id="navs-top-home" role="tabpanel">
+                        <div class="fList"></div>
+                      </div>
+                      <div class="tab-pane fade" id="navs-top-profile" role="tabpanel">
+                        <p>
+                          Donut dragée jelly pie halvah. Danish gingerbread bonbon cookie wafer candy oat cake ice
+                          cream. Gummies halvah tootsie roll muffin biscuit icing dessert gingerbread. Pastry ice cream
+                          cheesecake fruitcake.
+                        </p>
+                        <p class="mb-0">
+                          Jelly-o jelly beans icing pastry cake cake lemon drops. Muffin muffin pie tiramisu halvah
+                          cotton candy liquorice caramels.
+                        </p>
+                      </div>
+                      <div class="tab-pane fade" id="navs-top-messages" role="tabpanel">
+                        <p>
+                          Oat cake chupa chups dragée donut toffee. Sweet cotton candy jelly beans macaroon gummies
+                          cupcake gummi bears cake chocolate.
+                        </p>
+                        <p class="mb-0">
+                          Cake chocolate bar cotton candy apple pie tootsie roll ice cream apple pie brownie cake. Sweet
+                          roll icing sesame snaps caramels danish toffee. Brownie biscuit dessert dessert. Pudding jelly
+                          jelly-o tart brownie jelly.
+                        </p>
+                      </div>
+                    </div>
+									
 						
-						<div class="fList"></div>
 						
                         <div class="bBottom" style="margin-top: 30px;">
                             <div class="bsBox">

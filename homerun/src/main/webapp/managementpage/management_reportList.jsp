@@ -1,11 +1,3 @@
-<%@page import="java.text.NumberFormat"%>
-<%@page import="data.dao.ProductDao"%>
-<%@page import="data.dto.ProductDto"%>
-<%@page import="data.dao.TeamDao"%>
-<%@page import="java.text.SimpleDateFormat"%>
-<%@page import="java.util.List"%>
-<%@page import="data.dto.FreeBoardDto"%>
-<%@page import="data.dao.FreeBoardDao"%>
 <%@ page language="java" contentType="text/html; charset=utf-8"
 	pageEncoding="utf-8"%>
 <!DOCTYPE html>
@@ -18,7 +10,7 @@
 <meta name="viewport"
 	content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0" />
 
-<title>관리자페이지_ 재고목록</title>
+<title>관리자페이지_신고 목록</title>
 
 <meta name="description" content="" />
 
@@ -105,81 +97,61 @@ a {
 </head>
 <script>
 $(function(){
-	fList();
+	list();
 })
 
-function fList() {
-    		//var val = $("#search :selected").val();
-    		//var currentPage = $("#currentPage").val();
-    		//alert(val + ", "+ currentPage);
-			var list = $("#list").val();
-    		$.ajax({
-    			
-    			type : "get",
-    			url : "getListTest.jsp",
-    			dataType : "json",
-    			data : {"list" : list},
-    			success:function(res) {
-
-    				var s="";
-    				
-    				s+="<div class='table-responsive text-nowrap'>";
-    				s+="<table class='table'>";
-    				s+="<thead style='background-color: #F8F9FA'>";
-    				s+="<tr>";
-    				s+="<th style='text-align: center; width: 80px;'>No.</th>";
-    				s+="<th style='text-align: center; width: 150px;'>카테고리</th>";
-    				s+="<th style='text-align: center;'>제목</th>";
-    				s+="<th style='text-align: center; width: 200px;'>작성자</th>";
-    				s+="<th style='text-align: center; width: 200px;'>날짜</th>";
-    				s+="<th style='text-align: center; width: 80px;'>조회수</th>";
-    				s+="<th style='text-align: center; width: 80px;'>추천</th>";
-    				s+="<th style='text-align: center; width: 80px;'>비추천</th>";
-    				s+="</tr>";
-    				s+="</thead>";
-					s+="<tbody class='table-border-bottom-0'>";
-    				
-					if(res.length == 0) {
-						s+="<tr>";
-						s+="<td colspan='8' align='center' style='font-size: 18pt;'>아직 작성된 게시글이 없습니다</td>";
-						s+="</tr>";
-					} else {
-						$.each(res, function(idx, item){
-							s+="<tr>";
-							s+="<td style='text-align: center;'>" + item.fbNum + "</td>";
-							
-							if(item.fbCategory == "전체") {   
-								s+="<td style='text-align: center; vertical-align:middle;'>";
-								s+="<img src='https://cdn.icon-icons.com/icons2/2070/PNG/512/baseball_icon_126956.png' style='width: 30px;'>";
-								   s+="</td>";
-							} else if(item.fbCategory == "한화") {
-								s+="<td style='text-align: center; vertical-align:middle;'>";
-								s+="<img src='" + item.teamLogoImg + "' style='width: 50px;'>";
-								s+="</td>";
-							} else {
-								s+="<td style='text-align: center; vertical-align:middle;'>";
-								s+="<img src='" + item.teamLogoImg + "' style='width: 40px;'>";
-								   s+="</td>";
-							}
-							
-							s+="<td style='vertical-align:middle;'><a href='freePost_detailPage.jsp?fbNum=" + item.fbNum + "&currentPage='>" + item.fbSubject + "</a><span style='color: tomato;'>&nbsp;&nbsp;[" + item.fcCnt + "]</span></td>";
-							s+="<td style='text-align: center; vertical-align:middle;'>" + item.nickname + "</td>";
-							s+="<td style='text-align: center; vertical-align:middle;'>" + item.fbWriteday + "</td>";
-							s+="<td style='text-align: center; vertical-align:middle;'>" + item.fbReadCnt + "</td>";
-							s+="<td style='text-align: center; vertical-align:middle;'>" + item.fbLike + "</td>";
-							s+="<td style='text-align: center; vertical-align:middle;'>" + item.fbDislike + "</td> ";							
-							s+="</tr>"		
-						});
-					}
-    				s+="</tbody>";
-    				s+="</table>";
-    				s+="</div>";
-    				
-    				$("div.fList").html(s);
-    			}
-    		});
-    		
+function list(){
+	$.ajax({
+		type:"get",
+		dataType:"json",
+		url:"getListTest.jsp",
+		success:function(res){
+			var s="";
+			
+			s+="<div class='text-nowrap'>";
+			s+="<table class='table'>";
+			s+="<thead style='background-color: #F8F9FA'>";
+			s+="<tr>";
+			s+="<th style='text-align: center; width: 70px;'>상품ID</th>";
+			s+="<th style='text-align: center; width: 150px;'>상품명</th>";
+			s+="<th style='text-align: center; width: 120px;'>팀</th>";
+			s+="<th style='text-align: center; width: 80px;'>카테고리</th>";
+			s+="<th style='text-align: center; width: 100px;'>재고수(SKU)</th>";
+			s+="<th style='text-align: center; width: 120px;'>가격</th>";
+			s+="<th style='text-align: center; width: 150px;'>관리</th>";
+			s+="</tr>";
+			s+="</thead>";
+			s+="<tbody class='table-border-bottom-0'>";
+			
+			if(res.length == 0) {
+				s+="<tr>";
+				s+="<td colspan='7' align='center' style='font-size: 18pt;'>아직 입력된 상품이 없습니다</td>";
+				s+="</tr>";
+			} else {
+				$.each(res, function(idx, item){
+					s+="<tr>";
+					s+="<td style='text-align: center;'>" + item.pId + "</td>";
+					s+="<td style='text-align: center;'><a href='../product/product_detailPage.jsp?pId="+item.pId+"'><b>"+item.pName+"</b></a></td>";
+					s+="<td style='text-align: center;'>" + item.teamName + "</td>";
+					s+="<td style='text-align: center;'>" + item.pCategory + "</td>";
+					s+="<td style='text-align: center;'>" + item.pStock + "</td>";
+					s+="<td style='text-align: center;'>" + item.price + "</td>";
+					s+="<td style='text-align: center;'><div class='dropdown'><button type='button' class='btn p-0 dropdown-toggle hide-arrow' data-bs-toggle='dropdown'><i class='bx bx-dots-vertical-rounded'></i></button>";
+					s+="<div class='dropdown-menu'><a class='dropdown-item' href='../product/product_updatePage.jsp?pId="+item.pId+"'><i class='bx bx-edit-alt me-1'></i>Update</a>";
+					s+="<a class='dropdown-item' href='../product/product_delete.jsp?pId="+item.pId+"'><i class='bx bx-trash me-1'></i> Delete</a>";
+					s+="</div></div></td>"
+					s+="</tr>"		
+				});
+			}
+			s+="</tbody>";
+			s+="</table>";
+			s+="</div>";
+			
+			$("div.sList").html(s);
 		}
+		
+	})
+}
 
 </script>
 <body>
@@ -196,9 +168,9 @@ int currentPage; //현재페이지
 
 int no;
 
-FreeBoardDao dao = new FreeBoardDao();
+ProductDao dao = new ProductDao();
 
-totalCount = dao.getFBTotalCount();
+totalCount = dao.getTotalCount();
 
 //현재 페이지 번호 읽기(null일때는 1페이지로 설정)
 if (request.getParameter("currentPage") == null)
@@ -221,10 +193,8 @@ if (endPage > totalPage)
 start = (currentPage - 1) * perPage;
 
 //메서드 불러오기
-List<FreeBoardDto> list = dao.getFBList(start, perPage);
+List<ProductDto> list = dao.getList_pDay(start, perPage);
 %>
-
-<input type="hidden" id="list" value="<%=list %>">
 	<!-- Layout wrapper -->
 	<div class="layout-wrapper layout-content-navbar">
 		<div class="layout-container">
@@ -239,7 +209,7 @@ List<FreeBoardDto> list = dao.getFBList(start, perPage);
 						<h3 class="card-header">
 							<b>재고목록</b>
 						</h3>
-						<div class="fList"></div>
+						<div class="sList"></div>
 
 						<div class="bBottom">
 							<div class="bsBox">

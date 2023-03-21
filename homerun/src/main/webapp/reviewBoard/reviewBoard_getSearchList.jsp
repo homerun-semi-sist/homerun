@@ -25,11 +25,11 @@
 	String str = request.getParameter("str");
 	
 	if(val.equals("nickname"))
-		rbList = rbDao.search_nickname(str);
+		rbList = rbDao.search_nickname(start, perPage, str);
 	else if(val.equals("subject"))
-		rbList = rbDao.search_subject(str);
+		rbList = rbDao.search_subject(start, perPage, str);
 	else if(val.equals("content"))
-		rbList = rbDao.search_content(str);
+		rbList = rbDao.search_content(start, perPage, str);
 
 	ReviewCommentDao rcDao = new ReviewCommentDao();
 	

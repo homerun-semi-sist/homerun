@@ -107,7 +107,7 @@ public class FreeBoardDao {
  		PreparedStatement pstmt = null;
  		ResultSet rs = null;
  		
- 		String sql = "select * from FREEBOARD order by fbReadCnt desc;";
+ 		String sql = "select * from FREEBOARD order by fbReadCnt desc";
  		 		
  		try {
  			pstmt = conn.prepareStatement(sql);
@@ -142,6 +142,45 @@ public class FreeBoardDao {
 	
 	// list - 신고수
 	// SELECT * FROM POSTREPORT WHERE fbReport != 0;
+	public List<FreeBoardDto> getAllFBs_report() {
+		List<FreeBoardDto> list = new Vector<>();
+		
+		Connection conn = db.getConnection();
+ 		PreparedStatement pstmt = null;
+ 		ResultSet rs = null;
+ 		
+ 		String sql = "select * from FREEBOARD where fbReport != 0";
+ 		 		
+ 		try {
+ 			pstmt = conn.prepareStatement(sql);
+ 			rs = pstmt.executeQuery();
+ 		
+ 			while(rs.next()) {
+ 				FreeBoardDto dto = new FreeBoardDto();
+ 				
+ 				dto.setFbNum(rs.getString("fbNum"));
+ 				dto.setUId(rs.getString("uId"));
+                dto.setFbCategory(rs.getString("fbCategory"));
+                dto.setFbSubject(rs.getString("fbSubject"));
+                dto.setFbContent(rs.getString("fbContent"));
+                dto.setFbPhoto(rs.getString("fbPhoto"));
+                dto.setFbReadCnt(rs.getString("fbReadCnt"));
+                dto.setFbLike(rs.getString("fbLike"));
+                dto.setFbDislike(rs.getString("fbDislike"));
+                dto.setFbWriteday(rs.getTimestamp("fbWriteday"));
+                dto.setFbReport(rs.getString("fbReport"));
+                
+ 				// list 추가
+ 				list.add(dto);
+ 			}
+ 		} catch (SQLException e) {
+ 			e.printStackTrace();
+ 		} finally {
+ 			db.dbClose(rs, pstmt, conn);
+ 		}
+		return list;
+				
+	}
 	
 	// getFB 
 	public FreeBoardDto getFB(String fbNum) {

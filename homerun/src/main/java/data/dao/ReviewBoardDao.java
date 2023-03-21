@@ -61,7 +61,49 @@ public class ReviewBoardDao {
 	
 	// list - 조회수순
 	
-	/// getRB 
+	// list - 신고수
+	// SELECT * FROM POSTREPORT WHERE fbReport != 0;
+	public List<ReviewBoardDto> getAllRBs_report() {
+		List<ReviewBoardDto> list = new Vector<>();
+		
+		Connection conn = db.getConnection();
+ 		PreparedStatement pstmt = null;
+ 		ResultSet rs = null;
+ 		
+ 		String sql = "select * from REVIEWBOARD where rbReport != 0";
+ 		 		
+ 		try {
+ 			pstmt = conn.prepareStatement(sql);
+ 			rs = pstmt.executeQuery();
+ 		
+ 			while(rs.next()) {
+ 				ReviewBoardDto dto = new ReviewBoardDto();
+ 				
+ 				dto.setRbNum(rs.getString("rbNum"));
+                dto.setUId(rs.getString("uId"));
+                dto.setgId(rs.getString("gId"));
+                dto.setRbSubject(rs.getString("rbSubject"));
+                dto.setRbContent(rs.getString("rbContent"));
+                dto.setRbPhoto(rs.getString("rbPhoto"));
+                dto.setRbReadCnt(rs.getString("rbReadCnt"));
+                dto.setRbLike(rs.getString("rbLike"));
+                dto.setRbDislike(rs.getString("rbDislike"));
+                dto.setRbWriteday(rs.getTimestamp("rbWriteday"));
+                dto.setRbReport(rs.getString("rbReport"));
+                
+ 				// list 추가
+ 				list.add(dto);
+ 			}
+ 		} catch (SQLException e) {
+ 			e.printStackTrace();
+ 		} finally {
+ 			db.dbClose(rs, pstmt, conn);
+ 		}
+		return list;
+				
+	}
+	
+	// getRB 
 	public ReviewBoardDto getRB(String rbNum) {
 		ReviewBoardDto dto = new ReviewBoardDto();
 
@@ -339,8 +381,7 @@ public class ReviewBoardDao {
         return list;
 				
 	}
-	
-	
+		
 	// search - rbContent
 	// select * from REVIEWBOARD where rbContent Like "%?%";
 	public List<ReviewBoardDto> search_content(int start, int perPage, String rbContent) {

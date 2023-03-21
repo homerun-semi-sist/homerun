@@ -27,9 +27,6 @@
     <link rel="stylesheet" href="../assets/board/vendor/css/theme-default.css" class="template-customizer-theme-css" />
     <link rel="stylesheet" href="../assets/board/css/demo.css" />
 
-    <!-- Vendors CSS -->
-    <link rel="stylesheet" href="../assets/board/vendor/libs/perfect-scrollbar/perfect-scrollbar.css" />
-
     <!-- Page CSS -->
 
     <!-- Helpers -->
