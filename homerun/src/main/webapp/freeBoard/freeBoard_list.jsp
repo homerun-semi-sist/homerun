@@ -192,7 +192,7 @@
     			type : "get",
     			url : "freeBoard_getList.jsp",
     			dataType : "json",
-    			/* data : {"val" : val}, */
+    			data : {"currentPage" : currentPage}, 
     			success:function(res) {
 
     				var s="";

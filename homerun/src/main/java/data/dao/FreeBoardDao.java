@@ -140,6 +140,9 @@ public class FreeBoardDao {
 				
 	}
 	
+	// list - 신고수
+	// SELECT * FROM POSTREPORT WHERE fbReport != 0;
+	
 	// getFB 
 	public FreeBoardDto getFB(String fbNum) {
 		FreeBoardDto dto = new FreeBoardDto();
