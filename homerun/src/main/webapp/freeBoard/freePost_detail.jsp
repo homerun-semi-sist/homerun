@@ -103,7 +103,7 @@
 			});
 			
 			// 댓글 delete
-			$(document).on("click", "#fcDel", function() {
+			$(document).on("click", ".fcDel", function() {
 				var a = confirm("댓글을 삭제하려면 [확인]을 눌러주세요");
 				
 				var fcIdx = $(this).attr("fcIdx");
@@ -124,12 +124,12 @@
 			});
 			
 			// 댓글 update 버튼 클릭
-			$(document).on("click", "#fcMod", function() {
+			$(document).on("click", ".fcMod", function() {
 							
 				var fcIdx = $(this).attr("fcIdx");
-				// alert(fcIdx);
+				alert(fcIdx);
 				
-				// 추가폼은 숨기고 수정폼은 나타냄
+				// 입력폼은 숨기고 수정폼은 나타냄
 				$("div.commentForm").hide();
 				$("div.commentUpdateForm").show();
 				
@@ -141,6 +141,7 @@
 					data : {"fcIdx" : fcIdx},
 					success : function(res) {	
 						$("#ucontent").val(res.fcContent);
+						$("#cUpdateBtn").attr("fcIdx", res.fcIdx);
 					}
 				});
  
@@ -149,9 +150,9 @@
 			// 댓글 update
 			$("#cUpdateBtn").click(function() {
 							
-				var fcIdx = $("#fcMod").attr("fcIdx");
+				var fcIdx = $(this).attr("fcIdx");
 				var ucontent = $("#ucontent").val();
-				// alert(fcIdx + ", " + ucontent);
+				alert(fcIdx + ", " + ucontent);
 
 				$.ajax({
 				
@@ -162,20 +163,25 @@
 					success : function () {
 			
 						list();
+						
+						// 수정폼은 숨기고 입력폼은 나타냄
+						$("div.commentUpdateForm").hide();
+						$("div.commentForm").show();
+						
 					}
 						
 				}); 
 			});
 			
 			// 댓글 추천수 증가
-			$(document).on("click", "#fcLike", function() {
+			$(document).on("click", ".fcLike", function() {
 				var loginok = $("#loginok").val();
 				//alert(loginok);
 				
 				if(loginok == "yes") {
 					
 					var fcIdx = $(this).attr("fcIdx");
-					// alert(fcIdx);
+					 alert(fcIdx);
 					
 					$.ajax({
 						
@@ -184,8 +190,9 @@
 						dataType : "json",
 						data : {"fcIdx" : fcIdx},
 						success : function (res) {
-	
-							$("#fcLikeCnt").text(res.like);
+						
+							list();
+							
 						}
 					})
 					
@@ -196,14 +203,14 @@
 			});
 			
 			// 댓글 비추천수 증가
-			$(document).on("click", "#fcDislike", function() {
+			$(document).on("click", "#.cDislike", function() {
 				var loginok = $("#loginok").val();
 				//alert(loginok);
 				
 				if(loginok == "yes") {
 					
 					var fcIdx = $(this).attr("fcIdx");
-					// alert(fcIdx);
+					 alert(fcIdx);
 					
 					$.ajax({
 						
@@ -213,7 +220,7 @@
 						data : {"fcIdx" : fcIdx},
 						success : function (res) {
 	
-							$("#fcDislikeCnt").text(res.dislike);
+							list();
 						}
 					})
 					
@@ -224,14 +231,14 @@
 			});
 			
 			// 댓글 신고수 증가 
-			$(document).on("click", "#fcReport", function() {
+			$(document).on("click", ".fcReport", function() {
 				var loginok = $("#loginok").val();
 				//alert(loginok);
 				
 				if(loginok == "yes") {
 					
 					var fcIdx = $(this).attr("fcIdx");
-					// alert(fcIdx);
+					 alert(fcIdx);
 					
 					$.ajax({
 						
@@ -241,16 +248,13 @@
 						data : {"fcIdx" : fcIdx},
 						success : function (res) {
 		
-							if(res.flag == true) {
-								var a = confirm("신고하려면 [확인]을 눌러주세요\n한번 신고한 댓글은 취소가 불가능합니다");
+							var a = confirm("신고하려면 [확인]을 눌러주세요\n한번 신고한 댓글은 취소가 불가능합니다");
 								
-								if(a) {
-									$("#fcReportCnt").text(res.report);
-									alert("댓글을 신고하였습니다");
-								}
+							if(a) {
+								$(".fcReportCnt").text(res.report);
+								alert("댓글을 신고하였습니다");	
+								list();
 							}
-							else 
-								alert("이미 신고한 댓글입니다");
 						}
 					})
 					
@@ -299,20 +303,20 @@
 						// 로그인 o && 댓글 작성자 == 로그인 한 아이디 -> 수정, 삭제 표시
 						if(loginok != null && uId == item.fcUId) {
 							if(item.fcUId == fbUId) 
-								s+="<div class='fw-bold'><i class='fa-solid fa-user'></i>&nbsp;" + (idx + 1) + ". " + item.nickname + "<span style='color: red; border: 1px solid red; border-radius: 5px; font-size: 0.7rem; margin-left: 3px;'>작성자</span> <span class='cday'>" + item.fcWriteday + " | <span id='fcMod' fcIdx=" + item.fcIdx + " style='cursor: pointer'>수정</span> | <span id='fcDel' fcIdx=" + item.fcIdx + " style='cursor: pointer'> 삭제 </span></span></div>"; 
+								s+="<div class='fw-bold'><i class='fa-solid fa-user'></i>&nbsp;" + (idx + 1) + ". " + item.nickname + "<span style='color: red; border: 1px solid red; border-radius: 5px; font-size: 0.7rem; margin-left: 3px;'>작성자</span> <span class='cday'>" + item.fcWriteday + " | <span class='fcMod' fcIdx=" + item.fcIdx + " style='cursor: pointer'>수정</span> | <span class='fcDel' fcIdx=" + item.fcIdx + " style='cursor: pointer'> 삭제 </span></span></div>"; 
 							
 							// 댓글 작성자 == 글 작성자 -> 작성자 표시	1.로그인했을때->수정삭제
 							else
-								s+="<div class='fw-bold'><i class='fa-solid fa-user'></i>&nbsp;" + (idx + 1) + ". " + item.nickname + "<span class='cday'>" + item.fcWriteday + " | <span id='fcMod' fcIdx=" + item.fcIdx + " style='cursor: pointer'>수정</span> | <span id='fcDel' fcIdx=" + item.fcIdx + " style='cursor: pointer'> 삭제 </span></span></div>";
+								s+="<div class='fw-bold'><i class='fa-solid fa-user'></i>&nbsp;" + (idx + 1) + ". " + item.nickname + "<span class='cday'>" + item.fcWriteday + " | <span class='fcMod' fcIdx=" + item.fcIdx + " style='cursor: pointer'>수정</span> | <span class='fcDel' fcIdx=" + item.fcIdx + " style='cursor: pointer'> 삭제 </span></span></div>";
 						}
 						
 						// 댓글 작성자 == 글 작성자 -> 작성자 표시	2.로그인안했을때 
 						else if(item.fcUId == fbUId) 
-							s+="<div class='fw-bold'><i class='fa-solid fa-user'></i>&nbsp;" + (idx + 1) + ". " + item.nickname + "<span style='color: red; border: 1px solid red; border-radius: 5px; font-size: 0.7rem; margin-left: 3px;'>작성자</span> <span class='cday'>" + item.fcWriteday + " | <span id='fcMod' fcIdx=" + item.fcIdx + " style='cursor: pointer'>수정</span> | <span id='fcDel' fcIdx=" + item.fcIdx + " style='cursor: pointer'> 삭제 </span></span></div>"; 
+							s+="<div class='fw-bold'><i class='fa-solid fa-user'></i>&nbsp;" + (idx + 1) + ". " + item.nickname + "<span style='color: red; border: 1px solid red; border-radius: 5px; font-size: 0.7rem; margin-left: 3px;'>작성자</span> <span class='cday'>" + item.fcWriteday + " | <span class='fcMod' fcIdx=" + item.fcIdx + " style='cursor: pointer'>수정</span> | <span class='fcDel' fcIdx=" + item.fcIdx + " style='cursor: pointer'> 삭제 </span></span></div>"; 
 						 
 						// 로그인 x
 						else
-							s+="<div class='fw-bold'><i class='fa-solid fa-user'></i>&nbsp;" + (idx + 1) + ". " + item.nickname + "<span class='cday'>" + item.fcWriteday + " | <span id='fcLike' fcIdx=" + item.fcIdx + " style='cursor: pointer'>추천 <span id='fcLikeCnt'> " + item.fcLike + "</span></span> | <span id='fcDislike' fcIdx=" + item.fcIdx + " style='cursor: pointer'> 비추천 <span id='fcDislikeCnt'> " + item.fcDislike + "</span> </span> | <span id='fcReport' fcIdx=" + item.fcIdx + " style='cursor: pointer'> 신고 <span id='fcReportCnt'>" + item.fcReport + "</span></span></span></div>"; 
+							s+="<div class='fw-bold'><i class='fa-solid fa-user'></i>&nbsp;" + (idx + 1) + ". " + item.nickname + "<span class='cday'>" + item.fcWriteday + " | <span class='fcLike' fcIdx='" + item.fcIdx + "' style='cursor: pointer'>추천 <span class='fcLikeCnt' fcIdx='" + item.fcIdx + "'>" + item.fcLike + "</span></span> | <span class='fcDislike' fcIdx=" + item.fcIdx + " style='cursor: pointer'> 비추천 <span class='fcDislikeCnt' fcIdx='" + item.fcIdx + "'> " + item.fcDislike + "</span> </span> | <span class='fcReport' fcIdx=" + item.fcIdx + " style='cursor: pointer'> 신고 <span class='fcReportCnt' fcIdx='" + item.fcIdx + "'>" + item.fcReport + "</span></span></span></div>"; 
 						
 						s+= "<div id='fcContent' fcContent='"+ item.fcContent +"'>" + item.fcContent + "</div>";
 						s+="</div>";
@@ -537,7 +541,7 @@
 			                      					<textarea name="ucontent" id="ucontent" class="form-control"></textarea>
 							                    </div>
 							                    <div class="col-1">
-							                      <button type="button" id="cUpdateBtn" class="btn btn-primary" style="width: 80px; height: 40px; line-height: 20px;">수정</button>
+							                      <button type="button" id="cUpdateBtn" fcIdx="" class="btn btn-primary" style="width: 80px; height: 40px; line-height: 20px;">수정</button>
 							                    </div>
 			                 				 </div>	                          
 			                        	</div>
@@ -636,28 +640,28 @@
 				var num = $("#fbNum").val();
 				
 				// alert(num);
+				var a = confirm("신고하려면 [확인]을 눌러주세요\n한번 신고한 글은 취소가 불가능합니다");
 				
-				$.ajax({
+				if(a) {
+					$.ajax({
 					
-					type : "get",
-					dataType : "json",
-					url : "freePost_report.jsp",
-					data : {"num" : num},
-					success : function(res) {
-						
-						// alert(res.report);
-						
-						if(res.flag == true) {
-							var a = confirm("신고하려면 [확인]을 눌러주세요\n한번 신고한 글은 취소가 불가능합니다");
+						type : "get",
+						dataType : "json",
+						url : "freePost_report.jsp",
+						data : {"num" : num},
+						success : function(res) {
 							
-							if(a)
-								alert("게시글을 신고하였습니다");
+							// alert(res.report);
+
+							if(res.flag == true)
+									alert("게시글을 신고하였습니다");
+							
+							else 
+								alert("이미 신고한 게시글입니다");
+		
 						}
-						else 
-							alert("이미 신고한 게시글입니다");
-	
-					}
-				}); 
+					}); 
+				}
 			} else
 				alert("로그인 후 이용 가능합니다");
 			

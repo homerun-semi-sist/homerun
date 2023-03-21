@@ -2106,41 +2106,6 @@ progress {
   border-color: #394859;
 }
 
-.table-responsive {
-  overflow-x: auto;
-  -webkit-overflow-scrolling: touch;
-}
-
-@media (max-width: 575.98px) {
-  .table-responsive-sm {
-    overflow-x: auto;
-    -webkit-overflow-scrolling: touch;
-  }
-}
-@media (max-width: 767.98px) {
-  .table-responsive-md {
-    overflow-x: auto;
-    -webkit-overflow-scrolling: touch;
-  }
-}
-@media (max-width: 991.98px) {
-  .table-responsive-lg {
-    overflow-x: auto;
-    -webkit-overflow-scrolling: touch;
-  }
-}
-@media (max-width: 1199.98px) {
-  .table-responsive-xl {
-    overflow-x: auto;
-    -webkit-overflow-scrolling: touch;
-  }
-}
-@media (max-width: 1399.98px) {
-  .table-responsive-xxl {
-    overflow-x: auto;
-    -webkit-overflow-scrolling: touch;
-  }
-}
 .form-label {
   margin-bottom: 0.5rem;
   font-size: 0.75rem;
@@ -4069,17 +4034,6 @@ textarea.form-control-lg {
 }
 .modal.modal-static .modal-dialog {
   transform: scale(1.02);
-}
-
-.modal-dialog-scrollable {
-  height: calc(100% - 3rem);
-}
-.modal-dialog-scrollable .modal-content {
-  max-height: 100%;
-  overflow: hidden;
-}
-.modal-dialog-scrollable .modal-body {
-  overflow-y: auto;
 }
 
 .modal-dialog-centered {
@@ -7080,18 +7034,6 @@ form select.selectpicker.is-invalid ~ .btn {
   padding: 0.25rem 1.5rem 1.5rem;
 }
 
-.modal-dialog-scrollable .btn-close,
-.modal-fullscreen .btn-close,
-.modal-top .btn-close {
-  box-shadow: none;
-  transform: translate(0, 0) !important;
-}
-.modal-dialog-scrollable .btn-close:hover,
-.modal-fullscreen .btn-close:hover,
-.modal-top .btn-close:hover {
-  transform: translate(0, 0) !important;
-}
-
 .modal-top .modal-dialog {
   margin-top: 0;
 }
@@ -7911,10 +7853,6 @@ button.list-group-item-gray.active {
 
 .overflow-visible {
   overflow: visible !important;
-}
-
-.overflow-scroll {
-  overflow: scroll !important;
 }
 
 .d-inline {

@@ -18,6 +18,7 @@
 	JSONObject ob = new JSONObject();
 	
 	ob.put("like", like);
+	ob.put("fcIdx", fcIdx);
 %>
 
 <%=ob.toString() %>

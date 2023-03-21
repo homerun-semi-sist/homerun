@@ -163,6 +163,10 @@
 					success : function () {
 			
 						list();
+						
+						// 수정폼은 숨기고 입력폼은 나타냄
+						$("div.commentUpdateForm").hide();
+						$("div.commentForm").show();
 					}
 						
 				}); 
@@ -648,31 +652,31 @@
 				var num = $("#rbNum").val();
 				
 				// alert(num);
+				var a = confirm("신고하려면 [확인]을 눌러주세요\n한번 신고한 글은 취소가 불가능합니다");
 				
-				$.ajax({
+				if(a) {
+					$.ajax({
 					
-					type : "get",
-					dataType : "json",
-					url : "reviewPost_report.jsp",
-					data : {"num" : num},
-					success : function(res) {
-						
-						// alert(res.report);
-						
-						if(res.flag == true) {
-							var a = confirm("신고하려면 [확인]을 눌러주세요\n한번 신고한 글은 취소가 불가능합니다");
+						type : "get",
+						dataType : "json",
+						url : "reviewPost_report.jsp",
+						data : {"num" : num},
+						success : function(res) {
 							
-							if(a)
-								alert("게시글을 신고하였습니다");
-						}
-						else 
-							alert("이미 신고한 게시글입니다");
+							// alert(res.report);
 	
-					}
-				}); 
+							if(res.flag == true)
+									alert("게시글을 신고하였습니다");
+							
+							else 
+								alert("이미 신고한 게시글입니다");
+		
+						}
+					}); 
+				}
 			} else
 				alert("로그인 후 이용 가능합니다");
-			
+				
 		});
 		
 		// 찜
