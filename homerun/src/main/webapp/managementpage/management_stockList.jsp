@@ -148,7 +148,7 @@ if (endPage > totalPage)
 start = (currentPage - 1) * perPage;
 
 //메서드 불러오기
-List<ProductDto> list = dao.getList(start, perPage);
+List<ProductDto> list = dao.getList_pDay(start, perPage);
 %>
 <body>
 	<!-- Layout wrapper -->
@@ -173,7 +173,6 @@ List<ProductDto> list = dao.getList(start, perPage);
 										<th style="text-align: center; width: 200px;">상품명</th>
 										<th style="text-align: center; width: 200px;">팀</th>
 										<th style="text-align: center; width: 80px;">카테고리</th>
-										<th style="text-align: center; width: 80px;">옵션</th>
 										<th style="text-align: center; width: 100px;">재고수(SKU)</th>
 										<th style="text-align: center; width: 120px;">가격</th>
 										<th style="text-align: center; width: 80px;">관리</th>
@@ -189,7 +188,6 @@ List<ProductDto> list = dao.getList(start, perPage);
 											href="../product/product_detailPage.jsp?pId=<%=dto.getpId()%>"><b><%=dto.getpName()%></b></a></td>
 										<td style="text-align: center;"><%=dto.getTeamName()%></td>
 										<td style="text-align: center;"><%=dto.getpCategory()%></td>
-										<td style="text-align: center;"><%=dto.getpOption()%></td>
 										<td style="text-align: center;"><%=dto.getpStock()%></td>
 										<td style="text-align: center;"><%=nf.format(dto.getPrice())%></td>
 										<td style="text-align: center;">

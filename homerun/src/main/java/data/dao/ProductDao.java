@@ -26,7 +26,6 @@ public class ProductDao {
 			pstmt.setString(2, dto.getTeamName());
 			pstmt.setString(3, dto.getpCategory());
 			pstmt.setString(4, dto.getpName());
-			pstmt.setString(5, dto.getpOption());
 			pstmt.setInt(6, dto.getpStock());
 			pstmt.setInt(7, dto.getPrice());
 			pstmt.setString(8, dto.getpDetail());
@@ -64,7 +63,6 @@ public class ProductDao {
 				dto.setpImage(rs.getString("pImage"));
 				dto.setpStock(rs.getInt("pStock"));
 				dto.setPrice(rs.getInt("price"));
-				dto.setpOption(rs.getString("pOption"));
 				dto.setpDetail(rs.getString("pDetail"));
 				dto.setpDay(rs.getTimestamp("pDay"));
 
@@ -101,7 +99,6 @@ public class ProductDao {
 				dto.setpImage(rs.getString("pImage"));
 				dto.setpStock(rs.getInt("pStock"));
 				dto.setPrice(rs.getInt("price"));
-				dto.setpOption(rs.getString("pOption"));
 				dto.setpDetail(rs.getString("pDetail"));
 				dto.setpDay(rs.getTimestamp("pDay"));
 
@@ -157,7 +154,6 @@ public class ProductDao {
 				dto.setpImage(rs.getString("pImage"));
 				dto.setpStock(rs.getInt("pStock"));
 				dto.setPrice(rs.getInt("price"));
-				dto.setpOption(rs.getString("pOption"));
 				dto.setpDetail(rs.getString("pDetail"));
 				dto.setpDay(rs.getTimestamp("pDay"));
 			}
@@ -276,7 +272,6 @@ public class ProductDao {
 				dto.setpImage(rs.getString("pImage"));
 				dto.setpStock(rs.getInt("pStock"));
 				dto.setPrice(rs.getInt("price"));
-				dto.setpOption(rs.getString("pOption"));
 				dto.setpDetail(rs.getString("pDetail"));
 				dto.setpDay(rs.getTimestamp("pDay"));
 
@@ -320,7 +315,6 @@ public class ProductDao {
 				dto.setpImage(rs.getString("pImage"));
 				dto.setpStock(rs.getInt("pStock"));
 				dto.setPrice(rs.getInt("price"));
-				dto.setpOption(rs.getString("pOption"));
 				dto.setpDetail(rs.getString("pDetail"));
 				dto.setpDay(rs.getTimestamp("pDay"));
 
@@ -359,7 +353,6 @@ public class ProductDao {
 				dto.setpImage(rs.getString("pImage"));
 				dto.setpStock(rs.getInt("pStock"));
 				dto.setPrice(rs.getInt("price"));
-				dto.setpOption(rs.getString("pOption"));
 				dto.setpDetail(rs.getString("pDetail"));
 				dto.setpDay(rs.getTimestamp("pDay"));
 
@@ -398,7 +391,6 @@ public class ProductDao {
 				dto.setpImage(rs.getString("pImage"));
 				dto.setpStock(rs.getInt("pStock"));
 				dto.setPrice(rs.getInt("price"));
-				dto.setpOption(rs.getString("pOption"));
 				dto.setpDetail(rs.getString("pDetail"));
 				dto.setpDay(rs.getTimestamp("pDay"));
 

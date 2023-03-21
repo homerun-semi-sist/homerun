@@ -7,7 +7,6 @@ public class ProductDto {
 	private String teamName;
 	private String pCategory;
 	private String pName;
-	private String pOption;
 	private int pStock;
 	private int price;
 	private String pDetail;
@@ -44,14 +43,6 @@ public class ProductDto {
 
 	public void setpName(String pName) {
 		this.pName = pName;
-	}
-
-	public String getpOption() {
-		return pOption;
-	}
-
-	public void setpOption(String pOption) {
-		this.pOption = pOption;
 	}
 
 	public int getpStock() {

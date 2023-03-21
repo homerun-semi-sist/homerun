@@ -96,16 +96,6 @@
 		</div>
 
 		<div class="textForm">
-			<span class="inputForm sameWidth">옵션 선택&nbsp;&nbsp;</span> <select
-				name="pOption">
-				<option value="없음" selected="selected">없음</option>
-				<option value="S">S</option>
-				<option value="M">M</option>
-				<option value="L">L</option>
-			</select>
-		</div>
-
-		<div class="textForm">
 			<span class="inputForm sameWidth">재고수&nbsp;&nbsp;</span> <input
 				name="pStock" type="number" min="1" value="100" style="width: 50px">
 		</div>
@@ -129,7 +119,7 @@
 				required="required">
 		</div>
 
-		<div style="margin-top: 20px">
+		<div style="margin-top: 50px">
 			<button type="submit" class="pinsertbtn pinsertbtn1">재고입력</button>
 			<button type="button" class="pinsertbtn"
 				onclick="location.href='../product/product_listPage.jsp'">취소</button>
