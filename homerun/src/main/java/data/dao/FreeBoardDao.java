@@ -327,13 +327,126 @@ public class FreeBoardDao {
 	}
 	
 	// search - nickname
-	// select f.fbNum, f.uId, f.fbCategory, f.fbSubject, f.fbContent, f.fbReadCnt, f.fbLike, f.fbDislike, f.fbReport, f.fbWriteday from FREEBOARD f, USER u where f.uId=u.uId and u.nickname='스프링';
+	// select f.* from FREEBOARD f, USER u where f.uId=u.uId and u.nickname=?;
+	public FreeBoardDto search_nickname(String nickname) {
+		FreeBoardDto dto = new FreeBoardDto();
+
+        Connection conn = db.getConnection();
+        PreparedStatement pstmt = null;
+        ResultSet rs = null;
+
+        String sql = "select f.*  from FREEBOARD f, USER u where f.uId=u.uId and u.nickname=?";
+
+        try {
+            pstmt = conn.prepareStatement(sql);
+
+            pstmt.setString(1, nickname);
+            rs = pstmt.executeQuery();
+
+            if(rs.next()) {
+            	dto.setFbNum(rs.getString("fbNum"));
+            	dto.setUId(rs.getString("uId"));
+                dto.setFbCategory(rs.getString("fbCategory"));
+                dto.setFbSubject(rs.getString("fbSubject"));
+                dto.setFbContent(rs.getString("fbContent"));
+                dto.setFbPhoto(rs.getString("fbPhoto"));
+                dto.setFbReadCnt(rs.getString("fbReadCnt"));
+                dto.setFbLike(rs.getString("fbLike"));
+                dto.setFbDislike(rs.getString("fbDislike"));
+                dto.setFbWriteday(rs.getTimestamp("fbWriteday"));
+                dto.setFbReport(rs.getString("fbReport"));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            db.dbClose(rs, pstmt, conn);
+        }
+
+        return dto;
+				
+	}
+	
 	
 	// search - fbSubject
 	// select * from FREEBOARD where fbSubject Like "%?%";
+	public FreeBoardDto search_subject(String fbSubject) {
+		FreeBoardDto dto = new FreeBoardDto();
+
+        Connection conn = db.getConnection();
+        PreparedStatement pstmt = null;
+        ResultSet rs = null;
+
+        String sql = "select * from FREEBOARD where fbSubject Like %?%";
+
+        try {
+            pstmt = conn.prepareStatement(sql);
+
+            pstmt.setString(1, fbSubject);
+            rs = pstmt.executeQuery();
+
+            if(rs.next()) {
+            	dto.setFbNum(rs.getString("fbNum"));
+            	dto.setUId(rs.getString("uId"));
+                dto.setFbCategory(rs.getString("fbCategory"));
+                dto.setFbSubject(rs.getString("fbSubject"));
+                dto.setFbContent(rs.getString("fbContent"));
+                dto.setFbPhoto(rs.getString("fbPhoto"));
+                dto.setFbReadCnt(rs.getString("fbReadCnt"));
+                dto.setFbLike(rs.getString("fbLike"));
+                dto.setFbDislike(rs.getString("fbDislike"));
+                dto.setFbWriteday(rs.getTimestamp("fbWriteday"));
+                dto.setFbReport(rs.getString("fbReport"));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            db.dbClose(rs, pstmt, conn);
+        }
+
+        return dto;
+				
+	}
+	
 	
 	// search - fbContent
 	// select * from FREEBOARD where fbContent Like "%?%";
+	public FreeBoardDto search_content(String fbContent) {
+		FreeBoardDto dto = new FreeBoardDto();
+
+        Connection conn = db.getConnection();
+        PreparedStatement pstmt = null;
+        ResultSet rs = null;
+
+        String sql = "select * from FREEBOARD where fbSubject Like %?%";
+
+        try {
+            pstmt = conn.prepareStatement(sql);
+
+            pstmt.setString(1, fbContent);
+            rs = pstmt.executeQuery();
+
+            if(rs.next()) {
+            	dto.setFbNum(rs.getString("fbNum"));
+            	dto.setUId(rs.getString("uId"));
+                dto.setFbCategory(rs.getString("fbCategory"));
+                dto.setFbSubject(rs.getString("fbSubject"));
+                dto.setFbContent(rs.getString("fbContent"));
+                dto.setFbPhoto(rs.getString("fbPhoto"));
+                dto.setFbReadCnt(rs.getString("fbReadCnt"));
+                dto.setFbLike(rs.getString("fbLike"));
+                dto.setFbDislike(rs.getString("fbDislike"));
+                dto.setFbWriteday(rs.getTimestamp("fbWriteday"));
+                dto.setFbReport(rs.getString("fbReport"));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            db.dbClose(rs, pstmt, conn);
+        }
+
+        return dto;
+				
+	}
 	
 	// 페이징 처리
 	// FB totalCount

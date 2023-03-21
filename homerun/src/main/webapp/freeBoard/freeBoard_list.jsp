@@ -52,20 +52,19 @@
         .bsBox {
             border: 0px solid gray;
             display: flex;
-            width: 250px;
+            width: 500px;
             text-align: center;
             margin-left: 10px;
         }
 
         .bSelect {
-            border: 1px solid gray;
-            width: 80px;
+            border: 0px solid gray;
             margin-right: 5px;
         }
 
         .bSearch {
-            border: 1px solid gray;
-            width: 170px;
+            border: 0px solid gray;
+            
         }
 
         .bInsert {
@@ -80,7 +79,7 @@
             color: black;
         }
         
-        #insertBtn {
+        #insertBtn, #searchBtn {
         	border-radius: 4px;
 			padding: 10px 20px;
 			border: 1px solid #0b214e;
@@ -92,11 +91,76 @@
         }
         
         
-        #insertBtn:hover {
+        #insertBtn:hover, #searchBtn:hover {
 		 	color: #0b214e;
 		  	background-color: #f8f9fa;
 		}
     </style>
+    
+    <script type="text/javascript">
+    	$(function() {
+
+    		/* var val = $("#search :selected").val();
+    		alert(val); */
+    		fList();
+    		
+    		$("#search").change(function(){
+    		    // Value값 가져오기
+    		    val = $("#search :selected").val();
+    	    
+    		   	alert(val);
+    		    
+    		});
+    		
+		})
+		
+		function fList() {
+    		var val = $("#search :selected").val();
+    		// alert(val);
+			
+    		$.ajax({
+				
+				type : "get",
+			    url : "freeBoard_getList.jsp",
+			    dataType : "json",
+			    data : {"val" : val},
+			    success:function(res){
+
+					// alert(res.length);
+					
+					var s="";
+					
+					s+="<div class='table-responsive text-nowrap'>";
+					s+="<table class='table'>";
+					s+="<thead style='background-color: #F8F9FA'>";
+					s+="<tr>";
+					s+="<th style='text-align: center; width: 80px;'>No.</th>";
+					s+="<th style='text-align: center; width: 150px;'>카테고리</th>";
+					s+="<th style='text-align: center;'>제목</th>";
+					s+="<th style='text-align: center; width: 200px;'>작성자</th>";
+					s+="<th style='text-align: center; width: 200px;'>날짜</th>";
+					s+="<th style='text-align: center; width: 80px;'>조회수</th>";
+					s+="<th style='text-align: center; width: 80px;'>추천</th>";
+					s+="<th style='text-align: center; width: 80px;'>비추천</th>";
+					s+="</tr>";
+					s+="</thead>";
+					s+="</table>";
+										
+
+					s+="<tbody class='table-border-bottom-0'>";
+					s+="<tr><td>";
+					s+="<span>아직 작성된 게시글이 없습니다</span>";
+					s+="</td></tr>";
+					s+="</tbody>";
+
+					$("div.fList").html(s);
+					
+				}
+			   
+			});
+ 
+		}
+    </script>
 </head>
 
 <body>	
@@ -166,8 +230,9 @@
                 <!-- Bootstrap Table with Header - Light -->
                     <div class="card" style="background-color: #fff">
 
-                        <div class="table-responsive text-nowrap">
-                            <table class="table">
+					<div class="fList">
+                       <!--  <div class="table-responsive text-nowrap">
+                           <table class="table">
                                 <thead style="background-color: #F8F9FA">
                                     <tr>
                                         <th style="text-align: center; width: 80px;">No.</th>
@@ -179,85 +244,98 @@
                                         <th style="text-align: center; width: 80px;">추천</th>
                                         <th style="text-align: center; width: 80px;">비추천</th>
                                     </tr>
-                                </thead>
-                                <tbody class="table-border-bottom-0">
+                                </thead> 
                                 
-                                <%                                	
-                                	for(FreeBoardDto fbDto : fbList) {
-                                		UserDao uDao = new UserDao();
-                                		String nickname = uDao.getUser(fbDto.getUId()).getNickname();
-                                		
-                                		int fcCnt = fcDao.getAllFCs(fbDto.getFbNum()).size();
-                                %>
-                                
-                                <!-- 
-                                	카테고리 : 전체 -> 야구공 png
-                                	야구공 png -> https://cdn.icon-icons.com/icons2/2070/PNG/512/baseball_icon_126956.png
-                                	야구공 크기만 25px
+                                	<tbody class="table-border-bottom-0">
                                  -->
-                                
-                                	<tr>
-                                        <td style="text-align: center;"><%=fbDto.getFbNum() %></td>
-                                        <!-- 
-                                        카테고리 전체
-                                        <td style="text-align: center;"><img
-                                                src="https://cdn.icon-icons.com/icons2/2070/PNG/512/baseball_icon_126956.png"
-                                                style="width: 25px;">
-                                        </td>
-                                        -->
-                                        
-                                        <%
-                                        	// 카테고리 : 전체 -> 야구공 png
-                                        	if(fbDto.getFbCategory().equals("전체")) {                                       		
-                                        %>
-                                        		<td style="text-align: center; vertical-align:middle;"><img
+	                               <%--  <%                                	
+	                                	for(FreeBoardDto fbDto : fbList) {
+	                                		UserDao uDao = new UserDao();
+	                                		String nickname = uDao.getUser(fbDto.getUId()).getNickname();
+	                                		
+	                                		int fcCnt = fcDao.getAllFCs(fbDto.getFbNum()).size();
+	                                %>
+	                                
+	                                <!-- 
+	                                	카테고리 : 전체 -> 야구공 png
+	                                	야구공 png -> https://cdn.icon-icons.com/icons2/2070/PNG/512/baseball_icon_126956.png
+	                                	야구공 크기만 25px
+	                                 -->
+	                                
+	                                	<tr>
+	                                        <td style="text-align: center;"><%=fbDto.getFbNum() %></td>
+	                                        <!-- 
+	                                        카테고리 전체
+	                                        <td style="text-align: center;"><img
 	                                                src="https://cdn.icon-icons.com/icons2/2070/PNG/512/baseball_icon_126956.png"
-	                                                style="width: 30px;">
-                                        		</td>
-                                        	
-                                        <%
-                                        	} else if(fbDto.getFbCategory().equals("한화")) {
-                                        %>
-                                        		<td style="text-align: center; vertical-align:middle;">
-                                        		<img
-	                                                src="<%=tDao.getTeam(fbDto.getFbCategory()).getTeamLogo() %>"
-	                                                    style="width: 50px;">
-                                        		</td>
-                                        <%		
-                                        	}
-                                        	
-                                        	else {
-                                        %>
-                                        		<td style="text-align: center; vertical-align:middle;">
+	                                                style="width: 25px;">
+	                                        </td>
+	                                        -->
+	                                        
+	                                        <%
+	                                        	// 카테고리 : 전체 -> 야구공 png
+	                                        	if(fbDto.getFbCategory().equals("전체")) {                                       		
+	                                        %>
+	                                        		<td style="text-align: center; vertical-align:middle;"><img
+		                                                src="https://cdn.icon-icons.com/icons2/2070/PNG/512/baseball_icon_126956.png"
+		                                                style="width: 30px;">
+	                                        		</td>
+	                                        	
+	                                        <%
+	                                        	} else if(fbDto.getFbCategory().equals("한화")) {
+	                                        %>
+	                                        		<td style="text-align: center; vertical-align:middle;">
 	                                        		<img
-	                                                	src="<%=tDao.getTeam(fbDto.getFbCategory()).getTeamLogo() %>"
-	                                                    style="width: 40px;">
-                                        		</td>
-                                        <%
-                                        	}
-                                     
-                                        %>
-                                                                         
-                                        <td style="vertical-align:middle;"><a href="freePost_detailPage.jsp?fbNum=<%=fbDto.getFbNum() %>&currentPage=<%=currentPage%>"><%=fbDto.getFbSubject() %></a><span style="color: tomato;">&nbsp;&nbsp;[<%=fcCnt %>]</span></td>
-                                        <td style="text-align: center; vertical-align:middle;"><%=nickname %></td>
-                                        <td style="text-align: center; vertical-align:middle;"><%=sdf.format(fbDto.getFbWriteday()) %></td>
-                                        <td style="text-align: center; vertical-align:middle;"><%=fbDto.getFbReadCnt() %></td>
-                                        <td style="text-align: center; vertical-align:middle;"><%=fbDto.getFbLike() %></td>
-                                        <td style="text-align: center; vertical-align:middle;"><%=fbDto.getFbDislike() %></td>
-                                    </tr>
-                         
-                                <%
-                                	}
-                                %>
-                              
-                                </tbody>
-                            </table>
+		                                                src="<%=tDao.getTeam(fbDto.getFbCategory()).getTeamLogo() %>"
+		                                                    style="width: 50px;">
+	                                        		</td>
+	                                        <%		
+	                                        	}
+	                                        	
+	                                        	else {
+	                                        %>
+	                                        		<td style="text-align: center; vertical-align:middle;">
+		                                        		<img
+		                                                	src="<%=tDao.getTeam(fbDto.getFbCategory()).getTeamLogo() %>"
+		                                                    style="width: 40px;">
+	                                        		</td>
+	                                        <%
+	                                        	}
+	                                     
+	                                        %>
+	                                                                         
+	                                        <td style="vertical-align:middle;"><a href="freePost_detailPage.jsp?fbNum=<%=fbDto.getFbNum() %>&currentPage=<%=currentPage%>"><%=fbDto.getFbSubject() %></a><span style="color: tomato;">&nbsp;&nbsp;[<%=fcCnt %>]</span></td>
+	                                        <td style="text-align: center; vertical-align:middle;"><%=nickname %></td>
+	                                        <td style="text-align: center; vertical-align:middle;"><%=sdf.format(fbDto.getFbWriteday()) %></td>
+	                                        <td style="text-align: center; vertical-align:middle;"><%=fbDto.getFbReadCnt() %></td>
+	                                        <td style="text-align: center; vertical-align:middle;"><%=fbDto.getFbLike() %></td>
+	                                        <td style="text-align: center; vertical-align:middle;"><%=fbDto.getFbDislike() %></td>
+	                                    </tr>
+	                         
+	                                <%
+	                                	}
+	                                %>
+                              		</tbody>
+                                 --%>
+                                
+                           <!--  </table> -->
                         </div>
 
                         <div class="bBottom" style="margin-top: 30px;">
                             <div class="bsBox">
-                                <div class="bSelect">select</div>
-                                <div class="bSearch">검색창</div>
+                                <div class="bSelect">
+									<select id="search" class="form-control" style="width: 100px; height: 40px; text-align: center;">
+										<option value="all" selected="selected">전체</option>
+										<option value="nickname">작성자</option>
+										<option value="subject">제목</option>
+										<option value="content">내용</option>
+									</select>
+								</div>
+                                <div class="bSearch">
+									<input type="text" name="serch_str" class="form-control"
+											required="required" style="width: 200px; height: 40px;">
+								</div>
+								<button type="button" class="btn btn-default" id="searchBtn" style="margin-left: 5px;">검색</button>
                             </div>
                             <div class="bInsert">
 								<button type="button" class="btn btn-default" id="insertBtn">글쓰기</button>
@@ -315,7 +393,7 @@
     <!-- / Layout page -->
 
 	<script type="text/javascript">
-		
+			
 		$("#insertBtn").click(function() {
 			var login = '<%=loginok %>';
 			
@@ -326,7 +404,7 @@
 				alert("로그인 후 이용 가능합니다");
 			
 		});
-		
+					
 	</script>
 
 	<!-- Core JS -->
