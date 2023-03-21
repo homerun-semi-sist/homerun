@@ -23,11 +23,11 @@
 	String str = request.getParameter("str");
 
 	if(val.equals("nickname"))
-		fbList = fbDao.search_nickname(str);
+		fbList = fbDao.search_nickname(start, perPage, str);
 	else if(val.equals("subject"))
-		fbList = fbDao.search_subject(str);
+		fbList = fbDao.search_subject(start, perPage, str);
 	else if(val.equals("content"))
-		fbList = fbDao.search_content(str);
+		fbList = fbDao.search_content(start, perPage, str);
 
 	UserDao uDao = new UserDao();
 	TeamDao tDao = new TeamDao();

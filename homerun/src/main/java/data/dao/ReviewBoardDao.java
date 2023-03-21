@@ -249,19 +249,21 @@ public class ReviewBoardDao {
 	
 	// search - nickname
 	// select r.* from REVIEWBOARD r, USER u where r.uId=u.uId and u.nickname=?;
-	public List<ReviewBoardDto> search_nickname(String nickname) {
+	public List<ReviewBoardDto> search_nickname(int start, int perPage, String nickname) {
 		List<ReviewBoardDto> list = new Vector<>();
 
         Connection conn = db.getConnection();
         PreparedStatement pstmt = null;
         ResultSet rs = null;
 
-        String sql = "select r.*  from REVIEWBOARD r, USER u where r.uId=u.uId and u.nickname Like ?";
+        String sql = "select r.*  from REVIEWBOARD r, USER u where r.uId=u.uId and u.nickname Like ? order by rbNum desc limit ?, ?";
 
         try {
             pstmt = conn.prepareStatement(sql);
 
             pstmt.setString(1, "%" + nickname + "%");
+            pstmt.setInt(2, start);
+            pstmt.setInt(3, perPage);
             rs = pstmt.executeQuery();
 
             while(rs.next()) {
@@ -294,19 +296,21 @@ public class ReviewBoardDao {
 	
 	// search - rbSubject
 	// select * from REVIEWBOARD where rbSubject Like "%?%";
-	public List<ReviewBoardDto> search_subject(String fbSubject) {
+	public List<ReviewBoardDto> search_subject(int start, int perPage, String fbSubject) {
 		List<ReviewBoardDto> list = new Vector<>();
 
         Connection conn = db.getConnection();
         PreparedStatement pstmt = null;
         ResultSet rs = null;
 
-        String sql = "select * from REVIEWBOARD where rbSubject Like ?";
+        String sql = "select * from REVIEWBOARD where rbSubject Like ? order by rbNum desc limit ?, ?";
 
         try {
             pstmt = conn.prepareStatement(sql);
 
             pstmt.setString(1, "%" + fbSubject + "%");
+            pstmt.setInt(2, start);
+            pstmt.setInt(3, perPage);
             rs = pstmt.executeQuery();
 
             while(rs.next()) {
@@ -339,19 +343,21 @@ public class ReviewBoardDao {
 	
 	// search - rbContent
 	// select * from REVIEWBOARD where rbContent Like "%?%";
-	public List<ReviewBoardDto> search_content(String rbContent) {
+	public List<ReviewBoardDto> search_content(int start, int perPage, String rbContent) {
 		List<ReviewBoardDto> list = new Vector<>();
 
         Connection conn = db.getConnection();
         PreparedStatement pstmt = null;
         ResultSet rs = null;
 
-        String sql = "select * from REVIEWBOARD where rbContent Like ?";
+        String sql = "select * from REVIEWBOARD where rbContent Like ? order by rbNum desc limit ?, ?";
 
         try {
             pstmt = conn.prepareStatement(sql);
 
             pstmt.setString(1, "%" + rbContent + "%");
+            pstmt.setInt(2, start);
+            pstmt.setInt(3, perPage);
             rs = pstmt.executeQuery();
 
             while(rs.next()) {

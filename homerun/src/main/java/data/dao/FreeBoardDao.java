@@ -331,19 +331,21 @@ public class FreeBoardDao {
 	
 	// search - nickname
 	// select f.* from FREEBOARD f, USER u where f.uId=u.uId and u.nickname=?;
-	public List<FreeBoardDto> search_nickname(String nickname) {
+	public List<FreeBoardDto> search_nickname(int start, int perPage, String nickname) {
 		List<FreeBoardDto> list = new Vector<>();
 
         Connection conn = db.getConnection();
         PreparedStatement pstmt = null;
         ResultSet rs = null;
 
-        String sql = "select f.*  from FREEBOARD f, USER u where f.uId=u.uId and u.nickname Like ?";
+        String sql = "select f.*  from FREEBOARD f, USER u where f.uId=u.uId and u.nickname Like ? order by fbNum desc limit ?, ?";
 
         try {
             pstmt = conn.prepareStatement(sql);
 
             pstmt.setString(1, "%" + nickname + "%");
+            pstmt.setInt(2, start);
+            pstmt.setInt(3, perPage);
             rs = pstmt.executeQuery();
 
             while(rs.next()) {
@@ -376,19 +378,21 @@ public class FreeBoardDao {
 	
 	// search - fbSubject
 	// select * from FREEBOARD where fbSubject Like "%?%";
-	public List<FreeBoardDto> search_subject(String fbSubject) {
+	public List<FreeBoardDto> search_subject(int start, int perPage, String fbSubject) {
 		List<FreeBoardDto> list = new Vector<>();
 
         Connection conn = db.getConnection();
         PreparedStatement pstmt = null;
         ResultSet rs = null;
 
-        String sql = "select * from FREEBOARD where fbSubject Like ?";
+        String sql = "select * from FREEBOARD where fbSubject Like ? order by fbNum desc limit ?, ?";
 
         try {
             pstmt = conn.prepareStatement(sql);
 
             pstmt.setString(1, "%" + fbSubject + "%");
+            pstmt.setInt(2, start);
+            pstmt.setInt(3, perPage);
             rs = pstmt.executeQuery();
 
             while(rs.next()) {
@@ -421,19 +425,21 @@ public class FreeBoardDao {
 	
 	// search - fbContent
 	// select * from FREEBOARD where fbContent Like "%?%";
-	public List<FreeBoardDto> search_content(String fbContent) {
+	public List<FreeBoardDto> search_content(int start, int perPage, String fbContent) {
 		List<FreeBoardDto> list = new Vector<>();
 
         Connection conn = db.getConnection();
         PreparedStatement pstmt = null;
         ResultSet rs = null;
 
-        String sql = "select * from FREEBOARD where fbContent Like ?";
+        String sql = "select * from FREEBOARD where fbContent Like ? order by fbNum desc limit ?, ?";
 
         try {
             pstmt = conn.prepareStatement(sql);
 
             pstmt.setString(1, "%" + fbContent + "%");
+            pstmt.setInt(2, start);
+            pstmt.setInt(3, perPage);
             rs = pstmt.executeQuery();
 
             while(rs.next()) {
