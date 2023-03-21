@@ -212,4 +212,35 @@ public class CartDao {
 
 		return list;
 	}
+	
+	public void QTYmethod (String pId) {
+		Connection conn=db.getConnection();
+		PreparedStatement pstmt=null;
+		
+		String sql="UPDATE PRODUCT"
+				+ "SET pStock = pStock - ("
+				+ "  SELECT SUM(cQTY)"
+				+ "  FROM CART "
+				+ "  WHERE pId = ?"
+				+ ")"
+				+ "WHERE pId IN ("
+				+ "  SELECT DISTINCT pId"
+				+ "  FROM CART"
+				+ ")";
+		
+		try {
+			pstmt=conn.prepareStatement(sql);
+			pstmt.setString(1, pId);
+			
+			pstmt.execute();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			db.dbClose(pstmt, conn);
+		}
+		
+	}
+				
+	
 }
