@@ -58,6 +58,8 @@
 <!--! Template customizer & Theme config files MUST be included after core stylesheets and helpers.js in the <head> section -->
 <!--? Config:  Mandatory theme config file contain global vars & default theme options, Set your preferred theme option in this file.  -->
 <script src="../assets/board/js/config.js"></script>
+<script src="https://code.jquery.com/jquery-3.6.3.js"></script>
+
 
 
 <style>
@@ -109,11 +111,6 @@ if (request.getParameter("main") != null) {
 }
 String root = request.getContextPath();
 
-NumberFormat nf = NumberFormat.getCurrencyInstance();
-
-ProductDao dao = new ProductDao();
-/* List<ProductDto> list = dao.selectAllProduct(); */
-
 int totalCount; //총 개수
 int totalPage; //총 페이지수
 int startPage; //각 블럭(1,2,3..)의 시작페이지
@@ -124,6 +121,8 @@ int perBlock = 5; //한 블럭당 보여지는 페이지 개수
 int currentPage; //현재페이지
 
 int no;
+
+ProductDao dao = new ProductDao();
 
 totalCount = dao.getTotalCount();
 
@@ -147,10 +146,72 @@ if (endPage > totalPage)
 //각페이지에서 불러올 시작번호
 start = (currentPage - 1) * perPage;
 
-//메서드 불러오기
-List<ProductDto> list = dao.getList_pDay(start, perPage);
+
 %>
+<script>
+$(function(){
+	list();
+})
+
+function list(){
+	var currentPage=$("#currentPage").val();
+	
+	$.ajax({
+		type:"get",
+		dataType:"json",
+		data:{"currentPage":currentPage},
+		url:"management_getStockList.jsp",
+		success:function(res){
+			var s="";
+			
+			s+="<div class='text-nowrap'>";
+			s+="<table class='table'>";
+			s+="<thead style='background-color: #F8F9FA'>";
+			s+="<tr>";
+			s+="<th style='text-align: center; width: 70px;'>상품ID</th>";
+			s+="<th style='text-align: center; width: 150px;'>상품명</th>";
+			s+="<th style='text-align: center; width: 120px;'>팀</th>";
+			s+="<th style='text-align: center; width: 80px;'>카테고리</th>";
+			s+="<th style='text-align: center; width: 100px;'>재고수(SKU)</th>";
+			s+="<th style='text-align: center; width: 120px;'>가격</th>";
+			s+="<th style='text-align: center; width: 150px;'>관리</th>";
+			s+="</tr>";
+			s+="</thead>";
+			s+="<tbody class='table-border-bottom-0'>";
+			
+			if(res.length == 0) {
+				s+="<tr>";
+				s+="<td colspan='7' align='center' style='font-size: 18pt;'>아직 입력된 상품이 없습니다</td>";
+				s+="</tr>";
+			} else {
+				$.each(res, function(idx, item){
+					s+="<tr>";
+					s+="<td style='text-align: center;'>" + item.pId + "</td>";
+					s+="<td style='text-align: center;'><a href='../product/product_detailPage.jsp?pId="+item.pId+"'><b>"+item.pName+"</b></a></td>";
+					s+="<td style='text-align: center;'>" + item.teamName + "</td>";
+					s+="<td style='text-align: center;'>" + item.pCategory + "</td>";
+					s+="<td style='text-align: center;'>" + item.pStock + "</td>";
+					s+="<td style='text-align: center;'>" + item.price + "</td>";
+					s+="<td style='text-align: center;'><div class='dropdown'><button type='button' class='btn p-0 dropdown-toggle hide-arrow' data-bs-toggle='dropdown'><i class='bx bx-dots-vertical-rounded'></i></button>";
+					s+="<div class='dropdown-menu'><a class='dropdown-item' href='../product/product_updatePage.jsp?pId="+item.pId+"'><i class='bx bx-edit-alt me-1'></i>Update</a>";
+					s+="<a class='dropdown-item' href='../product/product_delete.jsp?pId="+item.pId+"'><i class='bx bx-trash me-1'></i> Delete</a>";
+					s+="</div></div></td>"
+					s+="</tr>"		
+				});
+			}
+			s+="</tbody>";
+			s+="</table>";
+			s+="</div>";
+			
+			$("div.sList").html(s);
+		}
+		
+	})
+}
+
+</script>
 <body>
+<input type="hidden" id="currentPage" value="<%=currentPage%>">
 	<!-- Layout wrapper -->
 	<div class="layout-wrapper layout-content-navbar">
 		<div class="layout-container">
@@ -159,62 +220,13 @@ List<ProductDto> list = dao.getList_pDay(start, perPage);
 			<div class="content-wrapper">
 				<!-- Content -->
 
-				<div class="container-xxl flex-grow-1 container-p-y">
+				<div class="flex-grow-1 container-p-y">
 					<!-- Bootstrap Table with Header - Light -->
 					<div class="card">
 						<h3 class="card-header">
 							<b>재고목록</b>
 						</h3>
-						<div class="table-responsive text-nowrap">
-							<table class="table">
-								<thead class="table-light">
-									<tr>
-										<th style="text-align: center; width: 70px;">상품ID</th>
-										<th style="text-align: center; width: 200px;">상품명</th>
-										<th style="text-align: center; width: 200px;">팀</th>
-										<th style="text-align: center; width: 80px;">카테고리</th>
-										<th style="text-align: center; width: 100px;">재고수(SKU)</th>
-										<th style="text-align: center; width: 120px;">가격</th>
-										<th style="text-align: center; width: 80px;">관리</th>
-									</tr>
-								</thead>
-								<tbody class="table-border-bottom-0">
-									<%
-									for (ProductDto dto : list) {
-									%>
-									<tr>
-										<td style="text-align: center;"><%=dto.getpId()%></td>
-										<td style="text-align: center;"><a
-											href="../product/product_detailPage.jsp?pId=<%=dto.getpId()%>"><b><%=dto.getpName()%></b></a></td>
-										<td style="text-align: center;"><%=dto.getTeamName()%></td>
-										<td style="text-align: center;"><%=dto.getpCategory()%></td>
-										<td style="text-align: center;"><%=dto.getpStock()%></td>
-										<td style="text-align: center;"><%=nf.format(dto.getPrice())%></td>
-										<td style="text-align: center;">
-											<div class=" dropdown">
-												<button type="button"
-													class="btn p-0 dropdown-toggle hide-arrow"
-													data-bs-toggle="dropdown">
-													<i class="bx bx-dots-vertical-rounded"></i>
-												</button>
-												<div class="dropdown-menu">
-													<a class="dropdown-item"
-														href="../product/product_updatePage.jsp?pId=<%=dto.getpId()%>"><i
-														class="bx bx-edit-alt me-1"></i>Update</a> <a
-														class="dropdown-item"
-														href="../product/product_delete.jsp?pId=<%=dto.getpId()%>"><i
-														class="bx bx-trash me-1"></i> Delete</a>
-
-												</div>
-											</div>
-										</td>
-									</tr>
-									<%
-									}
-									%>
-								</tbody>
-							</table>
-						</div>
+						<div class="sList"></div>
 
 						<div class="bBottom">
 							<div class="bsBox">
