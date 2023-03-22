@@ -12,20 +12,23 @@
 	pageEncoding="UTF-8"%>
 
 <%
-	String val = request.getParameter("val");
-	String str = request.getParameter("str");
+	int currentPage = Integer.parseInt(request.getParameter("currentPage"));
+	int perPage = 15;
+	int start = (currentPage - 1) * perPage;
 	
 	FreeBoardDao fbDao = new FreeBoardDao();
-	List<FreeBoardDto> list = new Vector<>();
+	List<FreeBoardDto> fbList = fbDao.getFBList(start, perPage);
 	
-	if(val.equals("nickname"))
-		list = fbDao.search_nickname(str);
-	else if(val.equals("subject"))
-		list = fbDao.search_subject(str);
-	else if(val.equals("content"))
-		list = fbDao.search_content(str);
+	String val = request.getParameter("val");
+	String str = request.getParameter("str");
 
-	
+	if(val.equals("nickname"))
+		fbList = fbDao.search_nickname(start, perPage, str);
+	else if(val.equals("subject"))
+		fbList = fbDao.search_subject(start, perPage, str);
+	else if(val.equals("content"))
+		fbList = fbDao.search_content(start, perPage, str);
+
 	UserDao uDao = new UserDao();
 	TeamDao tDao = new TeamDao();
 	FreeCommentDao fcDao = new FreeCommentDao();
@@ -33,7 +36,7 @@
 	JSONArray arr = new JSONArray();
 	SimpleDateFormat sdf = new SimpleDateFormat("yy.MM.dd HH:mm");
 	
-	for(FreeBoardDto dto : list) {
+	for(FreeBoardDto dto : fbList) {
 		JSONObject ob = new JSONObject();
 		String teamLogoImg = "";
 		

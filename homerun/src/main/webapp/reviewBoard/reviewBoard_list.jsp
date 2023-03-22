@@ -27,9 +27,6 @@
     <link rel="stylesheet" href="../assets/board/vendor/css/theme-default.css" class="template-customizer-theme-css" />
     <link rel="stylesheet" href="../assets/board/css/demo.css" />
 
-    <!-- Vendors CSS -->
-    <link rel="stylesheet" href="../assets/board/vendor/libs/perfect-scrollbar/perfect-scrollbar.css" />
-
     <!-- Page CSS -->
 
     <!-- Helpers -->
@@ -114,7 +111,7 @@
 	    			type : "get",
 	    			url : "reviewBoard_getSearchList.jsp",
 	    			dataType : "json",
-	    			data : {"val" : val, "str" : str},
+	    			data : {"val" : val, "str" : str, "currentPage" : currentPage},
 	    			success:function(res) {
 	    				// alert(val + ", "+ str +", " + res.length);
 	    				
@@ -200,7 +197,7 @@
     			type : "get",
     			url : "reviewBoard_getList.jsp",
     			dataType : "json",
-    			/* data : {"val" : val}, */
+    			data : {"currentPage" : currentPage},
     			success:function(res) {
 
     				var s="";

@@ -9,6 +9,7 @@ public class PostReportDto {
 	private String fbNum;
 	private String rbNum;
 	private Timestamp rDay;
+	private int reportCnt; 
 	
 	public String getPrId() {
 		return prId;
@@ -40,5 +41,11 @@ public class PostReportDto {
 	public void setrDay(Timestamp rDay) {
 		this.rDay = rDay;
 	}
-	
+	public int getReportCnt() {
+		return reportCnt;
+	}
+	public void setReportCnt(int reportCnt) {
+		this.reportCnt = reportCnt;
+	}
+
 }

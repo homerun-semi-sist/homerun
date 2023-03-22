@@ -14,25 +14,29 @@
 	pageEncoding="UTF-8"%>
 
 <%
+	int currentPage = Integer.parseInt(request.getParameter("currentPage"));
+	int perPage = 15;
+	int start = (currentPage - 1) * perPage;
+	
+	ReviewBoardDao rbDao = new ReviewBoardDao();
+	List<ReviewBoardDto> rbList = rbDao.getRBList(start, perPage);
+	
 	String val = request.getParameter("val");
 	String str = request.getParameter("str");
 	
-	ReviewBoardDao rbDao = new ReviewBoardDao();
-	List<ReviewBoardDto> list = new Vector<>();
-	
 	if(val.equals("nickname"))
-		list = rbDao.search_nickname(str);
+		rbList = rbDao.search_nickname(start, perPage, str);
 	else if(val.equals("subject"))
-		list = rbDao.search_subject(str);
+		rbList = rbDao.search_subject(start, perPage, str);
 	else if(val.equals("content"))
-		list = rbDao.search_content(str);
+		rbList = rbDao.search_content(start, perPage, str);
 
 	ReviewCommentDao rcDao = new ReviewCommentDao();
 	
 	JSONArray arr = new JSONArray();
 	SimpleDateFormat sdf = new SimpleDateFormat("yy.MM.dd HH:mm");
 	
-	for(ReviewBoardDto rbDto : list) {
+	for(ReviewBoardDto rbDto : rbList) {
 		JSONObject ob = new JSONObject();	
 		
 		GameDao gDao = new GameDao();
