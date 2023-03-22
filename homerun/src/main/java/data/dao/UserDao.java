@@ -4,8 +4,11 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+<<<<<<< HEAD
 import java.util.List;
 import java.util.Vector;
+=======
+>>>>>>> SungUng
 
 import data.dto.UserDto;
 import mysql.db.DbConnect;
@@ -237,19 +240,28 @@ public class UserDao {
 		Connection conn=db.getConnection();
 		PreparedStatement pstmt=null;
 		
+<<<<<<< HEAD
 		String sql="update USER set uName=?,nickname=?,pw=?,gender=?,birth=?,hp=?,addr=? where uid=?";
+=======
+		String sql="update USER set uName=?,nickname=?,addr=? where uid=?";
+>>>>>>> SungUng
 		
 		try {
 			pstmt=conn.prepareStatement(sql);
 			
 			pstmt.setString(1, dto.getuName());
 			pstmt.setString(2, dto.getNickname());
+<<<<<<< HEAD
 			pstmt.setString(3, dto.getPw());
 			pstmt.setString(4, dto.getGender());
 			pstmt.setString(5, dto.getBirth());
 			pstmt.setString(6, dto.getHp());
 			pstmt.setString(7, dto.getAddr());
 			pstmt.setString(8, dto.getUid());
+=======
+			pstmt.setString(3, dto.getAddr());
+			pstmt.setString(4, dto.getUid());
+>>>>>>> SungUng
 			
 			pstmt.execute();
 			
@@ -260,6 +272,7 @@ public class UserDao {
 			db.dbClose(pstmt, conn);
 		}
 	}
+<<<<<<< HEAD
 	
 	//전체 회원 수
 	public int getTotalCount()
@@ -369,3 +382,6 @@ public class UserDao {
 		return list;
 	}
 }
+=======
+}
+>>>>>>> SungUng

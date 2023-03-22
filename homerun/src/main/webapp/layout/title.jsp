@@ -101,9 +101,15 @@ String root = request.getContextPath();
 						 
 						 <span class="a_title">&nbsp;|&nbsp;</span> 
 						 
+<<<<<<< HEAD
 						 <a style="color: white;" href="#">
 						 
 						 <span>장바구니</span>
+=======
+						 <a style="color: white;" href="../homerun/product/product_cartlist.jsp">
+						 
+						 <span >장바구니</span>
+>>>>>>> SungUng
 						 
 						 </a>
 				</div>

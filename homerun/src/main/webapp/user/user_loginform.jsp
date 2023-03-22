@@ -15,6 +15,7 @@
 		<script type="text/javascript">
 		function logincheck(a)
 		{
+<<<<<<< HEAD
 			var uid=$("#uid").val();
 			var pw=$("#pw").val();
 			
@@ -62,6 +63,16 @@
 			        
 			    }
 			}
+=======
+			if(a.uid.value==""){
+				
+				alert("아이디를 입력 해 주세요");
+								
+			}else if(a.pw.value=="")
+				
+				alert("비밀번호를 입력 해 주세요");
+		}
+>>>>>>> SungUng
 		</script>
 	</head>
 	<style>
@@ -211,12 +222,20 @@
   onsubmit="return logincheck(this)" name="a">
   
     <div class="user-box">
+<<<<<<< HEAD
       <input type="text" name="uid" id="uid" maxlength="8" required="required" onkeyup="noSpacialForm(this);" onchange="noSpacialForm(this);">
+=======
+      <input type="text" name="uid" required="required" value="<%=myid %>" >
+>>>>>>> SungUng
       <label>아이디</label>
     </div>
     
     <div class="user-box">
+<<<<<<< HEAD
       <input type="password" name="pw" id="pw" maxlength="10" required="required" onkeyup="noSpaceForm(this);" onchange="noSpaceForm(this);">
+=======
+      <input type="password" name="pw" required="required">
+>>>>>>> SungUng
       <label>비밀번호</label>
     </div>
     
@@ -225,7 +244,11 @@
     	<%=saveok==null?"":"checked" %>>&nbsp;아이디저장
     </div>
     
+<<<<<<< HEAD
     <button type="submit" class="login" onclick="logincheck(a)" >로그인</button>
+=======
+    <button type="submit" class="login" onclick="logincheck(a)">로그인</button>
+>>>>>>> SungUng
     <button type="button" class="regist"  onclick="location.href='../regist/regist_registform.jsp'">회원가입</button>
     
   </form>
