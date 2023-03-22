@@ -243,6 +243,16 @@ sup {
   vertical-align: baseline;
 }
 
+.page-item.active .page-link, .page-item.active .page-link:hover, .page-item.active .page-link:focus,
+.pagination li.active > a:not(.page-link),
+.pagination li.active > a:not(.page-link):hover,
+.pagination li.active > a:not(.page-link):focus {
+  border-color: #0b214e;
+  background-color: #0b214e;
+  color: #fff;
+  box-shadow: 0 0.125rem 0.25rem rgba(105, 108, 255, 0.4);
+}
+
 sub {
   bottom: -0.25em;
 }

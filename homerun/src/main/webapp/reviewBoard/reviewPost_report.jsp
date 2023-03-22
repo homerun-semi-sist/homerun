@@ -1,3 +1,4 @@
+<%@page import="data.dao.ReviewBoardDao"%>
 <%@page import="data.dto.PostReportDto"%>
 <%@page import="data.dao.PostReportDao"%>
 <%@page import="java.util.List"%>
@@ -10,17 +11,20 @@
 
 	boolean flag;
 
-	PostReportDao dao = new PostReportDao();
-	int n = dao.getRBRPcnt(uId, num);
+	ReviewBoardDao rbDao = new ReviewBoardDao();
+	PostReportDao prDao = new PostReportDao();
+	
+	int n = prDao.getRBRPcnt(uId, num);
 		
 	System.out.println(n);
 	if(n == 0) {
-		PostReportDto dto = new PostReportDto();
+		PostReportDto prDto = new PostReportDto();
 		
-		dto.setuId(uId);
-		dto.setFbNum(num);
+		prDto.setuId(uId);
+		prDto.setFbNum(num);
 		
-		dao.insertRBPR(dto);
+		prDao.insertRBPR(prDto);
+		rbDao.updateReport(num);
 		
 		flag = true;
 	} else { 
@@ -30,6 +34,7 @@
 	JSONObject ob = new JSONObject();
 	
 	ob.put("flag", flag);
+	ob.put("report", rbDao.getRB(num).getRbReport());
 %>
 
 <%=ob.toString() %>

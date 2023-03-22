@@ -88,20 +88,6 @@ ProductDto dto = dao.getProduct(pId);
 		</div>
 
 		<div class="textForm">
-			<span class="inputForm sameWidth">옵션 선택&nbsp;&nbsp;</span> <select
-				name="pOption">
-				<option value="없음"
-					<%=dto.getpOption().equals("없음") ? "selected" : ""%>>없음</option>
-				<option value="S"
-					<%=dto.getpOption().equals("S") ? "selected" : ""%>>S</option>
-				<option value="M"
-					<%=dto.getpOption().equals("M") ? "selected" : ""%>>M</option>
-				<option value="L"
-					<%=dto.getpOption().equals("L") ? "selected" : ""%>>L</option>
-			</select>
-		</div>
-
-		<div class="textForm">
 			<span class="inputForm sameWidth"><b style="color: #0b214e">재고수</b>&nbsp;&nbsp;</span>
 			<input name="pStock" type="number" min="1" value="100"
 				style="width: 50px;">
@@ -127,7 +113,7 @@ ProductDto dto = dao.getProduct(pId);
 				readonly="readonly" value="<%=dto.getpImage()%>">
 		</div>
 
-		<div style="margin-top: 20px">
+		<div style="margin-top: 50px">
 			<button type="submit" class="pinsertbtn pinsertbtn1">재고수정</button>
 			<button type="button" class="pinsertbtn"
 				onclick="location.href='../managementpage/management_stockListPage.jsp'">취소</button>

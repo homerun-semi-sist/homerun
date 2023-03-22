@@ -25,7 +25,6 @@
 	String pCategory = request.getParameter("pCategory");
 	if (pCategory.equals("없음"))
 		pCategory = null;
-	String pOption = request.getParameter("pOption");
 	int pStock = Integer.parseInt(request.getParameter("pStock"));
 	int price = Integer.parseInt(request.getParameter("price"));
 	String pDetail = request.getParameter("pDetail");
@@ -36,7 +35,6 @@
 	dto.setpName(pName);
 	dto.setTeamName(teamName);
 	dto.setpCategory(pCategory);
-	dto.setpOption(pOption);
 	dto.setpStock(pStock);
 	dto.setPrice(price);
 	dto.setpDetail(pDetail);

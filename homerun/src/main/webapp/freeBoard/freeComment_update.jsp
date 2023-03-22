@@ -11,7 +11,7 @@
 	FreeCommentDao dao = new FreeCommentDao();
 	FreeCommentDto dto = dao.getFC(fcIdx);
 	
-	dto.setFbNum(fcIdx);
+	dto.setFcIdx(fcIdx);
 	dto.setFcContent(ucontent);
 	
 	dao.updateFC(dto);

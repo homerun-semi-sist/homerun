@@ -3,8 +3,8 @@
 <%@page import="data.dto.ProductDto"%>
 <%@page import="java.util.List"%>
 <%@page import="data.dao.ProductDao"%>
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-	pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=utf-8"
+	pageEncoding="utf-8"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -15,22 +15,19 @@
 <style>
 #navv-doosan, #navv-kiwoom, #navv-samsung, #navv-lg, #navv-kt, #navv-ssg,
 	#navv-nc, #navv-lotte, #navv-kia, #navv-hanhwa, #pills-doosan_teamwear,
-	#pills-doosan_cheering, #pills-doosan_baseball,
-	#pills-doosan_commemoration, #pills-lotte_teamwear,
-	#pills-lotte_cheering, #pills-lotte_baseball,
-	#pills-lotte_commemoration, #pills-samsung_teamwear,
-	#pills-samsung_cheering, #pills-samsung_baseball,
-	#pills-samsung_commemoration, #pills-kiwoom_teamwear,
-	#pills-kiwoom_cheering, #pills-kiwoom_baseball,
-	#pills-kiwoom_commemoration, #pills-lg_teamwear, #pills-lg_cheering,
-	#pills-lg_baseball, #pills-lg_commemoration, #pills-nc_teamwear,
-	#pills-nc_cheering, #pills-nc_baseball, #pills-nc_commemoration,
-	#pills-hanhwa_teamwear, #pills-hanhwa_cheering, #pills-hanhwa_baseball,
-	#pills-hanhwa_commemoration, #pills-kia_teamwear, #pills-kia_cheering,
-	#pills-kia_baseball, #pills-kia_commemoration, #pills-kt_teamwear,
-	#pills-kt_cheering, #pills-kt_baseball, #pills-kt_commemoration,
-	#pills-ssg_teamwear, #pills-ssg_cheering, #pills-ssg_baseball,
-	#pills-ssg_commemoration {
+	#pills-doosan_cheering, #pills-doosan_baseball, #pills-doosan_memory,
+	#pills-lotte_teamwear, #pills-lotte_cheering, #pills-lotte_baseball,
+	#pills-lotte_memory, #pills-samsung_teamwear, #pills-samsung_cheering,
+	#pills-samsung_baseball, #pills-samsung_memory, #pills-kiwoom_teamwear,
+	#pills-kiwoom_cheering, #pills-kiwoom_baseball, #pills-kiwoom_memory,
+	#pills-lg_teamwear, #pills-lg_cheering, #pills-lg_baseball,
+	#pills-lg_memory, #pills-nc_teamwear, #pills-nc_cheering,
+	#pills-nc_baseball, #pills-nc_memory, #pills-hanhwa_teamwear,
+	#pills-hanhwa_cheering, #pills-hanhwa_baseball, #pills-hanhwa_memory,
+	#pills-kia_teamwear, #pills-kia_cheering, #pills-kia_baseball,
+	#pills-kia_memory, #pills-kt_teamwear, #pills-kt_cheering,
+	#pills-kt_baseball, #pills-kt_memory, #pills-ssg_teamwear,
+	#pills-ssg_cheering, #pills-ssg_baseball, #pills-ssg_memory {
 	opacity: 1;
 }
 </style>
@@ -39,7 +36,8 @@
 
 <%
 ProductDao dao = new ProductDao();
-List<ProductDto> list = dao.selectAllProduct();
+List<ProductDto> list = dao.selectAllProduct_pDay();
+List<ProductDto> list_best = dao.selectAllProduct_bseller();
 
 NumberFormat nf = NumberFormat.getCurrencyInstance();
 %>
@@ -52,9 +50,9 @@ NumberFormat nf = NumberFormat.getCurrencyInstance();
 				<div
 					class="bg-300 p-4 h-30 d-flex flex-column justify-content-center">
 					<h4 class="text-800">KBO Online Store</h4>
-					<h1 class="fw-semi-bold lh-sm fs-4 fs-lg-5 fs-xl-6">23Ω√¡
-						ø¬∂Û¿ŒΩ∫≈‰æÓ</h1>
-					<p class="mb-5 fs-1">23Ω√¡ ¿¸ ±∏¥‹¿« ∆¿ Ω∫≈‰æÓ ªÛ«∞¿ª ±∏∏≈«“ ºˆ ¿÷Ω¿¥œ¥Ÿ.</p>
+					<h1 class="fw-semi-bold lh-sm fs-4 fs-lg-5 fs-xl-6">23ÏãúÏ¶å
+						Ïò®ÎùºÏù∏Ïä§ÌÜ†Ïñ¥</h1>
+					<p class="mb-5 fs-1">23ÏãúÏ¶å Ï†Ñ Íµ¨Îã®Ïùò ÌåÄ Ïä§ÌÜ†Ïñ¥ ÏÉÅÌíàÏùÑ Íµ¨Îß§Ìï† Ïàò ÏûàÏäµÎãàÎã§.</p>
 					<div class="d-grid gap-2 d-md-block">
 						<a style="background-color: #0b214e; color: white"
 							class="btn btn-lg" href="product_listPage.jsp" role="button">Explore</a>
@@ -71,71 +69,41 @@ NumberFormat nf = NumberFormat.getCurrencyInstance();
 			</div>
 			<div class="col-12">
 				<div class="row h-100 align-items-center g-2">
+					<%
+					List<ProductDto> subListbase_best = new ArrayList<>();
+					for (int i = 0; i < list_best.size(); i++) {
+						ProductDto dto = list_best.get(i);
+
+						subListbase_best.add(dto);
+
+					}
+					%>
+					<%
+					int last_best = subListbase_best.size() < 4 ? subListbase_best.size() : 4;
+					List<ProductDto> subList_best = new ArrayList<ProductDto>(subListbase_best.subList(0, last_best));
+					for (int j = 0; j < subList_best.size(); j++) {
+						ProductDto dto = subList_best.get(j);
+					%>
 					<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
-						<div class="card card-span text-white">
-							<img class="img-fluid h-100"
-								src="https://www.ktwizstore.co.kr/web/product/big/202204/05feabbf22d3ba44b5ae41ea7f6089e4.jpg"
-								alt="..." />
+						<div class="card card-span h-100 text-white">
+							<img class="img-fluid h-100" src="<%=dto.getpImage()%>" alt="..." />
 							<div class="card-img-overlay ps-0"></div>
 							<div class="card-body ps-0 bg-200">
-								<h5 class="fw-bold text-1000 text-truncate">ƒ…¿Ã∆º¿ß¡Ó 2022 æÓºæ∆Ω
-									»® ¿Ø¥œ∆˚</h5>
+								<h5 class="fw-bold text-1000 text-truncate"><%=dto.getpName()%></h5>
 								<div class="fw-bold">
-									<span class="text-600 me-2 text-decoration-line-through">109,900ø¯</span><span
-										class="text-primary">89,900ø¯</span>
+									<span class="text-primary"><%=nf.format(dto.getPrice())%></span>
 								</div>
 							</div>
-							<a class="stretched-link" href="product_detailPage.jsp"></a>
+							<a class="stretched-link"
+								href="product_detailPage.jsp?pId=<%=dto.getpId()%>"></a>
 						</div>
 					</div>
-					<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
-						<div class="card card-span text-white">
-							<img class="img-fluid h-100"
-								src="https://cdn-pro-web-251-119.cdn-nhncommerce.com/wyverntr9322_godomall_com/data/goods/23/02/07/1000001258/register_detail_069.jpg"
-								alt="..." />
-							<div class="card-img-overlay ps-0"></div>
-							<div class="card-body ps-0 bg-200">
-								<h5 class="fw-bold text-1000 text-truncate">∑£¥ıΩ∫ 23 Ω∫«¡∏µƒ∑«¡ ∏¿⁄</h5>
-								<div class="fw-bold">
-									<span class="text-600 me-2 text-decoration-line-through">39,000ø¯</span><span
-										class="text-primary">35,000ø¯</span>
-								</div>
-							</div>
-							<a class="stretched-link" href="#"></a>
-						</div>
-					</div>
-					<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
-						<div class="card card-span text-white">
-							<img class="img-fluid h-100"
-								src="http://openimage.interpark.com/goods_image/0/9/7/6/9803880976s.jpg"
-								alt="..." />
-							<div class="card-img-overlay ps-0"></div>
-							<div class="card-body ps-0 bg-200">
-								<h5 class="fw-bold text-1000 text-truncate">ø¿∏Æ¡ˆ≥Œ ∏¿⁄</h5>
-								<div class="fw-bold">
-									<span class="text-600 me-2 text-decoration-line-through">30,000ø¯</span><span
-										class="text-primary">29,000ø¯</span>
-								</div>
-							</div>
-							<a class="stretched-link" href="#"></a>
-						</div>
-					</div>
-					<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
-						<div class="card card-span text-white">
-							<img class="img-fluid h-100"
-								src="http://openimage.interpark.com/goods_image/0/9/3/5/9598780935s.jpg"
-								alt="..." />
-							<div class="card-img-overlay ps-0"></div>
-							<div class="card-body ps-0 bg-200">
-								<h5 class="fw-bold text-1000 text-truncate">¿¿ø¯πË∆Æ</h5>
-								<div class="fw-bold">
-									<span class="text-600 me-2 text-decoration-line-through">10,000ø¯</span><span
-										class="text-primary">8,000ø¯</span>
-								</div>
-							</div>
-							<a class="stretched-link" href="#"></a>
-						</div>
-					</div>
+					<%
+					}
+					%>
+
+					
+					
 				</div>
 			</div>
 		</div>
@@ -150,70 +118,40 @@ NumberFormat nf = NumberFormat.getCurrencyInstance();
 			</div>
 			<div class="col-12">
 				<div class="row h-100 align-items-center g-2">
+					<%
+					List<ProductDto> subListbase_new = new ArrayList<>();
+					for (int i = 0; i < list.size(); i++) {
+						ProductDto dto = list.get(i);
+
+						subListbase_new.add(dto);
+
+					}
+					%>
+					<%
+					int last_new = subListbase_new.size() < 4 ? subListbase_new.size() : 4;
+					List<ProductDto> subList_new = new ArrayList<ProductDto>(subListbase_new.subList(0, last_new));
+					for (int j = 0; j < subList_new.size(); j++) {
+						ProductDto dto = subList_new.get(j);
+					%>
 					<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
-						<div class="card card-span text-white">
-							<img class="img-fluid h-100"
-								src="http://openimage.interpark.com/goods_image/4/5/9/3/10098314593s.jpg"
-								alt="..." />
+						<div class="card card-span h-100 text-white">
+							<img class="img-fluid h-100" src="<%=dto.getpImage()%>" alt="..." />
 							<div class="card-img-overlay ps-0"></div>
 							<div class="card-body ps-0 bg-200">
-								<h5 class="fw-bold text-1000 text-truncate">Ω…∫º πŸ∂˜∏∑¿Ã (∫Ì∑¢)</h5>
+								<h5 class="fw-bold text-1000 text-truncate"><%=dto.getpName()%></h5>
 								<div class="fw-bold">
-									<span class="text-600 me-2 text-decoration-line-through">55000ø¯</span><span
-										class="text-primary">45000ø¯</span>
+									<span class="text-primary"><%=nf.format(dto.getPrice())%></span>
 								</div>
 							</div>
-							<a class="stretched-link" href="#"></a>
+							<a class="stretched-link"
+								href="product_detailPage.jsp?pId=<%=dto.getpId()%>"></a>
 						</div>
 					</div>
-					<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
-						<div class="card card-span text-white">
-							<img class="img-fluid h-100"
-								src="http://openimage.interpark.com/goods_image/0/5/9/8/9134140598s.jpg"
-								alt="..." />
-							<div class="card-img-overlay ps-0"></div>
-							<div class="card-body ps-0 bg-200">
-								<h5 class="fw-bold text-1000 text-truncate">¿Ø±§ ¡°∆€ (µø∞Ë)</h5>
-								<div class="fw-bold">
-									<span class="text-600 me-2 text-decoration-line-through">135,000ø¯</span><span
-										class="text-primary">120,000ø¯</span>
-								</div>
-							</div>
-							<a class="stretched-link" href="#"></a>
-						</div>
-					</div>
-					<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
-						<div class="card card-span text-white">
-							<img class="img-fluid h-100"
-								src="http://openimage.interpark.com/goods_image/0/9/7/6/9803880976s.jpg"
-								alt="..." />
-							<div class="card-img-overlay ps-0"></div>
-							<div class="card-body ps-0 bg-200">
-								<h5 class="fw-bold text-1000 text-truncate">ø¿∏Æ¡ˆ≥Œ ∏¿⁄</h5>
-								<div class="fw-bold">
-									<span class="text-600 me-2 text-decoration-line-through">30,000ø¯</span><span
-										class="text-primary">29,000ø¯</span>
-								</div>
-							</div>
-							<a class="stretched-link" href="#"></a>
-						</div>
-					</div>
-					<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
-						<div class="card card-span text-white">
-							<img class="img-fluid h-100"
-								src="http://openimage.interpark.com/goods_image/0/9/3/5/9598780935s.jpg"
-								alt="..." />
-							<div class="card-img-overlay ps-0"></div>
-							<div class="card-body ps-0 bg-200">
-								<h5 class="fw-bold text-1000 text-truncate">¿¿ø¯πË∆Æ</h5>
-								<div class="fw-bold">
-									<span class="text-600 me-2 text-decoration-line-through">10,000ø¯</span><span
-										class="text-primary">8,000ø¯</span>
-								</div>
-							</div>
-							<a class="stretched-link" href="#"></a>
-						</div>
-					</div>
+					<%
+					}
+					%>
+
+
 				</div>
 			</div>
 		</div>
@@ -235,39 +173,39 @@ NumberFormat nf = NumberFormat.getCurrencyInstance();
 					<button class="navv-link active" id="navv-doosan-tab"
 						data-bs-toggle="tab" data-bs-target="#navv-doosan" type="button"
 						role="tab" aria-controls="navv-doosan" aria-selected="true">
-						µŒªÍ ∫£æÓΩ∫</button>
+						ÎëêÏÇ∞ Î≤†Ïñ¥Ïä§</button>
 					<button class="navv-link" id="navv-lotte-tab" data-bs-toggle="tab"
 						data-bs-target="#navv-lotte" type="button" role="tab"
-						aria-controls="navv-lotte" aria-selected="false">∑‘µ• ¿⁄¿Ãæ√˜</button>
+						aria-controls="navv-lotte" aria-selected="false">Î°ØÎç∞ ÏûêÏù¥Ïñ∏Ï∏†</button>
 					<button class="navv-link" id="navv-samsung-tab"
 						data-bs-toggle="tab" data-bs-target="#navv-samsung" type="button"
-						role="tab" aria-controls="navv-samsung" aria-selected="false">ªÔº∫
-						∂Û¿Ãø¬¡Ó</button>
+						role="tab" aria-controls="navv-samsung" aria-selected="false">ÏÇºÏÑ±
+						ÎùºÏù¥Ïò®Ï¶à</button>
 					<button class="navv-link" id="navv-kiwoom-tab" data-bs-toggle="tab"
 						data-bs-target="#navv-kiwoom" type="button" role="tab"
-						aria-controls="navv-kiwoom" aria-selected="false">≈∞øÚ »˜æÓ∑Œ¡Ó</button>
+						aria-controls="navv-kiwoom" aria-selected="false">ÌÇ§ÏõÄ ÌûàÏñ¥Î°úÏ¶à</button>
 					<button class="navv-link" id="navv-hanhwa-tab" data-bs-toggle="tab"
 						data-bs-target="#navv-hanhwa" type="button" role="tab"
-						aria-controls="navv-hanhwa" aria-selected="false">«—»≠ ¿Ã±€Ω∫</button>
+						aria-controls="navv-hanhwa" aria-selected="false">ÌïúÌôî Ïù¥Í∏ÄÏä§</button>
 					<button class="navv-link" id="navv-kia-tab" data-bs-toggle="tab"
 						data-bs-target="#navv-kia" type="button" role="tab"
-						aria-controls="navv-kia" aria-selected="false">KIA ≈∏¿Ã∞≈¡Ó</button>
+						aria-controls="navv-kia" aria-selected="false">KIA ÌÉÄÏù¥Í±∞Ï¶à</button>
 					<button class="navv-link" id="navv-kt-tab" data-bs-toggle="tab"
 						data-bs-target="#navv-kt" type="button" role="tab"
 						aria-controls="navv-kt" aria-selected="false">KT WIZ</button>
 					<button class="navv-link" id="navv-lg-tab" data-bs-toggle="tab"
 						data-bs-target="#navv-lg" type="button" role="tab"
-						aria-controls="navv-lg" aria-selected="false">LG ∆Æ¿©Ω∫</button>
+						aria-controls="navv-lg" aria-selected="false">LG Ìä∏ÏúàÏä§</button>
 					<button class="navv-link" id="navv-nc-tab" data-bs-toggle="tab"
 						data-bs-target="#navv-nc" type="button" role="tab"
-						aria-controls="navv-nc" aria-selected="false">NC ¥Ÿ¿Ã≥ÎΩ∫</button>
+						aria-controls="navv-nc" aria-selected="false">NC Îã§Ïù¥ÎÖ∏Ïä§</button>
 					<button class="navv-link" id="navv-ssg-tab" data-bs-toggle="tab"
 						data-bs-target="#navv-ssg" type="button" role="tab"
-						aria-controls="navv-ssg" aria-selected="false">SSG ∑£¥ıΩ∫</button>
+						aria-controls="navv-ssg" aria-selected="false">SSG ÎûúÎçîÏä§</button>
 				</div>
 
 				<div class="tab-content" id="navv-tabContent">
-					<!-- µŒªÍ -->
+					<!-- ÎëêÏÇ∞ -->
 					<div class="tab-pane fade show active" id="navv-doosan"
 						style="opacity: 1" role="tabpanel"
 						aria-labelledby="navv-doosan-tab">
@@ -277,56 +215,56 @@ NumberFormat nf = NumberFormat.getCurrencyInstance();
 								<button class="navv-link active" id="pills-doosan_teamwear-tab"
 									data-bs-toggle="pill" data-bs-target="#pills-doosan_teamwear"
 									type="button" role="tab" aria-controls="pills-doosan_teamwear"
-									aria-selected="true">∆¿ø˛æÓ</button>
+									aria-selected="true">ÌåÄÏõ®Ïñ¥</button>
 							</li>
 							<li class="navv-item" role="presentation">
 								<button class="navv-link" id="pills-doosan_cheering-tab"
 									data-bs-toggle="pill" data-bs-target="#pills-doosan_cheering"
 									type="button" role="tab" aria-controls="pills-doosan_cheering"
-									aria-selected="false">¿¿ø¯øÎ«∞</button>
+									aria-selected="false">ÏùëÏõêÏö©Ìíà</button>
 							</li>
 							<li class="navv-item" role="presentation">
 								<button class="navv-link" id="pills-doosan_baseball-tab"
 									data-bs-toggle="pill" data-bs-target="#pills-doosan_baseball"
 									type="button" role="tab" aria-controls="pills-doosan_baseball"
-									aria-selected="false">æﬂ±∏øÎ«∞</button>
+									aria-selected="false">ÏïºÍµ¨Ïö©Ìíà</button>
 							</li>
 							<li class="navv-item" role="presentation">
-								<button class="navv-link" id="pills-doosan_commemoration-tab"
-									data-bs-toggle="pill"
-									data-bs-target="#pills-doosan_commemoration" type="button"
-									role="tab" aria-controls="pills-doosan_commemoration"
-									aria-selected="false">±‚≥‰ªÛ«∞</button>
+								<button class="navv-link" id="pills-doosan_memory-tab"
+									data-bs-toggle="pill" data-bs-target="#pills-doosan_memory"
+									type="button" role="tab" aria-controls="pills-doosan_memory"
+									aria-selected="false">Í∏∞ÎÖêÏÉÅÌíà</button>
 							</li>
 						</ul>
 						<div class="tab-content" id="pills-tabContentDoosan">
-							<!-- µŒªÍ ∆¿ø˛æÓ -->
+							<!-- ÎëêÏÇ∞ ÌåÄÏõ®Ïñ¥ -->
 							<div class="tab-pane fade show active" id="pills-doosan_teamwear"
 								role="tabpanel" aria-labelledby="pills-doosan_teamwear-tab">
 								<div class="carousel slide" id="carouselCategoryDoosanTeamwear"
 									data-bs-touch="false" data-bs-interval="false">
 
-									<!-- µŒªÍ ∆¿ø˛æÓ Ω√¿€ -->
+									<!-- ÎëêÏÇ∞ ÌåÄÏõ®Ïñ¥ ÏãúÏûë -->
 									<div class="carousel-inner">
-										<!-- µŒªÍ ∆¿ø˛æÓ √ππ¯¬∞ ∆‰¿Ã¡ˆ -->
+										<!-- ÎëêÏÇ∞ ÌåÄÏõ®Ïñ¥ Ï≤´Î≤àÏß∏ ÌéòÏù¥ÏßÄ -->
 										<div class="carousel-item active" data-bs-interval="10000">
 											<div class="row h-100 align-items-center g-2">
 												<%
-												List<ProductDto> subListbase_dt = new ArrayList<>();
+												List<ProductDto> subListbase_dooT = new ArrayList<>();
 												for (int i = 0; i < list.size(); i++) {
 													ProductDto dto = list.get(i);
-													if (dto.getTeamName().equals("µŒªÍ ∫£æÓΩ∫")) {
-														if (dto.getpCategory().equals("∆¿ø˛æÓ")) {
+													if (dto.getTeamName().equals("ÎëêÏÇ∞ Î≤†Ïñ¥Ïä§")) {
+														if (dto.getpCategory().equals("ÌåÄÏõ®Ïñ¥")) {
 
-															subListbase_dt.add(dto);
+													subListbase_dooT.add(dto);
 														}
 													}
 												}
 												%>
 												<%
-												List<ProductDto> subList_1_dt = new ArrayList<ProductDto>(subListbase_dt.subList(0, 4));
-												for (int j = 0; j < subList_1_dt.size(); j++) {
-													ProductDto dto = subList_1_dt.get(j);
+												int last_dooT_1 = subListbase_dooT.size() < 4 ? subListbase_dooT.size() : 4;
+												List<ProductDto> subList_1_dooT = new ArrayList<ProductDto>(subListbase_dooT.subList(0, last_dooT_1));
+												for (int j = 0; j < subList_1_dooT.size(); j++) {
+													ProductDto dto = subList_1_dooT.get(j);
 												%>
 												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
 													<div class="card card-span h-100 text-white">
@@ -351,15 +289,17 @@ NumberFormat nf = NumberFormat.getCurrencyInstance();
 											</div>
 										</div>
 
-
-										<!-- µŒªÍ ∆¿ø˛æÓ µŒπ¯¬∞ ∆‰¿Ã¡ˆ -->
+										<%
+										if (subListbase_dooT.size() > 4) {
+										%>
+										<!-- ÎëêÏÇ∞ ÌåÄÏõ®Ïñ¥ ÎëêÎ≤àÏß∏ ÌéòÏù¥ÏßÄ -->
 										<div class="carousel-item">
 											<div class="row h-100 align-items-center g-2">
 												<%
-												int last_dt = subListbase_dt.size() >= 8 ? 9 : subListbase_dt.size();
-												List<ProductDto> subList_2_dt = new ArrayList<ProductDto>(subListbase_dt.subList(5, last_dt));
-												for (int j = 0; j < subList_2_dt.size(); j++) {
-													ProductDto dto = subList_2_dt.get(j);
+												int last_dooT_2 = subListbase_dooT.size() > 8 ? 8 : subListbase_dooT.size();
+												List<ProductDto> subList_2_dooT = new ArrayList<ProductDto>(subListbase_dooT.subList(4, last_dooT_2));
+												for (int j = 0; j < subList_2_dooT.size(); j++) {
+													ProductDto dto = subList_2_dooT.get(j);
 												%>
 												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
 													<div class="card card-span h-100 text-white">
@@ -384,7 +324,7 @@ NumberFormat nf = NumberFormat.getCurrencyInstance();
 										</div>
 
 
-										<!-- µŒªÍ ∆¿ø˛æÓ ¡¬øÏ¿Ãµø -->
+										<!-- ÎëêÏÇ∞ ÌåÄÏõ®Ïñ¥ Ï¢åÏö∞Ïù¥Îèô -->
 										<div class="row">
 											<button class="carousel-control-prev" type="button"
 												data-bs-target="#carouselCategoryDoosanTeamwear"
@@ -400,67 +340,104 @@ NumberFormat nf = NumberFormat.getCurrencyInstance();
 											</button>
 										</div>
 
+										<%
+										}
+										%>
 
 									</div>
 								</div>
 
 							</div>
 
-							<!-- µŒªÍ ¿¿ø¯øÎ«∞ -->
+							<!-- ÎëêÏÇ∞ ÏùëÏõêÏö©Ìíà -->
 							<div class="tab-pane fade" id="pills-doosan_cheering"
 								role="tabpanel" aria-labelledby="pills-doosan_cheering-tab">
 								<div class="carousel slide" id="carouselCategoryDoosanCheering"
 									data-bs-touch="false" data-bs-interval="false">
-									<!-- µŒªÍ ¿¿ø¯øÎ«∞ Ω√¿€ -->
+
+									<!-- ÎëêÏÇ∞ ÏùëÏõêÏö©Ìíà ÏãúÏûë -->
 									<div class="carousel-inner">
-										<!-- µŒªÍ ¿¿ø¯øÎ«∞ √ππ¯¬∞ ∆‰¿Ã¡ˆ -->
+										<!-- ÎëêÏÇ∞ ÏùëÏõêÏö©Ìíà Ï≤´Î≤àÏß∏ ÌéòÏù¥ÏßÄ -->
 										<div class="carousel-item active" data-bs-interval="10000">
 											<div class="row h-100 align-items-center g-2">
-													<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
+												<%
+												List<ProductDto> subListbase_dooC = new ArrayList<>();
+												for (int i = 0; i < list.size(); i++) {
+													ProductDto dto = list.get(i);
+													if (dto.getTeamName().equals("ÎëêÏÇ∞ Î≤†Ïñ¥Ïä§")) {
+														if (dto.getpCategory().equals("ÏùëÏõêÏö©Ìíà")) {
+
+													subListbase_dooC.add(dto);
+														}
+													}
+												}
+												%>
+												<%
+												int last_dooC_1 = subListbase_dooC.size() < 4 ? subListbase_dooC.size() : 4;
+												List<ProductDto> subList_1_dooC = new ArrayList<ProductDto>(subListbase_dooC.subList(0, last_dooC_1));
+												for (int j = 0; j < subList_1_dooC.size(); j++) {
+													ProductDto dto = subList_1_dooC.get(j);
+												%>
+												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
 													<div class="card card-span h-100 text-white">
-														<img class="img-fluid h-100"
-															src="https://www.doosanbearswefan.shop/shop/data/goods/1393576360193s0.JPG"
+														<img class="img-fluid h-100" src="<%=dto.getpImage()%>"
 															alt="..." />
 														<div class="card-img-overlay ps-0"></div>
 														<div class="card-body ps-0 bg-200">
-															<h5 class="fw-bold text-1000 text-truncate">≈ı∏ÌøÏªÍ</h5>
+															<h5 class="fw-bold text-1000 text-truncate"><%=dto.getpName()%></h5>
 															<div class="fw-bold">
-																<span class="text-600 me-2 text-decoration-line-through">$200</span><span
-																	class="text-primary">$175</span>
+																<span class="text-primary"><%=nf.format(dto.getPrice())%></span>
 															</div>
 														</div>
-														<a class="stretched-link" href="#"></a>
+														<a class="stretched-link"
+															href="product_detailPage.jsp?pId=<%=dto.getpId()%>"></a>
 													</div>
 												</div>
-												
-												
+												<%
+												}
+												%>
+
+
+
 											</div>
 										</div>
 
-										<!-- µŒªÍ ¿¿ø¯øÎ«∞ µŒπ¯¬∞ ∆‰¿Ã¡ˆ-->
+										<%
+										if (subListbase_dooC.size() > 4) {
+										%>
+										<!-- ÎëêÏÇ∞ ÏùëÏõêÏö©Ìíà ÎëêÎ≤àÏß∏ ÌéòÏù¥ÏßÄ -->
 										<div class="carousel-item">
 											<div class="row h-100 align-items-center g-2">
+												<%
+												int last_dooC_2 = subListbase_dooC.size() > 8 ? 8 : subListbase_dooC.size();
+												List<ProductDto> subList_2_dooC = new ArrayList<ProductDto>(subListbase_dooC.subList(4, last_dooC_2));
+												for (int j = 0; j < subList_2_dooC.size(); j++) {
+													ProductDto dto = subList_2_dooC.get(j);
+												%>
 												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
 													<div class="card card-span h-100 text-white">
-														<img class="img-fluid h-100"
-															src="../assets/img/gallery/shirt-1.png" alt="..." />
+														<img class="img-fluid h-100" src="<%=dto.getpImage()%>"
+															alt="..." />
 														<div class="card-img-overlay ps-0"></div>
 														<div class="card-body ps-0 bg-200">
-															<h5 class="fw-bold text-1000 text-truncate">Shirt</h5>
+															<h5 class="fw-bold text-1000 text-truncate"><%=dto.getpName()%></h5>
 															<div class="fw-bold">
-																<span class="text-600 me-2 text-decoration-line-through">$200</span><span
-																	class="text-primary">$175</span>
+																<span class="text-primary"><%=nf.format(dto.getPrice())%></span>
 															</div>
 														</div>
-														<a class="stretched-link" href="#"></a>
+														<a class="stretched-link"
+															href="product_detailPage.jsp?pId=<%=dto.getpId()%>"></a>
 													</div>
 												</div>
-												
-												
+												<%
+												}
+												%>
+
 											</div>
 										</div>
 
-										<!-- µŒªÍ ¿¿ø¯øÎ«∞ ¡¬øÏ¿Ãµø-->
+
+										<!-- ÎëêÏÇ∞ ÏùëÏõêÏö©Ìíà Ï¢åÏö∞Ïù¥Îèô -->
 										<div class="row">
 											<button class="carousel-control-prev" type="button"
 												data-bs-target="#carouselCategoryDoosanCheering"
@@ -475,167 +452,235 @@ NumberFormat nf = NumberFormat.getCurrencyInstance();
 													class="visually-hidden">Next </span>
 											</button>
 										</div>
+										<%
+										}
+										%>
+
 									</div>
 								</div>
 
-								
 							</div>
 
-							<!-- µŒªÍ æﬂ±∏øÎ«∞ -->
+							<!-- ÎëêÏÇ∞ ÏïºÍµ¨Ïö©Ìíà -->
 							<div class="tab-pane fade" id="pills-doosan_baseball"
 								role="tabpanel" aria-labelledby="pills-doosan_baseball-tab">
-								<div class="carousel slide" id="carouselCategoryDoosanbaseball"
+								<div class="carousel slide" id="carouselCategoryDoosanBaseball"
 									data-bs-touch="false" data-bs-interval="false">
-									<!-- µŒªÍ æﬂ±∏øÎ«∞ Ω√¿€-->
+									<!-- ÎëêÏÇ∞ ÏïºÍµ¨Ïö©Ìíà ÏãúÏûë-->
 									<div class="carousel-inner">
-										<!-- µŒªÍ æﬂ±∏øÎ«∞ √ππ¯¬∞ ∆‰¿Ã¡ˆ-->
+										<!-- ÎëêÏÇ∞ ÏïºÍµ¨Ïö©Ìíà Ï≤´Î≤àÏß∏ ÌéòÏù¥ÏßÄ-->
 										<div class="carousel-item active" data-bs-interval="10000">
 											<div class="row h-100 align-items-center g-2">
+												<%
+												List<ProductDto> subListbase_dooB = new ArrayList<>();
+												for (int i = 0; i < list.size(); i++) {
+													ProductDto dto = list.get(i);
+													if (dto.getTeamName().equals("ÎëêÏÇ∞ Î≤†Ïñ¥Ïä§")) {
+														if (dto.getpCategory().equals("ÏïºÍµ¨Ïö©Ìíà")) {
+
+													subListbase_dooB.add(dto);
+														}
+													}
+												}
+												%>
+												<%
+												int last_dooB_1 = subListbase_dooB.size() < 4 ? subListbase_dooB.size() : 4;
+												List<ProductDto> subList_1_dooB = new ArrayList<ProductDto>(subListbase_dooB.subList(0, last_dooB_1));
+												for (int j = 0; j < subList_1_dooB.size(); j++) {
+													ProductDto dto = subList_1_dooB.get(j);
+												%>
 												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
 													<div class="card card-span h-100 text-white">
-														<img class="img-fluid h-100"
-															src="https://www.doosanbearswefan.shop/shop/data/goods/1527557404826m0.jpg"
+														<img class="img-fluid h-100" src="<%=dto.getpImage()%>"
 															alt="..." />
 														<div class="card-img-overlay ps-0"></div>
 														<div class="card-body ps-0 bg-200">
-															<h5 class="fw-bold text-1000 text-truncate">æÓºæ∆Ω πË∆Æ∞°πÊ</h5>
+															<h5 class="fw-bold text-1000 text-truncate"><%=dto.getpName()%></h5>
 															<div class="fw-bold">
-																<span class="text-600 me-2 text-decoration-line-through">$200</span><span
-																	class="text-primary">$175</span>
+																<span class="text-primary"><%=nf.format(dto.getPrice())%></span>
 															</div>
 														</div>
-														<a class="stretched-link" href="#"></a>
+														<a class="stretched-link"
+															href="product_detailPage.jsp?pId=<%=dto.getpId()%>"></a>
 													</div>
 												</div>
-												
-												
+												<%
+												}
+												%>
+
 											</div>
 										</div>
 
-										<!-- µŒªÍ æﬂ±∏øÎ«∞ µŒπ¯¬∞ ∆‰¿Ã¡ˆ-->
+										<%
+										if (subListbase_dooB.size() > 4) {
+										%>
+										<!-- ÎëêÏÇ∞ ÏùëÏõêÏö©Ìíà ÎëêÎ≤àÏß∏ ÌéòÏù¥ÏßÄ -->
 										<div class="carousel-item">
 											<div class="row h-100 align-items-center g-2">
+												<%
+												int last_dooB_2 = subListbase_dooB.size() > 8 ? 8 : subListbase_dooB.size();
+												List<ProductDto> subList_2_dooB = new ArrayList<ProductDto>(subListbase_dooB.subList(4, last_dooB_2));
+												for (int j = 0; j < subList_2_dooB.size(); j++) {
+													ProductDto dto = subList_2_dooB.get(j);
+												%>
 												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
 													<div class="card card-span h-100 text-white">
-														<img class="img-fluid h-100"
-															src="../assets/img/gallery/shoe-1.png" alt="..." />
+														<img class="img-fluid h-100" src="<%=dto.getpImage()%>"
+															alt="..." />
 														<div class="card-img-overlay ps-0"></div>
 														<div class="card-body ps-0 bg-200">
-															<h5 class="fw-bold text-1000 text-truncate">Shoe</h5>
+															<h5 class="fw-bold text-1000 text-truncate"><%=dto.getpName()%></h5>
 															<div class="fw-bold">
-																<span class="text-600 me-2 text-decoration-line-through">$200</span><span
-																	class="text-primary">$175</span>
+																<span class="text-primary"><%=nf.format(dto.getPrice())%></span>
 															</div>
 														</div>
-														<a class="stretched-link" href="#"></a>
+														<a class="stretched-link"
+															href="product_detailPage.jsp?pId=<%=dto.getpId()%>"></a>
 													</div>
 												</div>
-												
-												
+												<%
+												}
+												%>
+
 											</div>
 										</div>
 
-										<!-- µŒªÍ æﬂ±∏øÎ«∞ ¡¬øÏ¿Ãµø -->
+										<!-- ÎëêÏÇ∞ ÏïºÍµ¨Ïö©Ìíà Ï¢åÏö∞Ïù¥Îèô -->
 										<div class="row">
 											<button class="carousel-control-prev" type="button"
-												data-bs-target="#carouselCategoryDoosanbaseball"
+												data-bs-target="#carouselCategoryDoosanBaseball"
 												data-bs-slide="prev">
 												<span class="carousel-control-prev-icon" aria-hidden="true"></span><span
 													class="visually-hidden">Previous</span>
 											</button>
 											<button class="carousel-control-next" type="button"
-												data-bs-target="#carouselCategoryDoosanbaseball"
+												data-bs-target="#carouselCategoryDoosanBaseball"
 												data-bs-slide="next">
 												<span class="carousel-control-next-icon" aria-hidden="true"></span><span
 													class="visually-hidden">Next </span>
 											</button>
 										</div>
+										<%
+										}
+										%>
 									</div>
 								</div>
 
-								
+
 							</div>
 
-							<!-- µŒªÍ ±‚≥‰ªÛ«∞-->
-							<div class="tab-pane fade" id="pills-doosan_commemoration"
-								role="tabpanel" aria-labelledby="pills-doosan_commemoration-tab">
-								<div class="carousel slide"
-									id="carouselCategoryDoosanCommemoration" data-bs-touch="false"
-									data-bs-interval="false">
-									<!-- µŒªÍ ±‚≥‰ªÛ«∞ Ω√¿€-->
+							<!-- ÎëêÏÇ∞ Í∏∞ÎÖêÏÉÅÌíà-->
+							<div class="tab-pane fade" id="pills-doosan_memory"
+								role="tabpanel" aria-labelledby="pills-doosan_memory-tab">
+								<div class="carousel slide" id="carouselCategoryDoosanMemory"
+									data-bs-touch="false" data-bs-interval="false">
+									<!-- ÎëêÏÇ∞ Í∏∞ÎÖêÏÉÅÌíà ÏãúÏûë-->
 									<div class="carousel-inner">
-										<!-- µŒªÍ ±‚≥‰ªÛ«∞ √ππ¯¬∞ ∆‰¿Ã¡ˆ-->
+										<!-- ÎëêÏÇ∞ Í∏∞ÎÖêÏÉÅÌíà Ï≤´Î≤àÏß∏ ÌéòÏù¥ÏßÄ-->
 										<div class="carousel-item active" data-bs-interval="10000">
 											<div class="row h-100 align-items-center g-2">
+												<%
+												List<ProductDto> subListbase_dooM = new ArrayList<>();
+												for (int i = 0; i < list.size(); i++) {
+													ProductDto dto = list.get(i);
+													if (dto.getTeamName().equals("ÎëêÏÇ∞ Î≤†Ïñ¥Ïä§")) {
+														if (dto.getpCategory().equals("Í∏∞ÎÖêÏÉÅÌíà")) {
+
+													subListbase_dooM.add(dto);
+														}
+													}
+												}
+												%>
+												<%
+												int last_dooM_1 = subListbase_dooM.size() < 4 ? subListbase_dooM.size() : 4;
+												List<ProductDto> subList_1_dooM = new ArrayList<ProductDto>(subListbase_dooM.subList(0, last_dooM_1));
+												for (int j = 0; j < subList_1_dooM.size(); j++) {
+													ProductDto dto = subList_1_dooM.get(j);
+												%>
 												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
 													<div class="card card-span h-100 text-white">
-														<img class="img-fluid h-100"
-															src="https://www.doosanbearswefan.shop/shop/data/goods/1474879985163s0.jpg"
+														<img class="img-fluid h-100" src="<%=dto.getpImage()%>"
 															alt="..." />
 														<div class="card-img-overlay ps-0"></div>
 														<div class="card-body ps-0 bg-200">
-															<h5 class="fw-bold text-1000 text-truncate">2016
-																¡§±‘Ω√¡ øÏΩ¬ ±‚≥‰ ∏¿⁄</h5>
+															<h5 class="fw-bold text-1000 text-truncate"><%=dto.getpName()%></h5>
 															<div class="fw-bold">
-																<span class="text-600 me-2 text-decoration-line-through">$500</span><span
-																	class="text-primary">$275</span>
+																<span class="text-primary"><%=nf.format(dto.getPrice())%></span>
 															</div>
 														</div>
-														<a class="stretched-link" href="#"></a>
+														<a class="stretched-link"
+															href="product_detailPage.jsp?pId=<%=dto.getpId()%>"></a>
 													</div>
 												</div>
-												
-												
+												<%
+												}
+												%>
+
 											</div>
 										</div>
 
-										<!-- µŒªÍ ±‚≥‰ªÛ«∞ µŒπ¯¬∞ ∆‰¿Ã¡ˆ-->
+										<%
+										if (subListbase_dooM.size() > 4) {
+										%>
+										<!-- ÎëêÏÇ∞ Í∏∞ÎÖêÏÉÅÌíà ÎëêÎ≤àÏß∏ ÌéòÏù¥ÏßÄ -->
 										<div class="carousel-item">
 											<div class="row h-100 align-items-center g-2">
+												<%
+												int last_dooM_2 = subListbase_dooM.size() > 8 ? 8 : subListbase_dooM.size();
+												List<ProductDto> subList_2_dooM = new ArrayList<ProductDto>(subListbase_dooM.subList(4, last_dooM_2));
+												for (int j = 0; j < subList_2_dooM.size(); j++) {
+													ProductDto dto = subList_2_dooM.get(j);
+												%>
 												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
 													<div class="card card-span h-100 text-white">
-														<img class="img-fluid h-100"
-															src="../assets/img/gallery/watch-1.png" alt="..." />
+														<img class="img-fluid h-100" src="<%=dto.getpImage()%>"
+															alt="..." />
 														<div class="card-img-overlay ps-0"></div>
 														<div class="card-body ps-0 bg-200">
-															<h5 class="fw-bold text-1000 text-truncate">Watch</h5>
+															<h5 class="fw-bold text-1000 text-truncate"><%=dto.getpName()%></h5>
 															<div class="fw-bold">
-																<span class="text-600 me-2 text-decoration-line-through">$500</span><span
-																	class="text-primary">$275</span>
+																<span class="text-primary"><%=nf.format(dto.getPrice())%></span>
 															</div>
 														</div>
-														<a class="stretched-link" href="#"></a>
+														<a class="stretched-link"
+															href="product_detailPage.jsp?pId=<%=dto.getpId()%>"></a>
 													</div>
 												</div>
-												
-											
+												<%
+												}
+												%>
+
+
 											</div>
 										</div>
 
-										<!-- µŒªÍ ±‚≥‰ªÛ«∞ ¡¬øÏ¿Ãµø-->
+										<!-- ÎëêÏÇ∞ Í∏∞ÎÖêÏÉÅÌíà Ï¢åÏö∞Ïù¥Îèô-->
 										<div class="row">
 											<button class="carousel-control-prev" type="button"
-												data-bs-target="#carouselCategoryDoosanCommemoration"
+												data-bs-target="#carouselCategoryDoosanMemory"
 												data-bs-slide="prev">
 												<span class="carousel-control-prev-icon" aria-hidden="true"></span><span
 													class="visually-hidden">Previous</span>
 											</button>
 											<button class="carousel-control-next" type="button"
-												data-bs-target="#carouselCategoryDoosanCommemoration"
+												data-bs-target="#carouselCategoryDoosanMemory"
 												data-bs-slide="next">
 												<span class="carousel-control-next-icon" aria-hidden="true"></span><span
 													class="visually-hidden">Next </span>
 											</button>
 										</div>
+										<%
+										}
+										%>
 									</div>
 								</div>
 
-								
+
 							</div>
 						</div>
 					</div>
 
-					<!-- ∑‘µ• -->
+					<!-- Î°ØÎç∞ -->
 					<div class="tab-pane fade" id="navv-lotte" role="tabpanel"
 						style="opacity: 1" aria-labelledby="navv-lotte-tab">
 						<ul class="navv navv-pills mb-5 justify-content-center"
@@ -644,87 +689,116 @@ NumberFormat nf = NumberFormat.getCurrencyInstance();
 								<button class="navv-link active" id="pills-lotte_teamwear-tab"
 									data-bs-toggle="pill" data-bs-target="#pills-lotte_teamwear"
 									type="button" role="tab" aria-controls="pills-lotte_teamwear"
-									aria-selected="true">∆¿ø˛æÓ</button>
+									aria-selected="true">ÌåÄÏõ®Ïñ¥</button>
 							</li>
 							<li class="navv-item" role="presentation">
 								<button class="navv-link" id="pills-lotte_cheering-tab"
 									data-bs-toggle="pill" data-bs-target="#pills-lotte_cheering"
 									type="button" role="tab" aria-controls="pills-lotte_cheering"
-									aria-selected="false">¿¿ø¯øÎ«∞</button>
+									aria-selected="false">ÏùëÏõêÏö©Ìíà</button>
 							</li>
 							<li class="navv-item" role="presentation">
 								<button class="navv-link" id="pills-lotte_baseball-tab"
 									data-bs-toggle="pill" data-bs-target="#pills-lotte_baseball"
 									type="button" role="tab" aria-controls="pills-lotte_baseball"
-									aria-selected="false">æﬂ±∏øÎ«∞</button>
+									aria-selected="false">ÏïºÍµ¨Ïö©Ìíà</button>
 							</li>
 							<li class="navv-item" role="presentation">
-								<button class="navv-link" id="pills-lotte_commemoration-tab"
-									data-bs-toggle="pill"
-									data-bs-target="#pills-lotte_commemoration" type="button"
-									role="tab" aria-controls="pills-lotte_commemoration"
-									aria-selected="false">±‚≥‰ªÛ«∞</button>
+								<button class="navv-link" id="pills-lotte_memory-tab"
+									data-bs-toggle="pill" data-bs-target="#pills-lotte_memory"
+									type="button" role="tab" aria-controls="pills-lotte_memory"
+									aria-selected="false">Í∏∞ÎÖêÏÉÅÌíà</button>
 							</li>
 						</ul>
 						<div class="tab-content" id="pills-tabContentLotte">
-							<!-- ∑‘µ• ∆¿ø˛æÓ -->
+							<!-- Î°ØÎç∞ ÌåÄÏõ®Ïñ¥ -->
 							<div class="tab-pane fade show active" id="pills-lotte_teamwear"
-								style="opacity: 1" role="tabpanel"
-								aria-labelledby="pills-lotte_teamwear-tab">
+								role="tabpanel" aria-labelledby="pills-lotte_teamwear-tab">
 								<div class="carousel slide" id="carouselCategoryLotteTeamwear"
 									data-bs-touch="false" data-bs-interval="false">
-									<!-- ∑‘µ• ∆¿ø˛æÓ Ω√¿€ -->
+
+									<!-- Î°ØÎç∞ ÌåÄÏõ®Ïñ¥ ÏãúÏûë -->
 									<div class="carousel-inner">
-										<!-- ∑‘µ• ∆¿ø˛æÓ √ππ¯¬∞ ∆‰¿Ã¡ˆ -->
+										<!-- Î°ØÎç∞ ÌåÄÏõ®Ïñ¥ Ï≤´Î≤àÏß∏ ÌéòÏù¥ÏßÄ -->
 										<div class="carousel-item active" data-bs-interval="10000">
 											<div class="row h-100 align-items-center g-2">
+												<%
+												List<ProductDto> subListbase_ltT = new ArrayList<>();
+												for (int i = 0; i < list.size(); i++) {
+													ProductDto dto = list.get(i);
+													if (dto.getTeamName().equals("Î°ØÎç∞ ÏûêÏù¥Ïñ∏Ï∏†")) {
+														if (dto.getpCategory().equals("ÌåÄÏõ®Ïñ¥")) {
+
+													subListbase_ltT.add(dto);
+														}
+													}
+												}
+												%>
+												<%
+												int last_ltT_1 = subListbase_ltT.size() < 4 ? subListbase_ltT.size() : 4;
+												List<ProductDto> subList_1_ltT = new ArrayList<ProductDto>(subListbase_ltT.subList(0, last_ltT_1));
+												for (int j = 0; j < subList_1_ltT.size(); j++) {
+													ProductDto dto = subList_1_ltT.get(j);
+												%>
 												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
 													<div class="card card-span h-100 text-white">
-														<img class="img-fluid h-100"
-															src="http://www.lottegiantsshop.com/shopimages/giant00/0020040001533.jpg?1659488197"
+														<img class="img-fluid h-100" src="<%=dto.getpImage()%>"
 															alt="..." />
 														<div class="card-img-overlay ps-0"></div>
 														<div class="card-body ps-0 bg-200">
-															<h5 class="fw-bold text-1000 text-truncate">G∑Œ∞Ì ∫£¿Ã¡˜
-																πˆ≈∂«ﬁ</h5>
+															<h5 class="fw-bold text-1000 text-truncate"><%=dto.getpName()%></h5>
 															<div class="fw-bold">
-																<span class="text-600 me-2 text-decoration-line-through">$200</span><span
-																	class="text-primary">$175</span>
+																<span class="text-primary"><%=nf.format(dto.getPrice())%></span>
 															</div>
 														</div>
-														<a class="stretched-link" href="#"></a>
+														<a class="stretched-link"
+															href="product_detailPage.jsp?pId=<%=dto.getpId()%>"></a>
 													</div>
 												</div>
-												
-												
+												<%
+												}
+												%>
+
+
 											</div>
 										</div>
 
-										<!-- ∑‘µ• ∆¿ø˛æÓ µŒπ¯¬∞ ∆‰¿Ã¡ˆ -->
+										<%
+										if (subListbase_ltT.size() > 4) {
+										%>
+										<!-- Î°ØÎç∞ ÌåÄÏõ®Ïñ¥ ÎëêÎ≤àÏß∏ ÌéòÏù¥ÏßÄ -->
 										<div class="carousel-item">
 											<div class="row h-100 align-items-center g-2">
+												<%
+												int last_ltT_2 = subListbase_ltT.size() > 8 ? 8 : subListbase_ltT.size();
+												List<ProductDto> subList_2_ltT = new ArrayList<ProductDto>(subListbase_ltT.subList(4, last_ltT_2));
+												for (int j = 0; j < subList_2_ltT.size(); j++) {
+													ProductDto dto = subList_2_ltT.get(j);
+												%>
 												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
 													<div class="card card-span h-100 text-white">
-														<img class="img-fluid h-100"
-															src="../assets/img/gallery/white-tshirt.png" alt="..." />
+														<img class="img-fluid h-100" src="<%=dto.getpImage()%>"
+															alt="..." />
 														<div class="card-img-overlay ps-0"></div>
 														<div class="card-body ps-0 bg-200">
-															<h5 class="fw-bold text-1000 text-truncate">White
-																T-Shirt</h5>
+															<h5 class="fw-bold text-1000 text-truncate"><%=dto.getpName()%></h5>
 															<div class="fw-bold">
-																<span class="text-600 me-2 text-decoration-line-through">$200</span><span
-																	class="text-primary">$175</span>
+																<span class="text-primary"><%=nf.format(dto.getPrice())%></span>
 															</div>
 														</div>
-														<a class="stretched-link" href="#"></a>
+														<a class="stretched-link"
+															href="product_detailPage.jsp?pId=<%=dto.getpId()%>"></a>
 													</div>
 												</div>
-												
-												
+												<%
+												}
+												%>
+
 											</div>
 										</div>
 
-										<!-- ∑‘µ• ∆¿ø˛æÓ ¡¬øÏ¿Ãµø -->
+
+										<!-- Î°ØÎç∞ ÌåÄÏõ®Ïñ¥ Ï¢åÏö∞Ïù¥Îèô -->
 										<div class="row">
 											<button class="carousel-control-prev" type="button"
 												data-bs-target="#carouselCategoryLotteTeamwear"
@@ -739,69 +813,105 @@ NumberFormat nf = NumberFormat.getCurrencyInstance();
 													class="visually-hidden">Next </span>
 											</button>
 										</div>
+
+										<%
+										}
+										%>
+
 									</div>
 								</div>
 
-								
 							</div>
 
-							<!-- ∑‘µ• ¿¿ø¯øÎ«∞ -->
+							<!-- Î°ØÎç∞ ÏùëÏõêÏö©Ìíà -->
 							<div class="tab-pane fade" id="pills-lotte_cheering"
-								style="opacity: 1" role="tabpanel"
-								aria-labelledby="pills-lotte_cheering-tab">
+								role="tabpanel" aria-labelledby="pills-lotte_cheering-tab">
 								<div class="carousel slide" id="carouselCategoryLotteCheering"
 									data-bs-touch="false" data-bs-interval="false">
-									<!-- ∑‘µ• ¿¿ø¯øÎ«∞ Ω√¿€ -->
+
+									<!-- Î°ØÎç∞ ÏùëÏõêÏö©Ìíà ÏãúÏûë -->
 									<div class="carousel-inner">
-										<!-- ∑‘µ• ¿¿ø¯øÎ«∞ √ππ¯¬∞ ∆‰¿Ã¡ˆ -->
+										<!-- Î°ØÎç∞ ÏùëÏõêÏö©Ìíà Ï≤´Î≤àÏß∏ ÌéòÏù¥ÏßÄ -->
 										<div class="carousel-item active" data-bs-interval="10000">
 											<div class="row h-100 align-items-center g-2">
+												<%
+												List<ProductDto> subListbase_ltC = new ArrayList<>();
+												for (int i = 0; i < list.size(); i++) {
+													ProductDto dto = list.get(i);
+													if (dto.getTeamName().equals("Î°ØÎç∞ ÏûêÏù¥Ïñ∏Ï∏†")) {
+														if (dto.getpCategory().equals("ÏùëÏõêÏö©Ìíà")) {
+
+													subListbase_ltC.add(dto);
+														}
+													}
+												}
+												%>
+												<%
+												int last_ltC_1 = subListbase_ltC.size() < 4 ? subListbase_ltC.size() : 4;
+												List<ProductDto> subList_1_ltC = new ArrayList<ProductDto>(subListbase_ltC.subList(0, last_ltC_1));
+												for (int j = 0; j < subList_1_ltC.size(); j++) {
+													ProductDto dto = subList_1_ltC.get(j);
+												%>
 												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
 													<div class="card card-span h-100 text-white">
-														<img class="img-fluid h-100"
-															src="http://www.lottegiantsshop.com/shopimages/giant00/013008000002.jpg?1677205437"
+														<img class="img-fluid h-100" src="<%=dto.getpImage()%>"
 															alt="..." />
 														<div class="card-img-overlay ps-0"></div>
 														<div class="card-body ps-0 bg-200">
-															<h5 class="fw-bold text-1000 text-truncate">øÏ.º±.¿¿.ø¯
-																∆–ƒ°</h5>
+															<h5 class="fw-bold text-1000 text-truncate"><%=dto.getpName()%></h5>
 															<div class="fw-bold">
-																<span class="text-600 me-2 text-decoration-line-through">$200</span><span
-																	class="text-primary">$175</span>
+																<span class="text-primary"><%=nf.format(dto.getPrice())%></span>
 															</div>
 														</div>
-														<a class="stretched-link" href="#"></a>
+														<a class="stretched-link"
+															href="product_detailPage.jsp?pId=<%=dto.getpId()%>"></a>
 													</div>
 												</div>
-												
-												
+												<%
+												}
+												%>
+
+
+
 											</div>
 										</div>
 
-										<!-- ∑‘µ• ¿¿ø¯øÎ«∞ µŒπ¯¬∞ ∆‰¿Ã¡ˆ-->
+										<%
+										if (subListbase_ltC.size() > 4) {
+										%>
+										<!-- Î°ØÎç∞ ÏùëÏõêÏö©Ìíà ÎëêÎ≤àÏß∏ ÌéòÏù¥ÏßÄ -->
 										<div class="carousel-item">
 											<div class="row h-100 align-items-center g-2">
+												<%
+												int last_ltC_2 = subListbase_ltC.size() > 8 ? 8 : subListbase_ltC.size();
+												List<ProductDto> subList_2_ltC = new ArrayList<ProductDto>(subListbase_ltC.subList(4, last_ltC_2));
+												for (int j = 0; j < subList_2_ltC.size(); j++) {
+													ProductDto dto = subList_2_ltC.get(j);
+												%>
 												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
 													<div class="card card-span h-100 text-white">
-														<img class="img-fluid h-100"
-															src="../assets/img/gallery/shirt-5.png" alt="..." />
+														<img class="img-fluid h-100" src="<%=dto.getpImage()%>"
+															alt="..." />
 														<div class="card-img-overlay ps-0"></div>
 														<div class="card-body ps-0 bg-200">
-															<h5 class="fw-bold text-1000 text-truncate">Shirt</h5>
+															<h5 class="fw-bold text-1000 text-truncate"><%=dto.getpName()%></h5>
 															<div class="fw-bold">
-																<span class="text-600 me-2 text-decoration-line-through">$200</span><span
-																	class="text-primary">$175</span>
+																<span class="text-primary"><%=nf.format(dto.getPrice())%></span>
 															</div>
 														</div>
-														<a class="stretched-link" href="#"></a>
+														<a class="stretched-link"
+															href="product_detailPage.jsp?pId=<%=dto.getpId()%>"></a>
 													</div>
 												</div>
-												
-												
+												<%
+												}
+												%>
+
 											</div>
 										</div>
 
-										<!-- ∑‘µ• ¿¿ø¯øÎ«∞ ¡¬øÏ¿Ãµø-->
+
+										<!-- Î°ØÎç∞ ÏùëÏõêÏö©Ìíà Ï¢åÏö∞Ïù¥Îèô -->
 										<div class="row">
 											<button class="carousel-control-prev" type="button"
 												data-bs-target="#carouselCategoryLotteCheering"
@@ -816,168 +926,235 @@ NumberFormat nf = NumberFormat.getCurrencyInstance();
 													class="visually-hidden">Next </span>
 											</button>
 										</div>
+										<%
+										}
+										%>
+
 									</div>
 								</div>
 
-								
 							</div>
 
-							<!-- ∑‘µ• æﬂ±∏øÎ«∞ -->
+							<!-- Î°ØÎç∞ ÏïºÍµ¨Ïö©Ìíà -->
 							<div class="tab-pane fade" id="pills-lotte_baseball"
-								style="opacity: 1" role="tabpanel"
-								aria-labelledby="pills-lotte_baseball-tab">
-								<div class="carousel slide" id="carouselCategoryLottebaseball"
+								role="tabpanel" aria-labelledby="pills-lotte_baseball-tab">
+								<div class="carousel slide" id="carouselCategoryLotteBaseball"
 									data-bs-touch="false" data-bs-interval="false">
-									<!-- ∑‘µ• æﬂ±∏øÎ«∞ Ω√¿€ -->
+									<!-- Î°ØÎç∞ ÏïºÍµ¨Ïö©Ìíà ÏãúÏûë-->
 									<div class="carousel-inner">
-										<!-- ∑‘µ• æﬂ±∏øÎ«∞ √ππ¯¬∞ ∆‰¿Ã¡ˆ -->
+										<!-- Î°ØÎç∞ ÏïºÍµ¨Ïö©Ìíà Ï≤´Î≤àÏß∏ ÌéòÏù¥ÏßÄ-->
 										<div class="carousel-item active" data-bs-interval="10000">
 											<div class="row h-100 align-items-center g-2">
+												<%
+												List<ProductDto> subListbase_ltB = new ArrayList<>();
+												for (int i = 0; i < list.size(); i++) {
+													ProductDto dto = list.get(i);
+													if (dto.getTeamName().equals("Î°ØÎç∞ ÏûêÏù¥Ïñ∏Ï∏†")) {
+														if (dto.getpCategory().equals("ÏïºÍµ¨Ïö©Ìíà")) {
+
+													subListbase_ltB.add(dto);
+														}
+													}
+												}
+												%>
+												<%
+												int last_ltB_1 = subListbase_ltB.size() < 4 ? subListbase_ltB.size() : 4;
+												List<ProductDto> subList_1_ltB = new ArrayList<ProductDto>(subListbase_ltB.subList(0, last_ltB_1));
+												for (int j = 0; j < subList_1_ltB.size(); j++) {
+													ProductDto dto = subList_1_ltB.get(j);
+												%>
 												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
 													<div class="card card-span h-100 text-white">
-														<img class="img-fluid h-100"
-															src="http://www.lottegiantsshop.com/shopimages/giant00/0070010000753.jpg?1619500346"
+														<img class="img-fluid h-100" src="<%=dto.getpImage()%>"
 															alt="..." />
 														<div class="card-img-overlay ps-0"></div>
 														<div class="card-body ps-0 bg-200">
-															<h5 class="fw-bold text-1000 text-truncate">±‚∫ª ∑Œ∞Ì∫º</h5>
+															<h5 class="fw-bold text-1000 text-truncate"><%=dto.getpName()%></h5>
 															<div class="fw-bold">
-																<span class="text-600 me-2 text-decoration-line-through">$200</span><span
-																	class="text-primary">$175</span>
+																<span class="text-primary"><%=nf.format(dto.getPrice())%></span>
 															</div>
 														</div>
-														<a class="stretched-link" href="#"></a>
+														<a class="stretched-link"
+															href="product_detailPage.jsp?pId=<%=dto.getpId()%>"></a>
 													</div>
 												</div>
-												
-												
+												<%
+												}
+												%>
+
 											</div>
 										</div>
 
-										<!-- ∑‘µ• æﬂ±∏øÎ«∞ µŒπ¯¬∞ ∆‰¿Ã¡ˆ -->
+										<%
+										if (subListbase_ltB.size() > 4) {
+										%>
+										<!-- Î°ØÎç∞ ÏïºÍµ¨Ïö©Ìíà ÎëêÎ≤àÏß∏ ÌéòÏù¥ÏßÄ -->
 										<div class="carousel-item">
 											<div class="row h-100 align-items-center g-2">
+												<%
+												int last_ltB_2 = subListbase_ltB.size() > 8 ? 8 : subListbase_ltB.size();
+												List<ProductDto> subList_2_ltB = new ArrayList<ProductDto>(subListbase_ltB.subList(4, last_ltB_2));
+												for (int j = 0; j < subList_2_ltB.size(); j++) {
+													ProductDto dto = subList_2_ltB.get(j);
+												%>
 												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
 													<div class="card card-span h-100 text-white">
-														<img class="img-fluid h-100"
-															src="../assets/img/gallery/shoe-5.png" alt="..." />
+														<img class="img-fluid h-100" src="<%=dto.getpImage()%>"
+															alt="..." />
 														<div class="card-img-overlay ps-0"></div>
 														<div class="card-body ps-0 bg-200">
-															<h5 class="fw-bold text-1000 text-truncate">Shoe</h5>
+															<h5 class="fw-bold text-1000 text-truncate"><%=dto.getpName()%></h5>
 															<div class="fw-bold">
-																<span class="text-600 me-2 text-decoration-line-through">$200</span><span
-																	class="text-primary">$175</span>
+																<span class="text-primary"><%=nf.format(dto.getPrice())%></span>
 															</div>
 														</div>
-														<a class="stretched-link" href="#"></a>
+														<a class="stretched-link"
+															href="product_detailPage.jsp?pId=<%=dto.getpId()%>"></a>
 													</div>
 												</div>
-												
-												
+												<%
+												}
+												%>
+
 											</div>
 										</div>
 
-										<!-- ∑‘µ• æﬂ±∏øÎ«∞ ¡¬øÏ¿Ãµø -->
+										<!-- Î°ØÎç∞ ÏïºÍµ¨Ïö©Ìíà Ï¢åÏö∞Ïù¥Îèô -->
 										<div class="row">
 											<button class="carousel-control-prev" type="button"
-												data-bs-target="#carouselCategoryLottebaseball"
+												data-bs-target="#carouselCategoryLotteBaseball"
 												data-bs-slide="prev">
 												<span class="carousel-control-prev-icon" aria-hidden="true"></span><span
 													class="visually-hidden">Previous</span>
 											</button>
 											<button class="carousel-control-next" type="button"
-												data-bs-target="#carouselCategoryLottebaseball"
+												data-bs-target="#carouselCategoryLotteBaseball"
 												data-bs-slide="next">
 												<span class="carousel-control-next-icon" aria-hidden="true"></span><span
 													class="visually-hidden">Next </span>
 											</button>
 										</div>
+										<%
+										}
+										%>
 									</div>
 								</div>
 
-								
+
 							</div>
 
-							<!-- ∑‘µ• ±‚≥‰ªÛ«∞ -->
-							<div class="tab-pane fade" id="pills-lotte_commemoration"
-								style="opacity: 1" role="tabpanel"
-								aria-labelledby="pills-lotte_commemoration-tab">
-								<div class="carousel slide"
-									id="carouselCategoryLotteCommemoration" data-bs-touch="false"
-									data-bs-interval="false">
-									<!-- ∑‘µ• ±‚≥‰ªÛ«∞ Ω√¿€ -->
+							<!-- Î°ØÎç∞ Í∏∞ÎÖêÏÉÅÌíà-->
+							<div class="tab-pane fade" id="pills-lotte_memory"
+								role="tabpanel" aria-labelledby="pills-lotte_memory-tab">
+								<div class="carousel slide" id="carouselCategoryLotteMemory"
+									data-bs-touch="false" data-bs-interval="false">
+									<!-- Î°ØÎç∞ Í∏∞ÎÖêÏÉÅÌíà ÏãúÏûë-->
 									<div class="carousel-inner">
-										<!-- ∑‘µ• ±‚≥‰ªÛ«∞ √ππ¯¬∞ ∆‰¿Ã¡ˆ -->
+										<!-- Î°ØÎç∞ Í∏∞ÎÖêÏÉÅÌíà Ï≤´Î≤àÏß∏ ÌéòÏù¥ÏßÄ-->
 										<div class="carousel-item active" data-bs-interval="10000">
 											<div class="row h-100 align-items-center g-2">
+												<%
+												List<ProductDto> subListbase_ltM = new ArrayList<>();
+												for (int i = 0; i < list.size(); i++) {
+													ProductDto dto = list.get(i);
+													if (dto.getTeamName().equals("Î°ØÎç∞ ÏûêÏù¥Ïñ∏Ï∏†")) {
+														if (dto.getpCategory().equals("Í∏∞ÎÖêÏÉÅÌíà")) {
+
+													subListbase_ltM.add(dto);
+														}
+													}
+												}
+												%>
+												<%
+												int last_ltM_1 = subListbase_ltM.size() < 4 ? subListbase_ltM.size() : 4;
+												List<ProductDto> subList_1_ltM = new ArrayList<ProductDto>(subListbase_ltM.subList(0, last_ltM_1));
+												for (int j = 0; j < subList_1_ltM.size(); j++) {
+													ProductDto dto = subList_1_ltM.get(j);
+												%>
 												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
 													<div class="card card-span h-100 text-white">
-														<img class="img-fluid h-100"
-															src="http://www.lottegiantsshop.com/shopimages/giant00/0130030000173.jpg?1663327629"
+														<img class="img-fluid h-100" src="<%=dto.getpImage()%>"
 															alt="..." />
 														<div class="card-img-overlay ps-0"></div>
 														<div class="card-body ps-0 bg-200">
-															<h5 class="fw-bold text-1000 text-truncate">∞Ò«¡ ∆–≈∞¡ˆπ⁄Ω∫</h5>
+															<h5 class="fw-bold text-1000 text-truncate"><%=dto.getpName()%></h5>
 															<div class="fw-bold">
-																<span class="text-600 me-2 text-decoration-line-through">$500</span><span
-																	class="text-primary">$275</span>
+																<span class="text-primary"><%=nf.format(dto.getPrice())%></span>
 															</div>
 														</div>
-														<a class="stretched-link" href="#"></a>
+														<a class="stretched-link"
+															href="product_detailPage.jsp?pId=<%=dto.getpId()%>"></a>
 													</div>
 												</div>
-												
-												
+												<%
+												}
+												%>
+
 											</div>
 										</div>
 
-										<!-- ∑‘µ• ±‚≥‰ªÛ«∞ µŒπ¯¬∞ ∆‰¿Ã¡ˆ -->
+										<%
+										if (subListbase_ltM.size() > 4) {
+										%>
+										<!-- Î°ØÎç∞ Í∏∞ÎÖêÏÉÅÌíà ÎëêÎ≤àÏß∏ ÌéòÏù¥ÏßÄ -->
 										<div class="carousel-item">
 											<div class="row h-100 align-items-center g-2">
+												<%
+												int last_ltM_2 = subListbase_ltM.size() > 8 ? 8 : subListbase_ltM.size();
+												List<ProductDto> subList_2_ltM = new ArrayList<ProductDto>(subListbase_ltM.subList(4, last_ltM_2));
+												for (int j = 0; j < subList_2_ltM.size(); j++) {
+													ProductDto dto = subList_2_ltM.get(j);
+												%>
 												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
 													<div class="card card-span h-100 text-white">
-														<img class="img-fluid h-100"
-															src="../assets/img/gallery/watch-5.png" alt="..." />
+														<img class="img-fluid h-100" src="<%=dto.getpImage()%>"
+															alt="..." />
 														<div class="card-img-overlay ps-0"></div>
 														<div class="card-body ps-0 bg-200">
-															<h5 class="fw-bold text-1000 text-truncate">Watch</h5>
+															<h5 class="fw-bold text-1000 text-truncate"><%=dto.getpName()%></h5>
 															<div class="fw-bold">
-																<span class="text-600 me-2 text-decoration-line-through">$500</span><span
-																	class="text-primary">$275</span>
+																<span class="text-primary"><%=nf.format(dto.getPrice())%></span>
 															</div>
 														</div>
-														<a class="stretched-link" href="#"></a>
+														<a class="stretched-link"
+															href="product_detailPage.jsp?pId=<%=dto.getpId()%>"></a>
 													</div>
 												</div>
-												
-												
+												<%
+												}
+												%>
+
+
 											</div>
 										</div>
 
-										<!-- ∑‘µ• ±‚≥‰ªÛ«∞ ¡¬øÏ¿Ãµø -->
+										<!-- Î°ØÎç∞ Í∏∞ÎÖêÏÉÅÌíà Ï¢åÏö∞Ïù¥Îèô-->
 										<div class="row">
 											<button class="carousel-control-prev" type="button"
-												data-bs-target="#carouselCategoryLotteCommemoration"
+												data-bs-target="#carouselCategoryLotteMemory"
 												data-bs-slide="prev">
 												<span class="carousel-control-prev-icon" aria-hidden="true"></span><span
 													class="visually-hidden">Previous</span>
 											</button>
 											<button class="carousel-control-next" type="button"
-												data-bs-target="#carouselCategoryLotteCommemoration"
+												data-bs-target="#carouselCategoryLotteMemory"
 												data-bs-slide="next">
 												<span class="carousel-control-next-icon" aria-hidden="true"></span><span
 													class="visually-hidden">Next </span>
 											</button>
 										</div>
+										<%
+										}
+										%>
 									</div>
 								</div>
 
-								
+
 							</div>
 						</div>
 					</div>
 
-					<!-- ªÔº∫ -->
+					<!-- ÏÇºÏÑ± -->
 					<div class="tab-pane fade" id="navv-samsung" role="tabpanel"
 						style="opacity: 1" aria-labelledby="navv-samsung-tab">
 						<ul class="navv navv-pills mb-5 justify-content-center"
@@ -986,88 +1163,117 @@ NumberFormat nf = NumberFormat.getCurrencyInstance();
 								<button class="navv-link active" id="pills-samsung_teamwear-tab"
 									data-bs-toggle="pill" data-bs-target="#pills-samsung_teamwear"
 									type="button" role="tab" aria-controls="pills-samsung_teamwear"
-									aria-selected="true">∆¿ø˛æÓ</button>
+									aria-selected="true">ÌåÄÏõ®Ïñ¥</button>
 							</li>
 							<li class="navv-item" role="presentation">
 								<button class="navv-link" id="pills-samsung_cheering-tab"
 									data-bs-toggle="pill" data-bs-target="#pills-samsung_cheering"
 									type="button" role="tab" aria-controls="pills-samsung_cheering"
-									aria-selected="false">¿¿ø¯øÎ«∞</button>
+									aria-selected="false">ÏùëÏõêÏö©Ìíà</button>
 							</li>
 							<li class="navv-item" role="presentation">
 								<button class="navv-link" id="pills-samsung_baseball-tab"
 									data-bs-toggle="pill" data-bs-target="#pills-samsung_baseball"
 									type="button" role="tab" aria-controls="pills-samsung_baseball"
-									aria-selected="false">æﬂ±∏øÎ«∞</button>
+									aria-selected="false">ÏïºÍµ¨Ïö©Ìíà</button>
 							</li>
 							<li class="navv-item" role="presentation">
-								<button class="navv-link" id="pills-samsung_commemoration-tab"
-									data-bs-toggle="pill"
-									data-bs-target="#pills-samsung_commemoration" type="button"
-									role="tab" aria-controls="pills-samsung_commemoration"
-									aria-selected="false">±‚≥‰ªÛ«∞</button>
+								<button class="navv-link" id="pills-samsung_memory-tab"
+									data-bs-toggle="pill" data-bs-target="#pills-samsung_memory"
+									type="button" role="tab" aria-controls="pills-samsung_memory"
+									aria-selected="false">Í∏∞ÎÖêÏÉÅÌíà</button>
 							</li>
 						</ul>
-
 						<div class="tab-content" id="pills-tabContentSamsung">
-							<!-- ªÔº∫ ∆¿ø˛æÓ -->
+							<!-- ÏÇºÏÑ± ÌåÄÏõ®Ïñ¥ -->
 							<div class="tab-pane fade show active"
 								id="pills-samsung_teamwear" role="tabpanel"
 								aria-labelledby="pills-samsung_teamwear-tab">
 								<div class="carousel slide" id="carouselCategorySamsungTeamwear"
 									data-bs-touch="false" data-bs-interval="false">
-									<!-- ªÔº∫ ∆¿ø˛æÓ Ω√¿€ -->
+
+									<!-- ÏÇºÏÑ± ÌåÄÏõ®Ïñ¥ ÏãúÏûë -->
 									<div class="carousel-inner">
-										<!-- ªÔº∫ ∆¿ø˛æÓ √ππ¯¬∞ ∆‰¿Ã¡ˆ -->
+										<!-- ÏÇºÏÑ± ÌåÄÏõ®Ïñ¥ Ï≤´Î≤àÏß∏ ÌéòÏù¥ÏßÄ -->
 										<div class="carousel-item active" data-bs-interval="10000">
 											<div class="row h-100 align-items-center g-2">
+												<%
+												List<ProductDto> subListbase_samT = new ArrayList<>();
+												for (int i = 0; i < list.size(); i++) {
+													ProductDto dto = list.get(i);
+													if (dto.getTeamName().equals("ÏÇºÏÑ± ÎùºÏù¥Ïò®Ï¶à")) {
+														if (dto.getpCategory().equals("ÌåÄÏõ®Ïñ¥")) {
+
+													subListbase_samT.add(dto);
+														}
+													}
+												}
+												%>
+												<%
+												int last_samT_1 = subListbase_samT.size() < 4 ? subListbase_samT.size() : 4;
+												List<ProductDto> subList_1_samT = new ArrayList<ProductDto>(subListbase_samT.subList(0, last_samT_1));
+												for (int j = 0; j < subList_1_samT.size(); j++) {
+													ProductDto dto = subList_1_samT.get(j);
+												%>
 												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
 													<div class="card card-span h-100 text-white">
-														<img class="img-fluid h-100"
-															src="https://samsunglionsmall.com/web/product/big/202302/2073128f4a3079a02c1aa52d5a6032d0.jpg"
+														<img class="img-fluid h-100" src="<%=dto.getpImage()%>"
 															alt="..." />
 														<div class="card-img-overlay ps-0"></div>
 														<div class="card-body ps-0 bg-200">
-															<h5 class="fw-bold text-1000 text-truncate">ªÔº∫∂Û¿Ãø¬¡Ó
-																2023 «¡∑Œ∆‰º≈≥Œ æÓø˛¿Ã ¿Ø¥œ∆˚</h5>
+															<h5 class="fw-bold text-1000 text-truncate"><%=dto.getpName()%></h5>
 															<div class="fw-bold">
-																<span class="text-600 me-2 text-decoration-line-through">$200</span><span
-																	class="text-primary">$175</span>
+																<span class="text-primary"><%=nf.format(dto.getPrice())%></span>
 															</div>
 														</div>
-														<a class="stretched-link" href="#"></a>
+														<a class="stretched-link"
+															href="product_detailPage.jsp?pId=<%=dto.getpId()%>"></a>
 													</div>
 												</div>
-												
-												
+												<%
+												}
+												%>
+
+
 											</div>
 										</div>
 
-										<!-- ªÔº∫ ∆¿ø˛æÓ µŒπ¯¬∞ ∆‰¿Ã¡ˆ -->
+										<%
+										if (subListbase_samT.size() > 4) {
+										%>
+										<!-- ÏÇºÏÑ± ÌåÄÏõ®Ïñ¥ ÎëêÎ≤àÏß∏ ÌéòÏù¥ÏßÄ -->
 										<div class="carousel-item">
 											<div class="row h-100 align-items-center g-2">
+												<%
+												int last_samT_2 = subListbase_samT.size() > 8 ? 8 : subListbase_samT.size();
+												List<ProductDto> subList_2_samT = new ArrayList<ProductDto>(subListbase_samT.subList(4, last_samT_2));
+												for (int j = 0; j < subList_2_samT.size(); j++) {
+													ProductDto dto = subList_2_samT.get(j);
+												%>
 												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
 													<div class="card card-span h-100 text-white">
-														<img class="img-fluid h-100"
-															src="../assets/img/gallery/white-tshirt.png" alt="..." />
+														<img class="img-fluid h-100" src="<%=dto.getpImage()%>"
+															alt="..." />
 														<div class="card-img-overlay ps-0"></div>
 														<div class="card-body ps-0 bg-200">
-															<h5 class="fw-bold text-1000 text-truncate">White
-																T-Shirt</h5>
+															<h5 class="fw-bold text-1000 text-truncate"><%=dto.getpName()%></h5>
 															<div class="fw-bold">
-																<span class="text-600 me-2 text-decoration-line-through">$200</span><span
-																	class="text-primary">$175</span>
+																<span class="text-primary"><%=nf.format(dto.getPrice())%></span>
 															</div>
 														</div>
-														<a class="stretched-link" href="#"></a>
+														<a class="stretched-link"
+															href="product_detailPage.jsp?pId=<%=dto.getpId()%>"></a>
 													</div>
 												</div>
-												
-												
+												<%
+												}
+												%>
+
 											</div>
 										</div>
 
-										<!-- ªÔº∫ ∆¿ø˛æÓ ¡¬øÏ¿Ãµø -->
+
+										<!-- ÏÇºÏÑ± ÌåÄÏõ®Ïñ¥ Ï¢åÏö∞Ïù¥Îèô -->
 										<div class="row">
 											<button class="carousel-control-prev" type="button"
 												data-bs-target="#carouselCategorySamsungTeamwear"
@@ -1082,68 +1288,105 @@ NumberFormat nf = NumberFormat.getCurrencyInstance();
 													class="visually-hidden">Next </span>
 											</button>
 										</div>
+
+										<%
+										}
+										%>
+
 									</div>
 								</div>
 
-								
 							</div>
 
-							<!-- ªÔº∫ ¿¿ø¯øÎ«∞ -->
+							<!-- ÏÇºÏÑ± ÏùëÏõêÏö©Ìíà -->
 							<div class="tab-pane fade" id="pills-samsung_cheering"
 								role="tabpanel" aria-labelledby="pills-samsung_cheering-tab">
 								<div class="carousel slide" id="carouselCategorySamsungCheering"
 									data-bs-touch="false" data-bs-interval="false">
-									<!-- ªÔº∫ ¿¿ø¯øÎ«∞ Ω√¿€ -->
+
+									<!-- ÏÇºÏÑ± ÏùëÏõêÏö©Ìíà ÏãúÏûë -->
 									<div class="carousel-inner">
-										<!-- ªÔº∫ ¿¿ø¯øÎ«∞ √ππ¯¬∞ ∆‰¿Ã¡ˆ -->
+										<!-- ÏÇºÏÑ± ÏùëÏõêÏö©Ìíà Ï≤´Î≤àÏß∏ ÌéòÏù¥ÏßÄ -->
 										<div class="carousel-item active" data-bs-interval="10000">
 											<div class="row h-100 align-items-center g-2">
+												<%
+												List<ProductDto> subListbase_samC = new ArrayList<>();
+												for (int i = 0; i < list.size(); i++) {
+													ProductDto dto = list.get(i);
+													if (dto.getTeamName().equals("ÏÇºÏÑ± ÎùºÏù¥Ïò®Ï¶à")) {
+														if (dto.getpCategory().equals("ÏùëÏõêÏö©Ìíà")) {
+
+													subListbase_samC.add(dto);
+														}
+													}
+												}
+												%>
+												<%
+												int last_samC_1 = subListbase_samC.size() < 4 ? subListbase_samC.size() : 4;
+												List<ProductDto> subList_1_samC = new ArrayList<ProductDto>(subListbase_samC.subList(0, last_samC_1));
+												for (int j = 0; j < subList_1_samC.size(); j++) {
+													ProductDto dto = subList_1_samC.get(j);
+												%>
 												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
 													<div class="card card-span h-100 text-white">
-														<img class="img-fluid h-100"
-															src="https://samsunglionsmall.com/web/product/big/202303/0cef71d9b7e745c89b3841f0c0710912.jpg"
+														<img class="img-fluid h-100" src="<%=dto.getpImage()%>"
 															alt="..." />
 														<div class="card-img-overlay ps-0"></div>
 														<div class="card-body ps-0 bg-200">
-															<h5 class="fw-bold text-1000 text-truncate">ªÔº∫∂Û¿Ãø¬¡Ó
-																SL ∫Ú∑Œ∞Ì ∏Ò∞…¿Ã</h5>
+															<h5 class="fw-bold text-1000 text-truncate"><%=dto.getpName()%></h5>
 															<div class="fw-bold">
-																<span class="text-600 me-2 text-decoration-line-through">$200</span><span
-																	class="text-primary">$175</span>
+																<span class="text-primary"><%=nf.format(dto.getPrice())%></span>
 															</div>
 														</div>
-														<a class="stretched-link" href="#"></a>
+														<a class="stretched-link"
+															href="product_detailPage.jsp?pId=<%=dto.getpId()%>"></a>
 													</div>
 												</div>
-												
-												
+												<%
+												}
+												%>
+
+
+
 											</div>
 										</div>
 
-										<!-- ªÔº∫ ¿¿ø¯øÎ«∞ µŒπ¯¬∞ ∆‰¿Ã¡ˆ-->
+										<%
+										if (subListbase_samC.size() > 4) {
+										%>
+										<!-- ÏÇºÏÑ± ÏùëÏõêÏö©Ìíà ÎëêÎ≤àÏß∏ ÌéòÏù¥ÏßÄ -->
 										<div class="carousel-item">
 											<div class="row h-100 align-items-center g-2">
+												<%
+												int last_samC_2 = subListbase_samC.size() > 8 ? 8 : subListbase_samC.size();
+												List<ProductDto> subList_2_samC = new ArrayList<ProductDto>(subListbase_samC.subList(4, last_samC_2));
+												for (int j = 0; j < subList_2_samC.size(); j++) {
+													ProductDto dto = subList_2_samC.get(j);
+												%>
 												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
 													<div class="card card-span h-100 text-white">
-														<img class="img-fluid h-100"
-															src="../assets/img/gallery/shirt-5.png" alt="..." />
+														<img class="img-fluid h-100" src="<%=dto.getpImage()%>"
+															alt="..." />
 														<div class="card-img-overlay ps-0"></div>
 														<div class="card-body ps-0 bg-200">
-															<h5 class="fw-bold text-1000 text-truncate">Shirt</h5>
+															<h5 class="fw-bold text-1000 text-truncate"><%=dto.getpName()%></h5>
 															<div class="fw-bold">
-																<span class="text-600 me-2 text-decoration-line-through">$200</span><span
-																	class="text-primary">$175</span>
+																<span class="text-primary"><%=nf.format(dto.getPrice())%></span>
 															</div>
 														</div>
-														<a class="stretched-link" href="#"></a>
+														<a class="stretched-link"
+															href="product_detailPage.jsp?pId=<%=dto.getpId()%>"></a>
 													</div>
 												</div>
-												
-												
+												<%
+												}
+												%>
+
 											</div>
 										</div>
 
-										<!-- ªÔº∫ ¿¿ø¯øÎ«∞ ¡¬øÏ¿Ãµø-->
+
+										<!-- ÏÇºÏÑ± ÏùëÏõêÏö©Ìíà Ï¢åÏö∞Ïù¥Îèô -->
 										<div class="row">
 											<button class="carousel-control-prev" type="button"
 												data-bs-target="#carouselCategorySamsungCheering"
@@ -1158,258 +1401,353 @@ NumberFormat nf = NumberFormat.getCurrencyInstance();
 													class="visually-hidden">Next </span>
 											</button>
 										</div>
+										<%
+										}
+										%>
+
 									</div>
 								</div>
 
-								
 							</div>
 
-							<!-- ªÔº∫ æﬂ±∏øÎ«∞ -->
+							<!-- ÏÇºÏÑ± ÏïºÍµ¨Ïö©Ìíà -->
 							<div class="tab-pane fade" id="pills-samsung_baseball"
 								role="tabpanel" aria-labelledby="pills-samsung_baseball-tab">
-								<div class="carousel slide" id="carouselCategorySamsungbaseball"
+								<div class="carousel slide" id="carouselCategorySamsungBaseball"
 									data-bs-touch="false" data-bs-interval="false">
-									<!-- ªÔº∫ æﬂ±∏øÎ«∞ Ω√¿€ -->
+									<!-- ÏÇºÏÑ± ÏïºÍµ¨Ïö©Ìíà ÏãúÏûë-->
 									<div class="carousel-inner">
-										<!-- ªÔº∫ æﬂ±∏øÎ«∞ √ππ¯¬∞ ∆‰¿Ã¡ˆ -->
+										<!-- ÏÇºÏÑ± ÏïºÍµ¨Ïö©Ìíà Ï≤´Î≤àÏß∏ ÌéòÏù¥ÏßÄ-->
 										<div class="carousel-item active" data-bs-interval="10000">
 											<div class="row h-100 align-items-center g-2">
+												<%
+												List<ProductDto> subListbase_samB = new ArrayList<>();
+												for (int i = 0; i < list.size(); i++) {
+													ProductDto dto = list.get(i);
+													if (dto.getTeamName().equals("ÏÇºÏÑ± ÎùºÏù¥Ïò®Ï¶à")) {
+														if (dto.getpCategory().equals("ÏïºÍµ¨Ïö©Ìíà")) {
+
+													subListbase_samB.add(dto);
+														}
+													}
+												}
+												%>
+												<%
+												int last_samB_1 = subListbase_samB.size() < 4 ? subListbase_samB.size() : 4;
+												List<ProductDto> subList_1_samB = new ArrayList<ProductDto>(subListbase_samB.subList(0, last_samB_1));
+												for (int j = 0; j < subList_1_samB.size(); j++) {
+													ProductDto dto = subList_1_samB.get(j);
+												%>
 												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
 													<div class="card card-span h-100 text-white">
-														<img class="img-fluid h-100"
-															src="https://samsunglionsmall.com/web/product/big/202204/ec17fa5af199e1b0d6cda2a250ae8386.jpg"
+														<img class="img-fluid h-100" src="<%=dto.getpImage()%>"
 															alt="..." />
 														<div class="card-img-overlay ps-0"></div>
 														<div class="card-body ps-0 bg-200">
-															<h5 class="fw-bold text-1000 text-truncate">ªÔº∫ ∂Û¿Ãø¬¡Ó
-																2022 æﬂ±∏±€∑Ø∫Í</h5>
+															<h5 class="fw-bold text-1000 text-truncate"><%=dto.getpName()%></h5>
 															<div class="fw-bold">
-																<span class="text-600 me-2 text-decoration-line-through">$200</span><span
-																	class="text-primary">$175</span>
+																<span class="text-primary"><%=nf.format(dto.getPrice())%></span>
 															</div>
 														</div>
-														<a class="stretched-link" href="#"></a>
+														<a class="stretched-link"
+															href="product_detailPage.jsp?pId=<%=dto.getpId()%>"></a>
 													</div>
 												</div>
-											
-												
+												<%
+												}
+												%>
+
 											</div>
 										</div>
 
-										<!-- ªÔº∫ æﬂ±∏øÎ«∞ µŒπ¯¬∞ ∆‰¿Ã¡ˆ -->
+										<%
+										if (subListbase_samB.size() > 4) {
+										%>
+										<!-- ÏÇºÏÑ± ÏïºÍµ¨Ïö©Ìíà ÎëêÎ≤àÏß∏ ÌéòÏù¥ÏßÄ -->
 										<div class="carousel-item">
 											<div class="row h-100 align-items-center g-2">
+												<%
+												int last_samB_2 = subListbase_samB.size() > 8 ? 8 : subListbase_samB.size();
+												List<ProductDto> subList_2_samB = new ArrayList<ProductDto>(subListbase_samB.subList(4, last_samB_2));
+												for (int j = 0; j < subList_2_samB.size(); j++) {
+													ProductDto dto = subList_2_samB.get(j);
+												%>
 												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
 													<div class="card card-span h-100 text-white">
-														<img class="img-fluid h-100"
-															src="../assets/img/gallery/shoe-5.png" alt="..." />
+														<img class="img-fluid h-100" src="<%=dto.getpImage()%>"
+															alt="..." />
 														<div class="card-img-overlay ps-0"></div>
 														<div class="card-body ps-0 bg-200">
-															<h5 class="fw-bold text-1000 text-truncate">Shoe</h5>
+															<h5 class="fw-bold text-1000 text-truncate"><%=dto.getpName()%></h5>
 															<div class="fw-bold">
-																<span class="text-600 me-2 text-decoration-line-through">$200</span><span
-																	class="text-primary">$175</span>
+																<span class="text-primary"><%=nf.format(dto.getPrice())%></span>
 															</div>
 														</div>
-														<a class="stretched-link" href="#"></a>
+														<a class="stretched-link"
+															href="product_detailPage.jsp?pId=<%=dto.getpId()%>"></a>
 													</div>
 												</div>
-												
-												
+												<%
+												}
+												%>
+
 											</div>
 										</div>
 
-										<!-- ªÔº∫ æﬂ±∏øÎ«∞ ¡¬øÏ¿Ãµø -->
+										<!-- ÏÇºÏÑ± ÏïºÍµ¨Ïö©Ìíà Ï¢åÏö∞Ïù¥Îèô -->
 										<div class="row">
 											<button class="carousel-control-prev" type="button"
-												data-bs-target="#carouselCategorySamsungbaseball"
+												data-bs-target="#carouselCategorySamsungBaseball"
 												data-bs-slide="prev">
 												<span class="carousel-control-prev-icon" aria-hidden="true"></span><span
 													class="visually-hidden">Previous</span>
 											</button>
 											<button class="carousel-control-next" type="button"
-												data-bs-target="#carouselCategorySamsungbaseball"
+												data-bs-target="#carouselCategorySamsungBaseball"
 												data-bs-slide="next">
 												<span class="carousel-control-next-icon" aria-hidden="true"></span><span
 													class="visually-hidden">Next </span>
 											</button>
 										</div>
+										<%
+										}
+										%>
 									</div>
 								</div>
 
-								
+
 							</div>
 
-							<!-- ªÔº∫ ±‚≥‰ªÛ«∞ -->
-							<div class="tab-pane fade" id="pills-samsung_commemoration"
-								role="tabpanel"
-								aria-labelledby="pills-samsung_commemoration-tab">
-								<div class="carousel slide"
-									id="carouselCategorySamsungCommemoration" data-bs-touch="false"
-									data-bs-interval="false">
-									<!-- ªÔº∫ ±‚≥‰ªÛ«∞ Ω√¿€ -->
+							<!-- ÏÇºÏÑ± Í∏∞ÎÖêÏÉÅÌíà-->
+							<div class="tab-pane fade" id="pills-samsung_memory"
+								role="tabpanel" aria-labelledby="pills-samsung_memory-tab">
+								<div class="carousel slide" id="carouselCategorySamsungMemory"
+									data-bs-touch="false" data-bs-interval="false">
+									<!-- ÏÇºÏÑ± Í∏∞ÎÖêÏÉÅÌíà ÏãúÏûë-->
 									<div class="carousel-inner">
-										<!-- ªÔº∫ ±‚≥‰ªÛ«∞ √ππ¯¬∞ ∆‰¿Ã¡ˆ -->
+										<!-- ÏÇºÏÑ± Í∏∞ÎÖêÏÉÅÌíà Ï≤´Î≤àÏß∏ ÌéòÏù¥ÏßÄ-->
 										<div class="carousel-item active" data-bs-interval="10000">
 											<div class="row h-100 align-items-center g-2">
+												<%
+												List<ProductDto> subListbase_samM = new ArrayList<>();
+												for (int i = 0; i < list.size(); i++) {
+													ProductDto dto = list.get(i);
+													if (dto.getTeamName().equals("ÏÇºÏÑ± ÎùºÏù¥Ïò®Ï¶à")) {
+														if (dto.getpCategory().equals("Í∏∞ÎÖêÏÉÅÌíà")) {
+
+													subListbase_samM.add(dto);
+														}
+													}
+												}
+												%>
+												<%
+												int last_samM_1 = subListbase_samM.size() < 4 ? subListbase_samM.size() : 4;
+												List<ProductDto> subList_1_samM = new ArrayList<ProductDto>(subListbase_samM.subList(0, last_samM_1));
+												for (int j = 0; j < subList_1_samM.size(); j++) {
+													ProductDto dto = subList_1_samM.get(j);
+												%>
 												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
 													<div class="card card-span h-100 text-white">
-														<img class="img-fluid h-100"
-															src="https://samsunglionsmall.com/web/product/big/20191211/dfa7691b09d4cad6f6f6ede886b2505f.jpg"
+														<img class="img-fluid h-100" src="<%=dto.getpImage()%>"
 															alt="..." />
 														<div class="card-img-overlay ps-0"></div>
 														<div class="card-body ps-0 bg-200">
-															<h5 class="fw-bold text-1000 text-truncate">ªÔº∫ ∂Û¿Ãø¬¡Ó
-																æÁ√¢º∑ ∆–ƒ°</h5>
+															<h5 class="fw-bold text-1000 text-truncate"><%=dto.getpName()%></h5>
 															<div class="fw-bold">
-																<span class="text-600 me-2 text-decoration-line-through">$500</span><span
-																	class="text-primary">$275</span>
+																<span class="text-primary"><%=nf.format(dto.getPrice())%></span>
 															</div>
 														</div>
-														<a class="stretched-link" href="#"></a>
+														<a class="stretched-link"
+															href="product_detailPage.jsp?pId=<%=dto.getpId()%>"></a>
 													</div>
 												</div>
-												
-												
+												<%
+												}
+												%>
+
 											</div>
 										</div>
 
-										<!-- ªÔº∫ ±‚≥‰ªÛ«∞ µŒπ¯¬∞ ∆‰¿Ã¡ˆ -->
+										<%
+										if (subListbase_samM.size() > 4) {
+										%>
+										<!-- ÏÇºÏÑ± Í∏∞ÎÖêÏÉÅÌíà ÎëêÎ≤àÏß∏ ÌéòÏù¥ÏßÄ -->
 										<div class="carousel-item">
 											<div class="row h-100 align-items-center g-2">
+												<%
+												int last_samM_2 = subListbase_samM.size() > 8 ? 8 : subListbase_samM.size();
+												List<ProductDto> subList_2_samM = new ArrayList<ProductDto>(subListbase_samM.subList(4, last_samM_2));
+												for (int j = 0; j < subList_2_samM.size(); j++) {
+													ProductDto dto = subList_2_samM.get(j);
+												%>
 												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
 													<div class="card card-span h-100 text-white">
-														<img class="img-fluid h-100"
-															src="../assets/img/gallery/watch-5.png" alt="..." />
+														<img class="img-fluid h-100" src="<%=dto.getpImage()%>"
+															alt="..." />
 														<div class="card-img-overlay ps-0"></div>
 														<div class="card-body ps-0 bg-200">
-															<h5 class="fw-bold text-1000 text-truncate">Watch</h5>
+															<h5 class="fw-bold text-1000 text-truncate"><%=dto.getpName()%></h5>
 															<div class="fw-bold">
-																<span class="text-600 me-2 text-decoration-line-through">$500</span><span
-																	class="text-primary">$275</span>
+																<span class="text-primary"><%=nf.format(dto.getPrice())%></span>
 															</div>
 														</div>
-														<a class="stretched-link" href="#"></a>
+														<a class="stretched-link"
+															href="product_detailPage.jsp?pId=<%=dto.getpId()%>"></a>
 													</div>
 												</div>
-												
-												
+												<%
+												}
+												%>
+
+
 											</div>
 										</div>
 
-										<!-- ªÔº∫ ±‚≥‰ªÛ«∞ ¡¬øÏ¿Ãµø -->
+										<!-- ÏÇºÏÑ± Í∏∞ÎÖêÏÉÅÌíà Ï¢åÏö∞Ïù¥Îèô-->
 										<div class="row">
 											<button class="carousel-control-prev" type="button"
-												data-bs-target="#carouselCategorySamsungCommemoration"
+												data-bs-target="#carouselCategorySamsungMemory"
 												data-bs-slide="prev">
 												<span class="carousel-control-prev-icon" aria-hidden="true"></span><span
 													class="visually-hidden">Previous</span>
 											</button>
 											<button class="carousel-control-next" type="button"
-												data-bs-target="#carouselCategorySamsungCommemoration"
+												data-bs-target="#carouselCategorySamsungMemory"
 												data-bs-slide="next">
 												<span class="carousel-control-next-icon" aria-hidden="true"></span><span
 													class="visually-hidden">Next </span>
 											</button>
 										</div>
+										<%
+										}
+										%>
 									</div>
 								</div>
 
-								
+
 							</div>
 						</div>
 					</div>
 
-					<!-- ≈∞øÚ -->
+					<!-- ÌÇ§ÏõÄ -->
 					<div class="tab-pane fade" id="navv-kiwoom" role="tabpanel"
-						aria-labelledby="navv-kiwoom-tab">
+						style="opacity: 1" aria-labelledby="navv-kiwoom-tab">
 						<ul class="navv navv-pills mb-5 justify-content-center"
 							id="pills-tab-kiwoom" role="tablist">
 							<li class="navv-item" role="presentation">
 								<button class="navv-link active" id="pills-kiwoom_teamwear-tab"
 									data-bs-toggle="pill" data-bs-target="#pills-kiwoom_teamwear"
 									type="button" role="tab" aria-controls="pills-kiwoom_teamwear"
-									aria-selected="true">∆¿ø˛æÓ</button>
+									aria-selected="true">ÌåÄÏõ®Ïñ¥</button>
 							</li>
 							<li class="navv-item" role="presentation">
 								<button class="navv-link" id="pills-kiwoom_cheering-tab"
 									data-bs-toggle="pill" data-bs-target="#pills-kiwoom_cheering"
 									type="button" role="tab" aria-controls="pills-kiwoom_cheering"
-									aria-selected="false">¿¿ø¯øÎ«∞</button>
+									aria-selected="false">ÏùëÏõêÏö©Ìíà</button>
 							</li>
 							<li class="navv-item" role="presentation">
 								<button class="navv-link" id="pills-kiwoom_baseball-tab"
 									data-bs-toggle="pill" data-bs-target="#pills-kiwoom_baseball"
 									type="button" role="tab" aria-controls="pills-kiwoom_baseball"
-									aria-selected="false">æﬂ±∏øÎ«∞</button>
+									aria-selected="false">ÏïºÍµ¨Ïö©Ìíà</button>
 							</li>
 							<li class="navv-item" role="presentation">
-								<button class="navv-link" id="pills-kiwoom_commemoration-tab"
-									data-bs-toggle="pill"
-									data-bs-target="#pills-kiwoom_commemoration" type="button"
-									role="tab" aria-controls="pills-kiwoom_commemoration"
-									aria-selected="false">±‚≥‰ªÛ«∞</button>
+								<button class="navv-link" id="pills-kiwoom_memory-tab"
+									data-bs-toggle="pill" data-bs-target="#pills-kiwoom_memory"
+									type="button" role="tab" aria-controls="pills-kiwoom_memory"
+									aria-selected="false">Í∏∞ÎÖêÏÉÅÌíà</button>
 							</li>
 						</ul>
-
 						<div class="tab-content" id="pills-tabContentKiwoom">
-							<!-- ≈∞øÚ ∆¿ø˛æÓ -->
+							<!-- ÌÇ§ÏõÄ ÌåÄÏõ®Ïñ¥ -->
 							<div class="tab-pane fade show active" id="pills-kiwoom_teamwear"
 								role="tabpanel" aria-labelledby="pills-kiwoom_teamwear-tab">
 								<div class="carousel slide" id="carouselCategoryKiwoomTeamwear"
 									data-bs-touch="false" data-bs-interval="false">
-									<!-- ≈∞øÚ ∆¿ø˛æÓ Ω√¿€ -->
+
+									<!-- ÌÇ§ÏõÄ ÌåÄÏõ®Ïñ¥ ÏãúÏûë -->
 									<div class="carousel-inner">
-										<!-- ≈∞øÚ ∆¿ø˛æÓ √ππ¯¬∞ ∆‰¿Ã¡ˆ -->
+										<!-- ÌÇ§ÏõÄ ÌåÄÏõ®Ïñ¥ Ï≤´Î≤àÏß∏ ÌéòÏù¥ÏßÄ -->
 										<div class="carousel-item active" data-bs-interval="10000">
 											<div class="row h-100 align-items-center g-2">
+												<%
+												List<ProductDto> subListbase_kwT = new ArrayList<>();
+												for (int i = 0; i < list.size(); i++) {
+													ProductDto dto = list.get(i);
+													if (dto.getTeamName().equals("ÌÇ§ÏõÄ ÌûàÏñ¥Î°úÏ¶à")) {
+														if (dto.getpCategory().equals("ÌåÄÏõ®Ïñ¥")) {
+
+													subListbase_kwT.add(dto);
+														}
+													}
+												}
+												%>
+												<%
+												int last_kwT_1 = subListbase_kwT.size() < 4 ? subListbase_kwT.size() : 4;
+												List<ProductDto> subList_1_kwT = new ArrayList<ProductDto>(subListbase_kwT.subList(0, last_kwT_1));
+												for (int j = 0; j < subList_1_kwT.size(); j++) {
+													ProductDto dto = subList_1_kwT.get(j);
+												%>
 												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
 													<div class="card card-span h-100 text-white">
-														<img class="img-fluid h-100"
-															src="https://samsunglionsmall.com/web/product/big/202302/2073128f4a3079a02c1aa52d5a6032d0.jpg"
+														<img class="img-fluid h-100" src="<%=dto.getpImage()%>"
 															alt="..." />
 														<div class="card-img-overlay ps-0"></div>
 														<div class="card-body ps-0 bg-200">
-															<h5 class="fw-bold text-1000 text-truncate">ªÔº∫∂Û¿Ãø¬¡Ó
-																2023 «¡∑Œ∆‰º≈≥Œ æÓø˛¿Ã ¿Ø¥œ∆˚</h5>
+															<h5 class="fw-bold text-1000 text-truncate"><%=dto.getpName()%></h5>
 															<div class="fw-bold">
-																<span class="text-600 me-2 text-decoration-line-through">$200</span><span
-																	class="text-primary">$175</span>
+																<span class="text-primary"><%=nf.format(dto.getPrice())%></span>
 															</div>
 														</div>
-														<a class="stretched-link" href="#"></a>
+														<a class="stretched-link"
+															href="product_detailPage.jsp?pId=<%=dto.getpId()%>"></a>
 													</div>
 												</div>
-												
-												
+												<%
+												}
+												%>
+
+
 											</div>
 										</div>
 
-										<!-- ≈∞øÚ ∆¿ø˛æÓ µŒπ¯¬∞ ∆‰¿Ã¡ˆ -->
+										<%
+										if (subListbase_kwT.size() > 4) {
+										%>
+										<!-- ÌÇ§ÏõÄ ÌåÄÏõ®Ïñ¥ ÎëêÎ≤àÏß∏ ÌéòÏù¥ÏßÄ -->
 										<div class="carousel-item">
 											<div class="row h-100 align-items-center g-2">
+												<%
+												int last_kwT_2 = subListbase_kwT.size() > 8 ? 8 : subListbase_kwT.size();
+												List<ProductDto> subList_2_kwT = new ArrayList<ProductDto>(subListbase_kwT.subList(4, last_kwT_2));
+												for (int j = 0; j < subList_2_kwT.size(); j++) {
+													ProductDto dto = subList_2_kwT.get(j);
+												%>
 												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
 													<div class="card card-span h-100 text-white">
-														<img class="img-fluid h-100"
-															src="../assets/img/gallery/white-tshirt.png" alt="..." />
+														<img class="img-fluid h-100" src="<%=dto.getpImage()%>"
+															alt="..." />
 														<div class="card-img-overlay ps-0"></div>
 														<div class="card-body ps-0 bg-200">
-															<h5 class="fw-bold text-1000 text-truncate">White
-																T-Shirt</h5>
+															<h5 class="fw-bold text-1000 text-truncate"><%=dto.getpName()%></h5>
 															<div class="fw-bold">
-																<span class="text-600 me-2 text-decoration-line-through">$200</span><span
-																	class="text-primary">$175</span>
+																<span class="text-primary"><%=nf.format(dto.getPrice())%></span>
 															</div>
 														</div>
-														<a class="stretched-link" href="#"></a>
+														<a class="stretched-link"
+															href="product_detailPage.jsp?pId=<%=dto.getpId()%>"></a>
 													</div>
 												</div>
-												
-												
+												<%
+												}
+												%>
+
 											</div>
 										</div>
 
-										<!-- ≈∞øÚ ∆¿ø˛æÓ ¡¬øÏ¿Ãµø -->
+
+										<!-- ÌÇ§ÏõÄ ÌåÄÏõ®Ïñ¥ Ï¢åÏö∞Ïù¥Îèô -->
 										<div class="row">
 											<button class="carousel-control-prev" type="button"
 												data-bs-target="#carouselCategoryKiwoomTeamwear"
@@ -1424,67 +1762,105 @@ NumberFormat nf = NumberFormat.getCurrencyInstance();
 													class="visually-hidden">Next </span>
 											</button>
 										</div>
+
+										<%
+										}
+										%>
+
 									</div>
 								</div>
 
-								
 							</div>
 
-							<!-- ≈∞øÚ ¿¿ø¯øÎ«∞ -->
+							<!-- ÌÇ§ÏõÄ ÏùëÏõêÏö©Ìíà -->
 							<div class="tab-pane fade" id="pills-kiwoom_cheering"
 								role="tabpanel" aria-labelledby="pills-kiwoom_cheering-tab">
 								<div class="carousel slide" id="carouselCategoryKiwoomCheering"
 									data-bs-touch="false" data-bs-interval="false">
-									<!-- ≈∞øÚ ¿¿ø¯øÎ«∞ Ω√¿€ -->
+
+									<!-- ÌÇ§ÏõÄ ÏùëÏõêÏö©Ìíà ÏãúÏûë -->
 									<div class="carousel-inner">
-										<!-- ≈∞øÚ ¿¿ø¯øÎ«∞ √ππ¯¬∞ ∆‰¿Ã¡ˆ -->
+										<!-- ÌÇ§ÏõÄ ÏùëÏõêÏö©Ìíà Ï≤´Î≤àÏß∏ ÌéòÏù¥ÏßÄ -->
 										<div class="carousel-item active" data-bs-interval="10000">
 											<div class="row h-100 align-items-center g-2">
+												<%
+												List<ProductDto> subListbase_kwC = new ArrayList<>();
+												for (int i = 0; i < list.size(); i++) {
+													ProductDto dto = list.get(i);
+													if (dto.getTeamName().equals("ÌÇ§ÏõÄ ÌûàÏñ¥Î°úÏ¶à")) {
+														if (dto.getpCategory().equals("ÏùëÏõêÏö©Ìíà")) {
+
+													subListbase_kwC.add(dto);
+														}
+													}
+												}
+												%>
+												<%
+												int last_kwC_1 = subListbase_kwC.size() < 4 ? subListbase_kwC.size() : 4;
+												List<ProductDto> subList_1_kwC = new ArrayList<ProductDto>(subListbase_kwC.subList(0, last_kwC_1));
+												for (int j = 0; j < subList_1_kwC.size(); j++) {
+													ProductDto dto = subList_1_kwC.get(j);
+												%>
 												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
 													<div class="card card-span h-100 text-white">
-														<img class="img-fluid h-100"
-															src="http://openimage.interpark.com/goods_image/9/7/8/4/10046189784s.jpg"
+														<img class="img-fluid h-100" src="<%=dto.getpImage()%>"
 															alt="..." />
 														<div class="card-img-overlay ps-0"></div>
 														<div class="card-body ps-0 bg-200">
-															<h5 class="fw-bold text-1000 text-truncate">≈∞øÚ ∏«≈ı∏«</h5>
+															<h5 class="fw-bold text-1000 text-truncate"><%=dto.getpName()%></h5>
 															<div class="fw-bold">
-																<span class="text-600 me-2 text-decoration-line-through">$200</span><span
-																	class="text-primary">$175</span>
+																<span class="text-primary"><%=nf.format(dto.getPrice())%></span>
 															</div>
 														</div>
-														<a class="stretched-link" href="#"></a>
+														<a class="stretched-link"
+															href="product_detailPage.jsp?pId=<%=dto.getpId()%>"></a>
 													</div>
 												</div>
-												
-												
+												<%
+												}
+												%>
+
+
+
 											</div>
 										</div>
 
-										<!-- ≈∞øÚ ¿¿ø¯øÎ«∞ µŒπ¯¬∞ ∆‰¿Ã¡ˆ-->
+										<%
+										if (subListbase_kwC.size() > 4) {
+										%>
+										<!-- ÌÇ§ÏõÄ ÏùëÏõêÏö©Ìíà ÎëêÎ≤àÏß∏ ÌéòÏù¥ÏßÄ -->
 										<div class="carousel-item">
 											<div class="row h-100 align-items-center g-2">
+												<%
+												int last_kwC_2 = subListbase_kwC.size() > 8 ? 8 : subListbase_kwC.size();
+												List<ProductDto> subList_2_kwC = new ArrayList<ProductDto>(subListbase_kwC.subList(4, last_kwC_2));
+												for (int j = 0; j < subList_2_kwC.size(); j++) {
+													ProductDto dto = subList_2_kwC.get(j);
+												%>
 												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
 													<div class="card card-span h-100 text-white">
-														<img class="img-fluid h-100"
-															src="../assets/img/gallery/shirt-5.png" alt="..." />
+														<img class="img-fluid h-100" src="<%=dto.getpImage()%>"
+															alt="..." />
 														<div class="card-img-overlay ps-0"></div>
 														<div class="card-body ps-0 bg-200">
-															<h5 class="fw-bold text-1000 text-truncate">Shirt</h5>
+															<h5 class="fw-bold text-1000 text-truncate"><%=dto.getpName()%></h5>
 															<div class="fw-bold">
-																<span class="text-600 me-2 text-decoration-line-through">$200</span><span
-																	class="text-primary">$175</span>
+																<span class="text-primary"><%=nf.format(dto.getPrice())%></span>
 															</div>
 														</div>
-														<a class="stretched-link" href="#"></a>
+														<a class="stretched-link"
+															href="product_detailPage.jsp?pId=<%=dto.getpId()%>"></a>
 													</div>
 												</div>
-												
-												
+												<%
+												}
+												%>
+
 											</div>
 										</div>
 
-										<!-- ≈∞øÚ ¿¿ø¯øÎ«∞ ¡¬øÏ¿Ãµø-->
+
+										<!-- ÌÇ§ÏõÄ ÏùëÏõêÏö©Ìíà Ï¢åÏö∞Ïù¥Îèô -->
 										<div class="row">
 											<button class="carousel-control-prev" type="button"
 												data-bs-target="#carouselCategoryKiwoomCheering"
@@ -1499,166 +1875,235 @@ NumberFormat nf = NumberFormat.getCurrencyInstance();
 													class="visually-hidden">Next </span>
 											</button>
 										</div>
+										<%
+										}
+										%>
+
 									</div>
 								</div>
 
-								
 							</div>
 
-							<!-- ≈∞øÚ æﬂ±∏øÎ«∞ -->
+							<!-- ÌÇ§ÏõÄ ÏïºÍµ¨Ïö©Ìíà -->
 							<div class="tab-pane fade" id="pills-kiwoom_baseball"
 								role="tabpanel" aria-labelledby="pills-kiwoom_baseball-tab">
-								<div class="carousel slide" id="carouselCategoryKiwoombaseball"
+								<div class="carousel slide" id="carouselCategoryKiwoomBaseball"
 									data-bs-touch="false" data-bs-interval="false">
-									<!-- ≈∞øÚ æﬂ±∏øÎ«∞ Ω√¿€ -->
+									<!-- ÌÇ§ÏõÄ ÏïºÍµ¨Ïö©Ìíà ÏãúÏûë-->
 									<div class="carousel-inner">
-										<!-- ≈∞øÚ æﬂ±∏øÎ«∞ √ππ¯¬∞ ∆‰¿Ã¡ˆ -->
+										<!-- ÌÇ§ÏõÄ ÏïºÍµ¨Ïö©Ìíà Ï≤´Î≤àÏß∏ ÌéòÏù¥ÏßÄ-->
 										<div class="carousel-item active" data-bs-interval="10000">
 											<div class="row h-100 align-items-center g-2">
+												<%
+												List<ProductDto> subListbase_kwB = new ArrayList<>();
+												for (int i = 0; i < list.size(); i++) {
+													ProductDto dto = list.get(i);
+													if (dto.getTeamName().equals("ÌÇ§ÏõÄ ÌûàÏñ¥Î°úÏ¶à")) {
+														if (dto.getpCategory().equals("ÏïºÍµ¨Ïö©Ìíà")) {
+
+													subListbase_kwB.add(dto);
+														}
+													}
+												}
+												%>
+												<%
+												int last_kwB_1 = subListbase_kwB.size() < 4 ? subListbase_kwB.size() : 4;
+												List<ProductDto> subList_1_kwB = new ArrayList<ProductDto>(subListbase_kwB.subList(0, last_kwB_1));
+												for (int j = 0; j < subList_1_kwB.size(); j++) {
+													ProductDto dto = subList_1_kwB.get(j);
+												%>
 												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
 													<div class="card card-span h-100 text-white">
-														<img class="img-fluid h-100"
-															src="http://openimage.interpark.com/goods_image/9/7/8/4/10046189784s.jpg"
+														<img class="img-fluid h-100" src="<%=dto.getpImage()%>"
 															alt="..." />
 														<div class="card-img-overlay ps-0"></div>
 														<div class="card-body ps-0 bg-200">
-															<h5 class="fw-bold text-1000 text-truncate">≈∞øÚ ∏«≈ı∏«</h5>
+															<h5 class="fw-bold text-1000 text-truncate"><%=dto.getpName()%></h5>
 															<div class="fw-bold">
-																<span class="text-600 me-2 text-decoration-line-through">$200</span><span
-																	class="text-primary">$175</span>
+																<span class="text-primary"><%=nf.format(dto.getPrice())%></span>
 															</div>
 														</div>
-														<a class="stretched-link" href="#"></a>
+														<a class="stretched-link"
+															href="product_detailPage.jsp?pId=<%=dto.getpId()%>"></a>
 													</div>
 												</div>
-												
-												
+												<%
+												}
+												%>
+
 											</div>
 										</div>
 
-										<!-- ≈∞øÚ æﬂ±∏øÎ«∞ µŒπ¯¬∞ ∆‰¿Ã¡ˆ -->
+										<%
+										if (subListbase_kwB.size() > 4) {
+										%>
+										<!-- ÌÇ§ÏõÄ ÏïºÍµ¨Ïö©Ìíà ÎëêÎ≤àÏß∏ ÌéòÏù¥ÏßÄ -->
 										<div class="carousel-item">
 											<div class="row h-100 align-items-center g-2">
+												<%
+												int last_kwB_2 = subListbase_kwB.size() > 8 ? 8 : subListbase_kwB.size();
+												List<ProductDto> subList_2_kwB = new ArrayList<ProductDto>(subListbase_kwB.subList(4, last_kwB_2));
+												for (int j = 0; j < subList_2_kwB.size(); j++) {
+													ProductDto dto = subList_2_kwB.get(j);
+												%>
 												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
 													<div class="card card-span h-100 text-white">
-														<img class="img-fluid h-100"
-															src="../assets/img/gallery/shoe-5.png" alt="..." />
+														<img class="img-fluid h-100" src="<%=dto.getpImage()%>"
+															alt="..." />
 														<div class="card-img-overlay ps-0"></div>
 														<div class="card-body ps-0 bg-200">
-															<h5 class="fw-bold text-1000 text-truncate">Shoe</h5>
+															<h5 class="fw-bold text-1000 text-truncate"><%=dto.getpName()%></h5>
 															<div class="fw-bold">
-																<span class="text-600 me-2 text-decoration-line-through">$200</span><span
-																	class="text-primary">$175</span>
+																<span class="text-primary"><%=nf.format(dto.getPrice())%></span>
 															</div>
 														</div>
-														<a class="stretched-link" href="#"></a>
+														<a class="stretched-link"
+															href="product_detailPage.jsp?pId=<%=dto.getpId()%>"></a>
 													</div>
 												</div>
-												
-												
+												<%
+												}
+												%>
+
 											</div>
 										</div>
 
-										<!-- ≈∞øÚ æﬂ±∏øÎ«∞ ¡¬øÏ¿Ãµø -->
+										<!-- ÌÇ§ÏõÄ ÏïºÍµ¨Ïö©Ìíà Ï¢åÏö∞Ïù¥Îèô -->
 										<div class="row">
 											<button class="carousel-control-prev" type="button"
-												data-bs-target="#carouselCategoryKiwoombaseball"
+												data-bs-target="#carouselCategoryKiwoomBaseball"
 												data-bs-slide="prev">
 												<span class="carousel-control-prev-icon" aria-hidden="true"></span><span
 													class="visually-hidden">Previous</span>
 											</button>
 											<button class="carousel-control-next" type="button"
-												data-bs-target="#carouselCategoryKiwoombaseball"
+												data-bs-target="#carouselCategoryKiwoomBaseball"
 												data-bs-slide="next">
 												<span class="carousel-control-next-icon" aria-hidden="true"></span><span
 													class="visually-hidden">Next </span>
 											</button>
 										</div>
+										<%
+										}
+										%>
 									</div>
 								</div>
 
-								
+
 							</div>
 
-							<!-- ≈∞øÚ ±‚≥‰ªÛ«∞ -->
-							<div class="tab-pane fade" id="pills-kiwoom_commemoration"
-								role="tabpanel" aria-labelledby="pills-kiwoom_commemoration-tab">
-								<div class="carousel slide"
-									id="carouselCategoryKiwoomCommemoration" data-bs-touch="false"
-									data-bs-interval="false">
-									<!-- ≈∞øÚ ±‚≥‰ªÛ«∞ Ω√¿€ -->
+							<!-- ÌÇ§ÏõÄ Í∏∞ÎÖêÏÉÅÌíà-->
+							<div class="tab-pane fade" id="pills-kiwoom_memory"
+								role="tabpanel" aria-labelledby="pills-kiwoom_memory-tab">
+								<div class="carousel slide" id="carouselCategoryKiwoomMemory"
+									data-bs-touch="false" data-bs-interval="false">
+									<!-- ÌÇ§ÏõÄ Í∏∞ÎÖêÏÉÅÌíà ÏãúÏûë-->
 									<div class="carousel-inner">
-										<!-- ≈∞øÚ ±‚≥‰ªÛ«∞ √ππ¯¬∞ ∆‰¿Ã¡ˆ -->
+										<!-- ÌÇ§ÏõÄ Í∏∞ÎÖêÏÉÅÌíà Ï≤´Î≤àÏß∏ ÌéòÏù¥ÏßÄ-->
 										<div class="carousel-item active" data-bs-interval="10000">
 											<div class="row h-100 align-items-center g-2">
+												<%
+												List<ProductDto> subListbase_kwM = new ArrayList<>();
+												for (int i = 0; i < list.size(); i++) {
+													ProductDto dto = list.get(i);
+													if (dto.getTeamName().equals("ÌÇ§ÏõÄ ÌûàÏñ¥Î°úÏ¶à")) {
+														if (dto.getpCategory().equals("Í∏∞ÎÖêÏÉÅÌíà")) {
+
+													subListbase_kwM.add(dto);
+														}
+													}
+												}
+												%>
+												<%
+												int last_kwM_1 = subListbase_kwM.size() < 4 ? subListbase_kwM.size() : 4;
+												List<ProductDto> subList_1_kwM = new ArrayList<ProductDto>(subListbase_kwM.subList(0, last_kwM_1));
+												for (int j = 0; j < subList_1_kwM.size(); j++) {
+													ProductDto dto = subList_1_kwM.get(j);
+												%>
 												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
 													<div class="card card-span h-100 text-white">
-														<img class="img-fluid h-100"
-															src="http://openimage.interpark.com/goods_image/9/7/8/4/10046189784s.jpg"
+														<img class="img-fluid h-100" src="<%=dto.getpImage()%>"
 															alt="..." />
 														<div class="card-img-overlay ps-0"></div>
 														<div class="card-body ps-0 bg-200">
-															<h5 class="fw-bold text-1000 text-truncate">≈∞øÚ ∏«≈ı∏«</h5>
+															<h5 class="fw-bold text-1000 text-truncate"><%=dto.getpName()%></h5>
 															<div class="fw-bold">
-																<span class="text-600 me-2 text-decoration-line-through">$500</span><span
-																	class="text-primary">$275</span>
+																<span class="text-primary"><%=nf.format(dto.getPrice())%></span>
 															</div>
 														</div>
-														<a class="stretched-link" href="#"></a>
+														<a class="stretched-link"
+															href="product_detailPage.jsp?pId=<%=dto.getpId()%>"></a>
 													</div>
 												</div>
-												
-												
+												<%
+												}
+												%>
+
 											</div>
 										</div>
 
-										<!-- ≈∞øÚ ±‚≥‰ªÛ«∞ µŒπ¯¬∞ ∆‰¿Ã¡ˆ -->
+										<%
+										if (subListbase_kwM.size() > 4) {
+										%>
+										<!-- ÌÇ§ÏõÄ Í∏∞ÎÖêÏÉÅÌíà ÎëêÎ≤àÏß∏ ÌéòÏù¥ÏßÄ -->
 										<div class="carousel-item">
 											<div class="row h-100 align-items-center g-2">
+												<%
+												int last_kwM_2 = subListbase_kwM.size() > 8 ? 8 : subListbase_kwM.size();
+												List<ProductDto> subList_2_kwM = new ArrayList<ProductDto>(subListbase_kwM.subList(4, last_kwM_2));
+												for (int j = 0; j < subList_2_kwM.size(); j++) {
+													ProductDto dto = subList_2_kwM.get(j);
+												%>
 												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
 													<div class="card card-span h-100 text-white">
-														<img class="img-fluid h-100"
-															src="../assets/img/gallery/watch-5.png" alt="..." />
+														<img class="img-fluid h-100" src="<%=dto.getpImage()%>"
+															alt="..." />
 														<div class="card-img-overlay ps-0"></div>
 														<div class="card-body ps-0 bg-200">
-															<h5 class="fw-bold text-1000 text-truncate">Watch</h5>
+															<h5 class="fw-bold text-1000 text-truncate"><%=dto.getpName()%></h5>
 															<div class="fw-bold">
-																<span class="text-600 me-2 text-decoration-line-through">$500</span><span
-																	class="text-primary">$275</span>
+																<span class="text-primary"><%=nf.format(dto.getPrice())%></span>
 															</div>
 														</div>
-														<a class="stretched-link" href="#"></a>
+														<a class="stretched-link"
+															href="product_detailPage.jsp?pId=<%=dto.getpId()%>"></a>
 													</div>
 												</div>
-												
-												
+												<%
+												}
+												%>
+
+
 											</div>
 										</div>
 
-										<!-- ≈∞øÚ ±‚≥‰ªÛ«∞ ¡¬øÏ¿Ãµø -->
+										<!-- ÌÇ§ÏõÄ Í∏∞ÎÖêÏÉÅÌíà Ï¢åÏö∞Ïù¥Îèô-->
 										<div class="row">
 											<button class="carousel-control-prev" type="button"
-												data-bs-target="#carouselCategoryKiwoomCommemoration"
+												data-bs-target="#carouselCategoryKiwoomMemory"
 												data-bs-slide="prev">
 												<span class="carousel-control-prev-icon" aria-hidden="true"></span><span
 													class="visually-hidden">Previous</span>
 											</button>
 											<button class="carousel-control-next" type="button"
-												data-bs-target="#carouselCategoryKiwoomCommemoration"
+												data-bs-target="#carouselCategoryKiwoomMemory"
 												data-bs-slide="next">
 												<span class="carousel-control-next-icon" aria-hidden="true"></span><span
 													class="visually-hidden">Next </span>
 											</button>
 										</div>
+										<%
+										}
+										%>
 									</div>
 								</div>
 
-								
+
 							</div>
 						</div>
 					</div>
 
-					<!-- «—»≠ -->
+					<!-- ÌïúÌôî -->
 					<div class="tab-pane fade" id="navv-hanhwa" role="tabpanel"
 						style="opacity: 1" aria-labelledby="navv-hanhwa-tab">
 						<ul class="navv navv-pills mb-5 justify-content-center"
@@ -1667,86 +2112,116 @@ NumberFormat nf = NumberFormat.getCurrencyInstance();
 								<button class="navv-link active" id="pills-hanhwa_teamwear-tab"
 									data-bs-toggle="pill" data-bs-target="#pills-hanhwa_teamwear"
 									type="button" role="tab" aria-controls="pills-hanhwa_teamwear"
-									aria-selected="true">∆¿ø˛æÓ</button>
+									aria-selected="true">ÌåÄÏõ®Ïñ¥</button>
 							</li>
 							<li class="navv-item" role="presentation">
 								<button class="navv-link" id="pills-hanhwa_cheering-tab"
 									data-bs-toggle="pill" data-bs-target="#pills-hanhwa_cheering"
 									type="button" role="tab" aria-controls="pills-hanhwa_cheering"
-									aria-selected="false">¿¿ø¯øÎ«∞</button>
+									aria-selected="false">ÏùëÏõêÏö©Ìíà</button>
 							</li>
 							<li class="navv-item" role="presentation">
 								<button class="navv-link" id="pills-hanhwa_baseball-tab"
 									data-bs-toggle="pill" data-bs-target="#pills-hanhwa_baseball"
 									type="button" role="tab" aria-controls="pills-hanhwa_baseball"
-									aria-selected="false">æﬂ±∏øÎ«∞</button>
+									aria-selected="false">ÏïºÍµ¨Ïö©Ìíà</button>
 							</li>
 							<li class="navv-item" role="presentation">
-								<button class="navv-link" id="pills-hanhwa_commemoration-tab"
-									data-bs-toggle="pill"
-									data-bs-target="#pills-hanhwa_commemoration" type="button"
-									role="tab" aria-controls="pills-hanhwa_commemoration"
-									aria-selected="false">±‚≥‰ªÛ«∞</button>
+								<button class="navv-link" id="pills-hanhwa_memory-tab"
+									data-bs-toggle="pill" data-bs-target="#pills-hanhwa_memory"
+									type="button" role="tab" aria-controls="pills-hanhwa_memory"
+									aria-selected="false">Í∏∞ÎÖêÏÉÅÌíà</button>
 							</li>
 						</ul>
-
 						<div class="tab-content" id="pills-tabContentHanhwa">
-							<!-- «—»≠ ∆¿ø˛æÓ -->
+							<!-- ÌïúÌôî ÌåÄÏõ®Ïñ¥ -->
 							<div class="tab-pane fade show active" id="pills-hanhwa_teamwear"
 								role="tabpanel" aria-labelledby="pills-hanhwa_teamwear-tab">
 								<div class="carousel slide" id="carouselCategoryHanhwaTeamwear"
 									data-bs-touch="false" data-bs-interval="false">
-									<!-- «—»≠ ∆¿ø˛æÓ Ω√¿€ -->
+
+									<!-- ÌïúÌôî ÌåÄÏõ®Ïñ¥ ÏãúÏûë -->
 									<div class="carousel-inner">
-										<!-- «—»≠ ∆¿ø˛æÓ √ππ¯¬∞ ∆‰¿Ã¡ˆ -->
+										<!-- ÌïúÌôî ÌåÄÏõ®Ïñ¥ Ï≤´Î≤àÏß∏ ÌéòÏù¥ÏßÄ -->
 										<div class="carousel-item active" data-bs-interval="10000">
 											<div class="row h-100 align-items-center g-2">
+												<%
+												List<ProductDto> subListbase_hanT = new ArrayList<>();
+												for (int i = 0; i < list.size(); i++) {
+													ProductDto dto = list.get(i);
+													if (dto.getTeamName().equals("ÌïúÌôî Ïù¥Í∏ÄÏä§")) {
+														if (dto.getpCategory().equals("ÌåÄÏõ®Ïñ¥")) {
+
+													subListbase_hanT.add(dto);
+														}
+													}
+												}
+												%>
+												<%
+												int last_hanT_1 = subListbase_hanT.size() < 4 ? subListbase_hanT.size() : 4;
+												List<ProductDto> subList_1_hanT = new ArrayList<ProductDto>(subListbase_hanT.subList(0, last_hanT_1));
+												for (int j = 0; j < subList_1_hanT.size(); j++) {
+													ProductDto dto = subList_1_hanT.get(j);
+												%>
 												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
 													<div class="card card-span h-100 text-white">
-														<img class="img-fluid h-100"
-															src="https://cdn-pro-web-210-60.cdn-nhncommerce.com/wefan20073_godomall_com/data/goods/21/03/10/1000000003/1000000003_main_057.jpg"
+														<img class="img-fluid h-100" src="<%=dto.getpImage()%>"
 															alt="..." />
 														<div class="card-img-overlay ps-0"></div>
 														<div class="card-body ps-0 bg-200">
-															<h5 class="fw-bold text-1000 text-truncate">«—»≠¿Ã±€Ω∫ »®
-																æÓºæ∆Ω ¿Ø¥œ∆˚(ø¿∑ª¡ˆ)</h5>
+															<h5 class="fw-bold text-1000 text-truncate"><%=dto.getpName()%></h5>
 															<div class="fw-bold">
-																<span class="text-600 me-2 text-decoration-line-through">$200</span><span
-																	class="text-primary">$175</span>
+																<span class="text-primary"><%=nf.format(dto.getPrice())%></span>
 															</div>
 														</div>
-														<a class="stretched-link" href="#"></a>
+														<a class="stretched-link"
+															href="product_detailPage.jsp?pId=<%=dto.getpId()%>"></a>
 													</div>
 												</div>
-												
-												
+												<%
+												}
+												%>
+
+
 											</div>
 										</div>
 
-										<!-- «—»≠ ∆¿ø˛æÓ µŒπ¯¬∞ ∆‰¿Ã¡ˆ -->
+										<%
+										if (subListbase_hanT.size() > 4) {
+										%>
+										<!-- ÌïúÌôî ÌåÄÏõ®Ïñ¥ ÎëêÎ≤àÏß∏ ÌéòÏù¥ÏßÄ -->
 										<div class="carousel-item">
 											<div class="row h-100 align-items-center g-2">
+												<%
+												int last_hanT_2 = subListbase_hanT.size() > 8 ? 8 : subListbase_hanT.size();
+												List<ProductDto> subList_2_hanT = new ArrayList<ProductDto>(subListbase_hanT.subList(4, last_hanT_2));
+												for (int j = 0; j < subList_2_hanT.size(); j++) {
+													ProductDto dto = subList_2_hanT.get(j);
+												%>
 												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
 													<div class="card card-span h-100 text-white">
-														<img class="img-fluid h-100"
-															src="../assets/img/gallery/white-tshirt.png" alt="..." />
+														<img class="img-fluid h-100" src="<%=dto.getpImage()%>"
+															alt="..." />
 														<div class="card-img-overlay ps-0"></div>
 														<div class="card-body ps-0 bg-200">
-															<h5 class="fw-bold text-1000 text-truncate">White
-																T-Shirt</h5>
+															<h5 class="fw-bold text-1000 text-truncate"><%=dto.getpName()%></h5>
 															<div class="fw-bold">
-																<span class="text-600 me-2 text-decoration-line-through">$200</span><span
-																	class="text-primary">$175</span>
+																<span class="text-primary"><%=nf.format(dto.getPrice())%></span>
 															</div>
 														</div>
-														<a class="stretched-link" href="#"></a>
+														<a class="stretched-link"
+															href="product_detailPage.jsp?pId=<%=dto.getpId()%>"></a>
 													</div>
 												</div>
-												
+												<%
+												}
+												%>
+
 											</div>
 										</div>
 
-										<!-- «—»≠ ∆¿ø˛æÓ ¡¬øÏ¿Ãµø -->
+
+										<!-- ÌïúÌôî ÌåÄÏõ®Ïñ¥ Ï¢åÏö∞Ïù¥Îèô -->
 										<div class="row">
 											<button class="carousel-control-prev" type="button"
 												data-bs-target="#carouselCategoryHanhwaTeamwear"
@@ -1761,65 +2236,105 @@ NumberFormat nf = NumberFormat.getCurrencyInstance();
 													class="visually-hidden">Next </span>
 											</button>
 										</div>
+
+										<%
+										}
+										%>
+
 									</div>
 								</div>
 
-								
 							</div>
 
-							<!-- «—»≠ ¿¿ø¯øÎ«∞ -->
+							<!-- ÌïúÌôî ÏùëÏõêÏö©Ìíà -->
 							<div class="tab-pane fade" id="pills-hanhwa_cheering"
 								role="tabpanel" aria-labelledby="pills-hanhwa_cheering-tab">
 								<div class="carousel slide" id="carouselCategoryHanhwaCheering"
 									data-bs-touch="false" data-bs-interval="false">
-									<!-- «—»≠ ¿¿ø¯øÎ«∞ Ω√¿€ -->
+
+									<!-- ÌïúÌôî ÏùëÏõêÏö©Ìíà ÏãúÏûë -->
 									<div class="carousel-inner">
-										<!-- «—»≠ ¿¿ø¯øÎ«∞ √ππ¯¬∞ ∆‰¿Ã¡ˆ -->
+										<!-- ÌïúÌôî ÏùëÏõêÏö©Ìíà Ï≤´Î≤àÏß∏ ÌéòÏù¥ÏßÄ -->
 										<div class="carousel-item active" data-bs-interval="10000">
 											<div class="row h-100 align-items-center g-2">
+												<%
+												List<ProductDto> subListbase_hanC = new ArrayList<>();
+												for (int i = 0; i < list.size(); i++) {
+													ProductDto dto = list.get(i);
+													if (dto.getTeamName().equals("ÌïúÌôî Ïù¥Í∏ÄÏä§")) {
+														if (dto.getpCategory().equals("ÏùëÏõêÏö©Ìíà")) {
+
+													subListbase_hanC.add(dto);
+														}
+													}
+												}
+												%>
+												<%
+												int last_hanC_1 = subListbase_hanC.size() < 4 ? subListbase_hanC.size() : 4;
+												List<ProductDto> subList_1_hanC = new ArrayList<ProductDto>(subListbase_hanC.subList(0, last_hanC_1));
+												for (int j = 0; j < subList_1_hanC.size(); j++) {
+													ProductDto dto = subList_1_hanC.get(j);
+												%>
 												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
 													<div class="card card-span h-100 text-white">
-														<img class="img-fluid h-100"
-															src="http://openimage.interpark.com/goods_image/9/7/8/4/10046189784s.jpg"
+														<img class="img-fluid h-100" src="<%=dto.getpImage()%>"
 															alt="..." />
 														<div class="card-img-overlay ps-0"></div>
 														<div class="card-body ps-0 bg-200">
-															<h5 class="fw-bold text-1000 text-truncate">≈∞øÚ ∏«≈ı∏«</h5>
+															<h5 class="fw-bold text-1000 text-truncate"><%=dto.getpName()%></h5>
 															<div class="fw-bold">
-																<span class="text-600 me-2 text-decoration-line-through">$200</span><span
-																	class="text-primary">$175</span>
+																<span class="text-primary"><%=nf.format(dto.getPrice())%></span>
 															</div>
 														</div>
-														<a class="stretched-link" href="#"></a>
+														<a class="stretched-link"
+															href="product_detailPage.jsp?pId=<%=dto.getpId()%>"></a>
 													</div>
 												</div>
-												
+												<%
+												}
+												%>
+
+
+
 											</div>
 										</div>
 
-										<!-- «—»≠ ¿¿ø¯øÎ«∞ µŒπ¯¬∞ ∆‰¿Ã¡ˆ-->
+										<%
+										if (subListbase_hanC.size() > 4) {
+										%>
+										<!-- ÌïúÌôî ÏùëÏõêÏö©Ìíà ÎëêÎ≤àÏß∏ ÌéòÏù¥ÏßÄ -->
 										<div class="carousel-item">
 											<div class="row h-100 align-items-center g-2">
+												<%
+												int last_hanC_2 = subListbase_hanC.size() > 8 ? 8 : subListbase_hanC.size();
+												List<ProductDto> subList_2_hanC = new ArrayList<ProductDto>(subListbase_hanC.subList(4, last_hanC_2));
+												for (int j = 0; j < subList_2_hanC.size(); j++) {
+													ProductDto dto = subList_2_hanC.get(j);
+												%>
 												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
 													<div class="card card-span h-100 text-white">
-														<img class="img-fluid h-100"
-															src="../assets/img/gallery/shirt-5.png" alt="..." />
+														<img class="img-fluid h-100" src="<%=dto.getpImage()%>"
+															alt="..." />
 														<div class="card-img-overlay ps-0"></div>
 														<div class="card-body ps-0 bg-200">
-															<h5 class="fw-bold text-1000 text-truncate">Shirt</h5>
+															<h5 class="fw-bold text-1000 text-truncate"><%=dto.getpName()%></h5>
 															<div class="fw-bold">
-																<span class="text-600 me-2 text-decoration-line-through">$200</span><span
-																	class="text-primary">$175</span>
+																<span class="text-primary"><%=nf.format(dto.getPrice())%></span>
 															</div>
 														</div>
-														<a class="stretched-link" href="#"></a>
+														<a class="stretched-link"
+															href="product_detailPage.jsp?pId=<%=dto.getpId()%>"></a>
 													</div>
 												</div>
-												
+												<%
+												}
+												%>
+
 											</div>
 										</div>
 
-										<!-- «—»≠ ¿¿ø¯øÎ«∞ ¡¬øÏ¿Ãµø-->
+
+										<!-- ÌïúÌôî ÏùëÏõêÏö©Ìíà Ï¢åÏö∞Ïù¥Îèô -->
 										<div class="row">
 											<button class="carousel-control-prev" type="button"
 												data-bs-target="#carouselCategoryHanhwaCheering"
@@ -1834,157 +2349,230 @@ NumberFormat nf = NumberFormat.getCurrencyInstance();
 													class="visually-hidden">Next </span>
 											</button>
 										</div>
+										<%
+										}
+										%>
+
 									</div>
 								</div>
 
-								
 							</div>
 
-							<!-- «—»≠ æﬂ±∏øÎ«∞ -->
+							<!-- ÌïúÌôî ÏïºÍµ¨Ïö©Ìíà -->
 							<div class="tab-pane fade" id="pills-hanhwa_baseball"
 								role="tabpanel" aria-labelledby="pills-hanhwa_baseball-tab">
-								<div class="carousel slide" id="carouselCategoryHanhwabaseball"
+								<div class="carousel slide" id="carouselCategoryHanhwaBaseball"
 									data-bs-touch="false" data-bs-interval="false">
-									<!-- «—»≠ æﬂ±∏øÎ«∞ Ω√¿€ -->
+									<!-- ÌïúÌôî ÏïºÍµ¨Ïö©Ìíà ÏãúÏûë-->
 									<div class="carousel-inner">
-										<!-- «—»≠ æﬂ±∏øÎ«∞ √ππ¯¬∞ ∆‰¿Ã¡ˆ -->
+										<!-- ÌïúÌôî ÏïºÍµ¨Ïö©Ìíà Ï≤´Î≤àÏß∏ ÌéòÏù¥ÏßÄ-->
 										<div class="carousel-item active" data-bs-interval="10000">
 											<div class="row h-100 align-items-center g-2">
+												<%
+												List<ProductDto> subListbase_hanB = new ArrayList<>();
+												for (int i = 0; i < list.size(); i++) {
+													ProductDto dto = list.get(i);
+													if (dto.getTeamName().equals("ÌïúÌôî Ïù¥Í∏ÄÏä§")) {
+														if (dto.getpCategory().equals("ÏïºÍµ¨Ïö©Ìíà")) {
+
+													subListbase_hanB.add(dto);
+														}
+													}
+												}
+												%>
+												<%
+												int last_hanB_1 = subListbase_hanB.size() < 4 ? subListbase_hanB.size() : 4;
+												List<ProductDto> subList_1_hanB = new ArrayList<ProductDto>(subListbase_hanB.subList(0, last_hanB_1));
+												for (int j = 0; j < subList_1_hanB.size(); j++) {
+													ProductDto dto = subList_1_hanB.get(j);
+												%>
 												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
 													<div class="card card-span h-100 text-white">
-														<img class="img-fluid h-100"
-															src="http://openimage.interpark.com/goods_image/9/7/8/4/10046189784s.jpg"
+														<img class="img-fluid h-100" src="<%=dto.getpImage()%>"
 															alt="..." />
 														<div class="card-img-overlay ps-0"></div>
 														<div class="card-body ps-0 bg-200">
-															<h5 class="fw-bold text-1000 text-truncate">≈∞øÚ ∏«≈ı∏«</h5>
+															<h5 class="fw-bold text-1000 text-truncate"><%=dto.getpName()%></h5>
 															<div class="fw-bold">
-																<span class="text-600 me-2 text-decoration-line-through">$200</span><span
-																	class="text-primary">$175</span>
+																<span class="text-primary"><%=nf.format(dto.getPrice())%></span>
 															</div>
 														</div>
-														<a class="stretched-link" href="#"></a>
+														<a class="stretched-link"
+															href="product_detailPage.jsp?pId=<%=dto.getpId()%>"></a>
 													</div>
 												</div>
-												
+												<%
+												}
+												%>
+
 											</div>
 										</div>
 
-										<!-- «—»≠ æﬂ±∏øÎ«∞ µŒπ¯¬∞ ∆‰¿Ã¡ˆ -->
+										<%
+										if (subListbase_hanB.size() > 4) {
+										%>
+										<!-- ÌïúÌôî ÏïºÍµ¨Ïö©Ìíà ÎëêÎ≤àÏß∏ ÌéòÏù¥ÏßÄ -->
 										<div class="carousel-item">
 											<div class="row h-100 align-items-center g-2">
+												<%
+												int last_hanB_2 = subListbase_hanB.size() > 8 ? 8 : subListbase_hanB.size();
+												List<ProductDto> subList_2_hanB = new ArrayList<ProductDto>(subListbase_hanB.subList(4, last_hanB_2));
+												for (int j = 0; j < subList_2_hanB.size(); j++) {
+													ProductDto dto = subList_2_hanB.get(j);
+												%>
 												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
 													<div class="card card-span h-100 text-white">
-														<img class="img-fluid h-100"
-															src="../assets/img/gallery/shoe-5.png" alt="..." />
+														<img class="img-fluid h-100" src="<%=dto.getpImage()%>"
+															alt="..." />
 														<div class="card-img-overlay ps-0"></div>
 														<div class="card-body ps-0 bg-200">
-															<h5 class="fw-bold text-1000 text-truncate">Shoe</h5>
+															<h5 class="fw-bold text-1000 text-truncate"><%=dto.getpName()%></h5>
 															<div class="fw-bold">
-																<span class="text-600 me-2 text-decoration-line-through">$200</span><span
-																	class="text-primary">$175</span>
+																<span class="text-primary"><%=nf.format(dto.getPrice())%></span>
 															</div>
 														</div>
-														<a class="stretched-link" href="#"></a>
+														<a class="stretched-link"
+															href="product_detailPage.jsp?pId=<%=dto.getpId()%>"></a>
 													</div>
 												</div>
-												
+												<%
+												}
+												%>
+
 											</div>
 										</div>
 
-										<!-- «—»≠ æﬂ±∏øÎ«∞ ¡¬øÏ¿Ãµø -->
+										<!-- ÌïúÌôî ÏïºÍµ¨Ïö©Ìíà Ï¢åÏö∞Ïù¥Îèô -->
 										<div class="row">
 											<button class="carousel-control-prev" type="button"
-												data-bs-target="#carouselCategoryHanhwabaseball"
+												data-bs-target="#carouselCategoryHanhwaBaseball"
 												data-bs-slide="prev">
 												<span class="carousel-control-prev-icon" aria-hidden="true"></span><span
 													class="visually-hidden">Previous</span>
 											</button>
 											<button class="carousel-control-next" type="button"
-												data-bs-target="#carouselCategoryHanhwabaseball"
+												data-bs-target="#carouselCategoryHanhwaBaseball"
 												data-bs-slide="next">
 												<span class="carousel-control-next-icon" aria-hidden="true"></span><span
 													class="visually-hidden">Next </span>
 											</button>
 										</div>
+										<%
+										}
+										%>
 									</div>
 								</div>
 
-								
+
 							</div>
 
-							<!-- «—»≠ ±‚≥‰ªÛ«∞ -->
-							<div class="tab-pane fade" id="pills-hanhwa_commemoration"
-								role="tabpanel" aria-labelledby="pills-hanhwa_commemoration-tab">
-								<div class="carousel slide"
-									id="carouselCategoryHanhwaCommemoration" data-bs-touch="false"
-									data-bs-interval="false">
-									<!-- «—»≠ ±‚≥‰ªÛ«∞ Ω√¿€ -->
+							<!-- ÌïúÌôî Í∏∞ÎÖêÏÉÅÌíà-->
+							<div class="tab-pane fade" id="pills-hanhwa_memory"
+								role="tabpanel" aria-labelledby="pills-hanhwa_memory-tab">
+								<div class="carousel slide" id="carouselCategoryHanhwaMemory"
+									data-bs-touch="false" data-bs-interval="false">
+									<!-- ÌïúÌôî Í∏∞ÎÖêÏÉÅÌíà ÏãúÏûë-->
 									<div class="carousel-inner">
-										<!-- «—»≠ ±‚≥‰ªÛ«∞ √ππ¯¬∞ ∆‰¿Ã¡ˆ -->
+										<!-- ÌïúÌôî Í∏∞ÎÖêÏÉÅÌíà Ï≤´Î≤àÏß∏ ÌéòÏù¥ÏßÄ-->
 										<div class="carousel-item active" data-bs-interval="10000">
 											<div class="row h-100 align-items-center g-2">
+												<%
+												List<ProductDto> subListbase_hanM = new ArrayList<>();
+												for (int i = 0; i < list.size(); i++) {
+													ProductDto dto = list.get(i);
+													if (dto.getTeamName().equals("ÌïúÌôî Ïù¥Í∏ÄÏä§")) {
+														if (dto.getpCategory().equals("Í∏∞ÎÖêÏÉÅÌíà")) {
+
+													subListbase_hanM.add(dto);
+														}
+													}
+												}
+												%>
+												<%
+												int last_hanM_1 = subListbase_hanM.size() < 4 ? subListbase_hanM.size() : 4;
+												List<ProductDto> subList_1_hanM = new ArrayList<ProductDto>(subListbase_hanM.subList(0, last_hanM_1));
+												for (int j = 0; j < subList_1_hanM.size(); j++) {
+													ProductDto dto = subList_1_hanM.get(j);
+												%>
 												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
 													<div class="card card-span h-100 text-white">
-														<img class="img-fluid h-100"
-															src="http://openimage.interpark.com/goods_image/9/7/8/4/10046189784s.jpg"
+														<img class="img-fluid h-100" src="<%=dto.getpImage()%>"
 															alt="..." />
 														<div class="card-img-overlay ps-0"></div>
 														<div class="card-body ps-0 bg-200">
-															<h5 class="fw-bold text-1000 text-truncate">≈∞øÚ ∏«≈ı∏«</h5>
+															<h5 class="fw-bold text-1000 text-truncate"><%=dto.getpName()%></h5>
 															<div class="fw-bold">
-																<span class="text-600 me-2 text-decoration-line-through">$500</span><span
-																	class="text-primary">$275</span>
+																<span class="text-primary"><%=nf.format(dto.getPrice())%></span>
 															</div>
 														</div>
-														<a class="stretched-link" href="#"></a>
+														<a class="stretched-link"
+															href="product_detailPage.jsp?pId=<%=dto.getpId()%>"></a>
 													</div>
 												</div>
-												
+												<%
+												}
+												%>
+
 											</div>
 										</div>
 
-										<!-- «—»≠ ±‚≥‰ªÛ«∞ µŒπ¯¬∞ ∆‰¿Ã¡ˆ -->
+										<%
+										if (subListbase_hanM.size() > 4) {
+										%>
+										<!-- ÌïúÌôî Í∏∞ÎÖêÏÉÅÌíà ÎëêÎ≤àÏß∏ ÌéòÏù¥ÏßÄ -->
 										<div class="carousel-item">
 											<div class="row h-100 align-items-center g-2">
+												<%
+												int last_hanM_2 = subListbase_hanM.size() > 8 ? 8 : subListbase_hanM.size();
+												List<ProductDto> subList_2_hanM = new ArrayList<ProductDto>(subListbase_hanM.subList(4, last_hanM_2));
+												for (int j = 0; j < subList_2_hanM.size(); j++) {
+													ProductDto dto = subList_2_hanM.get(j);
+												%>
 												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
 													<div class="card card-span h-100 text-white">
-														<img class="img-fluid h-100"
-															src="../assets/img/gallery/watch-5.png" alt="..." />
+														<img class="img-fluid h-100" src="<%=dto.getpImage()%>"
+															alt="..." />
 														<div class="card-img-overlay ps-0"></div>
 														<div class="card-body ps-0 bg-200">
-															<h5 class="fw-bold text-1000 text-truncate">Watch</h5>
+															<h5 class="fw-bold text-1000 text-truncate"><%=dto.getpName()%></h5>
 															<div class="fw-bold">
-																<span class="text-600 me-2 text-decoration-line-through">$500</span><span
-																	class="text-primary">$275</span>
+																<span class="text-primary"><%=nf.format(dto.getPrice())%></span>
 															</div>
 														</div>
-														<a class="stretched-link" href="#"></a>
+														<a class="stretched-link"
+															href="product_detailPage.jsp?pId=<%=dto.getpId()%>"></a>
 													</div>
 												</div>
-												
+												<%
+												}
+												%>
+
+
 											</div>
 										</div>
 
-										<!-- «—»≠ ±‚≥‰ªÛ«∞ ¡¬øÏ¿Ãµø -->
+										<!-- ÌïúÌôî Í∏∞ÎÖêÏÉÅÌíà Ï¢åÏö∞Ïù¥Îèô-->
 										<div class="row">
 											<button class="carousel-control-prev" type="button"
-												data-bs-target="#carouselCategoryHanhwaCommemoration"
+												data-bs-target="#carouselCategoryHanhwaMemory"
 												data-bs-slide="prev">
 												<span class="carousel-control-prev-icon" aria-hidden="true"></span><span
 													class="visually-hidden">Previous</span>
 											</button>
 											<button class="carousel-control-next" type="button"
-												data-bs-target="#carouselCategoryHanhwaCommemoration"
+												data-bs-target="#carouselCategoryHanhwaMemory"
 												data-bs-slide="next">
 												<span class="carousel-control-next-icon" aria-hidden="true"></span><span
 													class="visually-hidden">Next </span>
 											</button>
 										</div>
+										<%
+										}
+										%>
 									</div>
 								</div>
 
-								
+
 							</div>
 						</div>
 					</div>
@@ -1998,84 +2586,116 @@ NumberFormat nf = NumberFormat.getCurrencyInstance();
 								<button class="navv-link active" id="pills-kia_teamwear-tab"
 									data-bs-toggle="pill" data-bs-target="#pills-kia_teamwear"
 									type="button" role="tab" aria-controls="pills-kia_teamwear"
-									aria-selected="true">∆¿ø˛æÓ</button>
+									aria-selected="true">ÌåÄÏõ®Ïñ¥</button>
 							</li>
 							<li class="navv-item" role="presentation">
 								<button class="navv-link" id="pills-kia_cheering-tab"
 									data-bs-toggle="pill" data-bs-target="#pills-kia_cheering"
 									type="button" role="tab" aria-controls="pills-kia_cheering"
-									aria-selected="false">¿¿ø¯øÎ«∞</button>
+									aria-selected="false">ÏùëÏõêÏö©Ìíà</button>
 							</li>
 							<li class="navv-item" role="presentation">
 								<button class="navv-link" id="pills-kia_baseball-tab"
 									data-bs-toggle="pill" data-bs-target="#pills-kia_baseball"
 									type="button" role="tab" aria-controls="pills-kia_baseball"
-									aria-selected="false">æﬂ±∏øÎ«∞</button>
+									aria-selected="false">ÏïºÍµ¨Ïö©Ìíà</button>
 							</li>
 							<li class="navv-item" role="presentation">
-								<button class="navv-link" id="pills-kia_commemoration-tab"
-									data-bs-toggle="pill" data-bs-target="#pills-kia_commemoration"
-									type="button" role="tab"
-									aria-controls="pills-kia_commemoration" aria-selected="false">±‚≥‰ªÛ«∞</button>
+								<button class="navv-link" id="pills-kia_memory-tab"
+									data-bs-toggle="pill" data-bs-target="#pills-kia_memory"
+									type="button" role="tab" aria-controls="pills-kia_memory"
+									aria-selected="false">Í∏∞ÎÖêÏÉÅÌíà</button>
 							</li>
 						</ul>
-
 						<div class="tab-content" id="pills-tabContentKia">
-							<!-- KIA ∆¿ø˛æÓ -->
+							<!-- KIA ÌåÄÏõ®Ïñ¥ -->
 							<div class="tab-pane fade show active" id="pills-kia_teamwear"
 								role="tabpanel" aria-labelledby="pills-kia_teamwear-tab">
 								<div class="carousel slide" id="carouselCategoryKiaTeamwear"
 									data-bs-touch="false" data-bs-interval="false">
-									<!-- KIA ∆¿ø˛æÓ Ω√¿€ -->
+
+									<!-- KIA ÌåÄÏõ®Ïñ¥ ÏãúÏûë -->
 									<div class="carousel-inner">
-										<!-- KIA ∆¿ø˛æÓ √ππ¯¬∞ ∆‰¿Ã¡ˆ -->
+										<!-- KIA ÌåÄÏõ®Ïñ¥ Ï≤´Î≤àÏß∏ ÌéòÏù¥ÏßÄ -->
 										<div class="carousel-item active" data-bs-interval="10000">
 											<div class="row h-100 align-items-center g-2">
+												<%
+												List<ProductDto> subListbase_kiaT = new ArrayList<>();
+												for (int i = 0; i < list.size(); i++) {
+													ProductDto dto = list.get(i);
+													if (dto.getTeamName().equals("KIA ÌÉÄÏù¥Í±∞Ï¶à")) {
+														if (dto.getpCategory().equals("ÌåÄÏõ®Ïñ¥")) {
+
+													subListbase_kiaT.add(dto);
+														}
+													}
+												}
+												%>
+												<%
+												int last_kiaT_1 = subListbase_kiaT.size() < 4 ? subListbase_kiaT.size() : 4;
+												List<ProductDto> subList_1_kiaT = new ArrayList<ProductDto>(subListbase_kiaT.subList(0, last_kiaT_1));
+												for (int j = 0; j < subList_1_kiaT.size(); j++) {
+													ProductDto dto = subList_1_kiaT.get(j);
+												%>
 												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
 													<div class="card card-span h-100 text-white">
-														<img class="img-fluid h-100"
-															src="https://tigerstr9934.cdn-nhncommerce.com/data/goods/23/01/01/1000003040/1000003040_add3_021.jpg"
+														<img class="img-fluid h-100" src="<%=dto.getpImage()%>"
 															alt="..." />
 														<div class="card-img-overlay ps-0"></div>
 														<div class="card-body ps-0 bg-200">
-															<h5 class="fw-bold text-1000 text-truncate">2022
-																KIA≈∏¿Ã∞≈¡Ó æÓºæ∆Ω ±§∫π¿˝ ¿Ø¥œ∆˚</h5>
+															<h5 class="fw-bold text-1000 text-truncate"><%=dto.getpName()%></h5>
 															<div class="fw-bold">
-																<span class="text-600 me-2 text-decoration-line-through">$200</span><span
-																	class="text-primary">$175</span>
+																<span class="text-primary"><%=nf.format(dto.getPrice())%></span>
 															</div>
 														</div>
-														<a class="stretched-link" href="#"></a>
+														<a class="stretched-link"
+															href="product_detailPage.jsp?pId=<%=dto.getpId()%>"></a>
 													</div>
 												</div>
-											
+												<%
+												}
+												%>
+
+
 											</div>
 										</div>
 
-										<!-- KIA ∆¿ø˛æÓ µŒπ¯¬∞ ∆‰¿Ã¡ˆ -->
+										<%
+										if (subListbase_kiaT.size() > 4) {
+										%>
+										<!-- KIA ÌåÄÏõ®Ïñ¥ ÎëêÎ≤àÏß∏ ÌéòÏù¥ÏßÄ -->
 										<div class="carousel-item">
 											<div class="row h-100 align-items-center g-2">
+												<%
+												int last_kiaT_2 = subListbase_kiaT.size() > 8 ? 8 : subListbase_kiaT.size();
+												List<ProductDto> subList_2_kiaT = new ArrayList<ProductDto>(subListbase_kiaT.subList(4, last_kiaT_2));
+												for (int j = 0; j < subList_2_kiaT.size(); j++) {
+													ProductDto dto = subList_2_kiaT.get(j);
+												%>
 												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
 													<div class="card card-span h-100 text-white">
-														<img class="img-fluid h-100"
-															src="../assets/img/gallery/white-tshirt.png" alt="..." />
+														<img class="img-fluid h-100" src="<%=dto.getpImage()%>"
+															alt="..." />
 														<div class="card-img-overlay ps-0"></div>
 														<div class="card-body ps-0 bg-200">
-															<h5 class="fw-bold text-1000 text-truncate">White
-																T-Shirt</h5>
+															<h5 class="fw-bold text-1000 text-truncate"><%=dto.getpName()%></h5>
 															<div class="fw-bold">
-																<span class="text-600 me-2 text-decoration-line-through">$200</span><span
-																	class="text-primary">$175</span>
+																<span class="text-primary"><%=nf.format(dto.getPrice())%></span>
 															</div>
 														</div>
-														<a class="stretched-link" href="#"></a>
+														<a class="stretched-link"
+															href="product_detailPage.jsp?pId=<%=dto.getpId()%>"></a>
 													</div>
 												</div>
-												
+												<%
+												}
+												%>
+
 											</div>
 										</div>
 
-										<!-- KIA ∆¿ø˛æÓ ¡¬øÏ¿Ãµø -->
+
+										<!-- KIA ÌåÄÏõ®Ïñ¥ Ï¢åÏö∞Ïù¥Îèô -->
 										<div class="row">
 											<button class="carousel-control-prev" type="button"
 												data-bs-target="#carouselCategoryKiaTeamwear"
@@ -2090,65 +2710,105 @@ NumberFormat nf = NumberFormat.getCurrencyInstance();
 													class="visually-hidden">Next </span>
 											</button>
 										</div>
+
+										<%
+										}
+										%>
+
 									</div>
 								</div>
 
-								
 							</div>
 
-							<!-- KIA ¿¿ø¯øÎ«∞ -->
+							<!-- KIA ÏùëÏõêÏö©Ìíà -->
 							<div class="tab-pane fade" id="pills-kia_cheering"
 								role="tabpanel" aria-labelledby="pills-kia_cheering-tab">
 								<div class="carousel slide" id="carouselCategoryKiaCheering"
 									data-bs-touch="false" data-bs-interval="false">
-									<!-- KIA ¿¿ø¯øÎ«∞ Ω√¿€ -->
+
+									<!-- KIA ÏùëÏõêÏö©Ìíà ÏãúÏûë -->
 									<div class="carousel-inner">
-										<!-- KIA ¿¿ø¯øÎ«∞ √ππ¯¬∞ ∆‰¿Ã¡ˆ -->
+										<!-- KIA ÏùëÏõêÏö©Ìíà Ï≤´Î≤àÏß∏ ÌéòÏù¥ÏßÄ -->
 										<div class="carousel-item active" data-bs-interval="10000">
 											<div class="row h-100 align-items-center g-2">
+												<%
+												List<ProductDto> subListbase_kiaC = new ArrayList<>();
+												for (int i = 0; i < list.size(); i++) {
+													ProductDto dto = list.get(i);
+													if (dto.getTeamName().equals("KIA ÌÉÄÏù¥Í±∞Ï¶à")) {
+														if (dto.getpCategory().equals("ÏùëÏõêÏö©Ìíà")) {
+
+													subListbase_kiaC.add(dto);
+														}
+													}
+												}
+												%>
+												<%
+												int last_kiaC_1 = subListbase_kiaC.size() < 4 ? subListbase_kiaC.size() : 4;
+												List<ProductDto> subList_1_kiaC = new ArrayList<ProductDto>(subListbase_kiaC.subList(0, last_kiaC_1));
+												for (int j = 0; j < subList_1_kiaC.size(); j++) {
+													ProductDto dto = subList_1_kiaC.get(j);
+												%>
 												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
 													<div class="card card-span h-100 text-white">
-														<img class="img-fluid h-100"
-															src="http://openimage.interpark.com/goods_image/9/7/8/4/10046189784s.jpg"
+														<img class="img-fluid h-100" src="<%=dto.getpImage()%>"
 															alt="..." />
 														<div class="card-img-overlay ps-0"></div>
 														<div class="card-body ps-0 bg-200">
-															<h5 class="fw-bold text-1000 text-truncate">≈∞øÚ ∏«≈ı∏«</h5>
+															<h5 class="fw-bold text-1000 text-truncate"><%=dto.getpName()%></h5>
 															<div class="fw-bold">
-																<span class="text-600 me-2 text-decoration-line-through">$200</span><span
-																	class="text-primary">$175</span>
+																<span class="text-primary"><%=nf.format(dto.getPrice())%></span>
 															</div>
 														</div>
-														<a class="stretched-link" href="#"></a>
+														<a class="stretched-link"
+															href="product_detailPage.jsp?pId=<%=dto.getpId()%>"></a>
 													</div>
 												</div>
-											
+												<%
+												}
+												%>
+
+
+
 											</div>
 										</div>
 
-										<!-- KIA ¿¿ø¯øÎ«∞ µŒπ¯¬∞ ∆‰¿Ã¡ˆ-->
+										<%
+										if (subListbase_kiaC.size() > 4) {
+										%>
+										<!-- KIA ÏùëÏõêÏö©Ìíà ÎëêÎ≤àÏß∏ ÌéòÏù¥ÏßÄ -->
 										<div class="carousel-item">
 											<div class="row h-100 align-items-center g-2">
+												<%
+												int last_kiaC_2 = subListbase_kiaC.size() > 8 ? 8 : subListbase_kiaC.size();
+												List<ProductDto> subList_2_kiaC = new ArrayList<ProductDto>(subListbase_kiaC.subList(4, last_kiaC_2));
+												for (int j = 0; j < subList_2_kiaC.size(); j++) {
+													ProductDto dto = subList_2_kiaC.get(j);
+												%>
 												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
 													<div class="card card-span h-100 text-white">
-														<img class="img-fluid h-100"
-															src="../assets/img/gallery/shirt-5.png" alt="..." />
+														<img class="img-fluid h-100" src="<%=dto.getpImage()%>"
+															alt="..." />
 														<div class="card-img-overlay ps-0"></div>
 														<div class="card-body ps-0 bg-200">
-															<h5 class="fw-bold text-1000 text-truncate">Shirt</h5>
+															<h5 class="fw-bold text-1000 text-truncate"><%=dto.getpName()%></h5>
 															<div class="fw-bold">
-																<span class="text-600 me-2 text-decoration-line-through">$200</span><span
-																	class="text-primary">$175</span>
+																<span class="text-primary"><%=nf.format(dto.getPrice())%></span>
 															</div>
 														</div>
-														<a class="stretched-link" href="#"></a>
+														<a class="stretched-link"
+															href="product_detailPage.jsp?pId=<%=dto.getpId()%>"></a>
 													</div>
 												</div>
-											
+												<%
+												}
+												%>
+
 											</div>
 										</div>
 
-										<!-- KIA ¿¿ø¯øÎ«∞ ¡¬øÏ¿Ãµø-->
+
+										<!-- KIA ÏùëÏõêÏö©Ìíà Ï¢åÏö∞Ïù¥Îèô -->
 										<div class="row">
 											<button class="carousel-control-prev" type="button"
 												data-bs-target="#carouselCategoryKiaCheering"
@@ -2163,157 +2823,230 @@ NumberFormat nf = NumberFormat.getCurrencyInstance();
 													class="visually-hidden">Next </span>
 											</button>
 										</div>
+										<%
+										}
+										%>
+
 									</div>
 								</div>
 
-								
 							</div>
 
-							<!-- KIA æﬂ±∏øÎ«∞ -->
+							<!-- KIA ÏïºÍµ¨Ïö©Ìíà -->
 							<div class="tab-pane fade" id="pills-kia_baseball"
 								role="tabpanel" aria-labelledby="pills-kia_baseball-tab">
-								<div class="carousel slide" id="carouselCategoryKiabaseball"
+								<div class="carousel slide" id="carouselCategoryKiaBaseball"
 									data-bs-touch="false" data-bs-interval="false">
-									<!-- KIA æﬂ±∏øÎ«∞ Ω√¿€ -->
+									<!-- KIA ÏïºÍµ¨Ïö©Ìíà ÏãúÏûë-->
 									<div class="carousel-inner">
-										<!-- KIA æﬂ±∏øÎ«∞ √ππ¯¬∞ ∆‰¿Ã¡ˆ -->
+										<!-- KIA ÏïºÍµ¨Ïö©Ìíà Ï≤´Î≤àÏß∏ ÌéòÏù¥ÏßÄ-->
 										<div class="carousel-item active" data-bs-interval="10000">
 											<div class="row h-100 align-items-center g-2">
+												<%
+												List<ProductDto> subListbase_kiaB = new ArrayList<>();
+												for (int i = 0; i < list.size(); i++) {
+													ProductDto dto = list.get(i);
+													if (dto.getTeamName().equals("KIA ÌÉÄÏù¥Í±∞Ï¶à")) {
+														if (dto.getpCategory().equals("ÏïºÍµ¨Ïö©Ìíà")) {
+
+													subListbase_kiaB.add(dto);
+														}
+													}
+												}
+												%>
+												<%
+												int last_kiaB_1 = subListbase_kiaB.size() < 4 ? subListbase_kiaB.size() : 4;
+												List<ProductDto> subList_1_kiaB = new ArrayList<ProductDto>(subListbase_kiaB.subList(0, last_kiaB_1));
+												for (int j = 0; j < subList_1_kiaB.size(); j++) {
+													ProductDto dto = subList_1_kiaB.get(j);
+												%>
 												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
 													<div class="card card-span h-100 text-white">
-														<img class="img-fluid h-100"
-															src="http://openimage.interpark.com/goods_image/9/7/8/4/10046189784s.jpg"
+														<img class="img-fluid h-100" src="<%=dto.getpImage()%>"
 															alt="..." />
 														<div class="card-img-overlay ps-0"></div>
 														<div class="card-body ps-0 bg-200">
-															<h5 class="fw-bold text-1000 text-truncate">≈∞øÚ ∏«≈ı∏«</h5>
+															<h5 class="fw-bold text-1000 text-truncate"><%=dto.getpName()%></h5>
 															<div class="fw-bold">
-																<span class="text-600 me-2 text-decoration-line-through">$200</span><span
-																	class="text-primary">$175</span>
+																<span class="text-primary"><%=nf.format(dto.getPrice())%></span>
 															</div>
 														</div>
-														<a class="stretched-link" href="#"></a>
+														<a class="stretched-link"
+															href="product_detailPage.jsp?pId=<%=dto.getpId()%>"></a>
 													</div>
 												</div>
-											
+												<%
+												}
+												%>
+
 											</div>
 										</div>
 
-										<!-- KIA æﬂ±∏øÎ«∞ µŒπ¯¬∞ ∆‰¿Ã¡ˆ -->
+										<%
+										if (subListbase_kiaB.size() > 4) {
+										%>
+										<!-- KIA ÏïºÍµ¨Ïö©Ìíà ÎëêÎ≤àÏß∏ ÌéòÏù¥ÏßÄ -->
 										<div class="carousel-item">
 											<div class="row h-100 align-items-center g-2">
+												<%
+												int last_kiaB_2 = subListbase_kiaB.size() > 8 ? 8 : subListbase_kiaB.size();
+												List<ProductDto> subList_2_kiaB = new ArrayList<ProductDto>(subListbase_kiaB.subList(4, last_kiaB_2));
+												for (int j = 0; j < subList_2_kiaB.size(); j++) {
+													ProductDto dto = subList_2_kiaB.get(j);
+												%>
 												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
 													<div class="card card-span h-100 text-white">
-														<img class="img-fluid h-100"
-															src="../assets/img/gallery/shoe-5.png" alt="..." />
+														<img class="img-fluid h-100" src="<%=dto.getpImage()%>"
+															alt="..." />
 														<div class="card-img-overlay ps-0"></div>
 														<div class="card-body ps-0 bg-200">
-															<h5 class="fw-bold text-1000 text-truncate">Shoe</h5>
+															<h5 class="fw-bold text-1000 text-truncate"><%=dto.getpName()%></h5>
 															<div class="fw-bold">
-																<span class="text-600 me-2 text-decoration-line-through">$200</span><span
-																	class="text-primary">$175</span>
+																<span class="text-primary"><%=nf.format(dto.getPrice())%></span>
 															</div>
 														</div>
-														<a class="stretched-link" href="#"></a>
+														<a class="stretched-link"
+															href="product_detailPage.jsp?pId=<%=dto.getpId()%>"></a>
 													</div>
 												</div>
-												
+												<%
+												}
+												%>
+
 											</div>
 										</div>
 
-										<!-- KIA æﬂ±∏øÎ«∞ ¡¬øÏ¿Ãµø -->
+										<!-- KIA ÏïºÍµ¨Ïö©Ìíà Ï¢åÏö∞Ïù¥Îèô -->
 										<div class="row">
 											<button class="carousel-control-prev" type="button"
-												data-bs-target="#carouselCategoryKiabaseball"
+												data-bs-target="#carouselCategoryKiaBaseball"
 												data-bs-slide="prev">
 												<span class="carousel-control-prev-icon" aria-hidden="true"></span><span
 													class="visually-hidden">Previous</span>
 											</button>
 											<button class="carousel-control-next" type="button"
-												data-bs-target="#carouselCategoryKiabaseball"
+												data-bs-target="#carouselCategoryKiaBaseball"
 												data-bs-slide="next">
 												<span class="carousel-control-next-icon" aria-hidden="true"></span><span
 													class="visually-hidden">Next </span>
 											</button>
 										</div>
+										<%
+										}
+										%>
 									</div>
 								</div>
 
-								
+
 							</div>
 
-							<!-- KIA ±‚≥‰ªÛ«∞ -->
-							<div class="tab-pane fade" id="pills-kia_commemoration"
-								role="tabpanel" aria-labelledby="pills-kia_commemoration-tab">
-								<div class="carousel slide"
-									id="carouselCategoryKiaCommemoration" data-bs-touch="false"
-									data-bs-interval="false">
-									<!-- KIA ±‚≥‰ªÛ«∞ Ω√¿€ -->
+							<!-- KIA Í∏∞ÎÖêÏÉÅÌíà-->
+							<div class="tab-pane fade" id="pills-kia_memory" role="tabpanel"
+								aria-labelledby="pills-kia_memory-tab">
+								<div class="carousel slide" id="carouselCategoryKiaMemory"
+									data-bs-touch="false" data-bs-interval="false">
+									<!-- KIA Í∏∞ÎÖêÏÉÅÌíà ÏãúÏûë-->
 									<div class="carousel-inner">
-										<!-- KIA ±‚≥‰ªÛ«∞ √ππ¯¬∞ ∆‰¿Ã¡ˆ -->
+										<!-- KIA Í∏∞ÎÖêÏÉÅÌíà Ï≤´Î≤àÏß∏ ÌéòÏù¥ÏßÄ-->
 										<div class="carousel-item active" data-bs-interval="10000">
 											<div class="row h-100 align-items-center g-2">
+												<%
+												List<ProductDto> subListbase_kiaM = new ArrayList<>();
+												for (int i = 0; i < list.size(); i++) {
+													ProductDto dto = list.get(i);
+													if (dto.getTeamName().equals("KIA ÌÉÄÏù¥Í±∞Ï¶à")) {
+														if (dto.getpCategory().equals("Í∏∞ÎÖêÏÉÅÌíà")) {
+
+													subListbase_kiaM.add(dto);
+														}
+													}
+												}
+												%>
+												<%
+												int last_kiaM_1 = subListbase_kiaM.size() < 4 ? subListbase_kiaM.size() : 4;
+												List<ProductDto> subList_1_kiaM = new ArrayList<ProductDto>(subListbase_kiaM.subList(0, last_kiaM_1));
+												for (int j = 0; j < subList_1_kiaM.size(); j++) {
+													ProductDto dto = subList_1_kiaM.get(j);
+												%>
 												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
 													<div class="card card-span h-100 text-white">
-														<img class="img-fluid h-100"
-															src="http://openimage.interpark.com/goods_image/9/7/8/4/10046189784s.jpg"
+														<img class="img-fluid h-100" src="<%=dto.getpImage()%>"
 															alt="..." />
 														<div class="card-img-overlay ps-0"></div>
 														<div class="card-body ps-0 bg-200">
-															<h5 class="fw-bold text-1000 text-truncate">≈∞øÚ ∏«≈ı∏«</h5>
+															<h5 class="fw-bold text-1000 text-truncate"><%=dto.getpName()%></h5>
 															<div class="fw-bold">
-																<span class="text-600 me-2 text-decoration-line-through">$500</span><span
-																	class="text-primary">$275</span>
+																<span class="text-primary"><%=nf.format(dto.getPrice())%></span>
 															</div>
 														</div>
-														<a class="stretched-link" href="#"></a>
+														<a class="stretched-link"
+															href="product_detailPage.jsp?pId=<%=dto.getpId()%>"></a>
 													</div>
 												</div>
-												
+												<%
+												}
+												%>
+
 											</div>
 										</div>
 
-										<!-- KIA ±‚≥‰ªÛ«∞ µŒπ¯¬∞ ∆‰¿Ã¡ˆ -->
+										<%
+										if (subListbase_kiaM.size() > 4) {
+										%>
+										<!-- KIA Í∏∞ÎÖêÏÉÅÌíà ÎëêÎ≤àÏß∏ ÌéòÏù¥ÏßÄ -->
 										<div class="carousel-item">
 											<div class="row h-100 align-items-center g-2">
+												<%
+												int last_kiaM_2 = subListbase_kiaM.size() > 8 ? 8 : subListbase_kiaM.size();
+												List<ProductDto> subList_2_kiaM = new ArrayList<ProductDto>(subListbase_kiaM.subList(4, last_kiaM_2));
+												for (int j = 0; j < subList_2_kiaM.size(); j++) {
+													ProductDto dto = subList_2_kiaM.get(j);
+												%>
 												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
 													<div class="card card-span h-100 text-white">
-														<img class="img-fluid h-100"
-															src="../assets/img/gallery/watch-5.png" alt="..." />
+														<img class="img-fluid h-100" src="<%=dto.getpImage()%>"
+															alt="..." />
 														<div class="card-img-overlay ps-0"></div>
 														<div class="card-body ps-0 bg-200">
-															<h5 class="fw-bold text-1000 text-truncate">Watch</h5>
+															<h5 class="fw-bold text-1000 text-truncate"><%=dto.getpName()%></h5>
 															<div class="fw-bold">
-																<span class="text-600 me-2 text-decoration-line-through">$500</span><span
-																	class="text-primary">$275</span>
+																<span class="text-primary"><%=nf.format(dto.getPrice())%></span>
 															</div>
 														</div>
-														<a class="stretched-link" href="#"></a>
+														<a class="stretched-link"
+															href="product_detailPage.jsp?pId=<%=dto.getpId()%>"></a>
 													</div>
 												</div>
-											
+												<%
+												}
+												%>
+
+
 											</div>
 										</div>
 
-										<!-- KIA ±‚≥‰ªÛ«∞ ¡¬øÏ¿Ãµø -->
+										<!-- KIA Í∏∞ÎÖêÏÉÅÌíà Ï¢åÏö∞Ïù¥Îèô-->
 										<div class="row">
 											<button class="carousel-control-prev" type="button"
-												data-bs-target="#carouselCategoryKiaCommemoration"
+												data-bs-target="#carouselCategoryKiaMemory"
 												data-bs-slide="prev">
 												<span class="carousel-control-prev-icon" aria-hidden="true"></span><span
 													class="visually-hidden">Previous</span>
 											</button>
 											<button class="carousel-control-next" type="button"
-												data-bs-target="#carouselCategoryKiaCommemoration"
+												data-bs-target="#carouselCategoryKiaMemory"
 												data-bs-slide="next">
 												<span class="carousel-control-next-icon" aria-hidden="true"></span><span
 													class="visually-hidden">Next </span>
 											</button>
 										</div>
+										<%
+										}
+										%>
 									</div>
 								</div>
 
-								
+
 							</div>
 						</div>
 					</div>
@@ -2327,84 +3060,116 @@ NumberFormat nf = NumberFormat.getCurrencyInstance();
 								<button class="navv-link active" id="pills-kt_teamwear-tab"
 									data-bs-toggle="pill" data-bs-target="#pills-kt_teamwear"
 									type="button" role="tab" aria-controls="pills-kt_teamwear"
-									aria-selected="true">∆¿ø˛æÓ</button>
+									aria-selected="true">ÌåÄÏõ®Ïñ¥</button>
 							</li>
 							<li class="navv-item" role="presentation">
 								<button class="navv-link" id="pills-kt_cheering-tab"
 									data-bs-toggle="pill" data-bs-target="#pills-kt_cheering"
 									type="button" role="tab" aria-controls="pills-kt_cheering"
-									aria-selected="false">¿¿ø¯øÎ«∞</button>
+									aria-selected="false">ÏùëÏõêÏö©Ìíà</button>
 							</li>
 							<li class="navv-item" role="presentation">
 								<button class="navv-link" id="pills-kt_baseball-tab"
 									data-bs-toggle="pill" data-bs-target="#pills-kt_baseball"
 									type="button" role="tab" aria-controls="pills-kt_baseball"
-									aria-selected="false">æﬂ±∏øÎ«∞</button>
+									aria-selected="false">ÏïºÍµ¨Ïö©Ìíà</button>
 							</li>
 							<li class="navv-item" role="presentation">
-								<button class="navv-link" id="pills-kt_commemoration-tab"
-									data-bs-toggle="pill" data-bs-target="#pills-kt_commemoration"
-									type="button" role="tab" aria-controls="pills-kt_commemoration"
-									aria-selected="false">±‚≥‰ªÛ«∞</button>
+								<button class="navv-link" id="pills-kt_memory-tab"
+									data-bs-toggle="pill" data-bs-target="#pills-kt_memory"
+									type="button" role="tab" aria-controls="pills-kt_memory"
+									aria-selected="false">Í∏∞ÎÖêÏÉÅÌíà</button>
 							</li>
 						</ul>
-
 						<div class="tab-content" id="pills-tabContentKt">
-							<!-- KT ∆¿ø˛æÓ -->
+							<!-- KT ÌåÄÏõ®Ïñ¥ -->
 							<div class="tab-pane fade show active" id="pills-kt_teamwear"
 								role="tabpanel" aria-labelledby="pills-kt_teamwear-tab">
 								<div class="carousel slide" id="carouselCategoryKtTeamwear"
 									data-bs-touch="false" data-bs-interval="false">
-									<!-- KT ∆¿ø˛æÓ Ω√¿€ -->
+
+									<!-- KT ÌåÄÏõ®Ïñ¥ ÏãúÏûë -->
 									<div class="carousel-inner">
-										<!-- KT ∆¿ø˛æÓ √ππ¯¬∞ ∆‰¿Ã¡ˆ -->
+										<!-- KT ÌåÄÏõ®Ïñ¥ Ï≤´Î≤àÏß∏ ÌéòÏù¥ÏßÄ -->
 										<div class="carousel-item active" data-bs-interval="10000">
 											<div class="row h-100 align-items-center g-2">
+												<%
+												List<ProductDto> subListbase_ktT = new ArrayList<>();
+												for (int i = 0; i < list.size(); i++) {
+													ProductDto dto = list.get(i);
+													if (dto.getTeamName().equals("KT WIZ")) {
+														if (dto.getpCategory().equals("ÌåÄÏõ®Ïñ¥")) {
+
+													subListbase_ktT.add(dto);
+														}
+													}
+												}
+												%>
+												<%
+												int last_ktT_1 = subListbase_ktT.size() < 4 ? subListbase_ktT.size() : 4;
+												List<ProductDto> subList_1_ktT = new ArrayList<ProductDto>(subListbase_ktT.subList(0, last_ktT_1));
+												for (int j = 0; j < subList_1_ktT.size(); j++) {
+													ProductDto dto = subList_1_ktT.get(j);
+												%>
 												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
 													<div class="card card-span h-100 text-white">
-														<img class="img-fluid h-100"
-															src="https://ktwizstore.co.kr/web/product/big/202212/cd10c2c1da07b53bcb820ebc3e26ba5b.jpg"
+														<img class="img-fluid h-100" src="<%=dto.getpImage()%>"
 															alt="..." />
 														<div class="card-img-overlay ps-0"></div>
 														<div class="card-body ps-0 bg-200">
-															<h5 class="fw-bold text-1000 text-truncate">ƒ…¿Ã∆º¿ß¡Ó
-																2022 ∆˜Ω∫∆ÆΩ√¡ ±‚≥‰±∏</h5>
+															<h5 class="fw-bold text-1000 text-truncate"><%=dto.getpName()%></h5>
 															<div class="fw-bold">
-																<span class="text-600 me-2 text-decoration-line-through">$200</span><span
-																	class="text-primary">$175</span>
+																<span class="text-primary"><%=nf.format(dto.getPrice())%></span>
 															</div>
 														</div>
-														<a class="stretched-link" href="#"></a>
+														<a class="stretched-link"
+															href="product_detailPage.jsp?pId=<%=dto.getpId()%>"></a>
 													</div>
 												</div>
-												
+												<%
+												}
+												%>
+
+
 											</div>
 										</div>
 
-										<!-- KT ∆¿ø˛æÓ µŒπ¯¬∞ ∆‰¿Ã¡ˆ -->
+										<%
+										if (subListbase_ktT.size() > 4) {
+										%>
+										<!-- KT ÌåÄÏõ®Ïñ¥ ÎëêÎ≤àÏß∏ ÌéòÏù¥ÏßÄ -->
 										<div class="carousel-item">
 											<div class="row h-100 align-items-center g-2">
+												<%
+												int last_ktT_2 = subListbase_ktT.size() > 8 ? 8 : subListbase_ktT.size();
+												List<ProductDto> subList_2_ktT = new ArrayList<ProductDto>(subListbase_ktT.subList(4, last_ktT_2));
+												for (int j = 0; j < subList_2_ktT.size(); j++) {
+													ProductDto dto = subList_2_ktT.get(j);
+												%>
 												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
 													<div class="card card-span h-100 text-white">
-														<img class="img-fluid h-100"
-															src="../assets/img/gallery/white-tshirt.png" alt="..." />
+														<img class="img-fluid h-100" src="<%=dto.getpImage()%>"
+															alt="..." />
 														<div class="card-img-overlay ps-0"></div>
 														<div class="card-body ps-0 bg-200">
-															<h5 class="fw-bold text-1000 text-truncate">White
-																T-Shirt</h5>
+															<h5 class="fw-bold text-1000 text-truncate"><%=dto.getpName()%></h5>
 															<div class="fw-bold">
-																<span class="text-600 me-2 text-decoration-line-through">$200</span><span
-																	class="text-primary">$175</span>
+																<span class="text-primary"><%=nf.format(dto.getPrice())%></span>
 															</div>
 														</div>
-														<a class="stretched-link" href="#"></a>
+														<a class="stretched-link"
+															href="product_detailPage.jsp?pId=<%=dto.getpId()%>"></a>
 													</div>
 												</div>
-												
+												<%
+												}
+												%>
+
 											</div>
 										</div>
 
-										<!-- KT ∆¿ø˛æÓ ¡¬øÏ¿Ãµø -->
+
+										<!-- KT ÌåÄÏõ®Ïñ¥ Ï¢åÏö∞Ïù¥Îèô -->
 										<div class="row">
 											<button class="carousel-control-prev" type="button"
 												data-bs-target="#carouselCategoryKtTeamwear"
@@ -2419,65 +3184,105 @@ NumberFormat nf = NumberFormat.getCurrencyInstance();
 													class="visually-hidden">Next </span>
 											</button>
 										</div>
+
+										<%
+										}
+										%>
+
 									</div>
 								</div>
 
-								
 							</div>
 
-							<!-- KT ¿¿ø¯øÎ«∞ -->
+							<!-- KT ÏùëÏõêÏö©Ìíà -->
 							<div class="tab-pane fade" id="pills-kt_cheering" role="tabpanel"
 								aria-labelledby="pills-kt_cheering-tab">
 								<div class="carousel slide" id="carouselCategoryKtCheering"
 									data-bs-touch="false" data-bs-interval="false">
-									<!-- KT ¿¿ø¯øÎ«∞ Ω√¿€ -->
+
+									<!-- KT ÏùëÏõêÏö©Ìíà ÏãúÏûë -->
 									<div class="carousel-inner">
-										<!-- KT ¿¿ø¯øÎ«∞ √ππ¯¬∞ ∆‰¿Ã¡ˆ -->
+										<!-- KT ÏùëÏõêÏö©Ìíà Ï≤´Î≤àÏß∏ ÌéòÏù¥ÏßÄ -->
 										<div class="carousel-item active" data-bs-interval="10000">
 											<div class="row h-100 align-items-center g-2">
+												<%
+												List<ProductDto> subListbase_ktC = new ArrayList<>();
+												for (int i = 0; i < list.size(); i++) {
+													ProductDto dto = list.get(i);
+													if (dto.getTeamName().equals("KT WIZ")) {
+														if (dto.getpCategory().equals("ÏùëÏõêÏö©Ìíà")) {
+
+													subListbase_ktC.add(dto);
+														}
+													}
+												}
+												%>
+												<%
+												int last_ktC_1 = subListbase_ktC.size() < 4 ? subListbase_ktC.size() : 4;
+												List<ProductDto> subList_1_ktC = new ArrayList<ProductDto>(subListbase_ktC.subList(0, last_ktC_1));
+												for (int j = 0; j < subList_1_ktC.size(); j++) {
+													ProductDto dto = subList_1_ktC.get(j);
+												%>
 												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
 													<div class="card card-span h-100 text-white">
-														<img class="img-fluid h-100"
-															src="http://openimage.interpark.com/goods_image/9/7/8/4/10046189784s.jpg"
+														<img class="img-fluid h-100" src="<%=dto.getpImage()%>"
 															alt="..." />
 														<div class="card-img-overlay ps-0"></div>
 														<div class="card-body ps-0 bg-200">
-															<h5 class="fw-bold text-1000 text-truncate">≈∞øÚ ∏«≈ı∏«</h5>
+															<h5 class="fw-bold text-1000 text-truncate"><%=dto.getpName()%></h5>
 															<div class="fw-bold">
-																<span class="text-600 me-2 text-decoration-line-through">$200</span><span
-																	class="text-primary">$175</span>
+																<span class="text-primary"><%=nf.format(dto.getPrice())%></span>
 															</div>
 														</div>
-														<a class="stretched-link" href="#"></a>
+														<a class="stretched-link"
+															href="product_detailPage.jsp?pId=<%=dto.getpId()%>"></a>
 													</div>
 												</div>
-												
+												<%
+												}
+												%>
+
+
+
 											</div>
 										</div>
 
-										<!-- KT ¿¿ø¯øÎ«∞ µŒπ¯¬∞ ∆‰¿Ã¡ˆ-->
+										<%
+										if (subListbase_ktC.size() > 4) {
+										%>
+										<!-- KT ÏùëÏõêÏö©Ìíà ÎëêÎ≤àÏß∏ ÌéòÏù¥ÏßÄ -->
 										<div class="carousel-item">
 											<div class="row h-100 align-items-center g-2">
+												<%
+												int last_ktC_2 = subListbase_ktC.size() > 8 ? 8 : subListbase_ktC.size();
+												List<ProductDto> subList_2_ktC = new ArrayList<ProductDto>(subListbase_ktC.subList(4, last_ktC_2));
+												for (int j = 0; j < subList_2_ktC.size(); j++) {
+													ProductDto dto = subList_2_ktC.get(j);
+												%>
 												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
 													<div class="card card-span h-100 text-white">
-														<img class="img-fluid h-100"
-															src="../assets/img/gallery/shirt-5.png" alt="..." />
+														<img class="img-fluid h-100" src="<%=dto.getpImage()%>"
+															alt="..." />
 														<div class="card-img-overlay ps-0"></div>
 														<div class="card-body ps-0 bg-200">
-															<h5 class="fw-bold text-1000 text-truncate">Shirt</h5>
+															<h5 class="fw-bold text-1000 text-truncate"><%=dto.getpName()%></h5>
 															<div class="fw-bold">
-																<span class="text-600 me-2 text-decoration-line-through">$200</span><span
-																	class="text-primary">$175</span>
+																<span class="text-primary"><%=nf.format(dto.getPrice())%></span>
 															</div>
 														</div>
-														<a class="stretched-link" href="#"></a>
+														<a class="stretched-link"
+															href="product_detailPage.jsp?pId=<%=dto.getpId()%>"></a>
 													</div>
 												</div>
-											
+												<%
+												}
+												%>
+
 											</div>
 										</div>
 
-										<!-- KT ¿¿ø¯øÎ«∞ ¡¬øÏ¿Ãµø-->
+
+										<!-- KT ÏùëÏõêÏö©Ìíà Ï¢åÏö∞Ïù¥Îèô -->
 										<div class="row">
 											<button class="carousel-control-prev" type="button"
 												data-bs-target="#carouselCategoryKtCheering"
@@ -2492,156 +3297,230 @@ NumberFormat nf = NumberFormat.getCurrencyInstance();
 													class="visually-hidden">Next </span>
 											</button>
 										</div>
+										<%
+										}
+										%>
+
 									</div>
 								</div>
 
-								
 							</div>
 
-							<!-- KT æﬂ±∏øÎ«∞ -->
+							<!-- KT ÏïºÍµ¨Ïö©Ìíà -->
 							<div class="tab-pane fade" id="pills-kt_baseball" role="tabpanel"
 								aria-labelledby="pills-kt_baseball-tab">
-								<div class="carousel slide" id="carouselCategoryKtbaseball"
+								<div class="carousel slide" id="carouselCategoryKtBaseball"
 									data-bs-touch="false" data-bs-interval="false">
-									<!-- KT æﬂ±∏øÎ«∞ Ω√¿€ -->
+									<!-- KT ÏïºÍµ¨Ïö©Ìíà ÏãúÏûë-->
 									<div class="carousel-inner">
-										<!-- KT æﬂ±∏øÎ«∞ √ππ¯¬∞ ∆‰¿Ã¡ˆ -->
+										<!-- KT ÏïºÍµ¨Ïö©Ìíà Ï≤´Î≤àÏß∏ ÌéòÏù¥ÏßÄ-->
 										<div class="carousel-item active" data-bs-interval="10000">
 											<div class="row h-100 align-items-center g-2">
+												<%
+												List<ProductDto> subListbase_ktB = new ArrayList<>();
+												for (int i = 0; i < list.size(); i++) {
+													ProductDto dto = list.get(i);
+													if (dto.getTeamName().equals("KT WIZ")) {
+														if (dto.getpCategory().equals("ÏïºÍµ¨Ïö©Ìíà")) {
+
+													subListbase_ktB.add(dto);
+														}
+													}
+												}
+												%>
+												<%
+												int last_ktB_1 = subListbase_ktB.size() < 4 ? subListbase_ktB.size() : 4;
+												List<ProductDto> subList_1_ktB = new ArrayList<ProductDto>(subListbase_ktB.subList(0, last_ktB_1));
+												for (int j = 0; j < subList_1_ktB.size(); j++) {
+													ProductDto dto = subList_1_ktB.get(j);
+												%>
 												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
 													<div class="card card-span h-100 text-white">
-														<img class="img-fluid h-100"
-															src="http://openimage.interpark.com/goods_image/9/7/8/4/10046189784s.jpg"
+														<img class="img-fluid h-100" src="<%=dto.getpImage()%>"
 															alt="..." />
 														<div class="card-img-overlay ps-0"></div>
 														<div class="card-body ps-0 bg-200">
-															<h5 class="fw-bold text-1000 text-truncate">≈∞øÚ ∏«≈ı∏«</h5>
+															<h5 class="fw-bold text-1000 text-truncate"><%=dto.getpName()%></h5>
 															<div class="fw-bold">
-																<span class="text-600 me-2 text-decoration-line-through">$200</span><span
-																	class="text-primary">$175</span>
+																<span class="text-primary"><%=nf.format(dto.getPrice())%></span>
 															</div>
 														</div>
-														<a class="stretched-link" href="#"></a>
+														<a class="stretched-link"
+															href="product_detailPage.jsp?pId=<%=dto.getpId()%>"></a>
 													</div>
 												</div>
-											
+												<%
+												}
+												%>
+
 											</div>
 										</div>
 
-										<!-- KT æﬂ±∏øÎ«∞ µŒπ¯¬∞ ∆‰¿Ã¡ˆ -->
+										<%
+										if (subListbase_ktB.size() > 4) {
+										%>
+										<!-- KT ÏïºÍµ¨Ïö©Ìíà ÎëêÎ≤àÏß∏ ÌéòÏù¥ÏßÄ -->
 										<div class="carousel-item">
 											<div class="row h-100 align-items-center g-2">
+												<%
+												int last_ktB_2 = subListbase_ktB.size() > 8 ? 8 : subListbase_ktB.size();
+												List<ProductDto> subList_2_ktB = new ArrayList<ProductDto>(subListbase_ktB.subList(4, last_ktB_2));
+												for (int j = 0; j < subList_2_ktB.size(); j++) {
+													ProductDto dto = subList_2_ktB.get(j);
+												%>
 												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
 													<div class="card card-span h-100 text-white">
-														<img class="img-fluid h-100"
-															src="../assets/img/gallery/shoe-5.png" alt="..." />
+														<img class="img-fluid h-100" src="<%=dto.getpImage()%>"
+															alt="..." />
 														<div class="card-img-overlay ps-0"></div>
 														<div class="card-body ps-0 bg-200">
-															<h5 class="fw-bold text-1000 text-truncate">Shoe</h5>
+															<h5 class="fw-bold text-1000 text-truncate"><%=dto.getpName()%></h5>
 															<div class="fw-bold">
-																<span class="text-600 me-2 text-decoration-line-through">$200</span><span
-																	class="text-primary">$175</span>
+																<span class="text-primary"><%=nf.format(dto.getPrice())%></span>
 															</div>
 														</div>
-														<a class="stretched-link" href="#"></a>
+														<a class="stretched-link"
+															href="product_detailPage.jsp?pId=<%=dto.getpId()%>"></a>
 													</div>
 												</div>
-											
+												<%
+												}
+												%>
+
 											</div>
 										</div>
 
-										<!-- KT æﬂ±∏øÎ«∞ ¡¬øÏ¿Ãµø -->
+										<!-- KT ÏïºÍµ¨Ïö©Ìíà Ï¢åÏö∞Ïù¥Îèô -->
 										<div class="row">
 											<button class="carousel-control-prev" type="button"
-												data-bs-target="#carouselCategoryKtbaseball"
+												data-bs-target="#carouselCategoryKtBaseball"
 												data-bs-slide="prev">
 												<span class="carousel-control-prev-icon" aria-hidden="true"></span><span
 													class="visually-hidden">Previous</span>
 											</button>
 											<button class="carousel-control-next" type="button"
-												data-bs-target="#carouselCategoryKtbaseball"
+												data-bs-target="#carouselCategoryKtBaseball"
 												data-bs-slide="next">
 												<span class="carousel-control-next-icon" aria-hidden="true"></span><span
 													class="visually-hidden">Next </span>
 											</button>
 										</div>
+										<%
+										}
+										%>
 									</div>
 								</div>
 
-								
+
 							</div>
 
-							<!-- KT ±‚≥‰ªÛ«∞ -->
-							<div class="tab-pane fade" id="pills-kt_commemoration"
-								role="tabpanel" aria-labelledby="pills-kt_commemoration-tab">
-								<div class="carousel slide" id="carouselCategoryKtCommemoration"
+							<!-- KT Í∏∞ÎÖêÏÉÅÌíà-->
+							<div class="tab-pane fade" id="pills-kt_memory" role="tabpanel"
+								aria-labelledby="pills-kt_memory-tab">
+								<div class="carousel slide" id="carouselCategoryKtMemory"
 									data-bs-touch="false" data-bs-interval="false">
-									<!-- KT ±‚≥‰ªÛ«∞ Ω√¿€ -->
+									<!-- KT Í∏∞ÎÖêÏÉÅÌíà ÏãúÏûë-->
 									<div class="carousel-inner">
-										<!-- KT ±‚≥‰ªÛ«∞ √ππ¯¬∞ ∆‰¿Ã¡ˆ -->
+										<!-- KT Í∏∞ÎÖêÏÉÅÌíà Ï≤´Î≤àÏß∏ ÌéòÏù¥ÏßÄ-->
 										<div class="carousel-item active" data-bs-interval="10000">
 											<div class="row h-100 align-items-center g-2">
+												<%
+												List<ProductDto> subListbase_ktM = new ArrayList<>();
+												for (int i = 0; i < list.size(); i++) {
+													ProductDto dto = list.get(i);
+													if (dto.getTeamName().equals("KT WIZ")) {
+														if (dto.getpCategory().equals("Í∏∞ÎÖêÏÉÅÌíà")) {
+
+													subListbase_ktM.add(dto);
+														}
+													}
+												}
+												%>
+												<%
+												int last_ktM_1 = subListbase_ktM.size() < 4 ? subListbase_ktM.size() : 4;
+												List<ProductDto> subList_1_ktM = new ArrayList<ProductDto>(subListbase_ktM.subList(0, last_ktM_1));
+												for (int j = 0; j < subList_1_ktM.size(); j++) {
+													ProductDto dto = subList_1_ktM.get(j);
+												%>
 												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
 													<div class="card card-span h-100 text-white">
-														<img class="img-fluid h-100"
-															src="http://openimage.interpark.com/goods_image/9/7/8/4/10046189784s.jpg"
+														<img class="img-fluid h-100" src="<%=dto.getpImage()%>"
 															alt="..." />
 														<div class="card-img-overlay ps-0"></div>
 														<div class="card-body ps-0 bg-200">
-															<h5 class="fw-bold text-1000 text-truncate">≈∞øÚ ∏«≈ı∏«</h5>
+															<h5 class="fw-bold text-1000 text-truncate"><%=dto.getpName()%></h5>
 															<div class="fw-bold">
-																<span class="text-600 me-2 text-decoration-line-through">$500</span><span
-																	class="text-primary">$275</span>
+																<span class="text-primary"><%=nf.format(dto.getPrice())%></span>
 															</div>
 														</div>
-														<a class="stretched-link" href="#"></a>
+														<a class="stretched-link"
+															href="product_detailPage.jsp?pId=<%=dto.getpId()%>"></a>
 													</div>
 												</div>
-												
+												<%
+												}
+												%>
+
 											</div>
 										</div>
 
-										<!-- KT ±‚≥‰ªÛ«∞ µŒπ¯¬∞ ∆‰¿Ã¡ˆ -->
+										<%
+										if (subListbase_ktM.size() > 4) {
+										%>
+										<!-- KT Í∏∞ÎÖêÏÉÅÌíà ÎëêÎ≤àÏß∏ ÌéòÏù¥ÏßÄ -->
 										<div class="carousel-item">
 											<div class="row h-100 align-items-center g-2">
+												<%
+												int last_ktM_2 = subListbase_ktM.size() > 8 ? 8 : subListbase_ktM.size();
+												List<ProductDto> subList_2_ktM = new ArrayList<ProductDto>(subListbase_ktM.subList(4, last_ktM_2));
+												for (int j = 0; j < subList_2_ktM.size(); j++) {
+													ProductDto dto = subList_2_ktM.get(j);
+												%>
 												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
 													<div class="card card-span h-100 text-white">
-														<img class="img-fluid h-100"
-															src="../assets/img/gallery/watch-5.png" alt="..." />
+														<img class="img-fluid h-100" src="<%=dto.getpImage()%>"
+															alt="..." />
 														<div class="card-img-overlay ps-0"></div>
 														<div class="card-body ps-0 bg-200">
-															<h5 class="fw-bold text-1000 text-truncate">Watch</h5>
+															<h5 class="fw-bold text-1000 text-truncate"><%=dto.getpName()%></h5>
 															<div class="fw-bold">
-																<span class="text-600 me-2 text-decoration-line-through">$500</span><span
-																	class="text-primary">$275</span>
+																<span class="text-primary"><%=nf.format(dto.getPrice())%></span>
 															</div>
 														</div>
-														<a class="stretched-link" href="#"></a>
+														<a class="stretched-link"
+															href="product_detailPage.jsp?pId=<%=dto.getpId()%>"></a>
 													</div>
 												</div>
-										
+												<%
+												}
+												%>
+
+
 											</div>
 										</div>
 
-										<!-- KT ±‚≥‰ªÛ«∞ ¡¬øÏ¿Ãµø -->
+										<!-- KT Í∏∞ÎÖêÏÉÅÌíà Ï¢åÏö∞Ïù¥Îèô-->
 										<div class="row">
 											<button class="carousel-control-prev" type="button"
-												data-bs-target="#carouselCategoryKtCommemoration"
+												data-bs-target="#carouselCategoryKtMemory"
 												data-bs-slide="prev">
 												<span class="carousel-control-prev-icon" aria-hidden="true"></span><span
 													class="visually-hidden">Previous</span>
 											</button>
 											<button class="carousel-control-next" type="button"
-												data-bs-target="#carouselCategoryKtCommemoration"
+												data-bs-target="#carouselCategoryKtMemory"
 												data-bs-slide="next">
 												<span class="carousel-control-next-icon" aria-hidden="true"></span><span
 													class="visually-hidden">Next </span>
 											</button>
 										</div>
+										<%
+										}
+										%>
 									</div>
 								</div>
 
-								
+
 							</div>
 						</div>
 					</div>
@@ -2655,84 +3534,116 @@ NumberFormat nf = NumberFormat.getCurrencyInstance();
 								<button class="navv-link active" id="pills-lg_teamwear-tab"
 									data-bs-toggle="pill" data-bs-target="#pills-lg_teamwear"
 									type="button" role="tab" aria-controls="pills-lg_teamwear"
-									aria-selected="true">∆¿ø˛æÓ</button>
+									aria-selected="true">ÌåÄÏõ®Ïñ¥</button>
 							</li>
 							<li class="navv-item" role="presentation">
 								<button class="navv-link" id="pills-lg_cheering-tab"
 									data-bs-toggle="pill" data-bs-target="#pills-lg_cheering"
 									type="button" role="tab" aria-controls="pills-lg_cheering"
-									aria-selected="false">¿¿ø¯øÎ«∞</button>
+									aria-selected="false">ÏùëÏõêÏö©Ìíà</button>
 							</li>
 							<li class="navv-item" role="presentation">
 								<button class="navv-link" id="pills-lg_baseball-tab"
 									data-bs-toggle="pill" data-bs-target="#pills-lg_baseball"
 									type="button" role="tab" aria-controls="pills-lg_baseball"
-									aria-selected="false">æﬂ±∏øÎ«∞</button>
+									aria-selected="false">ÏïºÍµ¨Ïö©Ìíà</button>
 							</li>
 							<li class="navv-item" role="presentation">
-								<button class="navv-link" id="pills-lg_commemoration-tab"
-									data-bs-toggle="pill" data-bs-target="#pills-lg_commemoration"
-									type="button" role="tab" aria-controls="pills-lg_commemoration"
-									aria-selected="false">±‚≥‰ªÛ«∞</button>
+								<button class="navv-link" id="pills-lg_memory-tab"
+									data-bs-toggle="pill" data-bs-target="#pills-lg_memory"
+									type="button" role="tab" aria-controls="pills-lg_memory"
+									aria-selected="false">Í∏∞ÎÖêÏÉÅÌíà</button>
 							</li>
 						</ul>
-
 						<div class="tab-content" id="pills-tabContentLg">
-							<!-- LG ∆¿ø˛æÓ -->
+							<!-- LG ÌåÄÏõ®Ïñ¥ -->
 							<div class="tab-pane fade show active" id="pills-lg_teamwear"
 								role="tabpanel" aria-labelledby="pills-lg_teamwear-tab">
 								<div class="carousel slide" id="carouselCategoryLgTeamwear"
 									data-bs-touch="false" data-bs-interval="false">
-									<!-- LG ∆¿ø˛æÓ Ω√¿€ -->
+
+									<!-- LG ÌåÄÏõ®Ïñ¥ ÏãúÏûë -->
 									<div class="carousel-inner">
-										<!-- LG ∆¿ø˛æÓ √ππ¯¬∞ ∆‰¿Ã¡ˆ -->
+										<!-- LG ÌåÄÏõ®Ïñ¥ Ï≤´Î≤àÏß∏ ÌéòÏù¥ÏßÄ -->
 										<div class="carousel-item active" data-bs-interval="10000">
 											<div class="row h-100 align-items-center g-2">
+												<%
+												List<ProductDto> subListbase_lgT = new ArrayList<>();
+												for (int i = 0; i < list.size(); i++) {
+													ProductDto dto = list.get(i);
+													if (dto.getTeamName().equals("LG Ìä∏ÏúàÏä§")) {
+														if (dto.getpCategory().equals("ÌåÄÏõ®Ïñ¥")) {
+
+													subListbase_lgT.add(dto);
+														}
+													}
+												}
+												%>
+												<%
+												int last_lgT_1 = subListbase_lgT.size() < 4 ? subListbase_lgT.size() : 4;
+												List<ProductDto> subList_1_lgT = new ArrayList<ProductDto>(subListbase_lgT.subList(0, last_lgT_1));
+												for (int j = 0; j < subList_1_lgT.size(); j++) {
+													ProductDto dto = subList_1_lgT.get(j);
+												%>
 												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
 													<div class="card card-span h-100 text-white">
-														<img class="img-fluid h-100"
-															src="https://cdn-pro-web-228-207.cdn-nhncommerce.com/keienkorea4_godomall_com/data/goods/22/05/18//1000002415/register_detail_081.jpg"
+														<img class="img-fluid h-100" src="<%=dto.getpImage()%>"
 															alt="..." />
 														<div class="card-img-overlay ps-0"></div>
 														<div class="card-body ps-0 bg-200">
-															<h5 class="fw-bold text-1000 text-truncate">2022
-																LG∆Æ¿©Ω∫ æÓºæ∆Ω πÈ∆—</h5>
+															<h5 class="fw-bold text-1000 text-truncate"><%=dto.getpName()%></h5>
 															<div class="fw-bold">
-																<span class="text-600 me-2 text-decoration-line-through">$200</span><span
-																	class="text-primary">$175</span>
+																<span class="text-primary"><%=nf.format(dto.getPrice())%></span>
 															</div>
 														</div>
-														<a class="stretched-link" href="#"></a>
+														<a class="stretched-link"
+															href="product_detailPage.jsp?pId=<%=dto.getpId()%>"></a>
 													</div>
 												</div>
-												
+												<%
+												}
+												%>
+
+
 											</div>
 										</div>
 
-										<!-- LG ∆¿ø˛æÓ µŒπ¯¬∞ ∆‰¿Ã¡ˆ -->
+										<%
+										if (subListbase_lgT.size() > 4) {
+										%>
+										<!-- LG ÌåÄÏõ®Ïñ¥ ÎëêÎ≤àÏß∏ ÌéòÏù¥ÏßÄ -->
 										<div class="carousel-item">
 											<div class="row h-100 align-items-center g-2">
+												<%
+												int last_lgT_2 = subListbase_lgT.size() > 8 ? 8 : subListbase_lgT.size();
+												List<ProductDto> subList_2_lgT = new ArrayList<ProductDto>(subListbase_lgT.subList(4, last_lgT_2));
+												for (int j = 0; j < subList_2_lgT.size(); j++) {
+													ProductDto dto = subList_2_lgT.get(j);
+												%>
 												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
 													<div class="card card-span h-100 text-white">
-														<img class="img-fluid h-100"
-															src="../assets/img/gallery/white-tshirt.png" alt="..." />
+														<img class="img-fluid h-100" src="<%=dto.getpImage()%>"
+															alt="..." />
 														<div class="card-img-overlay ps-0"></div>
 														<div class="card-body ps-0 bg-200">
-															<h5 class="fw-bold text-1000 text-truncate">White
-																T-Shirt</h5>
+															<h5 class="fw-bold text-1000 text-truncate"><%=dto.getpName()%></h5>
 															<div class="fw-bold">
-																<span class="text-600 me-2 text-decoration-line-through">$200</span><span
-																	class="text-primary">$175</span>
+																<span class="text-primary"><%=nf.format(dto.getPrice())%></span>
 															</div>
 														</div>
-														<a class="stretched-link" href="#"></a>
+														<a class="stretched-link"
+															href="product_detailPage.jsp?pId=<%=dto.getpId()%>"></a>
 													</div>
 												</div>
-												
+												<%
+												}
+												%>
+
 											</div>
 										</div>
 
-										<!-- LG ∆¿ø˛æÓ ¡¬øÏ¿Ãµø -->
+
+										<!-- LG ÌåÄÏõ®Ïñ¥ Ï¢åÏö∞Ïù¥Îèô -->
 										<div class="row">
 											<button class="carousel-control-prev" type="button"
 												data-bs-target="#carouselCategoryLgTeamwear"
@@ -2747,65 +3658,105 @@ NumberFormat nf = NumberFormat.getCurrencyInstance();
 													class="visually-hidden">Next </span>
 											</button>
 										</div>
+
+										<%
+										}
+										%>
+
 									</div>
 								</div>
 
-								
 							</div>
 
-							<!-- LG ¿¿ø¯øÎ«∞ -->
+							<!-- LG ÏùëÏõêÏö©Ìíà -->
 							<div class="tab-pane fade" id="pills-lg_cheering" role="tabpanel"
 								aria-labelledby="pills-lg_cheering-tab">
 								<div class="carousel slide" id="carouselCategoryLgCheering"
 									data-bs-touch="false" data-bs-interval="false">
-									<!-- LG ¿¿ø¯øÎ«∞ Ω√¿€ -->
+
+									<!-- LG ÏùëÏõêÏö©Ìíà ÏãúÏûë -->
 									<div class="carousel-inner">
-										<!-- LG ¿¿ø¯øÎ«∞ √ππ¯¬∞ ∆‰¿Ã¡ˆ -->
+										<!-- LG ÏùëÏõêÏö©Ìíà Ï≤´Î≤àÏß∏ ÌéòÏù¥ÏßÄ -->
 										<div class="carousel-item active" data-bs-interval="10000">
 											<div class="row h-100 align-items-center g-2">
+												<%
+												List<ProductDto> subListbase_lgC = new ArrayList<>();
+												for (int i = 0; i < list.size(); i++) {
+													ProductDto dto = list.get(i);
+													if (dto.getTeamName().equals("LG Ìä∏ÏúàÏä§")) {
+														if (dto.getpCategory().equals("ÏùëÏõêÏö©Ìíà")) {
+
+													subListbase_lgC.add(dto);
+														}
+													}
+												}
+												%>
+												<%
+												int last_lgC_1 = subListbase_lgC.size() < 4 ? subListbase_lgC.size() : 4;
+												List<ProductDto> subList_1_lgC = new ArrayList<ProductDto>(subListbase_lgC.subList(0, last_lgC_1));
+												for (int j = 0; j < subList_1_lgC.size(); j++) {
+													ProductDto dto = subList_1_lgC.get(j);
+												%>
 												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
 													<div class="card card-span h-100 text-white">
-														<img class="img-fluid h-100"
-															src="http://openimage.interpark.com/goods_image/9/7/8/4/10046189784s.jpg"
+														<img class="img-fluid h-100" src="<%=dto.getpImage()%>"
 															alt="..." />
 														<div class="card-img-overlay ps-0"></div>
 														<div class="card-body ps-0 bg-200">
-															<h5 class="fw-bold text-1000 text-truncate">≈∞øÚ ∏«≈ı∏«</h5>
+															<h5 class="fw-bold text-1000 text-truncate"><%=dto.getpName()%></h5>
 															<div class="fw-bold">
-																<span class="text-600 me-2 text-decoration-line-through">$200</span><span
-																	class="text-primary">$175</span>
+																<span class="text-primary"><%=nf.format(dto.getPrice())%></span>
 															</div>
 														</div>
-														<a class="stretched-link" href="#"></a>
+														<a class="stretched-link"
+															href="product_detailPage.jsp?pId=<%=dto.getpId()%>"></a>
 													</div>
 												</div>
-												
+												<%
+												}
+												%>
+
+
+
 											</div>
 										</div>
 
-										<!-- LG ¿¿ø¯øÎ«∞ µŒπ¯¬∞ ∆‰¿Ã¡ˆ-->
+										<%
+										if (subListbase_lgC.size() > 4) {
+										%>
+										<!-- LG ÏùëÏõêÏö©Ìíà ÎëêÎ≤àÏß∏ ÌéòÏù¥ÏßÄ -->
 										<div class="carousel-item">
 											<div class="row h-100 align-items-center g-2">
+												<%
+												int last_lgC_2 = subListbase_lgC.size() > 8 ? 8 : subListbase_lgC.size();
+												List<ProductDto> subList_2_lgC = new ArrayList<ProductDto>(subListbase_lgC.subList(4, last_lgC_2));
+												for (int j = 0; j < subList_2_lgC.size(); j++) {
+													ProductDto dto = subList_2_lgC.get(j);
+												%>
 												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
 													<div class="card card-span h-100 text-white">
-														<img class="img-fluid h-100"
-															src="../assets/img/gallery/shirt-5.png" alt="..." />
+														<img class="img-fluid h-100" src="<%=dto.getpImage()%>"
+															alt="..." />
 														<div class="card-img-overlay ps-0"></div>
 														<div class="card-body ps-0 bg-200">
-															<h5 class="fw-bold text-1000 text-truncate">Shirt</h5>
+															<h5 class="fw-bold text-1000 text-truncate"><%=dto.getpName()%></h5>
 															<div class="fw-bold">
-																<span class="text-600 me-2 text-decoration-line-through">$200</span><span
-																	class="text-primary">$175</span>
+																<span class="text-primary"><%=nf.format(dto.getPrice())%></span>
 															</div>
 														</div>
-														<a class="stretched-link" href="#"></a>
+														<a class="stretched-link"
+															href="product_detailPage.jsp?pId=<%=dto.getpId()%>"></a>
 													</div>
 												</div>
-											
+												<%
+												}
+												%>
+
 											</div>
 										</div>
 
-										<!-- LG ¿¿ø¯øÎ«∞ ¡¬øÏ¿Ãµø-->
+
+										<!-- LG ÏùëÏõêÏö©Ìíà Ï¢åÏö∞Ïù¥Îèô -->
 										<div class="row">
 											<button class="carousel-control-prev" type="button"
 												data-bs-target="#carouselCategoryLgCheering"
@@ -2820,156 +3771,230 @@ NumberFormat nf = NumberFormat.getCurrencyInstance();
 													class="visually-hidden">Next </span>
 											</button>
 										</div>
+										<%
+										}
+										%>
+
 									</div>
 								</div>
 
-								
 							</div>
 
-							<!-- LG æﬂ±∏øÎ«∞ -->
+							<!-- LG ÏïºÍµ¨Ïö©Ìíà -->
 							<div class="tab-pane fade" id="pills-lg_baseball" role="tabpanel"
 								aria-labelledby="pills-lg_baseball-tab">
-								<div class="carousel slide" id="carouselCategoryLgbaseball"
+								<div class="carousel slide" id="carouselCategoryLgBaseball"
 									data-bs-touch="false" data-bs-interval="false">
-									<!-- LG æﬂ±∏øÎ«∞ Ω√¿€ -->
+									<!-- LG ÏïºÍµ¨Ïö©Ìíà ÏãúÏûë-->
 									<div class="carousel-inner">
-										<!-- LG æﬂ±∏øÎ«∞ √ππ¯¬∞ ∆‰¿Ã¡ˆ -->
+										<!-- LG ÏïºÍµ¨Ïö©Ìíà Ï≤´Î≤àÏß∏ ÌéòÏù¥ÏßÄ-->
 										<div class="carousel-item active" data-bs-interval="10000">
 											<div class="row h-100 align-items-center g-2">
+												<%
+												List<ProductDto> subListbase_lgB = new ArrayList<>();
+												for (int i = 0; i < list.size(); i++) {
+													ProductDto dto = list.get(i);
+													if (dto.getTeamName().equals("LG Ìä∏ÏúàÏä§")) {
+														if (dto.getpCategory().equals("ÏïºÍµ¨Ïö©Ìíà")) {
+
+													subListbase_lgB.add(dto);
+														}
+													}
+												}
+												%>
+												<%
+												int last_lgB_1 = subListbase_lgB.size() < 4 ? subListbase_lgB.size() : 4;
+												List<ProductDto> subList_1_lgB = new ArrayList<ProductDto>(subListbase_lgB.subList(0, last_lgB_1));
+												for (int j = 0; j < subList_1_lgB.size(); j++) {
+													ProductDto dto = subList_1_lgB.get(j);
+												%>
 												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
 													<div class="card card-span h-100 text-white">
-														<img class="img-fluid h-100"
-															src="http://openimage.interpark.com/goods_image/9/7/8/4/10046189784s.jpg"
+														<img class="img-fluid h-100" src="<%=dto.getpImage()%>"
 															alt="..." />
 														<div class="card-img-overlay ps-0"></div>
 														<div class="card-body ps-0 bg-200">
-															<h5 class="fw-bold text-1000 text-truncate">≈∞øÚ ∏«≈ı∏«</h5>
+															<h5 class="fw-bold text-1000 text-truncate"><%=dto.getpName()%></h5>
 															<div class="fw-bold">
-																<span class="text-600 me-2 text-decoration-line-through">$200</span><span
-																	class="text-primary">$175</span>
+																<span class="text-primary"><%=nf.format(dto.getPrice())%></span>
 															</div>
 														</div>
-														<a class="stretched-link" href="#"></a>
+														<a class="stretched-link"
+															href="product_detailPage.jsp?pId=<%=dto.getpId()%>"></a>
 													</div>
 												</div>
-												
+												<%
+												}
+												%>
+
 											</div>
 										</div>
 
-										<!-- LG æﬂ±∏øÎ«∞ µŒπ¯¬∞ ∆‰¿Ã¡ˆ -->
+										<%
+										if (subListbase_lgB.size() > 4) {
+										%>
+										<!-- LG ÏïºÍµ¨Ïö©Ìíà ÎëêÎ≤àÏß∏ ÌéòÏù¥ÏßÄ -->
 										<div class="carousel-item">
 											<div class="row h-100 align-items-center g-2">
+												<%
+												int last_lgB_2 = subListbase_lgB.size() > 8 ? 8 : subListbase_lgB.size();
+												List<ProductDto> subList_2_lgB = new ArrayList<ProductDto>(subListbase_lgB.subList(4, last_lgB_2));
+												for (int j = 0; j < subList_2_lgB.size(); j++) {
+													ProductDto dto = subList_2_lgB.get(j);
+												%>
 												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
 													<div class="card card-span h-100 text-white">
-														<img class="img-fluid h-100"
-															src="../assets/img/gallery/shoe-5.png" alt="..." />
+														<img class="img-fluid h-100" src="<%=dto.getpImage()%>"
+															alt="..." />
 														<div class="card-img-overlay ps-0"></div>
 														<div class="card-body ps-0 bg-200">
-															<h5 class="fw-bold text-1000 text-truncate">Shoe</h5>
+															<h5 class="fw-bold text-1000 text-truncate"><%=dto.getpName()%></h5>
 															<div class="fw-bold">
-																<span class="text-600 me-2 text-decoration-line-through">$200</span><span
-																	class="text-primary">$175</span>
+																<span class="text-primary"><%=nf.format(dto.getPrice())%></span>
 															</div>
 														</div>
-														<a class="stretched-link" href="#"></a>
+														<a class="stretched-link"
+															href="product_detailPage.jsp?pId=<%=dto.getpId()%>"></a>
 													</div>
 												</div>
-										
+												<%
+												}
+												%>
+
 											</div>
 										</div>
 
-										<!-- LG æﬂ±∏øÎ«∞ ¡¬øÏ¿Ãµø -->
+										<!-- LG ÏïºÍµ¨Ïö©Ìíà Ï¢åÏö∞Ïù¥Îèô -->
 										<div class="row">
 											<button class="carousel-control-prev" type="button"
-												data-bs-target="#carouselCategoryLgbaseball"
+												data-bs-target="#carouselCategoryLgBaseball"
 												data-bs-slide="prev">
 												<span class="carousel-control-prev-icon" aria-hidden="true"></span><span
 													class="visually-hidden">Previous</span>
 											</button>
 											<button class="carousel-control-next" type="button"
-												data-bs-target="#carouselCategoryLgbaseball"
+												data-bs-target="#carouselCategoryLgBaseball"
 												data-bs-slide="next">
 												<span class="carousel-control-next-icon" aria-hidden="true"></span><span
 													class="visually-hidden">Next </span>
 											</button>
 										</div>
+										<%
+										}
+										%>
 									</div>
 								</div>
 
-								
+
 							</div>
 
-							<!-- LG ±‚≥‰ªÛ«∞ -->
-							<div class="tab-pane fade" id="pills-lg_commemoration"
-								role="tabpanel" aria-labelledby="pills-lg_commemoration-tab">
-								<div class="carousel slide" id="carouselCategoryLgCommemoration"
+							<!-- LG Í∏∞ÎÖêÏÉÅÌíà-->
+							<div class="tab-pane fade" id="pills-lg_memory" role="tabpanel"
+								aria-labelledby="pills-lg_memory-tab">
+								<div class="carousel slide" id="carouselCategoryLgMemory"
 									data-bs-touch="false" data-bs-interval="false">
-									<!-- LG ±‚≥‰ªÛ«∞ Ω√¿€ -->
+									<!-- LG Í∏∞ÎÖêÏÉÅÌíà ÏãúÏûë-->
 									<div class="carousel-inner">
-										<!-- LG ±‚≥‰ªÛ«∞ √ππ¯¬∞ ∆‰¿Ã¡ˆ -->
+										<!-- LG Í∏∞ÎÖêÏÉÅÌíà Ï≤´Î≤àÏß∏ ÌéòÏù¥ÏßÄ-->
 										<div class="carousel-item active" data-bs-interval="10000">
 											<div class="row h-100 align-items-center g-2">
+												<%
+												List<ProductDto> subListbase_lgM = new ArrayList<>();
+												for (int i = 0; i < list.size(); i++) {
+													ProductDto dto = list.get(i);
+													if (dto.getTeamName().equals("LG Ìä∏ÏúàÏä§")) {
+														if (dto.getpCategory().equals("Í∏∞ÎÖêÏÉÅÌíà")) {
+
+													subListbase_lgM.add(dto);
+														}
+													}
+												}
+												%>
+												<%
+												int last_lgM_1 = subListbase_lgM.size() < 4 ? subListbase_lgM.size() : 4;
+												List<ProductDto> subList_1_lgM = new ArrayList<ProductDto>(subListbase_lgM.subList(0, last_lgM_1));
+												for (int j = 0; j < subList_1_lgM.size(); j++) {
+													ProductDto dto = subList_1_lgM.get(j);
+												%>
 												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
 													<div class="card card-span h-100 text-white">
-														<img class="img-fluid h-100"
-															src="http://openimage.interpark.com/goods_image/9/7/8/4/10046189784s.jpg"
+														<img class="img-fluid h-100" src="<%=dto.getpImage()%>"
 															alt="..." />
 														<div class="card-img-overlay ps-0"></div>
 														<div class="card-body ps-0 bg-200">
-															<h5 class="fw-bold text-1000 text-truncate">≈∞øÚ ∏«≈ı∏«</h5>
+															<h5 class="fw-bold text-1000 text-truncate"><%=dto.getpName()%></h5>
 															<div class="fw-bold">
-																<span class="text-600 me-2 text-decoration-line-through">$500</span><span
-																	class="text-primary">$275</span>
+																<span class="text-primary"><%=nf.format(dto.getPrice())%></span>
 															</div>
 														</div>
-														<a class="stretched-link" href="#"></a>
+														<a class="stretched-link"
+															href="product_detailPage.jsp?pId=<%=dto.getpId()%>"></a>
 													</div>
 												</div>
-											
+												<%
+												}
+												%>
+
 											</div>
 										</div>
 
-										<!-- LG ±‚≥‰ªÛ«∞ µŒπ¯¬∞ ∆‰¿Ã¡ˆ -->
+										<%
+										if (subListbase_lgM.size() > 4) {
+										%>
+										<!-- LG Í∏∞ÎÖêÏÉÅÌíà ÎëêÎ≤àÏß∏ ÌéòÏù¥ÏßÄ -->
 										<div class="carousel-item">
 											<div class="row h-100 align-items-center g-2">
+												<%
+												int last_lgM_2 = subListbase_lgM.size() > 8 ? 8 : subListbase_lgM.size();
+												List<ProductDto> subList_2_lgM = new ArrayList<ProductDto>(subListbase_lgM.subList(4, last_lgM_2));
+												for (int j = 0; j < subList_2_lgM.size(); j++) {
+													ProductDto dto = subList_2_lgM.get(j);
+												%>
 												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
 													<div class="card card-span h-100 text-white">
-														<img class="img-fluid h-100"
-															src="../assets/img/gallery/watch-5.png" alt="..." />
+														<img class="img-fluid h-100" src="<%=dto.getpImage()%>"
+															alt="..." />
 														<div class="card-img-overlay ps-0"></div>
 														<div class="card-body ps-0 bg-200">
-															<h5 class="fw-bold text-1000 text-truncate">Watch</h5>
+															<h5 class="fw-bold text-1000 text-truncate"><%=dto.getpName()%></h5>
 															<div class="fw-bold">
-																<span class="text-600 me-2 text-decoration-line-through">$500</span><span
-																	class="text-primary">$275</span>
+																<span class="text-primary"><%=nf.format(dto.getPrice())%></span>
 															</div>
 														</div>
-														<a class="stretched-link" href="#"></a>
+														<a class="stretched-link"
+															href="product_detailPage.jsp?pId=<%=dto.getpId()%>"></a>
 													</div>
 												</div>
-												
+												<%
+												}
+												%>
+
+
 											</div>
 										</div>
 
-										<!-- LG ±‚≥‰ªÛ«∞ ¡¬øÏ¿Ãµø -->
+										<!-- LG Í∏∞ÎÖêÏÉÅÌíà Ï¢åÏö∞Ïù¥Îèô-->
 										<div class="row">
 											<button class="carousel-control-prev" type="button"
-												data-bs-target="#carouselCategoryLgCommemoration"
+												data-bs-target="#carouselCategoryLgMemory"
 												data-bs-slide="prev">
 												<span class="carousel-control-prev-icon" aria-hidden="true"></span><span
 													class="visually-hidden">Previous</span>
 											</button>
 											<button class="carousel-control-next" type="button"
-												data-bs-target="#carouselCategoryLgCommemoration"
+												data-bs-target="#carouselCategoryLgMemory"
 												data-bs-slide="next">
 												<span class="carousel-control-next-icon" aria-hidden="true"></span><span
 													class="visually-hidden">Next </span>
 											</button>
 										</div>
+										<%
+										}
+										%>
 									</div>
 								</div>
 
-								
+
 							</div>
 						</div>
 					</div>
@@ -2983,84 +4008,116 @@ NumberFormat nf = NumberFormat.getCurrencyInstance();
 								<button class="navv-link active" id="pills-nc_teamwear-tab"
 									data-bs-toggle="pill" data-bs-target="#pills-nc_teamwear"
 									type="button" role="tab" aria-controls="pills-nc_teamwear"
-									aria-selected="true">∆¿ø˛æÓ</button>
+									aria-selected="true">ÌåÄÏõ®Ïñ¥</button>
 							</li>
 							<li class="navv-item" role="presentation">
 								<button class="navv-link" id="pills-nc_cheering-tab"
 									data-bs-toggle="pill" data-bs-target="#pills-nc_cheering"
 									type="button" role="tab" aria-controls="pills-nc_cheering"
-									aria-selected="false">¿¿ø¯øÎ«∞</button>
+									aria-selected="false">ÏùëÏõêÏö©Ìíà</button>
 							</li>
 							<li class="navv-item" role="presentation">
 								<button class="navv-link" id="pills-nc_baseball-tab"
 									data-bs-toggle="pill" data-bs-target="#pills-nc_baseball"
 									type="button" role="tab" aria-controls="pills-nc_baseball"
-									aria-selected="false">æﬂ±∏øÎ«∞</button>
+									aria-selected="false">ÏïºÍµ¨Ïö©Ìíà</button>
 							</li>
 							<li class="navv-item" role="presentation">
-								<button class="navv-link" id="pills-nc_commemoration-tab"
-									data-bs-toggle="pill" data-bs-target="#pills-nc_commemoration"
-									type="button" role="tab" aria-controls="pills-nc_commemoration"
-									aria-selected="false">±‚≥‰ªÛ«∞</button>
+								<button class="navv-link" id="pills-nc_memory-tab"
+									data-bs-toggle="pill" data-bs-target="#pills-nc_memory"
+									type="button" role="tab" aria-controls="pills-nc_memory"
+									aria-selected="false">Í∏∞ÎÖêÏÉÅÌíà</button>
 							</li>
 						</ul>
-
 						<div class="tab-content" id="pills-tabContentNc">
-							<!-- NC ∆¿ø˛æÓ -->
+							<!-- NC ÌåÄÏõ®Ïñ¥ -->
 							<div class="tab-pane fade show active" id="pills-nc_teamwear"
 								role="tabpanel" aria-labelledby="pills-nc_teamwear-tab">
 								<div class="carousel slide" id="carouselCategoryNcTeamwear"
 									data-bs-touch="false" data-bs-interval="false">
-									<!-- NC ∆¿ø˛æÓ Ω√¿€ -->
+
+									<!-- NC ÌåÄÏõ®Ïñ¥ ÏãúÏûë -->
 									<div class="carousel-inner">
-										<!-- NC ∆¿ø˛æÓ √ππ¯¬∞ ∆‰¿Ã¡ˆ -->
+										<!-- NC ÌåÄÏõ®Ïñ¥ Ï≤´Î≤àÏß∏ ÌéòÏù¥ÏßÄ -->
 										<div class="carousel-item active" data-bs-interval="10000">
 											<div class="row h-100 align-items-center g-2">
+												<%
+												List<ProductDto> subListbase_ncT = new ArrayList<>();
+												for (int i = 0; i < list.size(); i++) {
+													ProductDto dto = list.get(i);
+													if (dto.getTeamName().equals("NC Îã§Ïù¥ÎÖ∏Ïä§")) {
+														if (dto.getpCategory().equals("ÌåÄÏõ®Ïñ¥")) {
+
+													subListbase_ncT.add(dto);
+														}
+													}
+												}
+												%>
+												<%
+												int last_ncT_1 = subListbase_ncT.size() < 4 ? subListbase_ncT.size() : 4;
+												List<ProductDto> subList_1_ncT = new ArrayList<ProductDto>(subListbase_ncT.subList(0, last_ncT_1));
+												for (int j = 0; j < subList_1_ncT.size(); j++) {
+													ProductDto dto = subList_1_ncT.get(j);
+												%>
 												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
 													<div class="card card-span h-100 text-white">
-														<img class="img-fluid h-100"
-															src="https://d29trs2nbedcfj.cloudfront.net/erp/shop/7a1749c7-a1a8-48c2-b354-c3a2bf6f29fa20230217.jpg"
+														<img class="img-fluid h-100" src="<%=dto.getpImage()%>"
 															alt="..." />
 														<div class="card-img-overlay ps-0"></div>
 														<div class="card-body ps-0 bg-200">
-															<h5 class="fw-bold text-1000 text-truncate">2023 æÓºæ∆Ω
-																CAMP 2 »® ¿Ø¥œ∆˚</h5>
+															<h5 class="fw-bold text-1000 text-truncate"><%=dto.getpName()%></h5>
 															<div class="fw-bold">
-																<span class="text-600 me-2 text-decoration-line-through">$200</span><span
-																	class="text-primary">$175</span>
+																<span class="text-primary"><%=nf.format(dto.getPrice())%></span>
 															</div>
 														</div>
-														<a class="stretched-link" href="#"></a>
+														<a class="stretched-link"
+															href="product_detailPage.jsp?pId=<%=dto.getpId()%>"></a>
 													</div>
 												</div>
-												
+												<%
+												}
+												%>
+
+
 											</div>
 										</div>
 
-										<!-- NC ∆¿ø˛æÓ µŒπ¯¬∞ ∆‰¿Ã¡ˆ -->
+										<%
+										if (subListbase_ncT.size() > 4) {
+										%>
+										<!-- NC ÌåÄÏõ®Ïñ¥ ÎëêÎ≤àÏß∏ ÌéòÏù¥ÏßÄ -->
 										<div class="carousel-item">
 											<div class="row h-100 align-items-center g-2">
+												<%
+												int last_ncT_2 = subListbase_ncT.size() > 8 ? 8 : subListbase_ncT.size();
+												List<ProductDto> subList_2_ncT = new ArrayList<ProductDto>(subListbase_ncT.subList(4, last_ncT_2));
+												for (int j = 0; j < subList_2_ncT.size(); j++) {
+													ProductDto dto = subList_2_ncT.get(j);
+												%>
 												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
 													<div class="card card-span h-100 text-white">
-														<img class="img-fluid h-100"
-															src="../assets/img/gallery/white-tshirt.png" alt="..." />
+														<img class="img-fluid h-100" src="<%=dto.getpImage()%>"
+															alt="..." />
 														<div class="card-img-overlay ps-0"></div>
 														<div class="card-body ps-0 bg-200">
-															<h5 class="fw-bold text-1000 text-truncate">White
-																T-Shirt</h5>
+															<h5 class="fw-bold text-1000 text-truncate"><%=dto.getpName()%></h5>
 															<div class="fw-bold">
-																<span class="text-600 me-2 text-decoration-line-through">$200</span><span
-																	class="text-primary">$175</span>
+																<span class="text-primary"><%=nf.format(dto.getPrice())%></span>
 															</div>
 														</div>
-														<a class="stretched-link" href="#"></a>
+														<a class="stretched-link"
+															href="product_detailPage.jsp?pId=<%=dto.getpId()%>"></a>
 													</div>
 												</div>
-												
+												<%
+												}
+												%>
+
 											</div>
 										</div>
 
-										<!-- NC ∆¿ø˛æÓ ¡¬øÏ¿Ãµø -->
+
+										<!-- NC ÌåÄÏõ®Ïñ¥ Ï¢åÏö∞Ïù¥Îèô -->
 										<div class="row">
 											<button class="carousel-control-prev" type="button"
 												data-bs-target="#carouselCategoryNcTeamwear"
@@ -3075,65 +4132,105 @@ NumberFormat nf = NumberFormat.getCurrencyInstance();
 													class="visually-hidden">Next </span>
 											</button>
 										</div>
+
+										<%
+										}
+										%>
+
 									</div>
 								</div>
 
-								
 							</div>
 
-							<!-- NC ¿¿ø¯øÎ«∞ -->
+							<!-- NC ÏùëÏõêÏö©Ìíà -->
 							<div class="tab-pane fade" id="pills-nc_cheering" role="tabpanel"
 								aria-labelledby="pills-nc_cheering-tab">
 								<div class="carousel slide" id="carouselCategoryNcCheering"
 									data-bs-touch="false" data-bs-interval="false">
-									<!-- NC ¿¿ø¯øÎ«∞ Ω√¿€ -->
+
+									<!-- NC ÏùëÏõêÏö©Ìíà ÏãúÏûë -->
 									<div class="carousel-inner">
-										<!-- NC ¿¿ø¯øÎ«∞ √ππ¯¬∞ ∆‰¿Ã¡ˆ -->
+										<!-- NC ÏùëÏõêÏö©Ìíà Ï≤´Î≤àÏß∏ ÌéòÏù¥ÏßÄ -->
 										<div class="carousel-item active" data-bs-interval="10000">
 											<div class="row h-100 align-items-center g-2">
+												<%
+												List<ProductDto> subListbase_ncC = new ArrayList<>();
+												for (int i = 0; i < list.size(); i++) {
+													ProductDto dto = list.get(i);
+													if (dto.getTeamName().equals("NC Îã§Ïù¥ÎÖ∏Ïä§")) {
+														if (dto.getpCategory().equals("ÏùëÏõêÏö©Ìíà")) {
+
+													subListbase_ncC.add(dto);
+														}
+													}
+												}
+												%>
+												<%
+												int last_ncC_1 = subListbase_ncC.size() < 4 ? subListbase_ncC.size() : 4;
+												List<ProductDto> subList_1_ncC = new ArrayList<ProductDto>(subListbase_ncC.subList(0, last_ncC_1));
+												for (int j = 0; j < subList_1_ncC.size(); j++) {
+													ProductDto dto = subList_1_ncC.get(j);
+												%>
 												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
 													<div class="card card-span h-100 text-white">
-														<img class="img-fluid h-100"
-															src="http://openimage.interpark.com/goods_image/9/7/8/4/10046189784s.jpg"
+														<img class="img-fluid h-100" src="<%=dto.getpImage()%>"
 															alt="..." />
 														<div class="card-img-overlay ps-0"></div>
 														<div class="card-body ps-0 bg-200">
-															<h5 class="fw-bold text-1000 text-truncate">≈∞øÚ ∏«≈ı∏«</h5>
+															<h5 class="fw-bold text-1000 text-truncate"><%=dto.getpName()%></h5>
 															<div class="fw-bold">
-																<span class="text-600 me-2 text-decoration-line-through">$200</span><span
-																	class="text-primary">$175</span>
+																<span class="text-primary"><%=nf.format(dto.getPrice())%></span>
 															</div>
 														</div>
-														<a class="stretched-link" href="#"></a>
+														<a class="stretched-link"
+															href="product_detailPage.jsp?pId=<%=dto.getpId()%>"></a>
 													</div>
 												</div>
-												
+												<%
+												}
+												%>
+
+
+
 											</div>
 										</div>
 
-										<!-- NC ¿¿ø¯øÎ«∞ µŒπ¯¬∞ ∆‰¿Ã¡ˆ-->
+										<%
+										if (subListbase_ncC.size() > 4) {
+										%>
+										<!-- NC ÏùëÏõêÏö©Ìíà ÎëêÎ≤àÏß∏ ÌéòÏù¥ÏßÄ -->
 										<div class="carousel-item">
 											<div class="row h-100 align-items-center g-2">
+												<%
+												int last_ncC_2 = subListbase_ncC.size() > 8 ? 8 : subListbase_ncC.size();
+												List<ProductDto> subList_2_ncC = new ArrayList<ProductDto>(subListbase_ncC.subList(4, last_ncC_2));
+												for (int j = 0; j < subList_2_ncC.size(); j++) {
+													ProductDto dto = subList_2_ncC.get(j);
+												%>
 												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
 													<div class="card card-span h-100 text-white">
-														<img class="img-fluid h-100"
-															src="../assets/img/gallery/shirt-5.png" alt="..." />
+														<img class="img-fluid h-100" src="<%=dto.getpImage()%>"
+															alt="..." />
 														<div class="card-img-overlay ps-0"></div>
 														<div class="card-body ps-0 bg-200">
-															<h5 class="fw-bold text-1000 text-truncate">Shirt</h5>
+															<h5 class="fw-bold text-1000 text-truncate"><%=dto.getpName()%></h5>
 															<div class="fw-bold">
-																<span class="text-600 me-2 text-decoration-line-through">$200</span><span
-																	class="text-primary">$175</span>
+																<span class="text-primary"><%=nf.format(dto.getPrice())%></span>
 															</div>
 														</div>
-														<a class="stretched-link" href="#"></a>
+														<a class="stretched-link"
+															href="product_detailPage.jsp?pId=<%=dto.getpId()%>"></a>
 													</div>
 												</div>
-												
+												<%
+												}
+												%>
+
 											</div>
 										</div>
 
-										<!-- NC ¿¿ø¯øÎ«∞ ¡¬øÏ¿Ãµø-->
+
+										<!-- NC ÏùëÏõêÏö©Ìíà Ï¢åÏö∞Ïù¥Îèô -->
 										<div class="row">
 											<button class="carousel-control-prev" type="button"
 												data-bs-target="#carouselCategoryNcCheering"
@@ -3148,156 +4245,230 @@ NumberFormat nf = NumberFormat.getCurrencyInstance();
 													class="visually-hidden">Next </span>
 											</button>
 										</div>
+										<%
+										}
+										%>
+
 									</div>
 								</div>
 
-							
 							</div>
 
-							<!-- NC æﬂ±∏øÎ«∞ -->
+							<!-- NC ÏïºÍµ¨Ïö©Ìíà -->
 							<div class="tab-pane fade" id="pills-nc_baseball" role="tabpanel"
 								aria-labelledby="pills-nc_baseball-tab">
-								<div class="carousel slide" id="carouselCategoryNcbaseball"
+								<div class="carousel slide" id="carouselCategoryNcBaseball"
 									data-bs-touch="false" data-bs-interval="false">
-									<!-- NC æﬂ±∏øÎ«∞ Ω√¿€ -->
+									<!-- NC ÏïºÍµ¨Ïö©Ìíà ÏãúÏûë-->
 									<div class="carousel-inner">
-										<!-- NC æﬂ±∏øÎ«∞ √ππ¯¬∞ ∆‰¿Ã¡ˆ -->
+										<!-- NC ÏïºÍµ¨Ïö©Ìíà Ï≤´Î≤àÏß∏ ÌéòÏù¥ÏßÄ-->
 										<div class="carousel-item active" data-bs-interval="10000">
 											<div class="row h-100 align-items-center g-2">
+												<%
+												List<ProductDto> subListbase_ncB = new ArrayList<>();
+												for (int i = 0; i < list.size(); i++) {
+													ProductDto dto = list.get(i);
+													if (dto.getTeamName().equals("NC Îã§Ïù¥ÎÖ∏Ïä§")) {
+														if (dto.getpCategory().equals("ÏïºÍµ¨Ïö©Ìíà")) {
+
+													subListbase_ncB.add(dto);
+														}
+													}
+												}
+												%>
+												<%
+												int last_ncB_1 = subListbase_ncB.size() < 4 ? subListbase_ncB.size() : 4;
+												List<ProductDto> subList_1_ncB = new ArrayList<ProductDto>(subListbase_ncB.subList(0, last_ncB_1));
+												for (int j = 0; j < subList_1_ncB.size(); j++) {
+													ProductDto dto = subList_1_ncB.get(j);
+												%>
 												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
 													<div class="card card-span h-100 text-white">
-														<img class="img-fluid h-100"
-															src="http://openimage.interpark.com/goods_image/9/7/8/4/10046189784s.jpg"
+														<img class="img-fluid h-100" src="<%=dto.getpImage()%>"
 															alt="..." />
 														<div class="card-img-overlay ps-0"></div>
 														<div class="card-body ps-0 bg-200">
-															<h5 class="fw-bold text-1000 text-truncate">≈∞øÚ ∏«≈ı∏«</h5>
+															<h5 class="fw-bold text-1000 text-truncate"><%=dto.getpName()%></h5>
 															<div class="fw-bold">
-																<span class="text-600 me-2 text-decoration-line-through">$200</span><span
-																	class="text-primary">$175</span>
+																<span class="text-primary"><%=nf.format(dto.getPrice())%></span>
 															</div>
 														</div>
-														<a class="stretched-link" href="#"></a>
+														<a class="stretched-link"
+															href="product_detailPage.jsp?pId=<%=dto.getpId()%>"></a>
 													</div>
 												</div>
-											
+												<%
+												}
+												%>
+
 											</div>
 										</div>
 
-										<!-- NC æﬂ±∏øÎ«∞ µŒπ¯¬∞ ∆‰¿Ã¡ˆ -->
+										<%
+										if (subListbase_ncB.size() > 4) {
+										%>
+										<!-- NC ÏïºÍµ¨Ïö©Ìíà ÎëêÎ≤àÏß∏ ÌéòÏù¥ÏßÄ -->
 										<div class="carousel-item">
 											<div class="row h-100 align-items-center g-2">
+												<%
+												int last_ncB_2 = subListbase_ncB.size() > 8 ? 8 : subListbase_ncB.size();
+												List<ProductDto> subList_2_ncB = new ArrayList<ProductDto>(subListbase_ncB.subList(4, last_ncB_2));
+												for (int j = 0; j < subList_2_ncB.size(); j++) {
+													ProductDto dto = subList_2_ncB.get(j);
+												%>
 												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
 													<div class="card card-span h-100 text-white">
-														<img class="img-fluid h-100"
-															src="../assets/img/gallery/shoe-5.png" alt="..." />
+														<img class="img-fluid h-100" src="<%=dto.getpImage()%>"
+															alt="..." />
 														<div class="card-img-overlay ps-0"></div>
 														<div class="card-body ps-0 bg-200">
-															<h5 class="fw-bold text-1000 text-truncate">Shoe</h5>
+															<h5 class="fw-bold text-1000 text-truncate"><%=dto.getpName()%></h5>
 															<div class="fw-bold">
-																<span class="text-600 me-2 text-decoration-line-through">$200</span><span
-																	class="text-primary">$175</span>
+																<span class="text-primary"><%=nf.format(dto.getPrice())%></span>
 															</div>
 														</div>
-														<a class="stretched-link" href="#"></a>
+														<a class="stretched-link"
+															href="product_detailPage.jsp?pId=<%=dto.getpId()%>"></a>
 													</div>
 												</div>
-												
+												<%
+												}
+												%>
+
 											</div>
 										</div>
 
-										<!-- NC æﬂ±∏øÎ«∞ ¡¬øÏ¿Ãµø -->
+										<!-- NC ÏïºÍµ¨Ïö©Ìíà Ï¢åÏö∞Ïù¥Îèô -->
 										<div class="row">
 											<button class="carousel-control-prev" type="button"
-												data-bs-target="#carouselCategoryNcbaseball"
+												data-bs-target="#carouselCategoryNcBaseball"
 												data-bs-slide="prev">
 												<span class="carousel-control-prev-icon" aria-hidden="true"></span><span
 													class="visually-hidden">Previous</span>
 											</button>
 											<button class="carousel-control-next" type="button"
-												data-bs-target="#carouselCategoryNcbaseball"
+												data-bs-target="#carouselCategoryNcBaseball"
 												data-bs-slide="next">
 												<span class="carousel-control-next-icon" aria-hidden="true"></span><span
 													class="visually-hidden">Next </span>
 											</button>
 										</div>
+										<%
+										}
+										%>
 									</div>
 								</div>
 
-								
+
 							</div>
 
-							<!-- NC ±‚≥‰ªÛ«∞ -->
-							<div class="tab-pane fade" id="pills-nc_commemoration"
-								role="tabpanel" aria-labelledby="pills-nc_commemoration-tab">
-								<div class="carousel slide" id="carouselCategoryNcCommemoration"
+							<!-- NC Í∏∞ÎÖêÏÉÅÌíà-->
+							<div class="tab-pane fade" id="pills-nc_memory" role="tabpanel"
+								aria-labelledby="pills-nc_memory-tab">
+								<div class="carousel slide" id="carouselCategoryNcMemory"
 									data-bs-touch="false" data-bs-interval="false">
-									<!-- NC ±‚≥‰ªÛ«∞ Ω√¿€ -->
+									<!-- NC Í∏∞ÎÖêÏÉÅÌíà ÏãúÏûë-->
 									<div class="carousel-inner">
-										<!-- NC ±‚≥‰ªÛ«∞ √ππ¯¬∞ ∆‰¿Ã¡ˆ -->
+										<!-- NC Í∏∞ÎÖêÏÉÅÌíà Ï≤´Î≤àÏß∏ ÌéòÏù¥ÏßÄ-->
 										<div class="carousel-item active" data-bs-interval="10000">
 											<div class="row h-100 align-items-center g-2">
+												<%
+												List<ProductDto> subListbase_ncM = new ArrayList<>();
+												for (int i = 0; i < list.size(); i++) {
+													ProductDto dto = list.get(i);
+													if (dto.getTeamName().equals("NC Îã§Ïù¥ÎÖ∏Ïä§")) {
+														if (dto.getpCategory().equals("Í∏∞ÎÖêÏÉÅÌíà")) {
+
+													subListbase_ncM.add(dto);
+														}
+													}
+												}
+												%>
+												<%
+												int last_ncM_1 = subListbase_ncM.size() < 4 ? subListbase_ncM.size() : 4;
+												List<ProductDto> subList_1_ncM = new ArrayList<ProductDto>(subListbase_ncM.subList(0, last_ncM_1));
+												for (int j = 0; j < subList_1_ncM.size(); j++) {
+													ProductDto dto = subList_1_ncM.get(j);
+												%>
 												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
 													<div class="card card-span h-100 text-white">
-														<img class="img-fluid h-100"
-															src="http://openimage.interpark.com/goods_image/9/7/8/4/10046189784s.jpg"
+														<img class="img-fluid h-100" src="<%=dto.getpImage()%>"
 															alt="..." />
 														<div class="card-img-overlay ps-0"></div>
 														<div class="card-body ps-0 bg-200">
-															<h5 class="fw-bold text-1000 text-truncate">≈∞øÚ ∏«≈ı∏«</h5>
+															<h5 class="fw-bold text-1000 text-truncate"><%=dto.getpName()%></h5>
 															<div class="fw-bold">
-																<span class="text-600 me-2 text-decoration-line-through">$500</span><span
-																	class="text-primary">$275</span>
+																<span class="text-primary"><%=nf.format(dto.getPrice())%></span>
 															</div>
 														</div>
-														<a class="stretched-link" href="#"></a>
+														<a class="stretched-link"
+															href="product_detailPage.jsp?pId=<%=dto.getpId()%>"></a>
 													</div>
 												</div>
-												
+												<%
+												}
+												%>
+
 											</div>
 										</div>
 
-										<!-- NC ±‚≥‰ªÛ«∞ µŒπ¯¬∞ ∆‰¿Ã¡ˆ -->
+										<%
+										if (subListbase_ncM.size() > 4) {
+										%>
+										<!-- NC Í∏∞ÎÖêÏÉÅÌíà ÎëêÎ≤àÏß∏ ÌéòÏù¥ÏßÄ -->
 										<div class="carousel-item">
 											<div class="row h-100 align-items-center g-2">
+												<%
+												int last_ncM_2 = subListbase_ncM.size() > 8 ? 8 : subListbase_ncM.size();
+												List<ProductDto> subList_2_ncM = new ArrayList<ProductDto>(subListbase_ncM.subList(4, last_ncM_2));
+												for (int j = 0; j < subList_2_ncM.size(); j++) {
+													ProductDto dto = subList_2_ncM.get(j);
+												%>
 												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
 													<div class="card card-span h-100 text-white">
-														<img class="img-fluid h-100"
-															src="../assets/img/gallery/watch-5.png" alt="..." />
+														<img class="img-fluid h-100" src="<%=dto.getpImage()%>"
+															alt="..." />
 														<div class="card-img-overlay ps-0"></div>
 														<div class="card-body ps-0 bg-200">
-															<h5 class="fw-bold text-1000 text-truncate">Watch</h5>
+															<h5 class="fw-bold text-1000 text-truncate"><%=dto.getpName()%></h5>
 															<div class="fw-bold">
-																<span class="text-600 me-2 text-decoration-line-through">$500</span><span
-																	class="text-primary">$275</span>
+																<span class="text-primary"><%=nf.format(dto.getPrice())%></span>
 															</div>
 														</div>
-														<a class="stretched-link" href="#"></a>
+														<a class="stretched-link"
+															href="product_detailPage.jsp?pId=<%=dto.getpId()%>"></a>
 													</div>
 												</div>
-												
+												<%
+												}
+												%>
+
+
 											</div>
 										</div>
 
-										<!-- NC ±‚≥‰ªÛ«∞ ¡¬øÏ¿Ãµø -->
+										<!-- NC Í∏∞ÎÖêÏÉÅÌíà Ï¢åÏö∞Ïù¥Îèô-->
 										<div class="row">
 											<button class="carousel-control-prev" type="button"
-												data-bs-target="#carouselCategoryNcCommemoration"
+												data-bs-target="#carouselCategoryNcMemory"
 												data-bs-slide="prev">
 												<span class="carousel-control-prev-icon" aria-hidden="true"></span><span
 													class="visually-hidden">Previous</span>
 											</button>
 											<button class="carousel-control-next" type="button"
-												data-bs-target="#carouselCategoryNcCommemoration"
+												data-bs-target="#carouselCategoryNcMemory"
 												data-bs-slide="next">
 												<span class="carousel-control-next-icon" aria-hidden="true"></span><span
 													class="visually-hidden">Next </span>
 											</button>
 										</div>
+										<%
+										}
+										%>
 									</div>
 								</div>
 
-								
+
 							</div>
 						</div>
 					</div>
@@ -3311,84 +4482,116 @@ NumberFormat nf = NumberFormat.getCurrencyInstance();
 								<button class="navv-link active" id="pills-ssg_teamwear-tab"
 									data-bs-toggle="pill" data-bs-target="#pills-ssg_teamwear"
 									type="button" role="tab" aria-controls="pills-ssg_teamwear"
-									aria-selected="true">∆¿ø˛æÓ</button>
+									aria-selected="true">ÌåÄÏõ®Ïñ¥</button>
 							</li>
 							<li class="navv-item" role="presentation">
 								<button class="navv-link" id="pills-ssg_cheering-tab"
 									data-bs-toggle="pill" data-bs-target="#pills-ssg_cheering"
 									type="button" role="tab" aria-controls="pills-ssg_cheering"
-									aria-selected="false">¿¿ø¯øÎ«∞</button>
+									aria-selected="false">ÏùëÏõêÏö©Ìíà</button>
 							</li>
 							<li class="navv-item" role="presentation">
 								<button class="navv-link" id="pills-ssg_baseball-tab"
 									data-bs-toggle="pill" data-bs-target="#pills-ssg_baseball"
 									type="button" role="tab" aria-controls="pills-ssg_baseball"
-									aria-selected="false">æﬂ±∏øÎ«∞</button>
+									aria-selected="false">ÏïºÍµ¨Ïö©Ìíà</button>
 							</li>
 							<li class="navv-item" role="presentation">
-								<button class="navv-link" id="pills-ssg_commemoration-tab"
-									data-bs-toggle="pill" data-bs-target="#pills-ssg_commemoration"
-									type="button" role="tab"
-									aria-controls="pills-ssg_commemoration" aria-selected="false">±‚≥‰ªÛ«∞</button>
+								<button class="navv-link" id="pills-ssg_memory-tab"
+									data-bs-toggle="pill" data-bs-target="#pills-ssg_memory"
+									type="button" role="tab" aria-controls="pills-ssg_memory"
+									aria-selected="false">Í∏∞ÎÖêÏÉÅÌíà</button>
 							</li>
 						</ul>
-
 						<div class="tab-content" id="pills-tabContentSsg">
-							<!-- SSG ∆¿ø˛æÓ -->
+							<!-- SSG ÌåÄÏõ®Ïñ¥ -->
 							<div class="tab-pane fade show active" id="pills-ssg_teamwear"
 								role="tabpanel" aria-labelledby="pills-ssg_teamwear-tab">
 								<div class="carousel slide" id="carouselCategorySsgTeamwear"
 									data-bs-touch="false" data-bs-interval="false">
-									<!-- SSG ∆¿ø˛æÓ Ω√¿€ -->
+
+									<!-- SSG ÌåÄÏõ®Ïñ¥ ÏãúÏûë -->
 									<div class="carousel-inner">
-										<!-- SSG ∆¿ø˛æÓ √ππ¯¬∞ ∆‰¿Ã¡ˆ -->
+										<!-- SSG ÌåÄÏõ®Ïñ¥ Ï≤´Î≤àÏß∏ ÌéòÏù¥ÏßÄ -->
 										<div class="carousel-item active" data-bs-interval="10000">
 											<div class="row h-100 align-items-center g-2">
+												<%
+												List<ProductDto> subListbase_ssgT = new ArrayList<>();
+												for (int i = 0; i < list.size(); i++) {
+													ProductDto dto = list.get(i);
+													if (dto.getTeamName().equals("SSG ÎûúÎçîÏä§")) {
+														if (dto.getpCategory().equals("ÌåÄÏõ®Ïñ¥")) {
+
+													subListbase_ssgT.add(dto);
+														}
+													}
+												}
+												%>
+												<%
+												int last_ssgT_1 = subListbase_ssgT.size() < 4 ? subListbase_ssgT.size() : 4;
+												List<ProductDto> subList_1_ssgT = new ArrayList<ProductDto>(subListbase_ssgT.subList(0, last_ssgT_1));
+												for (int j = 0; j < subList_1_ssgT.size(); j++) {
+													ProductDto dto = subList_1_ssgT.get(j);
+												%>
 												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
 													<div class="card card-span h-100 text-white">
-														<img class="img-fluid h-100"
-															src="https://cdn-pro-web-251-119.cdn-nhncommerce.com/wyverntr9322_godomall_com/data/goods/22/03/13//1000001099/register_detail_015.jpg"
+														<img class="img-fluid h-100" src="<%=dto.getpImage()%>"
 															alt="..." />
 														<div class="card-img-overlay ps-0"></div>
 														<div class="card-body ps-0 bg-200">
-															<h5 class="fw-bold text-1000 text-truncate">2022 Ω√¡
-																æÓø˛¿Ã æÓºæ∆Ω ¿Ø¥œ∆˚</h5>
+															<h5 class="fw-bold text-1000 text-truncate"><%=dto.getpName()%></h5>
 															<div class="fw-bold">
-																<span class="text-600 me-2 text-decoration-line-through">$200</span><span
-																	class="text-primary">$175</span>
+																<span class="text-primary"><%=nf.format(dto.getPrice())%></span>
 															</div>
 														</div>
-														<a class="stretched-link" href="#"></a>
+														<a class="stretched-link"
+															href="product_detailPage.jsp?pId=<%=dto.getpId()%>"></a>
 													</div>
 												</div>
-										
+												<%
+												}
+												%>
+
+
 											</div>
 										</div>
 
-										<!-- SSG ∆¿ø˛æÓ µŒπ¯¬∞ ∆‰¿Ã¡ˆ -->
+										<%
+										if (subListbase_ssgT.size() > 4) {
+										%>
+										<!-- SSG ÌåÄÏõ®Ïñ¥ ÎëêÎ≤àÏß∏ ÌéòÏù¥ÏßÄ -->
 										<div class="carousel-item">
 											<div class="row h-100 align-items-center g-2">
+												<%
+												int last_ssgT_2 = subListbase_ssgT.size() > 8 ? 8 : subListbase_ssgT.size();
+												List<ProductDto> subList_2_ssgT = new ArrayList<ProductDto>(subListbase_ssgT.subList(4, last_ssgT_2));
+												for (int j = 0; j < subList_2_ssgT.size(); j++) {
+													ProductDto dto = subList_2_ssgT.get(j);
+												%>
 												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
 													<div class="card card-span h-100 text-white">
-														<img class="img-fluid h-100"
-															src="../assets/img/gallery/white-tshirt.png" alt="..." />
+														<img class="img-fluid h-100" src="<%=dto.getpImage()%>"
+															alt="..." />
 														<div class="card-img-overlay ps-0"></div>
 														<div class="card-body ps-0 bg-200">
-															<h5 class="fw-bold text-1000 text-truncate">White
-																T-Shirt</h5>
+															<h5 class="fw-bold text-1000 text-truncate"><%=dto.getpName()%></h5>
 															<div class="fw-bold">
-																<span class="text-600 me-2 text-decoration-line-through">$200</span><span
-																	class="text-primary">$175</span>
+																<span class="text-primary"><%=nf.format(dto.getPrice())%></span>
 															</div>
 														</div>
-														<a class="stretched-link" href="#"></a>
+														<a class="stretched-link"
+															href="product_detailPage.jsp?pId=<%=dto.getpId()%>"></a>
 													</div>
 												</div>
-											
+												<%
+												}
+												%>
+
 											</div>
 										</div>
 
-										<!-- SSG ∆¿ø˛æÓ ¡¬øÏ¿Ãµø -->
+
+										<!-- SSG ÌåÄÏõ®Ïñ¥ Ï¢åÏö∞Ïù¥Îèô -->
 										<div class="row">
 											<button class="carousel-control-prev" type="button"
 												data-bs-target="#carouselCategorySsgTeamwear"
@@ -3403,65 +4606,105 @@ NumberFormat nf = NumberFormat.getCurrencyInstance();
 													class="visually-hidden">Next </span>
 											</button>
 										</div>
+
+										<%
+										}
+										%>
+
 									</div>
 								</div>
 
-								
 							</div>
 
-							<!-- SSG ¿¿ø¯øÎ«∞ -->
+							<!-- SSG ÏùëÏõêÏö©Ìíà -->
 							<div class="tab-pane fade" id="pills-ssg_cheering"
 								role="tabpanel" aria-labelledby="pills-ssg_cheering-tab">
 								<div class="carousel slide" id="carouselCategorySsgCheering"
 									data-bs-touch="false" data-bs-interval="false">
-									<!-- SSG ¿¿ø¯øÎ«∞ Ω√¿€ -->
+
+									<!-- SSG ÏùëÏõêÏö©Ìíà ÏãúÏûë -->
 									<div class="carousel-inner">
-										<!-- SSG ¿¿ø¯øÎ«∞ √ππ¯¬∞ ∆‰¿Ã¡ˆ -->
+										<!-- SSG ÏùëÏõêÏö©Ìíà Ï≤´Î≤àÏß∏ ÌéòÏù¥ÏßÄ -->
 										<div class="carousel-item active" data-bs-interval="10000">
 											<div class="row h-100 align-items-center g-2">
+												<%
+												List<ProductDto> subListbase_ssgC = new ArrayList<>();
+												for (int i = 0; i < list.size(); i++) {
+													ProductDto dto = list.get(i);
+													if (dto.getTeamName().equals("SSG ÎûúÎçîÏä§")) {
+														if (dto.getpCategory().equals("ÏùëÏõêÏö©Ìíà")) {
+
+													subListbase_ssgC.add(dto);
+														}
+													}
+												}
+												%>
+												<%
+												int last_ssgC_1 = subListbase_ssgC.size() < 4 ? subListbase_ssgC.size() : 4;
+												List<ProductDto> subList_1_ssgC = new ArrayList<ProductDto>(subListbase_ssgC.subList(0, last_ssgC_1));
+												for (int j = 0; j < subList_1_ssgC.size(); j++) {
+													ProductDto dto = subList_1_ssgC.get(j);
+												%>
 												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
 													<div class="card card-span h-100 text-white">
-														<img class="img-fluid h-100"
-															src="http://openimage.interpark.com/goods_image/9/7/8/4/10046189784s.jpg"
+														<img class="img-fluid h-100" src="<%=dto.getpImage()%>"
 															alt="..." />
 														<div class="card-img-overlay ps-0"></div>
 														<div class="card-body ps-0 bg-200">
-															<h5 class="fw-bold text-1000 text-truncate">≈∞øÚ ∏«≈ı∏«</h5>
+															<h5 class="fw-bold text-1000 text-truncate"><%=dto.getpName()%></h5>
 															<div class="fw-bold">
-																<span class="text-600 me-2 text-decoration-line-through">$200</span><span
-																	class="text-primary">$175</span>
+																<span class="text-primary"><%=nf.format(dto.getPrice())%></span>
 															</div>
 														</div>
-														<a class="stretched-link" href="#"></a>
+														<a class="stretched-link"
+															href="product_detailPage.jsp?pId=<%=dto.getpId()%>"></a>
 													</div>
 												</div>
-												
+												<%
+												}
+												%>
+
+
+
 											</div>
 										</div>
 
-										<!-- SSG ¿¿ø¯øÎ«∞ µŒπ¯¬∞ ∆‰¿Ã¡ˆ-->
+										<%
+										if (subListbase_ssgC.size() > 4) {
+										%>
+										<!-- SSG ÏùëÏõêÏö©Ìíà ÎëêÎ≤àÏß∏ ÌéòÏù¥ÏßÄ -->
 										<div class="carousel-item">
 											<div class="row h-100 align-items-center g-2">
+												<%
+												int last_ssgC_2 = subListbase_ssgC.size() > 8 ? 8 : subListbase_ssgC.size();
+												List<ProductDto> subList_2_ssgC = new ArrayList<ProductDto>(subListbase_ssgC.subList(4, last_ssgC_2));
+												for (int j = 0; j < subList_2_ssgC.size(); j++) {
+													ProductDto dto = subList_2_ssgC.get(j);
+												%>
 												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
 													<div class="card card-span h-100 text-white">
-														<img class="img-fluid h-100"
-															src="../assets/img/gallery/shirt-5.png" alt="..." />
+														<img class="img-fluid h-100" src="<%=dto.getpImage()%>"
+															alt="..." />
 														<div class="card-img-overlay ps-0"></div>
 														<div class="card-body ps-0 bg-200">
-															<h5 class="fw-bold text-1000 text-truncate">Shirt</h5>
+															<h5 class="fw-bold text-1000 text-truncate"><%=dto.getpName()%></h5>
 															<div class="fw-bold">
-																<span class="text-600 me-2 text-decoration-line-through">$200</span><span
-																	class="text-primary">$175</span>
+																<span class="text-primary"><%=nf.format(dto.getPrice())%></span>
 															</div>
 														</div>
-														<a class="stretched-link" href="#"></a>
+														<a class="stretched-link"
+															href="product_detailPage.jsp?pId=<%=dto.getpId()%>"></a>
 													</div>
 												</div>
-										
+												<%
+												}
+												%>
+
 											</div>
 										</div>
 
-										<!-- SSG ¿¿ø¯øÎ«∞ ¡¬øÏ¿Ãµø-->
+
+										<!-- SSG ÏùëÏõêÏö©Ìíà Ï¢åÏö∞Ïù¥Îèô -->
 										<div class="row">
 											<button class="carousel-control-prev" type="button"
 												data-bs-target="#carouselCategorySsgCheering"
@@ -3476,169 +4719,242 @@ NumberFormat nf = NumberFormat.getCurrencyInstance();
 													class="visually-hidden">Next </span>
 											</button>
 										</div>
+										<%
+										}
+										%>
+
 									</div>
 								</div>
 
-								
 							</div>
 
-							<!-- SSG æﬂ±∏øÎ«∞ -->
+							<!-- SSG ÏïºÍµ¨Ïö©Ìíà -->
 							<div class="tab-pane fade" id="pills-ssg_baseball"
 								role="tabpanel" aria-labelledby="pills-ssg_baseball-tab">
-								<div class="carousel slide" id="carouselCategorySsgbaseball"
+								<div class="carousel slide" id="carouselCategorySsgBaseball"
 									data-bs-touch="false" data-bs-interval="false">
-									<!-- SSG æﬂ±∏øÎ«∞ Ω√¿€ -->
+									<!-- SSG ÏïºÍµ¨Ïö©Ìíà ÏãúÏûë-->
 									<div class="carousel-inner">
-										<!-- SSG æﬂ±∏øÎ«∞ √ππ¯¬∞ ∆‰¿Ã¡ˆ -->
+										<!-- SSG ÏïºÍµ¨Ïö©Ìíà Ï≤´Î≤àÏß∏ ÌéòÏù¥ÏßÄ-->
 										<div class="carousel-item active" data-bs-interval="10000">
 											<div class="row h-100 align-items-center g-2">
+												<%
+												List<ProductDto> subListbase_ssgB = new ArrayList<>();
+												for (int i = 0; i < list.size(); i++) {
+													ProductDto dto = list.get(i);
+													if (dto.getTeamName().equals("SSG ÎûúÎçîÏä§")) {
+														if (dto.getpCategory().equals("ÏïºÍµ¨Ïö©Ìíà")) {
+
+													subListbase_ssgB.add(dto);
+														}
+													}
+												}
+												%>
+												<%
+												int last_ssgB_1 = subListbase_ssgB.size() < 4 ? subListbase_ssgB.size() : 4;
+												List<ProductDto> subList_1_ssgB = new ArrayList<ProductDto>(subListbase_ssgB.subList(0, last_ssgB_1));
+												for (int j = 0; j < subList_1_ssgB.size(); j++) {
+													ProductDto dto = subList_1_ssgB.get(j);
+												%>
 												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
 													<div class="card card-span h-100 text-white">
-														<img class="img-fluid h-100"
-															src="http://openimage.interpark.com/goods_image/9/7/8/4/10046189784s.jpg"
+														<img class="img-fluid h-100" src="<%=dto.getpImage()%>"
 															alt="..." />
 														<div class="card-img-overlay ps-0"></div>
 														<div class="card-body ps-0 bg-200">
-															<h5 class="fw-bold text-1000 text-truncate">≈∞øÚ ∏«≈ı∏«</h5>
+															<h5 class="fw-bold text-1000 text-truncate"><%=dto.getpName()%></h5>
 															<div class="fw-bold">
-																<span class="text-600 me-2 text-decoration-line-through">$200</span><span
-																	class="text-primary">$175</span>
+																<span class="text-primary"><%=nf.format(dto.getPrice())%></span>
 															</div>
 														</div>
-														<a class="stretched-link" href="#"></a>
+														<a class="stretched-link"
+															href="product_detailPage.jsp?pId=<%=dto.getpId()%>"></a>
 													</div>
 												</div>
-												
+												<%
+												}
+												%>
+
 											</div>
 										</div>
 
-										<!-- SSG æﬂ±∏øÎ«∞ µŒπ¯¬∞ ∆‰¿Ã¡ˆ -->
+										<%
+										if (subListbase_ssgB.size() > 4) {
+										%>
+										<!-- SSG ÏïºÍµ¨Ïö©Ìíà ÎëêÎ≤àÏß∏ ÌéòÏù¥ÏßÄ -->
 										<div class="carousel-item">
 											<div class="row h-100 align-items-center g-2">
+												<%
+												int last_ssgB_2 = subListbase_ssgB.size() > 8 ? 8 : subListbase_ssgB.size();
+												List<ProductDto> subList_2_ssgB = new ArrayList<ProductDto>(subListbase_ssgB.subList(4, last_ssgB_2));
+												for (int j = 0; j < subList_2_ssgB.size(); j++) {
+													ProductDto dto = subList_2_ssgB.get(j);
+												%>
 												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
 													<div class="card card-span h-100 text-white">
-														<img class="img-fluid h-100"
-															src="../assets/img/gallery/shoe-5.png" alt="..." />
+														<img class="img-fluid h-100" src="<%=dto.getpImage()%>"
+															alt="..." />
 														<div class="card-img-overlay ps-0"></div>
 														<div class="card-body ps-0 bg-200">
-															<h5 class="fw-bold text-1000 text-truncate">Shoe</h5>
+															<h5 class="fw-bold text-1000 text-truncate"><%=dto.getpName()%></h5>
 															<div class="fw-bold">
-																<span class="text-600 me-2 text-decoration-line-through">$200</span><span
-																	class="text-primary">$175</span>
+																<span class="text-primary"><%=nf.format(dto.getPrice())%></span>
 															</div>
 														</div>
-														<a class="stretched-link" href="#"></a>
+														<a class="stretched-link"
+															href="product_detailPage.jsp?pId=<%=dto.getpId()%>"></a>
 													</div>
 												</div>
-											
+												<%
+												}
+												%>
+
 											</div>
 										</div>
 
-										<!-- SSG æﬂ±∏øÎ«∞ ¡¬øÏ¿Ãµø -->
+										<!-- SSG ÏïºÍµ¨Ïö©Ìíà Ï¢åÏö∞Ïù¥Îèô -->
 										<div class="row">
 											<button class="carousel-control-prev" type="button"
-												data-bs-target="#carouselCategorySsgbaseball"
+												data-bs-target="#carouselCategorySsgBaseball"
 												data-bs-slide="prev">
 												<span class="carousel-control-prev-icon" aria-hidden="true"></span><span
 													class="visually-hidden">Previous</span>
 											</button>
 											<button class="carousel-control-next" type="button"
-												data-bs-target="#carouselCategorySsgbaseball"
+												data-bs-target="#carouselCategorySsgBaseball"
 												data-bs-slide="next">
 												<span class="carousel-control-next-icon" aria-hidden="true"></span><span
 													class="visually-hidden">Next </span>
 											</button>
 										</div>
+										<%
+										}
+										%>
 									</div>
 								</div>
 
-								
+
 							</div>
 
-							<!-- SSG ±‚≥‰ªÛ«∞ -->
-							<div class="tab-pane fade" id="pills-ssg_commemoration"
-								role="tabpanel" aria-labelledby="pills-ssg_commemoration-tab">
-								<div class="carousel slide"
-									id="carouselCategorySsgCommemoration" data-bs-touch="false"
-									data-bs-interval="false">
-									<!-- SSG ±‚≥‰ªÛ«∞ Ω√¿€ -->
+							<!-- SSG Í∏∞ÎÖêÏÉÅÌíà-->
+							<div class="tab-pane fade" id="pills-ssg_memory" role="tabpanel"
+								aria-labelledby="pills-ssg_memory-tab">
+								<div class="carousel slide" id="carouselCategorySsgMemory"
+									data-bs-touch="false" data-bs-interval="false">
+									<!-- SSG Í∏∞ÎÖêÏÉÅÌíà ÏãúÏûë-->
 									<div class="carousel-inner">
-										<!-- SSG ±‚≥‰ªÛ«∞ √ππ¯¬∞ ∆‰¿Ã¡ˆ -->
+										<!-- SSG Í∏∞ÎÖêÏÉÅÌíà Ï≤´Î≤àÏß∏ ÌéòÏù¥ÏßÄ-->
 										<div class="carousel-item active" data-bs-interval="10000">
 											<div class="row h-100 align-items-center g-2">
+												<%
+												List<ProductDto> subListbase_ssgM = new ArrayList<>();
+												for (int i = 0; i < list.size(); i++) {
+													ProductDto dto = list.get(i);
+													if (dto.getTeamName().equals("SSG ÎûúÎçîÏä§")) {
+														if (dto.getpCategory().equals("Í∏∞ÎÖêÏÉÅÌíà")) {
+
+													subListbase_ssgM.add(dto);
+														}
+													}
+												}
+												%>
+												<%
+												int last_ssgM_1 = subListbase_ssgM.size() < 4 ? subListbase_ssgM.size() : 4;
+												List<ProductDto> subList_1_ssgM = new ArrayList<ProductDto>(subListbase_ssgM.subList(0, last_ssgM_1));
+												for (int j = 0; j < subList_1_ssgM.size(); j++) {
+													ProductDto dto = subList_1_ssgM.get(j);
+												%>
 												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
 													<div class="card card-span h-100 text-white">
-														<img class="img-fluid h-100"
-															src="http://openimage.interpark.com/goods_image/9/7/8/4/10046189784s.jpg"
+														<img class="img-fluid h-100" src="<%=dto.getpImage()%>"
 															alt="..." />
 														<div class="card-img-overlay ps-0"></div>
 														<div class="card-body ps-0 bg-200">
-															<h5 class="fw-bold text-1000 text-truncate">≈∞øÚ ∏«≈ı∏«</h5>
+															<h5 class="fw-bold text-1000 text-truncate"><%=dto.getpName()%></h5>
 															<div class="fw-bold">
-																<span class="text-600 me-2 text-decoration-line-through">$500</span><span
-																	class="text-primary">$275</span>
+																<span class="text-primary"><%=nf.format(dto.getPrice())%></span>
 															</div>
 														</div>
-														<a class="stretched-link" href="#"></a>
+														<a class="stretched-link"
+															href="product_detailPage.jsp?pId=<%=dto.getpId()%>"></a>
 													</div>
 												</div>
-											
+												<%
+												}
+												%>
+
 											</div>
 										</div>
 
-										<!-- SSG ±‚≥‰ªÛ«∞ µŒπ¯¬∞ ∆‰¿Ã¡ˆ -->
+										<%
+										if (subListbase_ssgM.size() > 4) {
+										%>
+										<!-- SSG Í∏∞ÎÖêÏÉÅÌíà ÎëêÎ≤àÏß∏ ÌéòÏù¥ÏßÄ -->
 										<div class="carousel-item">
 											<div class="row h-100 align-items-center g-2">
+												<%
+												int last_ssgM_2 = subListbase_ssgM.size() > 8 ? 8 : subListbase_ssgM.size();
+												List<ProductDto> subList_2_ssgM = new ArrayList<ProductDto>(subListbase_ssgM.subList(4, last_ssgM_2));
+												for (int j = 0; j < subList_2_ssgM.size(); j++) {
+													ProductDto dto = subList_2_ssgM.get(j);
+												%>
 												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
 													<div class="card card-span h-100 text-white">
-														<img class="img-fluid h-100"
-															src="../assets/img/gallery/watch-5.png" alt="..." />
+														<img class="img-fluid h-100" src="<%=dto.getpImage()%>"
+															alt="..." />
 														<div class="card-img-overlay ps-0"></div>
 														<div class="card-body ps-0 bg-200">
-															<h5 class="fw-bold text-1000 text-truncate">Watch</h5>
+															<h5 class="fw-bold text-1000 text-truncate"><%=dto.getpName()%></h5>
 															<div class="fw-bold">
-																<span class="text-600 me-2 text-decoration-line-through">$500</span><span
-																	class="text-primary">$275</span>
+																<span class="text-primary"><%=nf.format(dto.getPrice())%></span>
 															</div>
 														</div>
-														<a class="stretched-link" href="#"></a>
+														<a class="stretched-link"
+															href="product_detailPage.jsp?pId=<%=dto.getpId()%>"></a>
 													</div>
 												</div>
-											
+												<%
+												}
+												%>
+
+
 											</div>
 										</div>
 
-										<!-- SSG ±‚≥‰ªÛ«∞ ¡¬øÏ¿Ãµø -->
+										<!-- SSG Í∏∞ÎÖêÏÉÅÌíà Ï¢åÏö∞Ïù¥Îèô-->
 										<div class="row">
 											<button class="carousel-control-prev" type="button"
-												data-bs-target="#carouselCategorySsgCommemoration"
+												data-bs-target="#carouselCategorySsgMemory"
 												data-bs-slide="prev">
 												<span class="carousel-control-prev-icon" aria-hidden="true"></span><span
 													class="visually-hidden">Previous</span>
 											</button>
 											<button class="carousel-control-next" type="button"
-												data-bs-target="#carouselCategorySsgCommemoration"
+												data-bs-target="#carouselCategorySsgMemory"
 												data-bs-slide="next">
 												<span class="carousel-control-next-icon" aria-hidden="true"></span><span
 													class="visually-hidden">Next </span>
 											</button>
 										</div>
+										<%
+										}
+										%>
 									</div>
 								</div>
 
-								
-								
+
 							</div>
 						</div>
 					</div>
 				</div>
 
 				</navv>
-			
-			<div class="col-12 d-flex justify-content-center mt-4">
-									<a class="btn btn-lg btn-dark" href="product_listPage.jsp">View All </a>
-								</div>
-			
+
+				<div class="col-12 d-flex justify-content-center mt-4">
+					<a class="btn btn-lg btn-dark" href="product_listPage.jsp">View
+						All </a>
+				</div>
+
 			</div>
 		</div>
 

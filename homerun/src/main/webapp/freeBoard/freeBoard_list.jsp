@@ -28,9 +28,9 @@
     <link rel="stylesheet" href="../assets/board/vendor/css/theme-default.css" class="template-customizer-theme-css" />
     <link rel="stylesheet" href="../assets/board/css/demo.css" />
 
-    <!-- Vendors CSS -->
-    <link rel="stylesheet" href="../assets/board/vendor/libs/perfect-scrollbar/perfect-scrollbar.css" />
-
+	<!-- Vendors CSS -->
+<link rel="stylesheet"
+	href="../assets/board/vendor/libs/perfect-scrollbar/perfect-scrollbar.css" />
     <!-- Page CSS -->
 
     <!-- Helpers -->
@@ -115,7 +115,7 @@
 	    			type : "get",
 	    			url : "freeBoard_getSearchList.jsp",
 	    			dataType : "json",
-	    			data : {"val" : val, "str" : str},
+	    			data : {"val" : val, "str" : str, "currentPage" : currentPage},
 	    			success:function(res) {
 	    				// alert(val + ", "+ str +", " + res.length);
 	    				
@@ -192,7 +192,7 @@
     			type : "get",
     			url : "freeBoard_getList.jsp",
     			dataType : "json",
-    			/* data : {"val" : val}, */
+    			data : {"currentPage" : currentPage}, 
     			success:function(res) {
 
     				var s="";
@@ -320,102 +320,13 @@
                 <!-- Content -->
 
                 <div class="container-xxl flex-grow-1 container-p-y">
-                <h3 style="margin-bottom: 30px;">자유게시판</h3>
+                <h3 style="margin-bottom: 30px;">자유게시판</h3>            
                 
                 <!-- Bootstrap Table with Header - Light -->
                     <div class="card" style="background-color: #fff">
-
-					<div class="fList">
-                       <!--  <div class="table-responsive text-nowrap">
-                           <table class="table">
-                                <thead style="background-color: #F8F9FA">
-                                    <tr>
-                                        <th style="text-align: center; width: 80px;">No.</th>
-                                        <th style="text-align: center; width: 150px;">카테고리</th>
-                                        <th style="text-align: center;">제목</th>
-                                        <th style="text-align: center;  width: 200px;">작성자</th>
-                                        <th style="text-align: center;  width: 200px;">날짜</th>
-                                        <th style="text-align: center; width: 80px;">조회수</th>
-                                        <th style="text-align: center; width: 80px;">추천</th>
-                                        <th style="text-align: center; width: 80px;">비추천</th>
-                                    </tr>
-                                </thead> 
-                                
-                                	<tbody class="table-border-bottom-0">
-                                 -->
-	                               <%--  <%                                	
-	                                	for(FreeBoardDto fbDto : fbList) {
-	                                		UserDao uDao = new UserDao();
-	                                		String nickname = uDao.getUser(fbDto.getUId()).getNickname();
-	                                		
-	                                		int fcCnt = fcDao.getAllFCs(fbDto.getFbNum()).size();
-	                                %>
-	                                
-	                                <!-- 
-	                                	카테고리 : 전체 -> 야구공 png
-	                                	야구공 png -> https://cdn.icon-icons.com/icons2/2070/PNG/512/baseball_icon_126956.png
-	                                	야구공 크기만 25px
-	                                 -->
-	                                
-	                                	<tr>
-	                                        <td style="text-align: center;"><%=fbDto.getFbNum() %></td>
-	                                        <!-- 
-	                                        카테고리 전체
-	                                        <td style="text-align: center;"><img
-	                                                src="https://cdn.icon-icons.com/icons2/2070/PNG/512/baseball_icon_126956.png"
-	                                                style="width: 25px;">
-	                                        </td>
-	                                        -->
-	                                        
-	                                        <%
-	                                        	// 카테고리 : 전체 -> 야구공 png
-	                                        	if(fbDto.getFbCategory().equals("전체")) {                                       		
-	                                        %>
-	                                        		<td style="text-align: center; vertical-align:middle;"><img
-		                                                src="https://cdn.icon-icons.com/icons2/2070/PNG/512/baseball_icon_126956.png"
-		                                                style="width: 30px;">
-	                                        		</td>
-	                                        	
-	                                        <%
-	                                        	} else if(fbDto.getFbCategory().equals("한화")) {
-	                                        %>
-	                                        		<td style="text-align: center; vertical-align:middle;">
-	                                        		<img
-		                                                src="<%=tDao.getTeam(fbDto.getFbCategory()).getTeamLogo() %>"
-		                                                    style="width: 50px;">
-	                                        		</td>
-	                                        <%		
-	                                        	}
-	                                        	
-	                                        	else {
-	                                        %>
-	                                        		<td style="text-align: center; vertical-align:middle;">
-		                                        		<img
-		                                                	src="<%=tDao.getTeam(fbDto.getFbCategory()).getTeamLogo() %>"
-		                                                    style="width: 40px;">
-	                                        		</td>
-	                                        <%
-	                                        	}
-	                                     
-	                                        %>
-	                                                                         
-	                                        <td style="vertical-align:middle;"><a href="freePost_detailPage.jsp?fbNum=<%=fbDto.getFbNum() %>&currentPage=<%=currentPage%>"><%=fbDto.getFbSubject() %></a><span style="color: tomato;">&nbsp;&nbsp;[<%=fcCnt %>]</span></td>
-	                                        <td style="text-align: center; vertical-align:middle;"><%=nickname %></td>
-	                                        <td style="text-align: center; vertical-align:middle;"><%=sdf.format(fbDto.getFbWriteday()) %></td>
-	                                        <td style="text-align: center; vertical-align:middle;"><%=fbDto.getFbReadCnt() %></td>
-	                                        <td style="text-align: center; vertical-align:middle;"><%=fbDto.getFbLike() %></td>
-	                                        <td style="text-align: center; vertical-align:middle;"><%=fbDto.getFbDislike() %></td>
-	                                    </tr>
-	                         
-	                                <%
-	                                	}
-	                                %>
-                              		</tbody>
-                                 --%>
-                                
-                           <!--  </table> -->
-                        </div>
-
+						
+						<div class="fList"></div>
+						
                         <div class="bBottom" style="margin-top: 30px;">
                             <div class="bsBox">
                                 <div class="bSelect">

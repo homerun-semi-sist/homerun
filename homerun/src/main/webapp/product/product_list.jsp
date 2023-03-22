@@ -11,37 +11,75 @@
 <title>HOMERUN | ShopList</title>
 <link href="../assets/css/theme.css" rel="stylesheet" />
 
-<link href="../assets/css/styles_footer.css" rel="stylesheet" />
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
 
 <style>
-#navv-doosan, #navv-kiwoom, #navv-samsung, #navv-lg, #navv-kt, #navv-ssg,
-	#navv-nc, #navv-lotte, #navv-kia, #navv-hanhwa, #pills-doosan_teamwear,
-	#pills-doosan_cheering, #pills-doosan_baseball,
-	#pills-doosan_commemoration, #pills-lotte_teamwear,
-	#pills-lotte_cheering, #pills-lotte_baseball,
-	#pills-lotte_commemoration, #pills-samsung_teamwear,
-	#pills-samsung_cheering, #pills-samsung_baseball,
-	#pills-samsung_commemoration, #pills-kiwoom_teamwear,
-	#pills-kiwoom_cheering, #pills-kiwoom_baseball,
-	#pills-kiwoom_commemoration, #pills-lg_teamwear, #pills-lg_cheering,
-	#pills-lg_baseball, #pills-lg_commemoration, #pills-nc_teamwear,
-	#pills-nc_cheering, #pills-nc_baseball, #pills-nc_commemoration,
-	#pills-hanhwa_teamwear, #pills-hanhwa_cheering, #pills-hanhwa_baseball,
-	#pills-hanhwa_commemoration, #pills-kia_teamwear, #pills-kia_cheering,
-	#pills-kia_baseball, #pills-kia_commemoration, #pills-kt_teamwear,
-	#pills-kt_cheering, #pills-kt_baseball, #pills-kt_commemoration,
-	#pills-ssg_teamwear, #pills-ssg_cheering, #pills-ssg_baseball,
-	#pills-ssg_commemoration {
+#navv-all, #navv-doosan, #navv-kiwoom, #navv-samsung, #navv-lg, #navv-kt,
+	#navv-ssg, #navv-nc, #navv-lotte, #navv-kia, #navv-hanhwa,
+	#pills-all_teamwear, #pills-all_cheering, #pills-all_baseball,
+	#pills-all_memory, #pills-doosan_teamwear, #pills-doosan_cheering,
+	#pills-doosan_baseball, #pills-doosan_memory, #pills-lotte_teamwear,
+	#pills-lotte_cheering, #pills-lotte_baseball, #pills-lotte_memory,
+	#pills-samsung_teamwear, #pills-samsung_cheering,
+	#pills-samsung_baseball, #pills-samsung_memory, #pills-kiwoom_teamwear,
+	#pills-kiwoom_cheering, #pills-kiwoom_baseball, #pills-kiwoom_memory,
+	#pills-lg_teamwear, #pills-lg_cheering, #pills-lg_baseball,
+	#pills-lg_memory, #pills-nc_teamwear, #pills-nc_cheering,
+	#pills-nc_baseball, #pills-nc_memory, #pills-hanhwa_teamwear,
+	#pills-hanhwa_cheering, #pills-hanhwa_baseball, #pills-hanhwa_memory,
+	#pills-kia_teamwear, #pills-kia_cheering, #pills-kia_baseball,
+	#pills-kia_memory, #pills-kt_teamwear, #pills-kt_cheering,
+	#pills-kt_baseball, #pills-kt_memory, #pills-ssg_teamwear,
+	#pills-ssg_cheering, #pills-ssg_baseball, #pills-ssg_memory {
 	opacity: 1;
 }
 </style>
 
 </head>
 <%
-ProductDao dao = new ProductDao();
-List<ProductDto> list = dao.selectAllProduct();
-
 NumberFormat nf = NumberFormat.getCurrencyInstance();
+
+ProductDao dao = new ProductDao();
+
+List<ProductDto> list = dao.selectAllProduct_pDay();
+
+ProductDao dao_all = new ProductDao();
+
+int totalCount; //총 개수
+int totalPage; //총 페이지수
+int startPage; //각 블럭(1,2,3..)의 시작페이지
+int endPage; //각 블럭의 마지막 페이지
+int start; //각 페이지의 시작번호
+int perPage = 12; //한 페이지당 보여질 글 개수
+int perBlock = 5; //한 블럭당 보여지는 페이지 개수
+int currentPage; //현재페이지
+
+int no;
+
+totalCount = dao_all.getTotalCount();
+
+//현재 페이지 번호 읽기(null일때는 1페이지로 설정)
+if (request.getParameter("currentPage") == null)
+	currentPage = 1;
+else
+	currentPage = Integer.parseInt(request.getParameter("currentPage"));
+
+//총 페이지 개수
+totalPage = totalCount / perPage + (totalCount % perPage == 0 ? 0 : 1);
+
+//각 블럭의 시작페이지 -> 현재페이지가 3 -> s:1, e:5 / 6 -> s:6, e:10
+startPage = (currentPage - 1) / perBlock * perBlock + 1;
+endPage = startPage + perBlock - 1;
+
+//총 페이지가 8이면 (6~10 -> end페이지를 8로 수정)
+if (endPage > totalPage)
+	endPage = totalPage;
+
+//각페이지에서 불러올 시작번호
+start = (currentPage - 1) * perPage;
+
+//메서드 불러오기
+List<ProductDto> list_all = dao_all.getList_pDay(start, perPage);
 %>
 <body>
 	<section id="categoryWomen">
@@ -55,10 +93,13 @@ NumberFormat nf = NumberFormat.getCurrencyInstance();
 				<div
 					class="navv navv-tabs majestic-tabs mb-4 justify-content-center"
 					id="navv-tab" role="tablist">
-					<button class="navv-link active" id="navv-doosan-tab"
-						data-bs-toggle="tab" data-bs-target="#navv-doosan" type="button"
-						role="tab" aria-controls="navv-doosan" aria-selected="true">
-						두산 베어스</button>
+					<button class="navv-link active" id="navv-all-tab"
+						data-bs-toggle="tab" data-bs-target="#navv-all" type="button"
+						role="tab" aria-controls="navv-all" aria-selected="true">
+						전체</button>
+					<button class="navv-link" id="navv-doosan-tab" data-bs-toggle="tab"
+						data-bs-target="#navv-doosan" type="button" role="tab"
+						aria-controls="navv-doosan" aria-selected="false">두산 베어스</button>
 					<button class="navv-link" id="navv-lotte-tab" data-bs-toggle="tab"
 						data-bs-target="#navv-lotte" type="button" role="tab"
 						aria-controls="navv-lotte" aria-selected="false">롯데 자이언츠</button>
@@ -90,12 +131,80 @@ NumberFormat nf = NumberFormat.getCurrencyInstance();
 				</div>
 
 				<div class="tab-content" id="navv-tabContent">
+
+
+					<!-- 전체 -->
+					<div class="tab-pane fade show active" id="navv-all"
+						style="opacity: 1" role="tabpanel" aria-labelledby="navv-all-tab">
+
+						<div class="tab-content" id="pills-tabContentAll">
+							<!-- 전체 팀웨어 -->
+
+							<div class="row h-100 align-items-center g-2">
+								<%
+								for (ProductDto dto : list_all) {
+								%>
+								<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
+									<div class="card card-span h-100 text-white">
+										<img class="img-fluid h-100" src="<%=dto.getpImage()%>"
+											alt="..." />
+										<div class="card-img-overlay ps-0"></div>
+										<div class="card-body ps-0 bg-200">
+											<h5 class="fw-bold text-1000 text-truncate"><%=dto.getpName()%></h5>
+											<div class="fw-bold">
+												<span class="text-primary"><%=nf.format(dto.getPrice())%></span>
+											</div>
+										</div>
+										<a class="stretched-link"
+											href="product_detailPage.jsp?pId=<%=dto.getpId()%>"></a>
+									</div>
+								</div>
+								<%
+								}
+								%>
+
+							</div>
+						</div>
+						
+						<div style="width: 500px; text-align: center;" class="container">
+							<ul class="pagination">
+								<%
+								//이전
+								if (startPage > 1) {
+								%>
+								<li><a href="product_listPage.jsp?currentPage=<%=startPage - 1%>">이전</a></li>
+								<%
+								}
+								for (int pp = startPage; pp <= endPage; pp++) {
+								if (pp == currentPage) {
+								%>
+								<li class="active"><a
+									href="product_listPage.jsp?currentPage=<%=pp%>"><%=pp%></a></li>
+								<%
+								} else {
+								%>
+
+								<li><a href="product_listPage.jsp?currentPage=<%=pp%>"><%=pp%></a></li>
+								<%
+								}
+								}
+								//다음
+								if (endPage < totalPage) {
+								%>
+								<li><a href="product_listPage.jsp?currentPage=<%=endPage + 1%>">다음</a></li>
+								<%
+								}
+								%>
+							</ul>
+						</div>
+
+					</div>
+
 					<!-- 두산 -->
-					<div class="tab-pane fade show active" id="navv-doosan"
-						style="opacity: 1" role="tabpanel"
-						aria-labelledby="navv-doosan-tab">
-						<ul class="navv navv-pills justify-content-center mb-5"
-							id="pills-tab-all" role="tablist">
+					<div class="tab-pane fade" id="navv-doosan" role="tabpanel"
+						style="opacity: 1" aria-labelledby="navv-doosan-tab">
+						<ul class="navv navv-pills mb-5 justify-content-center"
+							id="pills-tab-doosan" role="tablist">
 							<li class="navv-item" role="presentation">
 								<button class="navv-link active" id="pills-doosan_teamwear-tab"
 									data-bs-toggle="pill" data-bs-target="#pills-doosan_teamwear"
@@ -115,21 +224,22 @@ NumberFormat nf = NumberFormat.getCurrencyInstance();
 									aria-selected="false">야구용품</button>
 							</li>
 							<li class="navv-item" role="presentation">
-								<button class="navv-link" id="pills-doosan_commemoration-tab"
-									data-bs-toggle="pill"
-									data-bs-target="#pills-doosan_commemoration" type="button"
-									role="tab" aria-controls="pills-doosan_commemoration"
+								<button class="navv-link" id="pills-doosan_memory-tab"
+									data-bs-toggle="pill" data-bs-target="#pills-doosan_memory"
+									type="button" role="tab" aria-controls="pills-doosan_memory"
 									aria-selected="false">기념상품</button>
 							</li>
 						</ul>
 						<div class="tab-content" id="pills-tabContentDoosan">
 							<!-- 두산 팀웨어 -->
 							<div class="tab-pane fade show active" id="pills-doosan_teamwear"
-								role="tabpanel" aria-labelledby="pills-doosan_teamwear-tab">
+								style="opacity: 1" role="tabpanel"
+								aria-labelledby="pills-doosan_teamwear-tab">
 								<div class="carousel slide" id="carouselCategoryDoosanTeamwear"
 									data-bs-touch="false" data-bs-interval="false">
 									<!-- 두산 팀웨어 시작 -->
 									<div class="carousel-inner">
+
 										<!-- 두산 팀웨어 첫번째 페이지 -->
 										<div class="carousel-item active" data-bs-interval="10000">
 											<div class="row h-100 align-items-center g-2">
@@ -159,15 +269,23 @@ NumberFormat nf = NumberFormat.getCurrencyInstance();
 												}
 												%>
 
+
 											</div>
 										</div>
+
+
+
+
+
 									</div>
 								</div>
+
 							</div>
 
 							<!-- 두산 응원용품 -->
 							<div class="tab-pane fade" id="pills-doosan_cheering"
-								role="tabpanel" aria-labelledby="pills-doosan_cheering-tab">
+								style="opacity: 1" role="tabpanel"
+								aria-labelledby="pills-doosan_cheering-tab">
 								<div class="carousel slide" id="carouselCategoryDoosanCheering"
 									data-bs-touch="false" data-bs-interval="false">
 									<!-- 두산 응원용품 시작 -->
@@ -202,22 +320,27 @@ NumberFormat nf = NumberFormat.getCurrencyInstance();
 												%>
 
 
+
 											</div>
 										</div>
 
 
+
+
 									</div>
 								</div>
+
 							</div>
 
 							<!-- 두산 야구용품 -->
 							<div class="tab-pane fade" id="pills-doosan_baseball"
-								role="tabpanel" aria-labelledby="pills-doosan_baseball-tab">
+								style="opacity: 1" role="tabpanel"
+								aria-labelledby="pills-doosan_baseball-tab">
 								<div class="carousel slide" id="carouselCategoryDoosanbaseball"
 									data-bs-touch="false" data-bs-interval="false">
-									<!-- 두산 야구용품 시작-->
+									<!-- 두산 야구용품 시작 -->
 									<div class="carousel-inner">
-										<!-- 두산 야구용품 첫번째 페이지-->
+										<!-- 두산 야구용품 첫번째 페이지 -->
 										<div class="carousel-item active" data-bs-interval="10000">
 											<div class="row h-100 align-items-center g-2">
 												<%
@@ -246,23 +369,26 @@ NumberFormat nf = NumberFormat.getCurrencyInstance();
 												}
 												%>
 
+
 											</div>
 										</div>
+
+
 
 
 									</div>
 								</div>
 							</div>
 
-							<!-- 두산 기념상품-->
-							<div class="tab-pane fade" id="pills-doosan_commemoration"
-								role="tabpanel" aria-labelledby="pills-doosan_commemoration-tab">
-								<div class="carousel slide"
-									id="carouselCategoryDoosanCommemoration" data-bs-touch="false"
-									data-bs-interval="false">
-									<!-- 두산 기념상품 시작-->
+							<!-- 두산 기념상품 -->
+							<div class="tab-pane fade" id="pills-doosan_memory"
+								style="opacity: 1" role="tabpanel"
+								aria-labelledby="pills-doosan_memory-tab">
+								<div class="carousel slide" id="carouselCategoryDoosanMemory"
+									data-bs-touch="false" data-bs-interval="false">
+									<!-- 두산 기념상품 시작 -->
 									<div class="carousel-inner">
-										<!-- 두산 기념상품 첫번째 페이지-->
+										<!-- 두산 기념상품 첫번째 페이지 -->
 										<div class="carousel-item active" data-bs-interval="10000">
 											<div class="row h-100 align-items-center g-2">
 												<%
@@ -290,8 +416,12 @@ NumberFormat nf = NumberFormat.getCurrencyInstance();
 												}
 												}
 												%>
+
+
 											</div>
 										</div>
+
+
 
 
 									</div>
@@ -324,10 +454,9 @@ NumberFormat nf = NumberFormat.getCurrencyInstance();
 									aria-selected="false">야구용품</button>
 							</li>
 							<li class="navv-item" role="presentation">
-								<button class="navv-link" id="pills-lotte_commemoration-tab"
-									data-bs-toggle="pill"
-									data-bs-target="#pills-lotte_commemoration" type="button"
-									role="tab" aria-controls="pills-lotte_commemoration"
+								<button class="navv-link" id="pills-lotte_memory-tab"
+									data-bs-toggle="pill" data-bs-target="#pills-lotte_memory"
+									type="button" role="tab" aria-controls="pills-lotte_memory"
 									aria-selected="false">기념상품</button>
 							</li>
 						</ul>
@@ -482,12 +611,11 @@ NumberFormat nf = NumberFormat.getCurrencyInstance();
 							</div>
 
 							<!-- 롯데 기념상품 -->
-							<div class="tab-pane fade" id="pills-lotte_commemoration"
+							<div class="tab-pane fade" id="pills-lotte_memory"
 								style="opacity: 1" role="tabpanel"
-								aria-labelledby="pills-lotte_commemoration-tab">
-								<div class="carousel slide"
-									id="carouselCategoryLotteCommemoration" data-bs-touch="false"
-									data-bs-interval="false">
+								aria-labelledby="pills-lotte_memory-tab">
+								<div class="carousel slide" id="carouselCategoryLotteMemory"
+									data-bs-touch="false" data-bs-interval="false">
 									<!-- 롯데 기념상품 시작 -->
 									<div class="carousel-inner">
 										<!-- 롯데 기념상품 첫번째 페이지 -->
@@ -556,10 +684,9 @@ NumberFormat nf = NumberFormat.getCurrencyInstance();
 									aria-selected="false">야구용품</button>
 							</li>
 							<li class="navv-item" role="presentation">
-								<button class="navv-link" id="pills-samsung_commemoration-tab"
-									data-bs-toggle="pill"
-									data-bs-target="#pills-samsung_commemoration" type="button"
-									role="tab" aria-controls="pills-samsung_commemoration"
+								<button class="navv-link" id="pills-samsung_memory-tab"
+									data-bs-toggle="pill" data-bs-target="#pills-samsung_memory"
+									type="button" role="tab" aria-controls="pills-samsung_memory"
 									aria-selected="false">기념상품</button>
 							</li>
 						</ul>
@@ -704,12 +831,10 @@ NumberFormat nf = NumberFormat.getCurrencyInstance();
 							</div>
 
 							<!-- 삼성 기념상품 -->
-							<div class="tab-pane fade" id="pills-samsung_commemoration"
-								role="tabpanel"
-								aria-labelledby="pills-samsung_commemoration-tab">
-								<div class="carousel slide"
-									id="carouselCategorySamsungCommemoration" data-bs-touch="false"
-									data-bs-interval="false">
+							<div class="tab-pane fade" id="pills-samsung_memory"
+								role="tabpanel" aria-labelledby="pills-samsung_memory-tab">
+								<div class="carousel slide" id="carouselCategorySamsungMemory"
+									data-bs-touch="false" data-bs-interval="false">
 									<!-- 삼성 기념상품 시작 -->
 									<div class="carousel-inner">
 										<!-- 삼성 기념상품 첫번째 페이지 -->
@@ -776,10 +901,9 @@ NumberFormat nf = NumberFormat.getCurrencyInstance();
 									aria-selected="false">야구용품</button>
 							</li>
 							<li class="navv-item" role="presentation">
-								<button class="navv-link" id="pills-kiwoom_commemoration-tab"
-									data-bs-toggle="pill"
-									data-bs-target="#pills-kiwoom_commemoration" type="button"
-									role="tab" aria-controls="pills-kiwoom_commemoration"
+								<button class="navv-link" id="pills-kiwoom_memory-tab"
+									data-bs-toggle="pill" data-bs-target="#pills-kiwoom_memory"
+									type="button" role="tab" aria-controls="pills-kiwoom_memory"
 									aria-selected="false">기념상품</button>
 							</li>
 						</ul>
@@ -922,11 +1046,10 @@ NumberFormat nf = NumberFormat.getCurrencyInstance();
 							</div>
 
 							<!-- 키움 기념상품 -->
-							<div class="tab-pane fade" id="pills-kiwoom_commemoration"
-								role="tabpanel" aria-labelledby="pills-kiwoom_commemoration-tab">
-								<div class="carousel slide"
-									id="carouselCategoryKiwoomCommemoration" data-bs-touch="false"
-									data-bs-interval="false">
+							<div class="tab-pane fade" id="pills-kiwoom_memory"
+								role="tabpanel" aria-labelledby="pills-kiwoom_memory-tab">
+								<div class="carousel slide" id="carouselCategoryKiwoomMemory"
+									data-bs-touch="false" data-bs-interval="false">
 									<!-- 키움 기념상품 시작 -->
 									<div class="carousel-inner">
 										<!-- 키움 기념상품 첫번째 페이지 -->
@@ -993,10 +1116,9 @@ NumberFormat nf = NumberFormat.getCurrencyInstance();
 									aria-selected="false">야구용품</button>
 							</li>
 							<li class="navv-item" role="presentation">
-								<button class="navv-link" id="pills-hanhwa_commemoration-tab"
-									data-bs-toggle="pill"
-									data-bs-target="#pills-hanhwa_commemoration" type="button"
-									role="tab" aria-controls="pills-hanhwa_commemoration"
+								<button class="navv-link" id="pills-hanhwa_memory-tab"
+									data-bs-toggle="pill" data-bs-target="#pills-hanhwa_memory"
+									type="button" role="tab" aria-controls="pills-hanhwa_memory"
 									aria-selected="false">기념상품</button>
 							</li>
 						</ul>
@@ -1137,11 +1259,10 @@ NumberFormat nf = NumberFormat.getCurrencyInstance();
 							</div>
 
 							<!-- 한화 기념상품 -->
-							<div class="tab-pane fade" id="pills-hanhwa_commemoration"
-								role="tabpanel" aria-labelledby="pills-hanhwa_commemoration-tab">
-								<div class="carousel slide"
-									id="carouselCategoryHanhwaCommemoration" data-bs-touch="false"
-									data-bs-interval="false">
+							<div class="tab-pane fade" id="pills-hanhwa_memory"
+								role="tabpanel" aria-labelledby="pills-hanhwa_memory-tab">
+								<div class="carousel slide" id="carouselCategoryHanhwaMemory"
+									data-bs-touch="false" data-bs-interval="false">
 									<!-- 한화 기념상품 시작 -->
 									<div class="carousel-inner">
 										<!-- 한화 기념상품 첫번째 페이지 -->
@@ -1208,10 +1329,10 @@ NumberFormat nf = NumberFormat.getCurrencyInstance();
 									aria-selected="false">야구용품</button>
 							</li>
 							<li class="navv-item" role="presentation">
-								<button class="navv-link" id="pills-kia_commemoration-tab"
-									data-bs-toggle="pill" data-bs-target="#pills-kia_commemoration"
-									type="button" role="tab"
-									aria-controls="pills-kia_commemoration" aria-selected="false">기념상품</button>
+								<button class="navv-link" id="pills-kia_memory-tab"
+									data-bs-toggle="pill" data-bs-target="#pills-kia_memory"
+									type="button" role="tab" aria-controls="pills-kia_memory"
+									aria-selected="false">기념상품</button>
 							</li>
 						</ul>
 
@@ -1352,11 +1473,10 @@ NumberFormat nf = NumberFormat.getCurrencyInstance();
 							</div>
 
 							<!-- KIA 기념상품 -->
-							<div class="tab-pane fade" id="pills-kia_commemoration"
-								role="tabpanel" aria-labelledby="pills-kia_commemoration-tab">
-								<div class="carousel slide"
-									id="carouselCategoryKiaCommemoration" data-bs-touch="false"
-									data-bs-interval="false">
+							<div class="tab-pane fade" id="pills-kia_memory" role="tabpanel"
+								aria-labelledby="pills-kia_memory-tab">
+								<div class="carousel slide" id="carouselCategoryKiaMemory"
+									data-bs-touch="false" data-bs-interval="false">
 									<!-- KIA 기념상품 시작 -->
 									<div class="carousel-inner">
 										<!-- KIA 기념상품 첫번째 페이지 -->
@@ -1422,9 +1542,9 @@ NumberFormat nf = NumberFormat.getCurrencyInstance();
 									aria-selected="false">야구용품</button>
 							</li>
 							<li class="navv-item" role="presentation">
-								<button class="navv-link" id="pills-kt_commemoration-tab"
-									data-bs-toggle="pill" data-bs-target="#pills-kt_commemoration"
-									type="button" role="tab" aria-controls="pills-kt_commemoration"
+								<button class="navv-link" id="pills-kt_memory-tab"
+									data-bs-toggle="pill" data-bs-target="#pills-kt_memory"
+									type="button" role="tab" aria-controls="pills-kt_memory"
 									aria-selected="false">기념상품</button>
 							</li>
 						</ul>
@@ -1566,9 +1686,9 @@ NumberFormat nf = NumberFormat.getCurrencyInstance();
 							</div>
 
 							<!-- KT 기념상품 -->
-							<div class="tab-pane fade" id="pills-kt_commemoration"
-								role="tabpanel" aria-labelledby="pills-kt_commemoration-tab">
-								<div class="carousel slide" id="carouselCategoryKtCommemoration"
+							<div class="tab-pane fade" id="pills-kt_memory" role="tabpanel"
+								aria-labelledby="pills-kt_memory-tab">
+								<div class="carousel slide" id="carouselCategoryKtMemory"
 									data-bs-touch="false" data-bs-interval="false">
 									<!-- KT 기념상품 시작 -->
 									<div class="carousel-inner">
@@ -1636,9 +1756,9 @@ NumberFormat nf = NumberFormat.getCurrencyInstance();
 									aria-selected="false">야구용품</button>
 							</li>
 							<li class="navv-item" role="presentation">
-								<button class="navv-link" id="pills-lg_commemoration-tab"
-									data-bs-toggle="pill" data-bs-target="#pills-lg_commemoration"
-									type="button" role="tab" aria-controls="pills-lg_commemoration"
+								<button class="navv-link" id="pills-lg_memory-tab"
+									data-bs-toggle="pill" data-bs-target="#pills-lg_memory"
+									type="button" role="tab" aria-controls="pills-lg_memory"
 									aria-selected="false">기념상품</button>
 							</li>
 						</ul>
@@ -1781,9 +1901,9 @@ NumberFormat nf = NumberFormat.getCurrencyInstance();
 							</div>
 
 							<!-- LG 기념상품 -->
-							<div class="tab-pane fade" id="pills-lg_commemoration"
-								role="tabpanel" aria-labelledby="pills-lg_commemoration-tab">
-								<div class="carousel slide" id="carouselCategoryLgCommemoration"
+							<div class="tab-pane fade" id="pills-lg_memory" role="tabpanel"
+								aria-labelledby="pills-lg_memory-tab">
+								<div class="carousel slide" id="carouselCategoryLgMemory"
 									data-bs-touch="false" data-bs-interval="false">
 									<!-- LG 기념상품 시작 -->
 									<div class="carousel-inner">
@@ -1850,9 +1970,9 @@ NumberFormat nf = NumberFormat.getCurrencyInstance();
 									aria-selected="false">야구용품</button>
 							</li>
 							<li class="navv-item" role="presentation">
-								<button class="navv-link" id="pills-nc_commemoration-tab"
-									data-bs-toggle="pill" data-bs-target="#pills-nc_commemoration"
-									type="button" role="tab" aria-controls="pills-nc_commemoration"
+								<button class="navv-link" id="pills-nc_memory-tab"
+									data-bs-toggle="pill" data-bs-target="#pills-nc_memory"
+									type="button" role="tab" aria-controls="pills-nc_memory"
 									aria-selected="false">기념상품</button>
 							</li>
 						</ul>
@@ -1994,9 +2114,9 @@ NumberFormat nf = NumberFormat.getCurrencyInstance();
 							</div>
 
 							<!-- NC 기념상품 -->
-							<div class="tab-pane fade" id="pills-nc_commemoration"
-								role="tabpanel" aria-labelledby="pills-nc_commemoration-tab">
-								<div class="carousel slide" id="carouselCategoryNcCommemoration"
+							<div class="tab-pane fade" id="pills-nc_memory" role="tabpanel"
+								aria-labelledby="pills-nc_memory-tab">
+								<div class="carousel slide" id="carouselCategoryNcMemory"
 									data-bs-touch="false" data-bs-interval="false">
 									<!-- NC 기념상품 시작 -->
 									<div class="carousel-inner">
@@ -2065,10 +2185,10 @@ NumberFormat nf = NumberFormat.getCurrencyInstance();
 									aria-selected="false">야구용품</button>
 							</li>
 							<li class="navv-item" role="presentation">
-								<button class="navv-link" id="pills-ssg_commemoration-tab"
-									data-bs-toggle="pill" data-bs-target="#pills-ssg_commemoration"
-									type="button" role="tab"
-									aria-controls="pills-ssg_commemoration" aria-selected="false">기념상품</button>
+								<button class="navv-link" id="pills-ssg_memory-tab"
+									data-bs-toggle="pill" data-bs-target="#pills-ssg_memory"
+									type="button" role="tab" aria-controls="pills-ssg_memory"
+									aria-selected="false">기념상품</button>
 							</li>
 						</ul>
 
@@ -2210,11 +2330,10 @@ NumberFormat nf = NumberFormat.getCurrencyInstance();
 							</div>
 
 							<!-- SSG 기념상품 -->
-							<div class="tab-pane fade" id="pills-ssg_commemoration"
-								role="tabpanel" aria-labelledby="pills-ssg_commemoration-tab">
-								<div class="carousel slide"
-									id="carouselCategorySsgCommemoration" data-bs-touch="false"
-									data-bs-interval="false">
+							<div class="tab-pane fade" id="pills-ssg_memory" role="tabpanel"
+								aria-labelledby="pills-ssg_memory-tab">
+								<div class="carousel slide" id="carouselCategorySsgMemory"
+									data-bs-touch="false" data-bs-interval="false">
 									<!-- SSG 기념상품 시작 -->
 									<div class="carousel-inner">
 										<!-- SSG 기념상품 첫번째 페이지 -->
@@ -2268,5 +2387,7 @@ NumberFormat nf = NumberFormat.getCurrencyInstance();
 	<link
 		href="https://fonts.googleapis.com/css2?family=Jost:wght@200;300;400;500;600;700;800;900&amp;display=swap"
 		rel="stylesheet" />
+		
+		
 </body>
 </html>

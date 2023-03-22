@@ -14,10 +14,13 @@
 	pageEncoding="UTF-8"%>
 
 <%
-	
-	ReviewBoardDao rbDao = new ReviewBoardDao();
-	List<ReviewBoardDto> list = rbDao.getAllRBs();
+	int currentPage = Integer.parseInt(request.getParameter("currentPage"));
+	int perPage = 15;
+	int start = (currentPage - 1) * perPage;
 
+	ReviewBoardDao rbDao = new ReviewBoardDao();
+	List<ReviewBoardDto> list = rbDao.getRBList(start, perPage);
+	
 	ReviewCommentDao rcDao = new ReviewCommentDao();
 	
 	JSONArray arr = new JSONArray();
