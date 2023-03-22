@@ -165,9 +165,8 @@ $(function(){
 		var currentPage=$("#currentPage").val();
 		var str = $("#search_str").val();
 		
-		alert(val+" "+currentPage+" "+str);
+		//alert(val+" "+currentPage+" "+str);
 		
-	   
 	    $.ajax({
 		
 			type : "get",
@@ -175,7 +174,7 @@ $(function(){
 			dataType : "json",
 			data : {"val" : val, "str" : str,"currentPage":currentPage},
 			success:function(res) {
-				//alert(val + ", "+ str +", " + res.length);
+				alert(val + ", "+ str +", " + res.length);
 				
 				var s="";
 				
@@ -299,6 +298,7 @@ function list(){
 						<h3 class="card-header">
 							<a href='management_stockListPage.jsp' style="text-decoration: none;color: black;"><b>재&nbsp;고&nbsp;목&nbsp;록</b></a>
 						</h3>
+						
 						<div class="sList"></div>
 
 						<div class="bBottom" style="margin-top: 30px;">
@@ -319,18 +319,18 @@ function list(){
                             <div class="bInsert">
 								<button type="button" class="btn btn-default" id="insertBtn" onclick="location.href='../product/product_insertPage.jsp'">재고입력</button>
 							</div>
-							</div>
 						</div>
-						<div style="width: 500px; text-align: center;" class="container">
-							<ul class="pagination">
-								<%
-								//이전
-								if (startPage > 1) {
-								%>
-								<li><a href="management_stockListPage.jsp?currentPage=<%=startPage - 1%>">이전</a></li>
-								<%
-								}
-								for (int pp = startPage; pp <= endPage; pp++) {
+					</div>
+					<div style="width: 500px; text-align: center;" class="container">
+						<ul class="pagination">
+							<%
+							//이전
+							if (startPage > 1) {
+							%>
+							<li><a href="management_stockListPage.jsp?currentPage=<%=startPage - 1%>">이전</a></li>
+							<%
+							}
+							for (int pp = startPage; pp <= endPage; pp++) {
 								if (pp == currentPage) {
 								%>
 								<li class="active"><a
@@ -342,16 +342,16 @@ function list(){
 								<li><a href="management_stockListPage.jsp?currentPage=<%=pp%>"><%=pp%></a></li>
 								<%
 								}
-								}
-								//다음
-								if (endPage < totalPage) {
-								%>
+							}
+							//다음
+							if (endPage < totalPage) {
+							%>
 								<li><a href="management_stockListPage.jsp?currentPage=<%=endPage + 1%>">다음</a></li>
-								<%
-								}
-								%>
-							</ul>
-						</div>
+							<%
+							}
+							%>
+						</ul>
+					</div>
 					</div>
 				</div>
 				<!-- Bootstrap Table with Header - Light -->

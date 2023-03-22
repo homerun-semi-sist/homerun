@@ -6,14 +6,14 @@
 <%@page import="data.dto.ProductDto"%>
 <%@page import="java.util.List"%>
 <%@page import="data.dao.ProductDao"%>
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-	pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=utf-8"
+	pageEncoding="utf-8"%>
 <%
 int currentPage = Integer.parseInt(request.getParameter("currentPage"));
 
-int start; //°¢ ÆäÀÌÁöÀÇ ½ÃÀÛ¹øÈ£
-int perPage = 10; //ÇÑ ÆäÀÌÁö´ç º¸¿©Áú ±Û °³¼ö
-//°¢ÆäÀÌÁö¿¡¼­ ºÒ·¯¿Ã ½ÃÀÛ¹øÈ£
+int start; //ê° íŽ˜ì´ì§€ì˜ ì‹œìž‘ë²ˆí˜¸
+int perPage = 10; //í•œ íŽ˜ì´ì§€ë‹¹ ë³´ì—¬ì§ˆ ê¸€ ê°œìˆ˜
+//ê°íŽ˜ì´ì§€ì—ì„œ ë¶ˆëŸ¬ì˜¬ ì‹œìž‘ë²ˆí˜¸
 start = (currentPage - 1) * perPage;
 
 String val = request.getParameter("val");
