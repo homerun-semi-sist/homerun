@@ -102,7 +102,7 @@ $("#btnnck").click(function(){
 					
 					alert("닉네임 중복체크를 해 주세요");
 					$("#nickname").focus();
-					
+
 				}else{
 					
 					if(f.pw1.value!=f.pw2.value){
@@ -142,20 +142,16 @@ $("#btnnck").click(function(){
 						
 						alert("전화번호 뒷자리를 입력 해 주세요");
 						
+						
 					}else if(f.addr1.value==""){
 						
 						alert("주소를 입력 해 주세요");
 						
-					}else if(f.addr2.value==""){
+					}else{
 						
-						alert("주소를 입력 해 주세요");
-						
-					}else if(f.addr3.value==""){
-						
-						alert("주소를 입력 해 주세요");
+						return true;
 						
 					}
-					
 				}
 			}
 		});
@@ -543,9 +539,9 @@ $("#btnnck").click(function(){
        </div> -->
        
        <div class="textForm" >주소
-	       <input type="text" name="addr1" class="addr" id="sample6_postcode" placeholder="우편번호" style="margin-left: 98px;">&nbsp;
+	       <input type="text" name="addr1" class="addr" id="sample6_postcode" placeholder="우편번호" style="margin-left: 98px;" required="required">&nbsp;
 		   <input type="button" class="addr" onclick="sample6_execDaumPostcode()" value="우편번호 찾기"><br>
-		   <input type="text" name="addr2" class="addr" id="sample6_address" placeholder="주소" style="margin-left: 130px;">&nbsp;
+		   <input type="text" name="addr2" class="addr" id="sample6_address" placeholder="주소" style="margin-left: 130px;" required="required">&nbsp;
 		   <input type="text" name="addr3" class="addr" id="sample6_extraAddress" placeholder="참고항목">
 		</div>
 		

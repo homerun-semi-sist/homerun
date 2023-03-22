@@ -52,22 +52,6 @@ $("#btnnck").click(function(){
 	
 	function passcheck(f)
 	{
-		var nickname=$("#nickname").val();
-		
-		$.ajax({
-			
-			type:"post",
-			url:"../regist/regist_search.jsp",
-			dataType:"json",
-			data:{"nickname":nickname},
-			success:function(res){
-				
-				if(res.Ncount==1){
-					
-					alert("닉네임 중복체크를 해 주세요");
-					$("#nickname").focus();
-					
-				}else{
 					
 					if(f.pw1.value!=f.pw2.value){
 						
@@ -114,15 +98,7 @@ $("#btnnck").click(function(){
 						
 						alert("주소를 입력 해 주세요");
 						
-					}else if(f.addr3.value==""){
-						
-						alert("주소를 입력 해 주세요");
-						
 					}
-					
-				}
-			}
-		});
 		
 	}
 	
@@ -537,8 +513,7 @@ function noSpacialForm(obj) { // 공백사용못하게
 		   <input type="text" name="addr2" class="addr" id="sample6_address" placeholder="주소" required="required" style="margin-left: 130px;"
 		   		value="<%=addr[1]%> <%=addr[2]%> <%=addr[3]%> <%=addr[4]%>">&nbsp;
 		   
-		   <input type="text" name="addr3" class="addr" id="sample6_extraAddress" placeholder="참고항목" required="required"
-		   		value="<%=addr[5]%>">
+		   <input type="text" name="addr3" class="addr" id="sample6_extraAddress" placeholder="참고항목">
 		</div>
     
        <button type="submit" class="btn1" onclick="passcheck(f)">수정하기</button>

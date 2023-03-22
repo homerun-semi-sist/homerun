@@ -1,3 +1,5 @@
+<%@page import="data.dto.UserDto"%>
+<%@page import="data.dao.UserDao"%>
 <%@ page import="data.dao.ProductDao"%>
 <%@ page import="java.util.List"%>
 <%@ page import="data.dto.ProductDto"%>
@@ -11,7 +13,9 @@
 		<link rel="stylesheet"
 			href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" />
 		<script src="https://code.jquery.com/jquery-3.6.3.js"></script>
-		<link href="../assets/css/style_index.css" rel="stylesheet">
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+		<link href="../assets/css/index.css" rel="stylesheet">
 		<script type="text/javascript">
 		function logincheck(a)
 		{
@@ -169,7 +173,6 @@
 
 
 </style>
-	
 	<body style="overflow-x: hidden;">
 		<%
 			String mainPage = "../layout/main.jsp";
@@ -192,6 +195,7 @@
 					<div class="col-sm-2" style="border: 1px solid red;">left</div>
 					<div class="col-sm-8" style="border: 1px solid pink;">
 						<!-- write here -->
+
 <%
 	//세션 값 얻기
 	String saveok=(String)session.getAttribute("saveok");
@@ -231,6 +235,7 @@
   </form>
   
 </div>
+
 
 
 						<!-- the end -->
