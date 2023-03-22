@@ -127,7 +127,7 @@
 			$(document).on("click", ".fcMod", function() {
 							
 				var fcIdx = $(this).attr("fcIdx");
-				alert(fcIdx);
+				// alert(fcIdx);
 				
 				// 입력폼은 숨기고 수정폼은 나타냄
 				$("div.commentForm").hide();
@@ -152,7 +152,7 @@
 							
 				var fcIdx = $(this).attr("fcIdx");
 				var ucontent = $("#ucontent").val();
-				alert(fcIdx + ", " + ucontent);
+				// alert(fcIdx + ", " + ucontent);
 
 				$.ajax({
 				
@@ -210,7 +210,7 @@
 				if(loginok == "yes") {
 					
 					var fcIdx = $(this).attr("fcIdx");
-					 alert(fcIdx);
+					// alert(fcIdx);
 					
 					$.ajax({
 						
@@ -238,7 +238,7 @@
 				if(loginok == "yes") {
 					
 					var fcIdx = $(this).attr("fcIdx");
-					 alert(fcIdx);
+					// alert(fcIdx);
 					
 					$.ajax({
 						

@@ -19,12 +19,6 @@
 <link href="../assets/css/styles_detail.css" rel="stylesheet" />
 </head>
 
-<%
-String pId = request.getParameter("pId");
-
-ProductDao dao = new ProductDao();
-ProductDto dto = dao.getProduct(pId);
-
 <script>
 	$(function(){
 		
@@ -56,7 +50,6 @@ ProductDto dto = dao.getProduct(pId);
 		
 	});
 </script>
-
 
 <%
 String pId = request.getParameter("pId");

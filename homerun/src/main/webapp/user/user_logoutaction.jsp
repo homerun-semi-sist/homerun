@@ -38,10 +38,7 @@
 <%
 		//loginok 세션 제거
 		session.removeAttribute("loginok");
-<<<<<<< HEAD
-=======
-	
->>>>>>> origin/WooUng3
+
 		//loginmain이동
 		response.sendRedirect("../index.jsp");
 %>
