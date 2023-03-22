@@ -212,10 +212,12 @@ div{
       </div>  
          
       <div class="item">
-        <div>         
+        <div>
+        <a href="../managementpage/management_stockListPage.jsp" style="text-decoration: none;color: black;">         
           <img class="image" src="../assets/img/재고 관리.png">
           <div class="text">재고 관리</div>
           <div class="number">0건</div>
+          </a>
         </div>
       </div>   
         

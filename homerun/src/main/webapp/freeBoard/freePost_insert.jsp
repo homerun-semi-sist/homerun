@@ -46,7 +46,7 @@
 		TeamDao tDao = new TeamDao();	
 		List<TeamDto> list = tDao.getAllTeams();
 	
-		String uId = (String)session.getAttribute("myid");
+		String uId = (String)session.getAttribute("uid");
 	%>
 
     <!-- Layout wrapper -->
