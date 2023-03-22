@@ -289,25 +289,26 @@ div.pName, span.del {
 				var pId = $(this).attr("pId");
 				var cQTY = $(this).attr("cQTY");
 				
-				stock(pId);
+				stock(pId,cId);
 				orderlist(cId,cQTY);
-				
+				setTimeout(function() {
 				del(cId);
-				
+				},100);
 			});
 			
 		});
 		
 		
 			
-		function stock(pId){
+		function stock(pId,cId){
 			$.ajax({
 
 				type : "get",
 				dataType : "html",
 				url : "product_updatepStock.jsp",
 				data : {
-					"pId" : pId
+					"pId" : pId,
+					"cId" : cId
 				},
 				success : function() {
 					location.href="product_success.jsp";

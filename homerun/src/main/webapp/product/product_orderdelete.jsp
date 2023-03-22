@@ -3,11 +3,8 @@
     pageEncoding="utf-8"%>
 
 <%
-	String pId=request.getParameter("pId");
-	String cId=request.getParameter("cId");
+	String oId=request.getParameter("oId");
 	CartDao dao=new CartDao();
-	
-	
-	dao.QTYmethod(pId,cId);
-	//response.sendRedirect("product_success.jsp");
+	dao.deleteOrder(oId);
+	//response.sendRedirect("product_cartlist.jsp");
 %>

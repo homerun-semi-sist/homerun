@@ -7,14 +7,7 @@ public class CartDto {
 	private String uId; //user id
 	private String pId; //상품 id 
 	private int cQTY; // 
-	private Timestamp cartDay;
 	
-	public Timestamp getCartDay() {
-		return cartDay;
-	}
-	public void setCartDay(Timestamp cartDay) {
-		this.cartDay = cartDay;
-	}
 	public String getcId() {
 		return cId;
 	}

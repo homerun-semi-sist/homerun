@@ -13,6 +13,7 @@ import com.mysql.cj.xdevapi.Result;
 
 import data.dto.CartDto;
 import data.dto.OrderDto;
+import data.dto.ProductDto;
 import mysql.db.DbConnect;
 
 public class CartDao {
@@ -112,6 +113,26 @@ public class CartDao {
 
 	}
 	
+	public void deleteOrder(String oId) { // 카트 삭제
+		Connection conn = db.getConnection();
+		PreparedStatement pstmt = null;
+
+		String sql = "delete from ORDERS where oId=?";
+
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, oId);
+			pstmt.execute();
+
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			db.dbClose(pstmt, conn);
+		}
+
+	}
+	
 	public void successDelete() {
 		Connection conn = db.getConnection();
 		PreparedStatement pstmt = null;
@@ -129,6 +150,27 @@ public class CartDao {
 			db.dbClose(pstmt, conn);
 		}
 
+	}
+	public void insertCart(CartDto dto) {
+		Connection conn = db.getConnection();
+		PreparedStatement pstmt =null;
+		
+		String sql ="insert into CART values(null,?,?,?)";
+		
+		try {
+			pstmt=conn.prepareStatement(sql);
+			pstmt.setString(1,dto.getuId());
+			pstmt.setString(2,dto.getpId());
+			pstmt.setInt(3,dto.getcQTY());
+			
+			pstmt.execute();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally{
+			db.dbClose(pstmt, conn);
+		}
+		
 	}
 	
 
@@ -233,24 +275,25 @@ public class CartDao {
 		return list;
 	}
 	
-	public void QTYmethod (String pId) {
+	public void QTYmethod (String pId,String cId) {
 		Connection conn=db.getConnection();
 		PreparedStatement pstmt=null;
 		
 		String sql="UPDATE PRODUCT "
 				+ "SET pStock = pStock - ("
-				+ "  SELECT SUM(cQTY)"
+				+ "  SELECT sum(cQTY)"
 				+ "  FROM CART "
 				+ "  WHERE pId = ?"
 				+ ")"
-				+ "WHERE pId IN ("
+				+ " WHERE pId IN ("
 				+ "  SELECT DISTINCT pId"
-				+ "  FROM CART"
+				+ "  FROM CART WHERE cId =?"
 				+ ")";
 		
 		try {
 			pstmt=conn.prepareStatement(sql);
 			pstmt.setString(1, pId);
+			pstmt.setString(2, cId);
 			
 			pstmt.execute();
 		} catch (SQLException e) {
