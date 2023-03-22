@@ -172,7 +172,7 @@
 
 			String[] team = {"KIA", "KT", "LG", "NC", "SSG", "두산", "롯데", "삼성", "키움", "한화"};
 
-			int num = (int)(Math.random() * 10 + 1);
+			int num = (int)(Math.random() * 10);
 			String place = "";
 			
 			if(team[num].equals(team[4])) {
