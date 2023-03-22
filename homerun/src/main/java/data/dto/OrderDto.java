@@ -5,7 +5,8 @@ import java.sql.Timestamp;
 public class OrderDto {
 	
 	private String oId;
-	private String cId;
+	private String uId;
+	private String pId;
 	private int oQTY;
 	private Timestamp oDay;
 	
@@ -15,11 +16,11 @@ public class OrderDto {
 	public void setoId(String oId) {
 		this.oId = oId;
 	}
-	public String getcId() {
-		return cId;
+	public String getpId() {
+		return pId;
 	}
-	public void setcId(String cId) {
-		this.cId = cId;
+	public void setpId(String pId) {
+		this.pId = pId;
 	}
 	public int getoQTY() {
 		return oQTY;

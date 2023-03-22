@@ -12,10 +12,10 @@
 request.setCharacterEncoding("utf-8");
 
 	CartDto dto = new CartDto();
-	String cId = request.getParameter("cId");
+	String pId = request.getParameter("pId");
 	int cQTY=Integer.parseInt(request.getParameter("cQTY"));
 	
-	dto.setcId(cId);
+	dto.setcId(pId);
 	dto.setcQTY(cQTY);
 	CartDao dao = new CartDao();
 	dao.insertOrder(dto);

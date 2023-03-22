@@ -19,20 +19,25 @@
 <link href="../assets/css/styles_detail.css" rel="stylesheet" />
 </head>
 
-<script>
+<script  type="text/javascript">
+
 	$(function(){
 		
-		$("#cartInsert").click(function(){
+		$("#cartinsert").click(function(){
+			
 			var uId = $(this).attr("uId");
 			var pId = $(this).attr("pId");
-			var=cQTY=$("#inputQuantity").val();
+			var cQTY=$("#inputQuantity").val();
+			
 			
 			insertCart(uId,pId,cQTY);
-			
-			
 		});
 		
+		
+		
+		
 		function insertCart(uId,pId,cQTY){
+			
 			$.ajax({
 
 				type : "get",
@@ -46,6 +51,8 @@
 				success : function() {
 					location.href="product_cartlist.jsp";
 				}
+				
+			});	
 		}
 		
 	});
@@ -53,12 +60,12 @@
 
 <%
 String pId = request.getParameter("pId");
-String uId = request.getParameter("uId");
+String uid=(String)session.getAttribute("uid");
 
 ProductDao dao = new ProductDao();
 ProductDto dto = dao.getProduct(pId);
 UserDao udao = new UserDao();
-UserDto udto = udao.getData(uId);
+UserDto udto = udao.getData(uid);
 
 NumberFormat nf = NumberFormat.getCurrencyInstance();
 %>
@@ -85,9 +92,7 @@ NumberFormat nf = NumberFormat.getCurrencyInstance();
 						<input class="form-control text-center me-4" id="inputQuantity"
 							type="number" value="1" style="max-width: 4rem" />
 						<button class="btn btn-dark flex-shrink-0" type="button"
-							id="cartInsert">
-
-							장바구니 담기 <i class="bi-cart-fill me-1"></i>
+							id="cartinsert"pId="<%=dto.getpId()%>" uId="<%=udto.getUid()%>">장바구니 담기 <i class="bi-cart-fill me-1"></i>
 						</button>
 					</div>
 				</div>
@@ -117,7 +122,8 @@ NumberFormat nf = NumberFormat.getCurrencyInstance();
 				List<ProductDto> subList_related = new ArrayList<ProductDto>(subListbase_related.subList(0, last_related));
 				for (int j = 0; j < subList_related.size(); j++) {
 					ProductDto dto_related = subList_related.get(j);
-				%>
+				
+					%>
 				<div class="col mb-5">
 					<div class="card h-100">
 						<!-- Product image-->

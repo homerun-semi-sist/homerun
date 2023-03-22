@@ -157,12 +157,10 @@ div.pName, span.del {
 				});
 
 		//상품선택시 디테일페이지 이동
-		$("div.pName")
-				.click(
+		$("div.pName").click(
 						function() {
-
-							var pName = $(this).attr("pId");
-							location.href = "product_detailPage.jsp?pId="+ pId;
+							var pId = $(this).attr("pId");
+							location.href = "product_detailPage.jsp?pId="+pId;
 
 						});
 
@@ -290,7 +288,7 @@ div.pName, span.del {
 				var cQTY = $(this).attr("cQTY");
 				
 				stock(pId,cId);
-				orderlist(cId,cQTY);
+				orderlist(pId,cQTY);
 				setTimeout(function() {
 				del(cId);
 				},100);
@@ -320,14 +318,14 @@ div.pName, span.del {
 			
 		} 
 		
-		function orderlist(cId,cQTY){
+		function orderlist(pId,cQTY){
 			$.ajax({
 
 				type : "get",
 				dataType : "html",
 				url : "product_insertOrder.jsp",
 				data : {
-					"cId" : cId,
+					"pId" : pId,
 					"cQTY": cQTY
 				},
 				success : function() {
@@ -424,12 +422,12 @@ NumberFormat nf = NumberFormat.getInstance();
 
 									<td style="line-height: 100px;">
 										<div pId="<%=map.get("pId")%>" class="pName" >
-											<img src="<%=photo%>" class="photo" align="left" hspace="20" pId="<%=map.get("pId")%>">
+											<img src="<%=photo%>" class="photo" align="left"  style="width:90px;" hspace="20" pId="<%=map.get("pId")%>">
 
 											<h4 style="line-height: 80px;">
 												<b> <%=map.get("pName")%> &nbsp;&nbsp;&nbsp;&nbsp;
 												</b>
-												<sapn style="font-size:0.8em">재고:<%=Integer.parseInt(map.get("pStock"))%>
+												<sapn style="font-size:0.8em">
 												</sapn>
 											</h4>
 											<td><span style="line-height: 35px"

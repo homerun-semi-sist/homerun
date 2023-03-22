@@ -181,7 +181,7 @@ public class CartDao {
 		String sql = "insert into ORDERS values(null,?,?,now())";
 		try {
 			pstmt = conn.prepareStatement(sql);
-			pstmt.setString(1, dto.getcId());
+			pstmt.setString(1, dto.getpId());
 			pstmt.setInt(2, dto.getcQTY());
 			pstmt.execute();
 		} catch (SQLException e) {
