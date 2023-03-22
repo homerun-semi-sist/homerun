@@ -1,3 +1,6 @@
+<%@page import="data.dto.ProductDto"%>
+<%@page import="java.util.List"%>
+<%@page import="data.dao.ProductDao"%>
 <%@ page language="java" contentType="text/html; charset=utf-8"
 	pageEncoding="utf-8"%>
 <!DOCTYPE html>
