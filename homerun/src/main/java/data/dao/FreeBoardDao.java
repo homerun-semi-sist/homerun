@@ -555,7 +555,7 @@ public class FreeBoardDao {
 			pstmt.setInt(2, perPage);
 			
 			rs = pstmt.executeQuery();
-			System.out.println(sql);	
+			
 			while(rs.next()) {
 				FreeBoardDto dto = new FreeBoardDto();
 				

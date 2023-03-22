@@ -105,3 +105,91 @@
   text-align: center;
   margin-top: 1rem;
 }
+
+/* naav 추가 */
+.naav {
+  --bs-naav-link-padding-x: 1rem;
+  --bs-naav-link-padding-y: 0.5rem;
+  --bs-naav-link-font-weight: ;
+  --bs-naav-link-color: var(--bs-link-color);
+  --bs-naav-link-hover-color: var(--bs-link-hover-color);
+  --bs-naav-link-disabled-color: #6c757d;
+  display: flex;
+  flex-wrap: wrap;
+  padding-left: 0;
+  margin-bottom: 0;
+  list-style: none;
+}
+.naav-link {
+  display: block;
+  padding: var(--bs-naav-link-padding-y) var(--bs-naav-link-padding-x);
+  font-size: var(--bs-naav-link-font-size);
+  font-weight: var(--bs-naav-link-font-weight);
+  color: var(--bs-naav-link-color);
+  text-decoration: none;
+  transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out,
+    border-color 0.15s ease-in-out;
+}
+@media (prefers-reduced-motion: reduce) {
+  .naav-link {
+    transition: none;
+  }
+}
+.naav-link:focus,
+.naav-link:hover {
+  color: var(--bs-naav-link-hover-color);
+}
+.naav-link.disabled {
+  color: var(--bs-naav-link-disabled-color);
+  pointer-events: none;
+  cursor: default;
+}
+.naav-tabs {
+  --bs-naav-tabs-border-width: 1px;
+  --bs-naav-tabs-border-color: #dee2e6;
+  --bs-naav-tabs-border-radius: 0.375rem;
+  --bs-naav-tabs-link-hover-border-color: #e9ecef #e9ecef #dee2e6;
+  --bs-naav-tabs-link-active-color: #495057;
+  --bs-naav-tabs-link-active-bg: #fff;
+  --bs-naav-tabs-link-active-border-color: #dee2e6 #dee2e6 #fff;
+  border-bottom: var(--bs-naav-tabs-border-width) solid
+    var(--bs-naav-tabs-border-color);
+}
+.naav-tabs .naav-link {
+  margin-bottom: calc(-1 * var(--bs-naav-tabs-border-width));
+  background: 0 0;
+  border: var(--bs-naav-tabs-border-width) solid transparent;
+  border-top-left-radius: var(--bs-naav-tabs-border-radius);
+  border-top-right-radius: var(--bs-naav-tabs-border-radius);
+}
+.naav-tabs .naav-link:focus,
+.naav-tabs .naav-link:hover {
+  isolation: isolate;
+  border-color: var(--bs-naav-tabs-link-hover-border-color);
+}
+.naav-tabs .naav-link.disabled,
+.naav-tabs .naav-link:disabled {
+  color: var(--bs-naav-link-disabled-color);
+  background-color: transparent;
+  border-color: transparent;
+}
+.naav-tabs .naav-item.show .naav-link,
+.naav-tabs .naav-link.active {
+  color: var(--bs-naav-tabs-link-active-color);
+  background-color: var(--bs-naav-tabs-link-active-bg);
+  border-color: var(--bs-naav-tabs-link-active-border-color);
+}
+.naav-tabs .dropdown-menu {
+  margin-top: calc(-1 * var(--bs-naav-tabs-border-width));
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+}
+.fade {
+  transition: opacity 0.15s linear;
+}
+.tab-content > .tab-pane {
+  display: none;
+}
+.tab-content > .active {
+  display: block;
+}

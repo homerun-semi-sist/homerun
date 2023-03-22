@@ -2193,81 +2193,81 @@ section {
   background-color: #f8f9fa;
 }
 
-/* nav -> navvv */
-.navvv {
-  --bs-navvv-link-padding-x: 1rem;
-  --bs-navvv-link-padding-y: 0.5rem;
-  --bs-navvv-link-font-weight: ;
-  --bs-navvv-link-color: var(--bs-link-color);
-  --bs-navvv-link-hover-color: var(--bs-link-hover-color);
-  --bs-navvv-link-disabled-color: #6c757d;
+/* nav -> naav */
+.naav {
+  --bs-naav-link-padding-x: 1rem;
+  --bs-naav-link-padding-y: 0.5rem;
+  --bs-naav-link-font-weight: ;
+  --bs-naav-link-color: var(--bs-link-color);
+  --bs-naav-link-hover-color: var(--bs-link-hover-color);
+  --bs-naav-link-disabled-color: #6c757d;
   display: flex;
   flex-wrap: wrap;
   padding-left: 0;
   margin-bottom: 0;
   list-style: none;
 }
-.navvv-link {
+.naav-link {
   display: block;
-  padding: var(--bs-navvv-link-padding-y) var(--bs-navvv-link-padding-x);
-  font-size: var(--bs-navvv-link-font-size);
-  font-weight: var(--bs-navvv-link-font-weight);
-  color: var(--bs-navvv-link-color);
+  padding: var(--bs-naav-link-padding-y) var(--bs-naav-link-padding-x);
+  font-size: var(--bs-naav-link-font-size);
+  font-weight: var(--bs-naav-link-font-weight);
+  color: var(--bs-naav-link-color);
   text-decoration: none;
   transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out,
     border-color 0.15s ease-in-out;
 }
 @media (prefers-reduced-motion: reduce) {
-  .navvv-link {
+  .naav-link {
     transition: none;
   }
 }
-.navvv-link:focus,
-.navvv-link:hover {
-  color: var(--bs-navvv-link-hover-color);
+.naav-link:focus,
+.naav-link:hover {
+  color: var(--bs-naav-link-hover-color);
 }
-.navvv-link.disabled {
-  color: var(--bs-navvv-link-disabled-color);
+.naav-link.disabled {
+  color: var(--bs-naav-link-disabled-color);
   pointer-events: none;
   cursor: default;
 }
-.navvv-tabs {
-  --bs-navvv-tabs-border-width: 1px;
-  --bs-navvv-tabs-border-color: #dee2e6;
-  --bs-navvv-tabs-border-radius: 0.375rem;
-  --bs-navvv-tabs-link-hover-border-color: #e9ecef #e9ecef #dee2e6;
-  --bs-navvv-tabs-link-active-color: #495057;
-  --bs-navvv-tabs-link-active-bg: #fff;
-  --bs-navvv-tabs-link-active-border-color: #dee2e6 #dee2e6 #fff;
-  border-bottom: var(--bs-navvv-tabs-border-width) solid
-    var(--bs-navvv-tabs-border-color);
+.naav-tabs {
+  --bs-naav-tabs-border-width: 1px;
+  --bs-naav-tabs-border-color: #dee2e6;
+  --bs-naav-tabs-border-radius: 0.375rem;
+  --bs-naav-tabs-link-hover-border-color: #e9ecef #e9ecef #dee2e6;
+  --bs-naav-tabs-link-active-color: #495057;
+  --bs-naav-tabs-link-active-bg: #fff;
+  --bs-naav-tabs-link-active-border-color: #dee2e6 #dee2e6 #fff;
+  border-bottom: var(--bs-naav-tabs-border-width) solid
+    var(--bs-naav-tabs-border-color);
 }
-.navvv-tabs .navvv-link {
-  margin-bottom: calc(-1 * var(--bs-navvv-tabs-border-width));
+.naav-tabs .naav-link {
+  margin-bottom: calc(-1 * var(--bs-naav-tabs-border-width));
   background: 0 0;
-  border: var(--bs-navvv-tabs-border-width) solid transparent;
-  border-top-left-radius: var(--bs-navvv-tabs-border-radius);
-  border-top-right-radius: var(--bs-navvv-tabs-border-radius);
+  border: var(--bs-naav-tabs-border-width) solid transparent;
+  border-top-left-radius: var(--bs-naav-tabs-border-radius);
+  border-top-right-radius: var(--bs-naav-tabs-border-radius);
 }
-.navvv-tabs .navvv-link:focus,
-.navvv-tabs .navvv-link:hover {
+.naav-tabs .naav-link:focus,
+.naav-tabs .naav-link:hover {
   isolation: isolate;
-  border-color: var(--bs-navvv-tabs-link-hover-border-color);
+  border-color: var(--bs-naav-tabs-link-hover-border-color);
 }
-.navvv-tabs .navvv-link.disabled,
-.navvv-tabs .navvv-link:disabled {
-  color: var(--bs-navvv-link-disabled-color);
+.naav-tabs .naav-link.disabled,
+.naav-tabs .naav-link:disabled {
+  color: var(--bs-naav-link-disabled-color);
   background-color: transparent;
   border-color: transparent;
 }
-.navvv-tabs .navvv-item.show .navvv-link,
-.navvv-tabs .navvv-link.active {
-  color: var(--bs-navvv-tabs-link-active-color);
-  background-color: var(--bs-navvv-tabs-link-active-bg);
-  border-color: var(--bs-navvv-tabs-link-active-border-color);
+.naav-tabs .naav-item.show .naav-link,
+.naav-tabs .naav-link.active {
+  color: var(--bs-naav-tabs-link-active-color);
+  background-color: var(--bs-naav-tabs-link-active-bg);
+  border-color: var(--bs-naav-tabs-link-active-border-color);
 }
-.navvv-tabs .dropdown-menu {
-  margin-top: calc(-1 * var(--bs-navvv-tabs-border-width));
+.naav-tabs .dropdown-menu {
+  margin-top: calc(-1 * var(--bs-naav-tabs-border-width));
   border-top-left-radius: 0;
   border-top-right-radius: 0;
 }
