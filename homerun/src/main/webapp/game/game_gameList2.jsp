@@ -41,7 +41,13 @@
 	String text_left = "";
 	String text_right = "";
 	String text_gday = "";
-
+%>
+<table class="table table-bordered" style="width: 500px">
+		<tr>
+			<th width="150px">경기일</th>
+			<th width="350px">경기</th>
+		</tr>
+		<%	
 	for (int i = 0; i < elements_gday.size(); i++) {
 		text_gday=elements_gday.get(i).text();
 	    int startIndex = i * 5;
@@ -53,11 +59,13 @@
 	    	text_left=elements_left.get(j).text();
 	    	text_right=elements_right.get(j).text();
 	        %>
-	    	<h3><%=text_gday %>&nbsp;&nbsp;<%=text_left %>vs<%=text_right %></h3>
+	        <tr><td><%=text_gday %></td><td><%=text_left %>vs<%=text_right %></td>
+	    	</tr>
 	    	<%
 	    }
 	}
 	
 	%>
+	</table>
 </body>
 </html>
