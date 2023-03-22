@@ -39,34 +39,26 @@
     <div class="collapse navbar-collapse" id="navbarCollapse">
         <div class="navbar-nav ms-auto py-3 py-lg-0">
             <a href="<%=root %>/index.jsp" class="nav-item nav-link active">Home</a>
-            <div class="nav-item dropdown">
+            <%--<div class="nav-item dropdown">
                 <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">경기일정</a>
                 <div class="dropdown-menu bg-light m-0">
                     <a href="#" class="dropdown-item">Page 1-1</a> <a href="#" class="dropdown-item">Page
                     1-2</a> <a href="#" class="dropdown-item">Page 1-3</a>
                 </div>
+            </div>--%>
+            <div class="nav-item">
+                <a href="<%=root %>/freeBoard/freeBoard_listPage.jsp" class="nav-link">자유게시판</a>
             </div>
-            <div class="nav-item dropdown">
-                <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">게시판</a>
-                <div class="dropdown-menu bg-light m-0">
-                    <a href="<%=root %>/freeBoard/freeBoard_listPage.jsp" class="dropdown-item">자유게시판</a>
-                    <a href="<%=root %>/reviewBoard/reviewBoard_listPage.jsp" class="dropdown-item">후기게시판</a>
-                </div>
+
+            <div class="nav-item">
+                <a href="<%=root %>/reviewBoard/reviewBoard_listPage.jsp" class="nav-link">후기게시판</a>
             </div>
+
             <div class="nav-item">
                 <a href="<%=root%>/product/product_mainPage.jsp" class="nav-link">응원용품</a>
 
             </div>
-            <div class="nav-item dropdown">
-                <a href="#" class="nav-link dropdown-toggle"
-                   data-bs-toggle="dropdown">예약</a>
-                <div class="dropdown-menu bg-light m-0">
-                    <a href="#" class="dropdown-item">Page 1-1</a> <a href="#"
-                                                                      class="dropdown-item">Page 1-2</a> <a href="#"
-                                                                                                            class="dropdown-item">Page
-                    1-3</a>
-                </div>
-            </div>
+
             <%-- <div class="nav-item dropdown">
                 <a href="#" class="nav-link dropdown-toggle"
                    data-bs-toggle="dropdown">관리자페이지</a>

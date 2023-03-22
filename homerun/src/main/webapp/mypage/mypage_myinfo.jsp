@@ -1,3 +1,5 @@
+<%@page import="data.dto.UserDto"%>
+<%@page import="data.dao.UserDao"%>
 <%@ page import="data.dao.ProductDao"%>
 <%@ page import="java.util.List"%>
 <%@ page import="data.dto.ProductDto"%>
@@ -36,12 +38,14 @@ div{
 	position: absolute;
 	left: 50%;
 	transform: translate(-50%, 0%); 
+	top: 200px;
 }
 
 .photo{
 	width: 100%;
 	height: 100%;
 	object-fit: cover;
+	cursor: pointer;
 }
 
 .summaryContainer{
@@ -71,14 +75,14 @@ div{
 .shippingStatusContainer .title{
   font-size: 20px;
   font-weight: bold;
-  margin-bottom: 15px;
+  margin-bottom: 10px;
 }
 
 /* 장바구니 결제완료 배송중 구매확정 [로우] */
 .shippingStatusContainer .status{
   display: flex;
   justify-content: space-between;
-  margin-bottom: 21px;
+  margin: 50px;
 }
 /* 장바구니 결제완료 배송중 구매확정 [아이템]  */
 .shippingStatusContainer .item{
@@ -102,12 +106,14 @@ div{
 	width: 100px;
 	height: 100px;
 	margin-bottom: 10px;
+	cursor: pointer;
+	
 }
 
 .name {
 	font-size: 40px;
 	text-align: center;
-	margin-top: 200px;
+	margin-top: 250px;
 }
 
 .nickname{
@@ -150,6 +156,46 @@ div{
 }
 
 </style>
+<%
+
+	String uid=(String)session.getAttribute("uid");
+	UserDao dao=new UserDao();
+	String uName=dao.getuName(uid);	
+	UserDto dto=dao.getData(uid);
+%>
+<script type="text/javascript">
+	function delfunc(uid){
+		
+		var pw1=$("#pw1").val();
+		
+		if(pw1==<%=dto.getPw()%>)
+			{
+				location.href='mypage_unregistaction.jsp?uid='+uid;
+				
+			}else{
+				
+				pw1="";
+				alert("비밀번호가 틀렸습니다")
+				
+			}
+		}
+	
+	function upfunc(){
+			
+			var pw2=$("#pw2").val();
+			
+			if(pw2==<%=dto.getPw()%>)
+				{
+					location.href='mypage_modifyform.jsp';
+					
+				}else{
+					
+					pw2="";
+					alert("비밀번호가 틀렸습니다")
+					
+				}
+			}
+</script>
 	<body style="overflow-x: hidden;">
 		<%
 			String mainPage = "../layout/main.jsp";
@@ -172,6 +218,7 @@ div{
 					<div class="col-sm-2" style="border: 1px solid red;">left</div>
 					<div class="col-sm-8" style="border: 1px solid pink;">
 						<!-- write here -->
+
 <div class="wrap">
 
 <div class="head">
@@ -198,13 +245,13 @@ div{
           <p><b style="font-size: 15pt;">정말 회원탈퇴 하시겠습니까?</b></p>
         </div>
         <div>
-        	&nbsp;&nbsp;&nbsp;&nbsp;<input type="password" placeholder="비밀번호 입력">
+        	&nbsp;&nbsp;&nbsp;&nbsp;<input type="password"  id="pw1" placeholder="비밀번호 입력">
         	<br>
         	<br>
         </div>
         <div class="modal-footer">
         	<button type="button" class="btn btn-default" data-dismiss="modal"
-        	onclick="location.href='../mypage/mypage_unregistform.jsp'">탈퇴하기</button>
+        	onclick="delfunc('<%=dto.getUid()%>')">탈퇴하기</button>
           <button type="button" class="btn btn-default" data-dismiss="modal">취소</button>
         </div>
       </div>
@@ -213,16 +260,45 @@ div{
   </div>
 						
 		<button type="button" class="btn2"
-			onclick="location.href='../index.jsp'">로그아웃</button>
+			onclick="location.href='../user/user_logoutaction.jsp'">로그아웃</button>
 		
 	  <div class="profile">
-	 	<img class="photo" src="../assets/img/프로필.png">
-	 	<br><br>
+	  	<a data-toggle="modal" data-target="#myModal2">
+	 		<img class="photo" src="../assets/img/프로필.png">
+	 		<br><br>
+	 	</a>
 	  </div>
 	  
-	  <div class="name"><b>이름</b></div>
+	  <!-- Modal -->
+  <div class="modal fade" id="myModal2" role="dialog">
+    <div class="modal-dialog">
+    
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title"><b>회원정보 수정</b></h4>
+        </div>
+        <div class="modal-body">
+          <p><b style="font-size: 15pt;">비밀번호를 입력 해 주세요</b></p>
+        </div>
+        <div>
+        	&nbsp;&nbsp;&nbsp;&nbsp;<input type="password" id="pw2" placeholder="비밀번호 입력">
+        	<br>
+        	<br>
+        </div>
+        <div class="modal-footer">
+        	<button type="button" class="btn btn-default" data-dismiss="modal"
+        	onclick="upfunc()">수정하기</button>
+          <button type="button" class="btn btn-default" data-dismiss="modal">취소</button>
+        </div>
+      </div>
+      
+    </div>
+  </div>
+	  
+	  <div class="name"><b><%=uName %></b></div>
 	  <br><br>
-	  <div class="nickname"><b>닉네임</b>님 환영합니다</div>
+	  <div class="nickname"><b><%=uid %></b>님 환영합니다</div>
   </div>
   
   <div class="shippingStatusContainer">
@@ -249,7 +325,7 @@ div{
         </div>
       </div>   
         
-      <div class="item">
+      <div class="item" >
         <div>
           <img class="image" src="../assets/img/댓글.png">        
           <div class="text">내 댓글</div>

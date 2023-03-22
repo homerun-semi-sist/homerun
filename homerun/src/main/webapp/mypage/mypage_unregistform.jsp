@@ -92,11 +92,10 @@ div {
 					<div class="col-sm-8" style="border: 1px solid pink;">
 						<!-- write here -->
 <%
-	String uid=request.getParameter("uid");
 
+	String uid=(String)session.getAttribute("uid");
 	UserDao dao=new UserDao();
-	
-	dao.getuName(uid);
+	String uName=dao.getuName(uid);
 	
 %>
 				<div class=main>
