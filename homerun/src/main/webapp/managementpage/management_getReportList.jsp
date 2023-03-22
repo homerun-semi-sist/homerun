@@ -17,14 +17,14 @@
 	int start = (currentPage - 1) * perPage;
 
 	FreeBoardDao fbDao = new FreeBoardDao();
-	List<FreeBoardDto> fbList = fbDao.getFBList(start, perPage);	
+	List<FreeBoardDto> fbList = fbDao.getAllFBs_report(start, perPage);	
 	
 	UserDao uDao = new UserDao();
 	TeamDao tDao = new TeamDao();
 	FreeCommentDao fcDao = new FreeCommentDao();
 	
 	JSONArray arr = new JSONArray();
-	SimpleDateFormat sdf = new SimpleDateFormat("yy.MM.dd HH:mm");
+	SimpleDateFormat sdf = new SimpleDateFormat("yy.MM.dd");
 	
 	for(FreeBoardDto dto : fbList) {
 		JSONObject ob = new JSONObject();		

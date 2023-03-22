@@ -381,11 +381,12 @@
             <div class="content-wrapper">
                 <!-- Content -->
 
-                <div class="container-xxl flex-grow-1 container-p-y">
-                <h3 style="margin-bottom: 30px;">자유게시판</h3>            
-                
-                <!-- Bootstrap Table with Header - Light -->
-                    <div class="card" style="background-color: #fff">
+                <div class="flex-grow-1 container-p-y">
+					<!-- Bootstrap Table with Header - Light -->
+					<div class="card" style="background-color: #fff">
+						<h3 class="card-header">
+							<a href='management_reportListPage.jsp' style="text-decoration: none;color: black;"><b>자&nbsp;유&nbsp;게&nbsp;시&nbsp;판</b></a>
+						</h3>
 						
 						<div class="fList"></div>
 						

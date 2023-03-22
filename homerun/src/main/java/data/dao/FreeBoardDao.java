@@ -142,17 +142,21 @@ public class FreeBoardDao {
 	
 	// list - 신고수
 	// SELECT * FROM POSTREPORT WHERE fbReport != 0;
-	public List<FreeBoardDto> getAllFBs_report() {
+	public List<FreeBoardDto> getAllFBs_report(int start, int perPage) {
 		List<FreeBoardDto> list = new Vector<>();
 		
 		Connection conn = db.getConnection();
  		PreparedStatement pstmt = null;
  		ResultSet rs = null;
  		
- 		String sql = "select * from FREEBOARD where fbReport != 0";
+ 		String sql = "select * from FREEBOARD where fbReport != 0 order by fbNum desc limit ?, ?";
  		 		
  		try {
  			pstmt = conn.prepareStatement(sql);
+ 			
+ 			pstmt.setInt(1, start);
+			pstmt.setInt(2, perPage);
+			
  			rs = pstmt.executeQuery();
  		
  			while(rs.next()) {
