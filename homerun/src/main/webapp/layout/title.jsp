@@ -72,7 +72,7 @@ String root = request.getContextPath();
 						
 					</span>
 						
-						 <a class="a_title" href="../homerun/admin/admin_adminform.jsp">
+						 <a class="a_title" href="<%=root%>/admin/admin_adminform.jsp">
 						 
 						 <span>관리자페이지</span>
 						 
@@ -92,15 +92,15 @@ String root = request.getContextPath();
 						
 					</span>
 						
-						 <a class="a_title" href="../homerun/mypage/mypage_myinfo.jsp">
+						 <a class="a_title" href="<%=root%>/mypage/mypage_myinfo.jsp">
 						 
 						 <span>마이페이지</span>
 						 
 						 </a>
 						 
-						 <span class="a_title"> | </span> 
+						 <span class="a_title">&nbsp;|&nbsp;</span> 
 						 
-						 <a style="color: white;" href="../homerun/product/product_cartlist.jsp">
+						 <a style="color: white;" href="<%=root%>/product/product_cartlist.jsp">
 						 
 						 <span>장바구니</span>
 						 
