@@ -22,7 +22,7 @@
 
 <meta name="description" content="" />
 
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+
 
 <!-- Favicon -->
 <link rel="icon" type="image/x-icon"
@@ -98,7 +98,6 @@
         
         #insertBtn, #searchBtn {
         	border-radius: 4px;
-			padding: 10px 20px;
 			border: 1px solid #0b214e;
 			background-color: #0b214e;
 		  	color: #F8F9FA;
@@ -176,7 +175,7 @@ $(function(){
 			dataType : "json",
 			data : {"val" : val, "str" : str,"currentPage":currentPage},
 			success:function(res) {
-				// alert(val + ", "+ str +", " + res.length);
+				//alert(val + ", "+ str +", " + res.length);
 				
 				var s="";
 				
@@ -203,7 +202,7 @@ $(function(){
 					$.each(res, function(idx, item){
 						s+="<tr>";
 						s+="<td style='text-align: center;'>" + item.pId + "</td>";
-						s+="<td style='text-align: center;'><a href='../product/product_detailPage.jsp?pId="+item.pId+"'><b>"+item.pName+"</b></a></td>";
+						s+="<td style='text-align: center;'><a href='../product/product_detailPage.jsp?pId="+item.pId+"' style='text-decoration: none;color: black;'><b>"+item.pName+"</b></a></td>";
 						s+="<td style='text-align: center;'>" + item.teamName + "</td>";
 						s+="<td style='text-align: center;'>" + item.pCategory + "</td>";
 						s+="<td style='text-align: center;'>" + item.pStock + "</td>";
@@ -298,7 +297,7 @@ function list(){
 					<!-- Bootstrap Table with Header - Light -->
 					<div class="card">
 						<h3 class="card-header">
-							<b>재고목록</b>
+							<a href='management_stockListPage.jsp' style="text-decoration: none;color: black;"><b>재&nbsp;고&nbsp;목&nbsp;록</b></a>
 						</h3>
 						<div class="sList"></div>
 
@@ -318,7 +317,7 @@ function list(){
 								<button type="button" class="btn btn-default" id="searchBtn" style="margin-left: 5px;">검색</button>
                             </div>
                             <div class="bInsert">
-								<button type="button" class="btn btn-default" id="insertBtn">글쓰기</button>
+								<button type="button" class="btn btn-default" id="insertBtn" onclick="location.href='../product/product_insertPage.jsp'">재고입력</button>
 							</div>
 							</div>
 						</div>

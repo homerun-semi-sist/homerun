@@ -31,14 +31,14 @@
 
 <!-- Navbar Start -->
 <nav class="navbar navbar-expand-lg navbar-light sticky-top px-4 px-lg-5 py-lg-0">
-    <a href="../index.jsp" class="navbar-brand d-flex align-items-center">
+    <a href="<%=root %>/index.jsp" class="navbar-brand d-flex align-items-center">
         Homerun </a>
     <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
         <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarCollapse">
         <div class="navbar-nav ms-auto py-3 py-lg-0">
-            <a href="../index.jsp" class="nav-item nav-link active">Home</a>
+            <a href="<%=root %>/index.jsp" class="nav-item nav-link active">Home</a>
             <div class="nav-item dropdown">
                 <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">경기일정</a>
                 <div class="dropdown-menu bg-light m-0">
@@ -53,14 +53,9 @@
                     <a href="<%=root %>/reviewBoard/reviewBoard_listPage.jsp" class="dropdown-item">후기게시판</a>
                 </div>
             </div>
-            <div class="nav-item dropdown">
-                <a href="#" class="nav-link dropdown-toggle"
-                   data-bs-toggle="dropdown">응원용품</a>
-                <div class="dropdown-menu bg-light m-0">
-                    <a href="<%=root%>/product/product_mainPage.jsp"
-                       class="dropdown-item">상품메인</a> <a href="<%=root%>/product/product_listPage.jsp"
-                                                         class="dropdown-item">상품목록</a>
-                </div>
+            <div class="nav-item">
+                <a href="<%=root%>/product/product_mainPage.jsp" class="nav-link">응원용품</a>
+
             </div>
             <div class="nav-item dropdown">
                 <a href="#" class="nav-link dropdown-toggle"
@@ -72,7 +67,7 @@
                     1-3</a>
                 </div>
             </div>
-            <div class="nav-item dropdown">
+            <%-- <div class="nav-item dropdown">
                 <a href="#" class="nav-link dropdown-toggle"
                    data-bs-toggle="dropdown">관리자페이지</a>
                 <div class="dropdown-menu bg-light m-0">
@@ -82,7 +77,7 @@
                         href="<%=root%>/product/product_insertPage.jsp"
                         class="dropdown-item">재고입력</a> <a href="#" class="dropdown-item">게시글관리</a>
                 </div>
-            </div>
+            </div> --%>
         </div>
     </div>
 
