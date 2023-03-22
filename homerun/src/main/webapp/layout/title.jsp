@@ -82,7 +82,6 @@ String root = request.getContextPath();
 			</div>
 			
 	<%}else{%>
-	
 		<div class="col-lg-3" style="margin-top: 20px;">
 				<div class="d-flex align-items-center justify-content-end">
 					<span class="me-3">
@@ -99,17 +98,11 @@ String root = request.getContextPath();
 						 
 						 </a>
 						 
-						 <span class="a_title">&nbsp;|&nbsp;</span> 
+						 <span class="a_title"> | </span> 
 						 
-<<<<<<< HEAD
-						 <a style="color: white;" href="#">
-						 
-						 <span>장바구니</span>
-=======
 						 <a style="color: white;" href="../homerun/product/product_cartlist.jsp">
 						 
-						 <span >장바구니</span>
->>>>>>> SungUng
+						 <span>장바구니</span>
 						 
 						 </a>
 				</div>

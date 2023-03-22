@@ -67,8 +67,4 @@ public class UserDto {
 		this.uPhoto = uPhoto;
 	}
 	
-<<<<<<< HEAD
 }
-=======
-}
->>>>>>> SungUng

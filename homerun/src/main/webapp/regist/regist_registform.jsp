@@ -30,35 +30,22 @@
 					if(res.count==1){
 						
 						alert("이미 가입된 아이디 입니다");
-<<<<<<< HEAD
 						$("#uid").val("");
 						$("#uid").focus();
-=======
->>>>>>> SungUng
 						
 					}else if(uid=="" || uid.length==0){
 						
 						alert("아이디를 입력 해 주세요");	
-<<<<<<< HEAD
 						$("#uid").focus()
 						
 					}else{
 						
 						alert("사용 가능한 아이디 입니다");
-=======
-						
-					}else{
-						
-						alert("사용 가능한 아이디 입니다")
->>>>>>> SungUng
 					}
 				}
 			});
 		});
-<<<<<<< HEAD
 		
-=======
->>>>>>> SungUng
 $("#btnnck").click(function(){
 			
 			var nickname=$("#nickname").val();
@@ -74,7 +61,6 @@ $("#btnnck").click(function(){
 					if(res.Ncount==1){
 						
 						alert("이미 가입된 닉네임 입니다");
-<<<<<<< HEAD
 						$("#nickname").val("");
 						$("#nickname").focus();
 
@@ -83,9 +69,6 @@ $("#btnnck").click(function(){
 						alert("닉네임을 입력 해 주세요");
 						$("#nickname").focus();
 						
-=======
-
->>>>>>> SungUng
 					}else{
 						
 						alert("사용 가능한 닉네임 입니다");
@@ -98,7 +81,6 @@ $("#btnnck").click(function(){
 	
 	function passcheck(f)
 	{
-<<<<<<< HEAD
 		
 		var uid=$("#uid").val();
 		var nickname=$("#nickname").val();
@@ -262,54 +244,6 @@ $("#btnnck").click(function(){
 	
     </script>
     <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
-=======
-		if(f.pw1.value!=f.pw2.value){
-			
-			alert("비밀번호가 일치하지 않습니다");
-			
-			f.pw1.value="";
-			f.pw2.value="";
-			
-			return false;
-			
-		}else if(f.uid.value==""){
-			
-			alert("아이디를 입력 해 주세요");
-			
-		}else if(f.pw1.value==""){
-			
-			alert("비밀번호를 입력 해 주세요");
-			
-		}else if(f.pw2.value==""){
-			
-			alert("비밀번호 확인을 입력 해 주세요");
-			
-		}else if(f.name.value==""){
-			
-			alert("이름을 입력 해 주세요");
-			
-		}else if(f.nickname.value==""){
-			
-			alert("닉네임을 입력 해 주세요");
-			
-		}else if(f.hp2.value==""){
-			
-			alert("전화번호를 입력 해 주세요");
-			
-		}else if(f.hp3.value==""){
-			
-			alert("전화번호 뒷자리를 입력 해 주세요");
-			
-		}else if(f.addr.value==""){
-			
-			alert("주소를 입력 해 주세요");
-			
-		}
-	}
-	
-	
-    </script>
->>>>>>> SungUng
 	</head>
 	<style>
 * {
@@ -367,11 +301,7 @@ $("#btnnck").click(function(){
   background: none;
 }
 
-<<<<<<< HEAD
 .uName {
-=======
-.name {
->>>>>>> SungUng
   width: 100%;
   border:none;
   outline:none;
@@ -402,20 +332,10 @@ $("#btnnck").click(function(){
 }
 
 .addr {
-<<<<<<< HEAD
 	border:1px solid gray;
 	margin-bottom: 5px;
 	position: relative;
 	bottom: 15px;
-=======
-  width: 100%;
-  border:none;
-  outline:none;
-  color: #636e72;
-  font-size:16px;
-  height:25px;
-  background: none;
->>>>>>> SungUng
 }
 
 .nickname {
@@ -442,10 +362,7 @@ $("#btnnck").click(function(){
   border:none;
   cursor:pointer;
   background-color: #0b214e;
-<<<<<<< HEAD
   bottom: 5px;
-=======
->>>>>>> SungUng
   
 }
 
@@ -461,10 +378,7 @@ $("#btnnck").click(function(){
   border:none;
   cursor:pointer;
   background-color: #0b214e;
-<<<<<<< HEAD
   bottom: 5px;	
-=======
->>>>>>> SungUng
   
 }
 
@@ -525,17 +439,12 @@ $("#btnnck").click(function(){
       <h2>회원가입</h2>
       
       <div class="textForm">
-<<<<<<< HEAD
         <input name="uid" type="text" class="uid" id="uid" maxlength="8" placeholder="아이디 (특수문자,공백 제외 8자 이하)" required="required" 
         onkeyup="noSpacialForm(this);" onchange="noSpacialForm(this);">
-=======
-        <input name="uid" type="text" class="uid" id="uid" placeholder="아이디 (특수문자,공백 제외 8자 이하)" required="required">
->>>>>>> SungUng
         <button type="button" class="btnck" id="btnck" >중복체크</button>
       </div>
       
       <div class="textForm">
-<<<<<<< HEAD
         <input name="pw1" type="password" class="pw" placeholder="비밀번호 (특수문자 포함 10자 이상)" required="required"
         onkeyup="noSpaceForm(this);" onchange="noSpaceForm(this);">
       </div>
@@ -552,31 +461,12 @@ $("#btnnck").click(function(){
       <div class="textForm">
         <input name="nickname" type="text" class="nickname" id="nickname" maxlength="8" placeholder="닉네임 (특수문자,공백 제외 8자 이하)" required="required"
         onkeyup="noSpacialForm(this);" onchange="noSpacialForm(this);">
-=======
-        <input name="pw1" type="password" class="pw" placeholder="비밀번호 (특수문자 포함 10자 이상)" required="required">
-      </div>
-      
-       <div class="textForm">
-        <input name="pw2" type="password" class="pw" placeholder="비밀번호 확인" required="required">
-      </div>
-      
-      <div class="textForm">
-        <input name="name" type="text" class="name" placeholder="이름" required="required">
-      </div>
-      
-      <div class="textForm">
-        <input name="nickname" type="text" class="nickname" placeholder="닉네임 (특수문자,공백 제외 8자 이하)" required="required">
->>>>>>> SungUng
         <button type="button" class="btnnck" id="btnnck">중복체크</button>      
       </div>
       
       <div class="textForm" style="font-size: 16px; opacity: 0.7;">성별 &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
-<<<<<<< HEAD
 		<input name="gender" type="radio" class="gender" value="남" checked="checked" >남자&nbsp;&nbsp; 
 		<input name="gender" type="radio" class="gender" value="여" />여자
-=======
-		<input name="gender" type="radio" class="gender" value="Male" checked="checked" >남자&nbsp;&nbsp; <input name="gender" type="radio" class="gender" value="Female" />여자
->>>>>>> SungUng
       </div>
       
       <!-- <div class="textForm">
@@ -587,7 +477,6 @@ $("#btnnck").click(function(){
      
      <select name="birth1" class="birth" style="width : 70px;"> 	
        
-<<<<<<< HEAD
  		<%
                 for(int i=2000; i<=2015; i++)
                 {%>
@@ -596,27 +485,10 @@ $("#btnnck").click(function(){
            <%}
  		
         %>
-=======
-       <option value="2013">2013</option>
-       <option value="2012">2012</option>
-       <option value="2011">2011</option>
-       <option value="2010">2010</option>
-       <option value="2009">2009</option>
-       <option value="2008">2008</option>
-       <option value="2007">2007</option>
-       <option value="2006">2006</option>
-       <option value="2005">2005</option>
-       <option value="2004">2004</option>
-       <option value="2003">2003</option>
-       <option value="2002">2002</option>
-       <option value="2001">2001</option>
-       <option value="2000">2000</option>
->>>>>>> SungUng
        
      </select>&nbsp;년&nbsp;
      
      <select name="birth2" class="birth"  style="width : 70px;">
-<<<<<<< HEAD
      
      <%
                 for(int i=1; i<=12; i++)
@@ -626,27 +498,11 @@ $("#btnnck").click(function(){
            <%}
  		
         %>
-=======
-       
-       <option value="1">1</option>
-       <option value="2">2</option>
-       <option value="3">3</option>
-       <option value="4">4</option>
-       <option value="5">5</option>
-       <option value="6">6</option>
-       <option value="7">7</option>
-       <option value="8">8</option>
-       <option value="9">9</option>
-       <option value="10">10</option>
-       <option value="11">11</option>
-       <option value="12">12</option>
->>>>>>> SungUng
        
      </select>&nbsp;월&nbsp;
      
      <select name="birth3" class="birth"  style="width : 70px;">
      
-<<<<<<< HEAD
 			<%
                 for(int i=1; i<=31; i++)
                 {%>
@@ -655,39 +511,6 @@ $("#btnnck").click(function(){
            <%}
  		
         %>
-=======
-       <option value="1">1</option>
-       <option value="2">2</option>
-       <option value="3">3</option>
-       <option value="4">4</option>
-       <option value="5">5</option>
-       <option value="6">6</option>
-       <option value="7">7</option>
-       <option value="8">8</option>
-       <option value="9">9</option>
-       <option value="10">10</option>
-       <option value="11">11</option>
-       <option value="12">12</option>
-       <option value="13">13</option>
-       <option value="14">14</option>
-       <option value="15">15</option>
-       <option value="16">16</option>
-       <option value="17">17</option>
-       <option value="18">18</option>
-       <option value="19">19</option>
-       <option value="20">20</option>
-       <option value="21">21</option>
-       <option value="22">22</option>
-       <option value="23">23</option>
-       <option value="24">24</option>
-       <option value="25">25</option>
-       <option value="26">26</option>
-       <option value="27">27</option>
-       <option value="28">28</option>
-       <option value="29">29</option>
-       <option value="30">30</option>
-       <option value="31">31</option>
->>>>>>> SungUng
        
      </select>&nbsp;일
       </div>
@@ -704,15 +527,10 @@ $("#btnnck").click(function(){
       		
       	</select>
       	
-<<<<<<< HEAD
       	- <input type="text" name="hp2" class="hp" style="width : 70px;" size="4" maxlength="4" 
       		oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" required="required">
       	- <input type="text" name="hp3" class="hp" style="width : 70px;" size="4" maxlength="4" 
       		oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" required="required">
-=======
-      	- <input type="text" name="hp2" class="hp" style="width : 70px;" size="4" maxlength="4" required="required">
-      	- <input type="text" name="hp3" class="hp" style="width : 70px;" size="4" maxlength="4" required="required">
->>>>>>> SungUng
       	
       </div>
       
@@ -720,7 +538,6 @@ $("#btnnck").click(function(){
         <input name="hp" type="text" class="hp" placeholder="전화번호">
       </div> -->
       
-<<<<<<< HEAD
        <!-- <div class="textForm">
         <input name="addr" type="text" class="addr" placeholder="주소" required="required">
        </div> -->
@@ -732,22 +549,11 @@ $("#btnnck").click(function(){
 		   <input type="text" name="addr3" class="addr" id="sample6_extraAddress" placeholder="참고항목">
 		</div>
 		
-=======
-       <div class="textForm">
-        <input name="addr" type="text" class="addr" placeholder="주소" required="required">
-       </div>
-
->>>>>>> SungUng
        <button type="submit" class="btn1" onclick="passcheck(f)">회원가입</button>
        <button type="button" class="btn2"  onclick="location.href='../index.jsp'">메인으로</button>
    
     </form>
-<<<<<<< HEAD
     					
-=======
-
-						
->>>>>>> SungUng
 						<!-- the end -->
 					</div>
 					<div class="col-sm-2" style="border: 1px solid blue;">right</div>

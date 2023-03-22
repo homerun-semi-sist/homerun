@@ -15,8 +15,4 @@
 	ob.put("count", count);
 %>
 
-<<<<<<< HEAD
 <%=ob.toString() %>
-=======
-<%=ob.toString() %>
->>>>>>> SungUng

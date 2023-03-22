@@ -1,7 +1,4 @@
-<<<<<<< HEAD
 <%@page import="data.dao.UserDao"%>
-=======
->>>>>>> SungUng
 <%@ page import="data.dao.ProductDao"%>
 <%@ page import="java.util.List"%>
 <%@ page import="data.dto.ProductDto"%>
@@ -15,7 +12,6 @@
 		<link rel="stylesheet"
 			href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" />
 		<script src="https://code.jquery.com/jquery-3.6.3.js"></script>
-<<<<<<< HEAD
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 		<link href="../assets/css/index.css" rel="stylesheet">
@@ -110,7 +106,6 @@ div{
 	height: 100px;
 	margin-bottom: 10px;
 	cursor: pointer;
-	
 }
 
 .name {
@@ -144,10 +139,6 @@ div{
 }
 
 </style>
-=======
-		<link href="../assets/css/index.css" rel="stylesheet">
-	</head>
->>>>>>> SungUng
 	<body style="overflow-x: hidden;">
 		<%
 			String mainPage = "../layout/main.jsp";
@@ -170,7 +161,6 @@ div{
 					<div class="col-sm-2" style="border: 1px solid red;">left</div>
 					<div class="col-sm-8" style="border: 1px solid pink;">
 						<!-- write here -->
-<<<<<<< HEAD
 <%
 
 	String uid=(String)session.getAttribute("uid");
@@ -181,7 +171,7 @@ div{
 
 <div class="head">
 	  <div class="summaryContainer">
-		<h3><b>관리자페이지</b></h3>
+		<h3>관리자페이지</h3>
 		<hr class="line" style="height: 5px;">
 	  </div>    
 	  
@@ -198,9 +188,9 @@ div{
 	 		<br><br>
 	  </div>
 	 
-	  <div class="name"><b><%=uName %></b></div>
+	  <div class="name"><%=uName %></div>
 	  <br><br>
-	  <div class="nickname"><b><%=uid %></b>님 환영합니다</div>
+	  <div class="nickname"><%=uid %>님 환영합니다</div>
   </div>
   
   <div class="shippingStatusContainer">
@@ -243,20 +233,6 @@ div{
 
 </div>
 						
-=======
-						
-						<%
-							ProductDao dao = new ProductDao();
-							List<ProductDto> list = dao.selectAllProduct();
-						
-							for (ProductDto dto : list) {
-						%>
-							<%=dto.getpId()%>
-							<%=dto.getpImage()%>
-						<%
-							}
-						%>
->>>>>>> SungUng
 						
 						<!-- the end -->
 					</div>
