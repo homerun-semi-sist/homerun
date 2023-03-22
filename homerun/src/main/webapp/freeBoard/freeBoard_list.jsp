@@ -143,30 +143,61 @@
 							s+="</tr>";
 						} else {
 							$.each(res, function(idx, item){
-								s+="<tr>";
-								s+="<td style='text-align: center;'>" + item.fbNum + "</td>";
-								
-								if(item.fbCategory == "전체") {   
+									
+								if(item.fbCategory == "공지") {
+									s+="<tr style='background-color: #FFF2F2; color: red; font-size: bold;'>";
+									s+="<td style='text-align: center;'></td>";
+									s+="<td style='text-align: center; vertical-align:middle;'>";
+									s+="<b>공지</b>";
+									s+="</td>";
+								} else if(item.fbCategory == "전체") {  
+									s+="<tr>";
+									s+="<td style='text-align: center;'>" + item.fbNum + "</td>";
 									s+="<td style='text-align: center; vertical-align:middle;'>";
 									s+="<img src='https://cdn.icon-icons.com/icons2/2070/PNG/512/baseball_icon_126956.png' style='width: 30px;'>";
 									   s+="</td>";
 								} else if(item.fbCategory == "한화") {
+									s+="<tr>";
+									s+="<td style='text-align: center;'>" + item.fbNum + "</td>";
 									s+="<td style='text-align: center; vertical-align:middle;'>";
 									s+="<img src='" + item.teamLogoImg + "' style='width: 50px;'>";
 									s+="</td>";
 								} else {
+									s+="<tr>";
+									s+="<td style='text-align: center;'>" + item.fbNum + "</td>";
 									s+="<td style='text-align: center; vertical-align:middle;'>";
 									s+="<img src='" + item.teamLogoImg + "' style='width: 40px;'>";
 									   s+="</td>";
 								}
 								
-								s+="<td style='vertical-align:middle;'><a href='freePost_detailPage.jsp?fbNum=" + item.fbNum + "&currentPage=" + currentPage + "'>" + item.fbSubject + "</a><span style='color: tomato;'>&nbsp;&nbsp;[" + item.fcCnt + "]</span></td>";
-								s+="<td style='text-align: center; vertical-align:middle;'>" + item.nickname + "</td>";
-								s+="<td style='text-align: center; vertical-align:middle;'>" + item.fbWriteday + "</td>";
-								s+="<td style='text-align: center; vertical-align:middle;'>" + item.fbReadCnt + "</td>";
-								s+="<td style='text-align: center; vertical-align:middle;'>" + item.fbLike + "</td>";
-								s+="<td style='text-align: center; vertical-align:middle;'>" + item.fbDislike + "</td> ";							
-								s+="</tr>"		
+								if(item.fcCnt == 0) {
+									if(item.fbCategory == "공지") 
+										s+="<td style='vertical-align:middle;'><a href='freePost_detailPage.jsp?fbNum=" + item.fbNum + "&currentPage=" + currentPage + "' style=' text-decoration: none; color: red;'><b>" + item.fbSubject + "</b></a></td>";
+									else 
+										s+="<td style='vertical-align:middle;'><a href='freePost_detailPage.jsp?fbNum=" + item.fbNum + "&currentPage=" + currentPage + "' style=' text-decoration: none; color: black;'>" + item.fbSubject + "</a></td>";
+								
+								} else {
+									if(item.fbCategory == "공지") 
+										s+="<td style='vertical-align:middle;'><a href='freePost_detailPage.jsp?fbNum=" + item.fbNum + "&currentPage=" + currentPage + "' style=' text-decoration: none; color: red;'><b>" + item.fbSubject + "</a><span style='color: tomato;'>&nbsp;&nbsp;[" + item.fcCnt + "]</span></td>";
+									else
+										s+="<td style='vertical-align:middle;'><a href='freePost_detailPage.jsp?fbNum=" + item.fbNum + "&currentPage=" + currentPage + "' style=' text-decoration: none; color: black;'>" + item.fbSubject + "</a><span style='color: tomato;'>&nbsp;&nbsp;[" + item.fcCnt + "]</span></td>";
+								}
+								
+								if(item.fbCategory == "공지") {
+									s+="<td style='text-align: center; vertical-align:middle;'><b>" + item.nickname + "</b></td>";
+									s+="<td style='text-align: center; vertical-align:middle;'><b>" + item.fbWriteday + "</b></td>";
+									s+="<td style='text-align: center; vertical-align:middle;'><b>" + item.fbReadCnt + "</b></td>";
+									s+="<td style='text-align: center; vertical-align:middle;'><b>" + item.fbLike + "</b></td>";
+									s+="<td style='text-align: center; vertical-align:middle;'><b>" + item.fbDislike + "</b></td>";							
+									s+="</tr>"	
+								} else {
+									s+="<td style='text-align: center; vertical-align:middle;'>" + item.nickname + "</td>";
+									s+="<td style='text-align: center; vertical-align:middle;'>" + item.fbWriteday + "</td>";
+									s+="<td style='text-align: center; vertical-align:middle;'>" + item.fbReadCnt + "</td>";
+									s+="<td style='text-align: center; vertical-align:middle;'>" + item.fbLike + "</td>";
+									s+="<td style='text-align: center; vertical-align:middle;'>" + item.fbDislike + "</td> ";							
+									s+="</tr>"
+								}
 							});
 						}
 						
@@ -219,30 +250,61 @@
 						s+="</tr>";
 					} else {
 						$.each(res, function(idx, item){
-							s+="<tr>";
-							s+="<td style='text-align: center;'>" + item.fbNum + "</td>";
 							
-							if(item.fbCategory == "전체") {   
+							if(item.fbCategory == "공지") {
+								s+="<tr style='background-color: #FFF2F2; color: red; font-size: bold;'>";
+								s+="<td style='text-align: center;'></td>";
+								s+="<td style='text-align: center; vertical-align:middle;'>";
+								s+="<b>공지</b>";
+								s+="</td>";
+							} else if(item.fbCategory == "전체") {   
+								s+="<tr>";
+								s+="<td style='text-align: center;'>" + item.fbNum + "</td>";
 								s+="<td style='text-align: center; vertical-align:middle;'>";
 								s+="<img src='https://cdn.icon-icons.com/icons2/2070/PNG/512/baseball_icon_126956.png' style='width: 30px;'>";
-								   s+="</td>";
+								s+="</td>";
 							} else if(item.fbCategory == "한화") {
+								s+="<tr>";
+								s+="<td style='text-align: center;'>" + item.fbNum + "</td>";
 								s+="<td style='text-align: center; vertical-align:middle;'>";
 								s+="<img src='" + item.teamLogoImg + "' style='width: 50px;'>";
 								s+="</td>";
 							} else {
+								s+="<tr>";
+								s+="<td style='text-align: center;'>" + item.fbNum + "</td>";
 								s+="<td style='text-align: center; vertical-align:middle;'>";
 								s+="<img src='" + item.teamLogoImg + "' style='width: 40px;'>";
 								   s+="</td>";
 							}
 							
-							s+="<td style='vertical-align:middle;'><a href='freePost_detailPage.jsp?fbNum=" + item.fbNum + "&currentPage=" + currentPage + "'>" + item.fbSubject + "</a><span style='color: tomato;'>&nbsp;&nbsp;[" + item.fcCnt + "]</span></td>";
-							s+="<td style='text-align: center; vertical-align:middle;'>" + item.nickname + "</td>";
-							s+="<td style='text-align: center; vertical-align:middle;'>" + item.fbWriteday + "</td>";
-							s+="<td style='text-align: center; vertical-align:middle;'>" + item.fbReadCnt + "</td>";
-							s+="<td style='text-align: center; vertical-align:middle;'>" + item.fbLike + "</td>";
-							s+="<td style='text-align: center; vertical-align:middle;'>" + item.fbDislike + "</td> ";							
-							s+="</tr>"		
+							if(item.fcCnt == 0) {
+								if(item.fbCategory == "공지") 
+									s+="<td style='vertical-align:middle;'><a href='freePost_detailPage.jsp?fbNum=" + item.fbNum + "&currentPage=" + currentPage + "' style=' text-decoration: none; color: red;'><b>" + item.fbSubject + "</b></a></td>";
+								else 
+									s+="<td style='vertical-align:middle;'><a href='freePost_detailPage.jsp?fbNum=" + item.fbNum + "&currentPage=" + currentPage + "' style=' text-decoration: none; color: black;'>" + item.fbSubject + "</a></td>";
+							
+							} else {
+								if(item.fbCategory == "공지") 
+									s+="<td style='vertical-align:middle;'><a href='freePost_detailPage.jsp?fbNum=" + item.fbNum + "&currentPage=" + currentPage + "' style=' text-decoration: none; color: red;'><b>" + item.fbSubject + "</a><span style='color: tomato;'>&nbsp;&nbsp;[" + item.fcCnt + "]</span></td>";
+								else
+									s+="<td style='vertical-align:middle;'><a href='freePost_detailPage.jsp?fbNum=" + item.fbNum + "&currentPage=" + currentPage + "' style=' text-decoration: none; color: black;'>" + item.fbSubject + "</a><span style='color: tomato;'>&nbsp;&nbsp;[" + item.fcCnt + "]</span></td>";
+							}
+							
+							if(item.fbCategory == "공지") {
+								s+="<td style='text-align: center; vertical-align:middle;'><b>" + item.nickname + "</b></td>";
+								s+="<td style='text-align: center; vertical-align:middle;'><b>" + item.fbWriteday + "</b></td>";
+								s+="<td style='text-align: center; vertical-align:middle;'><b>" + item.fbReadCnt + "</b></td>";
+								s+="<td style='text-align: center; vertical-align:middle;'><b>" + item.fbLike + "</b></td>";
+								s+="<td style='text-align: center; vertical-align:middle;'><b>" + item.fbDislike + "</b></td>";							
+								s+="</tr>"	
+							} else {
+								s+="<td style='text-align: center; vertical-align:middle;'>" + item.nickname + "</td>";
+								s+="<td style='text-align: center; vertical-align:middle;'>" + item.fbWriteday + "</td>";
+								s+="<td style='text-align: center; vertical-align:middle;'>" + item.fbReadCnt + "</td>";
+								s+="<td style='text-align: center; vertical-align:middle;'>" + item.fbLike + "</td>";
+								s+="<td style='text-align: center; vertical-align:middle;'>" + item.fbDislike + "</td> ";							
+								s+="</tr>"
+							}
 						});
 					}
     				s+="</tbody>";
@@ -260,7 +322,7 @@
 <body>	
 	<%
 		String loginok = (String)session.getAttribute("loginok");
-	
+		String uId = (String)session.getAttribute("uid");
 		FreeBoardDao fbDao = new FreeBoardDao();
 		
 		TeamDao tDao = new TeamDao();

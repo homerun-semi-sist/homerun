@@ -16,7 +16,7 @@
     <div class="col-sm-2" style="border: 1px solid red;">왼</div>
     <div class="col-sm-8" style="border: 1px solid pink;">
         <div class="mapWeather">
-            <jsp:include page="mapWeather.jsp"></jsp:include>
+            <%-- <jsp:include page="mapWeather.jsp"></jsp:include> --%>
         </div>
         <% // loginok 가져오기
             String loginok = (String) session.getAttribute("loginok");

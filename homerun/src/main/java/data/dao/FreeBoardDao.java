@@ -23,7 +23,7 @@ public class FreeBoardDao {
  		PreparedStatement pstmt = null;
  		ResultSet rs = null;
  		
- 		String sql = "select * from FREEBOARD order by fbNum desc";
+ 		String sql = "select * from FREEBOARD order by uId='admin' desc, fbWriteday desc";
  		 		
  		try {
  			pstmt = conn.prepareStatement(sql);
@@ -66,7 +66,7 @@ public class FreeBoardDao {
  		PreparedStatement pstmt = null;
  		ResultSet rs = null;
  		
- 		String sql = "select * from FREEBOARD order by fbLike desc";
+ 		String sql = "select * from FREEBOARD order by uId='admin' desc, fbLike desc";
  		 		
  		try {
  			pstmt = conn.prepareStatement(sql);
@@ -107,7 +107,7 @@ public class FreeBoardDao {
  		PreparedStatement pstmt = null;
  		ResultSet rs = null;
  		
- 		String sql = "select * from FREEBOARD order by fbReadCnt desc";
+ 		String sql = "select * from FREEBOARD order by uId='admin' desc, fbReadCnt desc";
  		 		
  		try {
  			pstmt = conn.prepareStatement(sql);
@@ -377,7 +377,7 @@ public class FreeBoardDao {
         PreparedStatement pstmt = null;
         ResultSet rs = null;
 
-        String sql = "select f.*  from FREEBOARD f, USER u where f.uId=u.uId and u.nickname Like ? order by fbNum desc limit ?, ?";
+        String sql = "select f.*  from FREEBOARD f, USER u where f.uId=u.uId and u.nickname Like ? order by f.uId='admin' desc, fbNum desc limit ?, ?";
 
         try {
             pstmt = conn.prepareStatement(sql);
@@ -424,7 +424,7 @@ public class FreeBoardDao {
         PreparedStatement pstmt = null;
         ResultSet rs = null;
 
-        String sql = "select * from FREEBOARD where fbSubject Like ? order by fbNum desc limit ?, ?";
+        String sql = "select * from FREEBOARD where fbSubject Like ? order by uId='admin' desc, fbNum desc limit ?, ?";
 
         try {
             pstmt = conn.prepareStatement(sql);
@@ -471,7 +471,7 @@ public class FreeBoardDao {
         PreparedStatement pstmt = null;
         ResultSet rs = null;
 
-        String sql = "select * from FREEBOARD where fbContent Like ? order by fbNum desc limit ?, ?";
+        String sql = "select * from FREEBOARD where fbContent Like ? order by uId='admin' desc, fbNum desc limit ?, ?";
 
         try {
             pstmt = conn.prepareStatement(sql);
@@ -544,7 +544,7 @@ public class FreeBoardDao {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		
-		String sql = "select * from FREEBOARD order by fbNum desc limit ?, ?";
+		String sql = "select * from FREEBOARD order by uId='admin' desc, fbNum desc limit ?, ?";
 		// select * from simpleboard order by num desc limit i, j => i번부터 j번까지 조회
 		
 		try {
@@ -555,7 +555,7 @@ public class FreeBoardDao {
 			pstmt.setInt(2, perPage);
 			
 			rs = pstmt.executeQuery();
-				
+			System.out.println(sql);	
 			while(rs.next()) {
 				FreeBoardDto dto = new FreeBoardDto();
 				

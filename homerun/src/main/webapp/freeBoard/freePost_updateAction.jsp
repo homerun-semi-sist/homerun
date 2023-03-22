@@ -19,6 +19,7 @@
 			String fbNum = request.getParameter("fbNum");
 			String subject = request.getParameter("subject");
 			String content = request.getParameter("content");
+			String currentPage = request.getParameter("currentPage");
 			
 			FreeBoardDto dto = new FreeBoardDto();
 			
@@ -32,7 +33,7 @@
 			// 페이징 처리
 			/* int num = dao.getMaxNum(); */
 			
-			response.sendRedirect("freePost_detailPage.jsp?fbNum=" + fbNum);
+			response.sendRedirect("freePost_detailPage.jsp?fbNum=" + fbNum + "&currentPage=" + currentPage);
 			
 		%>
 
