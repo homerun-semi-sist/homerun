@@ -22,6 +22,12 @@ public class OrderDto {
 	public void setpId(String pId) {
 		this.pId = pId;
 	}
+	public String getuId() {
+		return uId;
+	}
+	public void setuId(String uId) {
+		this.uId = uId;
+	}
 	public int getoQTY() {
 		return oQTY;
 	}

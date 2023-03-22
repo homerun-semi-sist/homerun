@@ -63,6 +63,8 @@ public class CartDao {
 
 	}
 	
+	
+	
 	public CartDto getData(String cId) {
 		CartDto dto=new CartDto();
 		
@@ -113,7 +115,7 @@ public class CartDao {
 
 	}
 	
-	public void deleteOrder(String oId) { // 카트 삭제
+	public void deleteOrder(String oId) { // 주문목록 삭제
 		Connection conn = db.getConnection();
 		PreparedStatement pstmt = null;
 
@@ -133,24 +135,7 @@ public class CartDao {
 
 	}
 	
-	public void successDelete() {
-		Connection conn = db.getConnection();
-		PreparedStatement pstmt = null;
-
-		String sql = "delete from CART where cId=(Select MAX(cId) from CART)";
-
-		try {
-			pstmt = conn.prepareStatement(sql);
-			pstmt.execute();
-
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} finally {
-			db.dbClose(pstmt, conn);
-		}
-
-	}
+	
 	public void insertCart(CartDto dto) {
 		Connection conn = db.getConnection();
 		PreparedStatement pstmt =null;
@@ -174,15 +159,16 @@ public class CartDao {
 	}
 	
 
-	public void insertOrder(CartDto dto) {
+	public void insertOrder(OrderDto dto) {
 		Connection conn = db.getConnection();
 		PreparedStatement pstmt = null;
 
-		String sql = "insert into ORDERS values(null,?,?,now())";
+		String sql = "insert into ORDERS values(null,?,?,?,now())";
 		try {
 			pstmt = conn.prepareStatement(sql);
-			pstmt.setString(1, dto.getpId());
-			pstmt.setInt(2, dto.getcQTY());
+			pstmt.setString(1, dto.getuId());
+			pstmt.setString(2, dto.getpId());
+			pstmt.setInt(3, dto.getoQTY());
 			pstmt.execute();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -233,7 +219,7 @@ public class CartDao {
 	}
 	
 
-	public List<HashMap<String, String>> getOrderList(String cId) {
+	public List<HashMap<String, String>> getOrderList(String uId) {
 
 		List<HashMap<String, String>> list = new ArrayList<>();
 
@@ -241,13 +227,13 @@ public class CartDao {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 
-		String sql = "select o.oId,c.cId,c.cQTY,o.oQTY ,o.oDay" 
-				+ "from ODEARS o,CART c, "
-				+ "where o.oId=c.cId and c.cId=?";
+		String sql = "select o.oId,p.pId,u.uId,p.pImage,p.pName,p.price,o.oQTY ,o.oDay" 
+				+ " from ORDERS o,PRODUCT p,USER u "
+				+ " where o.pId=p.pId and o.uId=u.uId and u.uId=?";
 
 		try {
 			pstmt = conn.prepareStatement(sql);
-			pstmt.setString(1, cId);
+			pstmt.setString(1, uId);
 
 			rs = pstmt.executeQuery();
 			while (rs.next()) {
@@ -255,9 +241,11 @@ public class CartDao {
 				HashMap<String, String> map = new HashMap<>();
 
 				map.put("oId", rs.getString("oId"));
-				map.put("cId", rs.getString("cId"));
+				map.put("pId", rs.getString("pId"));
+				map.put("uId", rs.getString("uId"));
+				map.put("pImage", rs.getString("pImage"));
+				map.put("pName", rs.getString("pName"));
 				map.put("price", rs.getString("price"));
-				map.put("cQTY", rs.getString("cQTY"));
 				map.put("oQTY", rs.getString("oQTY"));
 				map.put("oDay", rs.getString("oDay"));
 
@@ -304,6 +292,9 @@ public class CartDao {
 		}
 		
 	}
+	
+	
+	
 				
 	
 }

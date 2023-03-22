@@ -283,12 +283,13 @@ div.pName, span.del {
 		$("#buyBtn").click(function() {
 			$(".cId:checked").each(function(i, element) {
 
-				var cId = $(this).attr("cId");
+				var uId = $(this).attr("uid");
 				var pId = $(this).attr("pId");
+				var cId = $(this).attr("cId");
 				var cQTY = $(this).attr("cQTY");
 				
-				stock(pId,cId);
-				orderlist(pId,cQTY);
+				stock(uId,cId);
+				orderlist(uId,pId,cQTY);
 				setTimeout(function() {
 				del(cId);
 				},100);
@@ -318,13 +319,14 @@ div.pName, span.del {
 			
 		} 
 		
-		function orderlist(pId,cQTY){
+		function orderlist(uId,pId,cQTY){
 			$.ajax({
 
 				type : "get",
 				dataType : "html",
 				url : "product_insertOrder.jsp",
 				data : {
+					"uId":uId,
 					"pId" : pId,
 					"cQTY": cQTY
 				},
@@ -401,10 +403,10 @@ NumberFormat nf = NumberFormat.getInstance();
 								<tr>
 									<th style="width: 30px;"><input type="checkbox"
 										id="allcheck"></th>
-									<th style="width: 500px; font-size: 1.2em; text-align: center;">상품정보</th>
+									<th style="width: 600px; font-size: 1.2em; text-align: center;">상품정보</th>
 									<th style="width: 150px; font-size: 1.2em; text-align: center;">상품옵션</th>
-									<th style="width: 200px; font-size: 1.2em; text-align: center;">상품금액</th>
-									<th style="width: 200px; font-size: 1.2em; text-align: center;">총금액</th>
+									<th style="width: 150px; font-size: 1.2em; text-align: center;">상품금액</th>
+									<th style="width: 150px; font-size: 1.2em; text-align: center;">총금액</th>
 								</tr>
 
 								<%
@@ -418,7 +420,7 @@ NumberFormat nf = NumberFormat.getInstance();
 								<tr>
 									<td style="line-height: 100px;"><input type="checkbox"
 										name="cId" class="cId moneycheck" cId="<%=map.get("cId")%>"
-										price="<%=map.get("price")%>" cQTY="<%=map.get("cQTY")%>" pId="<%=map.get("pId")%>"pStock=<%=map.get("pStock") %>></td>
+										price="<%=map.get("price")%>" cQTY="<%=map.get("cQTY")%>" uId="<%=uid%>"pId="<%=map.get("pId")%>"pStock=<%=map.get("pStock") %>></td>
 
 									<td style="line-height: 100px;">
 										<div pId="<%=map.get("pId")%>" class="pName" >

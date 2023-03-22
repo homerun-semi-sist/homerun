@@ -1,3 +1,6 @@
+<%@page import="data.dto.OrderDto"%>
+<%@page import="data.dto.CartDto"%>
+<%@page import="data.dao.CartDao"%>
 <%@page import="data.dto.UserDto"%>
 <%@page import="data.dao.UserDao"%>
 <%@ page import="data.dao.ProductDao"%>
@@ -159,9 +162,13 @@ div{
 <%
 
 	String uid=(String)session.getAttribute("uid");
+	String oId=(String)session.getAttribute("oId");
 	UserDao dao=new UserDao();
 	String uName=dao.getuName(uid);	
 	UserDto dto=dao.getData(uid);
+	CartDao cdao = new CartDao();
+	int OrderSize = cdao.getOrderList(uid).size();
+	
 %>
 <script type="text/javascript">
 	function delfunc(uid){
@@ -195,6 +202,14 @@ div{
 					
 				}
 			}
+	
+	/* 주문내역 버튼  */
+	
+	$(function(){
+		$("#orderlist").click(function(){
+			location.href='../product/product_orderlist.jsp';
+		});
+	});
 </script>
 	<body style="overflow-x: hidden;">
 		<%
@@ -311,9 +326,9 @@ div{
       
       <div class="item">
         <div>
-          <img class="image" src="../assets/img/주문내역.png">
-          <div class="text">주문내역</div>
-          <div class="green number">6건</div>
+          <img class="image" id ="orderlist"  src="../assets/img/주문내역.png">
+          <div class="text" >주문내역</div>
+          <div class="green number"><%=OrderSize %>건</div>
         </div>
       </div>  
          
