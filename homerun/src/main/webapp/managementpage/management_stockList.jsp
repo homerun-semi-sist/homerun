@@ -60,8 +60,6 @@
 <script src="../assets/board/js/config.js"></script>
 <script src="https://code.jquery.com/jquery-3.6.3.js"></script>
 
-
-
 <style>
  .bBottom {
             border: 0px solid gray;
@@ -167,11 +165,13 @@ $(function(){
 		var currentPage=$("#currentPage").val();
 		var str = $("#search_str").val();
 		
+		alert(val+" "+currentPage+" "+str);
+		
 	   
 	    $.ajax({
 		
 			type : "get",
-			url : "management_getSearchList.jsp",
+			url : "management_getSearchStockList.jsp",
 			dataType : "json",
 			data : {"val" : val, "str" : str,"currentPage":currentPage},
 			success:function(res) {
@@ -260,7 +260,7 @@ function list(){
 				$.each(res, function(idx, item){
 					s+="<tr>";
 					s+="<td style='text-align: center;'>" + item.pId + "</td>";
-					s+="<td style='text-align: center;'><a href='../product/product_detailPage.jsp?pId="+item.pId+"'><b>"+item.pName+"</b></a></td>";
+					s+="<td style='text-align: center;'><a href='../product/product_detailPage.jsp?pId="+item.pId+"' style='text-decoration: none;color: black;'><b>"+item.pName+"</b></a></td>";
 					s+="<td style='text-align: center;'>" + item.teamName + "</td>";
 					s+="<td style='text-align: center;'>" + item.pCategory + "</td>";
 					s+="<td style='text-align: center;'>" + item.pStock + "</td>";
