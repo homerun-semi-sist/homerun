@@ -15,14 +15,53 @@
 		<script type="text/javascript">
 		function logincheck(a)
 		{
-			if(a.uid.value==""){
+			var uid=$("#uid").val();
+			var pw=$("#pw").val();
+			
+			if(uid==""){
 				
 				alert("아이디를 입력 해 주세요");
 								
-			}else if(a.pw.value=="")
+			}else if(pw==""){
 				
 				alert("비밀번호를 입력 해 주세요");
+			}
+				
+				
 		}
+		
+		function noSpacialForm(obj) { // 공백사용못하게
+			
+		    var str_space = /\s/;  // 공백체크
+		    var str_special = /[`~!@#$%^&*|\\\'\";:\/?]/gi;
+		    
+		    if(str_space.exec(obj.value)) { //공백 체크
+		        alert("공백은 사용할 수 없습니다");
+		        obj.focus();
+		        obj.value = obj.value.replace(' ',''); // 공백제거
+		        return false;
+		        
+		    }else if(str_special.exec(obj.value)){
+		    	alert("특수문자는 사용할 수 없습니다");
+		    	obj.focus();
+		    	const reg = /[\{\}\[\]\/?.,;:|\)*~`!^\-_+<>@\#$%&\\\=\(\'\"]/gi;
+		    	obj.value = obj.value.replace(reg,'');
+		    	return false;
+		    }
+		}
+		
+	function noSpaceForm(obj) { // 공백사용못하게
+				
+			    var str_space = /\s/;  // 공백체크
+			    
+			    if(str_space.exec(obj.value)) { //공백 체크
+			        alert("공백은 사용할 수 없습니다");
+			        obj.focus();
+			        obj.value = obj.value.replace(' ',''); // 공백제거
+			        return false;
+			        
+			    }
+			}
 		</script>
 	</head>
 	<style>
@@ -172,12 +211,12 @@
   onsubmit="return logincheck(this)" name="a">
   
     <div class="user-box">
-      <input type="text" name="uid" required="required" value="<%=myid %>" >
+      <input type="text" name="uid" id="uid" maxlength="8" required="required" onkeyup="noSpacialForm(this);" onchange="noSpacialForm(this);">
       <label>아이디</label>
     </div>
     
     <div class="user-box">
-      <input type="password" name="pw" required="required">
+      <input type="password" name="pw" id="pw" maxlength="10" required="required" onkeyup="noSpaceForm(this);" onchange="noSpaceForm(this);">
       <label>비밀번호</label>
     </div>
     
@@ -186,7 +225,7 @@
     	<%=saveok==null?"":"checked" %>>&nbsp;아이디저장
     </div>
     
-    <button type="submit" class="login" onclick="logincheck(a)">로그인</button>
+    <button type="submit" class="login" onclick="logincheck(a)" >로그인</button>
     <button type="button" class="regist"  onclick="location.href='../regist/regist_registform.jsp'">회원가입</button>
     
   </form>

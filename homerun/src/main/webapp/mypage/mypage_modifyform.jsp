@@ -17,33 +17,6 @@
 	<script type="text/javascript">
 	$(function(){
 		
-		$("#btnck").click(function(){
-			
-			var uid=$("#uid").val();
-			
-			$.ajax({
-				
-				type:"get",
-				url:"../regist/regist_search.jsp",
-				dataType:"json",
-				data:{"uid":uid},
-				success:function(res){
-					
-					if(res.count==1){
-						
-						alert("이미 가입된 아이디 입니다");
-						
-					}else if(uid=="" || uid.length==0){
-						
-						alert("아이디를 입력 해 주세요");	
-						
-					}else{
-						
-						alert("사용 가능한 아이디 입니다")
-					}
-				}
-			});
-		});
 $("#btnnck").click(function(){
 			
 			var nickname=$("#nickname").val();
@@ -59,7 +32,14 @@ $("#btnnck").click(function(){
 					if(res.Ncount==1){
 						
 						alert("이미 가입된 닉네임 입니다");
+						$("#nickname").val("");
+						$("#nickname").focus();
 
+					}else if(nickname="" || nickname.length==0){
+						
+						alert("닉네임을 입력 해 주세요");
+						$("#nickname").focus();
+						
 					}else{
 						
 						alert("사용 가능한 닉네임 입니다");
@@ -72,49 +52,112 @@ $("#btnnck").click(function(){
 	
 	function passcheck(f)
 	{
-		if(f.pw1.value!=f.pw2.value){
+		var nickname=$("#nickname").val();
+		
+		$.ajax({
 			
-			alert("비밀번호가 일치하지 않습니다");
-			
-			f.pw1.value="";
-			f.pw2.value="";
-			
-			return false;
-			
-		}else if(f.uid.value==""){
-			
-			alert("아이디를 입력 해 주세요");
-			
-		}else if(f.pw1.value==""){
-			
-			alert("비밀번호를 입력 해 주세요");
-			
-		}else if(f.pw2.value==""){
-			
-			alert("비밀번호 확인을 입력 해 주세요");
-			
-		}else if(f.uName.value==""){
-			
-			alert("이름을 입력 해 주세요");
-			
-		}else if(f.nickname.value==""){
-			
-			alert("닉네임을 입력 해 주세요");
-			
-		}else if(f.hp2.value==""){
-			
-			alert("전화번호를 입력 해 주세요");
-			
-		}else if(f.hp3.value==""){
-			
-			alert("전화번호 뒷자리를 입력 해 주세요");
-			
-		}else if(f.addr1.value==""){
-			
-			alert("주소를 입력 해 주세요");
-			
-		}
+			type:"post",
+			url:"../regist/regist_search.jsp",
+			dataType:"json",
+			data:{"nickname":nickname},
+			success:function(res){
+				
+				if(res.Ncount==1){
+					
+					alert("닉네임 중복체크를 해 주세요");
+					$("#nickname").focus();
+					
+				}else{
+					
+					if(f.pw1.value!=f.pw2.value){
+						
+						alert("비밀번호가 일치하지 않습니다");
+						
+						f.pw1.value="";
+						f.pw2.value="";
+						
+						return false;
+						
+					}else if(f.uid.value==""){
+						
+						alert("아이디를 입력 해 주세요");
+						
+					}else if(f.pw1.value==""){
+						
+						alert("비밀번호를 입력 해 주세요");
+						
+					}else if(f.pw2.value==""){
+						
+						alert("비밀번호 확인을 입력 해 주세요");
+						
+					}else if(f.uName.value==""){
+						
+						alert("이름을 입력 해 주세요");
+						
+					}else if(f.nickname.value==""){
+						
+						alert("닉네임을 입력 해 주세요");
+						
+					}else if(f.hp2.value==""){
+						
+						alert("전화번호를 입력 해 주세요");
+						
+					}else if(f.hp3.value==""){
+						
+						alert("전화번호 뒷자리를 입력 해 주세요");
+						
+					}else if(f.addr1.value==""){
+						
+						alert("주소를 입력 해 주세요");
+						
+					}else if(f.addr2.value==""){
+						
+						alert("주소를 입력 해 주세요");
+						
+					}else if(f.addr3.value==""){
+						
+						alert("주소를 입력 해 주세요");
+						
+					}
+					
+				}
+			}
+		});
+		
 	}
+	
+function noSpacialForm(obj) { // 공백사용못하게
+		
+	    var str_space = /\s/;  // 공백체크
+	    var str_special = /[`~!@#$%^&*|\\\'\";:\/?]/gi;
+	    
+	    if(str_space.exec(obj.value)) { //공백 체크
+	        alert("공백은 사용할 수 없습니다");
+	        obj.focus();
+	        obj.value = obj.value.replace(' ',''); // 공백제거
+	        return false;
+	        
+	    }else if(str_special.exec(obj.value)){
+	    	alert("특수문자는 사용할 수 없습니다");
+	    	obj.focus();
+	    	const reg = /[\{\}\[\]\/?.,;:|\)*~`!^\-_+<>@\#$%&\\\=\(\'\"]/gi;
+	    	obj.value = obj.value.replace(reg,'');
+	    	return false;
+	    }
+	}
+	
+	function noSpaceForm(obj) { // 공백사용못하게
+				
+			    var str_space = /\s/;  // 공백체크
+			    
+			    if(str_space.exec(obj.value)) { //공백 체크
+			        alert("공백은 사용할 수 없습니다");
+			        obj.focus();
+			        obj.value = obj.value.replace(' ',''); // 공백제거
+			        return false;
+		        
+		    }
+		}
 	
 	function sample6_execDaumPostcode() {
         new daum.Postcode({
@@ -177,7 +220,7 @@ $("#btnnck").click(function(){
 .joinForm {
   position:absolute;
   width:600px;
-  height:850px;
+  height:880px;
   padding: 30px, 20px;
   background-color:#FFFFFF;
   top:40%;
@@ -359,6 +402,9 @@ $("#btnnck").click(function(){
 	UserDao dao=new UserDao();
 	
 	UserDto dto=dao.getData(uid);
+	
+	String [] hp=dto.getHp().split("-");
+	String [] addr=dto.getAddr().split(" ");
 %>
 						<form action="../mypage/mypage_modifyaction.jsp" method="post" class="joinForm" 
 		onsubmit="return passcheck(this)" name="f">
@@ -372,11 +418,13 @@ $("#btnnck").click(function(){
       </div>
       
       <div class="textForm">
-        <input name="pw1" type="password" class="pw" placeholder="비밀번호 변경 (특수문자 포함 10자 이상)" required="required" >
+        <input name="pw1" type="password" class="pw" placeholder="비밀번호 변경 (특수문자 포함 10자 이상)" required="required" 
+        onkeyup="noSpaceForm(this);" onchange="noSpaceForm(this);">
       </div>
       
        <div class="textForm">
-        <input name="pw2" type="password" class="pw" placeholder="비밀번호 변경 확인" required="required" >
+        <input name="pw2" type="password" class="pw" placeholder="비밀번호 변경 확인" required="required" 
+        onkeyup="noSpaceForm(this);" onchange="noSpaceForm(this);">
       </div>
       
       <div class="textForm">
@@ -384,7 +432,8 @@ $("#btnnck").click(function(){
       </div>
       
       <div class="textForm">
-        <input name="nickname" type="text" class="nickname" placeholder="닉네임 (특수문자,공백 제외 8자 이하)" required="required" value="<%=dto.getNickname()%>">
+        <input name="nickname" type="text" class="nickname" id="nickname" placeholder="닉네임 (특수문자,공백 제외 8자 이하)" required="required" value="<%=dto.getNickname()%>"
+        onkeyup="noSpacialForm(this);" onchange="noSpacialForm(this);" maxlength="8">
         <button type="button" class="btnnck" id="btnnck">중복체크</button>      
       </div>
       
@@ -397,7 +446,7 @@ $("#btnnck").click(function(){
 			<%}
 		%>>남자&nbsp;&nbsp; 
 		
-		<input name="gender" type="radio" class="gender" value="여" /
+		<input name="gender" type="radio" class="gender" value="여"
 		
 		<%
 			if(dto.getGender().equals("여"))
@@ -465,8 +514,10 @@ $("#btnnck").click(function(){
       		
       	</select>
       	
-      	- <input type="text" name="hp2" class="hp" style="width : 70px;" size="4" maxlength="4" required="required">
-      	- <input type="text" name="hp3" class="hp" style="width : 70px;" size="4" maxlength="4" required="required">
+      	- <input type="text" name="hp2" class="hp" style="width : 70px;" size="4" maxlength="4" 
+      		oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" required="required"  value="<%=hp[1]%>">
+      	- <input type="text" name="hp3" class="hp" style="width : 70px;" size="4" maxlength="4" 
+      		oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" required="required" value="<%=hp[2]%>">
       	
       </div>
       
@@ -479,10 +530,15 @@ $("#btnnck").click(function(){
        </div> --%>
     
     	<div class="textForm" >주소
-	       <input type="text" name="addr1" class="addr" id="sample6_postcode" placeholder="우편번호" required="required" style="margin-left: 98px;">&nbsp;
+	       <input type="text" name="addr1" class="addr" id="sample6_postcode" placeholder="우편번호" required="required" style="margin-left: 98px;"
+	       		value="<%=addr[0]%>">&nbsp;
+	       		
 		   <input type="button" class="addr" onclick="sample6_execDaumPostcode()" value="우편번호 찾기"><br>
-		   <input type="text" name="addr2" class="addr" id="sample6_address" placeholder="주소" required="required" style="margin-left: 130px;">&nbsp;
-		   <input type="text" name="addr3" class="addr" id="sample6_extraAddress" placeholder="참고항목" required="required">
+		   <input type="text" name="addr2" class="addr" id="sample6_address" placeholder="주소" required="required" style="margin-left: 130px;"
+		   		value="<%=addr[1]%> <%=addr[2]%> <%=addr[3]%> <%=addr[4]%>">&nbsp;
+		   
+		   <input type="text" name="addr3" class="addr" id="sample6_extraAddress" placeholder="참고항목" required="required"
+		   		value="<%=addr[5]%>">
 		</div>
     
        <button type="submit" class="btn1" onclick="passcheck(f)">수정하기</button>

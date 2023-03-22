@@ -17,6 +17,7 @@
 <body>			
 
 <%
+	session.removeAttribute("loginok");
 
 	String uid=request.getParameter("uid");
 	UserDao dao=new UserDao();

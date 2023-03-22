@@ -1,5 +1,4 @@
 <%@page import="data.dao.UserDao"%>
-<%@page import="data.dto.UserDto"%>
 <%@ page import="data.dao.ProductDao"%>
 <%@ page import="java.util.List"%>
 <%@ page import="data.dto.ProductDto"%>
@@ -15,9 +14,61 @@
 		<script src="https://code.jquery.com/jquery-3.6.3.js"></script>
 		<link href="../assets/css/index.css" rel="stylesheet">
 	</head>
-	<%
-	request.setCharacterEncoding("utf-8");
-	%>
+<style>
+#btn{
+	margin-top:40px;
+	margin-left: 50px;
+}
+#successlogo {
+	width: 250px;
+	height: 250px;
+	margin-top:100px;
+}
+
+div {
+	text-align: center;
+}
+
+#thanksmsg {
+	font-size: 50px;
+
+}
+
+#user{
+	font-size: 30px;
+}
+
+.btn1 {
+  left:40%;
+  transform: translateX(-38%);
+  margin-right: 10px;
+  width:100px;
+  height:30px;
+  color:white;
+  font-weight: bold;
+  border:none;
+  cursor:pointer;
+  background-color: #0b214e;
+  
+}
+
+.btn2 {
+  left:40%;
+  transform: translateX(-38%);
+  width:100px;
+  height:30px;
+  color:white;
+  font-weight: bold;
+  border:none;
+  cursor:pointer;
+  background-color: #0b214e;
+  
+}
+
+.main{
+	margin-top: 80px;
+}
+</style>
 	<body style="overflow-x: hidden;">
 		<%
 			String mainPage = "../layout/main.jsp";
@@ -41,34 +92,33 @@
 					<div class="col-sm-8" style="border: 1px solid pink;">
 						<!-- write here -->
 <%
-	session.removeAttribute("loginok");
 
-	String uid=request.getParameter("uid");
-	String uName=request.getParameter("uName");
-	String nickname=request.getParameter("nickname");
-	String pw=request.getParameter("pw1");
-	String gender=request.getParameter("gender");
-	String birth=request.getParameter("birth1")+"-"+request.getParameter("birth2")+"-"+request.getParameter("birth3");
-	String hp=request.getParameter("hp1")+"-"+request.getParameter("hp2")+"-"+request.getParameter("hp3");
-	String addr="("+request.getParameter("addr1")+") "+request.getParameter("addr2")+" "+request.getParameter("addr3");
-	
-	UserDto dto=new UserDto();
-	
-	dto.setUid(uid);
-	dto.setuName(uName);
-	dto.setNickname(nickname);
-	dto.setPw(pw);
-	dto.setGender(gender);
-	dto.setBirth(birth);
-	dto.setHp(hp);
-	dto.setAddr(addr);
-	
+	String uid=(String)session.getAttribute("uid");
 	UserDao dao=new UserDao();
+	String uName=dao.getuName(uid);
 	
-	dao.updateUser(dto);
-	
-	response.sendRedirect("mypage_modifysuccess.jsp");
 %>
+				<div class=main>
+					<div>
+						<img src="../assets/img/완료.png" id="successlogo"> <br>
+						<br> <br>
+					</div>
+					<div id="thanksmsg">회원수정이 <b>완료</b> 되었습니다.</div>
+					<br> <br>
+					<div id="user"><b><%=uid%></b>님 다시 로그인 해 주세요</div>
+
+
+
+					
+					<div id="btn">
+						<button type="button" class="btn1"
+						onclick="location.href='../user/user_loginform.jsp'">로그인</button>
+						
+						<button type="button" class="btn2"
+						onclick="location.href='../index.jsp'">메인으로</button>
+					</div>
+				</div>
+					
 						<!-- the end -->
 					</div>
 					<div class="col-sm-2" style="border: 1px solid blue;">right</div>

@@ -1,3 +1,4 @@
+<%@page import="data.dto.UserDto"%>
 <%@page import="data.dao.UserDao"%>
 <%@ page import="data.dao.ProductDao"%>
 <%@ page import="java.util.List"%>
@@ -155,6 +156,46 @@ div{
 }
 
 </style>
+<%
+
+	String uid=(String)session.getAttribute("uid");
+	UserDao dao=new UserDao();
+	String uName=dao.getuName(uid);	
+	UserDto dto=dao.getData(uid);
+%>
+<script type="text/javascript">
+	function delfunc(uid){
+		
+		var pw1=$("#pw1").val();
+		
+		if(pw1==<%=dto.getPw()%>)
+			{
+				location.href='mypage_unregistaction.jsp?uid='+uid;
+				
+			}else{
+				
+				pw1="";
+				alert("비밀번호가 틀렸습니다")
+				
+			}
+		}
+	
+	function upfunc(){
+			
+			var pw2=$("#pw2").val();
+			
+			if(pw2==<%=dto.getPw()%>)
+				{
+					location.href='mypage_modifyform.jsp';
+					
+				}else{
+					
+					pw2="";
+					alert("비밀번호가 틀렸습니다")
+					
+				}
+			}
+</script>
 	<body style="overflow-x: hidden;">
 		<%
 			String mainPage = "../layout/main.jsp";
@@ -177,12 +218,7 @@ div{
 					<div class="col-sm-2" style="border: 1px solid red;">left</div>
 					<div class="col-sm-8" style="border: 1px solid pink;">
 						<!-- write here -->
-<%
 
-	String uid=(String)session.getAttribute("uid");
-	UserDao dao=new UserDao();
-	String uName=dao.getuName(uid);
-%>
 <div class="wrap">
 
 <div class="head">
@@ -209,13 +245,13 @@ div{
           <p><b style="font-size: 15pt;">정말 회원탈퇴 하시겠습니까?</b></p>
         </div>
         <div>
-        	&nbsp;&nbsp;&nbsp;&nbsp;<input type="password" placeholder="비밀번호 입력">
+        	&nbsp;&nbsp;&nbsp;&nbsp;<input type="password"  id="pw1" placeholder="비밀번호 입력">
         	<br>
         	<br>
         </div>
         <div class="modal-footer">
         	<button type="button" class="btn btn-default" data-dismiss="modal"
-        	onclick="location.href='../mypage/mypage_unregistaction.jsp'">탈퇴하기</button>
+        	onclick="delfunc('<%=dto.getUid()%>')">탈퇴하기</button>
           <button type="button" class="btn btn-default" data-dismiss="modal">취소</button>
         </div>
       </div>
@@ -246,13 +282,13 @@ div{
           <p><b style="font-size: 15pt;">비밀번호를 입력 해 주세요</b></p>
         </div>
         <div>
-        	&nbsp;&nbsp;&nbsp;&nbsp;<input type="password" placeholder="비밀번호 입력">
+        	&nbsp;&nbsp;&nbsp;&nbsp;<input type="password" id="pw2" placeholder="비밀번호 입력">
         	<br>
         	<br>
         </div>
         <div class="modal-footer">
         	<button type="button" class="btn btn-default" data-dismiss="modal"
-        	onclick="location.href='../mypage/mypage_modifyform.jsp'">수정하기</button>
+        	onclick="upfunc()">수정하기</button>
           <button type="button" class="btn btn-default" data-dismiss="modal">취소</button>
         </div>
       </div>
@@ -289,7 +325,7 @@ div{
         </div>
       </div>   
         
-      <div class="item">
+      <div class="item" >
         <div>
           <img class="image" src="../assets/img/댓글.png">        
           <div class="text">내 댓글</div>

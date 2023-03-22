@@ -30,7 +30,7 @@
 <body>
     <!-- Navbar Start -->
     <nav class="navbar navbar-expand-lg navbar-light sticky-top px-4 px-lg-5 py-lg-0">
-        <a href="index.jsp" class="navbar-brand d-flex align-items-center">
+        <a href="../index.jsp" class="navbar-brand d-flex align-items-center">
             Homerun
         </a>
         <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
@@ -38,7 +38,7 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarCollapse">
             <div class="navbar-nav ms-auto py-3 py-lg-0">
-                <a href="index.jsp" class="nav-item nav-link active">Home</a>
+                <a href="../index.jsp" class="nav-item nav-link active">Home</a>
                 <div class="nav-item dropdown">
                     <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">경기일정</a>
                     <div class="dropdown-menu bg-light m-0">

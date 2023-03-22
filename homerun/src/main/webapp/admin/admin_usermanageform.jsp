@@ -47,20 +47,51 @@ table td, th {
 }
 	</style>
 	<script type="text/javascript">
-	$(function() {
-		$("#delbtn").click(function(){
-			var uid = $(this).attr("uid");
+		function delfunc(uid){
 			
-			alert(uid);
-			
-			/* var yes=confirm("탈퇴 처리 하시겠습니까?");
+			var yes=confirm("탈퇴 처리 하시겠습니까?");
 			
 			if(yes)
-				alert("탈퇴 처리 되었습니다");
-				location.href='admin_unregistaction.jsp?uid='+uid; */
-		}
-	})
+				{
+					alert("탈퇴 처리 되었습니다");
+					location.href='admin_unregistaction.jsp?uid='+uid;
+				}
+			}
 		
+		function checkAll() {
+			
+			if($("#cboxAll").is(':checked')) {
+				
+				$("input[name=cbox]").prop("checked", true);
+				
+			} else {
+				
+				$("input[name=cbox]").prop("checked", false);
+				
+			}
+		}
+		
+		$(document).on("click", "input:checkbox[name=cbox]", function(e) {
+			
+			var chks = document.getElementsByName("cbox");
+			var chksChecked = 0;
+			
+			for(var i=0; i<chks.length; i++) {
+				var cbox = chks[i];
+				
+				if(cbox.checked) {
+					chksChecked++;
+				}
+			}
+			
+			if(chks.length == chksChecked){
+				$("#cboxAll").prop("checked", true);
+			}else{
+				$("#cboxAll").prop("checked",false);
+			}
+			
+		});
+
 	</script>
 	</head>
 	<%
@@ -71,6 +102,7 @@ table td, th {
 	%>
 	
 	<%
+		UserDao adao=new UserDao();
 		String loginok=(String)session.getAttribute("loginok");
 		
 		int totalCount;
@@ -79,11 +111,11 @@ table td, th {
 		int endPage;  //각 블럭의 마지막페이지
 		int start;  //각페이지 시작번호
 		int perPage = 7;  //현제페이지 보여질 글의 갯수
-		int perBlock = 5;  //한블럭당 보여지는 페이지개수
+		int perBlock = 3;  //한블럭당 보여지는 페이지개수
 		int currentPage;  //현재페이지
 		
 		//총 갯수
-		totalCount=dao.getTotalCount();
+		totalCount=adao.getTotalCount();
 		
 		//현재 페이지번호
 		if(request.getParameter("currentPage")==null)
@@ -106,7 +138,7 @@ table td, th {
 		start=(currentPage-1)*perPage;
 		
 		//각 페이지에서 필요한 게시글
-		List<UserDto> list2=dao.getList(start, perPage);
+		List<UserDto> alist=adao.getList(start, perPage);
 	%>
 
 	<body style="overflow-x: hidden;">
@@ -143,7 +175,7 @@ table td, th {
           <table class="ui very basic table">
             <thead>
               <tr>
-                <th><input type="checkbox"></th>
+                <th><input type="checkbox" id="cboxAll" name="cboxAll" onclick="checkAll()"></th>
                 <th>번호</th>
                 <th>이름</th>
                 <th>아이디</th>
@@ -156,10 +188,10 @@ table td, th {
             </thead>
             <tbody>
             <%
-            	for(UserDto dto:list)
+            	for(UserDto dto:alist)
             	{%>
             		<tr>
-            			<td><input type="checkbox"></td>
+            			<td><input type="checkbox" name="cbox" id="cbox"></td>
             			<td><%=no++ %></td>
             			<td><%=dto.getuName() %></td>
             			<td><%=dto.getUid() %></td>
@@ -167,8 +199,8 @@ table td, th {
             			<td><%=dto.getBirth() %></td>
             			<td><%=dto.getHp() %></td>
             			<td><%=dto.getAddr() %></td>
-            			<td><button type="button" class="btn btn-default" id="delbtn"
-							uid="<%=dto.getUid()%>">탈퇴</button></td>
+            			<td><button type="button" class="btn btn-default"
+					onclick="delfunc('<%=dto.getUid()%>')">탈퇴</button></td>
             		</tr>
             	<%}
             %>
