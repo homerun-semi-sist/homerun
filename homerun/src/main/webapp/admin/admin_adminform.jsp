@@ -166,6 +166,9 @@ div{
 	String uid=(String)session.getAttribute("uid");
 	UserDao dao=new UserDao();
 	String uName=dao.getuName(uid);
+
+    ProductDao pDao=new ProductDao();
+
 %>
 <div class="wrap">
 
@@ -216,7 +219,7 @@ div{
         <a href="../managementpage/management_stockListPage.jsp" style="text-decoration: none;color: black;">         
           <img class="image" src="../assets/img/재고 관리.png">
           <div class="text">재고 관리</div>
-          <div class="number">0건</div>
+          <div class="number"><%=pDao.getTotalCount() %>건</div>
           </a>
         </div>
       </div>   
