@@ -32,15 +32,18 @@
 						alert("이미 가입된 아이디 입니다");
 						$("#uid").val("");
 						$("#uid").focus();
-						
+						$("#check").val("");
+												
 					}else if(uid=="" || uid.length==0){
 						
 						alert("아이디를 입력 해 주세요");	
 						$("#uid").focus()
+						$("#check").val("");
 						
 					}else{
 						
 						alert("사용 가능한 아이디 입니다");
+						$("#check").val("checked");
 					}
 				}
 			});
@@ -63,15 +66,18 @@ $("#btnnck").click(function(){
 						alert("이미 가입된 닉네임 입니다");
 						$("#nickname").val("");
 						$("#nickname").focus();
+						$("#check2").val("");
 
 					}else if(nickname="" || nickname.length==0){
 						
 						alert("닉네임을 입력 해 주세요");
 						$("#nickname").focus();
+						$("#check2").val("");
 						
 					}else{
 						
 						alert("사용 가능한 닉네임 입니다");
+						$("#check2").val("checked");
 					}
 				}
 			});
@@ -81,31 +87,16 @@ $("#btnnck").click(function(){
 	
 	function passcheck(f)
 	{
-		
-		var uid=$("#uid").val();
-		var nickname=$("#nickname").val();
-		
-		$.ajax({
-			
-			type:"post",
-			url:"regist_search.jsp",
-			dataType:"json",
-			data:{"uid":uid,"nickname":nickname},
-			success:function(res){
-				
-				if(res.count==1){
-					
-					alert("아이디 중복체크를 해 주세요");
-					$("#uid").focus();
-					
-				}else if(res.Ncount==1){
-					
-					alert("닉네임 중복체크를 해 주세요");
-					$("#nickname").focus();
-
-				}else{
-					
-					if(f.pw1.value!=f.pw2.value){
+					 if(f.uid.value==""){
+						
+						alert("아이디를 입력 해 주세요");
+						return false;
+						
+					}else if(document.getElementById("check").value==''){
+						alert("아이디 중복체크를 해 주세요");
+						return false;
+									
+					}else if(f.pw1.value!=f.pw2.value){
 						
 						alert("비밀번호가 일치하지 않습니다");
 						
@@ -114,49 +105,52 @@ $("#btnnck").click(function(){
 						
 						return false;
 						
-					}else if(f.uid.value==""){
-						
-						alert("아이디를 입력 해 주세요");
-						
 					}else if(f.pw1.value==""){
 						
 						alert("비밀번호를 입력 해 주세요");
+						return false;
 						
 					}else if(f.pw2.value==""){
 						
 						alert("비밀번호 확인을 입력 해 주세요");
+						return false;
 						
 					}else if(f.uName.value==""){
 						
 						alert("이름을 입력 해 주세요");
+						return false;
 						
 					}else if(f.nickname.value==""){
 						
 						alert("닉네임을 입력 해 주세요");
+						return false;
 						
+					}else if(document.getElementById("check2").value==''){
+						alert("닉네임 중복체크를 해 주세요");
+						return false;
+									
 					}else if(f.hp2.value==""){
 						
 						alert("전화번호를 입력 해 주세요");
+						return false;
 						
 					}else if(f.hp3.value==""){
 						
 						alert("전화번호 뒷자리를 입력 해 주세요");
-						
+						return false;
 						
 					}else if(f.addr1.value==""){
 						
 						alert("주소를 입력 해 주세요");
+						return false;
 						
-					}else{
+					}else if(f.addr2.value==""){
 						
-						return true;
+						alert("주소를 입력 해 주세요");
+						return false;
 						
 					}
-				}
-			}
-		});
-		
-	}
+	} 
 	
 	function noSpacialForm(obj) { // 공백사용못하게
 		
@@ -250,23 +244,25 @@ $("#btnnck").click(function(){
 }
 
 .joinForm {
-  position:absolute;
-  width:600px;
-  height:850px;
+/*   position:absolute;
+  width:600px; */
+  margin:100px 50px;
+  height:920px;
   padding: 30px, 20px;
   background-color:#FFFFFF;
   top:40%;
-  left:50%;
-  transform: translate(-50%,-50%);
+  /* left:50%;
+  transform: translate(-50%,-50%); */
   border-radius: 15px;
   border: 1px solid gray;
-  margin-top: 100px;
+  /* margin-top: 100px; */
 }
 
 .joinForm h2 {
   text-align: center;
   margin: 30px;
   font-weight: bold;
+  font-size: 30pt;
 }
 
 .textForm {
@@ -351,14 +347,16 @@ $("#btnnck").click(function(){
   transform: translateX(-38%);
   margin-bottom: 20px;
   margin-right: 10px;
-  width:100px;
-  height:30px;
+  width:150px;
+  height:50px;
   color:white;
   font-weight: bold;
   border:none;
   cursor:pointer;
   background-color: #0b214e;
-  bottom: 5px;
+  top: 10px;
+  font-size: 15pt;
+  border-radius: 3px;
   
 }
 
@@ -367,14 +365,16 @@ $("#btnnck").click(function(){
   left:40%;
   transform: translateX(-38%);
   margin-bottom: 20px;
-  width:100px;
-  height:30px;
+  width:150px;
+  height:50px;
   color:white;
   font-weight: bold;
   border:none;
   cursor:pointer;
   background-color: #0b214e;
-  bottom: 5px;	
+  top: 10px;	
+  font-size: 15pt;
+  border-radius: 3px;
   
 }
 
@@ -384,24 +384,30 @@ $("#btnnck").click(function(){
 }
 
 .btnck{
-	position: absolute;
-	right: 50px;
-	width: 70px;
-	height: 30px;
+/* 	position: absolute;
+	right: 50px; */
+	position: relative;
+	bottom: 40px;
+	width: 100px;
+	height: 40px;
 	float: right;
-	border:none;
+	/* border:none; */
 	border:1px solid gray;
+	border-radius: 3px;
 	
 }
 
 .btnnck{
-	position: absolute;
-	right: 50px;
-	width: 70px;
-	height: 30px;
+	/* position: absolute;
+	right: 50px; */
+	position: relative;
+	bottom: 40px;
+	width: 100px;
+	height: 40px;
 	float: right;
-	border:none;
+	/* border:none; */
 	border:1px solid gray;
+	border-radius: 3px;
 	
 }
 
@@ -425,8 +431,8 @@ $("#btnnck").click(function(){
 		<div id="wrap">
 			<div id="content-wrap">
 				<div class="row">
-					<div class="col-sm-2" style="border: 1px solid red;">left</div>
-					<div class="col-sm-8" style="border: 1px solid pink;">
+					<div class="col-sm-2" style="border: 0px solid red;"></div>
+					<div class="col-sm-8" style="border: 0px solid pink;">
 						
 						<!-- write here -->
 						<form action="regist_registaction.jsp" method="post" class="joinForm" 
@@ -438,6 +444,7 @@ $("#btnnck").click(function(){
         <input name="uid" type="text" class="uid" id="uid" maxlength="8" placeholder="아이디 (특수문자,공백 제외 8자 이하)" required="required" 
         onkeyup="noSpacialForm(this);" onchange="noSpacialForm(this);">
         <button type="button" class="btnck" id="btnck" >중복체크</button>
+        <input type="hidden" id="check" value="" required="required">
       </div>
       
       <div class="textForm">
@@ -457,7 +464,8 @@ $("#btnnck").click(function(){
       <div class="textForm">
         <input name="nickname" type="text" class="nickname" id="nickname" maxlength="8" placeholder="닉네임 (특수문자,공백 제외 8자 이하)" required="required"
         onkeyup="noSpacialForm(this);" onchange="noSpacialForm(this);">
-        <button type="button" class="btnnck" id="btnnck">중복체크</button>      
+        <button type="button" class="btnnck" id="btnnck">중복체크</button>
+        <input type="hidden" id="check2" value="" required="required">      
       </div>
       
       <div class="textForm" style="font-size: 16px; opacity: 0.7;">성별 &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
@@ -552,7 +560,7 @@ $("#btnnck").click(function(){
     					
 						<!-- the end -->
 					</div>
-					<div class="col-sm-2" style="border: 1px solid blue;">right</div>
+					<div class="col-sm-2" style="border: 0px solid blue;"></div>
 				</div>
 			</div>
 		</div>
