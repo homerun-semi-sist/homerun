@@ -1,3 +1,4 @@
+<%@page import="data.dao.GameDao"%>
 <%@page import="data.dao.TeamDao"%>
 <%@page import="data.dto.TeamDto"%>
 <%@page import="java.util.Date"%>
@@ -57,6 +58,16 @@ table, tr, th, td {
 	border-collapse: collapse;
 }
 </style>
+<script>
+function Date getDateFromString(String dt, String format)
+{
+    SimpleDateFormat formatter = new SimpleDateFormat(format);
+    formatter.setTimeZone(TimeZone.getDefault());
+    Date uDate = null;
+    uDate = formatter.parse(dt);
+    return uDate;
+}
+</script>
 <body>
 	<%
 	Date todate = new Date();
@@ -80,9 +91,14 @@ table, tr, th, td {
 	Elements elements_right = doc.select(".team_rgt");
 	Elements elements_gday = doc.select(".td_date");
 
+	Elements elements_gday_1 = doc.select(".td_date strong");
+
 	String text_left = "";
 	String text_right = "";
 	String text_gday = "";
+	String text_gday_1 = "";
+	String text_gday_m = "";
+	String text_gday_d = "";
 	%>
 	<table class="table table-bordered" style="width: 100%">
 		<thead style="background-color: #0b214e; color: white;">
@@ -93,7 +109,26 @@ table, tr, th, td {
 		</thead>
 		<%
 		for (int i = 0; i < elements_gday.size(); i++) {
-			text_gday = elements_gday.get(i).text();
+			//text_gday = elements_gday.get(i).text();
+
+			text_gday_1 = elements_gday_1.get(i).text();
+
+			/*  String[] text_gday_day = text_gday_1.split(".");
+			text_gday_m = text_gday_day[0];
+			text_gday_d = text_gday_day[1];
+			
+			System.out.println(text_gday_m); */
+			
+			SimpleDateFormat sdf_gDay=new SimpleDateFormat("MM-dd");
+			
+			text_gday_m=text_gday_1.split("[.]")[0];
+			text_gday_m= text_gday_1.split("[.]")[1];
+			
+			Date gDAY= getDateFromString(year+text_gday_m+text_gday_m, "yy/MM/dd");
+			
+
+			System.out.println(gDAY);
+
 			int startIndex = i * 5;
 			int endIndex = (i + 1) * 5;
 			if (endIndex > elements_left.size()) {
@@ -154,52 +189,54 @@ table, tr, th, td {
 	//각페이지에서 불러올 시작번호
 	start = (currentPage - 1) * perPage;
 	%>
-	
+
 	<div class="layout-wrapper layout-content-navbar">
 
-			<!-- Content wrapper -->
-			<div class="content-wrapper">
-				<!-- Content -->
+		<!-- Content wrapper -->
+		<div class="content-wrapper">
+			<!-- Content -->
 
-				<div class="flex-grow-1 container-p-y">
-					<!-- Bootstrap Table with Header - Light -->
-					
-					<div style="width: 500px; text-align: center;" class="container">
-						<ul class="pagination">
-							<%
-							//이전
-							if (startPage > 1) {
-							%>
-							<li><a href="game_gameListPage.jsp?currentPage=<%=startPage - 1%>">이전</a></li>
-							<%
-							}
-							for (int pp = startPage; pp <= endPage; pp++) {
-								if (pp == currentPage) {
-								%>
-								<li class="active"><a
-									href="game_gameListPage.jsp?currentPage=<%=pp%>"><%=pp%></a></li>
-								<%
-								} else {
-								%>
-
-								<li><a href="game_gameListPage.jsp?currentPage=<%=pp%>"><%=pp%></a></li>
-								<%
-								}
-							}
-							//다음
-							if (endPage < totalPage) {
-							%>
-								<li><a href="game_gameListPage.jsp?currentPage=<%=endPage + 1%>">다음</a></li>
-							<%
-							}
-							%>
-						</ul>
-					</div>
-					</div>
-				</div>
+			<div class="flex-grow-1 container-p-y">
 				<!-- Bootstrap Table with Header - Light -->
-			
-			<!-- / Content -->
+
+				<div style="width: 500px; text-align: center;" class="container">
+					<ul class="pagination">
+						<%
+						//이전
+						if (startPage > 1) {
+						%>
+						<li><a
+							href="game_gameListPage.jsp?currentPage=<%=startPage - 1%>">이전</a></li>
+						<%
+						}
+						for (int pp = startPage; pp <= endPage; pp++) {
+						if (pp == currentPage) {
+						%>
+						<li class="active"><a
+							href="game_gameListPage.jsp?currentPage=<%=pp%>"><%=pp%></a></li>
+						<%
+						} else {
+						%>
+
+						<li><a href="game_gameListPage.jsp?currentPage=<%=pp%>"><%=pp%></a></li>
+						<%
+						}
+						}
+						//다음
+						if (endPage < totalPage) {
+						%>
+						<li><a
+							href="game_gameListPage.jsp?currentPage=<%=endPage + 1%>">다음</a></li>
+						<%
+						}
+						%>
+					</ul>
+				</div>
+			</div>
 		</div>
+		<!-- Bootstrap Table with Header - Light -->
+
+		<!-- / Content -->
+	</div>
 </body>
 </html>

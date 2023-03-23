@@ -7,8 +7,7 @@ public class GameDto {
 	private String home;
 	private String away;
 	private String win;
-	private String lose;
-	private String gstadium;
+	
 	public String getgId() {
 		return gId;
 	}
@@ -38,18 +37,6 @@ public class GameDto {
 	}
 	public void setWin(String win) {
 		this.win = win;
-	}
-	public String getLose() {
-		return lose;
-	}
-	public void setLose(String lose) {
-		this.lose = lose;
-	}
-	public String getGstadium() {
-		return gstadium;
-	}
-	public void setGstadium(String gstadium) {
-		this.gstadium = gstadium;
 	}
 
 }
