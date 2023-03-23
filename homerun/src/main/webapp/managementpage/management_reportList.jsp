@@ -1,6 +1,11 @@
-<%@page import="data.dto.ProductDto"%>
-<%@page import="java.util.List"%>
+<%@page import="java.text.NumberFormat"%>
 <%@page import="data.dao.ProductDao"%>
+<%@page import="data.dto.ProductDto"%>
+<%@page import="data.dao.TeamDao"%>
+<%@page import="java.text.SimpleDateFormat"%>
+<%@page import="java.util.List"%>
+<%@page import="data.dto.FreeBoardDto"%>
+<%@page import="data.dao.FreeBoardDao"%>
 <%@ page language="java" contentType="text/html; charset=utf-8"
 	pageEncoding="utf-8"%>
 <!DOCTYPE html>
@@ -17,7 +22,7 @@
 
 <meta name="description" content="" />
 
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+
 
 <!-- Favicon -->
 <link rel="icon" type="image/x-icon"
@@ -58,108 +63,64 @@
 
 
 <style>
-.bBottom {
-	border: 0px solid gray;
-	height: 35px;
-	display: flex;
-	margin: 10px;
-	line-height: 35px;
-}
-
-.bsBox {
-	border: 0px solid gray;
-	display: flex;
-	width: 250px;
-	text-align: center;
-	margin-left: 10px;
-}
-
-.bSelect {
-	border: 1px solid gray;
-	width: 80px;
-	margin-right: 5px;
-}
-
-.bSearch {
-	border: 1px solid gray;
-	width: 170px;
-}
-
-.bInsert {
-	border: 1px solid gray;
-	width: 100px;
-	text-align: center;
-	margin-left: auto;
-}
-
-a {
-	text-decoration: none;
-	color: black;
-}
+ .bBottom {
+            border: 0px solid gray;
+            height: 35px;
+            display: flex;
+            margin: 10px;
+            line-height: 35px;
+        }
+        .bsBox {
+            border: 0px solid gray;
+            display: flex;
+            width: 500px;
+            text-align: center;
+            margin-left: 10px;
+        }
+        .bSelect {
+            border: 0px solid gray;
+            margin-right: 5px;
+        }
+        .bSearch {
+            border: 0px solid gray;
+            
+        }
+        .bInsert {
+            border: 0px solid gray;
+            width: 100px;
+            text-align: center;
+            margin-left: auto;
+        }
+        a {
+            text-decoration: none;
+            color: black;
+        }
+        
+        #insertBtn, #searchBtn {
+        	border-radius: 4px;
+			border: 1px solid #0b214e;
+			background-color: #0b214e;
+		  	color: #F8F9FA;
+		  	width: 80px; 
+		  	height: 40px; 
+		  	line-height: 20px;
+        }
+        
+        
+        #insertBtn:hover, #searchBtn:hover {
+		 	color: #0b214e;
+		  	background-color: #f8f9fa;
+		}
 </style>
 </head>
-<script>
-$(function(){
-	list();
-})
-
-function list(){
-	$.ajax({
-		type:"get",
-		dataType:"json",
-		url:"getListTest.jsp",
-		success:function(res){
-			var s="";
-			
-			s+="<div class='text-nowrap'>";
-			s+="<table class='table'>";
-			s+="<thead style='background-color: #F8F9FA'>";
-			s+="<tr>";
-			s+="<th style='text-align: center; width: 70px;'>상품ID</th>";
-			s+="<th style='text-align: center; width: 150px;'>상품명</th>";
-			s+="<th style='text-align: center; width: 120px;'>팀</th>";
-			s+="<th style='text-align: center; width: 80px;'>카테고리</th>";
-			s+="<th style='text-align: center; width: 100px;'>재고수(SKU)</th>";
-			s+="<th style='text-align: center; width: 120px;'>가격</th>";
-			s+="<th style='text-align: center; width: 150px;'>관리</th>";
-			s+="</tr>";
-			s+="</thead>";
-			s+="<tbody class='table-border-bottom-0'>";
-			
-			if(res.length == 0) {
-				s+="<tr>";
-				s+="<td colspan='7' align='center' style='font-size: 18pt;'>아직 입력된 상품이 없습니다</td>";
-				s+="</tr>";
-			} else {
-				$.each(res, function(idx, item){
-					s+="<tr>";
-					s+="<td style='text-align: center;'>" + item.pId + "</td>";
-					s+="<td style='text-align: center;'><a href='../product/product_detailPage.jsp?pId="+item.pId+"'><b>"+item.pName+"</b></a></td>";
-					s+="<td style='text-align: center;'>" + item.teamName + "</td>";
-					s+="<td style='text-align: center;'>" + item.pCategory + "</td>";
-					s+="<td style='text-align: center;'>" + item.pStock + "</td>";
-					s+="<td style='text-align: center;'>" + item.price + "</td>";
-					s+="<td style='text-align: center;'><div class='dropdown'><button type='button' class='btn p-0 dropdown-toggle hide-arrow' data-bs-toggle='dropdown'><i class='bx bx-dots-vertical-rounded'></i></button>";
-					s+="<div class='dropdown-menu'><a class='dropdown-item' href='../product/product_updatePage.jsp?pId="+item.pId+"'><i class='bx bx-edit-alt me-1'></i>Update</a>";
-					s+="<a class='dropdown-item' href='../product/product_delete.jsp?pId="+item.pId+"'><i class='bx bx-trash me-1'></i> Delete</a>";
-					s+="</div></div></td>"
-					s+="</tr>"		
-				});
-			}
-			s+="</tbody>";
-			s+="</table>";
-			s+="</div>";
-			
-			$("div.sList").html(s);
-		}
-		
-	})
-}
-
-</script>
-<body>
-
 <%
+String mainPage = "../layout/main.jsp";
+
+if (request.getParameter("main") != null) {
+	mainPage = request.getParameter("main");
+}
+String root = request.getContextPath();
+
 int totalCount; //총 개수
 int totalPage; //총 페이지수
 int startPage; //각 블럭(1,2,3..)의 시작페이지
@@ -171,9 +132,9 @@ int currentPage; //현재페이지
 
 int no;
 
-ProductDao dao = new ProductDao();
+FreeBoardDao fbDao = new FreeBoardDao();
 
-totalCount = dao.getTotalCount();
+totalCount = fbDao.getAllFBs_report(1, perPage).size();
 
 //현재 페이지 번호 읽기(null일때는 1페이지로 설정)
 if (request.getParameter("currentPage") == null)
@@ -195,9 +156,141 @@ if (endPage > totalPage)
 //각페이지에서 불러올 시작번호
 start = (currentPage - 1) * perPage;
 
-//메서드 불러오기
-List<ProductDto> list = dao.getList_pDay(start, perPage);
+
 %>
+<script>
+$(function(){
+	list();
+	
+	$("#searchBtn").click(function(){
+		var val = $("#search :selected").val();
+		var currentPage=$("#currentPage").val();
+		var str = $("#search_str").val();
+		
+	   
+	    $.ajax({
+		
+			type : "get",
+			url : "management_getReportList.jsp",
+			dataType : "json",
+			data : {"val" : val, "str" : str, "currentPage" : currentPage},
+			success:function(res) {
+				//alert(val + ", "+ str +", " + res.length);
+				
+				var s="";
+				
+				s+="<div class='text-nowrap'>";
+				s+="<table class='table'>";
+				s+="<thead style='background-color: #F8F9FA'>";
+				s+="<tr>";
+				s+="<th style='text-align: center; width: 80px;'>NO.</th>";
+				s+="<th style='text-align: center; width: 80px;'>카테고리</th>";
+				s+="<th style='text-align: center; width: 500px;'>제목</th>";
+				s+="<th style='text-align: center; width: 200px;'>작성자</th>";
+				s+="<th style='text-align: center; width: 200px;'>작성일</th>";
+				s+="<th style='text-align: center; width: 80px;'>조회수</th>";
+				s+="<th style='text-align: center; width: 80px;'>누적 신고수</th>";
+				s+="<th style='text-align: center; width: 80px;'>관리</th>";
+				s+="</tr>";
+				s+="</thead>";
+				s+="<tbody class='table-border-bottom-0'>";
+				
+				if(res.length == 0) {
+					s+="<tr>";
+					s+="<td colspan='7' align='center' style='font-size: 18pt;'>\"" + str + "\" 검색 결과가 없습니다</td>";
+					s+="</tr>";
+				} else {
+					$.each(res, function(idx, item){
+						s+="<tr>";
+						s+="<td style='text-align: center;'>" + item.fbNum + "</td>";
+						s+="<td style='text-align: center; vertical-align:middle;'><b>" + item.fbCategory + "</b></td>";
+						s+="<td style='vertical-align:middle;'><a href='freePost_detailPage.jsp?fbNum=" + item.fbNum + "&currentPage=" + currentPage + "' style=' text-decoration: none; color: black;'>" + item.fbSubject + "</a></td>";
+						s+="<td style='text-align: center; vertical-align:middle;'><b>" + item.nickname + "</b></td>";
+						s+="<td style='text-align: center; vertical-align:middle;'><b>" + item.fbWriteday + "</b></td>";
+						s+="<td style='text-align: center; vertical-align:middle;'><b>" + item.fbReadCnt + "</b></td>";
+						s+="<td style='text-align: center; vertical-align:middle;'><b>" + item.fbReport + "</b></td>";										
+						s+="<td style='text-align: center;'><div class='dropdown'><button type='button' class='btn p-0 dropdown-toggle hide-arrow' data-bs-toggle='dropdown'><i class='bx bx-dots-vertical-rounded'></i></button>";
+						s+="<div class='dropdown-menu'><a class='dropdown-item' href='../product/product_updatePage.jsp?pId="+item.fbNum+"'><i class='bx bx-edit-alt me-1'></i>Reupload</a>";
+						s+="<a class='dropdown-item' href='#?fbNum="+item.fbNum+"'><i class='bx bx-trash me-1'></i> Delete</a>";
+						s+="<a class='dropdown-item' href='#?fbNum="+item.fbNum+"'><i class='bx bx-user-minus me-1'></i> Withdrawal</a>";
+						s+="</div></div></td>"
+						s+="</tr>"		
+					});
+				}
+				
+				s+="</tbody>";
+				s+="</table>";
+				s+="</div>";
+				
+				$("div.rList").html(s);
+			}
+		});
+	    
+	});
+})
+
+function list(){
+	var currentPage=$("#currentPage").val();
+	
+	$.ajax({
+		type:"get",
+		dataType:"json",
+		data:{"currentPage" : currentPage},
+		url:"management_getReportList.jsp",
+		success:function(res){
+			var s="";
+			
+			s+="<div class='text-nowrap'>";
+			s+="<table class='table'>";
+			s+="<thead style='background-color: #F8F9FA'>";
+			s+="<tr>";
+			s+="<th style='text-align: center; width: 70px;'>NO</th>";
+			s+="<th style='text-align: center; width: 150px;'>카테고리</th>";
+			s+="<th style='text-align: center; width: 150px;'>제목</th>";
+			s+="<th style='text-align: center; width: 120px;'>작성자</th>";
+			s+="<th style='text-align: center; width: 80px;'>작성일</th>";
+			s+="<th style='text-align: center; width: 100px;'>조회수</th>";
+			s+="<th style='text-align: center; width: 120px;'>누적 신고수</th>";
+			s+="<th style='text-align: center; width: 150px;'>관리</th>";
+			s+="</tr>";
+			s+="</thead>";
+			s+="<tbody class='table-border-bottom-0'>";
+			
+			if(res.length == 0) {
+				s+="<tr>";
+				s+="<td colspan='8' align='center' style='font-size: 18pt;'>아직 신고된 게시글이 없습니다</td>";
+				s+="</tr>";
+			} else {
+				$.each(res, function(idx, item){
+					s+="<tr>";
+					s+="<td style='text-align: center;'>" + item.fbNum + "</td>";
+					s+="<td style='text-align: center; vertical-align:middle;'><b>" + item.fbCategory + "</b></td>";
+					s+="<td style='vertical-align:middle;'><a href='freePost_detailPage.jsp?fbNum=" + item.fbNum + "&currentPage=" + currentPage + "' style=' text-decoration: none; color: black;'>" + item.fbSubject + "</a></td>";
+					s+="<td style='text-align: center; vertical-align:middle;'><b>" + item.nickname + "</b></td>";
+					s+="<td style='text-align: center; vertical-align:middle;'><b>" + item.fbWriteday + "</b></td>";
+					s+="<td style='text-align: center; vertical-align:middle;'><b>" + item.fbReadCnt + "</b></td>";
+					s+="<td style='text-align: center; vertical-align:middle;'><b>" + item.fbReport + "</b></td>";										
+					s+="<td style='text-align: center;'><div class='dropdown'><button type='button' class='btn p-0 dropdown-toggle hide-arrow' data-bs-toggle='dropdown'><i class='bx bx-dots-vertical-rounded'></i></button>";
+					s+="<div class='dropdown-menu'><a class='dropdown-item' href='../product/product_updatePage.jsp?pId="+item.fbNum+"'><i class='bx bx-edit-alt me-1'></i>Reupload</a>";
+					s+="<a class='dropdown-item' href='#?fbNum="+item.fbNum+"'><i class='bx bx-trash me-1'></i> Delete</a>";
+					s+="<a class='dropdown-item' href='#?fbNum="+item.fbNum+"'><i class='bx bx-user-minus me-1'></i> Withdrawal</a>";
+					s+="</div></div></td>"
+					s+="</tr>"		
+				});
+			}
+			s+="</tbody>";
+			s+="</table>";
+			s+="</div>";
+			
+			$("div.rList").html(s);
+		}
+		
+	})
+}
+
+</script>
+<body>
+<input type="hidden" id="currentPage" value="<%=currentPage%>">
 	<!-- Layout wrapper -->
 	<div class="layout-wrapper layout-content-navbar">
 		<div class="layout-container">
@@ -208,17 +301,28 @@ List<ProductDto> list = dao.getList_pDay(start, perPage);
 
 				<div class="flex-grow-1 container-p-y">
 					<!-- Bootstrap Table with Header - Light -->
-					<div class="card">
+					<div class="card" style="background-color: #fff">
 						<h3 class="card-header">
-							<b>재고목록</b>
+							<a href='management_reportListPage.jsp' style="text-decoration: none;color: black;"><b>자&nbsp;유&nbsp;게&nbsp;시&nbsp;판&nbsp;신&nbsp;고&nbsp;목&nbsp;록</b></a>
 						</h3>
-						<div class="sList"></div>
+						<div class="rList"></div>
 
-						<div class="bBottom">
+						<div class="bBottom" style="margin-top: 30px;">
 							<div class="bsBox">
-								<div class="bSelect">select</div>
-								<div class="bSearch">검색창</div>
-							</div>
+								<div class="bSelect">
+									<select id="search" class="form-control" style="width: 100px; height: 40px; text-align: center;">
+										<option value="pId" selected="selected">작성자</option>
+										<option value="teamName">제목</option>
+										<option value="pCategory">내용</option>
+									</select>
+								</div>
+                                <div class="bSearch">
+									<input type="text" id="search_str" class="form-control"
+											required="required" style="width: 200px; height: 40px;">
+								</div>
+								<button type="button" class="btn btn-default" id="searchBtn" style="margin-left: 5px;">검색</button>
+                            </div>                            
+						
 						</div>
 						<div style="width: 500px; text-align: center;" class="container">
 							<ul class="pagination">
@@ -226,26 +330,26 @@ List<ProductDto> list = dao.getList_pDay(start, perPage);
 								//이전
 								if (startPage > 1) {
 								%>
-								<li><a href="management_stockListPage.jsp?currentPage=<%=startPage - 1%>">이전</a></li>
+								<li><a href="management_reportListPage.jsp?currentPage=<%=startPage - 1%>">이전</a></li>
 								<%
 								}
 								for (int pp = startPage; pp <= endPage; pp++) {
 								if (pp == currentPage) {
 								%>
 								<li class="active"><a
-									href="management_stockListPage.jsp?currentPage=<%=pp%>"><%=pp%></a></li>
+									href="management_reportListPage.jsp?currentPage=<%=pp%>"><%=pp%></a></li>
 								<%
 								} else {
 								%>
 
-								<li><a href="management_stockListPage.jsp?currentPage=<%=pp%>"><%=pp%></a></li>
+								<li><a href="management_reportListPage.jsp?currentPage=<%=pp%>"><%=pp%></a></li>
 								<%
 								}
 								}
 								//다음
 								if (endPage < totalPage) {
 								%>
-								<li><a href="management_stockListPage.jsp?currentPage=<%=endPage + 1%>">다음</a></li>
+								<li><a href="management_reportListPage.jsp?currentPage=<%=endPage + 1%>">다음</a></li>
 								<%
 								}
 								%>

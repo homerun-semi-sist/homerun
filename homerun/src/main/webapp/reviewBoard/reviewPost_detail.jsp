@@ -83,7 +83,6 @@
 				
 				var uId = $("#uId").val();
 				var content = $("#content").val();
-				// alert("클릭");
 				// alert(num + ", "+ uId + ", " + content);
 				
 				$.ajax({
@@ -104,7 +103,7 @@
 			});
 			
 			// 댓글 delete
-			$(document).on("click", "#rcDel", function() {
+			$(document).on("click", ".rcDel", function() {
 				var a = confirm("댓글을 삭제하려면 [확인]을 눌러주세요");
 				
 				var rcIdx = $(this).attr("rcIdx");
@@ -125,7 +124,7 @@
 			});
 			
 			// 댓글 update 버튼 클릭
-			$(document).on("click", "#rcMod", function() {
+			$(document).on("click", ".rcMod", function() {
 							
 				var rcIdx = $(this).attr("rcIdx");
 				// alert(rcIdx);
@@ -141,7 +140,9 @@
 					dataType : "json",
 					data : {"rcIdx" : rcIdx},
 					success : function(res) {	
+						
 						$("#ucontent").val(res.rcContent);
+						$("#rUpdateBtn").attr("rcIdx", res.rcIdx);
 					}
 				});
  
@@ -150,7 +151,7 @@
 			// 댓글 update
 			$("#rUpdateBtn").click(function() {
 							
-				var rcIdx = $("#rcMod").attr("rcIdx");
+				var rcIdx = $(this).attr("rcIdx");
 				var ucontent = $("#ucontent").val();
 				// alert(rcIdx + ", " + ucontent);
 
@@ -161,7 +162,7 @@
 					dataType : "html",
 					data : {"rcIdx" : rcIdx, "ucontent" : ucontent},
 					success : function () {
-			
+						
 						list();
 						
 						// 수정폼은 숨기고 입력폼은 나타냄
@@ -173,7 +174,7 @@
 			});
 			
 			// 댓글 추천수 증가
-			$(document).on("click", "#rcLike", function() {
+			$(document).on("click", ".rcLike", function() {
 				var loginok = $("#loginok").val();
 				//alert(loginok);
 				
@@ -190,7 +191,7 @@
 						data : {"rcIdx" : rcIdx},
 						success : function (res) {
 	
-							$("#rcLikeCnt").text(res.like);
+							list();
 						}
 					})
 					
@@ -201,7 +202,7 @@
 			});
 			
 			// 댓글 비추천수 증가
-			$(document).on("click", "#rcDislike", function() {
+			$(document).on("click", ".rcDislike", function() {
 				var loginok = $("#loginok").val();
 				//alert(loginok);
 				
@@ -218,7 +219,7 @@
 						data : {"rcIdx" : rcIdx},
 						success : function (res) {
 	
-							$("#rcDislikeCnt").text(res.dislike);
+							list();
 						}
 					})
 					
@@ -229,7 +230,7 @@
 			});
 			
 			// 댓글 신고수 증가 
-			$(document).on("click", "#rcReport", function() {
+			$(document).on("click", ".rcReport", function() {
 				var loginok = $("#loginok").val();
 				//alert(loginok);
 				
@@ -238,26 +239,23 @@
 					var rcIdx = $(this).attr("rcIdx");
 					// alert(rcIdx);
 					
-					$.ajax({
-						
-						type : "get",
-						url : "reviewComment_report.jsp",
-						dataType : "json",
-						data : {"rcIdx" : rcIdx},
-						success : function (res) {
-		
-							if(res.flag == true) {
-								var a = confirm("신고하려면 [확인]을 눌러주세요\n한번 신고한 댓글은 취소가 불가능합니다");
+					var a = confirm("신고하려면 [확인]을 눌러주세요\n한번 신고한 댓글은 취소가 불가능합니다");
+					
+					if(a) {
+						$.ajax({
+							
+							type : "get",
+							url : "reviewComment_report.jsp",
+							dataType : "json",
+							data : {"rcIdx" : rcIdx},
+							success : function (res) {
+			
+								alert("댓글을 신고하였습니다");	
+								list();
 								
-								if(a) {
-									$("#rcReportCnt").text(res.report);
-									alert("댓글을 신고하였습니다");
-								}
 							}
-							else 
-								alert("이미 신고한 댓글입니다");
-						}
-					})
+						})
+					}	
 					
 				}
 				else 
@@ -299,26 +297,26 @@
 						// alert(rbUId + " : " + item.rcUId);
 						
 						s+="<div class='d-flex'>";
-						s+="<div class='ms-3'>";
-						
+						s+="<div class='ms-3'>";					
+							
 						// 로그인 o && 댓글 작성자 == 로그인 한 아이디 -> 수정, 삭제 표시
 						if(loginok != null && uId == item.rcUId) {
 							if(item.rcUId == rbUId) 
-								s+="<div class='fw-bold'><i class='fa-solid fa-user'></i>&nbsp;" + (idx + 1) + ". " + item.nickname + "<span style='color: red; border: 1px solid red; border-radius: 5px; font-size: 0.7rem; margin-left: 3px;'>작성자</span> <span class='cday'>" + item.rcWriteday + " | <span id='rcMod' rcIdx=" + item.rcIdx + " style='cursor: pointer'>수정</span> | <span id='rcDel' rcIdx=" + item.rcIdx + " style='cursor: pointer'> 삭제 </span></span></div>"; 
+								s+="<div class='fw-bold'><i class='fa-solid fa-user'></i>&nbsp;" + item.nickname + "<span style='color: red; border: 1px solid red; border-radius: 5px; font-size: 0.7rem; margin-left: 3px;'>작성자</span> <span class='cday'>" + item.rcWriteday + " | <span class='rcMod' rcIdx=" + item.rcIdx + " style='cursor: pointer'>수정</span> | <span class='rcDel' rcIdx=" + item.rcIdx + " style='cursor: pointer'> 삭제 </span></span></div>"; 
 							
 							// 댓글 작성자 == 글 작성자 -> 작성자 표시	1.로그인했을때->수정삭제
 							else
-								s+="<div class='fw-bold'><i class='fa-solid fa-user'></i>&nbsp;" + (idx + 1) + ". " + item.nickname + "<span class='cday'>" + item.rcWriteday + " | <span id='rcMod' rcIdx=" + item.rcIdx + " style='cursor: pointer'>수정</span> | <span id='rcDel' rcIdx=" + item.rcIdx + " style='cursor: pointer'> 삭제 </span></span></div>";
+								s+="<div class='fw-bold'><i class='fa-solid fa-user'></i>&nbsp;" + item.nickname + "<span class='cday'>" + item.rcWriteday + " | <span class='rcMod' rcIdx=" + item.rcIdx + " style='cursor: pointer'>수정</span> | <span class='rcDel' rcIdx=" + item.rcIdx + " style='cursor: pointer'> 삭제 </span></span></div>";
 						}
 						
 						// 댓글 작성자 == 글 작성자 -> 작성자 표시	2.로그인안했을때 
 						else if(item.rcUId == rbUId) 
-							s+="<div class='fw-bold'><i class='fa-solid fa-user'></i>&nbsp;" + (idx + 1) + ". " + item.nickname + "<span style='color: red; border: 1px solid red; border-radius: 5px; font-size: 0.7rem; margin-left: 3px;'>작성자</span> <span class='cday'>" + item.rcWriteday + " | <span id='rcMod' rcIdx=" + item.rcIdx + " style='cursor: pointer'>수정</span> | <span id='rcDel' rcIdx=" + item.rcIdx + " style='cursor: pointer'> 삭제 </span></span></div>"; 
-						 
+							s+="<div class='fw-bold'><i class='fa-solid fa-user'></i>&nbsp;" + item.nickname + "<span style='color: red; border: 1px solid red; border-radius: 5px; font-size: 0.7rem; margin-left: 3px;'>작성자</span> <span class='cday'>" + item.rcWriteday + " | <span class='rcLike' rcIdx='" + item.rcIdx + "' style='cursor: pointer'>추천 <span class='rcLikeCnt' rcIdx='" + item.rcIdx + "'>" + item.rcLike + "</span></span> | <span class='rcDislike' rcIdx=" + item.rcIdx + " style='cursor: pointer'> 비추천 <span class='rcDislikeCnt' rcIdx='" + item.rcIdx + "'> " + item.rcDislike + "</span> </span> | <span class='rcReport' rcIdx=" + item.rcIdx + " style='cursor: pointer'> 신고 <span class='rcReportCnt' rcIdx='" + item.rcIdx + "'>" + item.rcReport + "</span></span></span></div>";
+						
 						// 로그인 x
 						else
-							s+="<div class='fw-bold'><i class='fa-solid fa-user'></i>&nbsp;" + (idx + 1) + ". " + item.nickname + "<span class='cday'>" + item.rcWriteday + " | <span id='rcLike' rcIdx=" + item.rcIdx + " style='cursor: pointer'>추천 <span id='rcLikeCnt'> " + item.rcLike + "</span></span> | <span id='rcDislike' rcIdx=" + item.rcIdx + " style='cursor: pointer'> 비추천 <span id='rcDislikeCnt'> " + item.rcDislike + "</span> </span> | <span id='fcReport' rcIdx=" + item.rcIdx + " style='cursor: pointer'> 신고 <span id='fcReportCnt'>" + item.fcReport + "</span></span></span></div>"; 
-						
+							s+="<div class='fw-bold'><i class='fa-solid fa-user'></i>&nbsp;" + item.nickname + "<span class='cday'>" + item.rcWriteday + " | <span class='rcLike' rcIdx='" + item.rcIdx + "' style='cursor: pointer'>추천 <span class='rcLikeCnt' rcIdx='" + item.rcIdx + "'>" + item.rcLike + "</span></span> | <span class='rcDislike' rcIdx=" + item.rcIdx + " style='cursor: pointer'> 비추천 <span class='rcDislikeCnt' rcIdx='" + item.rcIdx + "'> " + item.rcDislike + "</span> </span> | <span class='rcReport' rcIdx=" + item.rcIdx + " style='cursor: pointer'> 신고 <span class='rcReportCnt' rcIdx='" + item.rcIdx + "'>" + item.rcReport + "</span></span></span></div>"; 
+									
 						s+= "<div id='rcContent' rcContent='"+ item.rcContent +"'>" + item.rcContent + "</div>";
 						s+="</div>";
 						s+="</div><br>";
@@ -353,7 +351,7 @@
 
 	SimpleDateFormat sdf = new SimpleDateFormat("yy.MM.dd HH:mm");
 
-	String uId = (String) session.getAttribute("myid");
+	String uId = (String) session.getAttribute("uid");
 	String loginok = (String) session.getAttribute("loginok");
 
 	UserDao uDao = new UserDao();
@@ -395,7 +393,7 @@
                     <div class="col">
 
                         <article class="blog-details" style="background-color: #fff;">
-                            <span class="title" style="vertical-align:middle;">
+                            <span class="title" style="vertical-align:middle; color:#0b214e;">
                             
                             <% 
                             	GameDto gDto = gDao.getGame(rbDto.getgId()); 
@@ -404,27 +402,30 @@
 	                    		String month = gDto.getgDay().substring(5, 7);
 	                    		String day = gDto.getgDay().substring(8, 10);
                            %>
-                           		[ <%=year %>.<%=month %>.<%=day %>&nbsp;
+                           		<span style="font-size: 0.8em;">[ 
                            <%
                                	if(gDto.getHome().equals("한화")) {	
                            %>
                                		<img src="<%=tDao.getTeam(gDto.getHome()).getTeamLogo() %>" style="width: 60px; vertical-align:middle;">
                                		vs&nbsp;
-                                   	<img src="<%=tDao.getTeam(gDto.getAway()).getTeamLogo() %>" style="width: 50px; vertical-align:middle;">] <%=rbDto.getRbSubject() %></span>     
+                                   	<img src="<%=tDao.getTeam(gDto.getAway()).getTeamLogo() %>" style="width: 50px; vertical-align:middle;">
                            <%		
                             	} else if(gDto.getAway().equals("한화")) {
                            %>
                                		<img src="<%=tDao.getTeam(gDto.getHome()).getTeamLogo() %>" style="width: 50px; vertical-align:middle;">
                                		&nbsp;vs
-                                   	<img src="<%=tDao.getTeam(gDto.getAway()).getTeamLogo() %>" style="width: 60px; vertical-align:middle;">] <%=rbDto.getRbSubject() %></span> 
+                                   	<img src="<%=tDao.getTeam(gDto.getAway()).getTeamLogo() %>" style="width: 60px; vertical-align:middle;">
                            <%			
                             	} else {
                            %>
                                		<img src="<%=tDao.getTeam(gDto.getHome()).getTeamLogo() %>" style="width: 50px; vertical-align:middle;">
                                		vs
-                                   	<img src="<%=tDao.getTeam(gDto.getAway()).getTeamLogo() %>" style="width: 50px; vertical-align:middle;">] <%=rbDto.getRbSubject() %></span> 
+                                   	<img src="<%=tDao.getTeam(gDto.getAway()).getTeamLogo() %>" style="width: 50px; vertical-align:middle;"> 
                            <%
-                                 }                       		
+                                 }     
+                           %>
+                           		&nbsp;<%=year %>.<%=month %>.<%=day %> ]</span> <%=rbDto.getRbSubject() %></span> 
+                           <%
                         	
                             	if(loginok != null && rbDto.getUId().equals(uId)) {
                            %>
@@ -438,13 +439,12 @@
                            <%
                             	}
                            %>
-                           
-                            
+                                                 
                             <div class="meta-top">
                                 <span style="font-size: 17px;"><i class="fa-regular fa-user"></i><%=uDto.getNickname()%></span>                   
-                                <span id="dlcnt" style="float: right;"><i class="fa-regular fa-thumbs-down"></i><%=rbDto.getRbDislike()%></span>
+                                <span style="float: right;"><i class="fa-regular fa-thumbs-down"></i><span id="dlcnt"><%=rbDto.getRbDislike()%></span></span>
                                 <span style="float: right;">&nbsp;&nbsp;|&nbsp;&nbsp;</span>
-                                <span id="lcnt" style="float: right;"><i class="fa-regular fa-thumbs-up"></i><%=rbDto.getRbLike()%></span>
+                                <span style="float: right;"><i class="fa-regular fa-thumbs-up"></i><span id="lcnt"><%=rbDto.getRbLike()%></span></span>
                                 <span style="float: right;">&nbsp;&nbsp;|&nbsp;&nbsp;</span>
                                 <span style="float: right;"><i class="fa-regular fa-eye"></i><%=rbDto.getRbReadCnt()%></span>
                                 <span style="float: right;">&nbsp;&nbsp;|&nbsp;&nbsp;</span>
@@ -584,7 +584,7 @@
 				var num = $(this).attr("num");
 				var tag = $(this);
 				
-				// alert(num);
+				 alert(num);
 			 	
 				$.ajax({
 					
@@ -594,13 +594,16 @@
 					data : {"num" : num},
 					success : function(res) {
 					
-						// alert(res.like);
+						 alert(res.like);
 						
 						tag.addClass("fa-solid").animate({"color" : "blue"}, 1000, function() {
 							tag.removeClass("fa-solid");
 							tag.addClass("fa-regular").css("font-size", "30px");
+						
+							alert("해당 게시글을 추천하였습니다");
 						});
 						
+						$("#lcnt").text(res.like);
 					}
 					
 				});
@@ -619,7 +622,7 @@
 				var num = $(this).attr("num");
 				var tag = $(this);	
 				
-				// alert(num);
+				 alert(num);
 				
 				$.ajax({
 					
@@ -629,13 +632,16 @@
 					data : {"num" : num},
 					success : function(res) {
 					
-						// alert(res.dislike);
+					 alert(res.dislike);
 				
 						tag.addClass("fa-solid").animate({"color" : "red"}, 1000, function() {
 							tag.removeClass("fa-solid");
 							tag.addClass("fa-regular").css("font-size", "30px");
+						
+							alert("해당 게시글을 비추천하였습니다");
 						});
 						
+						$("#dlcnt").text(res.dislike);
 					}
 					
 				});
@@ -651,7 +657,7 @@
 				
 				var num = $("#rbNum").val();
 				
-				// alert(num);
+				 alert(num);
 				var a = confirm("신고하려면 [확인]을 눌러주세요\n한번 신고한 글은 취소가 불가능합니다");
 				
 				if(a) {
@@ -663,7 +669,7 @@
 						data : {"num" : num},
 						success : function(res) {
 							
-							// alert(res.report);
+							 alert(res.report);
 	
 							if(res.flag == true)
 									alert("게시글을 신고하였습니다");

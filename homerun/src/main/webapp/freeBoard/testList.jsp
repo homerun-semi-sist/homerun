@@ -20,26 +20,25 @@
         content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0" />
 
     <title>자유게시판 목록</title>
+    <meta content="" name="description">
+    <meta content="" name="keywords">
 
-    <meta name="description" content="" />
+    <!-- Vendor CSS Files -->
+   <!--  <link href="../assets/detail/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet"> -->
+    <!-- <link href="../assets/detail/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet"> -->
+    
+   <!--  <link href="../assets/detail/vendor/aos/aos.css" rel="stylesheet">
+    <link href="../assets/detail/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
+    <link href="../assets/detail/vendor/swiper/swiper-bundle.min.css" rel="stylesheet"> -->
 
-    <!-- Core CSS -->
-    <link rel="stylesheet" href="../assets/board/vendor/css/core_copy2.css" class="template-customizer-core-css" />
-    <link rel="stylesheet" href="../assets/board/vendor/css/theme-defaul_copy2.css" class="template-customizer-theme-css" />
+ 	<!-- Core CSS -->
+	<link rel="stylesheet" href="../assets/board/vendor/css/core_copy2.css" class="template-customizer-core-css" />
+    <link rel="stylesheet" href="../assets/board/vendor/css/theme-default_copy2.css" class="template-customizer-theme-css" />
     <link rel="stylesheet" href="../assets/board/css/demo.css" />
 
-	<!-- Vendors CSS -->
-	<link rel="stylesheet"
-	href="../assets/board/vendor/libs/perfect-scrollbar/perfect-scrollbar.css" />
-    <!-- Page CSS -->
-
-    <!-- Helpers -->
-    <script src="../assets/board/vendor/js/helpers.js"></script>
-
-    <!--! Template customizer & Theme config files MUST be included after core stylesheets and helpers.js in the <head> section -->
-    <!--? Config:  Mandatory theme config file contain global vars & default theme options, Set your preferred theme option in this file.  -->
-    <script src="../assets/board/js/config.js"></script>
-
+    <!-- Template Main CSS File -->
+    <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"> -->
+    <script src="https://kit.fontawesome.com/8dcaa4675e.js" crossorigin="anonymous"></script>
     <style>
         .bBottom {
             border: 0px solid gray;
@@ -104,12 +103,12 @@
     
     <script type="text/javascript">
     	$(function() {
-    		// alert("SDF");
+
     		/* var val = $("#search :selected").val();
     		alert(val); */
-    		// fList();
+    		fList();
     		
-    		/* $("#searchBtn").click(function(){
+    		$("#searchBtn").click(function(){
     			var val = $("#search :selected").val();
         		var currentPage = $("#currentPage").val();
         		var str = $("#search_str").val();
@@ -148,61 +147,30 @@
 							s+="</tr>";
 						} else {
 							$.each(res, function(idx, item){
-									
-								if(item.fbCategory == "공지") {
-									s+="<tr style='background-color: #FFF2F2; color: red; font-size: bold;'>";
-									s+="<td style='text-align: center;'></td>";
-									s+="<td style='text-align: center; vertical-align:middle;'>";
-									s+="<b>공지</b>";
-									s+="</td>";
-								} else if(item.fbCategory == "전체") {  
-									s+="<tr>";
-									s+="<td style='text-align: center;'>" + item.fbNum + "</td>";
+								s+="<tr>";
+								s+="<td style='text-align: center;'>" + item.fbNum + "</td>";
+								
+								if(item.fbCategory == "전체") {   
 									s+="<td style='text-align: center; vertical-align:middle;'>";
 									s+="<img src='https://cdn.icon-icons.com/icons2/2070/PNG/512/baseball_icon_126956.png' style='width: 30px;'>";
 									   s+="</td>";
 								} else if(item.fbCategory == "한화") {
-									s+="<tr>";
-									s+="<td style='text-align: center;'>" + item.fbNum + "</td>";
 									s+="<td style='text-align: center; vertical-align:middle;'>";
 									s+="<img src='" + item.teamLogoImg + "' style='width: 50px;'>";
 									s+="</td>";
 								} else {
-									s+="<tr>";
-									s+="<td style='text-align: center;'>" + item.fbNum + "</td>";
 									s+="<td style='text-align: center; vertical-align:middle;'>";
 									s+="<img src='" + item.teamLogoImg + "' style='width: 40px;'>";
 									   s+="</td>";
 								}
 								
-								if(item.fcCnt == 0) {
-									if(item.fbCategory == "공지") 
-										s+="<td style='vertical-align:middle;'><a href='freePost_detailPage.jsp?fbNum=" + item.fbNum + "&currentPage=" + currentPage + "' style=' text-decoration: none; color: red;'><b>" + item.fbSubject + "</b></a></td>";
-									else 
-										s+="<td style='vertical-align:middle;'><a href='freePost_detailPage.jsp?fbNum=" + item.fbNum + "&currentPage=" + currentPage + "' style=' text-decoration: none; color: black;'>" + item.fbSubject + "</a></td>";
-								
-								} else {
-									if(item.fbCategory == "공지") 
-										s+="<td style='vertical-align:middle;'><a href='freePost_detailPage.jsp?fbNum=" + item.fbNum + "&currentPage=" + currentPage + "' style=' text-decoration: none; color: red;'><b>" + item.fbSubject + "</a><span style='color: tomato;'>&nbsp;&nbsp;[" + item.fcCnt + "]</span></td>";
-									else
-										s+="<td style='vertical-align:middle;'><a href='freePost_detailPage.jsp?fbNum=" + item.fbNum + "&currentPage=" + currentPage + "' style=' text-decoration: none; color: black;'>" + item.fbSubject + "</a><span style='color: tomato;'>&nbsp;&nbsp;[" + item.fcCnt + "]</span></td>";
-								}
-								
-								if(item.fbCategory == "공지") {
-									s+="<td style='text-align: center; vertical-align:middle;'><b>" + item.nickname + "</b></td>";
-									s+="<td style='text-align: center; vertical-align:middle;'><b>" + item.fbWriteday + "</b></td>";
-									s+="<td style='text-align: center; vertical-align:middle;'><b>" + item.fbReadCnt + "</b></td>";
-									s+="<td style='text-align: center; vertical-align:middle;'><b>" + item.fbLike + "</b></td>";
-									s+="<td style='text-align: center; vertical-align:middle;'><b>" + item.fbDislike + "</b></td>";							
-									s+="</tr>"	
-								} else {
-									s+="<td style='text-align: center; vertical-align:middle;'>" + item.nickname + "</td>";
-									s+="<td style='text-align: center; vertical-align:middle;'>" + item.fbWriteday + "</td>";
-									s+="<td style='text-align: center; vertical-align:middle;'>" + item.fbReadCnt + "</td>";
-									s+="<td style='text-align: center; vertical-align:middle;'>" + item.fbLike + "</td>";
-									s+="<td style='text-align: center; vertical-align:middle;'>" + item.fbDislike + "</td> ";							
-									s+="</tr>"
-								}
+								s+="<td style='vertical-align:middle;'><a href='freePost_detailPage.jsp?fbNum=" + item.fbNum + "&currentPage=" + currentPage + "'>" + item.fbSubject + "</a><span style='color: tomato;'>&nbsp;&nbsp;[" + item.fcCnt + "]</span></td>";
+								s+="<td style='text-align: center; vertical-align:middle;'>" + item.nickname + "</td>";
+								s+="<td style='text-align: center; vertical-align:middle;'>" + item.fbWriteday + "</td>";
+								s+="<td style='text-align: center; vertical-align:middle;'>" + item.fbReadCnt + "</td>";
+								s+="<td style='text-align: center; vertical-align:middle;'>" + item.fbLike + "</td>";
+								s+="<td style='text-align: center; vertical-align:middle;'>" + item.fbDislike + "</td> ";							
+								s+="</tr>"		
 							});
 						}
 						
@@ -214,15 +182,89 @@
 	    			}
 	    		});
     		    
-    		}); */
-    			
-    	});
-    	
+    		});
+	
+			$("button.naav-link").click(function() {
+				var category = $(this).attr("category");
+				var currentPage = $("#currentPage").val();
+				alert(category);
+				
+				$.ajax({
+	    			
+	    			type : "get",
+	    			url : "freeBoard_getList.jsp",
+	    			dataType : "json",
+	    			data : {"category" : category, "currentPage" : currentPage}, 
+	    			success:function(res) {
+	    				
+	    				var s="";
+	    				
+	    				s+="<div class='table-responsive text-nowrap'>";
+	    				s+="<table class='table'>";
+	    				s+="<thead style='background-color: #F8F9FA'>";
+	    				s+="<tr>";
+	    				s+="<th style='text-align: center; width: 80px;'>No.</th>";
+	    				s+="<th style='text-align: center; width: 150px;'>카테고리</th>";
+	    				s+="<th style='text-align: center;'>제목</th>";
+	    				s+="<th style='text-align: center; width: 200px;'>작성자</th>";
+	    				s+="<th style='text-align: center; width: 200px;'>날짜</th>";
+	    				s+="<th style='text-align: center; width: 80px;'>조회수</th>";
+	    				s+="<th style='text-align: center; width: 80px;'>추천</th>";
+	    				s+="<th style='text-align: center; width: 80px;'>비추천</th>";
+	    				s+="</tr>";
+	    				s+="</thead>";
+						s+="<tbody class='table-border-bottom-0'>";
+	    				
+						if(res.length == 0) {
+							s+="<tr>";
+							s+="<td colspan='8' align='center' style='font-size: 18pt;'>아직 작성된 게시글이 없습니다</td>";
+							s+="</tr>";
+						} else {
+							$.each(res, function(idx, item){
+								if(item.fbCategory == category) {
+								s+="<tr>";
+								s+="<td style='text-align: center;'>" + item.fbNum + "</td>";
+								
+								if(item.fbCategory == "전체") {   
+									s+="<td style='text-align: center; vertical-align:middle;'>";
+									s+="<img src='https://cdn.icon-icons.com/icons2/2070/PNG/512/baseball_icon_126956.png' style='width: 30px;'>";
+									   s+="</td>";
+								} else if(item.fbCategory == "한화") {
+									s+="<td style='text-align: center; vertical-align:middle;'>";
+									s+="<img src='" + item.teamLogoImg + "' style='width: 50px;'>";
+									s+="</td>";
+								} else {
+									s+="<td style='text-align: center; vertical-align:middle;'>";
+									s+="<img src='" + item.teamLogoImg + "' style='width: 40px;'>";
+									   s+="</td>";
+								}
+								
+								s+="<td style='vertical-align:middle;'><a href='freePost_detailPage.jsp?fbNum=" + item.fbNum + "&currentPage=" + currentPage + "'>" + item.fbSubject + "</a><span style='color: tomato;'>&nbsp;&nbsp;[" + item.fcCnt + "]</span></td>";
+								s+="<td style='text-align: center; vertical-align:middle;'>" + item.nickname + "</td>";
+								s+="<td style='text-align: center; vertical-align:middle;'>" + item.fbWriteday + "</td>";
+								s+="<td style='text-align: center; vertical-align:middle;'>" + item.fbReadCnt + "</td>";
+								s+="<td style='text-align: center; vertical-align:middle;'>" + item.fbLike + "</td>";
+								s+="<td style='text-align: center; vertical-align:middle;'>" + item.fbDislike + "</td> ";							
+								s+="</tr>"		
+							});
+						}}
+	    				s+="</tbody>";
+	    				s+="</table>";
+	    				s+="</div>";
+						
+	    				$("div.ffList").html(s);
+						
+	    			}
+	    		});
+			});
+    		
+		})
+		
 		function fList() {
-    		// var val = $("#search :selected").val();
+    		var val = $("#search :selected").val();
     		var currentPage = $("#currentPage").val();
-    		alert(currentPage);
-			
+    		//alert(val + ", "+ currentPage);
+ 		
     		$.ajax({
     			
     			type : "get",
@@ -230,7 +272,7 @@
     			dataType : "json",
     			data : {"currentPage" : currentPage}, 
     			success:function(res) {
-				alert("DSF";
+
     				var s="";
     				
     				s+="<div class='table-responsive text-nowrap'>";
@@ -255,61 +297,30 @@
 						s+="</tr>";
 					} else {
 						$.each(res, function(idx, item){
+							s+="<tr>";
+							s+="<td style='text-align: center;'>" + item.fbNum + "</td>";
 							
-							if(item.fbCategory == "공지") {
-								s+="<tr style='background-color: #FFF2F2; color: red; font-size: bold;'>";
-								s+="<td style='text-align: center;'></td>";
-								s+="<td style='text-align: center; vertical-align:middle;'>";
-								s+="<b>공지</b>";
-								s+="</td>";
-							} else if(item.fbCategory == "전체") {   
-								s+="<tr>";
-								s+="<td style='text-align: center;'>" + item.fbNum + "</td>";
+							if(item.fbCategory == "전체") {   
 								s+="<td style='text-align: center; vertical-align:middle;'>";
 								s+="<img src='https://cdn.icon-icons.com/icons2/2070/PNG/512/baseball_icon_126956.png' style='width: 30px;'>";
-								s+="</td>";
+								   s+="</td>";
 							} else if(item.fbCategory == "한화") {
-								s+="<tr>";
-								s+="<td style='text-align: center;'>" + item.fbNum + "</td>";
 								s+="<td style='text-align: center; vertical-align:middle;'>";
 								s+="<img src='" + item.teamLogoImg + "' style='width: 50px;'>";
 								s+="</td>";
 							} else {
-								s+="<tr>";
-								s+="<td style='text-align: center;'>" + item.fbNum + "</td>";
 								s+="<td style='text-align: center; vertical-align:middle;'>";
 								s+="<img src='" + item.teamLogoImg + "' style='width: 40px;'>";
 								   s+="</td>";
 							}
 							
-							if(item.fcCnt == 0) {
-								if(item.fbCategory == "공지") 
-									s+="<td style='vertical-align:middle;'><a href='freePost_detailPage.jsp?fbNum=" + item.fbNum + "&currentPage=" + currentPage + "' style=' text-decoration: none; color: red;'><b>" + item.fbSubject + "</b></a></td>";
-								else 
-									s+="<td style='vertical-align:middle;'><a href='freePost_detailPage.jsp?fbNum=" + item.fbNum + "&currentPage=" + currentPage + "' style=' text-decoration: none; color: black;'>" + item.fbSubject + "</a></td>";
-							
-							} else {
-								if(item.fbCategory == "공지") 
-									s+="<td style='vertical-align:middle;'><a href='freePost_detailPage.jsp?fbNum=" + item.fbNum + "&currentPage=" + currentPage + "' style=' text-decoration: none; color: red;'><b>" + item.fbSubject + "</a><span style='color: tomato;'>&nbsp;&nbsp;[" + item.fcCnt + "]</span></td>";
-								else
-									s+="<td style='vertical-align:middle;'><a href='freePost_detailPage.jsp?fbNum=" + item.fbNum + "&currentPage=" + currentPage + "' style=' text-decoration: none; color: black;'>" + item.fbSubject + "</a><span style='color: tomato;'>&nbsp;&nbsp;[" + item.fcCnt + "]</span></td>";
-							}
-							
-							if(item.fbCategory == "공지") {
-								s+="<td style='text-align: center; vertical-align:middle;'><b>" + item.nickname + "</b></td>";
-								s+="<td style='text-align: center; vertical-align:middle;'><b>" + item.fbWriteday + "</b></td>";
-								s+="<td style='text-align: center; vertical-align:middle;'><b>" + item.fbReadCnt + "</b></td>";
-								s+="<td style='text-align: center; vertical-align:middle;'><b>" + item.fbLike + "</b></td>";
-								s+="<td style='text-align: center; vertical-align:middle;'><b>" + item.fbDislike + "</b></td>";							
-								s+="</tr>"	
-							} else {
-								s+="<td style='text-align: center; vertical-align:middle;'>" + item.nickname + "</td>";
-								s+="<td style='text-align: center; vertical-align:middle;'>" + item.fbWriteday + "</td>";
-								s+="<td style='text-align: center; vertical-align:middle;'>" + item.fbReadCnt + "</td>";
-								s+="<td style='text-align: center; vertical-align:middle;'>" + item.fbLike + "</td>";
-								s+="<td style='text-align: center; vertical-align:middle;'>" + item.fbDislike + "</td> ";							
-								s+="</tr>"
-							}
+							s+="<td style='vertical-align:middle;'><a href='freePost_detailPage.jsp?fbNum=" + item.fbNum + "&currentPage=" + currentPage + "'>" + item.fbSubject + "</a><span style='color: tomato;'>&nbsp;&nbsp;[" + item.fcCnt + "]</span></td>";
+							s+="<td style='text-align: center; vertical-align:middle;'>" + item.nickname + "</td>";
+							s+="<td style='text-align: center; vertical-align:middle;'>" + item.fbWriteday + "</td>";
+							s+="<td style='text-align: center; vertical-align:middle;'>" + item.fbReadCnt + "</td>";
+							s+="<td style='text-align: center; vertical-align:middle;'>" + item.fbLike + "</td>";
+							s+="<td style='text-align: center; vertical-align:middle;'>" + item.fbDislike + "</td> ";							
+							s+="</tr>"		
 						});
 					}
     				s+="</tbody>";
@@ -317,7 +328,8 @@
     				s+="</div>";
     				
     				$("div.fList").html(s);
-       		});
+    			}
+    		});
     		
 		}
     </script>
@@ -326,7 +338,7 @@
 <body>	
 	<%
 		String loginok = (String)session.getAttribute("loginok");
-		String uId = (String)session.getAttribute("uid");
+	
 		FreeBoardDao fbDao = new FreeBoardDao();
 		
 		TeamDao tDao = new TeamDao();
@@ -552,8 +564,46 @@
                     <!-- tab별 내용 -->
                     <div class="tab-content">
                       <div class="tab-pane fade show active" id="naavs-top-all" role="tabpanel">
-                        <div class="fList"></div>
-                        
+                         all
+                         <div class="fList"></div>
+                      </div>
+                      <div class="tab-pane fade" id="naavs-top-kia" role="tabpanel">
+                        <div class="ffList"></div>
+                      </div>
+                      <div class="tab-pane fade" id="naavs-top-kt" role="tabpanel">
+                      	kt                     
+                      </div>
+                      <div class="tab-pane fade" id="naavs-top-lg" role="tabpanel">
+                      	lg                   
+                      </div>
+                      <div class="tab-pane fade" id="naavs-top-nc" role="tabpanel">
+                      	nc                  
+                      </div>
+                      <div class="tab-pane fade" id="naavs-top-ssg" role="tabpanel">
+                      	ssg                     
+                      </div>
+                      <div class="tab-pane fade" id="naavs-top-doosan" role="tabpanel">
+                      	doosan                   
+                      </div>
+                      <div class="tab-pane fade" id="naavs-top-lotte" role="tabpanel">
+                      	lotte                    
+                      </div>
+                      <div class="tab-pane fade" id="naavs-top-samsung" role="tabpanel">
+                      	samsung                
+                      </div>
+                      <div class="tab-pane fade" id="naavs-top-kiwoom" role="tabpanel">
+                      	kiwoom                   
+                      </div>
+                      <div class="tab-pane fade" id="naavs-top-hanhwa" role="tabpanel">
+                      	hanhwa                   
+                      </div>
+                    </div>
+                    
+                    </div>
+
+									
+						
+						
                         <%-- <div class="bBottom" style="margin-top: 30px;">
                             <div class="bsBox">
                                 <div class="bSelect">
@@ -613,42 +663,6 @@
 								%>
 							</ul>
 						</div> --%>
-                      </div>
-                      <div class="tab-pane fade" id="naavs-top-kia" role="tabpanel">
-                       KIA
-                      </div>
-                      <div class="tab-pane fade" id="naavs-top-kt" role="tabpanel">
-                      	kt                     
-                      </div>
-                      <div class="tab-pane fade" id="naavs-top-lg" role="tabpanel">
-                      	lg                   
-                      </div>
-                      <div class="tab-pane fade" id="naavs-top-nc" role="tabpanel">
-                      	nc                  
-                      </div>
-                      <div class="tab-pane fade" id="naavs-top-ssg" role="tabpanel">
-                      	ssg                     
-                      </div>
-                      <div class="tab-pane fade" id="naavs-top-doosan" role="tabpanel">
-                      	doosan                   
-                      </div>
-                      <div class="tab-pane fade" id="naavs-top-lotte" role="tabpanel">
-                      	lotte                    
-                      </div>
-                      <div class="tab-pane fade" id="naavs-top-samsung" role="tabpanel">
-                      	samsung                
-                      </div>
-                      <div class="tab-pane fade" id="naavs-top-kiwoom" role="tabpanel">
-                      	kiwoom                   
-                      </div>
-                      <div class="tab-pane fade" id="naavs-top-hanhwa" role="tabpanel">
-                      	hanhwa                   
-                      </div>
-                    </div>
-                    
-                    </div>
-
-                        
                        
                     </div>
                 </div>

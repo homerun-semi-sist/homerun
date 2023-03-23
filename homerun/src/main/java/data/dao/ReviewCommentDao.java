@@ -127,7 +127,8 @@ public class ReviewCommentDao {
 		try {
 			pstmt = conn.prepareStatement(sql);
 			
-			pstmt.setString(1, dto.getRcIdx());
+			pstmt.setString(1, dto.getRcContent());
+			pstmt.setString(2, dto.getRcIdx());
 
 			pstmt.execute();
 			
@@ -140,16 +141,17 @@ public class ReviewCommentDao {
 	}
 	
 	// delete
-	public void deleteRC(String fcIdx) {
+	public void deleteRC(String rcIdx) {
 		Connection conn = db.getConnection();
 		PreparedStatement pstmt = null;
 		
-		String sql = "delete from REVIEWCOMMENT where fcIdx=?";
+		String sql = "delete from REVIEWCOMMENT where rcIdx=?";
 		
 		try {
 			pstmt = conn.prepareStatement(sql);
 			
-			pstmt.setString(1, fcIdx);
+			pstmt.setString(1, rcIdx);
+			
 			pstmt.execute();
 		} catch (SQLException e) {
 			e.printStackTrace();

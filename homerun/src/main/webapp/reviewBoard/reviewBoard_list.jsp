@@ -104,7 +104,7 @@
     			var val = $("#search :selected").val();
         		var currentPage = $("#currentPage").val();
         		var str = $("#search_str").val();
-        		alert(val + ", "+ currentPage + ", "+ str);
+        		// alert(val + ", "+ currentPage + ", "+ str);
     		    
     		    $.ajax({
     			
@@ -141,7 +141,7 @@
 						} else {
 							$.each(res, function(idx, item){
 								s+="<tr>";
-								s+="<td style='text-align: center;'>" + item.rbNum + "</td>";
+								s+="<td style='text-align: center; vertical-align:middle;'>" + item.rbNum + "</td>";
 								s+="<td style='text-align: center; vertical-align:middle;'>" + item.year + "." + item.month + "." + item.day + "</td>"
 								
 								
@@ -164,8 +164,12 @@
 									s+="<img src='" + item.awayImg + "' style='width: 40px; vertical-align:middle;'>";
 									s+="</td>";
 								}
-	
-								s+="<td style='vertical-align:middle;'><a href='reviewPost_detailPage.jsp?rbNum=" + item.rbNum + "&currentPage=" + currentPage + "'>" + item.rbSubject + "</a><span style='color: tomato;'>&nbsp;&nbsp;[" + item.rcCnt + "]</span></td>";
+								
+								if(item.rcCnt == 0)
+									s+="<td style='vertical-align:middle;'><a href='reviewPost_detailPage.jsp?rbNum=" + item.rbNum + "&currentPage=" + currentPage + "'>" + item.rbSubject + "</a></td>";					
+								else
+									s+="<td style='vertical-align:middle;'><a href='reviewPost_detailPage.jsp?rbNum=" + item.rbNum + "&currentPage=" + currentPage + "'>" + item.rbSubject + "</a><span style='color: tomato;'>&nbsp;&nbsp;[" + item.rcCnt + "]</span></td>";
+								
 								s+="<td style='text-align: center; vertical-align:middle;'>" + item.nickname + "</td>";
 								s+="<td style='text-align: center; vertical-align:middle;'>" + item.rbWriteday + "</td>";
 								s+="<td style='text-align: center; vertical-align:middle;'>" + item.rbReadCnt + "</td>";
@@ -226,7 +230,7 @@
 					} else {
 						$.each(res, function(idx, item){
 							s+="<tr>";
-							s+="<td style='text-align: center;'>" + item.rbNum + "</td>";
+							s+="<td style='text-align: center; vertical-align:middle;'>" + item.rbNum + "</td>";
 							s+="<td style='text-align: center; vertical-align:middle;'>" + item.year + "." + item.month + "." + item.day + "</td>"
 							
 							
@@ -249,8 +253,12 @@
 								s+="<img src='" + item.awayImg + "' style='width: 40px; vertical-align:middle;'>";
 								s+="</td>";
 							}
-
-							s+="<td style='vertical-align:middle;'><a href='reviewPost_detailPage.jsp?rbNum=" + item.rbNum + "&currentPage=" + currentPage + "'>" + item.rbSubject + "</a><span style='color: tomato;'>&nbsp;&nbsp;[" + item.rcCnt + "]</span></td>";
+							
+							if(item.rcCnt == 0)
+								s+="<td style='vertical-align:middle;'><a href='reviewPost_detailPage.jsp?rbNum=" + item.rbNum + "&currentPage=" + currentPage + "'>" + item.rbSubject + "</a></td>";					
+							else
+								s+="<td style='vertical-align:middle;'><a href='reviewPost_detailPage.jsp?rbNum=" + item.rbNum + "&currentPage=" + currentPage + "'>" + item.rbSubject + "</a><span style='color: tomato;'>&nbsp;&nbsp;[" + item.rcCnt + "]</span></td>";
+							
 							s+="<td style='text-align: center; vertical-align:middle;'>" + item.nickname + "</td>";
 							s+="<td style='text-align: center; vertical-align:middle;'>" + item.rbWriteday + "</td>";
 							s+="<td style='text-align: center; vertical-align:middle;'>" + item.rbReadCnt + "</td>";

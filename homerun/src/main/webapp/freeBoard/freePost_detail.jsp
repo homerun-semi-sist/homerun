@@ -66,7 +66,7 @@
     
     <script type="text/javascript">
 		$(function() {
-			
+
 			// 댓글 관련 method
 			
 			// 처음 시작시 리스트 호출
@@ -181,7 +181,7 @@
 				if(loginok == "yes") {
 					
 					var fcIdx = $(this).attr("fcIdx");
-					 alert(fcIdx);
+					// alert(fcIdx);
 					
 					$.ajax({
 						
@@ -203,14 +203,14 @@
 			});
 			
 			// 댓글 비추천수 증가
-			$(document).on("click", "#.cDislike", function() {
+			$(document).on("click", ".fcDislike", function() {
 				var loginok = $("#loginok").val();
 				//alert(loginok);
 				
 				if(loginok == "yes") {
 					
 					var fcIdx = $(this).attr("fcIdx");
-					// alert(fcIdx);
+					 alert(fcIdx);
 					
 					$.ajax({
 						
@@ -240,24 +240,24 @@
 					var fcIdx = $(this).attr("fcIdx");
 					// alert(fcIdx);
 					
-					$.ajax({
-						
-						type : "get",
-						url : "freeComment_report.jsp",
-						dataType : "json",
-						data : {"fcIdx" : fcIdx},
-						success : function (res) {
-		
-							var a = confirm("신고하려면 [확인]을 눌러주세요\n한번 신고한 댓글은 취소가 불가능합니다");
-								
-							if(a) {
-								$(".fcReportCnt").text(res.report);
+					var a = confirm("신고하려면 [확인]을 눌러주세요\n한번 신고한 댓글은 취소가 불가능합니다");
+					
+					if(a) {
+						$.ajax({
+							
+							type : "get",
+							url : "freeComment_report.jsp",
+							dataType : "json",
+							data : {"fcIdx" : fcIdx},
+							success : function (res) {
+
 								alert("댓글을 신고하였습니다");	
 								list();
+								
 							}
-						}
-					})
-					
+							
+						})
+					}
 				}
 				else 
 					alert("로그인 후 이용 가능합니다");
@@ -303,20 +303,20 @@
 						// 로그인 o && 댓글 작성자 == 로그인 한 아이디 -> 수정, 삭제 표시
 						if(loginok != null && uId == item.fcUId) {
 							if(item.fcUId == fbUId) 
-								s+="<div class='fw-bold'><i class='fa-solid fa-user'></i>&nbsp;" + (idx + 1) + ". " + item.nickname + "<span style='color: red; border: 1px solid red; border-radius: 5px; font-size: 0.7rem; margin-left: 3px;'>작성자</span> <span class='cday'>" + item.fcWriteday + " | <span class='fcMod' fcIdx=" + item.fcIdx + " style='cursor: pointer'>수정</span> | <span class='fcDel' fcIdx=" + item.fcIdx + " style='cursor: pointer'> 삭제 </span></span></div>"; 
+								s+="<div class='fw-bold'><i class='fa-solid fa-user'></i>&nbsp;" + item.nickname + "<span style='color: red; border: 1px solid red; border-radius: 5px; font-size: 0.7rem; margin-left: 3px;'>작성자</span> <span class='cday'>" + item.fcWriteday + " | <span class='fcMod' fcIdx=" + item.fcIdx + " style='cursor: pointer'>수정</span> | <span class='fcDel' fcIdx=" + item.fcIdx + " style='cursor: pointer'> 삭제 </span></span></div>"; 
 							
 							// 댓글 작성자 == 글 작성자 -> 작성자 표시	1.로그인했을때->수정삭제
 							else
-								s+="<div class='fw-bold'><i class='fa-solid fa-user'></i>&nbsp;" + (idx + 1) + ". " + item.nickname + "<span class='cday'>" + item.fcWriteday + " | <span class='fcMod' fcIdx=" + item.fcIdx + " style='cursor: pointer'>수정</span> | <span class='fcDel' fcIdx=" + item.fcIdx + " style='cursor: pointer'> 삭제 </span></span></div>";
+								s+="<div class='fw-bold'><i class='fa-solid fa-user'></i>&nbsp;" + item.nickname + "<span class='cday'>" + item.fcWriteday + " | <span class='fcMod' fcIdx=" + item.fcIdx + " style='cursor: pointer'>수정</span> | <span class='fcDel' fcIdx=" + item.fcIdx + " style='cursor: pointer'> 삭제 </span></span></div>";
 						}
 						
 						// 댓글 작성자 == 글 작성자 -> 작성자 표시	2.로그인안했을때 
 						else if(item.fcUId == fbUId) 
-							s+="<div class='fw-bold'><i class='fa-solid fa-user'></i>&nbsp;" + (idx + 1) + ". " + item.nickname + "<span style='color: red; border: 1px solid red; border-radius: 5px; font-size: 0.7rem; margin-left: 3px;'>작성자</span> <span class='cday'>" + item.fcWriteday + " | <span class='fcMod' fcIdx=" + item.fcIdx + " style='cursor: pointer'>수정</span> | <span class='fcDel' fcIdx=" + item.fcIdx + " style='cursor: pointer'> 삭제 </span></span></div>"; 
-						 
+							s+="<div class='fw-bold'><i class='fa-solid fa-user'></i>&nbsp;" + item.nickname + "<span style='color: red; border: 1px solid red; border-radius: 5px; font-size: 0.7rem; margin-left: 3px;'>작성자</span> <span class='cday'>" + item.fcWriteday + " | <span class='fcLike' fcIdx='" + item.fcIdx + "' style='cursor: pointer'>추천 <span class='fcLikeCnt' fcIdx='" + item.fcIdx + "'>" + item.fcLike + "</span></span> | <span class='fcDislike' fcIdx=" + item.fcIdx + " style='cursor: pointer'> 비추천 <span class='fcDislikeCnt' fcIdx='" + item.fcIdx + "'> " + item.fcDislike + "</span> </span> | <span class='fcReport' fcIdx=" + item.fcIdx + " style='cursor: pointer'> 신고 <span class='fcReportCnt' fcIdx='" + item.fcIdx + "'>" + item.fcReport + "</span></span></span></div>";
+						
 						// 로그인 x
 						else
-							s+="<div class='fw-bold'><i class='fa-solid fa-user'></i>&nbsp;" + (idx + 1) + ". " + item.nickname + "<span class='cday'>" + item.fcWriteday + " | <span class='fcLike' fcIdx='" + item.fcIdx + "' style='cursor: pointer'>추천 <span class='fcLikeCnt' fcIdx='" + item.fcIdx + "'>" + item.fcLike + "</span></span> | <span class='fcDislike' fcIdx=" + item.fcIdx + " style='cursor: pointer'> 비추천 <span class='fcDislikeCnt' fcIdx='" + item.fcIdx + "'> " + item.fcDislike + "</span> </span> | <span class='fcReport' fcIdx=" + item.fcIdx + " style='cursor: pointer'> 신고 <span class='fcReportCnt' fcIdx='" + item.fcIdx + "'>" + item.fcReport + "</span></span></span></div>"; 
+							s+="<div class='fw-bold'><i class='fa-solid fa-user'></i>&nbsp;" + item.nickname + "<span class='cday'>" + item.fcWriteday + " | <span class='fcLike' fcIdx='" + item.fcIdx + "' style='cursor: pointer'>추천 <span class='fcLikeCnt' fcIdx='" + item.fcIdx + "'>" + item.fcLike + "</span></span> | <span class='fcDislike' fcIdx=" + item.fcIdx + " style='cursor: pointer'> 비추천 <span class='fcDislikeCnt' fcIdx='" + item.fcIdx + "'> " + item.fcDislike + "</span> </span> | <span class='fcReport' fcIdx=" + item.fcIdx + " style='cursor: pointer'> 신고 <span class='fcReportCnt' fcIdx='" + item.fcIdx + "'>" + item.fcReport + "</span></span></span></div>"; 
 						
 						s+= "<div id='fcContent' fcContent='"+ item.fcContent +"'>" + item.fcContent + "</div>";
 						s+="</div>";
@@ -352,8 +352,8 @@
 
 	SimpleDateFormat sdf = new SimpleDateFormat("yy.MM.dd HH:mm");
 
-	String uId = (String) session.getAttribute("myid");
-	String loginok = (String) session.getAttribute("loginok");
+	String uId = (String)session.getAttribute("uid");
+	String loginok = (String)session.getAttribute("loginok");
 
 	UserDao uDao = new UserDao();
 	UserDto uDto = uDao.getUser(fbDto.getUId());
@@ -392,48 +392,63 @@
                     <div class="col">
 
                         <article class="blog-details" style="background-color: #fff;">
-                            <span class="title">
-                            
+                           
+                            	
+                            <% 
+                            	if(fbDto.getFbCategory().equals("공지")) {
+                            %>	
+                            	 <span class="title" style="color:red;"><b>[공지] <%=fbDto.getFbSubject()%></b></span>
                             <%
+                            }
                             	// 카테고리 : 전체 -> 야구공 png
-                                if(fbDto.getFbCategory().equals("전체")) {                                       		
+                            	else if(fbDto.getFbCategory().equals("전체")) {                                       		
                             %>
+                            		<span class="title" style="color:#0b214e;">
                                 	<img src="https://cdn.icon-icons.com/icons2/2070/PNG/512/baseball_icon_126956.png" style="width: 40px;"> <%=fbDto.getFbSubject()%></span>
                                         	
 							<%                        
                                 } else if(fbDto.getFbCategory().equals("한화")) {
-                            %>
+                            %>		
+                            		<span class="title" style="color:#0b214e;">
                         			<img src="<%=tDao.getTeam(fbDto.getFbCategory()).getTeamLogo() %>" width="60px;"> <%=fbDto.getFbSubject()%></span>                           
                         	<%		
                         		} else {
-                        	%>
+                        	%>			
+                        			<span class="title" style="color:#0b214e;">
                         			<img src="<%=tDao.getTeam(fbDto.getFbCategory()).getTeamLogo() %>" width="50px;"> <%=fbDto.getFbSubject()%></span>
                             
                         	<%
                         		}
                         	
-                            	if(loginok != null && fbDto.getUId().equals(uId)) {
-                            %>
-                            		<span style="float: right; margin-top: 20px; cursor: pointer;" onclick="funDel(<%=fbNum%>, <%=currentPage%>)">삭제</span>
-                            		<span style="float: right; margin-top: 20px;">&nbsp;&nbsp;|&nbsp;&nbsp;</span>
-                            		<span style="float: right; margin-top: 20px; cursor: pointer;" onclick="location.href='freePost_updatePage.jsp?fbNum=<%=fbDto.getFbNum()%>&currentPage=<%=currentPage%>'">수정</span>                            		
-                            <%	
-                            	} else {
-                            %>
-                            		<span id="report" style="float: right; margin-top: 20px; color:red; cursor: pointer;">신고&nbsp;<i class="fa-solid fa-bullhorn"></i></span>
-                            <%
-                            	}
-                            %>
-                           
-                            
+                        		if(loginok != null && fbDto.getUId().equals(uId)) {
+	                       %>
+	                        		<span style="float: right; margin-top: 20px; cursor: pointer;" onclick="funDel(<%=fbNum%>, <%=currentPage%>)">삭제</span>
+	                        		<span style="float: right; margin-top: 20px;">&nbsp;&nbsp;|&nbsp;&nbsp;</span>
+	                        		<span style="float: right; margin-top: 20px; cursor: pointer;" onclick="location.href='freePost_updatePage.jsp?fbNum=<%=fbDto.getFbNum() %>&currentPage=<%=currentPage%>'">수정</span>                            		
+	                       <%	
+	                        	} else {
+	                        		if(!fbDto.getUId().equals("admin")) {
+	                       %>
+	                        			<span id="report" style="float: right; margin-top: 20px; color:red; cursor: pointer;">신고&nbsp;<i class="fa-solid fa-bullhorn"></i></span>
+	                       <%
+	                        		}
+	                        	}
+	                       %>
+                                                     
                             <div class="meta-top">
                                 <span style="font-size: 17px;"><i class="fa-regular fa-user"></i><%=uDto.getNickname()%></span>                   
-                                <span id="dlcnt" style="float: right;"><i class="fa-regular fa-thumbs-down"></i><%=fbDto.getFbDislike()%></span>
-                                <span style="float: right;">&nbsp;&nbsp;|&nbsp;&nbsp;</span>
-                                <span id="lcnt" style="float: right;"><i class="fa-regular fa-thumbs-up"></i><%=fbDto.getFbLike()%></span>
-                                <span style="float: right;">&nbsp;&nbsp;|&nbsp;&nbsp;</span>
-                                <span style="float: right;"><i class="fa-regular fa-eye"></i><%=fbDto.getFbReadCnt()%></span>
-                                <span style="float: right;">&nbsp;&nbsp;|&nbsp;&nbsp;</span>
+                            <%
+                            	if(!fbDto.getUId().equals("admin")) {
+                            %>
+	                                <span style="float: right;"><i class="fa-regular fa-thumbs-down"></i><span id="dlcnt" ><%=fbDto.getFbDislike()%></span></span>
+	                                <span style="float: right;">&nbsp;&nbsp;|&nbsp;&nbsp;</span>
+	                                <span style="float: right;"><i class="fa-regular fa-thumbs-up"></i><span id="lcnt" ><%=fbDto.getFbLike()%></span></span>
+	                                <span style="float: right;">&nbsp;&nbsp;|&nbsp;&nbsp;</span>
+	                                <span style="float: right;"><i class="fa-regular fa-eye"></i><%=fbDto.getFbReadCnt()%></span>
+	                                <span style="float: right;">&nbsp;&nbsp;|&nbsp;&nbsp;</span>
+                            <% 
+                            	}
+                            %>
                                 <span style="float: right;"><i class="fa-regular fa-calendar"></i><%=sdf.format(fbDto.getFbWriteday())%></span>
                             </div><!-- End meta top -->
 							<hr>
@@ -442,9 +457,10 @@
 
                             </div><!-- End post content -->
 
+							<%
+								if(!fbDto.getUId().equals("admin")) {
+                            %>
                             <div class="meta-bottom" style="text-align: center; height: 100px;">
-                                <%-- <span style="font-size: 30px; margin: 20px; cursor: pointer;" id="likeCnt"
-					num="<%=fbNum%>"><i class="fa-regular fa-thumbs-up"  style="color: blue;"></i></span> --%>
 								<span class="fa-regular fa-thumbs-up" style="font-size: 30px; margin: 20px; cursor: pointer;color: blue;" id="likeCnt"
 					num="<%=fbNum%>"></span>
                                 <span class="fa-regular fa-thumbs-down" style="font-size: 30px; margin: 20px; cursor: pointer; color: red;" id="dislikeCnt"
@@ -459,14 +475,16 @@
 									} else {
 								%>
 										<span class="fa-regular fa-heart" style="font-size: 30px; margin: 20px; cursor: pointer; color: pink;" id="bookmark"
-					num="<%=fbNum%>"></span>
-								<%
+					num="<%=fbNum%>"></span> 
+								</div><!-- End meta bottom -->
+							<%
 									}
-								%>
-					
+							
+                            	}
+                            %>
                                 
              
-                            </div><!-- End meta bottom -->
+                           
 
                         </article><!-- End blog post -->
                
@@ -530,23 +548,23 @@
                         <%		
                         	}
                         %>
-                            	<div class="commentUpdateForm">
-	                        		<div class="comments">
-			                        	<div class="reply-form" style="background-color: #F8F9FA;">	                           
-				                            <div class="row">
-				                            	<span>&nbsp;&nbsp;<i class="fa-solid fa-user-pen"></i>&nbsp;&nbsp;<b><%=uDao.getUser(uId).getNickname() %></b></span>
-				                            </div>
-				                            <div class="row" style="margin-top: 20px;">
-			                    				<div class="col-11 form-group">
-			                      					<textarea name="ucontent" id="ucontent" class="form-control"></textarea>
-							                    </div>
-							                    <div class="col-1">
-							                      <button type="button" id="cUpdateBtn" fcIdx="" class="btn btn-primary" style="width: 80px; height: 40px; line-height: 20px;">수정</button>
-							                    </div>
-			                 				 </div>	                          
-			                        	</div>
-									</div>  
-								</div>                        
+                           	<div class="commentUpdateForm">
+                        		<div class="comments">
+		                        	<div class="reply-form" style="background-color: #F8F9FA;">	                           
+			                            <div class="row">
+			                            	<span>&nbsp;&nbsp;<i class="fa-solid fa-user-pen"></i>&nbsp;&nbsp;<b><%=uDao.getUser(uId).getNickname() %></b></span>
+			                            </div>
+			                            <div class="row" style="margin-top: 20px;">
+		                    				<div class="col-11 form-group">
+		                      					<textarea name="ucontent" id="ucontent" class="form-control"></textarea>
+						                    </div>
+						                    <div class="col-1">
+						                      <button type="button" id="cUpdateBtn" fcIdx="" class="btn btn-primary" style="width: 80px; height: 40px; line-height: 20px;">수정</button>
+						                    </div>
+		                 				 </div>	                          
+		                        	</div>
+								</div>  
+							</div>                        
                     </div>
                 </div>
             </div>
@@ -587,7 +605,11 @@
 						tag.addClass("fa-solid").animate({"color" : "blue"}, 1000, function() {
 							tag.removeClass("fa-solid");
 							tag.addClass("fa-regular").css("font-size", "30px");
+							
+							alert("해당 게시글을 추천하였습니다");
 						});
+						
+						$("#lcnt").text(res.like);
 						
 					}
 					
@@ -622,7 +644,11 @@
 						tag.addClass("fa-solid").animate({"color" : "red"}, 1000, function() {
 							tag.removeClass("fa-solid");
 							tag.addClass("fa-regular").css("font-size", "30px");
+							
+							alert("해당 게시글을 비추천하였습니다");
 						});
+						
+						$("#dlcnt").text(res.dislike);
 						
 					}
 					

@@ -62,12 +62,11 @@
 
                 <div class="container-xxl flex-grow-1 container-p-y">
                     <div class="card">
-						<form action="freeBoard_updateAction.jsp" method="post">
-							<input type="hidden" name="fbNum" value="<%=uId %>">
-							
-							<!-- hiddend으로 nickname / value 값 변경 필요 -->
+						<form action="freePost_updateAction.jsp" method="post">
+
 							<input type="hidden" name="uId" value="<%=uId %>">	
-							<%-- <input type="hidden" name="currentPage" value="<%=currentPage %>"> --%>
+							<input type="hidden" name="fbNum" value="<%=fbNum %>">
+							<input type="hidden" name="currentPage" value="<%=currentPage %>">
 							
 							<table class="table table-bordered" style="height:30px; width: 1000px; height:700px; margin-left: 100px;">
 								<caption style="caption-side: top;"><h3>자유 게시판 작성글 수정</h3></caption>

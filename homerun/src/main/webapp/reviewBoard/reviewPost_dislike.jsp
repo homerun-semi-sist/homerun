@@ -10,7 +10,7 @@
 	ReviewBoardDao dao = new ReviewBoardDao();
 	
 	// num에 해당하는 like 증가
-	dao.updateLike(num);
+	dao.updateDislike(num);
 	
 	// num에 해당하는 chu값 json 형식으로 반환
 	String dislike = dao.getRB(num).getRbDislike();

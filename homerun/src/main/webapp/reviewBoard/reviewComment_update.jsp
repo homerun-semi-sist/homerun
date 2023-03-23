@@ -11,7 +11,7 @@
 	ReviewCommentDao dao = new ReviewCommentDao();
 	ReviewCommentDto dto = dao.getRC(rcIdx);
 	
-	dto.setRbNum(rcIdx);
+	dto.setRcIdx(rcIdx);
 	dto.setRcContent(ucontent);
 	
 	dao.updateRC(dto);

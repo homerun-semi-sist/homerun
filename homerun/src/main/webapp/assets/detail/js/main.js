@@ -18,51 +18,51 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   /**
-   * Mobile nav toggle
+   * Mobile naav toggle
    */
 
-  const mobileNavShow = document.querySelector('.mobile-nav-show');
-  const mobileNavHide = document.querySelector('.mobile-nav-hide');
+  const mobilenaavShow = document.querySelector('.mobile-naav-show');
+  const mobilenaavHide = document.querySelector('.mobile-naav-hide');
 
-  document.querySelectorAll('.mobile-nav-toggle').forEach(el => {
+  document.querySelectorAll('.mobile-naav-toggle').forEach(el => {
     el.addEventListener('click', function(event) {
       event.preventDefault();
-      mobileNavToogle();
+      mobilenaavToogle();
     })
   });
 
-  function mobileNavToogle() {
-    document.querySelector('body').classList.toggle('mobile-nav-active');
-    mobileNavShow.classList.toggle('d-none');
-    mobileNavHide.classList.toggle('d-none');
+  function mobilenaavToogle() {
+    document.querySelector('body').classList.toggle('mobile-naav-active');
+    mobilenaavShow.classList.toggle('d-none');
+    mobilenaavHide.classList.toggle('d-none');
   }
 
   /**
-   * Hide mobile nav on same-page/hash links
+   * Hide mobile naav on same-page/hash links
    */
-  document.querySelectorAll('#navbar a').forEach(navbarlink => {
+  document.querySelectorAll('#naavbar a').forEach(naavbarlink => {
 
-    if (!navbarlink.hash) return;
+    if (!naavbarlink.hash) return;
 
-    let section = document.querySelector(navbarlink.hash);
+    let section = document.querySelector(naavbarlink.hash);
     if (!section) return;
 
-    navbarlink.addEventListener('click', () => {
-      if (document.querySelector('.mobile-nav-active')) {
-        mobileNavToogle();
+    naavbarlink.addEventListener('click', () => {
+      if (document.querySelector('.mobile-naav-active')) {
+        mobilenaavToogle();
       }
     });
 
   });
 
   /**
-   * Toggle mobile nav dropdowns
+   * Toggle mobile naav dropdowns
    */
-  const navDropdowns = document.querySelectorAll('.navbar .dropdown > a');
+  const naavDropdowns = document.querySelectorAll('.naavbar .dropdown > a');
 
-  navDropdowns.forEach(el => {
+  naavDropdowns.forEach(el => {
     el.addEventListener('click', function(event) {
-      if (document.querySelector('.mobile-nav-active')) {
+      if (document.querySelector('.mobile-naav-active')) {
         event.preventDefault();
         this.classList.toggle('active');
         this.nextElementSibling.classList.toggle('dropdown-active');
@@ -150,7 +150,7 @@ document.addEventListener('DOMContentLoaded', () => {
       type: 'bullets',
       clickable: true
     },
-    navigation: {
+    naavigation: {
       nextEl: '.swiper-button-next',
       prevEl: '.swiper-button-prev',
     }
@@ -172,7 +172,7 @@ document.addEventListener('DOMContentLoaded', () => {
       type: 'bullets',
       clickable: true
     },
-    navigation: {
+    naavigation: {
       nextEl: '.swiper-button-next',
       prevEl: '.swiper-button-prev',
     },

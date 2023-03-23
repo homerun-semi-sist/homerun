@@ -1225,7 +1225,7 @@
 
 
     static isSupported() {
-      return 'ontouchstart' in document.documentElement || navigator.maxTouchPoints > 0;
+      return 'ontouchstart' in document.documentElement || naavigator.maxTouchPoints > 0;
     }
 
   }
@@ -2129,7 +2129,7 @@
   var round = Math.round;
 
   function getUAString() {
-    var uaData = navigator.userAgentData;
+    var uaData = naavigator.userAgentData;
 
     if (uaData != null && uaData.brands) {
       return uaData.brands.map(function (item) {
@@ -2137,7 +2137,7 @@
       }).join(' ');
     }
 
-    return navigator.userAgent;
+    return naavigator.userAgent;
   }
 
   function isLayoutViewport() {
@@ -3850,8 +3850,8 @@
   const SELECTOR_DATA_TOGGLE$3 = '[data-bs-toggle="dropdown"]:not(.disabled):not(:disabled)';
   const SELECTOR_DATA_TOGGLE_SHOWN = `${SELECTOR_DATA_TOGGLE$3}.${CLASS_NAME_SHOW$6}`;
   const SELECTOR_MENU = '.dropdown-menu';
-  const SELECTOR_NAVBAR = '.navbar';
-  const SELECTOR_NAVBAR_NAV = '.navbar-nav';
+  const SELECTOR_naavBAR = '.naavbar';
+  const SELECTOR_naavBAR_naav = '.naavbar-naav';
   const SELECTOR_VISIBLE_ITEMS = '.dropdown-menu .dropdown-item:not(.disabled):not(:disabled)';
   const PLACEMENT_TOP = isRTL() ? 'top-end' : 'top-start';
   const PLACEMENT_TOPEND = isRTL() ? 'top-start' : 'top-end';
@@ -3889,7 +3889,7 @@
       // todo: v6 revert #37011 & change markup https://getbootstrap.com/docs/5.2/forms/input-group/
 
       this._menu = SelectorEngine.next(this._element, SELECTOR_MENU)[0] || SelectorEngine.prev(this._element, SELECTOR_MENU)[0] || SelectorEngine.findOne(SELECTOR_MENU, this._parent);
-      this._inNavbar = this._detectNavbar();
+      this._innaavbar = this._detectnaavbar();
     } // Getters
 
 
@@ -3930,7 +3930,7 @@
       // https://www.quirksmode.org/blog/archives/2014/02/mouse_event_bub.html
 
 
-      if ('ontouchstart' in document.documentElement && !this._parent.closest(SELECTOR_NAVBAR_NAV)) {
+      if ('ontouchstart' in document.documentElement && !this._parent.closest(SELECTOR_naavBAR_naav)) {
         for (const element of [].concat(...document.body.children)) {
           EventHandler.on(element, 'mouseover', noop);
         }
@@ -3968,7 +3968,7 @@
     }
 
     update() {
-      this._inNavbar = this._detectNavbar();
+      this._innaavbar = this._detectnaavbar();
 
       if (this._popper) {
         this._popper.update();
@@ -4069,8 +4069,8 @@
       return isEnd ? PLACEMENT_BOTTOMEND : PLACEMENT_BOTTOM;
     }
 
-    _detectNavbar() {
-      return this._element.closest(SELECTOR_NAVBAR) !== null;
+    _detectnaavbar() {
+      return this._element.closest(SELECTOR_naavBAR) !== null;
     }
 
     _getOffset() {
@@ -4103,9 +4103,9 @@
             offset: this._getOffset()
           }
         }]
-      }; // Disable Popper if we have a static display or Dropdown is in Navbar
+      }; // Disable Popper if we have a static display or Dropdown is in naavbar
 
-      if (this._inNavbar || this._config.display === 'static') {
+      if (this._innaavbar || this._config.display === 'static') {
         Manipulator.setDataAttribute(this._menu, 'popper', 'static'); // todo:v6 remove
 
         defaultBsPopperConfig.modifiers = [{
@@ -4170,7 +4170,7 @@
 
         if (composedPath.includes(context._element) || context._config.autoClose === 'inside' && !isMenuTarget || context._config.autoClose === 'outside' && isMenuTarget) {
           continue;
-        } // Tab navigation through the dropdown menu or events from contained inputs shouldn't close the menu
+        } // Tab naavigation through the dropdown menu or events from contained inputs shouldn't close the menu
 
 
         if (context._menu.contains(event.target) && (event.type === 'keyup' && event.key === TAB_KEY$1 || /input|select|option|textarea|form/i.test(event.target.tagName))) {
@@ -4527,8 +4527,8 @@
   const EVENT_FOCUSIN$2 = `focusin${EVENT_KEY$5}`;
   const EVENT_KEYDOWN_TAB = `keydown.tab${EVENT_KEY$5}`;
   const TAB_KEY = 'Tab';
-  const TAB_NAV_FORWARD = 'forward';
-  const TAB_NAV_BACKWARD = 'backward';
+  const TAB_naav_FORWARD = 'forward';
+  const TAB_naav_BACKWARD = 'backward';
   const Default$7 = {
     autofocus: true,
     trapElement: null // The element to trap focus inside of
@@ -4547,7 +4547,7 @@
       super();
       this._config = this._getConfig(config);
       this._isActive = false;
-      this._lastTabNavDirection = null;
+      this._lastTabnaavDirection = null;
     } // Getters
 
 
@@ -4603,7 +4603,7 @@
 
       if (elements.length === 0) {
         trapElement.focus();
-      } else if (this._lastTabNavDirection === TAB_NAV_BACKWARD) {
+      } else if (this._lastTabnaavDirection === TAB_naav_BACKWARD) {
         elements[elements.length - 1].focus();
       } else {
         elements[0].focus();
@@ -4615,7 +4615,7 @@
         return;
       }
 
-      this._lastTabNavDirection = event.shiftKey ? TAB_NAV_BACKWARD : TAB_NAV_FORWARD;
+      this._lastTabnaavDirection = event.shiftKey ? TAB_naav_BACKWARD : TAB_naav_FORWARD;
     }
 
   }
@@ -6244,11 +6244,11 @@
   const CLASS_NAME_ACTIVE$1 = 'active';
   const SELECTOR_DATA_SPY = '[data-bs-spy="scroll"]';
   const SELECTOR_TARGET_LINKS = '[href]';
-  const SELECTOR_NAV_LIST_GROUP = '.nav, .list-group';
-  const SELECTOR_NAV_LINKS = '.nav-link';
-  const SELECTOR_NAV_ITEMS = '.nav-item';
+  const SELECTOR_naav_LIST_GROUP = '.naav, .list-group';
+  const SELECTOR_naav_LINKS = '.naav-link';
+  const SELECTOR_naav_ITEMS = '.naav-item';
   const SELECTOR_LIST_ITEMS = '.list-group-item';
-  const SELECTOR_LINK_ITEMS = `${SELECTOR_NAV_LINKS}, ${SELECTOR_NAV_ITEMS} > ${SELECTOR_NAV_LINKS}, ${SELECTOR_LIST_ITEMS}`;
+  const SELECTOR_LINK_ITEMS = `${SELECTOR_naav_LINKS}, ${SELECTOR_naav_ITEMS} > ${SELECTOR_naav_LINKS}, ${SELECTOR_LIST_ITEMS}`;
   const SELECTOR_DROPDOWN = '.dropdown';
   const SELECTOR_DROPDOWN_TOGGLE$1 = '.dropdown-toggle';
   const Default$1 = {
@@ -6462,9 +6462,9 @@
         return;
       }
 
-      for (const listGroup of SelectorEngine.parents(target, SELECTOR_NAV_LIST_GROUP)) {
+      for (const listGroup of SelectorEngine.parents(target, SELECTOR_naav_LIST_GROUP)) {
         // Set triggered links parents as active
-        // With both <ul> and <nav> markup a parent is the previous sibling of any nav ancestor
+        // With both <ul> and <naav> markup a parent is the previous sibling of any naav ancestor
         for (const item of SelectorEngine.prev(listGroup, SELECTOR_LINK_ITEMS)) {
           item.classList.add(CLASS_NAME_ACTIVE$1);
         }
@@ -6545,9 +6545,9 @@
   const SELECTOR_DROPDOWN_TOGGLE = '.dropdown-toggle';
   const SELECTOR_DROPDOWN_MENU = '.dropdown-menu';
   const NOT_SELECTOR_DROPDOWN_TOGGLE = ':not(.dropdown-toggle)';
-  const SELECTOR_TAB_PANEL = '.list-group, .nav, [role="tablist"]';
-  const SELECTOR_OUTER = '.nav-item, .list-group-item';
-  const SELECTOR_INNER = `.nav-link${NOT_SELECTOR_DROPDOWN_TOGGLE}, .list-group-item${NOT_SELECTOR_DROPDOWN_TOGGLE}, [role="tab"]${NOT_SELECTOR_DROPDOWN_TOGGLE}`;
+  const SELECTOR_TAB_PANEL = '.list-group, .naav, [role="tablist"]';
+  const SELECTOR_OUTER = '.naav-item, .list-group-item';
+  const SELECTOR_INNER = `.naav-link${NOT_SELECTOR_DROPDOWN_TOGGLE}, .list-group-item${NOT_SELECTOR_DROPDOWN_TOGGLE}, [role="tab"]${NOT_SELECTOR_DROPDOWN_TOGGLE}`;
   const SELECTOR_DATA_TOGGLE = '[data-bs-toggle="tab"], [data-bs-toggle="pill"], [data-bs-toggle="list"]'; // todo:v6: could be only `tab`
 
   const SELECTOR_INNER_ELEM = `${SELECTOR_INNER}, ${SELECTOR_DATA_TOGGLE}`;
@@ -6766,12 +6766,12 @@
 
     _elemIsActive(elem) {
       return elem.classList.contains(CLASS_NAME_ACTIVE);
-    } // Try to get the inner element (usually the .nav-link)
+    } // Try to get the inner element (usually the .naav-link)
 
 
     _getInnerElement(elem) {
       return elem.matches(SELECTOR_INNER_ELEM) ? elem : SelectorEngine.findOne(SELECTOR_INNER_ELEM, elem);
-    } // Try to get the outer element (usually the .nav-item)
+    } // Try to get the outer element (usually the .naav-item)
 
 
     _getOuterElement(elem) {

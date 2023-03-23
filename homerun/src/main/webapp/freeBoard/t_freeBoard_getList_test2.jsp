@@ -13,26 +13,21 @@
 
 <%
 	int currentPage = Integer.parseInt(request.getParameter("currentPage"));
-	//String category = request.getParameter("category");
-	
+	// String category = request.getParameter("category");
+
 	int perPage = 15;
 	int start = (currentPage - 1) * perPage;
-
-	FreeBoardDao fbDao = new FreeBoardDao();
-	List<FreeBoardDto> fbList = fbDao.getFBList(start, perPage);
-	//if(category.equals("all"))
-		//fbList = new Vector<>();
 	
-	//else
-		//fbList = fbDao.getAllFBs_category(start, perPage, category);
+	FreeBoardDao fbDao = new FreeBoardDao();
+	List<FreeBoardDto> fbList = fbDao.getFBList(start, perPage);			
 
 	UserDao uDao = new UserDao();
 	TeamDao tDao = new TeamDao();
 	FreeCommentDao fcDao = new FreeCommentDao();
 	
 	JSONArray arr = new JSONArray();
-	SimpleDateFormat sdf = new SimpleDateFormat("yy.MM.dd HH:mm");
-	
+	SimpleDateFormat sdf = new SimpleDateFormat("yy.MM.dd");
+
 	for(FreeBoardDto dto : fbList) {
 		JSONObject ob = new JSONObject();		
 		String nickname = uDao.getUser(dto.getUId()).getNickname();
@@ -53,9 +48,19 @@
 		ob.put("fbReport", dto.getFbReport());
 		ob.put("teamLogoImg", teamLogoImg);
 		ob.put("fcCnt", fcCnt);
+/* 		
+		ob.put("startPage", startPage);
+		ob.put("endPage", endPage);
+		ob.put("totalPage", totalPage); */
 		
 		arr.add(ob);
 	}
+	/* System.out.println(totalCount);
+	System.out.println(startPage);
+	System.out.println(endPage);
+	System.out.println(totalPage);
+	System.out.println("------"); */
+	
 %>
 
 <%=arr.toString() %>

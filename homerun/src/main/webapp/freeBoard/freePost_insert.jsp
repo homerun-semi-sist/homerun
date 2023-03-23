@@ -68,7 +68,15 @@
 									<th width="100" style="height:30px; text-align: center; line-height: 30px; background-color: #F8F9FA;">카테고리</th>
 									<td>
 										<select name="category" class="form-control" style="width: 220px;">
-											<option value="전체" selected="selected">전체</option>
+										
+										<%
+											if(uId.equals("admin")) {
+										%>
+												<option value="공지" selected="selected">공지</option>										
+										<%
+											} else {
+										%>
+												<option value="전체" selected="selected">전체</option>
 											<%
 												for(TeamDto tDto : list) {
 													String category = tDto.getTeamNick();	
@@ -77,6 +85,9 @@
 											<%
 												}
 											%>
+										<%
+											}
+										%>											
 										</select>
 									</td>
 							

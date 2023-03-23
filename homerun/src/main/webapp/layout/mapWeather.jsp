@@ -180,10 +180,6 @@
 			}
 			else 
 				place = dao.getTeam(team[num]).getStadium();
-			
-			System.out.println(hour);
-			System.out.println(str);
-			System.out.println(num);
 		%>
 		
 		<!-- <script>
