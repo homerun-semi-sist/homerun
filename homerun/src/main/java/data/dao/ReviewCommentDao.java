@@ -57,6 +57,145 @@ public class ReviewCommentDao {
 	// list - 최신순
 	
 	// list - 추천순
+
+	// list - 신고수
+	public List<ReviewCommentDto> getAllRCs_report(int start, int perPage) {
+		List<ReviewCommentDto> list = new Vector<>();
+		
+		Connection conn = db.getConnection();
+ 		PreparedStatement pstmt = null;
+ 		ResultSet rs = null;
+ 		
+ 		String sql = "select * from REVIEWCOMMENT where rcReport != 0 order by rcIdx desc limit ?, ?";
+ 		 		
+ 		try {
+ 			pstmt = conn.prepareStatement(sql);
+ 			
+ 			pstmt.setInt(1, start);
+			pstmt.setInt(2, perPage);
+			
+ 			rs = pstmt.executeQuery();
+ 		
+ 			while(rs.next()) {
+ 				ReviewCommentDto dto = new ReviewCommentDto();
+				
+ 				dto.setRcIdx(rs.getString("rcIdx"));
+				dto.setRbNum(rs.getString("rbNum"));
+ 				dto.setUId(rs.getString("uId"));
+                dto.setRcContent(rs.getString("rcContent"));
+                dto.setRcLike(rs.getString("rcLike"));
+                dto.setRcDislike(rs.getString("rcDislike"));
+                dto.setRcWriteday(rs.getTimestamp("rcWriteday"));
+                dto.setRcReport(rs.getString("rcReport"));
+                
+ 				// list 추가
+ 				list.add(dto);
+ 			}
+ 		} catch (SQLException e) {
+ 			e.printStackTrace();
+ 		} finally {
+ 			db.dbClose(rs, pstmt, conn);
+ 		}
+		return list;
+				
+	}
+
+	public List<ReviewCommentDto> getAllmyRCs(int start, int perPage, String uId) {
+		List<ReviewCommentDto> list = new Vector<>();
+		
+		Connection conn = db.getConnection();
+ 		PreparedStatement pstmt = null;
+ 		ResultSet rs = null;
+ 		
+ 		String sql = "select * from REVIEWCOMMENT where uId=? order by rcIdx desc limit ?, ?";
+ 		 		
+ 		try {
+ 			pstmt = conn.prepareStatement(sql);
+ 			
+ 			pstmt.setString(1, uId);
+ 			pstmt.setInt(2, start);
+			pstmt.setInt(3, perPage);
+			
+ 			rs = pstmt.executeQuery();
+ 		
+ 			while(rs.next()) {
+ 				ReviewCommentDto dto = new ReviewCommentDto();
+				
+ 				dto.setRcIdx(rs.getString("rcIdx"));
+				dto.setRbNum(rs.getString("rbNum"));
+ 				dto.setUId(rs.getString("uId"));
+                dto.setRcContent(rs.getString("rcContent"));
+                dto.setRcLike(rs.getString("rcLike"));
+                dto.setRcDislike(rs.getString("rcDislike"));
+                dto.setRcWriteday(rs.getTimestamp("rcWriteday"));
+                dto.setRcReport(rs.getString("rcReport"));
+                
+ 				// list 추가
+ 				list.add(dto);
+ 			}
+ 		} catch (SQLException e) {
+ 			e.printStackTrace();
+ 		} finally {
+ 			db.dbClose(rs, pstmt, conn);
+ 		}
+		return list;
+				
+	}
+	
+	// RC report totalCount
+	public int getAllRCs_reportCount() {
+		int n = 0;
+		
+		Connection conn = db.getConnection();
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		String sql = "select count(*) from REVIEWCOMMENT where rcReport !=0";
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			rs =  pstmt.executeQuery();
+		
+			if(rs.next()) 
+				n = rs.getInt(1);
+			
+			} catch (SQLException e) {
+				e.printStackTrace();
+			} finally {
+				db.dbClose(rs, pstmt, conn);
+		}
+			
+		return n; 
+	}	
+	
+	public int getAllmyRCs(String uId) {
+		int n = 0;
+		
+		Connection conn = db.getConnection();
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		String sql = "select count(*) from REVIEWCOMMENT where uId=?";
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setString(1, uId);
+			
+			rs =  pstmt.executeQuery();
+		
+			if(rs.next()) 
+				n = rs.getInt(1);
+			
+			} catch (SQLException e) {
+				e.printStackTrace();
+			} finally {
+				db.dbClose(rs, pstmt, conn);
+		}
+			
+		return n; 
+	}	
 	
 	// getRC 
 	public ReviewCommentDto getRC(String rcIdx) {

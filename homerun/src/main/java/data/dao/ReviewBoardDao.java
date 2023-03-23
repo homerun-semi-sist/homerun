@@ -63,17 +63,21 @@ public class ReviewBoardDao {
 	
 	// list - 신고수
 	// SELECT * FROM POSTREPORT WHERE fbReport != 0;
-	public List<ReviewBoardDto> getAllRBs_report() {
+	public List<ReviewBoardDto> getAllRBs_report(int start, int perPage) {
 		List<ReviewBoardDto> list = new Vector<>();
 		
 		Connection conn = db.getConnection();
  		PreparedStatement pstmt = null;
  		ResultSet rs = null;
  		
- 		String sql = "select * from REVIEWBOARD where rbReport != 0";
+ 		String sql = "select * from REVIEWBOARD where rbReport != 0 order by rbNum desc limit ?, ?";
  		 		
  		try {
  			pstmt = conn.prepareStatement(sql);
+ 			
+ 			pstmt.setInt(1, start);
+			pstmt.setInt(2, perPage);
+ 			
  			rs = pstmt.executeQuery();
  		
  			while(rs.next()) {
@@ -102,7 +106,107 @@ public class ReviewBoardDao {
 		return list;
 				
 	}
+
+	public List<ReviewBoardDto> getAllmyRBs(int start, int perPage, String uId) {
+		List<ReviewBoardDto> list = new Vector<>();
+		
+		Connection conn = db.getConnection();
+ 		PreparedStatement pstmt = null;
+ 		ResultSet rs = null;
+ 		
+ 		String sql = "select * from REVIEWBOARD where uId=? order by rbNum desc limit ?, ?";
+ 		 		
+ 		try {
+ 			pstmt = conn.prepareStatement(sql);
+ 			
+ 			pstmt.setString(1, uId);
+ 			pstmt.setInt(2, start);
+			pstmt.setInt(3, perPage);
+
+ 			rs = pstmt.executeQuery();
+ 		
+ 			while(rs.next()) {
+ 				ReviewBoardDto dto = new ReviewBoardDto();
+ 				
+ 				dto.setRbNum(rs.getString("rbNum"));
+                dto.setUId(rs.getString("uId"));
+                dto.setgId(rs.getString("gId"));
+                dto.setRbSubject(rs.getString("rbSubject"));
+                dto.setRbContent(rs.getString("rbContent"));
+                dto.setRbPhoto(rs.getString("rbPhoto"));
+                dto.setRbReadCnt(rs.getString("rbReadCnt"));
+                dto.setRbLike(rs.getString("rbLike"));
+                dto.setRbDislike(rs.getString("rbDislike"));
+                dto.setRbWriteday(rs.getTimestamp("rbWriteday"));
+                dto.setRbReport(rs.getString("rbReport"));
+                
+ 				// list 추가
+ 				list.add(dto);
+ 			}
+ 		} catch (SQLException e) {
+ 			e.printStackTrace();
+ 		} finally {
+ 			db.dbClose(rs, pstmt, conn);
+ 		}
+		return list;
+				
+	}	
 	
+	// RB report totalCount
+	public int getAllRBs_reportCount() {
+		int n = 0;
+		
+		Connection conn = db.getConnection();
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		String sql = "select count(*) from REVIEWBOARD where rbReport !=0";
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			rs =  pstmt.executeQuery();
+		
+			if(rs.next()) 
+				n = rs.getInt(1);
+			
+			} catch (SQLException e) {
+				e.printStackTrace();
+			} finally {
+				db.dbClose(rs, pstmt, conn);
+		}
+			
+		return n; 
+	}
+
+	public int getAllmyRBs(String uId) {
+		int n = 0;
+		
+		Connection conn = db.getConnection();
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		String sql = "select count(*) from REVIEWBOARD where uId=?";
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setString(1, uId);
+			
+			rs =  pstmt.executeQuery();
+		
+			if(rs.next()) 
+				n = rs.getInt(1);
+			
+			} catch (SQLException e) {
+				e.printStackTrace();
+			} finally {
+				db.dbClose(rs, pstmt, conn);
+		}
+			
+		return n; 
+	}
+		
 	// getRB 
 	public ReviewBoardDto getRB(String rbNum) {
 		ReviewBoardDto dto = new ReviewBoardDto();

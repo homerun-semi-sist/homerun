@@ -332,26 +332,32 @@ div{
       </div>  
          
       <div class="item">
-        <div>         
-          <img class="image" src="../assets/img/게시글.png">
-          <div class="text">내 게시글</div>
-          <div class="number">0건</div>
+        <div>
+          <a href="../mypage/mypage_postListPage.jsp" style="text-decoration: none;color: black;">          
+	          <img class="image" src="../assets/img/게시글.png">
+	          <div class="text">내 게시글</div>
+	          <div class="number">0건</div>
+          </a>
         </div>
       </div>   
         
       <div class="item" >
         <div>
-          <img class="image" src="../assets/img/댓글.png">        
-          <div class="text">내 댓글</div>
-          <div class="green number">1건</div>
+          <a href="../mypage/mypage_commentListPage.jsp" style="text-decoration: none;color: black;"> 
+	          <img class="image" src="../assets/img/댓글.png">        
+	          <div class="text">내 댓글</div>
+	          <div class="green number">1건</div>
+          </a>
         </div>
       </div>  
          
       <div class="item">
         <div>
-          <img class="image" src="../assets/img/찜.png">        
-          <div class="text">내 게시글 찜</div>
-          <div class="green number">3건</div>
+          <a href="../mypage/mypage_bookmarkListPage.jsp" style="text-decoration: none;color: black;"> 
+	          <img class="image" src="../assets/img/찜.png">        
+	          <div class="text">게시글 찜</div>
+	          <div class="green number">3건</div>
+          </a>
         </div>
       </div>     
       

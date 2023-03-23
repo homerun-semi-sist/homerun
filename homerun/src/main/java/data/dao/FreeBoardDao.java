@@ -101,7 +101,52 @@ public class FreeBoardDao {
 		return list;
 				
 	}
-	
+
+	public List<FreeBoardDto> getAllmyFBs(int start, int perPage, String uId) {
+		List<FreeBoardDto> list = new Vector<>();
+		
+		Connection conn = db.getConnection();
+ 		PreparedStatement pstmt = null;
+ 		ResultSet rs = null;
+ 		
+ 		String sql = "select * from FREEBOARD where uId=? order by fbNum desc limit ?, ?";
+ 		 		
+ 		try {
+ 			pstmt = conn.prepareStatement(sql);
+ 			
+ 			pstmt.setString(1, uId);
+ 			pstmt.setInt(2, start);
+			pstmt.setInt(3, perPage);
+			
+ 			rs = pstmt.executeQuery();
+ 		
+ 			while(rs.next()) {
+ 				FreeBoardDto dto = new FreeBoardDto();
+ 				
+ 				dto.setFbNum(rs.getString("fbNum"));
+ 				dto.setUId(rs.getString("uId"));
+                dto.setFbCategory(rs.getString("fbCategory"));
+                dto.setFbSubject(rs.getString("fbSubject"));
+                dto.setFbContent(rs.getString("fbContent"));
+                dto.setFbPhoto(rs.getString("fbPhoto"));
+                dto.setFbReadCnt(rs.getString("fbReadCnt"));
+                dto.setFbLike(rs.getString("fbLike"));
+                dto.setFbDislike(rs.getString("fbDislike"));
+                dto.setFbWriteday(rs.getTimestamp("fbWriteday"));
+                dto.setFbReport(rs.getString("fbReport"));
+                
+ 				// list 추가
+ 				list.add(dto);
+ 			}
+ 		} catch (SQLException e) {
+ 			e.printStackTrace();
+ 		} finally {
+ 			db.dbClose(rs, pstmt, conn);
+ 		}
+		return list;
+				
+	}
+		
 	// list - 최신순
 		
 	// list - 추천순
@@ -195,7 +240,7 @@ public class FreeBoardDao {
  		PreparedStatement pstmt = null;
  		ResultSet rs = null;
  		
- 		String sql = "select * from FREEBOARD where fbReport != 0 order by fbNum desc limit ?, ?";
+ 		String sql = "select * from FREEBOARD where fbReport !=0 order by fbNum desc limit ?, ?";
  		 		
  		try {
  			pstmt = conn.prepareStatement(sql);
@@ -232,6 +277,33 @@ public class FreeBoardDao {
 				
 	}
 	
+	// FB report totalCount
+	public int getAllFBs_reportCount() {
+		int n = 0;
+		
+		Connection conn = db.getConnection();
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		String sql = "select count(*) from FREEBOARD where fbReport !=0";
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			rs =  pstmt.executeQuery();
+		
+			if(rs.next()) 
+				n = rs.getInt(1);
+			
+			} catch (SQLException e) {
+				e.printStackTrace();
+			} finally {
+				db.dbClose(rs, pstmt, conn);
+		}
+			
+		return n; 
+	}
+		
 	// getFB 
 	public FreeBoardDto getFB(String fbNum) {
 		FreeBoardDto dto = new FreeBoardDto();
@@ -612,7 +684,35 @@ public class FreeBoardDao {
 			
 		return n; 
 	}
+	
+	public int getAllmyFBs(String uId) {
+		int n = 0;
 		
+		Connection conn = db.getConnection();
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		String sql = "select count(*) from FREEBOARD where uId=?";
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+		
+			pstmt.setString(1, uId);
+			
+			rs =  pstmt.executeQuery();
+		
+			if(rs.next()) 
+				n = rs.getInt(1);
+			
+			} catch (SQLException e) {
+				e.printStackTrace();
+			} finally {
+				db.dbClose(rs, pstmt, conn);
+		}
+			
+		return n; 
+	}
+
 	// FB List(start, perPage)
 	public List<FreeBoardDto> getFBList(int start, int perPage) {
 		List<FreeBoardDto> list = new Vector<>();

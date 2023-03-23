@@ -21,6 +21,7 @@
 <%
 	int currentPage = Integer.parseInt(request.getParameter("currentPage"));
 	String category = request.getParameter("category");
+	String uId = request.getParameter("uId");
 	
 	int perPage = 10;
 	int start = (currentPage - 1) * perPage;
@@ -30,22 +31,19 @@
 	FreeCommentDao fcDao = new FreeCommentDao();
 	ReviewCommentDao rcDao = new ReviewCommentDao();
 	
-	List<FreeBoardDto> fbList = fbDao.getAllFBs_report(start, perPage);	
-	List<ReviewBoardDto> rbList = rbDao.getAllRBs_report(start, perPage);
-	List<FreeCommentDto> fcList = fcDao.getAllFCs_report(start, perPage);
-	List<ReviewCommentDto> rcList = rcDao.getAllRCs_report(start, perPage); 
+	List<FreeBoardDto> fbList = fbDao.getAllmyFBs(start, perPage, uId);
+	List<ReviewBoardDto> rbList = rbDao.getAllmyRBs(start, perPage, uId);
 	
 	UserDao uDao = new UserDao();
 	TeamDao tDao = new TeamDao();
-	
-	
+
 	JSONArray arr = new JSONArray();
 	SimpleDateFormat sdf = new SimpleDateFormat("yy.MM.dd");
 	
 	if(category.equals("fb")) {
 		for(FreeBoardDto fbDto : fbList) {
 			JSONObject ob = new JSONObject();		
-			String nickname = uDao.getUser(fbDto.getUId()).getNickname();
+			String nickname = uDao.getUser(uId).getNickname();
 			String teamLogoImg = tDao.getTeam(fbDto.getFbCategory()).getTeamLogo();
 			
 			int fcCnt = fcDao.getAllFCs(fbDto.getFbNum()).size();
@@ -68,7 +66,7 @@
 		}
 	}
 	
-	else if(category.equals("rb")) {
+	else {
 		for(ReviewBoardDto rbDto : rbList) {
 			JSONObject ob = new JSONObject();	
 			
@@ -81,7 +79,7 @@
 			String home = gDto.getHome();
 			String away = gDto.getAway();
 			
-			String nickname = uDao.getUser(rbDto.getUId()).getNickname();
+			String nickname = uDao.getUser(uId).getNickname();
 			
 			String year = gDto.getgDay().substring(2, 4);
 			String month = gDto.getgDay().substring(5, 7);
@@ -90,7 +88,7 @@
 			int rcCnt = rcDao.getAllRCs(rbDto.getRbNum()).size();
 			
 			ob.put("rbNum", rbDto.getRbNum());
-			ob.put("frbUId", rbDto.getUId());
+			ob.put("rbUId", rbDto.getUId());
 			ob.put("nickname", nickname);
 			ob.put("rbSubject", rbDto.getRbSubject());
 			ob.put("rbContent", rbDto.getRbContent());
@@ -110,51 +108,6 @@
 			
 			arr.add(ob);
 		}
-	}
-	
-	else if(category.equals("fc")) {
-		for(FreeCommentDto fcDto : fcList) {
-			JSONObject ob = new JSONObject();
-			
-			String nickname = uDao.getUser(fcDto.getUId()).getNickname();
-			String subject = fbDao.getFB(fcDto.getFbNum()).getFbSubject();
-			
-			ob.put("cIdx", fcDto.getFcIdx());
-			ob.put("num", fcDto.getFbNum());
-			ob.put("subject", subject);
-			ob.put("uId", fcDto.getUId());
-			ob.put("nickname", nickname);
-			ob.put("content", fcDto.getFcContent());
-			ob.put("like", fcDto.getFcLike());
-			ob.put("dislike", fcDto.getFcDislike());
-			ob.put("writeday", sdf.format(fcDto.getFcWriteday()));
-			ob.put("report", fcDto.getFcReport());
-			
-			arr.add(ob);
-		}		
-	}
-	
-	else if(category.equals("rc")) {
-		for(ReviewCommentDto rcDto : rcList) {
-			JSONObject ob = new JSONObject();
-			
-			String nickname = uDao.getUser(rcDto.getUId()).getNickname();
-			String subject = rbDao.getRB(rcDto.getRbNum()).getRbSubject();
-			
-			ob.put("cIdx", rcDto.getRcIdx());
-			ob.put("num", rcDto.getRbNum());
-			ob.put("subject", subject);
-			ob.put("uId", rcDto.getUId());
-			ob.put("nickname", nickname);
-			ob.put("content", rcDto.getRcContent());
-			ob.put("like", rcDto.getRcLike());
-			ob.put("dislike", rcDto.getRcDislike());
-			ob.put("writeday", sdf.format(rcDto.getRcWriteday()));
-			ob.put("report", rcDto.getRcReport());
-			
-			arr.add(ob);
-		}
-		
 	}
 	
 %>

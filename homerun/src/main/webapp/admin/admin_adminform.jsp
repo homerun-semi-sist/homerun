@@ -1,3 +1,4 @@
+<%@page import="data.dao.PostReportDao"%>
 <%@page import="data.dao.UserDao"%>
 <%@ page import="data.dao.ProductDao"%>
 <%@ page import="java.util.List"%>
@@ -168,6 +169,8 @@ div{
 	String uName=dao.getuName(uid);
 
     ProductDao pDao=new ProductDao();
+    
+    PostReportDao prDao = new PostReportDao();
 
 %>
 <div class="wrap">
@@ -209,7 +212,7 @@ div{
         	<a href="admin_usermanageform.jsp">
           <img class="image" src="../assets/img/회원 관리.png">
           	</a>
-          <div class="text">회원 관리</div>
+          <div class="text"><br>회원 관리</div>
           <div class="green number">6건</div>
         </div>
       </div>  
@@ -218,7 +221,7 @@ div{
         <div>
         <a href="../managementpage/management_stockListPage.jsp" style="text-decoration: none;color: black;">         
           <img class="image" src="../assets/img/재고 관리.png">
-          <div class="text">재고 관리</div>
+          <div class="text"><br>재고 관리</div>
           <div class="number"><%=pDao.getTotalCount() %>건</div>
           </a>
         </div>
@@ -226,9 +229,11 @@ div{
         
       <div class="item">
         <div>
+        <a href="../managementpage/management_reportListPage.jsp" style="text-decoration: none;color: black;"> 
           <img class="image" src="../assets/img/게시글 관리.png">        
-          <div class="text">게시글 관리</div>
-          <div class="green number">1건</div>
+	          <div class="text">게시글/댓글<br>신고 관리</div>
+	          <div class="green number"><%=prDao.getPRTotalCount() %>건</div>
+          </a>
         </div>
       </div>   
       

@@ -58,6 +58,145 @@ public class FreeCommentDao {
 	
 	// list - 추천순
 	
+	// list - 신고수
+	public List<FreeCommentDto> getAllFCs_report(int start, int perPage) {
+		List<FreeCommentDto> list = new Vector<>();
+		
+		Connection conn = db.getConnection();
+ 		PreparedStatement pstmt = null;
+ 		ResultSet rs = null;
+ 		
+ 		String sql = "select * from FREECOMMENT where fcReport != 0 order by fcIdx desc limit ?, ?";
+ 		 		
+ 		try {
+ 			pstmt = conn.prepareStatement(sql);
+ 			
+ 			pstmt.setInt(1, start);
+			pstmt.setInt(2, perPage);
+			
+ 			rs = pstmt.executeQuery();
+ 		
+ 			while(rs.next()) {
+ 				FreeCommentDto dto = new FreeCommentDto();
+				
+				dto.setFcIdx(rs.getString("fcIdx"));
+				dto.setFbNum(rs.getString("fbNum"));
+ 				dto.setUId(rs.getString("uId"));
+                dto.setFcContent(rs.getString("fcContent"));
+                dto.setFcLike(rs.getString("fcLike"));
+                dto.setFcDislike(rs.getString("fcDislike"));
+                dto.setFcWriteday(rs.getTimestamp("fcWriteday"));
+                dto.setFcReport(rs.getString("fcReport"));
+                
+ 				// list 추가
+ 				list.add(dto);
+ 			}
+ 		} catch (SQLException e) {
+ 			e.printStackTrace();
+ 		} finally {
+ 			db.dbClose(rs, pstmt, conn);
+ 		}
+		return list;
+				
+	}
+	
+	public List<FreeCommentDto> getAllmyFCs(int start, int perPage, String uId) {
+		List<FreeCommentDto> list = new Vector<>();
+		
+		Connection conn = db.getConnection();
+ 		PreparedStatement pstmt = null;
+ 		ResultSet rs = null;
+ 		
+ 		String sql = "select * from FREECOMMENT where uId=? order by fcIdx desc limit ?, ?";
+ 		 		
+ 		try {
+ 			pstmt = conn.prepareStatement(sql);
+ 			
+ 			pstmt.setString(1, uId);
+ 			pstmt.setInt(2, start);
+			pstmt.setInt(3, perPage);
+
+ 			rs = pstmt.executeQuery();
+ 		
+ 			while(rs.next()) {
+ 				FreeCommentDto dto = new FreeCommentDto();
+				
+				dto.setFcIdx(rs.getString("fcIdx"));
+				dto.setFbNum(rs.getString("fbNum"));
+ 				dto.setUId(rs.getString("uId"));
+                dto.setFcContent(rs.getString("fcContent"));
+                dto.setFcLike(rs.getString("fcLike"));
+                dto.setFcDislike(rs.getString("fcDislike"));
+                dto.setFcWriteday(rs.getTimestamp("fcWriteday"));
+                dto.setFcReport(rs.getString("fcReport"));
+                
+ 				// list 추가
+ 				list.add(dto);
+ 			}
+ 		} catch (SQLException e) {
+ 			e.printStackTrace();
+ 		} finally {
+ 			db.dbClose(rs, pstmt, conn);
+ 		}
+		return list;
+				
+	}
+		
+	// RB report totalCount
+	public int getAllFCs_reportCount() {
+		int n = 0;
+		
+		Connection conn = db.getConnection();
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		String sql = "select count(*) from FREECOMMENT where fcReport !=0";
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			rs =  pstmt.executeQuery();
+		
+			if(rs.next()) 
+				n = rs.getInt(1);
+			
+			} catch (SQLException e) {
+				e.printStackTrace();
+			} finally {
+				db.dbClose(rs, pstmt, conn);
+		}
+			
+		return n; 
+	}
+
+	public int getAllmyFCs(String uId) {
+		int n = 0;
+		
+		Connection conn = db.getConnection();
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		String sql = "select count(*) from FREECOMMENT where uId=?";
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setString(1, uId);
+			
+			rs =  pstmt.executeQuery();
+		
+			if(rs.next()) 
+				n = rs.getInt(1);
+			
+			} catch (SQLException e) {
+				e.printStackTrace();
+			} finally {
+				db.dbClose(rs, pstmt, conn);
+		}
+			
+		return n; 
+	}
+	
 	// getFC 
 	public FreeCommentDto getFC(String fcIdx) {
 		FreeCommentDto dto = new FreeCommentDto();
