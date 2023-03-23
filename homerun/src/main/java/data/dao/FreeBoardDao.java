@@ -64,7 +64,7 @@ public class FreeBoardDao {
  		PreparedStatement pstmt = null;
  		ResultSet rs = null;
  		
- 		String sql = "select * from FREEBOARD where fbCategory=? order by fNum desc limit ?, ?";
+ 		String sql = "select * from FREEBOARD where fbCategory=? order by fbNum desc limit ?, ?";
  		 		
  		try {
  			pstmt = conn.prepareStatement(sql);

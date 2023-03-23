@@ -24,8 +24,8 @@
     <meta name="description" content="" />
 
     <!-- Core CSS -->
-    <link rel="stylesheet" href="../assets/board/vendor/css/core.css" class="template-customizer-core-css" />
-    <link rel="stylesheet" href="../assets/board/vendor/css/theme-default.css" class="template-customizer-theme-css" />
+    <link rel="stylesheet" href="../assets/board/vendor/css/core_copy2.css" class="template-customizer-core-css" />
+    <link rel="stylesheet" href="../assets/board/vendor/css/theme-default_copy2.css" class="template-customizer-theme-css" />
     <link rel="stylesheet" href="../assets/board/css/demo.css" />
 
 	<!-- Vendors CSS -->
@@ -95,6 +95,11 @@
 		 	color: #0b214e;
 		  	background-color: #f8f9fa;
 		}
+		
+		#naavs-top-all, #naavs-top-doosan, #naavs-top-kiwoom, #naavs-top-samsung, #naavs-top-lg, 
+		#naavs-top-kt, #naavs-top-ssg, #naavs-top-nc, #naavs-top-lotte, #naavs-top-kia, #naavs-top-hanhwa {
+			opacity: 1;
+		}
     </style>
     
     <script type="text/javascript">
@@ -152,19 +157,19 @@
 									s+="</td>";
 								} else if(item.fbCategory == "전체") {  
 									s+="<tr>";
-									s+="<td style='text-align: center;'>" + item.fbNum + "</td>";
+									s+="<td style='text-align: center; vertical-align:middle;'>" + item.fbNum + "</td>";
 									s+="<td style='text-align: center; vertical-align:middle;'>";
 									s+="<img src='https://cdn.icon-icons.com/icons2/2070/PNG/512/baseball_icon_126956.png' style='width: 30px;'>";
 									   s+="</td>";
 								} else if(item.fbCategory == "한화") {
 									s+="<tr>";
-									s+="<td style='text-align: center;'>" + item.fbNum + "</td>";
+									s+="<td style='text-align: center; vertical-align:middle;'>" + item.fbNum + "</td>";
 									s+="<td style='text-align: center; vertical-align:middle;'>";
 									s+="<img src='" + item.teamLogoImg + "' style='width: 50px;'>";
 									s+="</td>";
 								} else {
 									s+="<tr>";
-									s+="<td style='text-align: center;'>" + item.fbNum + "</td>";
+									s+="<td style='text-align: center; vertical-align:middle;'>" + item.fbNum + "</td>";
 									s+="<td style='text-align: center; vertical-align:middle;'>";
 									s+="<img src='" + item.teamLogoImg + "' style='width: 40px;'>";
 									   s+="</td>";
@@ -211,10 +216,114 @@
     		    
     		});
     		
+    		$("button.naav-link").click(function() {
+    			var category = $(this).attr("category");
+				var currentPage = $("#currentPage").val();
+				 alert(category + ", " + currentPage);
+								
+				$.ajax({
+	    			
+	    			type : "get",
+	    			url : "freeBoard_getCategoryList.jsp",
+	    			dataType : "json",
+	    			data : {"category" : category, "currentPage" : currentPage}, 
+	    			success:function(res) {
+	    				
+	    				var s="";
+	    				
+	    				s+="<div class='table-responsive text-nowrap'>";
+	    				s+="<table class='table'>";
+	    				s+="<thead style='background-color: #F8F9FA'>";
+	    				s+="<tr>";
+	    				s+="<th style='text-align: center; width: 80px;'>No.</th>";
+	    				s+="<th style='text-align: center; width: 150px;'>카테고리</th>";
+	    				s+="<th style='text-align: center;'>제목</th>";
+	    				s+="<th style='text-align: center; width: 200px;'>작성자</th>";
+	    				s+="<th style='text-align: center; width: 200px;'>날짜</th>";
+	    				s+="<th style='text-align: center; width: 80px;'>조회수</th>";
+	    				s+="<th style='text-align: center; width: 80px;'>추천</th>";
+	    				s+="<th style='text-align: center; width: 80px;'>비추천</th>";
+	    				s+="</tr>";
+	    				s+="</thead>";
+						s+="<tbody class='table-border-bottom-0'>";
+	    				
+						if(res.length == 0) {
+							s+="<tr>";
+							s+="<td colspan='8' align='center' style='font-size: 18pt;'>아직 작성된 게시글이 없습니다</td>";
+							s+="</tr>";
+						} else {
+							$.each(res, function(idx, item){
+								
+								if(item.fbCategory == "공지") {
+									s+="<tr style='background-color: #FFF2F2; color: red; font-size: bold;'>";
+									s+="<td style='text-align: center;'></td>";
+									s+="<td style='text-align: center; vertical-align:middle;'>";
+									s+="<b>공지</b>";
+									s+="</td>";
+								} else if(item.fbCategory == "전체") {   
+									s+="<tr>";
+									s+="<td style='text-align: center; vertical-align:middle;'>" + item.fbNum + "</td>";
+									s+="<td style='text-align: center; vertical-align:middle;'>";
+									s+="<img src='https://cdn.icon-icons.com/icons2/2070/PNG/512/baseball_icon_126956.png' style='width: 30px;'>";
+									s+="</td>";
+								} else if(item.fbCategory == "한화") {
+									s+="<tr>";
+									s+="<td style='text-align: center; vertical-align:middle;'>" + item.fbNum + "</td>";
+									s+="<td style='text-align: center; vertical-align:middle;'>";
+									s+="<img src='" + item.teamLogoImg + "' style='width: 50px;'>";
+									s+="</td>";
+								} else {
+									s+="<tr>";
+									s+="<td style='text-align: center; vertical-align:middle;'>" + item.fbNum + "</td>";
+									s+="<td style='text-align: center; vertical-align:middle;'>";
+									s+="<img src='" + item.teamLogoImg + "' style='width: 40px;'>";
+									   s+="</td>";
+								}
+								
+								if(item.fcCnt == 0) {
+									if(item.fbCategory == "공지") 
+										s+="<td style='vertical-align:middle;'><a href='freePost_detailPage.jsp?fbNum=" + item.fbNum + "&currentPage=" + currentPage + "' style=' text-decoration: none; color: red;'><b>" + item.fbSubject + "</b></a></td>";
+									else 
+										s+="<td style='vertical-align:middle;'><a href='freePost_detailPage.jsp?fbNum=" + item.fbNum + "&currentPage=" + currentPage + "' style=' text-decoration: none; color: black;'>" + item.fbSubject + "</a></td>";
+								
+								} else {
+									if(item.fbCategory == "공지") 
+										s+="<td style='vertical-align:middle;'><a href='freePost_detailPage.jsp?fbNum=" + item.fbNum + "&currentPage=" + currentPage + "' style=' text-decoration: none; color: red;'><b>" + item.fbSubject + "</a><span style='color: tomato;'>&nbsp;&nbsp;[" + item.fcCnt + "]</span></td>";
+									else
+										s+="<td style='vertical-align:middle;'><a href='freePost_detailPage.jsp?fbNum=" + item.fbNum + "&currentPage=" + currentPage + "' style=' text-decoration: none; color: black;'>" + item.fbSubject + "</a><span style='color: tomato;'>&nbsp;&nbsp;[" + item.fcCnt + "]</span></td>";
+								}
+								
+								if(item.fbCategory == "공지") {
+									s+="<td style='text-align: center; vertical-align:middle;'><b>" + item.nickname + "</b></td>";
+									s+="<td style='text-align: center; vertical-align:middle;'><b>" + item.fbWriteday + "</b></td>";
+									s+="<td style='text-align: center; vertical-align:middle;'><b>" + item.fbReadCnt + "</b></td>";
+									s+="<td style='text-align: center; vertical-align:middle;'><b>" + item.fbLike + "</b></td>";
+									s+="<td style='text-align: center; vertical-align:middle;'><b>" + item.fbDislike + "</b></td>";							
+									s+="</tr>"	
+								} else {
+									s+="<td style='text-align: center; vertical-align:middle;'>" + item.nickname + "</td>";
+									s+="<td style='text-align: center; vertical-align:middle;'>" + item.fbWriteday + "</td>";
+									s+="<td style='text-align: center; vertical-align:middle;'>" + item.fbReadCnt + "</td>";
+									s+="<td style='text-align: center; vertical-align:middle;'>" + item.fbLike + "</td>";
+									s+="<td style='text-align: center; vertical-align:middle;'>" + item.fbDislike + "</td> ";							
+									s+="</tr>"
+								}
+							});
+						}
+	    				s+="</tbody>";
+	    				s+="</table>";
+	    				s+="</div>";
+	    				
+	    				$("div.ffList").html(s);
+	    				$(".fbTitle").text("_ " + category);
+	    
+	    			}
+				});
+				
+			}); 
 		})
 		
 		function fList() {
-    		var val = $("#search :selected").val();
     		var currentPage = $("#currentPage").val();
     		//alert(val + ", "+ currentPage);
 			
@@ -259,19 +368,19 @@
 								s+="</td>";
 							} else if(item.fbCategory == "전체") {   
 								s+="<tr>";
-								s+="<td style='text-align: center;'>" + item.fbNum + "</td>";
+								s+="<td style='text-align: center; vertical-align:middle;'>" + item.fbNum + "</td>";
 								s+="<td style='text-align: center; vertical-align:middle;'>";
 								s+="<img src='https://cdn.icon-icons.com/icons2/2070/PNG/512/baseball_icon_126956.png' style='width: 30px;'>";
 								s+="</td>";
 							} else if(item.fbCategory == "한화") {
 								s+="<tr>";
-								s+="<td style='text-align: center;'>" + item.fbNum + "</td>";
+								s+="<td style='text-align: center; vertical-align:middle;'>" + item.fbNum + "</td>";
 								s+="<td style='text-align: center; vertical-align:middle;'>";
 								s+="<img src='" + item.teamLogoImg + "' style='width: 50px;'>";
 								s+="</td>";
 							} else {
 								s+="<tr>";
-								s+="<td style='text-align: center;'>" + item.fbNum + "</td>";
+								s+="<td style='text-align: center; vertical-align:middle;'>" + item.fbNum + "</td>";
 								s+="<td style='text-align: center; vertical-align:middle;'>";
 								s+="<img src='" + item.teamLogoImg + "' style='width: 40px;'>";
 								   s+="</td>";
@@ -385,10 +494,188 @@
 					<!-- Bootstrap Table with Header - Light -->
 					<div class="card" style="background-color: #fff">
 						<h3 class="card-header">
-							<a href='freeBoard_listPage.jsp' style="text-decoration: none;color: black;"><b>자&nbsp;유&nbsp;게&nbsp;시&nbsp;판</b></a>
+							<a href='freeBoard_listPage.jsp' style="text-decoration: none;color: black;"><b>자&nbsp;유&nbsp;게&nbsp;시&nbsp;판&nbsp;<sapn class="fbTitle" style="font-size: 0.8em;">_&nbsp;전체</span></b></a>
 						</h3>
 						
-						<div class="fList"></div>
+						<div class="naav-align-top mb-4">
+						    <ul class="naav naav-tabs naav-fill" role="tablist" style="width: 100%">
+						        <li class="naav-item">
+						            <button type="button" class="naav-link active" role="tab" data-bs-toggle="tab"
+						                data-bs-target="#naavs-top-all" aria-controls="naavs-top-all" aria-selected="true" category="All">
+						                전체
+						            </button>
+						        </li>
+						        <li class="naav-item">
+						            <button type="button" class="naav-link" role="tab" data-bs-toggle="tab" data-bs-target="#naavs-top-kia"
+						                aria-controls="naavs-top-kia" aria-selected="false" category="KIA">
+						                KIA
+						            </button>
+						        </li>
+						        <li class="naav-item">
+						            <button type="button" class="naav-link" role="tab" data-bs-toggle="tab" data-bs-target="#naavs-top-kt"
+						                aria-controls="naavs-top-kt" aria-selected="false" category="KT">
+						                KT
+						            </button>
+						        </li>
+						        <li class="naav-item">
+						            <button type="button" class="naav-link" role="tab" data-bs-toggle="tab" data-bs-target="#naavs-top-lg"
+						                aria-controls="naavs-top-lg" aria-selected="false" category="LG">
+						                LG
+						            </button>
+						        </li>
+						        <li class="naav-item">
+						            <button type="button" class="naav-link" role="tab" data-bs-toggle="tab" data-bs-target="#naavs-top-nc"
+						                aria-controls="naavs-top-nc" aria-selected="false" category="NC">
+						                NC
+						            </button>
+						        </li>
+						        <li class="naav-item">
+						            <button type="button" class="naav-link" role="tab" data-bs-toggle="tab" data-bs-target="#naavs-top-ssg"
+						                aria-controls="naavs-top-ssg" aria-selected="false" category="SSG">
+						                SSG
+						            </button>
+						        </li>
+						        <li class="naav-item">
+						            <button type="button" class="naav-link" role="tab" data-bs-toggle="tab" data-bs-target="#naavs-top-doosan"
+						                aria-controls="naavs-top-doosan" aria-selected="false" category="두산">
+						                두산
+						            </button>
+						        </li>
+						        <li class="naav-item">
+						            <button type="button" class="naav-link" role="tab" data-bs-toggle="tab" data-bs-target="#naavs-top-lotte"
+						                aria-controls="naavs-top-lotte" aria-selected="false" category="롯데">
+						                롯데
+						            </button>
+						        </li>
+						        <li class="naav-item">
+						            <button type="button" class="naav-link" role="tab" data-bs-toggle="tab" data-bs-target="#naavs-top-samsung"
+						                aria-controls="naavs-top-samsung" aria-selected="false" category="삼성">
+						                삼성
+						            </button>
+						        </li>
+						        <li class="naav-item">
+						            <button type="button" class="naav-link" role="tab" data-bs-toggle="tab" data-bs-target="#naavs-top-kiwoom"
+						                aria-controls="naavs-top-kiwoom" aria-selected="false" category="키움">
+						                키움
+						            </button>
+						        </li>
+						        <li class="naav-item">
+						            <button type="button" class="naav-link" role="tab" data-bs-toggle="tab" data-bs-target="#naavs-top-hanhwa"
+						                aria-controls="naavs-top-hanhwa" aria-selected="false" category="한화">
+						                한화
+						            </button>
+						        </li>
+						    </ul>
+						
+						    <!-- tab별 내용 -->
+						    <div class="tab-content">
+						        <div class="tab-pane fade show active" id="naavs-top-all" role="tabpanel">
+						           <div class="fList"></div>
+						
+			                        <div class="bBottom" style="margin-top: 30px;">
+			                            <div class="bsBox">
+			                                <div class="bSelect">
+												<select id="search" class="form-control" style="width: 100px; height: 40px; text-align: center;">
+													<option value="nickname" selected="selected">작성자</option>
+													<option value="subject">제목</option>
+													<option value="content">내용</option>
+												</select>
+											</div>
+			                                <div class="bSearch">
+												<input type="text" id="search_str" class="form-control"
+														required="required" style="width: 200px; height: 40px;">
+											</div>
+											<button type="button" class="btn btn-default" id="searchBtn" style="margin-left: 5px;">검색</button>
+			                            </div>
+			                            <div class="bInsert">
+											<button type="button" class="btn btn-default" id="insertBtn">글쓰기</button>
+										</div>
+			                        </div>
+			                       <!-- 페이징 처리 -->
+									<div style="width: 500px; text-align: center;" class="container">
+										<ul class="pagination">
+											<% 
+												// 이전
+												if(startPage > 1) {
+											%>
+												<li>
+													<a href="freeBoard_listPage.jsp?currentPage=<%=startPage-1 %>">이전</a>
+												</li>
+											<%
+												}
+												
+												for(int pp = startPage; pp <= endPage; pp++) {
+													if(pp == currentPage) {
+											%>
+														<li class="active">
+															<a href="freeBoard_listPage.jsp?currentPage=<%=pp %>"><%=pp %></a>
+														</li>
+											<%
+													} else {
+											%>
+														<li>
+															<a href="freeBoard_listPage.jsp?currentPage=<%=pp %>"><%=pp %></a>
+														</li>
+											<%
+													}
+												}
+												
+												// 다음
+												if(endPage < totalPage) {
+											%>
+													<li>
+														<a href="freeBoard_listPage.jsp?currentPage=<%=endPage+1 %>">다음</a>
+													</li>
+											<%
+												}
+											%>
+										</ul>
+									</div>
+						        </div>
+						        <div class="tab-pane fade" id="naavs-top-kia" role="tabpanel">
+						            KIA
+						            <div class="ffList"></div>
+						        </div>
+						        <div class="tab-pane fade" id="naavs-top-kt" role="tabpanel">
+						            kt
+						            <div class="ffList"></div>
+						        </div>
+						        <div class="tab-pane fade" id="naavs-top-lg" role="tabpanel">
+						            lg
+						            <div class="ffList"></div>
+						        </div>
+						        <div class="tab-pane fade" id="naavs-top-nc" role="tabpanel">
+						            nc
+						            <div class="ffList"></div>
+						        </div>
+						        <div class="tab-pane fade" id="naavs-top-ssg" role="tabpanel">
+						            ssg
+						            <div class="ffList"></div>
+						        </div>
+						        <div class="tab-pane fade" id="naavs-top-doosan" role="tabpanel">
+						            doosan
+						            <div class="ffList"></div>
+						        </div>
+						        <div class="tab-pane fade" id="naavs-top-lotte" role="tabpanel">
+						            lotte
+						            <div class="ffList"></div>
+						        </div>
+						        <div class="tab-pane fade" id="naavs-top-samsung" role="tabpanel">
+						            samsung
+						            <div class="ffList"></div>
+						        </div>
+						        <div class="tab-pane fade" id="naavs-top-kiwoom" role="tabpanel">
+						            kiwoom
+						            <div class="ffList"></div>
+						        </div>
+						        <div class="tab-pane fade" id="naavs-top-hanhwa" role="tabpanel">
+						            hanhwa
+						            <div class="ffList"></div>
+						        </div>
+						    </div>
+						</div>
+						
+						<%-- <div class="fList"></div>
 						
                         <div class="bBottom" style="margin-top: 30px;">
                             <div class="bsBox">
@@ -448,7 +735,7 @@
 									}
 								%>
 							</ul>
-						</div>
+						</div> --%>
                        
                     </div>
                 </div>
