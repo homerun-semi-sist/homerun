@@ -58,16 +58,6 @@ table, tr, th, td {
 	border-collapse: collapse;
 }
 </style>
-<script>
-function Date getDateFromString(String dt, String format)
-{
-    SimpleDateFormat formatter = new SimpleDateFormat(format);
-    formatter.setTimeZone(TimeZone.getDefault());
-    Date uDate = null;
-    uDate = formatter.parse(dt);
-    return uDate;
-}
-</script>
 <body>
 	<%
 	Date todate = new Date();
@@ -89,14 +79,11 @@ function Date getDateFromString(String dt, String format)
 	Document doc = Jsoup.connect(URL + params).get();
 	Elements elements_left = doc.select(".team_lft");
 	Elements elements_right = doc.select(".team_rgt");
-	Elements elements_gday = doc.select(".td_date");
-
-	Elements elements_gday_1 = doc.select(".td_date strong");
+	Elements elements_gday = doc.select(".td_date strong");
 
 	String text_left = "";
 	String text_right = "";
 	String text_gday = "";
-	String text_gday_1 = "";
 	String text_gday_m = "";
 	String text_gday_d = "";
 	%>
@@ -105,29 +92,27 @@ function Date getDateFromString(String dt, String format)
 			<tr height="50";>
 				<th width="150px" style="text-align: center; vertical-align: middle">경기일</th>
 				<th width="350px" style="text-align: center; vertical-align: middle">경기</th>
+				<th width="350px" style="text-align: center; vertical-align: middle">구장</th>
 			</tr>
 		</thead>
 		<%
 		for (int i = 0; i < elements_gday.size(); i++) {
-			//text_gday = elements_gday.get(i).text();
 
-			text_gday_1 = elements_gday_1.get(i).text();
+			text_gday = elements_gday.get(i).text();
 
-			/*  String[] text_gday_day = text_gday_1.split(".");
-			text_gday_m = text_gday_day[0];
-			text_gday_d = text_gday_day[1];
-			
-			System.out.println(text_gday_m); */
-			
-			SimpleDateFormat sdf_gDay=new SimpleDateFormat("MM-dd");
-			
-			text_gday_m=text_gday_1.split("[.]")[0];
-			text_gday_m= text_gday_1.split("[.]")[1];
-			
-			Date gDAY= getDateFromString(year+text_gday_m+text_gday_m, "yy/MM/dd");
-			
+			SimpleDateFormat sdf_gDay = new SimpleDateFormat("yyyy-MM-dd");
 
-			System.out.println(gDAY);
+			text_gday_m = text_gday.split("[.]")[0];
+			if (text_gday_m.length() == 1) {
+				text_gday_m = "0" + text_gday_m;
+			}
+			text_gday_d = text_gday.split("[.]")[1];
+			if (text_gday_d.length() == 1) {
+				text_gday_d = "0" + text_gday_d;
+			}
+
+			text_gday = year + "-" + text_gday_m + "-" + text_gday_d;
+			Date gDAY = sdf_gDay.parse(text_gday);
 
 			int startIndex = i * 5;
 			int endIndex = (i + 1) * 5;
@@ -140,7 +125,7 @@ function Date getDateFromString(String dt, String format)
 		%>
 		<tr height="60">
 			<td
-				style="text-align: center; vertical-align: middle; color: black; font-size: 1.3em"><%=text_gday%></td>
+				style="text-align: center; vertical-align: middle; color: black; font-size: 1.3em"><%=sdf_gDay.format(gDAY)%></td>
 			<td style="text-align: center; vertical-align: middle; color: black;">
 				<%
 				TeamDao dao = new TeamDao();
@@ -149,6 +134,10 @@ function Date getDateFromString(String dt, String format)
 				<%
 				TeamDto dto_right = dao.getTeam(text_right);
 				%> <img src="<%=dto_right.getTeamLogo()%>" width="40">
+			</td>
+			<td style="text-align: center; vertical-align: middle; color: black; font-size: 1.1em">
+				<%=dto_right.getHometown()%><span style="font-size: 0.8em; color: gray">(<%=dto_right.getStadium() %>)</span>
+			</td>
 		</tr>
 		<%
 		}

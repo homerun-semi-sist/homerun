@@ -29,7 +29,7 @@
 			<div class="row">
 				<div class="col-sm-2" style="border: 1px solid red;"></div>
 				<div class="col-sm-8" style="border: 1px solid pink;">
-					<jsp:include page="game_gameList2.jsp"></jsp:include>
+					<jsp:include page="gameinsertprac.jsp"></jsp:include>
 				</div>
 				<div class="col-sm-2" style="border: 1px solid blue;"></div>
 			</div>
