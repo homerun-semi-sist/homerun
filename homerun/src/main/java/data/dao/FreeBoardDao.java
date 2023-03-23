@@ -464,7 +464,6 @@ public class FreeBoardDao {
 				
 	}
 	
-	
 	// search - fbSubject
 	// select * from FREEBOARD where fbSubject Like "%?%";
 	public List<FreeBoardDto> search_subject(int start, int perPage, String fbSubject) {
@@ -510,8 +509,7 @@ public class FreeBoardDao {
         return list;
 				
 	}
-	
-	
+
 	// search - fbContent
 	// select * from FREEBOARD where fbContent Like "%?%";
 	public List<FreeBoardDto> search_content(int start, int perPage, String fbContent) {
@@ -572,6 +570,35 @@ public class FreeBoardDao {
 		try {
 			pstmt = conn.prepareStatement(sql);
 		
+			rs =  pstmt.executeQuery();
+		
+			if(rs.next()) 
+				n = rs.getInt(1);
+			
+			} catch (SQLException e) {
+				e.printStackTrace();
+			} finally {
+				db.dbClose(rs, pstmt, conn);
+		}
+			
+		return n; 
+	}
+	
+	// FB category totalCount
+	public int getFBcateTotalCount(String fbCategory) {
+		int n = 0;
+		
+		Connection conn = db.getConnection();
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		String sql = "select count(*) from FREEBOARD where fbCategory=?";
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setString(1, fbCategory);
+			
 			rs =  pstmt.executeQuery();
 		
 			if(rs.next()) 

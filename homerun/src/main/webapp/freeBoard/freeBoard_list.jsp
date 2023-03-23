@@ -24,8 +24,8 @@
     <meta name="description" content="" />
 
     <!-- Core CSS -->
-    <link rel="stylesheet" href="../assets/board/vendor/css/core_copy2.css" class="template-customizer-core-css" />
-    <link rel="stylesheet" href="../assets/board/vendor/css/theme-default_copy2.css" class="template-customizer-theme-css" />
+    <link rel="stylesheet" href="../assets/board/vendor/css/core.css" class="template-customizer-core-css" />
+    <link rel="stylesheet" href="../assets/board/vendor/css/theme-default.css" class="template-customizer-theme-css" />
     <link rel="stylesheet" href="../assets/board/css/demo.css" />
 
 	<!-- Vendors CSS -->
@@ -151,7 +151,7 @@
 									
 								if(item.fbCategory == "공지") {
 									s+="<tr style='background-color: #FFF2F2; color: red; font-size: bold;'>";
-									s+="<td style='text-align: center;'></td>";
+									s+="<td style='text-align: center; vertical-align:middle;'></td>";
 									s+="<td style='text-align: center; vertical-align:middle;'>";
 									s+="<b>공지</b>";
 									s+="</td>";
@@ -219,7 +219,7 @@
     		$("button.naav-link").click(function() {
     			var category = $(this).attr("category");
 				var currentPage = $("#currentPage").val();
-				 alert(category + ", " + currentPage);
+				// alert(category + ", " + currentPage);
 								
 				$.ajax({
 	    			
@@ -315,6 +315,9 @@
 	    				s+="</div>";
 	    				
 	    				$("div.ffList").html(s);
+	    				
+	    				if(category == "All")
+	    					category = "전체";
 	    				$(".fbTitle").text("_ " + category);
 	    
 	    			}
@@ -353,7 +356,9 @@
     				s+="</thead>";
 					s+="<tbody class='table-border-bottom-0'>";
     				
-					if(res.length == 0) {
+					var n = res.length;
+    				
+					if(n == 0) {
 						s+="<tr>";
 						s+="<td colspan='8' align='center' style='font-size: 18pt;'>아직 작성된 게시글이 없습니다</td>";
 						s+="</tr>";
@@ -441,44 +446,21 @@
 		
 		FreeCommentDao fcDao = new FreeCommentDao();
 		
-		// 페이징 처리		
-		int totalCount;
-		int totalPage;      // 총 페이지 수 
-		int startPage;      // 각 블럭의 시작 페이지
-		int endPage;        // 각 블럭의 마지막 페이지
-		int start;          // 각 페이지의 시작 번호 
-		int perPage = 15;    // 한 페이지에 보여질 글의 개수
-		int perBlock = 5;   // 한 블럭당 보여지는 페이지 개수
-		int currentPage;    // 현재 페이지
-		int no;
+		int currentPage; 
 		
-		// 총 개수 
-		totalCount = fbDao.getFBTotalCount();
-
-		// 현재 페이지 번호 읽기, null일 때는 1페이지로
 		if(request.getParameter("currentPage") == null)
 			currentPage = 1;
 		else
 			currentPage = Integer.parseInt(request.getParameter("currentPage"));
-
-		// 총 페이지 개수
-		totalPage = totalCount / perPage + (totalCount % perPage == 0 ? 0 : 1);
-		  
-		// 각 블럭의 시작 페이지 ex) 현재 페이지가 3일 때(start:1, end:5), 6일 때(start:6, end:10)
-		startPage = (currentPage - 1) / perBlock * perBlock + 1;
-		endPage = startPage + perBlock - 1;
-		    
-		// 총 페이지가 8일 때(6 ~ 10 -> endPage를 8로 수정해주어야 함)
-		if(endPage > totalPage)
-			endPage = totalPage;
-
-		// 각 페이지에서 불러올 시작 번호
-		start = (currentPage - 1) * perPage;
-
-		// 각 페이지에서 필요한 게시글 가져오기
-		List<FreeBoardDto> fbList = fbDao.getFBList(start, perPage);
 		
-		no = totalCount - (currentPage - 1) * perPage;		
+		// 페이징 처리		
+		int totalCount;
+		int totalPage;      
+		int startPage;      
+		int endPage;        
+		int start;         
+		int perPage = 15;  
+		int perBlock = 5;  
 	%>
 	<input type="hidden" id="currentPage" value="<%=currentPage %>">
 	
@@ -595,6 +577,18 @@
 									<div style="width: 500px; text-align: center;" class="container">
 										<ul class="pagination">
 											<% 
+												totalCount = fbDao.getFBTotalCount();
+	
+												totalPage = totalCount / perPage + (totalCount % perPage == 0 ? 0 : 1);
+	
+												startPage = (currentPage - 1) / perBlock * perBlock + 1;
+												endPage = startPage + perBlock - 1;
+	
+												if(endPage > totalPage)
+													endPage = totalPage;
+	
+												start = (currentPage - 1) * perPage;
+											
 												// 이전
 												if(startPage > 1) {
 											%>
@@ -633,110 +627,758 @@
 									</div>
 						        </div>
 						        <div class="tab-pane fade" id="naavs-top-kia" role="tabpanel">
-						            KIA
 						            <div class="ffList"></div>
+						        	
+						        	<div class="bBottom" style="margin-top: 30px;">
+			                            <div class="bsBox">
+			                                <div class="bSelect">
+												<select id="search" class="form-control" style="width: 100px; height: 40px; text-align: center;">
+													<option value="nickname" selected="selected">작성자</option>
+													<option value="subject">제목</option>
+													<option value="content">내용</option>
+												</select>
+											</div>
+			                                <div class="bSearch">
+												<input type="text" id="search_str" class="form-control"
+														required="required" style="width: 200px; height: 40px;">
+											</div>
+											<button type="button" class="btn btn-default" id="searchBtn" style="margin-left: 5px;">검색</button>
+			                            </div>
+			                            <div class="bInsert">
+											<button type="button" class="btn btn-default" id="insertBtn">글쓰기</button>
+										</div>
+			                        </div>
+			                       <!-- 페이징 처리 -->
+									<div style="width: 500px; text-align: center;" class="container">
+										<ul class="pagination">
+											<% 
+												totalCount = fbDao.getFBcateTotalCount("KIA");
+												
+												totalPage = totalCount / perPage + (totalCount % perPage == 0 ? 0 : 1);
+	
+												startPage = (currentPage - 1) / perBlock * perBlock + 1;
+												endPage = startPage + perBlock - 1;
+	
+												if(endPage > totalPage)
+													endPage = totalPage;
+	
+												start = (currentPage - 1) * perPage;
+											
+												// 이전
+												if(startPage > 1) {
+											%>
+												<li>
+													<a href="freeBoard_listPage.jsp?currentPage=<%=startPage-1 %>">이전</a>
+												</li>
+											<%
+												}
+												
+												for(int pp = startPage; pp <= endPage; pp++) {
+													if(pp == currentPage) {
+											%>
+														<li class="active">
+															<a href="freeBoard_listPage.jsp?currentPage=<%=pp %>"><%=pp %></a>
+														</li>
+											<%
+													} else {
+											%>
+														<li>
+															<a href="freeBoard_listPage.jsp?currentPage=<%=pp %>"><%=pp %></a>
+														</li>
+											<%
+													}
+												}
+												
+												// 다음
+												if(endPage < totalPage) {
+											%>
+													<li>
+														<a href="freeBoard_listPage.jsp?currentPage=<%=endPage+1 %>">다음</a>
+													</li>
+											<%
+												}
+											%>
+										</ul>
+									</div>
 						        </div>
 						        <div class="tab-pane fade" id="naavs-top-kt" role="tabpanel">
-						            kt
 						            <div class="ffList"></div>
+						        	
+						        	<div class="bBottom" style="margin-top: 30px;">
+			                            <div class="bsBox">
+			                                <div class="bSelect">
+												<select id="search" class="form-control" style="width: 100px; height: 40px; text-align: center;">
+													<option value="nickname" selected="selected">작성자</option>
+													<option value="subject">제목</option>
+													<option value="content">내용</option>
+												</select>
+											</div>
+			                                <div class="bSearch">
+												<input type="text" id="search_str" class="form-control"
+														required="required" style="width: 200px; height: 40px;">
+											</div>
+											<button type="button" class="btn btn-default" id="searchBtn" style="margin-left: 5px;">검색</button>
+			                            </div>
+			                            <div class="bInsert">
+											<button type="button" class="btn btn-default" id="insertBtn">글쓰기</button>
+										</div>
+			                        </div>
+			                       <!-- 페이징 처리 -->
+									<div style="width: 500px; text-align: center;" class="container">
+										<ul class="pagination">
+											<% 
+												totalCount = fbDao.getFBcateTotalCount("KT");
+												
+												totalPage = totalCount / perPage + (totalCount % perPage == 0 ? 0 : 1);
+	
+												startPage = (currentPage - 1) / perBlock * perBlock + 1;
+												endPage = startPage + perBlock - 1;
+	
+												if(endPage > totalPage)
+													endPage = totalPage;
+	
+												start = (currentPage - 1) * perPage;
+												
+												// 이전
+												if(startPage > 1) {
+											%>
+												<li>
+													<a href="freeBoard_listPage.jsp?currentPage=<%=startPage-1 %>">이전</a>
+												</li>
+											<%
+												}
+												
+												for(int pp = startPage; pp <= endPage; pp++) {
+													if(pp == currentPage) {
+											%>
+														<li class="active">
+															<a href="freeBoard_listPage.jsp?currentPage=<%=pp %>"><%=pp %></a>
+														</li>
+											<%
+													} else {
+											%>
+														<li>
+															<a href="freeBoard_listPage.jsp?currentPage=<%=pp %>"><%=pp %></a>
+														</li>
+											<%
+													}
+												}
+												
+												// 다음
+												if(endPage < totalPage) {
+											%>
+													<li>
+														<a href="freeBoard_listPage.jsp?currentPage=<%=endPage+1 %>">다음</a>
+													</li>
+											<%
+												}
+											%>
+										</ul>
+									</div>
 						        </div>
 						        <div class="tab-pane fade" id="naavs-top-lg" role="tabpanel">
-						            lg
 						            <div class="ffList"></div>
+						        	
+						        	<div class="bBottom" style="margin-top: 30px;">
+			                            <div class="bsBox">
+			                                <div class="bSelect">
+												<select id="search" class="form-control" style="width: 100px; height: 40px; text-align: center;">
+													<option value="nickname" selected="selected">작성자</option>
+													<option value="subject">제목</option>
+													<option value="content">내용</option>
+												</select>
+											</div>
+			                                <div class="bSearch">
+												<input type="text" id="search_str" class="form-control"
+														required="required" style="width: 200px; height: 40px;">
+											</div>
+											<button type="button" class="btn btn-default" id="searchBtn" style="margin-left: 5px;">검색</button>
+			                            </div>
+			                            <div class="bInsert">
+											<button type="button" class="btn btn-default" id="insertBtn">글쓰기</button>
+										</div>
+			                        </div>
+			                       <!-- 페이징 처리 -->
+									<div style="width: 500px; text-align: center;" class="container">
+										<ul class="pagination">
+											<% 
+												totalCount = fbDao.getFBcateTotalCount("LG");
+												
+												totalPage = totalCount / perPage + (totalCount % perPage == 0 ? 0 : 1);
+	
+												startPage = (currentPage - 1) / perBlock * perBlock + 1;
+												endPage = startPage + perBlock - 1;
+	
+												if(endPage > totalPage)
+													endPage = totalPage;
+	
+												start = (currentPage - 1) * perPage;
+											
+												// 이전
+												if(startPage > 1) {
+											%>
+												<li>
+													<a href="freeBoard_listPage.jsp?currentPage=<%=startPage-1 %>">이전</a>
+												</li>
+											<%
+												}
+												
+												for(int pp = startPage; pp <= endPage; pp++) {
+													if(pp == currentPage) {
+											%>
+														<li class="active">
+															<a href="freeBoard_listPage.jsp?currentPage=<%=pp %>"><%=pp %></a>
+														</li>
+											<%
+													} else {
+											%>
+														<li>
+															<a href="freeBoard_listPage.jsp?currentPage=<%=pp %>"><%=pp %></a>
+														</li>
+											<%
+													}
+												}
+												
+												// 다음
+												if(endPage < totalPage) {
+											%>
+													<li>
+														<a href="freeBoard_listPage.jsp?currentPage=<%=endPage+1 %>">다음</a>
+													</li>
+											<%
+												}
+											%>
+										</ul>
+									</div>
 						        </div>
 						        <div class="tab-pane fade" id="naavs-top-nc" role="tabpanel">
-						            nc
 						            <div class="ffList"></div>
+						        	
+						        	<div class="bBottom" style="margin-top: 30px;">
+			                            <div class="bsBox">
+			                                <div class="bSelect">
+												<select id="search" class="form-control" style="width: 100px; height: 40px; text-align: center;">
+													<option value="nickname" selected="selected">작성자</option>
+													<option value="subject">제목</option>
+													<option value="content">내용</option>
+												</select>
+											</div>
+			                                <div class="bSearch">
+												<input type="text" id="search_str" class="form-control"
+														required="required" style="width: 200px; height: 40px;">
+											</div>
+											<button type="button" class="btn btn-default" id="searchBtn" style="margin-left: 5px;">검색</button>
+			                            </div>
+			                            <div class="bInsert">
+											<button type="button" class="btn btn-default" id="insertBtn">글쓰기</button>
+										</div>
+			                        </div>
+			                       <!-- 페이징 처리 -->
+									<div style="width: 500px; text-align: center;" class="container">
+										<ul class="pagination">
+											<% 
+												totalCount = fbDao.getFBcateTotalCount("NC");
+												
+												totalPage = totalCount / perPage + (totalCount % perPage == 0 ? 0 : 1);
+	
+												startPage = (currentPage - 1) / perBlock * perBlock + 1;
+												endPage = startPage + perBlock - 1;
+	
+												if(endPage > totalPage)
+													endPage = totalPage;
+	
+												start = (currentPage - 1) * perPage;
+											
+												// 이전
+												if(startPage > 1) {
+											%>
+												<li>
+													<a href="freeBoard_listPage.jsp?currentPage=<%=startPage-1 %>">이전</a>
+												</li>
+											<%
+												}
+												
+												for(int pp = startPage; pp <= endPage; pp++) {
+													if(pp == currentPage) {
+											%>
+														<li class="active">
+															<a href="freeBoard_listPage.jsp?currentPage=<%=pp %>"><%=pp %></a>
+														</li>
+											<%
+													} else {
+											%>
+														<li>
+															<a href="freeBoard_listPage.jsp?currentPage=<%=pp %>"><%=pp %></a>
+														</li>
+											<%
+													}
+												}
+												
+												// 다음
+												if(endPage < totalPage) {
+											%>
+													<li>
+														<a href="freeBoard_listPage.jsp?currentPage=<%=endPage+1 %>">다음</a>
+													</li>
+											<%
+												}
+											%>
+										</ul>
+									</div>
 						        </div>
 						        <div class="tab-pane fade" id="naavs-top-ssg" role="tabpanel">
-						            ssg
 						            <div class="ffList"></div>
+						        	
+						        	<div class="bBottom" style="margin-top: 30px;">
+			                            <div class="bsBox">
+			                                <div class="bSelect">
+												<select id="search" class="form-control" style="width: 100px; height: 40px; text-align: center;">
+													<option value="nickname" selected="selected">작성자</option>
+													<option value="subject">제목</option>
+													<option value="content">내용</option>
+												</select>
+											</div>
+			                                <div class="bSearch">
+												<input type="text" id="search_str" class="form-control"
+														required="required" style="width: 200px; height: 40px;">
+											</div>
+											<button type="button" class="btn btn-default" id="searchBtn" style="margin-left: 5px;">검색</button>
+			                            </div>
+			                            <div class="bInsert">
+											<button type="button" class="btn btn-default" id="insertBtn">글쓰기</button>
+										</div>
+			                        </div>
+			                       <!-- 페이징 처리 -->
+									<div style="width: 500px; text-align: center;" class="container">
+										<ul class="pagination">
+											<% 	
+												totalCount = fbDao.getFBcateTotalCount("SSG");
+												
+												totalPage = totalCount / perPage + (totalCount % perPage == 0 ? 0 : 1);
+	
+												startPage = (currentPage - 1) / perBlock * perBlock + 1;
+												endPage = startPage + perBlock - 1;
+	
+												if(endPage > totalPage)
+													endPage = totalPage;
+	
+												start = (currentPage - 1) * perPage;
+												
+												// 이전
+												if(startPage > 1) {
+											%>
+												<li>
+													<a href="freeBoard_listPage.jsp?currentPage=<%=startPage-1 %>">이전</a>
+												</li>
+											<%
+												}
+												
+												for(int pp = startPage; pp <= endPage; pp++) {
+													if(pp == currentPage) {
+											%>
+														<li class="active">
+															<a href="freeBoard_listPage.jsp?currentPage=<%=pp %>"><%=pp %></a>
+														</li>
+											<%
+													} else {
+											%>
+														<li>
+															<a href="freeBoard_listPage.jsp?currentPage=<%=pp %>"><%=pp %></a>
+														</li>
+											<%
+													}
+												}
+												
+												// 다음
+												if(endPage < totalPage) {
+											%>
+													<li>
+														<a href="freeBoard_listPage.jsp?currentPage=<%=endPage+1 %>">다음</a>
+													</li>
+											<%
+												}
+											%>
+										</ul>
+									</div>
 						        </div>
 						        <div class="tab-pane fade" id="naavs-top-doosan" role="tabpanel">
-						            doosan
 						            <div class="ffList"></div>
+						        	
+						        	<div class="bBottom" style="margin-top: 30px;">
+			                            <div class="bsBox">
+			                                <div class="bSelect">
+												<select id="search" class="form-control" style="width: 100px; height: 40px; text-align: center;">
+													<option value="nickname" selected="selected">작성자</option>
+													<option value="subject">제목</option>
+													<option value="content">내용</option>
+												</select>
+											</div>
+			                                <div class="bSearch">
+												<input type="text" id="search_str" class="form-control"
+														required="required" style="width: 200px; height: 40px;">
+											</div>
+											<button type="button" class="btn btn-default" id="searchBtn" style="margin-left: 5px;">검색</button>
+			                            </div>
+			                            <div class="bInsert">
+											<button type="button" class="btn btn-default" id="insertBtn">글쓰기</button>
+										</div>
+			                        </div>
+			                       <!-- 페이징 처리 -->
+									<div style="width: 500px; text-align: center;" class="container">
+										<ul class="pagination">
+											<% 	
+												totalCount = fbDao.getFBcateTotalCount("두산");
+												
+												totalPage = totalCount / perPage + (totalCount % perPage == 0 ? 0 : 1);
+	
+												startPage = (currentPage - 1) / perBlock * perBlock + 1;
+												endPage = startPage + perBlock - 1;
+	
+												if(endPage > totalPage)
+													endPage = totalPage;
+	
+												start = (currentPage - 1) * perPage;
+												
+												// 이전
+												if(startPage > 1) {
+											%>
+												<li>
+													<a href="freeBoard_listPage.jsp?currentPage=<%=startPage-1 %>">이전</a>
+												</li>
+											<%
+												}
+												
+												for(int pp = startPage; pp <= endPage; pp++) {
+													if(pp == currentPage) {
+											%>
+														<li class="active">
+															<a href="freeBoard_listPage.jsp?currentPage=<%=pp %>"><%=pp %></a>
+														</li>
+											<%
+													} else {
+											%>
+														<li>
+															<a href="freeBoard_listPage.jsp?currentPage=<%=pp %>"><%=pp %></a>
+														</li>
+											<%
+													}
+												}
+												
+												// 다음
+												if(endPage < totalPage) {
+											%>
+													<li>
+														<a href="freeBoard_listPage.jsp?currentPage=<%=endPage+1 %>">다음</a>
+													</li>
+											<%
+												}
+											%>
+										</ul>
+									</div>
 						        </div>
 						        <div class="tab-pane fade" id="naavs-top-lotte" role="tabpanel">
-						            lotte
 						            <div class="ffList"></div>
+						        	
+						        	<div class="bBottom" style="margin-top: 30px;">
+			                            <div class="bsBox">
+			                                <div class="bSelect">
+												<select id="search" class="form-control" style="width: 100px; height: 40px; text-align: center;">
+													<option value="nickname" selected="selected">작성자</option>
+													<option value="subject">제목</option>
+													<option value="content">내용</option>
+												</select>
+											</div>
+			                                <div class="bSearch">
+												<input type="text" id="search_str" class="form-control"
+														required="required" style="width: 200px; height: 40px;">
+											</div>
+											<button type="button" class="btn btn-default" id="searchBtn" style="margin-left: 5px;">검색</button>
+			                            </div>
+			                            <div class="bInsert">
+											<button type="button" class="btn btn-default" id="insertBtn">글쓰기</button>
+										</div>
+			                        </div>
+			                       <!-- 페이징 처리 -->
+									<div style="width: 500px; text-align: center;" class="container">
+										<ul class="pagination">
+											<% 
+												totalCount = fbDao.getFBcateTotalCount("롯데");
+												
+												totalPage = totalCount / perPage + (totalCount % perPage == 0 ? 0 : 1);
+	
+												startPage = (currentPage - 1) / perBlock * perBlock + 1;
+												endPage = startPage + perBlock - 1;
+	
+												if(endPage > totalPage)
+													endPage = totalPage;
+	
+												start = (currentPage - 1) * perPage;
+												
+												// 이전
+												if(startPage > 1) {
+											%>
+												<li>
+													<a href="freeBoard_listPage.jsp?currentPage=<%=startPage-1 %>">이전</a>
+												</li>
+											<%
+												}
+												
+												for(int pp = startPage; pp <= endPage; pp++) {
+													if(pp == currentPage) {
+											%>
+														<li class="active">
+															<a href="freeBoard_listPage.jsp?currentPage=<%=pp %>"><%=pp %></a>
+														</li>
+											<%
+													} else {
+											%>
+														<li>
+															<a href="freeBoard_listPage.jsp?currentPage=<%=pp %>"><%=pp %></a>
+														</li>
+											<%
+													}
+												}
+												
+												// 다음
+												if(endPage < totalPage) {
+											%>
+													<li>
+														<a href="freeBoard_listPage.jsp?currentPage=<%=endPage+1 %>">다음</a>
+													</li>
+											<%
+												}
+											%>
+										</ul>
+									</div>
 						        </div>
 						        <div class="tab-pane fade" id="naavs-top-samsung" role="tabpanel">
-						            samsung
 						            <div class="ffList"></div>
+						        	
+						        	<div class="bBottom" style="margin-top: 30px;">
+			                            <div class="bsBox">
+			                                <div class="bSelect">
+												<select id="search" class="form-control" style="width: 100px; height: 40px; text-align: center;">
+													<option value="nickname" selected="selected">작성자</option>
+													<option value="subject">제목</option>
+													<option value="content">내용</option>
+												</select>
+											</div>
+			                                <div class="bSearch">
+												<input type="text" id="search_str" class="form-control"
+														required="required" style="width: 200px; height: 40px;">
+											</div>
+											<button type="button" class="btn btn-default" id="searchBtn" style="margin-left: 5px;">검색</button>
+			                            </div>
+			                            <div class="bInsert">
+											<button type="button" class="btn btn-default" id="insertBtn">글쓰기</button>
+										</div>
+			                        </div>
+			                       <!-- 페이징 처리 -->
+									<div style="width: 500px; text-align: center;" class="container">
+										<ul class="pagination">
+											<% 
+												totalCount = fbDao.getFBcateTotalCount("삼성");
+												
+												totalPage = totalCount / perPage + (totalCount % perPage == 0 ? 0 : 1);
+	
+												startPage = (currentPage - 1) / perBlock * perBlock + 1;
+												endPage = startPage + perBlock - 1;
+	
+												if(endPage > totalPage)
+													endPage = totalPage;
+	
+												start = (currentPage - 1) * perPage;
+											
+												// 이전
+												if(startPage > 1) {
+											%>
+												<li>
+													<a href="freeBoard_listPage.jsp?currentPage=<%=startPage-1 %>">이전</a>
+												</li>
+											<%
+												}
+												
+												for(int pp = startPage; pp <= endPage; pp++) {
+													if(pp == currentPage) {
+											%>
+														<li class="active">
+															<a href="freeBoard_listPage.jsp?currentPage=<%=pp %>"><%=pp %></a>
+														</li>
+											<%
+													} else {
+											%>
+														<li>
+															<a href="freeBoard_listPage.jsp?currentPage=<%=pp %>"><%=pp %></a>
+														</li>
+											<%
+													}
+												}
+												
+												// 다음
+												if(endPage < totalPage) {
+											%>
+													<li>
+														<a href="freeBoard_listPage.jsp?currentPage=<%=endPage+1 %>">다음</a>
+													</li>
+											<%
+												}
+											%>
+										</ul>
+									</div>
 						        </div>
 						        <div class="tab-pane fade" id="naavs-top-kiwoom" role="tabpanel">
-						            kiwoom
 						            <div class="ffList"></div>
+						        	
+						        	<div class="bBottom" style="margin-top: 30px;">
+			                            <div class="bsBox">
+			                                <div class="bSelect">
+												<select id="search" class="form-control" style="width: 100px; height: 40px; text-align: center;">
+													<option value="nickname" selected="selected">작성자</option>
+													<option value="subject">제목</option>
+													<option value="content">내용</option>
+												</select>
+											</div>
+			                                <div class="bSearch">
+												<input type="text" id="search_str" class="form-control"
+														required="required" style="width: 200px; height: 40px;">
+											</div>
+											<button type="button" class="btn btn-default" id="searchBtn" style="margin-left: 5px;">검색</button>
+			                            </div>
+			                            <div class="bInsert">
+											<button type="button" class="btn btn-default" id="insertBtn">글쓰기</button>
+										</div>
+			                        </div>
+			                       <!-- 페이징 처리 -->
+									<div style="width: 500px; text-align: center;" class="container">
+										<ul class="pagination">
+											<% 
+												totalCount = fbDao.getFBcateTotalCount("키움");
+												
+												totalPage = totalCount / perPage + (totalCount % perPage == 0 ? 0 : 1);
+	
+												startPage = (currentPage - 1) / perBlock * perBlock + 1;
+												endPage = startPage + perBlock - 1;
+	
+												if(endPage > totalPage)
+													endPage = totalPage;
+	
+												start = (currentPage - 1) * perPage;
+											
+												// 이전
+												if(startPage > 1) {
+											%>
+												<li>
+													<a href="freeBoard_listPage.jsp?currentPage=<%=startPage-1 %>">이전</a>
+												</li>
+											<%
+												}
+												
+												for(int pp = startPage; pp <= endPage; pp++) {
+													if(pp == currentPage) {
+											%>
+														<li class="active">
+															<a href="freeBoard_listPage.jsp?currentPage=<%=pp %>"><%=pp %></a>
+														</li>
+											<%
+													} else {
+											%>
+														<li>
+															<a href="freeBoard_listPage.jsp?currentPage=<%=pp %>"><%=pp %></a>
+														</li>
+											<%
+													}
+												}
+												
+												// 다음
+												if(endPage < totalPage) {
+											%>
+													<li>
+														<a href="freeBoard_listPage.jsp?currentPage=<%=endPage+1 %>">다음</a>
+													</li>
+											<%
+												}
+											%>
+										</ul>
+									</div>
 						        </div>
 						        <div class="tab-pane fade" id="naavs-top-hanhwa" role="tabpanel">
-						            hanhwa
 						            <div class="ffList"></div>
+						        	
+						        	<div class="bBottom" style="margin-top: 30px;">
+			                            <div class="bsBox">
+			                                <div class="bSelect">
+												<select id="search" class="form-control" style="width: 100px; height: 40px; text-align: center;">
+													<option value="nickname" selected="selected">작성자</option>
+													<option value="subject">제목</option>
+													<option value="content">내용</option>
+												</select>
+											</div>
+			                                <div class="bSearch">
+												<input type="text" id="search_str" class="form-control"
+														required="required" style="width: 200px; height: 40px;">
+											</div>
+											<button type="button" class="btn btn-default" id="searchBtn" style="margin-left: 5px;">검색</button>
+			                            </div>
+			                            <div class="bInsert">
+											<button type="button" class="btn btn-default" id="insertBtn">글쓰기</button>
+										</div>
+			                        </div>
+			                       <!-- 페이징 처리 -->
+									<div style="width: 500px; text-align: center;" class="container">
+										<ul class="pagination">
+											<% 
+												totalCount = fbDao.getFBcateTotalCount("한화");
+												
+												totalPage = totalCount / perPage + (totalCount % perPage == 0 ? 0 : 1);
+	
+												startPage = (currentPage - 1) / perBlock * perBlock + 1;
+												endPage = startPage + perBlock - 1;
+	
+												if(endPage > totalPage)
+													endPage = totalPage;
+	
+												start = (currentPage - 1) * perPage;
+												
+												// 이전
+												if(startPage > 1) {
+											%>
+												<li>
+													<a href="freeBoard_listPage.jsp?currentPage=<%=startPage-1 %>">이전</a>
+												</li>
+											<%
+												}
+												
+												for(int pp = startPage; pp <= endPage; pp++) {
+													if(pp == currentPage) {
+											%>
+														<li class="active">
+															<a href="freeBoard_listPage.jsp?currentPage=<%=pp %>"><%=pp %></a>
+														</li>
+											<%
+													} else {
+											%>
+														<li>
+															<a href="freeBoard_listPage.jsp?currentPage=<%=pp %>"><%=pp %></a>
+														</li>
+											<%
+													}
+												}
+												
+												// 다음
+												if(endPage < totalPage) {
+											%>
+													<li>
+														<a href="freeBoard_listPage.jsp?currentPage=<%=endPage+1 %>">다음</a>
+													</li>
+											<%
+												}
+											%>
+										</ul>
+									</div>
 						        </div>
 						    </div>
 						</div>
-						
-						<%-- <div class="fList"></div>
-						
-                        <div class="bBottom" style="margin-top: 30px;">
-                            <div class="bsBox">
-                                <div class="bSelect">
-									<select id="search" class="form-control" style="width: 100px; height: 40px; text-align: center;">
-										<option value="nickname" selected="selected">작성자</option>
-										<option value="subject">제목</option>
-										<option value="content">내용</option>
-									</select>
-								</div>
-                                <div class="bSearch">
-									<input type="text" id="search_str" class="form-control"
-											required="required" style="width: 200px; height: 40px;">
-								</div>
-								<button type="button" class="btn btn-default" id="searchBtn" style="margin-left: 5px;">검색</button>
-                            </div>
-                            <div class="bInsert">
-								<button type="button" class="btn btn-default" id="insertBtn">글쓰기</button>
-							</div>
-                        </div>
-                       <!-- 페이징 처리 -->
-						<div style="width: 500px; text-align: center;" class="container">
-							<ul class="pagination">
-								<% 
-									// 이전
-									if(startPage > 1) {
-								%>
-									<li>
-										<a href="freeBoard_listPage.jsp?currentPage=<%=startPage-1 %>">이전</a>
-									</li>
-								<%
-									}
-									
-									for(int pp = startPage; pp <= endPage; pp++) {
-										if(pp == currentPage) {
-								%>
-											<li class="active">
-												<a href="freeBoard_listPage.jsp?currentPage=<%=pp %>"><%=pp %></a>
-											</li>
-								<%
-										} else {
-								%>
-											<li>
-												<a href="freeBoard_listPage.jsp?currentPage=<%=pp %>"><%=pp %></a>
-											</li>
-								<%
-										}
-									}
-									
-									// 다음
-									if(endPage < totalPage) {
-								%>
-										<li>
-											<a href="freeBoard_listPage.jsp?currentPage=<%=endPage+1 %>">다음</a>
-										</li>
-								<%
-									}
-								%>
-							</ul>
-						</div> --%>
-                       
+      
                     </div>
                 </div>
                 <!-- Bootstrap Table with Header - Light -->
