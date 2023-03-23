@@ -174,7 +174,7 @@ $(function(){
 			dataType : "json",
 			data : {"val" : val, "str" : str,"currentPage":currentPage},
 			success:function(res) {
-				alert(val + ", "+ str +", " + res.length);
+				//alert(val + ", "+ str +", " + res.length);
 				
 				var s="";
 				
