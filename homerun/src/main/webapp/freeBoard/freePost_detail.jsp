@@ -518,9 +518,6 @@
 			                    				<div class="col-11 form-group">
 			                      					<textarea name="content" id="content" class="form-control" placeholder="비회원은 로그인 후 이용 가능합니다" readonly="readonly"></textarea>
 							                    </div>
-							                    <div class="col-1">
-							                      <button type="button" id="loginNoBtn" class="btn btn-primary" style="width: 80px; height: 40px; line-height: 20px;">입력</button>
-							                    </div>
 			                 				 </div>	                          
 			                        	</div>
 									</div>     
