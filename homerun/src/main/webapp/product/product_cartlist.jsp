@@ -31,8 +31,9 @@ div.pName, span.del {
 
 #noCart {
 	border: 4px solid rgba(0, 0, 0, 0.2);
-	width: 1000px;
+	width: 86.5%;
 	margin-right: 100px;
+	margin-bottom :300px;
 }
 
 .btn1 {
@@ -66,26 +67,26 @@ div.pName, span.del {
 }
 
 #cartsize {
-	height: 50px;
+width:86.5%;
+	height: 60px;
 	background-color: #0b214e;
 	border: 1px solid black;
 	color: white;
 	font-weight: bold;
 	font-size: 2em;
-	line-height: 1.8;
+	line-height: 2.2;
 	margin-left: 25px;
 }
 
 #usercart {
 	width: 86.5%;
-	height: 50px;
+	height: 60px;
 	background-color: #0b214e;
 	border: 1px solid black;
 	color: white;
 	font-weight: bold;
 	font-size: 2em;
-	line-height: 1.8;
-	height: 50px;
+	line-height: 2.2;
 	margin-left: 25px;
 }
 
@@ -157,12 +158,10 @@ div.pName, span.del {
 				});
 
 		//상품선택시 디테일페이지 이동
-		$("div.pName")
-				.click(
+		$("div.pName").click(
 						function() {
-
-							var pName = $(this).attr("pId");
-							location.href = "product_detailPage.jsp?pId="+ pId;
+							var pId = $(this).attr("pId");
+							location.href = "product_detailPage.jsp?pId="+pId;
 
 						});
 
@@ -285,12 +284,13 @@ div.pName, span.del {
 		$("#buyBtn").click(function() {
 			$(".cId:checked").each(function(i, element) {
 
-				var cId = $(this).attr("cId");
+				var uId = $(this).attr("uid");
 				var pId = $(this).attr("pId");
+				var cId = $(this).attr("cId");
 				var cQTY = $(this).attr("cQTY");
 				
-				stock(pId,cId);
-				orderlist(cId,cQTY);
+				stock(uId,cId);
+				orderlist(uId,pId,cQTY);
 				setTimeout(function() {
 				del(cId);
 				},100);
@@ -320,14 +320,15 @@ div.pName, span.del {
 			
 		} 
 		
-		function orderlist(cId,cQTY){
+		function orderlist(uId,pId,cQTY){
 			$.ajax({
 
 				type : "get",
 				dataType : "html",
 				url : "product_insertOrder.jsp",
 				data : {
-					"cId" : cId,
+					"uId":uId,
+					"pId" : pId,
 					"cQTY": cQTY
 				},
 				success : function() {
@@ -381,17 +382,17 @@ NumberFormat nf = NumberFormat.getInstance();
 	<div id="wrap">
 		<div id="content-wrap">
 			<div class="row">
-				<div class="col-sm-2" style="border: 1px solid red;">left</div>
-				<div class="col-sm-8" style="border: 1px solid pink;">
+				<div class="col-sm-2" style="border: 0px solid red;"></div>
+				<div class="col-sm-8" style="border: 0px solid pink;">
 					<!-- write here -->
 					<body>
 
-						<div style="text-align: center; margin-left: 100px;">
+						<div style="text-align: center; margin-left: 100px; ">
 
 							<div id="usercart">
 								<span style="color: yellow;"><%=uid%></span>님의 장바구니
 							</div>
-							<h4 id="cartsize" style="width: 1000px;">
+							<h4 id="cartsize" >
 								총 <span style="color: yellow"><%=cartSize%></span>개의 상품이 담겨져
 								있습니다
 							</h4>
@@ -399,14 +400,14 @@ NumberFormat nf = NumberFormat.getInstance();
 							if (cartSize > 0) {
 							%>
 							<table class="table table-bordered"
-								style="width: 1000px; color: black; font-size: 1.2em; margin-left: 25px;">
+								style="width: 86.5%; color: black; font-size: 1.2em; margin-left: 25px;">
 								<tr>
 									<th style="width: 30px;"><input type="checkbox"
 										id="allcheck"></th>
-									<th style="width: 500px; font-size: 1.2em; text-align: center;">상품정보</th>
+									<th style="width: 600px; font-size: 1.2em; text-align: center;">상품정보</th>
 									<th style="width: 150px; font-size: 1.2em; text-align: center;">상품옵션</th>
-									<th style="width: 200px; font-size: 1.2em; text-align: center;">상품금액</th>
-									<th style="width: 200px; font-size: 1.2em; text-align: center;">총금액</th>
+									<th style="width: 150px; font-size: 1.2em; text-align: center;">상품금액</th>
+									<th style="width: 150px; font-size: 1.2em; text-align: center;">총금액</th>
 								</tr>
 
 								<%
@@ -420,16 +421,16 @@ NumberFormat nf = NumberFormat.getInstance();
 								<tr>
 									<td style="line-height: 100px;"><input type="checkbox"
 										name="cId" class="cId moneycheck" cId="<%=map.get("cId")%>"
-										price="<%=map.get("price")%>" cQTY="<%=map.get("cQTY")%>" pId="<%=map.get("pId")%>"pStock=<%=map.get("pStock") %>></td>
+										price="<%=map.get("price")%>" cQTY="<%=map.get("cQTY")%>" uId="<%=uid%>"pId="<%=map.get("pId")%>"pStock=<%=map.get("pStock") %>></td>
 
 									<td style="line-height: 100px;">
 										<div pId="<%=map.get("pId")%>" class="pName" >
-											<img src="<%=photo%>" class="photo" align="left" hspace="20" pId="<%=map.get("pId")%>">
+											<img src="<%=photo%>" class="photo" align="left"  style="width:90px;" hspace="20" pId="<%=map.get("pId")%>">
 
 											<h4 style="line-height: 80px;">
 												<b> <%=map.get("pName")%> &nbsp;&nbsp;&nbsp;&nbsp;
 												</b>
-												<sapn style="font-size:0.8em">재고:<%=Integer.parseInt(map.get("pStock"))%>
+												<sapn style="font-size:0.8em">
 												</sapn>
 											</h4>
 											<td><span style="line-height: 35px"
@@ -471,17 +472,9 @@ NumberFormat nf = NumberFormat.getInstance();
 
 
 							</table>
-							<%
-							} else {
-							%>
-
-							<img src="../assets/img/빈장바구니.png" id="noCart">
-
-							<%
-							}
-							%>
+							
 							<table class="table table-bordered"
-								style="width: 1000px; color: black; margin-left: 25px;">
+								style="width: 86.5%; color: black; margin-left: 25px;margin-bottom:300px;">
 								<tr>
 								</tr>
 								<tr>
@@ -495,10 +488,19 @@ NumberFormat nf = NumberFormat.getInstance();
 									</td>
 								</tr>
 							</table>
+							<%
+							} else {
+							%>
+
+							<img src="../assets/img/빈장바구니.png" id="noCart">
+
+							<%
+							}
+							%>
 						</div>
 						<!-- the end -->
 				</div>
-				<div class="col-sm-2" style="border: 1px solid blue;">right</div>
+				<div class="col-sm-2" style="border: 0px solid blue;"></div>
 			</div>
 		</div>
 	</div>

@@ -19,20 +19,29 @@
 <link href="../assets/css/styles_detail.css" rel="stylesheet" />
 </head>
 
+<<<<<<< HEAD
+<script  type="text/javascript">
+
+=======
 <script>
+>>>>>>> WooTest
 	$(function(){
 		
-		$("#cartInsert").click(function(){
+		$("#cartinsert").click(function(){
+			
 			var uId = $(this).attr("uId");
 			var pId = $(this).attr("pId");
-			var=cQTY=$("#inputQuantity").val();
+			var cQTY=$("#inputQuantity").val();
+			
 			
 			insertCart(uId,pId,cQTY);
-			
-			
 		});
 		
+		
+		
+		
 		function insertCart(uId,pId,cQTY){
+			
 			$.ajax({
 
 				type : "get",
@@ -46,6 +55,8 @@
 				success : function() {
 					location.href="product_cartlist.jsp";
 				}
+				
+			});	
 		}
 		
 	});
@@ -53,15 +64,14 @@
 
 <%
 String pId = request.getParameter("pId");
-String uId = request.getParameter("uId");
+String uid=(String)session.getAttribute("uid");
 
 ProductDao dao = new ProductDao();
 ProductDto dto = dao.getProduct(pId);
-UserDao udao=new UserDao();
-UserDto udto=udao.getData(uId);
+UserDao udao = new UserDao();
+UserDto udto = udao.getData(uid);
 
-
-NumberFormat nf=NumberFormat.getCurrencyInstance();
+NumberFormat nf = NumberFormat.getCurrencyInstance();
 %>
 <body>
 	<section class="py-5">
@@ -84,10 +94,9 @@ NumberFormat nf=NumberFormat.getCurrencyInstance();
 					<p class="lead"><%=dto.getpDetail()%></p>
 					<div class="d-flex">
 						<input class="form-control text-center me-4" id="inputQuantity"
-							type="number" value="1" style="max-width: 4rem"  />
-						<button class="btn btn-dark flex-shrink-0" type="button" id="cartInsert">
-
-							장바구니 담기 <i class="bi-cart-fill me-1"></i>
+							type="number" value="1" style="max-width: 4rem" />
+						<button class="btn btn-dark flex-shrink-0" type="button"
+							id="cartinsert"pId="<%=dto.getpId()%>" uId="<%=udto.getUid()%>">장바구니 담기 <i class="bi-cart-fill me-1"></i>
 						</button>
 					</div>
 				</div>
@@ -103,7 +112,7 @@ NumberFormat nf=NumberFormat.getCurrencyInstance();
 
 				<%
 				ProductDao dao_related = new ProductDao();
-				List<ProductDto> list_related = dao_related.selectRelatedProduct(dto.getTeamName(),dto.getpId());
+				List<ProductDto> list_related = dao_related.selectRelatedProduct(dto.getTeamName(), dto.getpId());
 
 				List<ProductDto> subListbase_related = new ArrayList<>();
 				for (int i = 0; i < list_related.size(); i++) {
@@ -117,7 +126,8 @@ NumberFormat nf=NumberFormat.getCurrencyInstance();
 				List<ProductDto> subList_related = new ArrayList<ProductDto>(subListbase_related.subList(0, last_related));
 				for (int j = 0; j < subList_related.size(); j++) {
 					ProductDto dto_related = subList_related.get(j);
-				%>
+				
+					%>
 				<div class="col mb-5">
 					<div class="card h-100">
 						<!-- Product image-->
@@ -137,7 +147,8 @@ NumberFormat nf=NumberFormat.getCurrencyInstance();
 						<div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
 							<div class="text-center">
 								<a class="btn btn-outline-dark mt-auto"
-									href="product_detailPage.jsp?pId=<%=dto_related.getpId()%>">상품 보기</a>
+									href="product_detailPage.jsp?pId=<%=dto_related.getpId()%>">상품
+									보기</a>
 							</div>
 						</div>
 					</div>

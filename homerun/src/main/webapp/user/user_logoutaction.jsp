@@ -38,7 +38,6 @@
 <%
 		//loginok 세션 제거
 		session.removeAttribute("loginok");
-
 		//loginmain이동
 		response.sendRedirect("../index.jsp");
 %>

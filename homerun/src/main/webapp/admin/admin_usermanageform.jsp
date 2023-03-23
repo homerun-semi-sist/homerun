@@ -45,6 +45,8 @@ table td, th {
 	position: relative;
 	left: 250px;
 }
+
+
 	</style>
 	<script type="text/javascript">
 		function delfunc(uid){
@@ -110,7 +112,7 @@ table td, th {
 		int startPage; //각블럭의 시작페이지
 		int endPage;  //각 블럭의 마지막페이지
 		int start;  //각페이지 시작번호
-		int perPage = 7;  //현제페이지 보여질 글의 갯수
+		int perPage = 12;  //현제페이지 보여질 글의 갯수
 		int perBlock = 3;  //한블럭당 보여지는 페이지개수
 		int currentPage;  //현재페이지
 		
@@ -160,8 +162,8 @@ table td, th {
 		<div id="wrap">
 			<div id="content-wrap">
 				<div class="row">
-					<div class="col-sm-2" style="border: 1px solid red;">left</div>
-					<div class="col-sm-8" style="border: 1px solid pink;">
+					<div class="col-sm-2" style="border: 0px solid red;"></div>
+					<div class="col-sm-8" style="border: 0px solid pink;">
 						<!-- write here -->
 
     <div class="ui sub-container">
@@ -257,7 +259,7 @@ table td, th {
     				
 						<!-- the end -->
 					</div>
-					<div class="col-sm-2" style="border: 1px solid blue;">right</div>
+					<div class="col-sm-2" style="border: 0px solid blue;"></div>
 				</div>
 			</div>
 		</div>

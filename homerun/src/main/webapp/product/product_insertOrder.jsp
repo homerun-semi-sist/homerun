@@ -11,12 +11,15 @@
 
 request.setCharacterEncoding("utf-8");
 
-	CartDto dto = new CartDto();
-	String cId = request.getParameter("cId");
+	OrderDto dto = new OrderDto();
+	
+	String uId = request.getParameter("uId");
+	String pId = request.getParameter("pId");
 	int cQTY=Integer.parseInt(request.getParameter("cQTY"));
 	
-	dto.setcId(cId);
-	dto.setcQTY(cQTY);
+	dto.setuId(uId);
+	dto.setpId(pId);
+	dto.setoQTY(cQTY);
 	CartDao dao = new CartDao();
 	dao.insertOrder(dto);
 	

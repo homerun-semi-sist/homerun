@@ -87,24 +87,24 @@ ProductDto dto = dao.getProduct(pId);
 			</span>
 		</div>
 
-		<div class="textForm">
+		<div class="textForm" style="background-color: rgba(55, 95, 142, 0.1);">
 			<span class="inputForm sameWidth"><b style="color: #0b214e">재고수</b>&nbsp;&nbsp;</span>
 			<input name="pStock" type="number" min="1" value="100"
-				style="width: 50px;">
+				style="width: 50px; color: #B11B38;">
 		</div>
 
-		<div class="textForm">
+		<div class="textForm" style="background-color: rgba(55, 95, 142, 0.1);">
 			<span class="inputForm">&#8361;&nbsp;&nbsp;</span> <input
 				name="price" type="text" class="inputForm"
-				style="width: 100px; color: #0b214e; font-weight: 600;"
+				style="width: 100px; color: #B11B38; font-weight: 600;"
 				placeholder="가격 입력" required="required" value="<%=dto.getPrice()%>"
 				oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');">
 		</div>
 
-		<div class="textForm">
+		<div class="textForm" style="background-color: rgba(55, 95, 142, 0.1);">
 			<span class="inputForm"><b style="color: #0b214e">상품설명</b><br></span>
-			<textarea name="pDetail" style="width: 100%; height: 100px;"
-				required="required"><%=dto.getpDetail()%></textarea>
+			<textarea name="pDetail" style="width: 100%; height: 100px; color: #B11B38;"
+				required="required" ><%=dto.getpDetail()%></textarea>
 		</div>
 
 		<div class="textForm">

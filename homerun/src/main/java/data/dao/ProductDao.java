@@ -337,7 +337,7 @@ public class ProductDao {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 
-		String sql = "SELECT o.oQTY, p.* FROM CART c INNER JOIN ORDERS o ON c.cId = o.cId INNER JOIN PRODUCT p ON c.pId = p.pId ORDER BY o.oQTY DESC";
+		String sql = "select sum(oQTY) best, p.* from ORDERS o join PRODUCT p where o.pId=p.pId group by o.pId order by sum(oQTY) desc";
 
 		try {
 			pstmt = conn.prepareStatement(sql);

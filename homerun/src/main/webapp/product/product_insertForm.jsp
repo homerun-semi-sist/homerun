@@ -122,7 +122,7 @@
 		<div style="margin-top: 50px">
 			<button type="submit" class="pinsertbtn pinsertbtn1">재고입력</button>
 			<button type="button" class="pinsertbtn"
-				onclick="location.href='../product/product_listPage.jsp'">취소</button>
+				onclick="location.href='../managementpage/management_stockListPage.jsp'">취소</button>
 		</div>
 	</form>
 
