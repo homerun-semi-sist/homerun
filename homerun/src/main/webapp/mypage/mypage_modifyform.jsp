@@ -34,15 +34,18 @@ $("#btnnck").click(function(){
 						alert("이미 가입된 닉네임 입니다");
 						$("#nickname").val("");
 						$("#nickname").focus();
+						$("#check").val("");
 
 					}else if(nickname="" || nickname.length==0){
 						
 						alert("닉네임을 입력 해 주세요");
 						$("#nickname").focus();
+						$("#check").val("");
 						
 					}else{
 						
 						alert("사용 가능한 닉네임 입니다");
+						$("#check").val("checked");
 					}
 				}
 			});
@@ -50,26 +53,10 @@ $("#btnnck").click(function(){
 		
 	});
 	
+	
 	function passcheck(f)
 	{
-		var nickname=$("#nickname").val();
-		
-		$.ajax({
-			
-			type:"post",
-			url:"../regist/regist_search.jsp",
-			dataType:"json",
-			data:{"nickname":nickname},
-			success:function(res){
-				
-				if(res.Ncount==1){
-					
-					alert("닉네임 중복체크를 해 주세요");
-					$("#nickname").focus();
-					
-				}else{
-					
-					if(f.pw1.value!=f.pw2.value){
+					 if(f.pw1.value!=f.pw2.value){
 						
 						alert("비밀번호가 일치하지 않습니다");
 						
@@ -78,53 +65,52 @@ $("#btnnck").click(function(){
 						
 						return false;
 						
-					}else if(f.uid.value==""){
-						
-						alert("아이디를 입력 해 주세요");
-						
 					}else if(f.pw1.value==""){
 						
 						alert("비밀번호를 입력 해 주세요");
+						return false;
 						
 					}else if(f.pw2.value==""){
 						
 						alert("비밀번호 확인을 입력 해 주세요");
+						return false;
 						
 					}else if(f.uName.value==""){
 						
 						alert("이름을 입력 해 주세요");
+						return false;
 						
 					}else if(f.nickname.value==""){
 						
 						alert("닉네임을 입력 해 주세요");
+						return false;
 						
+					}else if(document.getElementById("check").value==''){
+						alert("닉네임 중복체크를 해 주세요");
+						return false;
+									
 					}else if(f.hp2.value==""){
 						
 						alert("전화번호를 입력 해 주세요");
+						return false;
 						
 					}else if(f.hp3.value==""){
 						
 						alert("전화번호 뒷자리를 입력 해 주세요");
+						return false;
 						
 					}else if(f.addr1.value==""){
 						
 						alert("주소를 입력 해 주세요");
+						return false;
 						
 					}else if(f.addr2.value==""){
 						
 						alert("주소를 입력 해 주세요");
-						
-					}else if(f.addr3.value==""){
-						
-						alert("주소를 입력 해 주세요");
+						return false;
 						
 					}
-					
-				}
-			}
-		});
-		
-	}
+	} 
 	
 function noSpacialForm(obj) { // 공백사용못하게
 		
@@ -199,8 +185,8 @@ function noSpacialForm(obj) { // 공백사용못하게
                 }
 
                 // 우편번호와 주소 정보를 해당 필드에 넣는다.
-                document.getElementById('sample6_postcode').value = data.zonecode;
-                document.getElementById("sample6_address").value = addr;
+                document.getElementById('addr1').value = data.zonecode;
+                document.getElementById("addr2").value = addr;
                 // 커서를 상세주소 필드로 이동한다.
             }
         }).open();
@@ -218,23 +204,25 @@ function noSpacialForm(obj) { // 공백사용못하게
 }
 
 .joinForm {
-  position:absolute;
-  width:600px;
-  height:880px;
+  /* position:absolute; */
+  /* width:800px; */
+  margin:100px 50px;
+  height:920px;
   padding: 30px, 20px;
   background-color:#FFFFFF;
   top:40%;
-  left:50%;
-  transform: translate(-50%,-50%);
+  /* left:50%;  */
+ /*  transform: translate(-50%,-50%); */
   border-radius: 15px;
   border: 1px solid gray;
-  margin-top: 100px;
+ /*  margin-top: 100px; */
 }
 
 .joinForm h2 {
   text-align: center;
   margin: 30px;
   font-weight: bold;
+  font-size: 30pt;
 }
 
 .textForm {
@@ -319,13 +307,15 @@ function noSpacialForm(obj) { // 공백사용못하게
   transform: translateX(-38%);
   margin-bottom: 20px;
   margin-right: 10px;
-  width:100px;
-  height:30px;
+  width:150px;
+  height:50px;
   color:white;
   font-weight: bold;
   border:none;
   cursor:pointer;
   background-color: #0b214e;
+  font-size: 15pt;
+  border-radius: 3px;
   
 }
 
@@ -334,40 +324,29 @@ function noSpacialForm(obj) { // 공백사용못하게
   left:40%;
   transform: translateX(-38%);
   margin-bottom: 20px;
-  width:100px;
-  height:30px;
+  width:150px;
+  height:50px;
   color:white;
   font-weight: bold;
   border:none;
   cursor:pointer;
   background-color: #0b214e;
+  font-size: 15pt;
+  border-radius: 3px;
   
 }
 
-.btn:hover {
-  background-position: right;
-  color:white;
-}
-
-.btnck{
-	position: absolute;
-	right: 50px;
-	width: 70px;
-	height: 30px;
-	float: right;
-	border:none;
-	border:1px solid gray;
-	
-}
-
 .btnnck{
-	position: absolute;
-	right: 50px;
-	width: 70px;
-	height: 30px;
+	/* position: absolute; */
+	/* right: 120px; */
+	position: relative;
+	bottom: 40px;
+	width: 100px;
+	height: 40px;
 	float: right;
-	border:none;
+	/* border:none; */
 	border:1px solid gray;
+	border-radius: 3px;
 	
 }
 
@@ -391,8 +370,8 @@ function noSpacialForm(obj) { // 공백사용못하게
 		<div id="wrap">
 			<div id="content-wrap">
 				<div class="row">
-					<div class="col-sm-2" style="border: 1px solid red;">left</div>
-					<div class="col-sm-8" style="border: 1px solid pink;">
+					<div class="col-sm-2" style="border: 0px solid red;"></div>
+					<div class="col-sm-8" style="border: 0px solid pink;">
 						
 						<!-- write here -->
 <%
@@ -406,8 +385,8 @@ function noSpacialForm(obj) { // 공백사용못하게
 	String [] hp=dto.getHp().split("-");
 	String [] addr=dto.getAddr().split(" ");
 %>
-						<form action="../mypage/mypage_modifyaction.jsp" method="post" class="joinForm" 
-		onsubmit="return passcheck(this)" name="f">
+						<form action="mypage_modifyaction.jsp" method="post" class="joinForm" 
+		onsubmit="return passcheck(f)" name="f">
                                                                                                
       <h2>회원정보 수정</h2>
       
@@ -418,23 +397,24 @@ function noSpacialForm(obj) { // 공백사용못하게
       </div>
       
       <div class="textForm">
-        <input name="pw1" type="password" class="pw" placeholder="비밀번호 변경 (특수문자 포함 10자 이상)" required="required" 
+        <input name="pw1" id="pw1" type="password" class="pw" placeholder="비밀번호 변경 (특수문자 포함 10자 이상)" required="required" 
         onkeyup="noSpaceForm(this);" onchange="noSpaceForm(this);">
       </div>
       
        <div class="textForm">
-        <input name="pw2" type="password" class="pw" placeholder="비밀번호 변경 확인" required="required" 
+        <input name="pw2" id="pw2" type="password" class="pw" placeholder="비밀번호 변경 확인" required="required" 
         onkeyup="noSpaceForm(this);" onchange="noSpaceForm(this);">
       </div>
       
       <div class="textForm">
-        <input name="uName" type="text" class="uName" placeholder="이름" required="required" value="<%=dto.getuName()%>">
+        <input name="uName" id="uName" type="text" class="uName" placeholder="이름" required="required" value="<%=dto.getuName()%>">
       </div>
       
       <div class="textForm">
         <input name="nickname" type="text" class="nickname" id="nickname" placeholder="닉네임 (특수문자,공백 제외 8자 이하)" required="required" value="<%=dto.getNickname()%>"
         onkeyup="noSpacialForm(this);" onchange="noSpacialForm(this);" maxlength="8">
-        <button type="button" class="btnnck" id="btnnck">중복체크</button>      
+        <button type="button" class="btnnck" id="btnnck">중복체크</button>
+        <input type="hidden" id="check" value="" required="required">      
       </div>
       
       <div class="textForm" style="font-size: 16px; opacity: 0.7;">성별 &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
@@ -504,7 +484,7 @@ function noSpacialForm(obj) { // 공백사용못하게
       
       <div class="textForm">전화번호&emsp;&emsp;&emsp;&emsp;&emsp;
       
-      	<select name="hp1" class="hp" style="width: 50px; ">
+      	<select name="hp1" id="hp1" class="hp" style="width: 50px; ">
       	
       		<option value="010">010</option>
       		<option value="011">011</option>
@@ -514,9 +494,9 @@ function noSpacialForm(obj) { // 공백사용못하게
       		
       	</select>
       	
-      	- <input type="text" name="hp2" class="hp" style="width : 70px;" size="4" maxlength="4" 
+      	- <input type="text" id="hp2" name="hp2" class="hp" style="width : 70px;" size="4" maxlength="4" 
       		oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" required="required"  value="<%=hp[1]%>">
-      	- <input type="text" name="hp3" class="hp" style="width : 70px;" size="4" maxlength="4" 
+      	- <input type="text" id="hp3" name="hp3" class="hp" style="width : 70px;" size="4" maxlength="4" 
       		oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" required="required" value="<%=hp[2]%>">
       	
       </div>
@@ -530,15 +510,14 @@ function noSpacialForm(obj) { // 공백사용못하게
        </div> --%>
     
     	<div class="textForm" >주소
-	       <input type="text" name="addr1" class="addr" id="sample6_postcode" placeholder="우편번호" required="required" style="margin-left: 98px;"
+	       <input type="text" name="addr1" class="addr" id="addr1" placeholder="우편번호" required="required" style="margin-left: 98px;"
 	       		value="<%=addr[0]%>">&nbsp;
 	       		
 		   <input type="button" class="addr" onclick="sample6_execDaumPostcode()" value="우편번호 찾기"><br>
-		   <input type="text" name="addr2" class="addr" id="sample6_address" placeholder="주소" required="required" style="margin-left: 130px;"
+		   <input type="text" name="addr2"  class="addr" id="addr2" placeholder="주소" required="required" style="margin-left: 130px;"
 		   		value="<%=addr[1]%> <%=addr[2]%> <%=addr[3]%> <%=addr[4]%>">&nbsp;
 		   
-		   <input type="text" name="addr3" class="addr" id="sample6_extraAddress" placeholder="참고항목" required="required"
-		   		value="<%=addr[5]%>">
+		   <input type="text" name="addr3" class="addr" id="sample6_extraAddress" placeholder="참고항목">
 		</div>
     
        <button type="submit" class="btn1" onclick="passcheck(f)">수정하기</button>
@@ -549,7 +528,7 @@ function noSpacialForm(obj) { // 공백사용못하게
 						
 						<!-- the end -->
 					</div>
-					<div class="col-sm-2" style="border: 1px solid blue;">right</div>
+					<div class="col-sm-2" style="border: 0px solid blue;"></div>
 				</div>
 			</div>
 		</div>

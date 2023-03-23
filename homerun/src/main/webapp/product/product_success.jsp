@@ -98,7 +98,7 @@ margin-top:50px;
 	<div id="wrap">
 		<div id="content-wrap">
 			<div class="row">
-				<div class="col-sm-2" style="border: 1px solid red;">left</div>
+				<div class="col-sm-2" style="border: 0px solid red;"></div>
 				<div class="col-sm-8"  id="successdiv">
 					<!-- write here -->
 					<%
@@ -136,14 +136,8 @@ margin-top:50px;
 					<div id="thanksmsg">구매해 주셔서 감사합니다.</div>
 					<br> <br>
 					<div style="text-align: center; margin-left: 350px; ">
-						<table class="table table-bordered" style="width: 60%; position:relative">
-							<!--   나중 시간 있을 때 할 것
-							<tr>
-								<th width="60px" style="text-align: center;">상품명</th>
-								<td width="300px">?상품명? 등 총 ?개 상품</td>
-
-							</tr>
-							 -->
+						<table class="table table-bordered" style="width: 60%; position:relative;margin-bottom:300px;">
+							
 							<tr>
 								<th width="60px" style="text-align: center;">주문번호</th>
 								<td width="300px"><%=orderNumber %></td>
@@ -165,7 +159,7 @@ margin-top:50px;
 					</div>
 					<!-- the end -->
 				</div>
-				<div class="col-sm-2" style="border: 1px solid blue;">right</div>
+				<div class="col-sm-2" style="border: 0px solid blue;"></div>
 			</div>
 		</div>
 	</div>

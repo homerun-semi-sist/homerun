@@ -1,3 +1,6 @@
+<%@page import="data.dto.OrderDto"%>
+<%@page import="data.dto.CartDto"%>
+<%@page import="data.dao.CartDao"%>
 <%@page import="data.dto.UserDto"%>
 <%@page import="data.dao.UserDao"%>
 <%@ page import="data.dao.ProductDao"%>
@@ -159,9 +162,13 @@ div{
 <%
 
 	String uid=(String)session.getAttribute("uid");
+	String oId=(String)session.getAttribute("oId");
 	UserDao dao=new UserDao();
 	String uName=dao.getuName(uid);	
 	UserDto dto=dao.getData(uid);
+	CartDao cdao = new CartDao();
+	int OrderSize = cdao.getOrderList(uid).size();
+	
 %>
 <script type="text/javascript">
 	function delfunc(uid){
@@ -195,6 +202,14 @@ div{
 					
 				}
 			}
+	
+	/* 주문내역 버튼  */
+	
+	$(function(){
+		$("#orderlist").click(function(){
+			location.href='../product/product_orderlist.jsp';
+		});
+	});
 </script>
 	<body style="overflow-x: hidden;">
 		<%
@@ -215,8 +230,8 @@ div{
 		<div id="wrap">
 			<div id="content-wrap">
 				<div class="row">
-					<div class="col-sm-2" style="border: 1px solid red;">left</div>
-					<div class="col-sm-8" style="border: 1px solid pink;">
+					<div class="col-sm-2" style="border: 0px solid red;"></div>
+					<div class="col-sm-8" style="border: 0px solid pink;">
 						<!-- write here -->
 
 <div class="wrap">
@@ -258,7 +273,6 @@ div{
       
     </div>
   </div>
-						
 		<button type="button" class="btn2"
 			onclick="location.href='../user/user_logoutaction.jsp'">로그아웃</button>
 		
@@ -311,9 +325,9 @@ div{
       
       <div class="item">
         <div>
-          <img class="image" src="../assets/img/주문내역.png">
-          <div class="text">주문내역</div>
-          <div class="green number">6건</div>
+          <img class="image" id ="orderlist"  src="../assets/img/주문내역.png">
+          <div class="text" >주문내역</div>
+          <div class="green number"><%=OrderSize %>건</div>
         </div>
       </div>  
          
@@ -350,7 +364,7 @@ div{
 						
 						<!-- the end -->
 					</div>
-					<div class="col-sm-2" style="border: 1px solid blue;">right</div>
+					<div class="col-sm-2" style="border: 0px solid blue;"></div>
 				</div>
 			</div>
 		</div>
