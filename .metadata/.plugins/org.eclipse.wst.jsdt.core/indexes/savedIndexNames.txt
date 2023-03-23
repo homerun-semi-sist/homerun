@@ -1,21 +1,8 @@
-<<<<<<< HEAD
 INDEX VERSION 1.4+C:\semi-SIST\homerun\.metadata\.plugins\org.eclipse.wst.jsdt.core\indexes
 3829223410.index
-2438703546.index
-181764218.index
-2570124981.index
-2497454653.index
-4283427230.index
+1772664146.index
 2032178871.index
-766439472.index
-766439472.index
-=======
-INDEX VERSION 1.4+C:\Users\seulg\OneDrive\¹®¼­\GitHub\homerun\.metadata\.plugins\org.eclipse.wst.jsdt.core\indexes
-3395049.index
-114129082.index
-1524949625.index
-787821581.index
-1391875273.index
-3829223410.index
-4106992957.index
->>>>>>> WooTest
+4283427230.index
+2497454653.index
+2570124981.index
+2438703546.index
