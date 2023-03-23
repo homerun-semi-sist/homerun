@@ -584,7 +584,7 @@
 				var num = $(this).attr("num");
 				var tag = $(this);
 				
-				 alert(num);
+				// alert(num);
 			 	
 				$.ajax({
 					
@@ -594,7 +594,7 @@
 					data : {"num" : num},
 					success : function(res) {
 					
-						 alert(res.like);
+						// alert(res.like);
 						
 						tag.addClass("fa-solid").animate({"color" : "blue"}, 1000, function() {
 							tag.removeClass("fa-solid");
@@ -622,7 +622,7 @@
 				var num = $(this).attr("num");
 				var tag = $(this);	
 				
-				 alert(num);
+				 // alert(num);
 				
 				$.ajax({
 					
@@ -632,7 +632,7 @@
 					data : {"num" : num},
 					success : function(res) {
 					
-					 alert(res.dislike);
+					 // alert(res.dislike);
 				
 						tag.addClass("fa-solid").animate({"color" : "red"}, 1000, function() {
 							tag.removeClass("fa-solid");
@@ -657,7 +657,7 @@
 				
 				var num = $("#rbNum").val();
 				
-				 alert(num);
+				// alert(num);
 				var a = confirm("신고하려면 [확인]을 눌러주세요\n한번 신고한 글은 취소가 불가능합니다");
 				
 				if(a) {
@@ -669,7 +669,7 @@
 						data : {"num" : num},
 						success : function(res) {
 							
-							 alert(res.report);
+							// alert(res.report);
 	
 							if(res.flag == true)
 									alert("게시글을 신고하였습니다");

@@ -24,12 +24,12 @@
     <meta name="description" content="" />
 
     <!-- Core CSS -->
-    <link rel="stylesheet" href="../assets/board/vendor/css/core_copy2.css" class="template-customizer-core-css" />
-    <link rel="stylesheet" href="../assets/board/vendor/css/theme-defaul_copy2.css" class="template-customizer-theme-css" />
+    <link rel="stylesheet" href="../assets/board/vendor/css/core.css" class="template-customizer-core-css" />
+    <link rel="stylesheet" href="../assets/board/vendor/css/theme-default.css" class="template-customizer-theme-css" />
     <link rel="stylesheet" href="../assets/board/css/demo.css" />
 
 	<!-- Vendors CSS -->
-	<link rel="stylesheet"
+<link rel="stylesheet"
 	href="../assets/board/vendor/libs/perfect-scrollbar/perfect-scrollbar.css" />
     <!-- Page CSS -->
 
@@ -95,21 +95,16 @@
 		 	color: #0b214e;
 		  	background-color: #f8f9fa;
 		}
-		
-		#naavs-top-all, #naavs-top-doosan, #naavs-top-kiwoom, #naavs-top-samsung, #naavs-top-lg, 
-		#naavs-top-kt, #naavs-top-ssg, #naavs-top-nc, #naavs-top-lotte, #naavs-top-kia, #naavs-top-hanhwa {
-			opacity: 1;
-		}
     </style>
     
     <script type="text/javascript">
     	$(function() {
-    		// alert("SDF");
+
     		/* var val = $("#search :selected").val();
     		alert(val); */
-    		// fList();
+    		fList();
     		
-    		/* $("#searchBtn").click(function(){
+    		$("#searchBtn").click(function(){
     			var val = $("#search :selected").val();
         		var currentPage = $("#currentPage").val();
         		var str = $("#search_str").val();
@@ -214,14 +209,14 @@
 	    			}
 	    		});
     		    
-    		}); */
-    			
-    	});
-    	
+    		});
+    		
+		})
+		
 		function fList() {
-    		// var val = $("#search :selected").val();
+    		var val = $("#search :selected").val();
     		var currentPage = $("#currentPage").val();
-    		alert(currentPage);
+    		//alert(val + ", "+ currentPage);
 			
     		$.ajax({
     			
@@ -230,7 +225,7 @@
     			dataType : "json",
     			data : {"currentPage" : currentPage}, 
     			success:function(res) {
-				alert("DSF";
+
     				var s="";
     				
     				s+="<div class='table-responsive text-nowrap'>";
@@ -317,7 +312,8 @@
     				s+="</div>";
     				
     				$("div.fList").html(s);
-       		});
+    			}
+    		});
     		
 		}
     </script>
@@ -378,183 +374,23 @@
 	<input type="hidden" id="currentPage" value="<%=currentPage %>">
 	
     <!-- Layout wrapper -->
-    <div class="layout-wrapper layout-content-naavvvbar">
+    <div class="layout-wrapper layout-content-navbar">
         <div class="layout-container">
 
             <!-- Content wrapper -->
             <div class="content-wrapper">
                 <!-- Content -->
 
-                <div class="container-xxl flex-grow-1 container-p-y">
-                <h3 style="margin-bottom: 30px;">자유게시판</h3>
-	            
-                <!-- Bootstrap Table with Header - Light -->
-                    <div class="card" style="background-color: #fff">
-			
-					<div class="naav-align-top mb-4">
-					<ul class="naav naav-tabs naav-fill" role="tablist" style="width: 100%">
-                      <li class="naav-item">
-                        <button
-                          type="button"
-                          class="naav-link active"
-                          role="tab"
-                          data-bs-toggle="tab"
-                          data-bs-target="#naavs-top-all"
-                          aria-controls="naavs-top-all"
-                          aria-selected="true"   
-                          category="All"
-                        >
-                          전체
-                        </button>
-                      </li>
-                      <li class="naav-item">
-                        <button
-                          type="button"
-                          class="naav-link"
-                          role="tab"
-                          data-bs-toggle="tab"
-                          data-bs-target="#naavs-top-kia"
-                          aria-controls="naavs-top-kia"
-                          aria-selected="false"
-                          category="KIA"
-                        >
-                          KIA
-                        </button>
-                      </li>
-                      <li class="naav-item">
-                        <button
-                          type="button"
-                          class="naav-link"
-                          role="tab"
-                          data-bs-toggle="tab"
-                          data-bs-target="#naavs-top-kt"
-                          aria-controls="naavs-top-kt"
-                          aria-selected="false"
-                          category="KT"
-                        >
-                         KT
-                        </button>
-                      </li>
-                      <li class="naav-item">
-                        <button
-                          type="button"
-                          class="naav-link"
-                          role="tab"
-                          data-bs-toggle="tab"
-                          data-bs-target="#naavs-top-lg"
-                          aria-controls="naavs-top-lg"
-                          aria-selected="false"
-                          category="LG"
-                        >
-                         LG
-                        </button>
-                      </li>
-                      <li class="naav-item">
-                        <button
-                          type="button"
-                          class="naav-link"
-                          role="tab"
-                          data-bs-toggle="tab"
-                          data-bs-target="#naavs-top-nc"
-                          aria-controls="naavs-top-nc"
-                          aria-selected="false"
-                          category="NC" 
-                        >
-                        NC
-                        </button>
-                      </li>
-                      <li class="naav-item">
-                        <button
-                          type="button"
-                          class="naav-link"
-                          role="tab"
-                          data-bs-toggle="tab"
-                          data-bs-target="#naavs-top-ssg"
-                          aria-controls="naavs-top-ssg"
-                          aria-selected="false"
-                          category="SSG"
-                        >
-                         SSG
-                        </button>
-                      </li>
-                      <li class="naav-item">
-                        <button
-                          type="button"
-                          class="naav-link"
-                          role="tab"
-                          data-bs-toggle="tab"
-                          data-bs-target="#naavs-top-doosan"
-                          aria-controls="naavs-top-doosan"
-                          aria-selected="false"
-                          category="두산"
-                        >
-                         두산
-                        </button>
-                      </li>
-                      <li class="naav-item">
-                        <button
-                          type="button"
-                          class="naav-link"
-                          role="tab"
-                          data-bs-toggle="tab"
-                          data-bs-target="#naavs-top-lotte"
-                          aria-controls="naavs-top-lotte"
-                          aria-selected="false"
-                          category="롯데" 
-                        >
-                         롯데
-                        </button>
-                      </li>
-                      <li class="naav-item">
-                        <button
-                          type="button"
-                          class="naav-link"
-                          role="tab"
-                          data-bs-toggle="tab"
-                          data-bs-target="#naavs-top-samsung"
-                          aria-controls="naavs-top-samsung"
-                          aria-selected="false"
-                          category="삼성"
-                        >
-                        삼성
-                        </button>
-                      </li>
-                      <li class="naav-item">
-                        <button
-                          type="button"
-                          class="naav-link"
-                          role="tab"
-                          data-bs-toggle="tab"
-                          data-bs-target="#naavs-top-kiwoom"
-                          aria-controls="naavs-top-kiwoom"
-                          aria-selected="false"
-                          category="키움"
-                        >
-                         키움
-                        </button>
-                      </li>
-                      <li class="naav-item">
-                        <button
-                          type="button"
-                          class="naav-link"
-                          role="tab"
-                          data-bs-toggle="tab"
-                          data-bs-target="#naavs-top-hanhwa"
-                          aria-controls="naavs-top-hanhwa"
-                          aria-selected="false"
-                          category="한화"
-                        >
-                         한화
-                        </button>
-                      </li>                      
-                    </ul>
-                    
-                    <!-- tab별 내용 -->
-                    <div class="tab-content">
-                      <div class="tab-pane fade show active" id="naavs-top-all" role="tabpanel">
-                        <div class="fList"></div>
-                        
-                        <%-- <div class="bBottom" style="margin-top: 30px;">
+                <div class="flex-grow-1 container-p-y">
+					<!-- Bootstrap Table with Header - Light -->
+					<div class="card" style="background-color: #fff">
+						<h3 class="card-header">
+							<a href='freeBoard_listPage.jsp' style="text-decoration: none;color: black;"><b>자&nbsp;유&nbsp;게&nbsp;시&nbsp;판</b></a>
+						</h3>
+						
+						<div class="fList"></div>
+						
+                        <div class="bBottom" style="margin-top: 30px;">
                             <div class="bsBox">
                                 <div class="bSelect">
 									<select id="search" class="form-control" style="width: 100px; height: 40px; text-align: center;">
@@ -612,43 +448,7 @@
 									}
 								%>
 							</ul>
-						</div> --%>
-                      </div>
-                      <div class="tab-pane fade" id="naavs-top-kia" role="tabpanel">
-                       KIA
-                      </div>
-                      <div class="tab-pane fade" id="naavs-top-kt" role="tabpanel">
-                      	kt                     
-                      </div>
-                      <div class="tab-pane fade" id="naavs-top-lg" role="tabpanel">
-                      	lg                   
-                      </div>
-                      <div class="tab-pane fade" id="naavs-top-nc" role="tabpanel">
-                      	nc                  
-                      </div>
-                      <div class="tab-pane fade" id="naavs-top-ssg" role="tabpanel">
-                      	ssg                     
-                      </div>
-                      <div class="tab-pane fade" id="naavs-top-doosan" role="tabpanel">
-                      	doosan                   
-                      </div>
-                      <div class="tab-pane fade" id="naavs-top-lotte" role="tabpanel">
-                      	lotte                    
-                      </div>
-                      <div class="tab-pane fade" id="naavs-top-samsung" role="tabpanel">
-                      	samsung                
-                      </div>
-                      <div class="tab-pane fade" id="naavs-top-kiwoom" role="tabpanel">
-                      	kiwoom                   
-                      </div>
-                      <div class="tab-pane fade" id="naavs-top-hanhwa" role="tabpanel">
-                      	hanhwa                   
-                      </div>
-                    </div>
-                    
-                    </div>
-
-                        
+						</div>
                        
                     </div>
                 </div>
