@@ -341,10 +341,14 @@
                 <!-- Content -->
 
                 <div class="container-xxl flex-grow-1 container-p-y">
-                <h3 style="margin-bottom: 30px;"><a href="reviewBoard_listPage.jsp?currentPage=<%=currentPage %>">후기게시판</a></h3>
+
                     <!-- Bootstrap Table with Header - Light -->
                     <div class="card" style="background-color: #fff">
-                                      
+                    
+						<h3 class="card-header">
+							<a href='reviewBoard_listPage.jsp' style="text-decoration: none;color: black;"><b>후&nbsp;기&nbsp;게&nbsp;시&nbsp;판</b></a>
+						</h3>
+						              
                         <div class="rList"></div>
                         
                         <div class="bBottom" style="margin-top: 30px;">
