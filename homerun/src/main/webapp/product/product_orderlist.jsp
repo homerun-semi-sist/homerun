@@ -31,8 +31,9 @@ div.pName, span.del {
 
 #noCart {
 	border: 4px solid rgba(0, 0, 0, 0.2);
-	width: 1000px;
-	margin-right: 100px;
+	width: 95.2%;
+	margin-left: 19px;
+	margin-bottom:200px;
 }
 
 .btn1 {
@@ -67,14 +68,14 @@ div.pName, span.del {
 
 #ordersize {
 width:95%;
-	height: 50px;
+	height: 60px;
 	background-color: #0b214e;
 	border: 1px solid black;
 	color: white;
 	font-weight: bold;
 	font-size: 2em;
-	line-height: 1.8;
-	margin-left: 25px;
+	line-height: 2.2;
+	margin-left: 40px;
 }
 
 #userorder {
@@ -85,9 +86,9 @@ width:95%;
 	color: white;
 	font-weight: bold;
 	font-size: 2em;
-	line-height: 1.8;
-	height: 50px;
-	margin-right: 25px;
+	line-height: 2.2;
+	height: 60px;
+	margin-left: 40px;
 }
 
 </style>
@@ -101,7 +102,7 @@ width:95%;
 
 					var chk = $(this).is(":checked");
 
-					$(".cId").prop("checked", chk);
+					$(".oId").prop("checked", chk);
 
 
 				});
@@ -200,8 +201,8 @@ NumberFormat nf = NumberFormat.getInstance();
 	<div id="wrap">
 		<div id="content-wrap">
 			<div class="row">
-				<div class="col-sm-2" style="border: 1px solid red;">left</div>
-				<div class="col-sm-8" style="border: 1px solid pink;">
+				<div class="col-sm-2" style="border: 0px solid red;"></div>
+				<div class="col-sm-8" style="border: 0px solid pink;">
 					<!-- write here -->
 					<body>
 
@@ -217,7 +218,7 @@ NumberFormat nf = NumberFormat.getInstance();
 							if (OrderSize > 0) {
 							%>
 							<table class="table table-bordered"
-								style="width: 95%; color: black; font-size: 1.2em; margin-right: 25px;">
+								style="width: 95%; color: black; font-size: 1.2em; margin-left: 40px; margin-bottom:300px;">
 								<tr>
 									<th style="width: 30px;"><input type="checkbox"
 										id="allcheck"></th>
@@ -298,7 +299,7 @@ NumberFormat nf = NumberFormat.getInstance();
 							} else {	
 							%>
 
-							<img src="../assets/img/빈장바구니.png" id="noCart">
+							<img src="../assets/img/빈주문리스트.png" id="noCart">
 
 							<%
 							}
@@ -310,7 +311,7 @@ NumberFormat nf = NumberFormat.getInstance();
 						</div>
 						<!-- the end -->
 				</div>
-				<div class="col-sm-2" style="border: 1px solid blue;">right</div>
+				<div class="col-sm-2" style="border: 0px solid blue;"></div>
 			</div>
 		</div>
 	</div>

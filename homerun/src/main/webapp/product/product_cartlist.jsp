@@ -31,8 +31,9 @@ div.pName, span.del {
 
 #noCart {
 	border: 4px solid rgba(0, 0, 0, 0.2);
-	width: 1000px;
+	width: 86.5%;
 	margin-right: 100px;
+	margin-bottom :300px;
 }
 
 .btn1 {
@@ -66,26 +67,26 @@ div.pName, span.del {
 }
 
 #cartsize {
-	height: 50px;
+width:86.5%;
+	height: 60px;
 	background-color: #0b214e;
 	border: 1px solid black;
 	color: white;
 	font-weight: bold;
 	font-size: 2em;
-	line-height: 1.8;
+	line-height: 2.2;
 	margin-left: 25px;
 }
 
 #usercart {
 	width: 86.5%;
-	height: 50px;
+	height: 60px;
 	background-color: #0b214e;
 	border: 1px solid black;
 	color: white;
 	font-weight: bold;
 	font-size: 2em;
-	line-height: 1.8;
-	height: 50px;
+	line-height: 2.2;
 	margin-left: 25px;
 }
 
@@ -381,17 +382,17 @@ NumberFormat nf = NumberFormat.getInstance();
 	<div id="wrap">
 		<div id="content-wrap">
 			<div class="row">
-				<div class="col-sm-2" style="border: 1px solid red;">left</div>
-				<div class="col-sm-8" style="border: 1px solid pink;">
+				<div class="col-sm-2" style="border: 0px solid red;"></div>
+				<div class="col-sm-8" style="border: 0px solid pink;">
 					<!-- write here -->
 					<body>
 
-						<div style="text-align: center; margin-left: 100px;">
+						<div style="text-align: center; margin-left: 100px; ">
 
 							<div id="usercart">
 								<span style="color: yellow;"><%=uid%></span>님의 장바구니
 							</div>
-							<h4 id="cartsize" style="width: 1000px;">
+							<h4 id="cartsize" >
 								총 <span style="color: yellow"><%=cartSize%></span>개의 상품이 담겨져
 								있습니다
 							</h4>
@@ -399,7 +400,7 @@ NumberFormat nf = NumberFormat.getInstance();
 							if (cartSize > 0) {
 							%>
 							<table class="table table-bordered"
-								style="width: 1000px; color: black; font-size: 1.2em; margin-left: 25px;">
+								style="width: 86.5%; color: black; font-size: 1.2em; margin-left: 25px;">
 								<tr>
 									<th style="width: 30px;"><input type="checkbox"
 										id="allcheck"></th>
@@ -471,17 +472,9 @@ NumberFormat nf = NumberFormat.getInstance();
 
 
 							</table>
-							<%
-							} else {
-							%>
-
-							<img src="../assets/img/빈장바구니.png" id="noCart">
-
-							<%
-							}
-							%>
+							
 							<table class="table table-bordered"
-								style="width: 1000px; color: black; margin-left: 25px;">
+								style="width: 86.5%; color: black; margin-left: 25px;margin-bottom:300px;">
 								<tr>
 								</tr>
 								<tr>
@@ -495,10 +488,19 @@ NumberFormat nf = NumberFormat.getInstance();
 									</td>
 								</tr>
 							</table>
+							<%
+							} else {
+							%>
+
+							<img src="../assets/img/빈장바구니.png" id="noCart">
+
+							<%
+							}
+							%>
 						</div>
 						<!-- the end -->
 				</div>
-				<div class="col-sm-2" style="border: 1px solid blue;">right</div>
+				<div class="col-sm-2" style="border: 0px solid blue;"></div>
 			</div>
 		</div>
 	</div>
