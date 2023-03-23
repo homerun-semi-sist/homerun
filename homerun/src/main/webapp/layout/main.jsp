@@ -88,6 +88,7 @@
    	 	left: 18px;
     	top: 5px;
     }
+<<<<<<< HEAD
     .lefttop{
     width:400px;
     height:400px;
@@ -100,6 +101,8 @@
     }
     
     
+=======
+>>>>>>> WooTest
     </style>
 </head>
 
@@ -108,9 +111,15 @@
 	String uid=(String)session.getAttribute("uid");
 %>
 <div class="row" style="height: 1200px;">
+<<<<<<< HEAD
     <div class="col-sm-2" style="border: 1px solid red;"></div>
     <div class="col-sm-8" style="border: 1px solid pink;">
         <%-- <div class="mapWeather">
+=======
+    <div class="col-sm-2" style="border: 0px solid red;"></div>
+    <div class="col-sm-8" style="border: 0px solid pink;">
+        <div class="mapWeather">
+>>>>>>> WooTest
             <jsp:include page="mapWeather.jsp"></jsp:include>
         </div> --%>
         <% // loginok 가져오기
@@ -118,6 +127,7 @@
             if (loginok == null) 
          { //로그아웃
         %>
+<<<<<<< HEAD
         <div>
         <div class="lefttop">왼쪽위</div>
         <div class="leftbottom">왼쪽아래</div>
@@ -127,15 +137,29 @@
    		<br>
    		<a class="regist" href="../homerun/regist/regist_registform.jsp">회원가입</a>
    		
+=======
+        <div class="login-box">
+        <b class="text">로그인 후 이용해 주세요</b>
+        <button type="button" class="login" onclick="location.href='../homerun/user/user_loginform.jsp'">로그인</button>
+   		<br>
+   		<a class="regist" href="../homerun/regist/regist_registform.jsp">회원가입</a>
+>>>>>>> WooTest
         </div>
         <% }
             
             else { %>
             <div class="logout-box">
+<<<<<<< HEAD
             <b class="text2">환영합니다
             <br>
             <img class="photo" src="../homerun/assets/img/로그인프로필.png">
             <b class="uid"><%=uid %>
+=======
+            <b class="text2">환영합니다</b>
+            <br>
+            <img class="photo" src="../homerun/assets/img/로그인프로필.png">
+            <b class="uid"><%=uid %></b>
+>>>>>>> WooTest
         <button type="button" class="logout" onclick="location.href='../homerun/user/user_logoutaction.jsp'">로그아웃</button>
         </div>
         <% } %>
@@ -143,7 +167,11 @@
         <div>여기는 날씨 안녕하세요</div>
         </div>
     </div>
+<<<<<<< HEAD
     
+=======
+        <div class="col-sm-2" style="border: 0px solid blue;"></div>
+>>>>>>> WooTest
     </div>
     </body>
 

@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 INDEX VERSION 1.131+C:\semi-SIST\homerun\.metadata\.plugins\org.eclipse.jdt.core
 1373488706.index
 1430959915.index
@@ -39,3 +40,46 @@ INDEX VERSION 1.131+C:\semi-SIST\homerun\.metadata\.plugins\org.eclipse.jdt.core
 1968242538.index
 3241716005.index
 2457682873.index
+=======
+INDEX VERSION 1.131+C:\Users\seulg\OneDrive\¹®¼­\GitHub\homerun\.metadata\.plugins\org.eclipse.jdt.core
+1841243419.index
+1779490100.index
+3829223410.index
+1394058952.index
+2871284082.index
+2586164685.index
+3956943980.index
+4150306035.index
+680833001.index
+60132321.index
+202488630.index
+3096339888.index
+2037398101.index
+3177779877.index
+3700027788.index
+2012866085.index
+1865797976.index
+2047171266.index
+3198231187.index
+140705023.index
+984924816.index
+1746348168.index
+3416155359.index
+3857174811.index
+546123508.index
+4286192868.index
+3424603217.index
+2813362547.index
+1223768892.index
+942037479.index
+1052384971.index
+4199845437.index
+4150541585.index
+4133169623.index
+3298896885.index
+3897581115.index
+405291799.index
+950039785.index
+1188030579.index
+3907255766.index
+>>>>>>> WooTest

@@ -16,8 +16,11 @@
 	</head>
 <style>
 #btn{
+	position: relative;
+	left: 40px;
 	margin-top:40px;
 	margin-left: 50px;
+	margin-bottom: 150px;
 }
 #successlogo {
 	width: 250px;
@@ -42,8 +45,8 @@ div {
   left:40%;
   transform: translateX(-38%);
   margin-right: 10px;
-  width:100px;
-  height:30px;
+  width:150px;
+  height:50px;
   color:white;
   font-weight: bold;
   border:none;
@@ -55,8 +58,8 @@ div {
 .btn2 {
   left:40%;
   transform: translateX(-38%);
-  width:100px;
-  height:30px;
+  width:150px;
+  height:50px;
   color:white;
   font-weight: bold;
   border:none;
@@ -65,9 +68,6 @@ div {
   
 }
 
-.main{
-	margin-top: 80px;
-}
 </style>
 	<body style="overflow-x: hidden;">
 		<%
@@ -88,8 +88,8 @@ div {
 		<div id="wrap">
 			<div id="content-wrap">
 				<div class="row">
-					<div class="col-sm-2" style="border: 1px solid red;">left</div>
-					<div class="col-sm-8" style="border: 1px solid pink;">
+					<div class="col-sm-2" style="border: 0px solid red;"></div>
+					<div class="col-sm-8" style="border: 0px solid pink;">
 						<!-- write here -->
 <%
 
@@ -121,7 +121,7 @@ div {
 					
 						<!-- the end -->
 					</div>
-					<div class="col-sm-2" style="border: 1px solid blue;">right</div>
+					<div class="col-sm-2" style="border: 0px solid blue;"></div>
 				</div>
 			</div>
 		</div>

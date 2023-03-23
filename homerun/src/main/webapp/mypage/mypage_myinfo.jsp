@@ -230,8 +230,8 @@ div{
 		<div id="wrap">
 			<div id="content-wrap">
 				<div class="row">
-					<div class="col-sm-2" style="border: 1px solid red;">left</div>
-					<div class="col-sm-8" style="border: 1px solid pink;">
+					<div class="col-sm-2" style="border: 0px solid red;"></div>
+					<div class="col-sm-8" style="border: 0px solid pink;">
 						<!-- write here -->
 
 <div class="wrap">
@@ -273,7 +273,6 @@ div{
       
     </div>
   </div>
-						
 		<button type="button" class="btn2"
 			onclick="location.href='../user/user_logoutaction.jsp'">로그아웃</button>
 		
@@ -365,7 +364,7 @@ div{
 						
 						<!-- the end -->
 					</div>
-					<div class="col-sm-2" style="border: 1px solid blue;">right</div>
+					<div class="col-sm-2" style="border: 0px solid blue;"></div>
 				</div>
 			</div>
 		</div>

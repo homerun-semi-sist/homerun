@@ -158,8 +158,8 @@ div{
 		<div id="wrap">
 			<div id="content-wrap">
 				<div class="row">
-					<div class="col-sm-2" style="border: 1px solid red;">left</div>
-					<div class="col-sm-8" style="border: 1px solid pink;">
+					<div class="col-sm-2" style="border: 0px solid red;"></div>
+					<div class="col-sm-8" style="border: 0px solid pink;">
 						<!-- write here -->
 <%
 
@@ -171,7 +171,7 @@ div{
 
 <div class="head">
 	  <div class="summaryContainer">
-		<h3>관리자페이지</h3>
+		<h3><b>관리자페이지</b></h3>
 		<hr class="line" style="height: 5px;">
 	  </div>    
 	  
@@ -188,9 +188,9 @@ div{
 	 		<br><br>
 	  </div>
 	 
-	  <div class="name"><%=uName %></div>
+	  <div class="name"><b><%=uName %></b></div>
 	  <br><br>
-	  <div class="nickname"><%=uid %>님 환영합니다</div>
+	  <div class="nickname"><b><%=uid %></b>님 환영합니다</div>
   </div>
   
   <div class="shippingStatusContainer">
@@ -236,7 +236,7 @@ div{
 						
 						<!-- the end -->
 					</div>
-					<div class="col-sm-2" style="border: 1px solid blue;">right</div>
+					<div class="col-sm-2" style="border: 0px solid blue;"></div>
 				</div>
 			</div>
 		</div>
