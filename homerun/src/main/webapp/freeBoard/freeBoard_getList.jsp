@@ -13,18 +13,18 @@
 
 <%
 	int currentPage = Integer.parseInt(request.getParameter("currentPage"));
-	String category = request.getParameter("category");
+	//String category = request.getParameter("category");
 	
 	int perPage = 15;
 	int start = (currentPage - 1) * perPage;
 
 	FreeBoardDao fbDao = new FreeBoardDao();
-	List<FreeBoardDto> fbList = new Vector<>();
+	List<FreeBoardDto> fbList = fbDao.getFBList(start, perPage);
+	//if(category.equals("all"))
+		//fbList = new Vector<>();
 	
-	if(category.equals("all"))
-		fbList = fbDao.getFBList(start, perPage);
-	else
-		fbList = fbDao.getAllFBs_category(start, perPage, category);
+	//else
+		//fbList = fbDao.getAllFBs_category(start, perPage, category);
 
 	UserDao uDao = new UserDao();
 	TeamDao tDao = new TeamDao();

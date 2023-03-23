@@ -1,4 +1,4 @@
-<%@page import="data.dao.FreeCommentDao"%>
+<%-- <%@page import="data.dao.FreeCommentDao"%>
 <%@page import="data.dao.TeamDao"%>
 <%@page import="java.util.Vector"%>
 <%@page import="data.dao.UserDao"%>
@@ -86,12 +86,8 @@
 		ob.put("teamLogoImg", teamLogoImg);
 		ob.put("fcCnt", fcCnt);
 		
-		ob.put("startPage", startPage);
-		ob.put("endPage", endPage);
-		ob.put("totalPage", totalPage);
-		
 		arr.add(ob);
 	}
 %>
 
-<%=arr.toString() %>
+<%=arr.toString() %> --%>
