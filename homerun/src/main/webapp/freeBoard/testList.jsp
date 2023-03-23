@@ -95,7 +95,8 @@
 		  	background-color: #f8f9fa;
 		}
 		
-		#naavs-top-home, #naavs-top-profile, #naavs-top-messages {
+		#naavs-top-all, #naavs-top-doosan, #naavs-top-kiwoom, #naavs-top-samsung, #naavs-top-lg, 
+		#naavs-top-kt, #naavs-top-ssg, #naavs-top-nc, #naavs-top-lotte, #naavs-top-kia, #naavs-top-hanhwa {
 			opacity: 1;
 		}
     </style>
@@ -105,7 +106,7 @@
 
     		/* var val = $("#search :selected").val();
     		alert(val); */
-    		//fList();
+    		fList();
     		
     		$("#searchBtn").click(function(){
     			var val = $("#search :selected").val();
@@ -182,6 +183,80 @@
 	    		});
     		    
     		});
+	
+			$("button.naav-link").click(function() {
+				var category = $(this).attr("category");
+				var currentPage = $("#currentPage").val();
+				alert(category);
+				
+				$.ajax({
+	    			
+	    			type : "get",
+	    			url : "freeBoard_getList.jsp",
+	    			dataType : "json",
+	    			data : {"category" : category, "currentPage" : currentPage}, 
+	    			success:function(res) {
+	    				
+	    				var s="";
+	    				
+	    				s+="<div class='table-responsive text-nowrap'>";
+	    				s+="<table class='table'>";
+	    				s+="<thead style='background-color: #F8F9FA'>";
+	    				s+="<tr>";
+	    				s+="<th style='text-align: center; width: 80px;'>No.</th>";
+	    				s+="<th style='text-align: center; width: 150px;'>카테고리</th>";
+	    				s+="<th style='text-align: center;'>제목</th>";
+	    				s+="<th style='text-align: center; width: 200px;'>작성자</th>";
+	    				s+="<th style='text-align: center; width: 200px;'>날짜</th>";
+	    				s+="<th style='text-align: center; width: 80px;'>조회수</th>";
+	    				s+="<th style='text-align: center; width: 80px;'>추천</th>";
+	    				s+="<th style='text-align: center; width: 80px;'>비추천</th>";
+	    				s+="</tr>";
+	    				s+="</thead>";
+						s+="<tbody class='table-border-bottom-0'>";
+	    				
+						if(res.length == 0) {
+							s+="<tr>";
+							s+="<td colspan='8' align='center' style='font-size: 18pt;'>아직 작성된 게시글이 없습니다</td>";
+							s+="</tr>";
+						} else {
+							$.each(res, function(idx, item){
+								if(item.fbCategory == category) {
+								s+="<tr>";
+								s+="<td style='text-align: center;'>" + item.fbNum + "</td>";
+								
+								if(item.fbCategory == "전체") {   
+									s+="<td style='text-align: center; vertical-align:middle;'>";
+									s+="<img src='https://cdn.icon-icons.com/icons2/2070/PNG/512/baseball_icon_126956.png' style='width: 30px;'>";
+									   s+="</td>";
+								} else if(item.fbCategory == "한화") {
+									s+="<td style='text-align: center; vertical-align:middle;'>";
+									s+="<img src='" + item.teamLogoImg + "' style='width: 50px;'>";
+									s+="</td>";
+								} else {
+									s+="<td style='text-align: center; vertical-align:middle;'>";
+									s+="<img src='" + item.teamLogoImg + "' style='width: 40px;'>";
+									   s+="</td>";
+								}
+								
+								s+="<td style='vertical-align:middle;'><a href='freePost_detailPage.jsp?fbNum=" + item.fbNum + "&currentPage=" + currentPage + "'>" + item.fbSubject + "</a><span style='color: tomato;'>&nbsp;&nbsp;[" + item.fcCnt + "]</span></td>";
+								s+="<td style='text-align: center; vertical-align:middle;'>" + item.nickname + "</td>";
+								s+="<td style='text-align: center; vertical-align:middle;'>" + item.fbWriteday + "</td>";
+								s+="<td style='text-align: center; vertical-align:middle;'>" + item.fbReadCnt + "</td>";
+								s+="<td style='text-align: center; vertical-align:middle;'>" + item.fbLike + "</td>";
+								s+="<td style='text-align: center; vertical-align:middle;'>" + item.fbDislike + "</td> ";							
+								s+="</tr>"		
+							});
+						}}
+	    				s+="</tbody>";
+	    				s+="</table>";
+	    				s+="</div>";
+						
+	    				$("div.ffList").html(s);
+						
+	    			}
+	    		});
+			});
     		
 		})
 		
@@ -189,7 +264,7 @@
     		var val = $("#search :selected").val();
     		var currentPage = $("#currentPage").val();
     		//alert(val + ", "+ currentPage);
-			
+ 		
     		$.ajax({
     			
     			type : "get",
@@ -327,19 +402,21 @@
 	            
                 <!-- Bootstrap Table with Header - Light -->
                     <div class="card" style="background-color: #fff">
-	
-					<ul class="naav naav-tabs" role="tablist">
+			
+					<div class="naav-align-top mb-4">
+					<ul class="naav naav-tabs naav-fill" role="tablist" style="width: 100%">
                       <li class="naav-item">
                         <button
                           type="button"
                           class="naav-link active"
                           role="tab"
                           data-bs-toggle="tab"
-                          data-bs-target="#naavs-top-home"
-                          aria-controls="naavs-top-home"
-                          aria-selected="true"
+                          data-bs-target="#naavs-top-all"
+                          aria-controls="naavs-top-all"
+                          aria-selected="true"   
+                          category="All"
                         >
-                          Home
+                          전체
                         </button>
                       </li>
                       <li class="naav-item">
@@ -348,11 +425,12 @@
                           class="naav-link"
                           role="tab"
                           data-bs-toggle="tab"
-                          data-bs-target="#naavs-top-profile"
-                          aria-controls="naavs-top-profile"
+                          data-bs-target="#naavs-top-kia"
+                          aria-controls="naavs-top-kia"
                           aria-selected="false"
+                          category="KIA"
                         >
-                          Profile
+                          KIA
                         </button>
                       </li>
                       <li class="naav-item">
@@ -361,45 +439,172 @@
                           class="naav-link"
                           role="tab"
                           data-bs-toggle="tab"
-                          data-bs-target="#naavs-top-messages"
-                          aria-controls="naavs-top-messages"
+                          data-bs-target="#naavs-top-kt"
+                          aria-controls="naavs-top-kt"
                           aria-selected="false"
+                          category="KT"
                         >
-                          Messages
+                         KT
                         </button>
                       </li>
+                      <li class="naav-item">
+                        <button
+                          type="button"
+                          class="naav-link"
+                          role="tab"
+                          data-bs-toggle="tab"
+                          data-bs-target="#naavs-top-lg"
+                          aria-controls="naavs-top-lg"
+                          aria-selected="false"
+                          category="LG"
+                        >
+                         LG
+                        </button>
+                      </li>
+                      <li class="naav-item">
+                        <button
+                          type="button"
+                          class="naav-link"
+                          role="tab"
+                          data-bs-toggle="tab"
+                          data-bs-target="#naavs-top-nc"
+                          aria-controls="naavs-top-nc"
+                          aria-selected="false"
+                          category="NC" 
+                        >
+                        NC
+                        </button>
+                      </li>
+                      <li class="naav-item">
+                        <button
+                          type="button"
+                          class="naav-link"
+                          role="tab"
+                          data-bs-toggle="tab"
+                          data-bs-target="#naavs-top-ssg"
+                          aria-controls="naavs-top-ssg"
+                          aria-selected="false"
+                          category="SSG"
+                        >
+                         SSG
+                        </button>
+                      </li>
+                      <li class="naav-item">
+                        <button
+                          type="button"
+                          class="naav-link"
+                          role="tab"
+                          data-bs-toggle="tab"
+                          data-bs-target="#naavs-top-doosan"
+                          aria-controls="naavs-top-doosan"
+                          aria-selected="false"
+                          category="두산"
+                        >
+                         두산
+                        </button>
+                      </li>
+                      <li class="naav-item">
+                        <button
+                          type="button"
+                          class="naav-link"
+                          role="tab"
+                          data-bs-toggle="tab"
+                          data-bs-target="#naavs-top-lotte"
+                          aria-controls="naavs-top-lotte"
+                          aria-selected="false"
+                          category="롯데" 
+                        >
+                         롯데
+                        </button>
+                      </li>
+                      <li class="naav-item">
+                        <button
+                          type="button"
+                          class="naav-link"
+                          role="tab"
+                          data-bs-toggle="tab"
+                          data-bs-target="#naavs-top-samsung"
+                          aria-controls="naavs-top-samsung"
+                          aria-selected="false"
+                          category="삼성"
+                        >
+                        삼성
+                        </button>
+                      </li>
+                      <li class="naav-item">
+                        <button
+                          type="button"
+                          class="naav-link"
+                          role="tab"
+                          data-bs-toggle="tab"
+                          data-bs-target="#naavs-top-kiwoom"
+                          aria-controls="naavs-top-kiwoom"
+                          aria-selected="false"
+                          category="키움"
+                        >
+                         키움
+                        </button>
+                      </li>
+                      <li class="naav-item">
+                        <button
+                          type="button"
+                          class="naav-link"
+                          role="tab"
+                          data-bs-toggle="tab"
+                          data-bs-target="#naavs-top-hanhwa"
+                          aria-controls="naavs-top-hanhwa"
+                          aria-selected="false"
+                          category="한화"
+                        >
+                         한화
+                        </button>
+                      </li>                      
                     </ul>
+                    
+                    <!-- tab별 내용 -->
                     <div class="tab-content">
-                      <div class="tab-pane fade show active" id="naavs-top-home" role="tabpanel">
+                      <div class="tab-pane fade show active" id="naavs-top-all" role="tabpanel">
                         <!-- <div class="fList"></div> -->
+                        all
                       </div>
-                      <div class="tab-pane fade" id="naavs-top-profile" role="tabpanel">
-                        <p>
-                          Donut dragée jelly pie halvah. Danish gingerbread bonbon cookie wafer candy oat cake ice
-                          cream. Gummies halvah tootsie roll muffin biscuit icing dessert gingerbread. Pastry ice cream
-                          cheesecake fruitcake.
-                        </p>
-                        <p class="mb-0">
-                          Jelly-o jelly beans icing pastry cake cake lemon drops. Muffin muffin pie tiramisu halvah
-                          cotton candy liquorice caramels.
-                        </p>
+                      <div class="tab-pane fade" id="naavs-top-kia" role="tabpanel">
+                        <div class="ffList"></div>
                       </div>
-                      <div class="tab-pane fade" id="naavs-top-messages" role="tabpanel">
-                        <p>
-                          Oat cake chupa chups dragée donut toffee. Sweet cotton candy jelly beans macaroon gummies
-                          cupcake gummi bears cake chocolate.
-                        </p>
-                        <p class="mb-0">
-                          Cake chocolate bar cotton candy apple pie tootsie roll ice cream apple pie brownie cake. Sweet
-                          roll icing sesame snaps caramels danish toffee. Brownie biscuit dessert dessert. Pudding jelly
-                          jelly-o tart brownie jelly.
-                        </p>
+                      <div class="tab-pane fade" id="naavs-top-kt" role="tabpanel">
+                      	kt                     
+                      </div>
+                      <div class="tab-pane fade" id="naavs-top-lg" role="tabpanel">
+                      	lg                   
+                      </div>
+                      <div class="tab-pane fade" id="naavs-top-nc" role="tabpanel">
+                      	nc                  
+                      </div>
+                      <div class="tab-pane fade" id="naavs-top-ssg" role="tabpanel">
+                      	ssg                     
+                      </div>
+                      <div class="tab-pane fade" id="naavs-top-doosan" role="tabpanel">
+                      	doosan                   
+                      </div>
+                      <div class="tab-pane fade" id="naavs-top-lotte" role="tabpanel">
+                      	lotte                    
+                      </div>
+                      <div class="tab-pane fade" id="naavs-top-samsung" role="tabpanel">
+                      	samsung                
+                      </div>
+                      <div class="tab-pane fade" id="naavs-top-kiwoom" role="tabpanel">
+                      	kiwoom                   
+                      </div>
+                      <div class="tab-pane fade" id="naavs-top-hanhwa" role="tabpanel">
+                      	hanhwa                   
                       </div>
                     </div>
+                    
+                    </div>
+
 									
 						
 						
-                        <div class="bBottom" style="margin-top: 30px;">
+                        <%-- <div class="bBottom" style="margin-top: 30px;">
                             <div class="bsBox">
                                 <div class="bSelect">
 									<select id="search" class="form-control" style="width: 100px; height: 40px; text-align: center;">
@@ -457,7 +662,7 @@
 									}
 								%>
 							</ul>
-						</div>
+						</div> --%>
                        
                     </div>
                 </div>

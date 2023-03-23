@@ -36,7 +36,7 @@
 				<div class="row">
 					<div class="col-sm-2" style="border: 1px solid red;">left</div>
 					<div class="col-sm-8" style="border: 1px solid pink;">
-						<jsp:include page="testList.jsp"></jsp:include>
+						<jsp:include page="t_freeBoard_list_test.jsp"></jsp:include>
 					</div>
 					<div class="col-sm-2" style="border: 1px solid blue;">right</div>
 				</div>

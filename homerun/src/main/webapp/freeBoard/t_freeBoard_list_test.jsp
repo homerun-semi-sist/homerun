@@ -216,12 +216,12 @@
 		function fList() {
     		var val = $("#search :selected").val();
     		var currentPage = $("#currentPage").val();
-    		//alert(val + ", "+ currentPage);
+    		alert(currentPage);
 			
     		$.ajax({
     			
     			type : "get",
-    			url : "freeBoard_getList.jsp",
+    			url : "t_freeBoard_getList_test2.jsp",
     			dataType : "json",
     			data : {"currentPage" : currentPage}, 
     			success:function(res) {
@@ -250,8 +250,9 @@
 						s+="</tr>";
 					} else {
 						$.each(res, function(idx, item){
+							alert(item.currentPage + item.startPage + item.endPage);						
 							
-							if(item.fbCategory == "공지") {
+							/* if(item.fbCategory == "공지") {
 								s+="<tr style='background-color: #FFF2F2; color: red; font-size: bold;'>";
 								s+="<td style='text-align: center;'></td>";
 								s+="<td style='text-align: center; vertical-align:middle;'>";
@@ -304,15 +305,53 @@
 								s+="<td style='text-align: center; vertical-align:middle;'>" + item.fbLike + "</td>";
 								s+="<td style='text-align: center; vertical-align:middle;'>" + item.fbDislike + "</td> ";							
 								s+="</tr>"
-							}
+							} */
 						});
 					}
     				s+="</tbody>";
     				s+="</table>";
     				s+="</div>";
     				
+    				/* String p = "";
+					p+="<div style='border: 1px solid red; width: 300px;'>페이징처리</div>";
+					 */
+    				
     				$("div.fList").html(s);
-       		});
+    				/* $("div.fPaging").html(p); */
+					
+					/* String p = "";
+					p+="<div style='border: 1px solid red; width: 300px;'>페이징처리</div>" */
+    				/*
+    				p+="<div style='width: 500px; text-align: center;' class='container'>";
+    				p+="<ul class='pagination'>";
+    				
+    				// 이전
+					if(item.startPage > 1) {
+						p+="<li><a href='freeBoard_listPage.jsp?currentPage=" + (item.startPage-1) +"'>이전</a></li>";
+					}
+    				
+					for(int pp = item.startPage; pp <= item.endPage; pp++) {
+						if(pp == item.currentPage) {
+							p+="<li class='active'><a href='freeBoard_listPage.jsp?currentPage=" + pp + "'>" + pp + "</a></li>";
+						} else {
+							p+="<li class='active'><a href='freeBoard_listPage.jsp?currentPage=" + pp + "'>" + pp + "</a></li>";
+						}
+					}
+					
+					// 다음
+					if(item.endPage < item.totalPage) {
+						p+="<li><a href='freeBoard_listPage.jsp?currentPage=" + (item.endPage+1) + "'>다음</a></li>";
+					}
+    				
+    				
+    				p+="</ul>"; 
+    				p+="</div>";*/
+    				
+    				/* $("div.fPaging").html(p);  */
+    				
+					
+    			}
+    		});
     		
 		}
     </script>
@@ -331,26 +370,26 @@
 		
 		FreeCommentDao fcDao = new FreeCommentDao();
 		
-		// 페이징 처리		
+/* 		// 페이징 처리		
 		int totalCount;
 		int totalPage;      // 총 페이지 수 
 		int startPage;      // 각 블럭의 시작 페이지
 		int endPage;        // 각 블럭의 마지막 페이지
 		int start;          // 각 페이지의 시작 번호 
 		int perPage = 15;    // 한 페이지에 보여질 글의 개수
-		int perBlock = 5;   // 한 블럭당 보여지는 페이지 개수
+		int perBlock = 5;   // 한 블럭당 보여지는 페이지 개수 */
 		int currentPage;    // 현재 페이지
-		int no;
+/* 		int no;
 		
 		// 총 개수 
-		totalCount = fbDao.getFBTotalCount();
-
+		totalCount = fbDao.getFBTotalCount(); */
+		currentPage = 1;
 		// 현재 페이지 번호 읽기, null일 때는 1페이지로
-		if(request.getParameter("currentPage") == null)
+		/* if(request.getParameter("currentPage") == null)
 			currentPage = 1;
 		else
-			currentPage = Integer.parseInt(request.getParameter("currentPage"));
-
+			currentPage = Integer.parseInt(request.getParameter("currentPage")); */
+/* 
 		// 총 페이지 개수
 		totalPage = totalCount / perPage + (totalCount % perPage == 0 ? 0 : 1);
 		  
@@ -366,9 +405,9 @@
 		start = (currentPage - 1) * perPage;
 
 		// 각 페이지에서 필요한 게시글 가져오기
-		List<FreeBoardDto> fbList = fbDao.getFBList(start, perPage);
+		List<FreeBoardDto> fbList = fbDao.getFBList(start, perPage); 
 		
-		no = totalCount - (currentPage - 1) * perPage;		
+		no = totalCount - (currentPage - 1) * perPage;		*/
 	%>
 	<input type="hidden" id="currentPage" value="<%=currentPage %>">
 	
