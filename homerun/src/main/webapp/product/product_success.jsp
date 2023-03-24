@@ -136,11 +136,7 @@ margin-top:50px;
 					<div id="thanksmsg">구매해 주셔서 감사합니다.</div>
 					<br> <br>
 					<div style="text-align: center; margin-left: 350px; ">
-<<<<<<< HEAD
-						<table class="table table-bordered" style="width: 60%; position:relative;margin-bottom:300px;">
-=======
 						<table class="table table-bordered" style="width: 60%; position:relative;margin-bottom:30px;">
->>>>>>> UngTest6
 							
 							<tr>
 								<th width="60px" style="text-align: center;">주문번호</th>

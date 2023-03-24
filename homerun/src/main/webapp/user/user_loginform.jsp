@@ -9,11 +9,8 @@
 <html>
 <head>
 <meta charset="utf-8">
-<<<<<<< HEAD
 <title>HOMERUN | USER_LOGIN</title>
-=======
-<title>Insert title here</title>
->>>>>>> UngTest6
+
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" />
 <script src="https://code.jquery.com/jquery-3.6.3.js"></script>
