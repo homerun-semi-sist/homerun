@@ -103,8 +103,6 @@ String root = request.getContextPath();
 						 <a style="color: white;" href="<%=root%>/product/product_cartlist.jsp">
 						 
 						 <span>장바구니</span>
-						 
-						 </a>
 				</div>
 			</div>
 		

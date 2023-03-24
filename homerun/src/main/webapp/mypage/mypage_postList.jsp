@@ -285,9 +285,9 @@ $(function(){
 							}
 							
 							if(item.rcCnt == 0)
-								s+="<td style='vertical-align:middle;'><a href='reviewPost_detailPage.jsp?rbNum=" + item.rbNum + "&currentPage=" + currentPage + "'>" + item.rbSubject + "</a></td>";					
+								s+="<td style='vertical-align:middle;'><a href='../reviewBoard/reviewPost_detailPage.jsp?rbNum=" + item.rbNum + "&currentPage=" + currentPage + "'>" + item.rbSubject + "</a></td>";					
 							else
-								s+="<td style='vertical-align:middle;'><a href='reviewPost_detailPage.jsp?rbNum=" + item.rbNum + "&currentPage=" + currentPage + "'>" + item.rbSubject + "</a><span style='color: tomato;'>&nbsp;&nbsp;[" + item.rcCnt + "]</span></td>";
+								s+="<td style='vertical-align:middle;'><a href='../reviewBoard/reviewPost_detailPage.jsp?rbNum=" + item.rbNum + "&currentPage=" + currentPage + "'>" + item.rbSubject + "</a><span style='color: tomato;'>&nbsp;&nbsp;[" + item.rcCnt + "]</span></td>";
 							
 							s+="<td style='text-align: center; vertical-align:middle;'>" + item.nickname + "</td>";
 							s+="<td style='text-align: center; vertical-align:middle;'>" + item.rbWriteday + "</td>";
@@ -414,9 +414,9 @@ function fbList(){
 					}
 					
 					if(item.fcCnt == 0) 
-						s+="<td style='vertical-align:middle;'><a href='freePost_detailPage.jsp?fbNum=" + item.fbNum + "&currentPage=" + currentPage + "' style=' text-decoration: none; color: black;'>" + item.fbSubject + "</a></td>";
+						s+="<td style='vertical-align:middle;'><a href='../freeBoard/freePost_detailPage.jsp?fbNum=" + item.fbNum + "&currentPage=" + currentPage + "' style=' text-decoration: none; color: black;'>" + item.fbSubject + "</a></td>";
 					else 
-						s+="<td style='vertical-align:middle;'><a href='freePost_detailPage.jsp?fbNum=" + item.fbNum + "&currentPage=" + currentPage + "' style=' text-decoration: none; color: black;'>" + item.fbSubject + "</a><span style='color: tomato;'>&nbsp;&nbsp;[" + item.fcCnt + "]</span></td>";
+						s+="<td style='vertical-align:middle;'><a href='../freeBoard/freePost_detailPage.jsp?fbNum=" + item.fbNum + "&currentPage=" + currentPage + "' style=' text-decoration: none; color: black;'>" + item.fbSubject + "</a><span style='color: tomato;'>&nbsp;&nbsp;[" + item.fcCnt + "]</span></td>";
 
 					s+="<td style='text-align: center; vertical-align:middle;'>" + item.nickname + "</td>";
 					s+="<td style='text-align: center; vertical-align:middle;'>" + item.fbWriteday + "</td>";

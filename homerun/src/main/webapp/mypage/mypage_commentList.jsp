@@ -108,7 +108,7 @@
 		  	background-color: #f8f9fa;
 		}
 		
-		#naavs-top-fb, #naavs-top-rb {
+		#naavs-top-fc, #naavs-top-rc {
 			opacity: 1;
 		}
 </style>
@@ -190,12 +190,12 @@ $(function(){
 					$.each(res, function(idx, item){
 						s+="<tr>";
 						s+="<td style='text-align: center; vertical-align:middle;'>" + item.fbNum + "</td>";
-						s+="<td style='text-align: center; vertical-align:middle;'><b>" + item.fbCategory + "</b></td>";
+						s+="<td style='text-align: center; vertical-align:middle;'>" + item.fbCategory + "</td>";
 						s+="<td style='vertical-align:middle;'><a href='../freeBoard/freePost_detailPage.jsp?fbNum=" + item.fbNum + "&currentPage=" + currentPage + "' style=' text-decoration: none; color: black;'>" + item.fbSubject + "</a></td>";
-						s+="<td style='text-align: center; vertical-align:middle;'><b>" + item.nickname + "</b></td>";
-						s+="<td style='text-align: center; vertical-align:middle;'><b>" + item.fbWriteday + "</b></td>";
-						s+="<td style='text-align: center; vertical-align:middle;'><b>" + item.fbReadCnt + "</b></td>";
-						s+="<td style='text-align: center; vertical-align:middle;'><b>" + item.fbReport + "</b></td>";										
+						s+="<td style='text-align: center; vertical-align:middle;'>" + item.nickname + "</td>";
+						s+="<td style='text-align: center; vertical-align:middle;'>" + item.fbWriteday + "</td>";
+						s+="<td style='text-align: center; vertical-align:middle;'>" + item.fbReadCnt + "</td>";
+						s+="<td style='text-align: center; vertical-align:middle;'>" + item.fbReport + "</td>";										
 						s+="<td style='text-align: center;'><div class='dropdown'><button type='button' class='btn p-0 dropdown-toggle hide-arrow' data-bs-toggle='dropdown'><i class='bx bx-dots-vertical-rounded'></i></button>";
 						s+="<div class='dropdown-menu'>";
 						s+="<a class='dropdown-item delUserBtn' href='#?fbNum="+item.fbNum+"'><i class='bx bx-edit-alt me-1'></i>Update</a>";
@@ -227,7 +227,8 @@ $(function(){
 			data:{"uId" : uId, "category" : category, "currentPage" : currentPage},
 			url:"mypage_getCommentList.jsp",
 			success:function(res){
-				alert(category + ", " + currentPage + ", " +uId);
+				// alert(category + ", " + currentPage + ", " +uId);
+				
 				if(category == "fc")
 					fcList();
 				
@@ -267,10 +268,9 @@ $(function(){
 								s+="<td style='vertical-align:middle;'><a href='../reviewBoard/reviewPost_detailPage.jsp?rbNum=" + item.num + "&currentPage=" + currentPage + "' style=' text-decoration: none; color: black;'>" + item.subject + "</a></td>";
 							
 							
-							s+="<td style='text-align: center; vertical-align:middle;'><b>" + item.content + "</b></td>";
+							s+="<td style='text-align: center; vertical-align:middle;'>" + item.content + "</td>";
 							s+="<td style='text-align: center; vertical-align:middle;'>" + item.nickname + "</td>";
 							s+="<td style='text-align: center; vertical-align:middle;'>" + item.writeday + "</td>";
-							s+="<td style='text-align: center; vertical-align:middle;'>" + item.readCnt + "</td>";
 							s+="<td style='text-align: center; vertical-align:middle;'>" + item.like + "</td>";
 							s+="<td style='text-align: center; vertical-align:middle;'>" + item.dislike + "</td> ";	
 							s+="<td style='text-align: center;'><div class='dropdown'><button type='button' class='btn p-0 dropdown-toggle hide-arrow' data-bs-toggle='dropdown'><i class='bx bx-dots-vertical-rounded'></i></button>";
@@ -377,7 +377,6 @@ function fcList(){
 					s+="<td style='text-align: center; vertical-align:middle;'><b>" + item.content + "</b></td>";
 					s+="<td style='text-align: center; vertical-align:middle;'>" + item.nickname + "</td>";
 					s+="<td style='text-align: center; vertical-align:middle;'>" + item.writeday + "</td>";
-					s+="<td style='text-align: center; vertical-align:middle;'>" + item.readCnt + "</td>";
 					s+="<td style='text-align: center; vertical-align:middle;'>" + item.like + "</td>";
 					s+="<td style='text-align: center; vertical-align:middle;'>" + item.dislike + "</td> ";	
 					s+="<td style='text-align: center;'><div class='dropdown'><button type='button' class='btn p-0 dropdown-toggle hide-arrow' data-bs-toggle='dropdown'><i class='bx bx-dots-vertical-rounded'></i></button>";
@@ -387,7 +386,7 @@ function fcList(){
 					s+="</div></div></td>"
 					s+="</tr>"		
 				});
-			}
+			} 
 			s+="</tbody>";
 			s+="</table>";
 			s+="</div>";
