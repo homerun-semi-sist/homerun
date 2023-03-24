@@ -23,7 +23,7 @@ public class FreeBoardDao {
  		PreparedStatement pstmt = null;
  		ResultSet rs = null;
  		
- 		String sql = "select * from FREEBOARD order by uId='admin' desc, fNum desc";
+ 		String sql = "select * from FREEBOARD order by uId='admin' desc, fbNum desc";
  		 		
  		try {
  			pstmt = conn.prepareStatement(sql);
