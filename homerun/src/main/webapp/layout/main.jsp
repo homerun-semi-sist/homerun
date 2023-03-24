@@ -95,7 +95,7 @@
 	align: left;
 	width: 55%;
 	height: 500px;
-	border: 1px solid black;
+	border: 0px solid black;
 }
 
 .leftbottom {

@@ -11,7 +11,8 @@
 <title>HOMERUN | ShopList</title>
 <link href="../assets/css/theme.css" rel="stylesheet" />
 
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
 
 <style>
 #navv-all, #navv-doosan, #navv-kiwoom, #navv-samsung, #navv-lg, #navv-kt,
@@ -34,7 +35,7 @@
 	opacity: 1;
 }
 </style>
-
+<script src="https://code.jquery.com/jquery-3.6.3.js"></script>
 </head>
 <%
 NumberFormat nf = NumberFormat.getCurrencyInstance();
@@ -165,14 +166,15 @@ List<ProductDto> list_all = dao_all.getList_pDay(start, perPage);
 
 							</div>
 						</div>
-						
+
 						<div style="width: 500px; text-align: center;" class="container">
 							<ul class="pagination">
 								<%
 								//이전
 								if (startPage > 1) {
 								%>
-								<li><a href="product_listPage.jsp?currentPage=<%=startPage - 1%>">이전</a></li>
+								<li><a
+									href="product_listPage.jsp?currentPage=<%=startPage - 1%>">이전</a></li>
 								<%
 								}
 								for (int pp = startPage; pp <= endPage; pp++) {
@@ -191,7 +193,8 @@ List<ProductDto> list_all = dao_all.getList_pDay(start, perPage);
 								//다음
 								if (endPage < totalPage) {
 								%>
-								<li><a href="product_listPage.jsp?currentPage=<%=endPage + 1%>">다음</a></li>
+								<li><a
+									href="product_listPage.jsp?currentPage=<%=endPage + 1%>">다음</a></li>
 								<%
 								}
 								%>
@@ -1550,6 +1553,7 @@ List<ProductDto> list_all = dao_all.getList_pDay(start, perPage);
 						</ul>
 
 						<div class="tab-content" id="pills-tabContentKt">
+
 							<!-- KT 팀웨어 -->
 							<div class="tab-pane fade show active" id="pills-kt_teamwear"
 								role="tabpanel" aria-labelledby="pills-kt_teamwear-tab">
@@ -2387,7 +2391,7 @@ List<ProductDto> list_all = dao_all.getList_pDay(start, perPage);
 	<link
 		href="https://fonts.googleapis.com/css2?family=Jost:wght@200;300;400;500;600;700;800;900&amp;display=swap"
 		rel="stylesheet" />
-		
-		
+
+
 </body>
 </html>

@@ -56,6 +56,7 @@
 <%
 String pId = request.getParameter("pId");
 String uid = (String) session.getAttribute("uid");
+String loginok = (String) session.getAttribute("loginok");
 
 ProductDao dao = new ProductDao();
 ProductDto dto = dao.getProduct(pId);
@@ -84,7 +85,7 @@ NumberFormat nf = NumberFormat.getCurrencyInstance();
 					</div>
 					<p class="lead"><%=dto.getpDetail()%></p>
 					<%
-					if (!uid.equals("admin") || uid == null) {
+					if (loginok == "yes" && !uid.equals("admin")) {
 					%>
 					<div class="d-flex">
 						<input class="form-control text-center me-4" id="inputQuantity"
