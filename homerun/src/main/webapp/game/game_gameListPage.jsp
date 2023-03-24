@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="utf-8">
-<title>Insert title here</title>
+<title>HOMERUN | GAME_LIST</title>
 
 <script src="https://code.jquery.com/jquery-3.6.3.js"></script>
 <link href="../assets/css/style_index.css" rel="stylesheet">
