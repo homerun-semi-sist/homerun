@@ -19,12 +19,7 @@
 <link href="../assets/css/styles_detail.css" rel="stylesheet" />
 </head>
 
-<<<<<<< HEAD
 <script  type="text/javascript">
-
-=======
-<script>
->>>>>>> WooTest
 	$(function(){
 		
 		$("#cartinsert").click(function(){

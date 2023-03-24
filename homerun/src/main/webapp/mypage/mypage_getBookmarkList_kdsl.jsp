@@ -45,13 +45,12 @@
 	for(BookMarkDto bDto : bList) {
 		JSONObject ob = new JSONObject();		
 		
-		String num, pUId, nickname, subject, readCnt, like, dislike, board, writeday;
+		String num, pUId, nickname, subject, readCnt, like, dislike, board;
+		Timestamp writeday;
 		int cCnt;
 		
 		if(bDto.getFbNum() != null) {
 			num = bDto.getFbNum();
-			FreeBoardDto fbDto = fbDao.getFB(num);
-			
 			board = "자유";
 			pUId = fbDao.getFB(bDto.getFbNum()).getUId();
 			nickname = uDao.getUser(pUId).getNickname();
@@ -59,12 +58,10 @@
 			readCnt = fbDao.getFB(bDto.getFbNum()).getFbReadCnt();					
 			like = fbDao.getFB(bDto.getFbNum()).getFbLike();
 			dislike = fbDao.getFB(bDto.getFbNum()).getFbDislike();
-			writeday = sdf.format(fbDto.getFbWriteday());
+			writeday = fbDao.getFB(bDto.getFbNum()).getFbWriteday();
 			cCnt = fcDao.getAllFCs(bDto.getFbNum()).size();
 		} else {
 			num = bDto.getRbNum();
-			ReviewBoardDto rbDto = rbDao.getRB(num);
-					
 			board = "후기";
 			pUId = rbDao.getRB(bDto.getRbNum()).getUId();
 			nickname = uDao.getUser(pUId).getNickname();
@@ -72,12 +69,11 @@
 			readCnt = rbDao.getRB(bDto.getRbNum()).getRbReadCnt();					
 			like = rbDao.getRB(bDto.getRbNum()).getRbLike();
 			dislike = rbDao.getRB(bDto.getRbNum()).getRbDislike();
-			writeday = sdf.format(rbDto.getRbWriteday());
+			writeday = rbDao.getRB(bDto.getRbNum()).getRbWriteday();
 			cCnt = rcDao.getAllRCs(bDto.getRbNum()).size();
 		}
 		
 		ob.put("bId", bDto.getbId());
-		ob.put("uId", uId);
 		ob.put("pUId", pUId);
 		ob.put("num", num);
 		ob.put("bday", sdf.format(bDto.getbDay()));
