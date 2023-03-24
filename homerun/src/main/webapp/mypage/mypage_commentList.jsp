@@ -21,7 +21,7 @@
 <meta name="viewport"
 	content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0" />
 
-<title>마이페이지_내 글 목록</title>
+<title>HOMERUN | MYPAGE_COMMENTLIST</title>
 
 <meta name="description" content="" />
 
@@ -219,7 +219,7 @@ $(function(){
 		var uId = $("#uId").val();
 		var category = $(this).attr("category");
 		var currentPage = $("#currentPage").val();
-		 alert(category + ", " + currentPage + ", " +uId);
+		// alert(category + ", " + currentPage + ", " +uId);
 						
 		$.ajax({
 			type:"get",
@@ -275,8 +275,7 @@ $(function(){
 							s+="<td style='text-align: center; vertical-align:middle;'>" + item.dislike + "</td> ";	
 							s+="<td style='text-align: center;'><div class='dropdown'><button type='button' class='btn p-0 dropdown-toggle hide-arrow' data-bs-toggle='dropdown'><i class='bx bx-dots-vertical-rounded'></i></button>";
 							s+="<div class='dropdown-menu'>";
-							s+="<a class='dropdown-item delUserBtn' href='#?rbNum="+item.cIdx+"'><i class='bx bx-edit-alt me-1'></i>Update</a>";
-							s+="<a class='dropdown-item delPostBtn' rbNum='"+ item.item + "'><i class='bx bx-trash me-1'></i> Delete</a>";		
+							s+="<a class='dropdown-item delPostBtn' cIdx='"+ item.cIdx + "'><i class='bx bx-trash me-1'></i> Delete</a>";						
 							s+="</div></div></td>"
 							s+="</tr>"		
 						});
@@ -296,34 +295,24 @@ $(function(){
 				$(".bTitle").text("_ " + category);
 
 			}
-		}); 
-		
+		});
+				
 	}); 
 	
 	
 	$(document).on("click", ".delBtn", function() {
-		var num = $(this).attr("num");
+		var cIdx = $(this).attr("cIdx");
 		var category = $(this).attr("category");
-		// alert(num + ", " + category);
+		alert(cIdx + ", " + category);
 		
-		if(category == "fb" || category =="rb") {
-			var a = confirm("해당 게시글을 정말로 강제 삭제하시겠습니까?");
+		var a = confirm("해당 댓글을 삭제하시겠습니까?");
 		
-			if(a) {
-				if(category == "fb")
-					location.href="../freeBoard/freePost_delete.jsp?fbNum=" + num;
-				else 
-					location.href="../reviewBoard/reviewPost_delete.jsp?rbNum=" + num;
-			}
-		} else {
-			var a = confirm("해당 댓글을 정말로 강제 삭제하시겠습니까?");
-			
-			if(a) {
-				if(category == "fc")
-					location.href="../freeBoard/freeComment_delete.jsp?fcIdx=" + num;
-				else 
-					location.href="../reviewBoard/reviewComment_delete.jsp?rcIdx=" + num;
-			}
+		if(a) {
+			if(category == "fc")
+				location.href="../freeBoard/freeComment_delete.jsp?fcIdx=" + num;
+			else 
+				location.href="../reviewBoard/reviewComment_delete.jsp?rcIdx=" + num;
+		}
 		}
 							
 	}); 
@@ -381,8 +370,7 @@ function fcList(){
 					s+="<td style='text-align: center; vertical-align:middle;'>" + item.dislike + "</td> ";	
 					s+="<td style='text-align: center;'><div class='dropdown'><button type='button' class='btn p-0 dropdown-toggle hide-arrow' data-bs-toggle='dropdown'><i class='bx bx-dots-vertical-rounded'></i></button>";
 					s+="<div class='dropdown-menu'>";
-					s+="<a class='dropdown-item delUserBtn' href='#?rbNum="+item.cIdx+"'><i class='bx bx-edit-alt me-1'></i>Update</a>";
-					s+="<a class='dropdown-item delPostBtn' rbNum='"+ item.cIdx + "'><i class='bx bx-trash me-1'></i> Delete</a>";		
+					s+="<a class='dropdown-item delPostBtn' cIdx='"+ item.cIdx + "' category='" + item.category + "'><i class='bx bx-trash me-1'></i> Delete</a>";						
 					s+="</div></div></td>"
 					s+="</tr>"		
 				});
@@ -452,9 +440,6 @@ function fcList(){
 									        </div>
 									        <button type="button" class="btn btn-default" id="searchBtn" style="margin-left: 5px;">검색</button>
 									    </div>
-									    <div class="bInsert">
-									        <button type="button" class="btn btn-default" id="insertBtn">글쓰기</button>
-									    </div>
 									</div>
 									<!-- 페이징 처리 -->
 									<div style="width: 500px; text-align: center;" class="container">
@@ -522,9 +507,6 @@ function fcList(){
 									                style="width: 200px; height: 40px;">
 									        </div>
 									        <button type="button" class="btn btn-default" id="searchBtn" style="margin-left: 5px;">검색</button>
-									    </div>
-									    <div class="bInsert">
-									        <button type="button" class="btn btn-default" id="insertBtn">글쓰기</button>
 									    </div>
 									</div>
 									<!-- 페이징 처리 -->

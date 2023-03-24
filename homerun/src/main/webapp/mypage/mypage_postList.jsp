@@ -21,7 +21,7 @@
 <meta name="viewport"
 	content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0" />
 
-<title>마이페이지_내 글 목록</title>
+<title>HOMERUN | MYPAGE_POSTLIST</title>
 
 <meta name="description" content="" />
 
@@ -225,7 +225,7 @@ $(function(){
 			type:"get",
 			dataType:"json",
 			data:{"uId" : uId, "category" : category, "currentPage" : currentPage},
-			url:"mypage_getBookmarkList.jsp",
+			url:"mypage_getpostList.jsp",
 			success:function(res){
 				
 				if(category == "fb")
@@ -497,9 +497,6 @@ function fbList(){
 									        </div>
 									        <button type="button" class="btn btn-default" id="searchBtn" style="margin-left: 5px;">검색</button>
 									    </div>
-									    <div class="bInsert">
-									        <button type="button" class="btn btn-default" id="insertBtn">글쓰기</button>
-									    </div>
 									</div>
 									<!-- 페이징 처리 -->
 									<div style="width: 500px; text-align: center;" class="container">
@@ -567,9 +564,6 @@ function fbList(){
 									                style="width: 200px; height: 40px;">
 									        </div>
 									        <button type="button" class="btn btn-default" id="searchBtn" style="margin-left: 5px;">검색</button>
-									    </div>
-									    <div class="bInsert">
-									        <button type="button" class="btn btn-default" id="insertBtn">글쓰기</button>
 									    </div>
 									</div>
 									<!-- 페이징 처리 -->

@@ -236,6 +236,7 @@ public class BookMarkDao {
 			pstmt = conn.prepareStatement(sql);
 			
 			pstmt.setString(1, bId);
+			
 			pstmt.execute();
 		} catch (SQLException e) {
 			e.printStackTrace();

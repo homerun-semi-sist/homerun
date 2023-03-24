@@ -22,7 +22,7 @@
 <meta name="viewport"
 	content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0" />
 
-<title>마이페이지_내 글 목록</title>
+<title>HOMERUN | MYPAGE_BOOKMARKLIST</title>
 
 <meta name="description" content="" />
 
@@ -192,7 +192,6 @@ $(function(){
 						s+="<td style='text-align: center; vertical-align:middle;'><b>" + item.fbReport + "</b></td>";										
 						s+="<td style='text-align: center;'><div class='dropdown'><button type='button' class='btn p-0 dropdown-toggle hide-arrow' data-bs-toggle='dropdown'><i class='bx bx-dots-vertical-rounded'></i></button>";
 						s+="<div class='dropdown-menu'>";
-						s+="<a class='dropdown-item delUserBtn' href='#?fbNum="+item.fbNum+"'><i class='bx bx-edit-alt me-1'></i>Update</a>";
 						s+="<a class='dropdown-item delPostBtn' bId='"+ item.fbNum + "'><i class='bx bx-trash me-1'></i> Delete</a>";						
 						s+="</div></div></td>"
 						s+="</tr>"			
@@ -209,16 +208,14 @@ $(function(){
 	    
 	});
 		
-	
 	$(document).on("click", ".delBtn", function() {
 		var bId = $(this).attr("bId");
 		// alert(bId);
-		
-		
+
 		var a = confirm("해당 게시글을 찜 목록에서 삭제하시겠습니까?");
 	
 		if(a) {
-			location.href="mypage_bookmarkDelete?bId=" + bId;
+			location.href="mypage_bookmarkDelete.jsp?bId=" + bId;
 		} 
 			 			
 	}); 
@@ -334,10 +331,7 @@ function bList(){
 											required="required" style="width: 200px; height: 40px;">
 								</div>
 								<button type="button" class="btn btn-default" id="searchBtn" style="margin-left: 5px;">검색</button>
-                            </div>
-                            <div class="bInsert">
-								<button type="button" class="btn btn-default" id="insertBtn">글쓰기</button>
-							</div>
+                            </div>              
                         </div>
                         <!-- 페이징 처리 -->
 							<div style="width: 500px; text-align: center;" class="container">

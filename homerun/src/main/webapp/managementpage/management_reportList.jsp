@@ -21,7 +21,7 @@
 <meta name="viewport"
 	content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0" />
 
-<title>관리자페이지_신고 목록</title>
+<title>HOMERUN | MANAGEMENT_REPORTLIST</title>
 
 <meta name="description" content="" />
 

@@ -9,7 +9,7 @@
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
 		<script src="https://code.jquery.com/jquery-3.6.3.js"></script>
 
-		<title>Insert title here</title>
+		<title>HOMERUN | BOOKMARK_DELETE</title>
 	</head>
 	
 	<body>
@@ -22,6 +22,8 @@
 			
 			// dao 삭제
 			dao.deleteMyBM(bId);
+			
+			response.sendRedirect("mypage_bookmarkListPage.jsp");
 		%>
 	</body>
 </html>

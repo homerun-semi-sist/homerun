@@ -8,7 +8,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>HOMERUN | REVIEWBOARD_INSERT</title>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
 <link rel="stylesheet" href="resources/css/plugin/datepicker/bootstrap-datepicker.css">
 
@@ -58,7 +58,7 @@
 	<table class="table table-bordered" style="width: 1000px; height:700px; margin-left: 100px;">
 		<caption style="caption-side: top;"><h3>후기게시판 게시글 등록</h3></caption>
 		<tr>
-			<th width="100" style="height:30px; text-align: center; line-height: 30px; background-color: #F8F9FA;">경기일</th>
+			<!-- <th width="100" style="height:30px; text-align: center; line-height: 30px; background-color: #F8F9FA;">경기일</th>
 			<td width="300">
 				<input type="date" id="input_date" max="2023-12-31" min="2020-01-01" value="2023-04-01" style="width: 140px;">		
 				<input type="button" class="btn btn-default" onclick="inputDate()" value="확인" style="width: 50px; height: 30px;">	
@@ -70,7 +70,7 @@
 					}
 				</script>
 			
-			</td>
+			</td> -->
 			
 			<th width="100" style="height:30px; text-align: center; line-height: 30px; background-color: #F8F9FA;">경기팀</th>
 			<td>
