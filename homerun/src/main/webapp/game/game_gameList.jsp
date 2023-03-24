@@ -57,10 +57,10 @@ table, tr, th, td {
 	%>
 	<table class="table table-bordered" style="width: 100%">
 		<thead style="background-color: #0b214e; color: white;">
-			<tr height="50">
-				<th width="150px" style="text-align: center; vertical-align: middle">경기일</th>
-				<th width="350px" style="text-align: center; vertical-align: middle">경기</th>
-			<th width="300px" style="text-align: center; vertical-align: middle">구장</th>
+			<tr height="65">
+				<th width="150px" style="text-align: center; font-size:1.4em; vertical-align: middle">경기일</th>
+				<th width="350px" style="text-align: center; font-size:1.4em; vertical-align: middle">경기</th>
+				<th width="300px" style="text-align: center; font-size:1.4em; vertical-align: middle">구장</th>
 			</tr>
 		</thead>
 		<%
@@ -74,7 +74,6 @@ table, tr, th, td {
 			for (int j = startIndex; j < endIndex; j++) {
 				text_left = elements_left.get(j).text();
 				text_right = elements_right.get(j).text();
-				
 		%>
 		<tr height="60">
 			<td
@@ -98,7 +97,7 @@ table, tr, th, td {
 		<%
 		}
 		}
-%>
+		%>
 	</table>
 </body>
 </html>
