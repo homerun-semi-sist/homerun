@@ -153,8 +153,7 @@ $(function(){
 		var val = $("#search :selected").val();
 		var currentPage=$("#currentPage").val();
 		var str = $("#search_str").val();
-		
-	   
+  
 	    $.ajax({
 		
 			type : "get",
@@ -225,9 +224,9 @@ $(function(){
 			type:"get",
 			dataType:"json",
 			data:{"uId" : uId, "category" : category, "currentPage" : currentPage},
-			url:"mypage_getpostList.jsp",
+			url:"mypage_getPostList.jsp",
 			success:function(res){
-				
+				// alert(category + ", " + currentPage + ", " +uId + ", " + res.length);
 				if(category == "fb")
 					fbList();
 				
@@ -260,7 +259,7 @@ $(function(){
 					} else {
 						$.each(res, function(idx, item){
 							s+="<tr>";
-							s+="<td style='text-align: center; vertical-align:middle;'>" + item.rbNum + "</td>";
+							s+="<td style='text-align: center; vertical-align:middle;'>" + item.num + "</td>";
 							s+="<td style='text-align: center; vertical-align:middle;'>" + item.year + "." + item.month + "." + item.day + "</td>"
 							
 							
@@ -284,20 +283,20 @@ $(function(){
 								s+="</td>";
 							}
 							
-							if(item.rcCnt == 0)
-								s+="<td style='vertical-align:middle;'><a href='../reviewBoard/reviewPost_detailPage.jsp?rbNum=" + item.rbNum + "&currentPage=" + currentPage + "'>" + item.rbSubject + "</a></td>";					
+							if(item.cCnt == 0)
+								s+="<td style='vertical-align:middle;'><a href='../reviewBoard/reviewPost_detailPage.jsp?rbNum=" + item.num + "&currentPage=" + currentPage + "'>" + item.subject + "</a></td>";					
 							else
-								s+="<td style='vertical-align:middle;'><a href='../reviewBoard/reviewPost_detailPage.jsp?rbNum=" + item.rbNum + "&currentPage=" + currentPage + "'>" + item.rbSubject + "</a><span style='color: tomato;'>&nbsp;&nbsp;[" + item.rcCnt + "]</span></td>";
+								s+="<td style='vertical-align:middle;'><a href='../reviewBoard/reviewPost_detailPage.jsp?rbNum=" + item.num + "&currentPage=" + currentPage + "'>" + item.subject + "</a><span style='color: tomato;'>&nbsp;&nbsp;[" + item.cCnt + "]</span></td>";
 							
 							s+="<td style='text-align: center; vertical-align:middle;'>" + item.nickname + "</td>";
-							s+="<td style='text-align: center; vertical-align:middle;'>" + item.rbWriteday + "</td>";
-							s+="<td style='text-align: center; vertical-align:middle;'>" + item.rbReadCnt + "</td>";
-							s+="<td style='text-align: center; vertical-align:middle;'>" + item.rbLike + "</td>";
-							s+="<td style='text-align: center; vertical-align:middle;'>" + item.rbDislike + "</td> ";	
+							s+="<td style='text-align: center; vertical-align:middle;'>" + item.writeday + "</td>";
+							s+="<td style='text-align: center; vertical-align:middle;'>" + item.readCnt + "</td>";
+							s+="<td style='text-align: center; vertical-align:middle;'>" + item.like + "</td>";
+							s+="<td style='text-align: center; vertical-align:middle;'>" + item.dislike + "</td> ";	
 							s+="<td style='text-align: center;'><div class='dropdown'><button type='button' class='btn p-0 dropdown-toggle hide-arrow' data-bs-toggle='dropdown'><i class='bx bx-dots-vertical-rounded'></i></button>";
 							s+="<div class='dropdown-menu'>";
-							s+="<a class='dropdown-item delUserBtn' href='#?rbNum="+item.rbNum+"'><i class='bx bx-edit-alt me-1'></i>Update</a>";
-							s+="<a class='dropdown-item delPostBtn' rbNum='"+ item.rbNum + "'><i class='bx bx-trash me-1'></i> Delete</a>";		
+							s+="<a class='dropdown-item modBtn' num="+item.num+"' category='" + category + "'><i class='bx bx-edit-alt me-1'></i>Update</a>";
+							s+="<a class='dropdown-item delBtn' num='"+ item.num + "' category='" + category + "'><i class='bx bx-trash me-1'></i> Delete</a>";		
 							s+="</div></div></td>"
 							s+="</tr>"		
 						});
@@ -327,26 +326,37 @@ $(function(){
 		var category = $(this).attr("category");
 		// alert(num + ", " + category);
 		
-		if(category == "fb" || category =="rb") {
-			var a = confirm("해당 게시글을 정말로 강제 삭제하시겠습니까?");
+		var a = confirm("해당 게시글을 삭제하시겠습니까?");
 		
-			if(a) {
-				if(category == "fb")
-					location.href="../freeBoard/freePost_delete.jsp?fbNum=" + num;
-				else 
-					location.href="../reviewBoard/reviewPost_delete.jsp?rbNum=" + num;
-			}
-		} else {
-			var a = confirm("해당 댓글을 정말로 강제 삭제하시겠습니까?");
-			
-			if(a) {
-				if(category == "fc")
-					location.href="../freeBoard/freeComment_delete.jsp?fcIdx=" + num;
-				else 
-					location.href="../reviewBoard/reviewComment_delete.jsp?rcIdx=" + num;
-			}
+		if(a) {
+			$.ajax({
+				type:"get",
+				dataType:"html",
+				data:{"num" : num, "category" : category},
+				url:"mypage_postDelete.jsp",
+				success:function(res){
+					alert("게시글을 삭제하였습니다.");
+					location.reload();
+				}
+				
+			});
 		}
-							
+								
+	}); 
+	
+	$(document).on("click", ".modBtn", function() {
+		var num = $(this).attr("num");
+		var category = $(this).attr("category");
+		alert(num + ", " + category);
+		
+		var a = confirm("해당 게시글을 수정하시겠습니까?");
+		if(a) {
+			
+			if(category == "fb")
+				location.href="../freeBoard/freePost_updatePage.jsp?fbNum=" + num;
+			else
+				location.href="../reviewBoard/reviewPost_updatePage.jsp?rbNum=" + num;
+		}				
 	}); 
 })
 
@@ -355,13 +365,11 @@ function fbList(){
 	var currentPage = $("#currentPage").val();
 	var category = "fb";
 	
-	
-	
 	$.ajax({
 		type:"get",
 		dataType:"json",
 		data:{"uId" : uId, "category" : category, "currentPage" : currentPage},
-		url:"mypage_getBookmarkList.jsp",
+		url:"mypage_getPostList.jsp",
 		success:function(res){
 			// alert(uId + ", " + currentPage + ", " + category);
 			
@@ -393,40 +401,40 @@ function fbList(){
 			} else {
 				$.each(res, function(idx, item){
 					
-					if(item.fbCategory == "전체") {   
+					if(item.category == "전체") {   
 						s+="<tr>";
-						s+="<td style='text-align: center; vertical-align:middle;'>" + item.fbNum + "</td>";
+						s+="<td style='text-align: center; vertical-align:middle;'>" + item.num + "</td>";
 						s+="<td style='text-align: center; vertical-align:middle;'>";
 						s+="<img src='https://cdn.icon-icons.com/icons2/2070/PNG/512/baseball_icon_126956.png' style='width: 30px;'>";
 						s+="</td>";
-					} else if(item.fbCategory == "한화") {
+					} else if(item.category == "한화") {
 						s+="<tr>";
-						s+="<td style='text-align: center; vertical-align:middle;'>" + item.fbNum + "</td>";
+						s+="<td style='text-align: center; vertical-align:middle;'>" + item.num + "</td>";
 						s+="<td style='text-align: center; vertical-align:middle;'>";
 						s+="<img src='" + item.teamLogoImg + "' style='width: 50px;'>";
 						s+="</td>";
 					} else {
 						s+="<tr>";
-						s+="<td style='text-align: center; vertical-align:middle;'>" + item.fbNum + "</td>";
+						s+="<td style='text-align: center; vertical-align:middle;'>" + item.num + "</td>";
 						s+="<td style='text-align: center; vertical-align:middle;'>";
 						s+="<img src='" + item.teamLogoImg + "' style='width: 40px;'>";
 						   s+="</td>";
 					}
 					
-					if(item.fcCnt == 0) 
-						s+="<td style='vertical-align:middle;'><a href='../freeBoard/freePost_detailPage.jsp?fbNum=" + item.fbNum + "&currentPage=" + currentPage + "' style=' text-decoration: none; color: black;'>" + item.fbSubject + "</a></td>";
+					if(item.cCnt == 0) 
+						s+="<td style='vertical-align:middle;'><a href='../freeBoard/freePost_detailPage.jsp?fbNum=" + item.num + "&currentPage=" + currentPage + "' style=' text-decoration: none; color: black;'>" + item.subject + "</a></td>";
 					else 
-						s+="<td style='vertical-align:middle;'><a href='../freeBoard/freePost_detailPage.jsp?fbNum=" + item.fbNum + "&currentPage=" + currentPage + "' style=' text-decoration: none; color: black;'>" + item.fbSubject + "</a><span style='color: tomato;'>&nbsp;&nbsp;[" + item.fcCnt + "]</span></td>";
+						s+="<td style='vertical-align:middle;'><a href='../freeBoard/freePost_detailPage.jsp?fbNum=" + item.num + "&currentPage=" + currentPage + "' style=' text-decoration: none; color: black;'>" + item.subject + "</a><span style='color: tomato;'>&nbsp;&nbsp;[" + item.cCnt + "]</span></td>";
 
 					s+="<td style='text-align: center; vertical-align:middle;'>" + item.nickname + "</td>";
-					s+="<td style='text-align: center; vertical-align:middle;'>" + item.fbWriteday + "</td>";
-					s+="<td style='text-align: center; vertical-align:middle;'>" + item.fbReadCnt + "</td>";
-					s+="<td style='text-align: center; vertical-align:middle;'>" + item.fbLike + "</td>";
-					s+="<td style='text-align: center; vertical-align:middle;'>" + item.fbDislike + "</td> ";
+					s+="<td style='text-align: center; vertical-align:middle;'>" + item.writeday + "</td>";
+					s+="<td style='text-align: center; vertical-align:middle;'>" + item.readCnt + "</td>";
+					s+="<td style='text-align: center; vertical-align:middle;'>" + item.like + "</td>";
+					s+="<td style='text-align: center; vertical-align:middle;'>" + item.dislike + "</td> ";
 					s+="<td style='text-align: center;'><div class='dropdown'><button type='button' class='btn p-0 dropdown-toggle hide-arrow' data-bs-toggle='dropdown'><i class='bx bx-dots-vertical-rounded'></i></button>";
 					s+="<div class='dropdown-menu'>";
-					s+="<a class='dropdown-item modPostBtn' href='#?fbNum="+item.fbNum+"'><i class='bx bx-edit-alt me-1'></i>Update</a>";
-					s+="<a class='dropdown-item delPostBtn' fbNum='"+ item.fbNum + "'><i class='bx bx-trash me-1'></i> Delete</a>";		
+					s+="<a class='dropdown-item modBtn' num='" + item.num + "' category='" + category + "'><i class='bx bx-edit-alt me-1'></i>Update</a>";
+					s+="<a class='dropdown-item delBtn' num='" + item.num + "' category='" + category + "'><i class='bx bx-trash me-1'></i> Delete</a>";		
 					s+="</div></div></td>"
 					s+="</tr>"
 	

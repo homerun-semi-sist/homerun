@@ -316,6 +316,30 @@ $(function(){
 		}
 							
 	}); 
+	
+	$(document).on("click", ".delBtn", function() {
+		var num = $(this).attr("num");
+		var category = $(this).attr("category");
+		// alert(num + ", " + category);
+		
+		var a = confirm("해당 게시글을 삭제하시겠습니까?");
+		
+		if(a) {
+			$.ajax({
+				type:"get",
+				dataType:"html",
+				data:{"num" : num, "category" : category},
+				url:"mypage_postDelete.jsp",
+				success:function(res){
+					alert("댓글을 삭제하였습니다.");
+					location.reload();
+				}
+				
+			});
+		}
+								
+	}); 
+	
 })
 
 function fcList(){
