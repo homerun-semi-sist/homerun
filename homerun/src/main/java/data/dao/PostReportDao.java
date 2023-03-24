@@ -12,6 +12,33 @@ public class PostReportDao {
 	
 	DbConnect db = new DbConnect();
 	
+	// PR totalCount
+	public int getPRTotalCount() {
+		int n = 0;
+		
+		Connection conn = db.getConnection();
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		String sql = "select count(*) from POSTREPORT";
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+		
+			rs =  pstmt.executeQuery();
+		
+			if(rs.next()) 
+				n = rs.getInt(1);
+			
+			} catch (SQLException e) {
+				e.printStackTrace();
+			} finally {
+				db.dbClose(rs, pstmt, conn);
+		}
+			
+		return n; 
+	}
+		
 	// FBRP cnt
 	public int getFBRPcnt(String uId, String fbNum) {
 		int n = 0;

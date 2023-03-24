@@ -3,7 +3,7 @@
 <html>
 	<head>
 	    <meta charset="utf-8">
-	    <title>Insert title here</title>
+	    <title>HOMERUN | MYPAGE_COMMENTLIST</title>
 	    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"/>
 	    <script src="https://code.jquery.com/jquery-3.6.3.js"></script>
 	    
@@ -36,7 +36,7 @@
 				<div class="row">
 					<div class="col-sm-2" style="border: 0px solid red;"></div>
 					<div class="col-sm-8" style="border: 0px solid pink;">
-						<jsp:include page="reviewPost_update.jsp"></jsp:include>
+						<jsp:include page="mypage_commentList.jsp"></jsp:include>
 					</div>
 					<div class="col-sm-2" style="border: 0px solid blue;"></div>
 				</div>

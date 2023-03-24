@@ -98,7 +98,7 @@ String root = request.getContextPath();
 						 
 						 </a>
 						 
-						 <span class="a_title"> | </span> 
+						 <span class="a_title">&nbsp;|&nbsp;</span> 
 						 
 						 <a style="color: white;" href="<%=root%>/product/product_cartlist.jsp">
 						 
