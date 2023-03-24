@@ -31,7 +31,7 @@
 	
 	%>
 	
-	<div class="fbList" style="width: 100%; border: 0px solid gray;">
+	<div class="fbList" style="width: 100%; height: 100%; border: 0px solid gray;">
 		<div class="title" >
 			<div style="float: left;">
 				<b style="font-size: 1.4em;">후기게시판 최근게시글</b>
