@@ -1,3 +1,6 @@
+<%@page import="java.util.HashMap"%>
+<%@page import="java.util.List"%>
+<%@page import="data.dao.TeamDao"%>
 <%@ page language="java" contentType="text/html; charset=utf-8"
 	pageEncoding="utf-8"%>
 <!DOCTYPE html>
@@ -12,26 +15,46 @@ table, tr, th, td {
 }
 </style>
 </head>
+<%
+TeamDao dao = new TeamDao();
+List<HashMap<String, String>> list = dao.teamRank();
+%>
 <body>
 	<table class="table table-bordered" style="width: 100%">
 		<thead style="background-color: #0b214e; color: white;">
 			<tr height="65">
-				<th width="150px"
+				<th width="30px"
 					style="text-align: center; font-size: 1.4em; vertical-align: middle">순위</th>
-				<th width="350px"
+				<th width="50px"
 					style="text-align: center; font-size: 1.4em; vertical-align: middle">구단</th>
+					<th width="30px"
+					style="text-align: center; font-size: 1.4em; vertical-align: middle">경기수</th>
+				<th width="30px"
+					style="text-align: center; font-size: 1.4em; vertical-align: middle">승수</th>
+					<th width="30px"
+					style="text-align: center; font-size: 1.4em; vertical-align: middle">패수</th>
+					<th width="50px"
+					style="text-align: center; font-size: 1.4em; vertical-align: middle">승률</th>
 			</tr>
 		</thead>
 		<%
-		for (int i = 1; i <= 10; i++) {
+		for (int i = 0; i < 10; i++) {
+			HashMap<String, String> map = list.get(i);
 		%>
 		<tr height="60">
 			<td
 				style="text-align: center; vertical-align: middle; color: black; font-size: 1.3em">
-
-				<%=i%></td>
-			<td style="text-align: center; vertical-align: middle; color: black;">KT위즈</td>
-
+				<%=map.get("등수")%></td>
+			<td
+				style="text-align: center; vertical-align: middle; color: black; font-size: 1.3em"><b><%=map.get("구단명")%></b></td>
+				<td
+				style="text-align: center; vertical-align: middle; color: black; font-size: 1.3em"><%=map.get("경기수")%></td>
+			<td
+				style="text-align: center; vertical-align: middle; color: black; font-size: 1.3em"><%=map.get("승수")%></td>
+				<td
+				style="text-align: center; vertical-align: middle; color: black; font-size: 1.3em"><%=map.get("패수")%></td>
+				<td
+				style="text-align: center; vertical-align: middle; color: black; font-size: 1.3em"><%=map.get("승률")%></td>
 		</tr>
 		<%
 		}
