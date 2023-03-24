@@ -20,7 +20,9 @@ TeamDao dao = new TeamDao();
 List<HashMap<String, String>> list = dao.teamRank();
 %>
 <body>
-	<table class="table table-bordered" style="width: 100%; height: 100%">
+
+<div style="width: 100%; height: 100%">
+	<table class="table table-bordered" >
 		<thead style="background-color: #0b214e; color: white;">
 			<tr>
 				<th width="30px"
@@ -46,7 +48,7 @@ List<HashMap<String, String>> list = dao.teamRank();
 				style="text-align: center; vertical-align: middle; color: black; font-size: 1.3em">
 				<%=map.get("등수")%></td>
 			<td
-				style="text-align: center; vertical-align: middle; color: black; font-size: 1.3em"><b><%=map.get("구단명")%></b></td>
+				style="text-align: center; vertical-align: middle; color: black; font-size: 1.3em"><%=map.get("구단명")%></td>
 				<td
 				style="text-align: center; vertical-align: middle; color: black; font-size: 1.3em"><%=map.get("경기수")%></td>
 			<td
@@ -61,5 +63,6 @@ List<HashMap<String, String>> list = dao.teamRank();
 		%>
 
 	</table>
+	</div>
 </body>
 </html>
