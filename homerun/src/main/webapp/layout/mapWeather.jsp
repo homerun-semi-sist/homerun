@@ -149,7 +149,7 @@
         </style>
       </head>
 
-      <%-- <body>
+       <body>
       <div class="box">
       <!-- 날씨 -->
 		<% 
@@ -346,7 +346,7 @@
 				}
 			];
  
-            var teams[positions.length];
+            <%-- var teams[positions.length];
             for(var i = 0; i < positions.length; i++) {
             	Team dto = dao.getData(i+1);
 	             
@@ -356,13 +356,13 @@
 	                  // team: "HANHWA EAGLES",
 	                  team: "<%=dto.getTeam() %>",
 	                  color: "<%=dto.gettColor() %>",
-	                  logo: "<%=dto.getTeamLogo()%>",
+	                  logo: "<%=dto.getTeamLogo()%>",	
 	                  stadium: "<%=dto.getStadium() %>",
 	                  location: "<%=dto.getLocation() %>"
 	                }
 	            ]
             
-            }
+            } --%>
             
             // 마커 이미지의 이미지 주소
             var imageSrc = "https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/marker_red.png";
@@ -439,5 +439,5 @@
           
        </div>   
       </body>
- --%>
+
       </html>

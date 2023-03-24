@@ -9,14 +9,24 @@
 <html>
 	<head>
 		<meta charset="utf-8">
-		<title>Insert title here</title>
+		<title>HOMERUN | MYPAGE_MODIFY</title>
 		<link rel="stylesheet"
 			href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" />
 		<script src="https://code.jquery.com/jquery-3.6.3.js"></script>
 		<link href="../assets/css/index.css" rel="stylesheet">
 	<script type="text/javascript">
+	<%
+
+	String uid=(String)session.getAttribute("uid");
+
+	UserDao dao=new UserDao();
+	
+	UserDto dto=dao.getData(uid);
+	
+	String [] hp=dto.getHp().split("-");
+	String [] addr=dto.getAddr().split(" ");
+%>
 	$(function(){
-		
 $("#btnnck").click(function(){
 			
 			var nickname=$("#nickname").val();
@@ -56,6 +66,7 @@ $("#btnnck").click(function(){
 	
 	function passcheck(f)
 	{
+		
 					 if(f.pw1.value!=f.pw2.value){
 						
 						alert("비밀번호가 일치하지 않습니다");
@@ -83,12 +94,16 @@ $("#btnnck").click(function(){
 					}else if(f.nickname.value==""){
 						
 						alert("닉네임을 입력 해 주세요");
-						return false;
+						return false;					
 						
 					}else if(document.getElementById("check").value==''){
-						alert("닉네임 중복체크를 해 주세요");
-						return false;
-									
+						
+						if("<%=dto.getNickname()%>"!=$("#nickname").val()){
+							
+							alert("닉네임 중복체크를 해 주세요");
+							return false;
+						
+						}		
 					}else if(f.hp2.value==""){
 						
 						alert("전화번호를 입력 해 주세요");
@@ -374,17 +389,7 @@ function noSpacialForm(obj) { // 공백사용못하게
 					<div class="col-sm-8" style="border: 0px solid pink;">
 						
 						<!-- write here -->
-<%
 
-	String uid=(String)session.getAttribute("uid");
-
-	UserDao dao=new UserDao();
-	
-	UserDto dto=dao.getData(uid);
-	
-	String [] hp=dto.getHp().split("-");
-	String [] addr=dto.getAddr().split(" ");
-%>
 						<form action="mypage_modifyaction.jsp" method="post" class="joinForm" 
 		onsubmit="return passcheck(f)" name="f">
                                                                                                
@@ -520,7 +525,7 @@ function noSpacialForm(obj) { // 공백사용못하게
 		   <input type="text" name="addr3" class="addr" id="sample6_extraAddress" placeholder="참고항목">
 		</div>
     
-       <button type="submit" class="btn1" onclick="passcheck(f)">수정하기</button>
+       <button type="submit" class="btn1">수정하기</button>
        <button type="button" class="btn2"  onclick="location.href='../index.jsp'">메인으로</button>
    
     </form>
