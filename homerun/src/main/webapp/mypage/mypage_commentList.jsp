@@ -209,7 +209,7 @@ $(function(){
 				s+="</table>";
 				s+="</div>";
 				
-				$("div.fbList").html(s);
+				$("div.fcList").html(s);
 			}
 		});
 	    
@@ -275,7 +275,7 @@ $(function(){
 							s+="<td style='text-align: center; vertical-align:middle;'>" + item.dislike + "</td> ";	
 							s+="<td style='text-align: center;'><div class='dropdown'><button type='button' class='btn p-0 dropdown-toggle hide-arrow' data-bs-toggle='dropdown'><i class='bx bx-dots-vertical-rounded'></i></button>";
 							s+="<div class='dropdown-menu'>";
-							s+="<a class='dropdown-item delPostBtn' cIdx='"+ item.cIdx + "'><i class='bx bx-trash me-1'></i> Delete</a>";						
+							s+="<a class='dropdown-item delBtn' cIdx='"+ item.cIdx + "' category='" + category + "'><i class='bx bx-trash me-1'></i> Delete</a>";						
 							s+="</div></div></td>"
 							s+="</tr>"		
 						});
@@ -306,38 +306,26 @@ $(function(){
 		alert(cIdx + ", " + category);
 		
 		var a = confirm("해당 댓글을 삭제하시겠습니까?");
+		 if(a) {
+			$.ajax({
+				type:"get",
+				dataType:"html",
+				data:{"cIdx" : cIdx, "category" : category},
+				url:"mypage_commentDelete.jsp",
+				success:function(res){
+					location.reload();
+					alert("댓글을 삭제하였습니다.");
+					
+				}	 						
+			}); 
+		 }
 		
-		if(a) {
+		/*
 			if(category == "fc")
 				location.href="../freeBoard/freeComment_delete.jsp?fcIdx=" + num;
 			else 
 				location.href="../reviewBoard/reviewComment_delete.jsp?rcIdx=" + num;
-		}
-		}
-							
-	}); 
-	
-	$(document).on("click", ".delBtn", function() {
-		var num = $(this).attr("num");
-		var category = $(this).attr("category");
-		// alert(num + ", " + category);
-		
-		var a = confirm("해당 게시글을 삭제하시겠습니까?");
-		
-		if(a) {
-			$.ajax({
-				type:"get",
-				dataType:"html",
-				data:{"num" : num, "category" : category},
-				url:"mypage_postDelete.jsp",
-				success:function(res){
-					alert("댓글을 삭제하였습니다.");
-					location.reload();
-				}
-				
-			});
-		}
-								
+		}	 */ 						
 	}); 
 	
 })
@@ -354,7 +342,7 @@ function fcList(){
 		data:{"uId" : uId, "category" : category, "currentPage" : currentPage},
 		url:"mypage_getCommentList.jsp",
 		success:function(res){
-				
+			// alert(category + ", " + currentPage + ", " +uId + ", " + res.length);
 			var s="";
 				
 			s+="<div class='table-responsive text-nowrap'>";
@@ -394,7 +382,7 @@ function fcList(){
 					s+="<td style='text-align: center; vertical-align:middle;'>" + item.dislike + "</td> ";	
 					s+="<td style='text-align: center;'><div class='dropdown'><button type='button' class='btn p-0 dropdown-toggle hide-arrow' data-bs-toggle='dropdown'><i class='bx bx-dots-vertical-rounded'></i></button>";
 					s+="<div class='dropdown-menu'>";
-					s+="<a class='dropdown-item delPostBtn' cIdx='"+ item.cIdx + "' category='" + item.category + "'><i class='bx bx-trash me-1'></i> Delete</a>";						
+					s+="<a class='dropdown-item delBtn' cIdx='"+ item.cIdx + "' category='" + category + "'><i class='bx bx-trash me-1'></i> Delete</a>";						
 					s+="</div></div></td>"
 					s+="</tr>"		
 				});

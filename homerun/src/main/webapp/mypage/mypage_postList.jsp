@@ -335,8 +335,8 @@ $(function(){
 				data:{"num" : num, "category" : category},
 				url:"mypage_postDelete.jsp",
 				success:function(res){
-					alert("게시글을 삭제하였습니다.");
 					location.reload();
+					alert("게시글을 삭제하였습니다.");
 				}
 				
 			});

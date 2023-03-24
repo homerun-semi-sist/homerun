@@ -50,6 +50,7 @@
 		int rcCnt = rcDao.getAllRCs(rbDto.getRbNum()).size();
 		
 		ob.put("rbNum", rbDto.getRbNum());
+		ob.put("gId", rbDto.getgId());
 		ob.put("frbUId", rbDto.getUId());
 		ob.put("nickname", nickname);
 		ob.put("rbSubject", rbDto.getRbSubject());

@@ -9,6 +9,8 @@
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
 <script src="https://code.jquery.com/jquery-3.6.3.js"></script>
+<script src="https://kit.fontawesome.com/8dcaa4675e.js" crossorigin="anonymous"></script>
+
 <style type="text/css">
 .login {
 	width: 250px;
@@ -98,11 +100,19 @@
 	border: 1px solid black;
 }
 
-.leftbottom {
+.leftbottom1 {
 	align: left;
 	width: 55%;
-	height: 500px;
+	height: 250px;
 	border: 1px solid yellow;
+	margin-top: 50px;
+}
+
+.leftbottom2 {
+	align: left;
+	width: 55%;
+	height: 250px;
+	border: 1px solid pink;
 	margin-top: 20px;
 }
 
@@ -131,8 +141,13 @@
             <jsp:include page="mapWeather.jsp"></jsp:include>
         </div > --%>
 
-			<div class="lefttop"><jsp:include page="teamRank.jsp"></jsp:include></div>
-			<div class="leftbottom">왼쪽아래</div>
+			<div class="lefttop"><%-- <jsp:include page="teamRank.jsp"> </jsp:include>--%></div>
+			<div class="leftbottom1">
+				<jsp:include page="main_fboardList.jsp"></jsp:include>
+			</div>
+			<div class="leftbottom2">
+				<jsp:include page="main_rboardList.jsp"></jsp:include>
+			</div>
 			<div class="right">
 				<%
 				// loginok 가져오기
