@@ -19,11 +19,31 @@
 <link href="../assets/css/styles_detail.css" rel="stylesheet" />
 </head>
 
+<<<<<<< HEAD
 <script>
 	$(function() {
 
 		$("#cartinsert").click(function() {
 
+=======
+<<<<<<< HEAD
+<<<<<<< HEAD
+<script  type="text/javascript">
+
+=======
+<script>
+>>>>>>> WooTest
+=======
+
+<script  type="text/javascript">
+
+
+>>>>>>> UngTest6
+	$(function(){
+		
+		$("#cartinsert").click(function(){
+			
+>>>>>>> origin/WooUng5
 			var uId = $(this).attr("uId");
 			var pId = $(this).attr("pId");
 			var cQTY = $("#inputQuantity").val();

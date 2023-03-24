@@ -35,6 +35,9 @@ hr {
   margin: 0 4% 0 4%;
 }
 
+
+
+
 table td, th {
   padding: 10px 0 !important;
   text-align: center !important;
@@ -49,51 +52,18 @@ table td, th {
 
 	</style>
 	<script type="text/javascript">
-		function delfunc(uid){
 			
-			var yes=confirm("탈퇴 처리 하시겠습니까?");
+				function delfunc(uid){
+					
+					var yes=confirm("탈퇴 처리 하시겠습니까?");
+					
+					if(yes)
+						{
+							alert("탈퇴 처리 되었습니다");
+							location.href='admin_unregistaction.jsp?uid='+uid;
+						}
+					}
 			
-			if(yes)
-				{
-					alert("탈퇴 처리 되었습니다");
-					location.href='admin_unregistaction.jsp?uid='+uid;
-				}
-			}
-		
-		function checkAll() {
-			
-			if($("#cboxAll").is(':checked')) {
-				
-				$("input[name=cbox]").prop("checked", true);
-				
-			} else {
-				
-				$("input[name=cbox]").prop("checked", false);
-				
-			}
-		}
-		
-		$(document).on("click", "input:checkbox[name=cbox]", function(e) {
-			
-			var chks = document.getElementsByName("cbox");
-			var chksChecked = 0;
-			
-			for(var i=0; i<chks.length; i++) {
-				var cbox = chks[i];
-				
-				if(cbox.checked) {
-					chksChecked++;
-				}
-			}
-			
-			if(chks.length == chksChecked){
-				$("#cboxAll").prop("checked", true);
-			}else{
-				$("#cboxAll").prop("checked",false);
-			}
-			
-		});
-
 	</script>
 	</head>
 	<%
@@ -177,7 +147,6 @@ table td, th {
           <table class="ui very basic table">
             <thead>
               <tr>
-                <th><input type="checkbox" id="cboxAll" name="cboxAll" onclick="checkAll()"></th>
                 <th>번호</th>
                 <th>이름</th>
                 <th>아이디</th>
@@ -193,7 +162,6 @@ table td, th {
             	for(UserDto dto:alist)
             	{%>
             		<tr>
-            			<td><input type="checkbox" name="cbox" id="cbox"></td>
             			<td><%=no++ %></td>
             			<td><%=dto.getuName() %></td>
             			<td><%=dto.getUid() %></td>
@@ -229,8 +197,8 @@ table td, th {
 				
 				if(pp==currentPage){
 					%>
-					<li class="active">
-						<a href="admin_usermanageform.jsp?currentPage=<%=pp %>"><%=pp %></a>
+					<li  >
+						<a  href="admin_usermanageform.jsp?currentPage=<%=pp %>" style="background-color: #0b214e; color:white;"><%=pp %></a>
 					</li>
 				<% } else{
 					%>
@@ -249,10 +217,12 @@ table td, th {
 				</li>
 			<%}
 			%>
+			
 		</ul>
 	</div>
                 </th>
               </tr>
+             
             </tfoot>
           </table>          
           </div>

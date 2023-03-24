@@ -10036,15 +10036,60 @@ fieldset:disabled .btn {
 /* title css */
 .a_title {
   color: white;
+  position: relative;
+  top:25px;
+}
+
+.a_logout{
+	position: relative;
+	left: 138px;
+	color: white;
+}
+
+.a_logout:hover,
+.a_logout:active {
+  color: white;
 }
 
 .a_title:hover,
 .a_title:active {
-  color: #dce4ff;
+  color: white;
 }
 
-.uname_title {
+.me-3{
   color: #dce4ff;
   font-weight: 600;
   font-size: 1.2em;
+  position: relative;
+  left: 138px;
+}
+
+.me-4{
+  color: #dce4ff;
+  font-weight: 600;
+  font-size: 1.2em;
+  position: relative;
+  left: 85px;
+}
+
+.b_title {
+	position: relative;
+    top: 30px;
+    color: white;
+}
+
+.b_logout{
+	position: relative;
+	left: 83px;
+	color: white;
+}
+
+.b_title:hover,
+.b_title:active {
+  color: white;
+}
+
+.b_logout:hover,
+.b_logout:active {
+  color: white;
 }

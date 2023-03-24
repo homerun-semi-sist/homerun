@@ -1,3 +1,4 @@
+<%@page import="data.dto.UserDto"%>
 <%@page import="data.dao.UserDao"%>
 <%@ page language="java" contentType="text/html; charset=utf-8"
 	pageEncoding="utf-8"%>
@@ -56,6 +57,10 @@ String root = request.getContextPath();
 	// loginok 가져오기
 	String loginok=(String)session.getAttribute("loginok");
 	String uid=(String)session.getAttribute("uid");
+	
+	UserDao dao=new UserDao();
+	
+	UserDto dto=dao.getData(uid);
 
 	if(loginok==null)	//로그아웃
 	{%>
@@ -64,15 +69,25 @@ String root = request.getContextPath();
 		
 			<div class="col-lg-3" style="margin-top: 20px;">
 				<div class="d-flex align-items-center justify-content-end">
-					<span class="me-3">
+					<span class="me-4">
 					
-						<span class="uname_title"><%=uid %></span>
+						<span class="uname_title"><%=dto.getNickname()%></span>
 						
-						<span class="a_title">님</span>
+						<span style="color: white;">님</span>
 						
 					</span>
+					
+					<a class="b_logout" href="<%=root%>/user/user_logoutaction.jsp">
+						 
+						 <span>로그아웃</span>
+						 
+						 </a>
 						
+<<<<<<< HEAD
+						 <a class="b_title" href="<%=root%>/admin/admin_adminform.jsp">
+=======
 						 <a class="a_title" href="<%=root%>/admin/admin_adminform.jsp">
+>>>>>>> UngTest6
 						 
 						 <span>관리자페이지</span>
 						 
@@ -88,9 +103,16 @@ String root = request.getContextPath();
 					
 						<span class="uname_title"><%=uid %></span>
 						
-						<span class="a_title">님</span>
+						<span style="color: white;">님</span>
 						
 					</span>
+					
+						<a class="a_logout" href="<%=root%>/user/user_logoutaction.jsp">
+						 
+						 <span>로그아웃</span>
+						 
+						 </a>
+						 
 						
 						 <a class="a_title" href="<%=root%>/mypage/mypage_myinfo.jsp">
 						 
@@ -100,7 +122,11 @@ String root = request.getContextPath();
 						 
 						 <span class="a_title">&nbsp;|&nbsp;</span> 
 						 
+<<<<<<< HEAD
+						 <a class="a_title" style="color: white;" href="<%=root%>/product/product_cartlist.jsp">
+=======
 						 <a style="color: white;" href="<%=root%>/product/product_cartlist.jsp">
+>>>>>>> UngTest6
 						 
 						 <span>장바구니</span>
 				</div>

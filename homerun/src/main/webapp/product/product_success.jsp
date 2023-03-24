@@ -10,7 +10,7 @@
 <html>
 <head>
 <meta charset="utf-8">
-<title>Insert title here</title>
+<title>HOMERUN | PRODUCT_SUCCESS</title>
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" />
 <script src="https://code.jquery.com/jquery-3.6.3.js"></script>
@@ -136,7 +136,11 @@ margin-top:50px;
 					<div id="thanksmsg">구매해 주셔서 감사합니다.</div>
 					<br> <br>
 					<div style="text-align: center; margin-left: 350px; ">
+<<<<<<< HEAD
 						<table class="table table-bordered" style="width: 60%; position:relative;margin-bottom:300px;">
+=======
+						<table class="table table-bordered" style="width: 60%; position:relative;margin-bottom:30px;">
+>>>>>>> UngTest6
 							
 							<tr>
 								<th width="60px" style="text-align: center;">주문번호</th>
@@ -150,7 +154,7 @@ margin-top:50px;
 
 
 
-					<div style="margin-left: 100px;">
+					<div style="margin-left: 100px;margin-bottom:30px;">
 						<button type="submit" class="btn2"
 							onclick="location.href='product_orderlist.jsp'">주문목록</button>
 						&nbsp;

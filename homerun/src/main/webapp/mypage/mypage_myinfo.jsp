@@ -1,8 +1,17 @@
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+=======
+>>>>>>> origin/WooUng5
 <%@page import="data.dao.BookMarkDao"%>
 <%@page import="data.dao.ReviewCommentDao"%>
 <%@page import="data.dao.ReviewBoardDao"%>
 <%@page import="data.dao.FreeCommentDao"%>
 <%@page import="data.dao.FreeBoardDao"%>
+<<<<<<< HEAD
+=======
+>>>>>>> UngTest6
+>>>>>>> origin/WooUng5
 <%@page import="data.dto.OrderDto"%>
 <%@page import="data.dto.CartDto"%>
 <%@page import="data.dao.CartDao"%>
@@ -17,7 +26,7 @@
 <html>
 	<head>
 		<meta charset="utf-8">
-		<title>Insert title here</title>
+		<title>HOMERUN | MYPAGE</title>
 		<link rel="stylesheet"
 			href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" />
 		<script src="https://code.jquery.com/jquery-3.6.3.js"></script>
@@ -174,6 +183,11 @@ div{
 	CartDao cdao = new CartDao();
 	int OrderSize = cdao.getOrderList(uid).size();
 	
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+=======
+>>>>>>> origin/WooUng5
 	FreeBoardDao fbDao = new FreeBoardDao();
 	FreeCommentDao fcDao = new FreeCommentDao();
 	ReviewBoardDao rbDao = new ReviewBoardDao();
@@ -184,6 +198,10 @@ div{
 	int commentCnt = fcDao.getAllmyFCs(uid) + rcDao.getAllmyRCs(uid);
 	int bmCbt = bDao.getAllmyBMs(uid);
 	
+<<<<<<< HEAD
+=======
+>>>>>>> UngTest6
+>>>>>>> origin/WooUng5
 %>
 <script type="text/javascript">
 	function delfunc(uid){

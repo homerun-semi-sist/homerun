@@ -21,11 +21,12 @@
 
         <style>
         .box {
-        position: absolute;
-        padding: 10px;
-        height: 635px;
-        border: 1px solid gray;
-        margin: 10px;
+        /* position: absolute; */
+        /*  padding: 10px;*/
+        width:100%;
+        height: 100%;
+       /*  border: 1px solid gray; */
+      /*   margin: 10px; */
         }
         .mapBox {
         border: 0px solid gray;
@@ -149,7 +150,11 @@
         </style>
       </head>
 
+<<<<<<< HEAD
       <body>
+=======
+       <body>
+>>>>>>> origin/WooUng5
       <div class="box">
       <!-- 날씨 -->
 		<% 
@@ -356,7 +361,7 @@
 	                  // team: "HANHWA EAGLES",
 	                  team: "<%=dto.getTeamNick() %>",
 	                  color: "<%=dto.gettColor() %>",
-	                  logo: "<%=dto.getTeamLogo()%>",
+	                  logo: "<%=dto.getTeamLogo()%>",	
 	                  stadium: "<%=dto.getStadium() %>",
 	                  location: "<%=dto.getLocation() %>"
 	                }
