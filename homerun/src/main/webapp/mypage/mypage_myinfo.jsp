@@ -1,3 +1,11 @@
+<<<<<<< HEAD
+=======
+<%@page import="data.dao.BookMarkDao"%>
+<%@page import="data.dao.ReviewCommentDao"%>
+<%@page import="data.dao.ReviewBoardDao"%>
+<%@page import="data.dao.FreeCommentDao"%>
+<%@page import="data.dao.FreeBoardDao"%>
+>>>>>>> UngTest6
 <%@page import="data.dto.OrderDto"%>
 <%@page import="data.dto.CartDto"%>
 <%@page import="data.dao.CartDao"%>
@@ -169,6 +177,19 @@ div{
 	CartDao cdao = new CartDao();
 	int OrderSize = cdao.getOrderList(uid).size();
 	
+<<<<<<< HEAD
+=======
+	FreeBoardDao fbDao = new FreeBoardDao();
+	FreeCommentDao fcDao = new FreeCommentDao();
+	ReviewBoardDao rbDao = new ReviewBoardDao();
+	ReviewCommentDao rcDao = new ReviewCommentDao();
+	BookMarkDao bDao = new BookMarkDao();
+	
+	int postCnt = fbDao.getAllmyFBs(uid) + rbDao.getAllmyRBs(uid);
+	int commentCnt = fcDao.getAllmyFCs(uid) + rcDao.getAllmyRCs(uid);
+	int bmCbt = bDao.getAllmyBMs(uid);
+	
+>>>>>>> UngTest6
 %>
 <script type="text/javascript">
 	function delfunc(uid){
@@ -332,26 +353,32 @@ div{
       </div>  
          
       <div class="item">
-        <div>         
-          <img class="image" src="../assets/img/게시글.png">
-          <div class="text">내 게시글</div>
-          <div class="number">0건</div>
+        <div>
+          <a href="../mypage/mypage_postListPage.jsp" style="text-decoration: none;color: black;">          
+	          <img class="image" src="../assets/img/게시글.png">
+	          <div class="text">내 게시글</div>
+	          <div class="number"><%=postCnt %>건</div>
+          </a>
         </div>
       </div>   
         
       <div class="item" >
         <div>
-          <img class="image" src="../assets/img/댓글.png">        
-          <div class="text">내 댓글</div>
-          <div class="green number">1건</div>
+          <a href="../mypage/mypage_commentListPage.jsp" style="text-decoration: none;color: black;"> 
+	          <img class="image" src="../assets/img/댓글.png">        
+	          <div class="text">내 댓글</div>
+	          <div class="green number"><%=commentCnt %>건</div>
+          </a>
         </div>
       </div>  
          
       <div class="item">
         <div>
-          <img class="image" src="../assets/img/찜.png">        
-          <div class="text">내 게시글 찜</div>
-          <div class="green number">3건</div>
+          <a href="../mypage/mypage_bookmarkListPage.jsp" style="text-decoration: none;color: black;"> 
+	          <img class="image" src="../assets/img/찜.png">        
+	          <div class="text">게시글 찜</div>
+	          <div class="green number"><%=bmCbt %>건</div>
+          </a>
         </div>
       </div>     
       

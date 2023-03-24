@@ -20,11 +20,18 @@
 </head>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 <script  type="text/javascript">
 
 =======
 <script>
 >>>>>>> WooTest
+=======
+
+<script  type="text/javascript">
+
+
+>>>>>>> UngTest6
 	$(function(){
 		
 		$("#cartinsert").click(function(){

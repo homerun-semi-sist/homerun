@@ -121,15 +121,15 @@
 	    				s+="<table class='table'>";
 	    				s+="<thead style='background-color: #F8F9FA'>";
 	    				s+="<tr>";
-	    				s+="<th style='text-align: center; width: 40px;'>No.</th>";
-	    				s+="<th style='text-align: center; width: 100px;'>경기일</th>";
+	    				s+="<th style='text-align: center; width: 80px;'>No.</th>";
+	    				s+="<th style='text-align: center; width: 80px;'>경기일</th>";
 	    				s+="<th style='text-align: center; width: 200px;'>경기팀</th>";
 	    				s+="<th style='text-align: center;'>제목</th>";
 	    				s+="<th style='text-align: center; width: 100px;'>작성자</th>";
 	    				s+="<th style='text-align: center; width: 100px;'>날짜</th>";
-	    				s+="<th style='text-align: center; width: 40px;'>조회수</th>";
-	    				s+="<th style='text-align: center; width: 40px;'>추천</th>";
-	    				s+="<th style='text-align: center; width: 40px;'>비추천</th>";
+	    				s+="<th style='text-align: center; width: 80px;'>조회수</th>";
+	    				s+="<th style='text-align: center; width: 80px;'>추천</th>";
+	    				s+="<th style='text-align: center; width: 80px;'>비추천</th>";
 	    				s+="</tr>";
 	    				s+="</thead>";
 						s+="<tbody class='table-border-bottom-0'>";
@@ -210,15 +210,15 @@
     				s+="<table class='table'>";
     				s+="<thead style='background-color: #F8F9FA'>";
     				s+="<tr>";
-    				s+="<th style='text-align: center; width: 40px;'>No.</th>";
-    				s+="<th style='text-align: center; width: 100px;'>경기일</th>";
+    				s+="<th style='text-align: center; width: 80px;'>No.</th>";
+    				s+="<th style='text-align: center; width: 80px;'>경기일</th>";
     				s+="<th style='text-align: center; width: 200px;'>경기팀</th>";
     				s+="<th style='text-align: center;'>제목</th>";
     				s+="<th style='text-align: center; width: 100px;'>작성자</th>";
     				s+="<th style='text-align: center; width: 100px;'>날짜</th>";
-    				s+="<th style='text-align: center; width: 40px;'>조회수</th>";
-    				s+="<th style='text-align: center; width: 40px;'>추천</th>";
-    				s+="<th style='text-align: center; width: 40px;'>비추천</th>";
+    				s+="<th style='text-align: center; width: 80px;'>조회수</th>";
+    				s+="<th style='text-align: center; width: 80px;'>추천</th>";
+    				s+="<th style='text-align: center; width: 80px;'>비추천</th>";
     				s+="</tr>";
     				s+="</thead>";
 					s+="<tbody class='table-border-bottom-0'>";
@@ -341,10 +341,14 @@
                 <!-- Content -->
 
                 <div class="container-xxl flex-grow-1 container-p-y">
-                <h3 style="margin-bottom: 30px;"><a href="reviewBoard_listPage.jsp?currentPage=<%=currentPage %>">후기게시판</a></h3>
+
                     <!-- Bootstrap Table with Header - Light -->
                     <div class="card" style="background-color: #fff">
-                                      
+                    
+						<h3 class="card-header">
+							<a href='reviewBoard_listPage.jsp' style="text-decoration: none;color: black;"><b>후&nbsp;기&nbsp;게&nbsp;시&nbsp;판</b></a>
+						</h3>
+						              
                         <div class="rList"></div>
                         
                         <div class="bBottom" style="margin-top: 30px;">

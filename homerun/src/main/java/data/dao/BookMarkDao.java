@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.Vector;
 
 import data.dto.BookMarkDto;
+import data.dto.ReviewBoardDto;
 import mysql.db.DbConnect;
 
 public class BookMarkDao {
@@ -50,6 +51,73 @@ public class BookMarkDao {
 		return list;
 				
 	}
+	
+	public List<BookMarkDto> getAllmyBMs(int start, int perPage, String uId) {
+		List<BookMarkDto> list = new Vector<>();
+		
+		Connection conn = db.getConnection();
+ 		PreparedStatement pstmt = null;
+ 		ResultSet rs = null;
+ 		
+ 		String sql = "select * from BOOKMARKPOST where uId=? order by bId desc limit ?, ?";
+ 		 		
+ 		try {
+ 			pstmt = conn.prepareStatement(sql);
+ 			
+ 			pstmt.setString(1, uId);
+ 			pstmt.setInt(2, start);
+			pstmt.setInt(3, perPage);
+
+ 			rs = pstmt.executeQuery();
+ 		
+ 			while(rs.next()) {
+ 				BookMarkDto dto = new BookMarkDto();
+ 				
+ 				dto.setbId(rs.getString("bId"));
+ 				dto.setuId(rs.getString("uId"));
+                dto.setFbNum(rs.getString("fbNum"));
+                dto.setRbNum(rs.getString("rbNum"));
+                dto.setbDay(rs.getTimestamp("bDay"));
+                
+ 				// list 추가
+ 				list.add(dto);
+ 			}
+ 		} catch (SQLException e) {
+ 			e.printStackTrace();
+ 		} finally {
+ 			db.dbClose(rs, pstmt, conn);
+ 		}
+		return list;
+				
+	}	
+	
+	public int getAllmyBMs(String uId) {
+		int n = 0;
+		
+		Connection conn = db.getConnection();
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		String sql = "select count(*) from BOOKMARKPOST where uId=?";
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setString(1, uId);
+			
+			rs =  pstmt.executeQuery();
+		
+			if(rs.next()) 
+				n = rs.getInt(1);
+			
+			} catch (SQLException e) {
+				e.printStackTrace();
+			} finally {
+				db.dbClose(rs, pstmt, conn);
+		}
+			
+		return n; 
+	}	
 	
 	// FBMK cnt
 	public int getFBBMcnt(String uId, String fbNum) {
@@ -111,7 +179,7 @@ public class BookMarkDao {
 				
 	}
 	
-	// FB insert
+	// insert
 	public void insertFBBM(BookMarkDto dto) {
 		Connection conn = db.getConnection();
 		PreparedStatement pstmt = null;

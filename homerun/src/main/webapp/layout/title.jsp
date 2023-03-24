@@ -83,7 +83,11 @@ String root = request.getContextPath();
 						 
 						 </a>
 						
+<<<<<<< HEAD
 						 <a class="b_title" href="<%=root%>/admin/admin_adminform.jsp">
+=======
+						 <a class="a_title" href="<%=root%>/admin/admin_adminform.jsp">
+>>>>>>> UngTest6
 						 
 						 <span>관리자페이지</span>
 						 
@@ -118,11 +122,13 @@ String root = request.getContextPath();
 						 
 						 <span class="a_title">&nbsp;|&nbsp;</span> 
 						 
+<<<<<<< HEAD
 						 <a class="a_title" style="color: white;" href="<%=root%>/product/product_cartlist.jsp">
+=======
+						 <a style="color: white;" href="<%=root%>/product/product_cartlist.jsp">
+>>>>>>> UngTest6
 						 
 						 <span>장바구니</span>
-						 
-						 </a>
 				</div>
 			</div>
 		

@@ -13,25 +13,19 @@
 
 <%
 	int currentPage = Integer.parseInt(request.getParameter("currentPage"));
-	//String category = request.getParameter("category");
-	
+
 	int perPage = 15;
 	int start = (currentPage - 1) * perPage;
 
 	FreeBoardDao fbDao = new FreeBoardDao();
 	List<FreeBoardDto> fbList = fbDao.getFBList(start, perPage);
-	//if(category.equals("all"))
-		//fbList = new Vector<>();
-	
-	//else
-		//fbList = fbDao.getAllFBs_category(start, perPage, category);
 
 	UserDao uDao = new UserDao();
 	TeamDao tDao = new TeamDao();
 	FreeCommentDao fcDao = new FreeCommentDao();
 	
 	JSONArray arr = new JSONArray();
-	SimpleDateFormat sdf = new SimpleDateFormat("yy.MM.dd HH:mm");
+	SimpleDateFormat sdf = new SimpleDateFormat("yy.MM.dd");
 	
 	for(FreeBoardDto dto : fbList) {
 		JSONObject ob = new JSONObject();		

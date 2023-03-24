@@ -12,7 +12,7 @@
 <html>
 <head>
 <meta charset="utf-8">
-<title>Insert title here</title>
+<title>HOMERUN | PRODUCT_CARTLIST</title>
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" />
 <script src="https://code.jquery.com/jquery-3.6.3.js"></script>
@@ -31,8 +31,13 @@ div.pName, span.del {
 
 #noCart {
 	border: 4px solid rgba(0, 0, 0, 0.2);
+<<<<<<< HEAD
 	width: 86.5%;
 	margin-right: 100px;
+=======
+	width: 88.5%;
+	margin-right: 85px;
+>>>>>>> UngTest6
 	margin-bottom :300px;
 }
 
@@ -67,7 +72,11 @@ div.pName, span.del {
 }
 
 #cartsize {
+<<<<<<< HEAD
 width:86.5%;
+=======
+width:88.5%;
+>>>>>>> UngTest6
 	height: 60px;
 	background-color: #0b214e;
 	border: 1px solid black;
@@ -79,7 +88,11 @@ width:86.5%;
 }
 
 #usercart {
+<<<<<<< HEAD
 	width: 86.5%;
+=======
+	width: 88.5%;
+>>>>>>> UngTest6
 	height: 60px;
 	background-color: #0b214e;
 	border: 1px solid black;
@@ -289,7 +302,11 @@ width:86.5%;
 				var cId = $(this).attr("cId");
 				var cQTY = $(this).attr("cQTY");
 				
+<<<<<<< HEAD
 				stock(uId,cId);
+=======
+				stock(pId,cId);
+>>>>>>> UngTest6
 				orderlist(uId,pId,cQTY);
 				setTimeout(function() {
 				del(cId);
@@ -400,6 +417,7 @@ NumberFormat nf = NumberFormat.getInstance();
 							if (cartSize > 0) {
 							%>
 							<table class="table table-bordered"
+<<<<<<< HEAD
 								style="width: 86.5%; color: black; font-size: 1.2em; margin-left: 25px;">
 								<tr>
 									<th style="width: 30px;"><input type="checkbox"
@@ -408,6 +426,16 @@ NumberFormat nf = NumberFormat.getInstance();
 									<th style="width: 150px; font-size: 1.2em; text-align: center;">상품옵션</th>
 									<th style="width: 150px; font-size: 1.2em; text-align: center;">상품금액</th>
 									<th style="width: 150px; font-size: 1.2em; text-align: center;">총금액</th>
+=======
+								style="width: 88.5%; color: black; font-size: 1.2em; margin-left: 25px;">
+								<tr>
+									<th style="width: 30px;"><input type="checkbox"
+										id="allcheck"></th>
+									<th style="width: 700px; font-size: 1.2em; text-align: center;">상품정보</th>
+									<th style="width: 140px; font-size: 1.2em; text-align: center;">상품옵션</th>
+									<th style="width: 140px; font-size: 1.2em; text-align: center;">상품금액</th>
+									<th style="width: 140px; font-size: 1.2em; text-align: center;">총금액</th>
+>>>>>>> UngTest6
 								</tr>
 
 								<%
@@ -474,7 +502,11 @@ NumberFormat nf = NumberFormat.getInstance();
 							</table>
 							
 							<table class="table table-bordered"
+<<<<<<< HEAD
 								style="width: 86.5%; color: black; margin-left: 25px;margin-bottom:300px;">
+=======
+								style="width: 88.5%; color: black; margin-left: 25px;margin-bottom:300px;">
+>>>>>>> UngTest6
 								<tr>
 								</tr>
 								<tr>

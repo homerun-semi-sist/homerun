@@ -515,7 +515,7 @@
 				                            	<span>&nbsp;<i class="fa-solid fa-user-pen"></i>&nbsp;비회원</span>
 				                            </div>
 				                            <div class="row" style="margin-top: 20px;">
-			                    				<div class="col-11 form-group">
+			                    				<div class="form-group">
 			                      					<textarea name="content" id="content" class="form-control" placeholder="비회원은 로그인 후 이용 가능합니다" readonly="readonly"></textarea>
 							                    </div>
 			                 				 </div>	                          
