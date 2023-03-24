@@ -23,35 +23,11 @@
 			}
 			String root = request.getContextPath();
 		%>
-		<header class="main_title">
-			<jsp:include page="../layout/title.jsp" />
-		</header>
-		<div class="main_nav">
-			<jsp:include page="../layout/nav.jsp" />
-		</div>
-		<div id="wrap">
-			<div id="content-wrap">
-				<div class="row">
-					<div class="col-sm-2" style="border: 1px solid red;">left</div>
-					<div class="col-sm-8" style="border: 1px solid pink;">
 						<!-- write here -->
-<%
-		//loginok 세션 제거
-		session.removeAttribute("loginok");
-	
-		//loginmain이동
-		response.sendRedirect("../index.jsp");
-%>
+						
+						<div style="width:100%;height:100%; background-color:blue"></div>
 						
 						<!-- the end -->
-					</div>
-					<div class="col-sm-2" style="border: 1px solid blue;">right</div>
-				</div>
-			</div>
-		</div>
 
-		<div class="main_footer">
-			<jsp:include page="../layout/footer.jsp" />
-		</div>
 	</body>
 </html>

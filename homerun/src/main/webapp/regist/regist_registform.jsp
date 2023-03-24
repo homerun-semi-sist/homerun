@@ -7,7 +7,7 @@
 <html>
 	<head>
 		<meta charset="utf-8">
-		<title>Insert title here</title>
+		<title>HOMERUN | REGIST</title>
 		<link rel="stylesheet"
 			href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" />
 		<script src="https://code.jquery.com/jquery-3.6.3.js"></script>
@@ -553,7 +553,7 @@ $("#btnnck").click(function(){
 		   <input type="text" name="addr3" class="addr" id="sample6_extraAddress" placeholder="참고항목">
 		</div>
 		
-       <button type="submit" class="btn1" onclick="passcheck(f)">회원가입</button>
+       <button type="submit" class="btn1">회원가입</button>
        <button type="button" class="btn2"  onclick="location.href='../index.jsp'">메인으로</button>
    
     </form>

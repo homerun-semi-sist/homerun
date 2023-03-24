@@ -12,7 +12,7 @@
 <html>
 <head>
 <meta charset="utf-8">
-<title>Insert title here</title>
+<title>HOMERUN | PRODUCT_ORDERLIST</title>
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" />
 <script src="https://code.jquery.com/jquery-3.6.3.js"></script>
@@ -222,11 +222,19 @@ NumberFormat nf = NumberFormat.getInstance();
 								<tr>
 									<th style="width: 30px;"><input type="checkbox"
 										id="allcheck"></th>
+<<<<<<< HEAD
 									<th style="width: 650px; font-size: 1.2em; text-align: center;">상품정보</th>
 									<th style="width: 150px; font-size: 1.2em; text-align: center;">상품옵션</th>
 									<th style="width: 150px; font-size: 1.2em; text-align: center;">상품금액</th>
 									<th style="width: 150px; font-size: 1.2em; text-align: center;">총금액</th>
 									<th style="width: 180px; font-size: 1.2em; text-align: center;">주문 날짜</th>
+=======
+									<th style="width: 700px; font-size: 1.2em; text-align: center;">상품정보</th>
+									<th style="width: 150px; font-size: 1.2em; text-align: center;">상품옵션</th>
+									<th style="width: 150px; font-size: 1.2em; text-align: center;">상품금액</th>
+									<th style="width: 150px; font-size: 1.2em; text-align: center;">총금액</th>
+									<th style="width: 170px; font-size: 1.2em; text-align: center;">주문 날짜</th>
+>>>>>>> UngTest6
 								</tr>
 
 								<%
