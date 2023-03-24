@@ -2,6 +2,7 @@ package data.dto;
 
 public class TeamDto {
 	
+	
 	private String teamName;
     private String teamNick;
     private String teamLogo;

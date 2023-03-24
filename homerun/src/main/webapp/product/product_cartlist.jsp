@@ -289,8 +289,8 @@ width:86.5%;
 				var cId = $(this).attr("cId");
 				var cQTY = $(this).attr("cQTY");
 				
-				stock(uId,cId);
 				orderlist(uId,pId,cQTY);
+				stock(pId,cId);
 				setTimeout(function() {
 				del(cId);
 				},100);
@@ -421,14 +421,14 @@ NumberFormat nf = NumberFormat.getInstance();
 								<tr>
 									<td style="line-height: 100px;"><input type="checkbox"
 										name="cId" class="cId moneycheck" cId="<%=map.get("cId")%>"
-										price="<%=map.get("price")%>" cQTY="<%=map.get("cQTY")%>" uId="<%=uid%>"pId="<%=map.get("pId")%>"pStock=<%=map.get("pStock") %>></td>
+										price="<%=map.get("price")%>" cQTY="<%=map.get("cQTY")%>" uId="<%=uid%>" pId="<%=map.get("pId")%> "pStock=<%=map.get("pStock") %>></td>
 
 									<td style="line-height: 100px;">
 										<div pId="<%=map.get("pId")%>" class="pName" >
 											<img src="<%=photo%>" class="photo" align="left"  style="width:90px;" hspace="20" pId="<%=map.get("pId")%>">
 
 											<h4 style="line-height: 80px;">
-												<b> <%=map.get("pName")%> &nbsp;&nbsp;&nbsp;&nbsp;
+												<b> <%=map.get("pName")%> &nbsp;&nbsp;&nbsp;&nbsp; 재고 <%=map.get("pStock") %>
 												</b>
 												<sapn style="font-size:0.8em">
 												</sapn>
@@ -451,7 +451,6 @@ NumberFormat nf = NumberFormat.getInstance();
 												<%
 												int price = Integer.parseInt(map.get("price"));
 												int cQTY = Integer.parseInt(map.get("cQTY"));
-												int pStock = Integer.parseInt(map.get("pStock"));
 												price *= cQTY;
 												total = total + price;
 												%>

@@ -136,7 +136,7 @@ margin-top:50px;
 					<div id="thanksmsg">구매해 주셔서 감사합니다.</div>
 					<br> <br>
 					<div style="text-align: center; margin-left: 350px; ">
-						<table class="table table-bordered" style="width: 60%; position:relative;margin-bottom:300px;">
+						<table class="table table-bordered" style="width: 60%; position:relative;margin-bottom:40px;">
 							
 							<tr>
 								<th width="60px" style="text-align: center;">주문번호</th>
@@ -150,7 +150,7 @@ margin-top:50px;
 
 
 
-					<div style="margin-left: 100px;">
+					<div style="margin-left: 100px; margin-bottom:40px">
 						<button type="submit" class="btn2"
 							onclick="location.href='product_orderlist.jsp'">주문목록</button>
 						&nbsp;

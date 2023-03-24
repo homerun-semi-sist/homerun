@@ -9,7 +9,7 @@
     <script src="https://code.jquery.com/jquery-3.6.3.js"></script>
     <style type="text/css">
     .login{
-    	width: 350px;
+    	width: 250px;
     	height: 80px;
     	color: white;
       	text-align: center;
@@ -21,20 +21,21 @@
     	letter-spacing: 5px;
     }
     .login-box{
-    	position: relative;
+    top:300px;
     	left: 700px;
     	border: 1px solid #0b214e;
     	box-sizing: border-box;
-    	width:400px;
+    	width:375px;
     	height: 180px;
     	background-color: #F2F2F2;
-    	margin-top: 30px;
+    	margin-bottom:100px;
+    	margin-left:8px
     }
     
     .regist{
-    	float:right;
+    
     	color: #0b214e;
-    	margin-right: 25px;
+    	 margin-right:25px;
     	font-weight: bold;
     	margin-top: 5px;
     }
@@ -45,21 +46,21 @@
     }
     	
     .text{
-    	position: relative;
    	 	left: 25px;
     	top: 20px;
     	font-size: 10pt;
     }
     
     .logout-box{
-   		position: relative;
-    	left: 800px;
+    	top:300px;
+    	left: 700px;
     	border: 1px solid #0b214e;
     	box-sizing: border-box;
-    	width:300px;
-    	height: 130px;
+    	width:375px;
+    	height: 180px;
     	background-color: #F2F2F2;
-    	margin-top: 30px;
+    	margin-bottom:100px;
+    	margin-left:8px;
     }
     
     .photo{
@@ -71,8 +72,7 @@
     
     .logout{
     	border: 1px solid #0b214e;
-    	float:right;
-    	margin-right: 15px;
+    	 left:15px;
     	font-weight: bold;
     }
     
@@ -90,15 +90,27 @@
     }
 
     .lefttop{
-    width:400px;
-    height:400px;
+    align:left;
+    width:70%;
+    height:500px;
     border:1px solid black;
     }
     .leftbottom{
-      width:400px;
-    height:400px;
+    align:left;
+      width:70%;
+    height:500px;
     border:1px solid yellow;
+    margin-top:20px;
     }
+   
+ 	.right{
+ 	position:relative;
+ 	bottom:1000px;
+ 	align:right;
+ 	width:30%;
+ 	margin-left :880px;
+ 	text-align:center;
+ 	}
     </style>
 </head>
 
@@ -106,23 +118,23 @@
 <%
 	String uid=(String)session.getAttribute("uid");
 %>
-<div class="row" style="height: 1200px;">
+<div class="row" margin-bottom:200px;">
 
     <div class="col-sm-2" style="border: 1px solid red;"></div>
-    <div class="col-sm-8" style="border: 1px solid pink;">
+    <div class="col-sm-8" style="border: 1px solid pink; ">
 
-        <div class="mapWeather">
-            <%-- <jsp:include page="mapWeather.jsp"></jsp:include> --%>
-        </div>
+    <%--     <div class="mapWeather">
+            <jsp:include page="mapWeather.jsp"></jsp:include>
+        </div > --%>
+
+        <div class="lefttop">왼쪽위</div>
+        <div class="leftbottom">왼쪽아래</div>
+        <div class="right">
         <% // loginok 가져오기
             String loginok = (String) session.getAttribute("loginok");
             if (loginok == null) 
          { //로그아웃
         %>
-
-        <div>
-        <div class="lefttop">왼쪽위</div>
-        <div class="leftbottom">왼쪽아래</div>
         <div class="login-box">
             <b class="text">로그인 후 이용해 주세요</b>
         <button type="button" class="login" onclick="location.href='../homerun/user/user_loginform.jsp'">로그인</button>
@@ -142,7 +154,9 @@
         </div>
         <% } %>
         
-        <div>여기는 날씨 안녕하세요</div>
+        <div> <div class="mapWeather">
+            <jsp:include page="mapWeather.jsp"></jsp:include>
+        </div ></div>
         </div>
     </div>
         <div class="col-sm-2" style="border: 0px solid blue;"></div>
