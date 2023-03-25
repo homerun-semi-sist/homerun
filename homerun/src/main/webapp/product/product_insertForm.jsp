@@ -1,5 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-	pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=utf-8"
+	pageEncoding="utf-8"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -14,115 +14,117 @@
 
 <script type="text/javascript">
 	$(function() {
-		
+
 		$(".btnDuplicate").click(function() {
 			var pId = $("#pId").val();
 			$.ajax({
 				type : "get",
 				url : "pIdSearch.jsp",
 				dataType : "json",
-				data : {"pId" : pId},
+				data : {
+					"pId" : pId
+				},
 				success : function(res) {
 					if (res.count == 1) {
-						alert("»ç¿ë ºÒ°¡");
+						alert("ì‚¬ìš© ë¶ˆê°€");
 						$("#pId").val("");
 						$("#check").val("");
-					} else if (res.count == 0 && res.pattern=="x") {
-						alert("»óÇ°¾ÆÀÌµğ Çü½ÄÀº 'p + ¼ıÀÚ 4ÀÚ¸®'ÀÔ´Ï´Ù.");
+					} else if (res.count == 0 && res.pattern == "x") {
+						alert("ìƒí’ˆì•„ì´ë”” í˜•ì‹ì€ 'p + ìˆ«ì 4ìë¦¬'ì…ë‹ˆë‹¤.");
 						$("#pId").val("");
 						$("#check").val("");
 					} else {
-						alert("»ç¿ë °¡´É");
+						alert("ì‚¬ìš© ê°€ëŠ¥");
 						$("#check").val("checked");
-						
+
 					}
 				}
 			});
 		});
 	})
-	
-	function duplicate_click(){
 
-		if(document.getElementById("check").value==''){
-		alert("¾ÆÀÌµğ Áßº¹È®ÀÎÀ» ÇØÁÖ¼¼¿ä.");
-		return false;
+	function duplicate_click() {
+
+		if (document.getElementById("check").value == '') {
+			alert("ì•„ì´ë”” ì¤‘ë³µí™•ì¸ì„ í•´ì£¼ì„¸ìš”.");
+			return false;
 		}
-	}	
+	}
 </script>
 </head>
 <body>
 	<form action="product_insertAction.jsp" method="post"
-		class="insertForm" onsubmit ="return duplicate_click()">
-		
-		<h2>Àç°íÀÔ·Â</h2>
+		class="insertForm" onsubmit="return duplicate_click()">
+
+		<h2>ì¬ê³ ì…ë ¥</h2>
 		<div class="textForm teamNcategory">
 			<div style="width: 400px">
 				<input name="pId" id="pId" type="text" class="inputForm"
-					placeholder="»óÇ°¾ÆÀÌµğ ÀÔ·Â" required="required">
+					placeholder="ìƒí’ˆì•„ì´ë”” ì…ë ¥" required="required">
 			</div>
 			<div>
-				<button type="button" class="pinsertbtn btnDuplicate">Áßº¹È®ÀÎ</button>
+				<button type="button" class="pinsertbtn btnDuplicate">ì¤‘ë³µí™•ì¸</button>
 			</div>
 			<input type="hidden" id="check" value="" required="required">
 		</div>
 
 		<div class="textForm">
 			<input name="pName" type="text" class="inputForm"
-				placeholder="»óÇ°¸í ÀÔ·Â" required="required">
+				placeholder="ìƒí’ˆëª… ì…ë ¥" required="required">
 		</div>
 
 		<div class="textForm teamNcategory">
-			<span class="inputForm"> <span class="sameWidth"> ÆÀ
-					¼±ÅÃ&nbsp;&nbsp; </span> <select name="teamName">
-					<option value="µÎ»ê º£¾î½º" selected="selected">µÎ»ê º£¾î½º</option>
-					<option value="·Ôµ¥ ÀÚÀÌ¾ğÃ÷">·Ôµ¥ ÀÚÀÌ¾ğÃ÷</option>
-					<option value="»ï¼º ¶óÀÌ¿ÂÁî">»ï¼º ¶óÀÌ¿ÂÁî</option>
-					<option value="Å°¿ò È÷¾î·ÎÁî">Å°¿ò È÷¾î·ÎÁî</option>
-					<option value="ÇÑÈ­ ÀÌ±Û½º">ÇÑÈ­ ÀÌ±Û½º</option>
-					<option value="KIA Å¸ÀÌ°ÅÁî">KIA Å¸ÀÌ°ÅÁî</option>
+			<span class="inputForm"> <span class="sameWidth"> íŒ€
+					ì„ íƒ&nbsp;&nbsp; </span> <select name="teamName">
+					<option value="ë‘ì‚° ë² ì–´ìŠ¤" selected="selected">ë‘ì‚° ë² ì–´ìŠ¤</option>
+					<option value="ë¡¯ë° ìì´ì–¸ì¸ ">ë¡¯ë° ìì´ì–¸ì¸ </option>
+					<option value="ì‚¼ì„± ë¼ì´ì˜¨ì¦ˆ">ì‚¼ì„± ë¼ì´ì˜¨ì¦ˆ</option>
+					<option value="í‚¤ì›€ íˆì–´ë¡œì¦ˆ">í‚¤ì›€ íˆì–´ë¡œì¦ˆ</option>
+					<option value="í•œí™” ì´ê¸€ìŠ¤">í•œí™” ì´ê¸€ìŠ¤</option>
+					<option value="KIA íƒ€ì´ê±°ì¦ˆ">KIA íƒ€ì´ê±°ì¦ˆ</option>
 					<option value="KT WIZ">KT WIZ</option>
-					<option value="LG Æ®À©½º">LG Æ®À©½º</option>
-					<option value="NC ´ÙÀÌ³ë½º">NC ´ÙÀÌ³ë½º</option>
-					<option value="SSG ·£´õ½º">SSG ·£´õ½º</option>
+					<option value="LG íŠ¸ìœˆìŠ¤">LG íŠ¸ìœˆìŠ¤</option>
+					<option value="NC ë‹¤ì´ë…¸ìŠ¤">NC ë‹¤ì´ë…¸ìŠ¤</option>
+					<option value="SSG ëœë”ìŠ¤">SSG ëœë”ìŠ¤</option>
 			</select>
 			</span> <span class="inputForm"> <span class="categoryWidth">
-					Ä«Å×°í¸® ¼±ÅÃ&nbsp;&nbsp; </span> <select name="pCategory">
-					<option value="ÆÀ¿ş¾î" selected="selected">ÆÀ¿ş¾î</option>
-					<option value="ÀÀ¿ø¿ëÇ°">ÀÀ¿ø¿ëÇ°</option>
-					<option value="¾ß±¸¿ëÇ°">¾ß±¸¿ëÇ°</option>
-					<option value="±â³ä»óÇ°">±â³ä»óÇ°</option>
+					ì¹´í…Œê³ ë¦¬ ì„ íƒ&nbsp;&nbsp; </span> <select name="pCategory">
+					<option value="íŒ€ì›¨ì–´" selected="selected">íŒ€ì›¨ì–´</option>
+					<option value="ì‘ì›ìš©í’ˆ">ì‘ì›ìš©í’ˆ</option>
+					<option value="ì•¼êµ¬ìš©í’ˆ">ì•¼êµ¬ìš©í’ˆ</option>
+					<option value="ê¸°ë…ìƒí’ˆ">ê¸°ë…ìƒí’ˆ</option>
 			</select>
 			</span>
 		</div>
 
 		<div class="textForm">
-			<span class="inputForm sameWidth">Àç°í¼ö&nbsp;&nbsp;</span> <input
+			<span class="inputForm sameWidth">ì¬ê³ ìˆ˜&nbsp;&nbsp;</span> <input
 				name="pStock" type="number" min="1" value="100" style="width: 50px">
 		</div>
 
 		<div class="textForm">
 			<span class="inputForm">&#8361;&nbsp;&nbsp;</span> <input
 				name="price" type="text" class="inputForm" style="width: 100px"
-				placeholder="°¡°İ ÀÔ·Â" required="required"
+				placeholder="ê°€ê²© ì…ë ¥" required="required"
 				oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');">
 		</div>
 
 		<div class="textForm">
-			<span class="inputForm">»óÇ°¼³¸í<br></span>
+			<span class="inputForm">ìƒí’ˆì„¤ëª…<br></span>
 			<textarea name="pDetail" style="width: 100%; height: 100px;"
 				required="required"></textarea>
 		</div>
 
 		<div class="textForm">
-			<span class="inputForm">»óÇ°ÀÌ¹ÌÁö &nbsp;</span> <input name="pImage"
+			<span class="inputForm">ìƒí’ˆì´ë¯¸ì§€ &nbsp;</span> <input name="pImage"
 				type="text" class="inputForm" placeholder="https://"
 				required="required">
 		</div>
 
 		<div style="margin-top: 50px">
-			<button type="submit" class="pinsertbtn pinsertbtn1">Àç°íÀÔ·Â</button>
+			<button type="submit" class="pinsertbtn pinsertbtn1">ì¬ê³ ì…ë ¥</button>
 			<button type="button" class="pinsertbtn"
-				onclick="location.href='../managementpage/management_stockListPage.jsp'">Ãë¼Ò</button>
+				onclick="location.href='../managementpage/management_stockListPage.jsp'">ì·¨ì†Œ</button>
 		</div>
 	</form>
 
