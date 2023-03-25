@@ -565,7 +565,7 @@
 								placeholder="참고항목">
 						</div>
 
-						<button type="submit" class="btn1">회원가입</button>
+						<button type="submit" class="btn1" onclick="passcheck(f)">회원가입</button>
 						<button type="button" class="btn2"
 							onclick="location.href='../index.jsp'">메인으로</button>
 
