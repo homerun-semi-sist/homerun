@@ -162,7 +162,7 @@ $(function(){
 	    $.ajax({
 		
 			type : "get",
-			url : "management_getReportList.jsp",
+			url : "management_getSearchReportList.jsp",
 			dataType : "json",
 			data : {"val" : val, "str" : str, "currentPage" : currentPage},
 			success:function(res) {
@@ -175,37 +175,37 @@ $(function(){
 				s+="<thead style='background-color: #F8F9FA'>";
 				s+="<tr>";
 				s+="<th style='text-align: center; width: 80px;'>NO.</th>";
-				s+="<th style='text-align: center; width: 80px;'>카테고리</th>";
-				s+="<th style='text-align: center; width: 500px;'>제목</th>";
-				s+="<th style='text-align: center; width: 200px;'>작성자</th>";
-				s+="<th style='text-align: center; width: 200px;'>작성일</th>";
+				s+="<th style='text-align: center; width: 100px;'>카테고리</th>";
+				s+="<th style='text-align: center;'>제목</th>";
+				s+="<th style='text-align: center; width: 150px;'>작성자</th>";
+				s+="<th style='text-align: center; width: 150px;'>작성일</th>";
 				s+="<th style='text-align: center; width: 80px;'>조회수</th>";
 				s+="<th style='text-align: center; width: 80px;'>누적 신고수</th>";
-				s+="<th style='text-align: center; width: 80px;'>관리</th>";
+				s+="<th style='text-align: center; width: 150px;'>관리</th>";
 				s+="</tr>";
 				s+="</thead>";
 				s+="<tbody class='table-border-bottom-0'>";
 				
 				if(res.length == 0) {
 					s+="<tr>";
-					s+="<td colspan='7' align='center' style='font-size: 18pt;'>\"" + str + "\" 검색 결과가 없습니다</td>";
+					s+="<td colspan='8' align='center' style='font-size: 18pt;'>\"" + str + "\" 검색 결과가 없습니다</td>";
 					s+="</tr>";
 				} else {
 					$.each(res, function(idx, item){
 						s+="<tr>";
-						s+="<td style='text-align: center; vertical-align:middle;'>" + item.fbNum + "</td>";
+						s+="<td style='text-align: center;'>" + item.fbNum + "</td>";
 						s+="<td style='text-align: center; vertical-align:middle;'><b>" + item.fbCategory + "</b></td>";
 						s+="<td style='vertical-align:middle;'><a href='../freeBoard/freePost_detailPage.jsp?fbNum=" + item.fbNum + "&currentPage=" + currentPage + "' style=' text-decoration: none; color: black;'>" + item.fbSubject + "</a></td>";
-						s+="<td style='text-align: center; vertical-align:middle;'><b>" + item.nickname + "</b></td>";
-						s+="<td style='text-align: center; vertical-align:middle;'><b>" + item.fbWriteday + "</b></td>";
-						s+="<td style='text-align: center; vertical-align:middle;'><b>" + item.fbReadCnt + "</b></td>";
-						s+="<td style='text-align: center; vertical-align:middle;'><b>" + item.fbReport + "</b></td>";										
+						s+="<td style='text-align: center; vertical-align:middle;'>" + item.nickname + "</td>";
+						s+="<td style='text-align: center; vertical-align:middle;'>" + item.fbWriteday + "</td>";
+						s+="<td style='text-align: center; vertical-align:middle;'>" + item.fbReadCnt + "</td>";
+						s+="<td style='text-align: center; vertical-align:middle;'>" + item.fbReport + "</td>";										
 						s+="<td style='text-align: center;'><div class='dropdown'><button type='button' class='btn p-0 dropdown-toggle hide-arrow' data-bs-toggle='dropdown'><i class='bx bx-dots-vertical-rounded'></i></button>";
 						s+="<div class='dropdown-menu'>";
-						s+="<a class='dropdown-item delPostBtn' fbNum='"+ item.fbNum + "'><i class='bx bx-trash me-1'></i> Delete</a>";
-						s+="<a class='dropdown-item delUserBtn' href='#?fbNum="+item.fbNum+"'><i class='bx bx-user-minus me-1'></i> Withdrawal</a>";
+						s+="<a class='dropdown-item delBtn' num='"+ item.fbNum + "' category='" + category + "'><i class='bx bx-trash me-1'></i> Delete</a>";
+						s+="<a class='dropdown-item delUserBtn' href='#?fbNum="+item.fbNum+"'><i class='bx bx-user-minus me-1'></i> Withdrawal</a></button>";
 						s+="</div></div></td>"
-						s+="</tr>"			
+						s+="</tr>"		
 					});
 				}
 				
