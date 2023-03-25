@@ -176,19 +176,35 @@
 			return false;
 		}
 	}
+	
+ 	 function chkPW(){
 
-	function noSpaceForm(obj) { // 공백사용못하게
+		 var pw1 = $("#pw1").val();
+		 var num = pw1.search(/[0-9]/g);
+		 var eng = pw1.search(/[a-z]/ig);
+		 var spe = pw1.search(/[`~!@@#$%^&*|₩₩₩'₩";:₩/?]/gi);
 
-		var str_space = /\s/; // 공백체크
+		 if(pw1.length < 10){
 
-		if (str_space.exec(obj.value)) { //공백 체크
-			alert("공백은 사용할 수 없습니다");
-			obj.focus();
-			obj.value = obj.value.replace(' ', ''); // 공백제거
-			return false;
+		  alert("비밀번호는 10자리 이상으로 입력 해 주세요");
+		 $("#pw1").focus();
+		 $("#pw1").val("");
+		  return false;
+		 }else if(pw1.search(/\s/) != -1){
+		  alert("비밀번호는 공백 없이 입력해주세요.");
+		  $("#pw1").focus();
+		  $("#pw1").val("");
+		  return false;
+		 }else if(spe < 0 ){
+		  alert("특수문자를 1개이상 포함 해 주세요");
+		  $("#pw1").focus();
+		  $("#pw1").val("");
+		  return false;
+		 }else {
+		    return true;
+		 }
 
-		}
-	}
+		} 
 
 	function sample6_execDaumPostcode() {
 		new daum.Postcode(
@@ -252,18 +268,13 @@
 }
 
 .joinForm {
-	/*   position:absolute;
-  width:600px; */
 	margin: 100px 50px;
 	height: 920px;
 	padding: 30px, 20px;
 	background-color: #FFFFFF;
 	top: 40%;
-	/* left:50%;
-  transform: translate(-50%,-50%); */
 	border-radius: 15px;
 	border: 1px solid gray;
-	/* margin-top: 100px; */
 }
 
 .joinForm h2 {
@@ -387,27 +398,21 @@
 }
 
 .btnck {
-	/* 	position: absolute;
-	right: 50px; */
 	position: relative;
 	bottom: 40px;
 	width: 100px;
 	height: 40px;
 	float: right;
-	/* border:none; */
 	border: 1px solid gray;
 	border-radius: 3px;
 }
 
 .btnnck {
-	/* position: absolute;
-	right: 50px; */
 	position: relative;
 	bottom: 40px;
 	width: 100px;
 	height: 40px;
 	float: right;
-	/* border:none; */
 	border: 1px solid gray;
 	border-radius: 3px;
 }
@@ -449,15 +454,14 @@
 						</div>
 
 						<div class="textForm">
-							<input name="pw1" type="password" class="pw"
+							<input name="pw1" type="password" class="pw" id="pw1"
 								placeholder="비밀번호 (특수문자 포함 10자 이상)" required="required"
-								onkeyup="noSpaceForm(this);" onchange="noSpaceForm(this);">
+								  onchange="chkPW(this);">
 						</div>
 
 						<div class="textForm">
 							<input name="pw2" type="password" class="pw"
-								placeholder="비밀번호 확인" required="required"
-								onkeyup="noSpaceForm(this);" onchange="noSpaceForm(this);">
+								placeholder="비밀번호 확인" required="required">
 						</div>
 
 						<div class="textForm">

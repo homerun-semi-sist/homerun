@@ -190,13 +190,13 @@ div{
 		
 		var pw1=$("#pw1").val();
 		
-		if(pw1==<%=dto.getPw()%>)
+		if(pw1=="<%=dto.getPw()%>")
 			{
 				location.href='mypage_unregistaction.jsp?uid='+uid;
 				
 			}else{
 				
-				pw1="";
+				$("#pw1").val("");
 				alert("비밀번호가 틀렸습니다")
 				
 			}
@@ -206,13 +206,13 @@ div{
 			
 			var pw2=$("#pw2").val();
 			
-			if(pw2==<%=dto.getPw()%>)
+			if(pw2=="<%=dto.getPw()%>")
 				{
 					location.href='mypage_modifyform.jsp';
 					
 				}else{
 					
-					pw2="";
+					$("#pw2").val("");
 					alert("비밀번호가 틀렸습니다")
 					
 				}
