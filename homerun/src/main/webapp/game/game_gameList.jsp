@@ -46,16 +46,21 @@ table, tr, th, td {
 	Elements elements_left = doc.select(".team_lft");
 	Elements elements_right = doc.select(".team_rgt");
 	Elements elements_gday = doc.select(".td_date");
+	Elements elements_gScore = doc.select(".td_score");
 
 	String text_left = "";
 	String text_right = "";
 	String text_gday = "";
+	String text_gScore = "";
+	String text_gScore_left = "";
+	String text_gScore_right = "";
 	%>
 	<table class="table table-bordered" style="width: 100%">
 		<thead style="background-color: #0b214e; color: white;">
-			<tr height="50";>
-				<th width="150px" style="text-align: center; vertical-align: middle">경기일</th>
-				<th width="350px" style="text-align: center; vertical-align: middle">경기</th>
+			<tr height="65">
+				<th width="150px" style="text-align: center; font-size:1.4em; vertical-align: middle">경기일</th>
+				<th width="350px" style="text-align: center; font-size:1.4em; vertical-align: middle">경기</th>
+				<th width="300px" style="text-align: center; font-size:1.4em; vertical-align: middle">구장</th>
 			</tr>
 		</thead>
 		<%
@@ -81,44 +86,17 @@ table, tr, th, td {
 				<%
 				TeamDto dto_right = dao.getTeam(text_right);
 				%> <img src="<%=dto_right.getTeamLogo()%>" width="40">
+			</td>
+			<td
+				style="text-align: center; vertical-align: middle; color: black; font-size: 1.1em">
+				<%=dto_right.getStadium()%><span
+				style="font-size: 0.8em; color: gray">(<%=dto_right.getHometown()%>)
+			</span>
+			</td>
 		</tr>
 		<%
 		}
 		}
-
-		int totalCount; //총 개수
-		int totalPage; //총 페이지수
-		int startPage; //각 블럭(1,2,3..)의 시작페이지
-		int endPage; //각 블럭의 마지막 페이지
-		int start; //각 페이지의 시작번호
-		int perPage = 10; //한 페이지당 보여질 글 개수
-		int perBlock = 5; //한 블럭당 보여지는 페이지 개수
-		int currentPage; //현재페이지
-
-		int no;
-
-		totalCount = elements_gday.size();
-
-		//현재 페이지 번호 읽기(null일때는 1페이지로 설정)
-		if (request.getParameter("currentPage") == null)
-			currentPage = 1;
-		else
-			currentPage = Integer.parseInt(request.getParameter("currentPage"));
-
-		//총 페이지 개수
-		totalPage = totalCount / perPage + (totalCount % perPage == 0 ? 0 : 1);
-
-		//각 블럭의 시작페이지 -> 현재페이지가 3 -> s:1, e:5 / 6 -> s:6, e:10
-		startPage = (currentPage - 1) / perBlock * perBlock + 1;
-		endPage = startPage + perBlock - 1;
-
-		//총 페이지가 8이면 (6~10 -> end페이지를 8로 수정)
-		if (endPage > totalPage)
-			endPage = totalPage;
-
-		//각페이지에서 불러올 시작번호
-		start = (currentPage - 1) * perPage;
-
 		%>
 	</table>
 </body>

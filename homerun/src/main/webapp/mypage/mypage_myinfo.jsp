@@ -17,7 +17,7 @@
 <html>
 	<head>
 		<meta charset="utf-8">
-		<title>Insert title here</title>
+		<title>HOMERUN | MYPAGE</title>
 		<link rel="stylesheet"
 			href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" />
 		<script src="https://code.jquery.com/jquery-3.6.3.js"></script>
@@ -173,7 +173,7 @@ div{
 	UserDto dto=dao.getData(uid);
 	CartDao cdao = new CartDao();
 	int OrderSize = cdao.getOrderList(uid).size();
-	
+
 	FreeBoardDao fbDao = new FreeBoardDao();
 	FreeCommentDao fcDao = new FreeCommentDao();
 	ReviewBoardDao rbDao = new ReviewBoardDao();
@@ -183,7 +183,7 @@ div{
 	int postCnt = fbDao.getAllmyFBs(uid) + rbDao.getAllmyRBs(uid);
 	int commentCnt = fcDao.getAllmyFCs(uid) + rcDao.getAllmyRCs(uid);
 	int bmCbt = bDao.getAllmyBMs(uid);
-	
+
 %>
 <script type="text/javascript">
 	function delfunc(uid){

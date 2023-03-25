@@ -2,8 +2,8 @@
 <%@page import="data.dto.ProductDto"%>
 <%@page import="java.util.List"%>
 <%@page import="data.dao.ProductDao"%>
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-	pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=utf-8"
+	pageEncoding="utf-8"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -11,7 +11,8 @@
 <title>HOMERUN | ShopList</title>
 <link href="../assets/css/theme.css" rel="stylesheet" />
 
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
 
 <style>
 #navv-all, #navv-doosan, #navv-kiwoom, #navv-samsung, #navv-lg, #navv-kt,
@@ -34,7 +35,7 @@
 	opacity: 1;
 }
 </style>
-
+<script src="https://code.jquery.com/jquery-3.6.3.js"></script>
 </head>
 <%
 NumberFormat nf = NumberFormat.getCurrencyInstance();
@@ -45,40 +46,40 @@ List<ProductDto> list = dao.selectAllProduct_pDay();
 
 ProductDao dao_all = new ProductDao();
 
-int totalCount; //ÃÑ °³¼ö
-int totalPage; //ÃÑ ÆäÀÌÁö¼ö
-int startPage; //°¢ ºí·°(1,2,3..)ÀÇ ½ÃÀÛÆäÀÌÁö
-int endPage; //°¢ ºí·°ÀÇ ¸¶Áö¸· ÆäÀÌÁö
-int start; //°¢ ÆäÀÌÁöÀÇ ½ÃÀÛ¹øÈ£
-int perPage = 12; //ÇÑ ÆäÀÌÁö´ç º¸¿©Áú ±Û °³¼ö
-int perBlock = 5; //ÇÑ ºí·°´ç º¸¿©Áö´Â ÆäÀÌÁö °³¼ö
-int currentPage; //ÇöÀçÆäÀÌÁö
+int totalCount; //ì´ ê°œìˆ˜
+int totalPage; //ì´ í˜ì´ì§€ìˆ˜
+int startPage; //ê° ë¸”ëŸ­(1,2,3..)ì˜ ì‹œì‘í˜ì´ì§€
+int endPage; //ê° ë¸”ëŸ­ì˜ ë§ˆì§€ë§‰ í˜ì´ì§€
+int start; //ê° í˜ì´ì§€ì˜ ì‹œì‘ë²ˆí˜¸
+int perPage = 12; //í•œ í˜ì´ì§€ë‹¹ ë³´ì—¬ì§ˆ ê¸€ ê°œìˆ˜
+int perBlock = 5; //í•œ ë¸”ëŸ­ë‹¹ ë³´ì—¬ì§€ëŠ” í˜ì´ì§€ ê°œìˆ˜
+int currentPage; //í˜„ì¬í˜ì´ì§€
 
 int no;
 
 totalCount = dao_all.getTotalCount();
 
-//ÇöÀç ÆäÀÌÁö ¹øÈ£ ÀĞ±â(nullÀÏ¶§´Â 1ÆäÀÌÁö·Î ¼³Á¤)
+//í˜„ì¬ í˜ì´ì§€ ë²ˆí˜¸ ì½ê¸°(nullì¼ë•ŒëŠ” 1í˜ì´ì§€ë¡œ ì„¤ì •)
 if (request.getParameter("currentPage") == null)
 	currentPage = 1;
 else
 	currentPage = Integer.parseInt(request.getParameter("currentPage"));
 
-//ÃÑ ÆäÀÌÁö °³¼ö
+//ì´ í˜ì´ì§€ ê°œìˆ˜
 totalPage = totalCount / perPage + (totalCount % perPage == 0 ? 0 : 1);
 
-//°¢ ºí·°ÀÇ ½ÃÀÛÆäÀÌÁö -> ÇöÀçÆäÀÌÁö°¡ 3 -> s:1, e:5 / 6 -> s:6, e:10
+//ê° ë¸”ëŸ­ì˜ ì‹œì‘í˜ì´ì§€ -> í˜„ì¬í˜ì´ì§€ê°€ 3 -> s:1, e:5 / 6 -> s:6, e:10
 startPage = (currentPage - 1) / perBlock * perBlock + 1;
 endPage = startPage + perBlock - 1;
 
-//ÃÑ ÆäÀÌÁö°¡ 8ÀÌ¸é (6~10 -> endÆäÀÌÁö¸¦ 8·Î ¼öÁ¤)
+//ì´ í˜ì´ì§€ê°€ 8ì´ë©´ (6~10 -> endí˜ì´ì§€ë¥¼ 8ë¡œ ìˆ˜ì •)
 if (endPage > totalPage)
 	endPage = totalPage;
 
-//°¢ÆäÀÌÁö¿¡¼­ ºÒ·¯¿Ã ½ÃÀÛ¹øÈ£
+//ê°í˜ì´ì§€ì—ì„œ ë¶ˆëŸ¬ì˜¬ ì‹œì‘ë²ˆí˜¸
 start = (currentPage - 1) * perPage;
 
-//¸Ş¼­µå ºÒ·¯¿À±â
+//ë©”ì„œë“œ ë¶ˆëŸ¬ì˜¤ê¸°
 List<ProductDto> list_all = dao_all.getList_pDay(start, perPage);
 %>
 <body>
@@ -96,49 +97,49 @@ List<ProductDto> list_all = dao_all.getList_pDay(start, perPage);
 					<button class="navv-link active" id="navv-all-tab"
 						data-bs-toggle="tab" data-bs-target="#navv-all" type="button"
 						role="tab" aria-controls="navv-all" aria-selected="true">
-						ÀüÃ¼</button>
+						ì „ì²´</button>
 					<button class="navv-link" id="navv-doosan-tab" data-bs-toggle="tab"
 						data-bs-target="#navv-doosan" type="button" role="tab"
-						aria-controls="navv-doosan" aria-selected="false">µÎ»ê º£¾î½º</button>
+						aria-controls="navv-doosan" aria-selected="false">ë‘ì‚° ë² ì–´ìŠ¤</button>
 					<button class="navv-link" id="navv-lotte-tab" data-bs-toggle="tab"
 						data-bs-target="#navv-lotte" type="button" role="tab"
-						aria-controls="navv-lotte" aria-selected="false">·Ôµ¥ ÀÚÀÌ¾ğÃ÷</button>
+						aria-controls="navv-lotte" aria-selected="false">ë¡¯ë° ìì´ì–¸ì¸ </button>
 					<button class="navv-link" id="navv-samsung-tab"
 						data-bs-toggle="tab" data-bs-target="#navv-samsung" type="button"
-						role="tab" aria-controls="navv-samsung" aria-selected="false">»ï¼º
-						¶óÀÌ¿ÂÁî</button>
+						role="tab" aria-controls="navv-samsung" aria-selected="false">ì‚¼ì„±
+						ë¼ì´ì˜¨ì¦ˆ</button>
 					<button class="navv-link" id="navv-kiwoom-tab" data-bs-toggle="tab"
 						data-bs-target="#navv-kiwoom" type="button" role="tab"
-						aria-controls="navv-kiwoom" aria-selected="false">Å°¿ò È÷¾î·ÎÁî</button>
+						aria-controls="navv-kiwoom" aria-selected="false">í‚¤ì›€ íˆì–´ë¡œì¦ˆ</button>
 					<button class="navv-link" id="navv-hanhwa-tab" data-bs-toggle="tab"
 						data-bs-target="#navv-hanhwa" type="button" role="tab"
-						aria-controls="navv-hanhwa" aria-selected="false">ÇÑÈ­ ÀÌ±Û½º</button>
+						aria-controls="navv-hanhwa" aria-selected="false">í•œí™” ì´ê¸€ìŠ¤</button>
 					<button class="navv-link" id="navv-kia-tab" data-bs-toggle="tab"
 						data-bs-target="#navv-kia" type="button" role="tab"
-						aria-controls="navv-kia" aria-selected="false">KIA Å¸ÀÌ°ÅÁî</button>
+						aria-controls="navv-kia" aria-selected="false">KIA íƒ€ì´ê±°ì¦ˆ</button>
 					<button class="navv-link" id="navv-kt-tab" data-bs-toggle="tab"
 						data-bs-target="#navv-kt" type="button" role="tab"
 						aria-controls="navv-kt" aria-selected="false">KT WIZ</button>
 					<button class="navv-link" id="navv-lg-tab" data-bs-toggle="tab"
 						data-bs-target="#navv-lg" type="button" role="tab"
-						aria-controls="navv-lg" aria-selected="false">LG Æ®À©½º</button>
+						aria-controls="navv-lg" aria-selected="false">LG íŠ¸ìœˆìŠ¤</button>
 					<button class="navv-link" id="navv-nc-tab" data-bs-toggle="tab"
 						data-bs-target="#navv-nc" type="button" role="tab"
-						aria-controls="navv-nc" aria-selected="false">NC ´ÙÀÌ³ë½º</button>
+						aria-controls="navv-nc" aria-selected="false">NC ë‹¤ì´ë…¸ìŠ¤</button>
 					<button class="navv-link" id="navv-ssg-tab" data-bs-toggle="tab"
 						data-bs-target="#navv-ssg" type="button" role="tab"
-						aria-controls="navv-ssg" aria-selected="false">SSG ·£´õ½º</button>
+						aria-controls="navv-ssg" aria-selected="false">SSG ëœë”ìŠ¤</button>
 				</div>
 
 				<div class="tab-content" id="navv-tabContent">
 
 
-					<!-- ÀüÃ¼ -->
+					<!-- ì „ì²´ -->
 					<div class="tab-pane fade show active" id="navv-all"
 						style="opacity: 1" role="tabpanel" aria-labelledby="navv-all-tab">
 
 						<div class="tab-content" id="pills-tabContentAll">
-							<!-- ÀüÃ¼ ÆÀ¿ş¾î -->
+							<!-- ì „ì²´ íŒ€ì›¨ì–´ -->
 
 							<div class="row h-100 align-items-center g-2">
 								<%
@@ -165,14 +166,15 @@ List<ProductDto> list_all = dao_all.getList_pDay(start, perPage);
 
 							</div>
 						</div>
-						
+
 						<div style="width: 500px; text-align: center;" class="container">
 							<ul class="pagination">
 								<%
-								//ÀÌÀü
+								//ì´ì „
 								if (startPage > 1) {
 								%>
-								<li><a href="product_listPage.jsp?currentPage=<%=startPage - 1%>">ÀÌÀü</a></li>
+								<li><a
+									href="product_listPage.jsp?currentPage=<%=startPage - 1%>">ì´ì „</a></li>
 								<%
 								}
 								for (int pp = startPage; pp <= endPage; pp++) {
@@ -188,10 +190,11 @@ List<ProductDto> list_all = dao_all.getList_pDay(start, perPage);
 								<%
 								}
 								}
-								//´ÙÀ½
+								//ë‹¤ìŒ
 								if (endPage < totalPage) {
 								%>
-								<li><a href="product_listPage.jsp?currentPage=<%=endPage + 1%>">´ÙÀ½</a></li>
+								<li><a
+									href="product_listPage.jsp?currentPage=<%=endPage + 1%>">ë‹¤ìŒ</a></li>
 								<%
 								}
 								%>
@@ -200,7 +203,7 @@ List<ProductDto> list_all = dao_all.getList_pDay(start, perPage);
 
 					</div>
 
-					<!-- µÎ»ê -->
+					<!-- ë‘ì‚° -->
 					<div class="tab-pane fade" id="navv-doosan" role="tabpanel"
 						style="opacity: 1" aria-labelledby="navv-doosan-tab">
 						<ul class="navv navv-pills mb-5 justify-content-center"
@@ -209,44 +212,44 @@ List<ProductDto> list_all = dao_all.getList_pDay(start, perPage);
 								<button class="navv-link active" id="pills-doosan_teamwear-tab"
 									data-bs-toggle="pill" data-bs-target="#pills-doosan_teamwear"
 									type="button" role="tab" aria-controls="pills-doosan_teamwear"
-									aria-selected="true">ÆÀ¿ş¾î</button>
+									aria-selected="true">íŒ€ì›¨ì–´</button>
 							</li>
 							<li class="navv-item" role="presentation">
 								<button class="navv-link" id="pills-doosan_cheering-tab"
 									data-bs-toggle="pill" data-bs-target="#pills-doosan_cheering"
 									type="button" role="tab" aria-controls="pills-doosan_cheering"
-									aria-selected="false">ÀÀ¿ø¿ëÇ°</button>
+									aria-selected="false">ì‘ì›ìš©í’ˆ</button>
 							</li>
 							<li class="navv-item" role="presentation">
 								<button class="navv-link" id="pills-doosan_baseball-tab"
 									data-bs-toggle="pill" data-bs-target="#pills-doosan_baseball"
 									type="button" role="tab" aria-controls="pills-doosan_baseball"
-									aria-selected="false">¾ß±¸¿ëÇ°</button>
+									aria-selected="false">ì•¼êµ¬ìš©í’ˆ</button>
 							</li>
 							<li class="navv-item" role="presentation">
 								<button class="navv-link" id="pills-doosan_memory-tab"
 									data-bs-toggle="pill" data-bs-target="#pills-doosan_memory"
 									type="button" role="tab" aria-controls="pills-doosan_memory"
-									aria-selected="false">±â³ä»óÇ°</button>
+									aria-selected="false">ê¸°ë…ìƒí’ˆ</button>
 							</li>
 						</ul>
 						<div class="tab-content" id="pills-tabContentDoosan">
-							<!-- µÎ»ê ÆÀ¿ş¾î -->
+							<!-- ë‘ì‚° íŒ€ì›¨ì–´ -->
 							<div class="tab-pane fade show active" id="pills-doosan_teamwear"
 								style="opacity: 1" role="tabpanel"
 								aria-labelledby="pills-doosan_teamwear-tab">
 								<div class="carousel slide" id="carouselCategoryDoosanTeamwear"
 									data-bs-touch="false" data-bs-interval="false">
-									<!-- µÎ»ê ÆÀ¿ş¾î ½ÃÀÛ -->
+									<!-- ë‘ì‚° íŒ€ì›¨ì–´ ì‹œì‘ -->
 									<div class="carousel-inner">
 
-										<!-- µÎ»ê ÆÀ¿ş¾î Ã¹¹øÂ° ÆäÀÌÁö -->
+										<!-- ë‘ì‚° íŒ€ì›¨ì–´ ì²«ë²ˆì§¸ í˜ì´ì§€ -->
 										<div class="carousel-item active" data-bs-interval="10000">
 											<div class="row h-100 align-items-center g-2">
 												<%
 												for (ProductDto dto : list) {
-													if (dto.getTeamName().equals("µÎ»ê º£¾î½º")) {
-														if (dto.getpCategory().equals("ÆÀ¿ş¾î")) {
+													if (dto.getTeamName().equals("ë‘ì‚° ë² ì–´ìŠ¤")) {
+														if (dto.getpCategory().equals("íŒ€ì›¨ì–´")) {
 												%>
 												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
 													<div class="card card-span h-100 text-white">
@@ -282,21 +285,21 @@ List<ProductDto> list_all = dao_all.getList_pDay(start, perPage);
 
 							</div>
 
-							<!-- µÎ»ê ÀÀ¿ø¿ëÇ° -->
+							<!-- ë‘ì‚° ì‘ì›ìš©í’ˆ -->
 							<div class="tab-pane fade" id="pills-doosan_cheering"
 								style="opacity: 1" role="tabpanel"
 								aria-labelledby="pills-doosan_cheering-tab">
 								<div class="carousel slide" id="carouselCategoryDoosanCheering"
 									data-bs-touch="false" data-bs-interval="false">
-									<!-- µÎ»ê ÀÀ¿ø¿ëÇ° ½ÃÀÛ -->
+									<!-- ë‘ì‚° ì‘ì›ìš©í’ˆ ì‹œì‘ -->
 									<div class="carousel-inner">
-										<!-- µÎ»ê ÀÀ¿ø¿ëÇ° Ã¹¹øÂ° ÆäÀÌÁö -->
+										<!-- ë‘ì‚° ì‘ì›ìš©í’ˆ ì²«ë²ˆì§¸ í˜ì´ì§€ -->
 										<div class="carousel-item active" data-bs-interval="10000">
 											<div class="row h-100 align-items-center g-2">
 												<%
 												for (ProductDto dto : list) {
-													if (dto.getTeamName().equals("µÎ»ê º£¾î½º")) {
-														if (dto.getpCategory().equals("ÀÀ¿ø¿ëÇ°")) {
+													if (dto.getTeamName().equals("ë‘ì‚° ë² ì–´ìŠ¤")) {
+														if (dto.getpCategory().equals("ì‘ì›ìš©í’ˆ")) {
 												%>
 												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
 													<div class="card card-span h-100 text-white">
@@ -332,21 +335,21 @@ List<ProductDto> list_all = dao_all.getList_pDay(start, perPage);
 
 							</div>
 
-							<!-- µÎ»ê ¾ß±¸¿ëÇ° -->
+							<!-- ë‘ì‚° ì•¼êµ¬ìš©í’ˆ -->
 							<div class="tab-pane fade" id="pills-doosan_baseball"
 								style="opacity: 1" role="tabpanel"
 								aria-labelledby="pills-doosan_baseball-tab">
 								<div class="carousel slide" id="carouselCategoryDoosanbaseball"
 									data-bs-touch="false" data-bs-interval="false">
-									<!-- µÎ»ê ¾ß±¸¿ëÇ° ½ÃÀÛ -->
+									<!-- ë‘ì‚° ì•¼êµ¬ìš©í’ˆ ì‹œì‘ -->
 									<div class="carousel-inner">
-										<!-- µÎ»ê ¾ß±¸¿ëÇ° Ã¹¹øÂ° ÆäÀÌÁö -->
+										<!-- ë‘ì‚° ì•¼êµ¬ìš©í’ˆ ì²«ë²ˆì§¸ í˜ì´ì§€ -->
 										<div class="carousel-item active" data-bs-interval="10000">
 											<div class="row h-100 align-items-center g-2">
 												<%
 												for (ProductDto dto : list) {
-													if (dto.getTeamName().equals("µÎ»ê º£¾î½º")) {
-														if (dto.getpCategory().equals("¾ß±¸¿ëÇ°")) {
+													if (dto.getTeamName().equals("ë‘ì‚° ë² ì–´ìŠ¤")) {
+														if (dto.getpCategory().equals("ì•¼êµ¬ìš©í’ˆ")) {
 												%>
 												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
 													<div class="card card-span h-100 text-white">
@@ -380,21 +383,21 @@ List<ProductDto> list_all = dao_all.getList_pDay(start, perPage);
 								</div>
 							</div>
 
-							<!-- µÎ»ê ±â³ä»óÇ° -->
+							<!-- ë‘ì‚° ê¸°ë…ìƒí’ˆ -->
 							<div class="tab-pane fade" id="pills-doosan_memory"
 								style="opacity: 1" role="tabpanel"
 								aria-labelledby="pills-doosan_memory-tab">
 								<div class="carousel slide" id="carouselCategoryDoosanMemory"
 									data-bs-touch="false" data-bs-interval="false">
-									<!-- µÎ»ê ±â³ä»óÇ° ½ÃÀÛ -->
+									<!-- ë‘ì‚° ê¸°ë…ìƒí’ˆ ì‹œì‘ -->
 									<div class="carousel-inner">
-										<!-- µÎ»ê ±â³ä»óÇ° Ã¹¹øÂ° ÆäÀÌÁö -->
+										<!-- ë‘ì‚° ê¸°ë…ìƒí’ˆ ì²«ë²ˆì§¸ í˜ì´ì§€ -->
 										<div class="carousel-item active" data-bs-interval="10000">
 											<div class="row h-100 align-items-center g-2">
 												<%
 												for (ProductDto dto : list) {
-													if (dto.getTeamName().equals("µÎ»ê º£¾î½º")) {
-														if (dto.getpCategory().equals("±â³ä»óÇ°")) {
+													if (dto.getTeamName().equals("ë‘ì‚° ë² ì–´ìŠ¤")) {
+														if (dto.getpCategory().equals("ê¸°ë…ìƒí’ˆ")) {
 												%>
 												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
 													<div class="card card-span h-100 text-white">
@@ -430,7 +433,7 @@ List<ProductDto> list_all = dao_all.getList_pDay(start, perPage);
 						</div>
 					</div>
 
-					<!-- ·Ôµ¥ -->
+					<!-- ë¡¯ë° -->
 					<div class="tab-pane fade" id="navv-lotte" role="tabpanel"
 						style="opacity: 1" aria-labelledby="navv-lotte-tab">
 						<ul class="navv navv-pills mb-5 justify-content-center"
@@ -439,44 +442,44 @@ List<ProductDto> list_all = dao_all.getList_pDay(start, perPage);
 								<button class="navv-link active" id="pills-lotte_teamwear-tab"
 									data-bs-toggle="pill" data-bs-target="#pills-lotte_teamwear"
 									type="button" role="tab" aria-controls="pills-lotte_teamwear"
-									aria-selected="true">ÆÀ¿ş¾î</button>
+									aria-selected="true">íŒ€ì›¨ì–´</button>
 							</li>
 							<li class="navv-item" role="presentation">
 								<button class="navv-link" id="pills-lotte_cheering-tab"
 									data-bs-toggle="pill" data-bs-target="#pills-lotte_cheering"
 									type="button" role="tab" aria-controls="pills-lotte_cheering"
-									aria-selected="false">ÀÀ¿ø¿ëÇ°</button>
+									aria-selected="false">ì‘ì›ìš©í’ˆ</button>
 							</li>
 							<li class="navv-item" role="presentation">
 								<button class="navv-link" id="pills-lotte_baseball-tab"
 									data-bs-toggle="pill" data-bs-target="#pills-lotte_baseball"
 									type="button" role="tab" aria-controls="pills-lotte_baseball"
-									aria-selected="false">¾ß±¸¿ëÇ°</button>
+									aria-selected="false">ì•¼êµ¬ìš©í’ˆ</button>
 							</li>
 							<li class="navv-item" role="presentation">
 								<button class="navv-link" id="pills-lotte_memory-tab"
 									data-bs-toggle="pill" data-bs-target="#pills-lotte_memory"
 									type="button" role="tab" aria-controls="pills-lotte_memory"
-									aria-selected="false">±â³ä»óÇ°</button>
+									aria-selected="false">ê¸°ë…ìƒí’ˆ</button>
 							</li>
 						</ul>
 						<div class="tab-content" id="pills-tabContentLotte">
-							<!-- ·Ôµ¥ ÆÀ¿ş¾î -->
+							<!-- ë¡¯ë° íŒ€ì›¨ì–´ -->
 							<div class="tab-pane fade show active" id="pills-lotte_teamwear"
 								style="opacity: 1" role="tabpanel"
 								aria-labelledby="pills-lotte_teamwear-tab">
 								<div class="carousel slide" id="carouselCategoryLotteTeamwear"
 									data-bs-touch="false" data-bs-interval="false">
-									<!-- ·Ôµ¥ ÆÀ¿ş¾î ½ÃÀÛ -->
+									<!-- ë¡¯ë° íŒ€ì›¨ì–´ ì‹œì‘ -->
 									<div class="carousel-inner">
 
-										<!-- ·Ôµ¥ ÆÀ¿ş¾î Ã¹¹øÂ° ÆäÀÌÁö -->
+										<!-- ë¡¯ë° íŒ€ì›¨ì–´ ì²«ë²ˆì§¸ í˜ì´ì§€ -->
 										<div class="carousel-item active" data-bs-interval="10000">
 											<div class="row h-100 align-items-center g-2">
 												<%
 												for (ProductDto dto : list) {
-													if (dto.getTeamName().equals("·Ôµ¥ ÀÚÀÌ¾ğÃ÷")) {
-														if (dto.getpCategory().equals("ÆÀ¿ş¾î")) {
+													if (dto.getTeamName().equals("ë¡¯ë° ìì´ì–¸ì¸ ")) {
+														if (dto.getpCategory().equals("íŒ€ì›¨ì–´")) {
 												%>
 												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
 													<div class="card card-span h-100 text-white">
@@ -512,21 +515,21 @@ List<ProductDto> list_all = dao_all.getList_pDay(start, perPage);
 
 							</div>
 
-							<!-- ·Ôµ¥ ÀÀ¿ø¿ëÇ° -->
+							<!-- ë¡¯ë° ì‘ì›ìš©í’ˆ -->
 							<div class="tab-pane fade" id="pills-lotte_cheering"
 								style="opacity: 1" role="tabpanel"
 								aria-labelledby="pills-lotte_cheering-tab">
 								<div class="carousel slide" id="carouselCategoryLotteCheering"
 									data-bs-touch="false" data-bs-interval="false">
-									<!-- ·Ôµ¥ ÀÀ¿ø¿ëÇ° ½ÃÀÛ -->
+									<!-- ë¡¯ë° ì‘ì›ìš©í’ˆ ì‹œì‘ -->
 									<div class="carousel-inner">
-										<!-- ·Ôµ¥ ÀÀ¿ø¿ëÇ° Ã¹¹øÂ° ÆäÀÌÁö -->
+										<!-- ë¡¯ë° ì‘ì›ìš©í’ˆ ì²«ë²ˆì§¸ í˜ì´ì§€ -->
 										<div class="carousel-item active" data-bs-interval="10000">
 											<div class="row h-100 align-items-center g-2">
 												<%
 												for (ProductDto dto : list) {
-													if (dto.getTeamName().equals("·Ôµ¥ ÀÚÀÌ¾ğÃ÷")) {
-														if (dto.getpCategory().equals("ÀÀ¿ø¿ëÇ°")) {
+													if (dto.getTeamName().equals("ë¡¯ë° ìì´ì–¸ì¸ ")) {
+														if (dto.getpCategory().equals("ì‘ì›ìš©í’ˆ")) {
 												%>
 												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
 													<div class="card card-span h-100 text-white">
@@ -562,21 +565,21 @@ List<ProductDto> list_all = dao_all.getList_pDay(start, perPage);
 
 							</div>
 
-							<!-- ·Ôµ¥ ¾ß±¸¿ëÇ° -->
+							<!-- ë¡¯ë° ì•¼êµ¬ìš©í’ˆ -->
 							<div class="tab-pane fade" id="pills-lotte_baseball"
 								style="opacity: 1" role="tabpanel"
 								aria-labelledby="pills-lotte_baseball-tab">
 								<div class="carousel slide" id="carouselCategoryLottebaseball"
 									data-bs-touch="false" data-bs-interval="false">
-									<!-- ·Ôµ¥ ¾ß±¸¿ëÇ° ½ÃÀÛ -->
+									<!-- ë¡¯ë° ì•¼êµ¬ìš©í’ˆ ì‹œì‘ -->
 									<div class="carousel-inner">
-										<!-- ·Ôµ¥ ¾ß±¸¿ëÇ° Ã¹¹øÂ° ÆäÀÌÁö -->
+										<!-- ë¡¯ë° ì•¼êµ¬ìš©í’ˆ ì²«ë²ˆì§¸ í˜ì´ì§€ -->
 										<div class="carousel-item active" data-bs-interval="10000">
 											<div class="row h-100 align-items-center g-2">
 												<%
 												for (ProductDto dto : list) {
-													if (dto.getTeamName().equals("·Ôµ¥ ÀÚÀÌ¾ğÃ÷")) {
-														if (dto.getpCategory().equals("¾ß±¸¿ëÇ°")) {
+													if (dto.getTeamName().equals("ë¡¯ë° ìì´ì–¸ì¸ ")) {
+														if (dto.getpCategory().equals("ì•¼êµ¬ìš©í’ˆ")) {
 												%>
 												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
 													<div class="card card-span h-100 text-white">
@@ -610,21 +613,21 @@ List<ProductDto> list_all = dao_all.getList_pDay(start, perPage);
 								</div>
 							</div>
 
-							<!-- ·Ôµ¥ ±â³ä»óÇ° -->
+							<!-- ë¡¯ë° ê¸°ë…ìƒí’ˆ -->
 							<div class="tab-pane fade" id="pills-lotte_memory"
 								style="opacity: 1" role="tabpanel"
 								aria-labelledby="pills-lotte_memory-tab">
 								<div class="carousel slide" id="carouselCategoryLotteMemory"
 									data-bs-touch="false" data-bs-interval="false">
-									<!-- ·Ôµ¥ ±â³ä»óÇ° ½ÃÀÛ -->
+									<!-- ë¡¯ë° ê¸°ë…ìƒí’ˆ ì‹œì‘ -->
 									<div class="carousel-inner">
-										<!-- ·Ôµ¥ ±â³ä»óÇ° Ã¹¹øÂ° ÆäÀÌÁö -->
+										<!-- ë¡¯ë° ê¸°ë…ìƒí’ˆ ì²«ë²ˆì§¸ í˜ì´ì§€ -->
 										<div class="carousel-item active" data-bs-interval="10000">
 											<div class="row h-100 align-items-center g-2">
 												<%
 												for (ProductDto dto : list) {
-													if (dto.getTeamName().equals("·Ôµ¥ ÀÚÀÌ¾ğÃ÷")) {
-														if (dto.getpCategory().equals("±â³ä»óÇ°")) {
+													if (dto.getTeamName().equals("ë¡¯ë° ìì´ì–¸ì¸ ")) {
+														if (dto.getpCategory().equals("ê¸°ë…ìƒí’ˆ")) {
 												%>
 												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
 													<div class="card card-span h-100 text-white">
@@ -660,7 +663,7 @@ List<ProductDto> list_all = dao_all.getList_pDay(start, perPage);
 						</div>
 					</div>
 
-					<!-- »ï¼º -->
+					<!-- ì‚¼ì„± -->
 					<div class="tab-pane fade" id="navv-samsung" role="tabpanel"
 						style="opacity: 1" aria-labelledby="navv-samsung-tab">
 						<ul class="navv navv-pills mb-5 justify-content-center"
@@ -669,44 +672,44 @@ List<ProductDto> list_all = dao_all.getList_pDay(start, perPage);
 								<button class="navv-link active" id="pills-samsung_teamwear-tab"
 									data-bs-toggle="pill" data-bs-target="#pills-samsung_teamwear"
 									type="button" role="tab" aria-controls="pills-samsung_teamwear"
-									aria-selected="true">ÆÀ¿ş¾î</button>
+									aria-selected="true">íŒ€ì›¨ì–´</button>
 							</li>
 							<li class="navv-item" role="presentation">
 								<button class="navv-link" id="pills-samsung_cheering-tab"
 									data-bs-toggle="pill" data-bs-target="#pills-samsung_cheering"
 									type="button" role="tab" aria-controls="pills-samsung_cheering"
-									aria-selected="false">ÀÀ¿ø¿ëÇ°</button>
+									aria-selected="false">ì‘ì›ìš©í’ˆ</button>
 							</li>
 							<li class="navv-item" role="presentation">
 								<button class="navv-link" id="pills-samsung_baseball-tab"
 									data-bs-toggle="pill" data-bs-target="#pills-samsung_baseball"
 									type="button" role="tab" aria-controls="pills-samsung_baseball"
-									aria-selected="false">¾ß±¸¿ëÇ°</button>
+									aria-selected="false">ì•¼êµ¬ìš©í’ˆ</button>
 							</li>
 							<li class="navv-item" role="presentation">
 								<button class="navv-link" id="pills-samsung_memory-tab"
 									data-bs-toggle="pill" data-bs-target="#pills-samsung_memory"
 									type="button" role="tab" aria-controls="pills-samsung_memory"
-									aria-selected="false">±â³ä»óÇ°</button>
+									aria-selected="false">ê¸°ë…ìƒí’ˆ</button>
 							</li>
 						</ul>
 
 						<div class="tab-content" id="pills-tabContentSamsung">
-							<!-- »ï¼º ÆÀ¿ş¾î -->
+							<!-- ì‚¼ì„± íŒ€ì›¨ì–´ -->
 							<div class="tab-pane fade show active"
 								id="pills-samsung_teamwear" role="tabpanel"
 								aria-labelledby="pills-samsung_teamwear-tab">
 								<div class="carousel slide" id="carouselCategorySamsungTeamwear"
 									data-bs-touch="false" data-bs-interval="false">
-									<!-- »ï¼º ÆÀ¿ş¾î ½ÃÀÛ -->
+									<!-- ì‚¼ì„± íŒ€ì›¨ì–´ ì‹œì‘ -->
 									<div class="carousel-inner">
-										<!-- »ï¼º ÆÀ¿ş¾î Ã¹¹øÂ° ÆäÀÌÁö -->
+										<!-- ì‚¼ì„± íŒ€ì›¨ì–´ ì²«ë²ˆì§¸ í˜ì´ì§€ -->
 										<div class="carousel-item active" data-bs-interval="10000">
 											<div class="row h-100 align-items-center g-2">
 												<%
 												for (ProductDto dto : list) {
-													if (dto.getTeamName().equals("»ï¼º ¶óÀÌ¿ÂÁî")) {
-														if (dto.getpCategory().equals("ÆÀ¿ş¾î")) {
+													if (dto.getTeamName().equals("ì‚¼ì„± ë¼ì´ì˜¨ì¦ˆ")) {
+														if (dto.getpCategory().equals("íŒ€ì›¨ì–´")) {
 												%>
 												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
 													<div class="card card-span h-100 text-white">
@@ -740,20 +743,20 @@ List<ProductDto> list_all = dao_all.getList_pDay(start, perPage);
 								</div>
 							</div>
 
-							<!-- »ï¼º ÀÀ¿ø¿ëÇ° -->
+							<!-- ì‚¼ì„± ì‘ì›ìš©í’ˆ -->
 							<div class="tab-pane fade" id="pills-samsung_cheering"
 								role="tabpanel" aria-labelledby="pills-samsung_cheering-tab">
 								<div class="carousel slide" id="carouselCategorySamsungCheering"
 									data-bs-touch="false" data-bs-interval="false">
-									<!-- »ï¼º ÀÀ¿ø¿ëÇ° ½ÃÀÛ -->
+									<!-- ì‚¼ì„± ì‘ì›ìš©í’ˆ ì‹œì‘ -->
 									<div class="carousel-inner">
-										<!-- »ï¼º ÀÀ¿ø¿ëÇ° Ã¹¹øÂ° ÆäÀÌÁö -->
+										<!-- ì‚¼ì„± ì‘ì›ìš©í’ˆ ì²«ë²ˆì§¸ í˜ì´ì§€ -->
 										<div class="carousel-item active" data-bs-interval="10000">
 											<div class="row h-100 align-items-center g-2">
 												<%
 												for (ProductDto dto : list) {
-													if (dto.getTeamName().equals("»ï¼º ¶óÀÌ¿ÂÁî")) {
-														if (dto.getpCategory().equals("ÀÀ¿ø¿ëÇ°")) {
+													if (dto.getTeamName().equals("ì‚¼ì„± ë¼ì´ì˜¨ì¦ˆ")) {
+														if (dto.getpCategory().equals("ì‘ì›ìš©í’ˆ")) {
 												%>
 												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
 													<div class="card card-span h-100 text-white">
@@ -785,20 +788,20 @@ List<ProductDto> list_all = dao_all.getList_pDay(start, perPage);
 								</div>
 							</div>
 
-							<!-- »ï¼º ¾ß±¸¿ëÇ° -->
+							<!-- ì‚¼ì„± ì•¼êµ¬ìš©í’ˆ -->
 							<div class="tab-pane fade" id="pills-samsung_baseball"
 								role="tabpanel" aria-labelledby="pills-samsung_baseball-tab">
 								<div class="carousel slide" id="carouselCategorySamsungbaseball"
 									data-bs-touch="false" data-bs-interval="false">
-									<!-- »ï¼º ¾ß±¸¿ëÇ° ½ÃÀÛ -->
+									<!-- ì‚¼ì„± ì•¼êµ¬ìš©í’ˆ ì‹œì‘ -->
 									<div class="carousel-inner">
-										<!-- »ï¼º ¾ß±¸¿ëÇ° Ã¹¹øÂ° ÆäÀÌÁö -->
+										<!-- ì‚¼ì„± ì•¼êµ¬ìš©í’ˆ ì²«ë²ˆì§¸ í˜ì´ì§€ -->
 										<div class="carousel-item active" data-bs-interval="10000">
 											<div class="row h-100 align-items-center g-2">
 												<%
 												for (ProductDto dto : list) {
-													if (dto.getTeamName().equals("»ï¼º ¶óÀÌ¿ÂÁî")) {
-														if (dto.getpCategory().equals("¾ß±¸¿ëÇ°")) {
+													if (dto.getTeamName().equals("ì‚¼ì„± ë¼ì´ì˜¨ì¦ˆ")) {
+														if (dto.getpCategory().equals("ì•¼êµ¬ìš©í’ˆ")) {
 												%>
 												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
 													<div class="card card-span h-100 text-white">
@@ -830,20 +833,20 @@ List<ProductDto> list_all = dao_all.getList_pDay(start, perPage);
 								</div>
 							</div>
 
-							<!-- »ï¼º ±â³ä»óÇ° -->
+							<!-- ì‚¼ì„± ê¸°ë…ìƒí’ˆ -->
 							<div class="tab-pane fade" id="pills-samsung_memory"
 								role="tabpanel" aria-labelledby="pills-samsung_memory-tab">
 								<div class="carousel slide" id="carouselCategorySamsungMemory"
 									data-bs-touch="false" data-bs-interval="false">
-									<!-- »ï¼º ±â³ä»óÇ° ½ÃÀÛ -->
+									<!-- ì‚¼ì„± ê¸°ë…ìƒí’ˆ ì‹œì‘ -->
 									<div class="carousel-inner">
-										<!-- »ï¼º ±â³ä»óÇ° Ã¹¹øÂ° ÆäÀÌÁö -->
+										<!-- ì‚¼ì„± ê¸°ë…ìƒí’ˆ ì²«ë²ˆì§¸ í˜ì´ì§€ -->
 										<div class="carousel-item active" data-bs-interval="10000">
 											<div class="row h-100 align-items-center g-2">
 												<%
 												for (ProductDto dto : list) {
-													if (dto.getTeamName().equals("»ï¼º ¶óÀÌ¿ÂÁî")) {
-														if (dto.getpCategory().equals("±â³ä»óÇ°")) {
+													if (dto.getTeamName().equals("ì‚¼ì„± ë¼ì´ì˜¨ì¦ˆ")) {
+														if (dto.getpCategory().equals("ê¸°ë…ìƒí’ˆ")) {
 												%>
 												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
 													<div class="card card-span h-100 text-white">
@@ -877,7 +880,7 @@ List<ProductDto> list_all = dao_all.getList_pDay(start, perPage);
 						</div>
 					</div>
 
-					<!-- Å°¿ò -->
+					<!-- í‚¤ì›€ -->
 					<div class="tab-pane fade" id="navv-kiwoom" role="tabpanel"
 						aria-labelledby="navv-kiwoom-tab">
 						<ul class="navv navv-pills mb-5 justify-content-center"
@@ -886,43 +889,43 @@ List<ProductDto> list_all = dao_all.getList_pDay(start, perPage);
 								<button class="navv-link active" id="pills-kiwoom_teamwear-tab"
 									data-bs-toggle="pill" data-bs-target="#pills-kiwoom_teamwear"
 									type="button" role="tab" aria-controls="pills-kiwoom_teamwear"
-									aria-selected="true">ÆÀ¿ş¾î</button>
+									aria-selected="true">íŒ€ì›¨ì–´</button>
 							</li>
 							<li class="navv-item" role="presentation">
 								<button class="navv-link" id="pills-kiwoom_cheering-tab"
 									data-bs-toggle="pill" data-bs-target="#pills-kiwoom_cheering"
 									type="button" role="tab" aria-controls="pills-kiwoom_cheering"
-									aria-selected="false">ÀÀ¿ø¿ëÇ°</button>
+									aria-selected="false">ì‘ì›ìš©í’ˆ</button>
 							</li>
 							<li class="navv-item" role="presentation">
 								<button class="navv-link" id="pills-kiwoom_baseball-tab"
 									data-bs-toggle="pill" data-bs-target="#pills-kiwoom_baseball"
 									type="button" role="tab" aria-controls="pills-kiwoom_baseball"
-									aria-selected="false">¾ß±¸¿ëÇ°</button>
+									aria-selected="false">ì•¼êµ¬ìš©í’ˆ</button>
 							</li>
 							<li class="navv-item" role="presentation">
 								<button class="navv-link" id="pills-kiwoom_memory-tab"
 									data-bs-toggle="pill" data-bs-target="#pills-kiwoom_memory"
 									type="button" role="tab" aria-controls="pills-kiwoom_memory"
-									aria-selected="false">±â³ä»óÇ°</button>
+									aria-selected="false">ê¸°ë…ìƒí’ˆ</button>
 							</li>
 						</ul>
 
 						<div class="tab-content" id="pills-tabContentKiwoom">
-							<!-- Å°¿ò ÆÀ¿ş¾î -->
+							<!-- í‚¤ì›€ íŒ€ì›¨ì–´ -->
 							<div class="tab-pane fade show active" id="pills-kiwoom_teamwear"
 								role="tabpanel" aria-labelledby="pills-kiwoom_teamwear-tab">
 								<div class="carousel slide" id="carouselCategoryKiwoomTeamwear"
 									data-bs-touch="false" data-bs-interval="false">
-									<!-- Å°¿ò ÆÀ¿ş¾î ½ÃÀÛ -->
+									<!-- í‚¤ì›€ íŒ€ì›¨ì–´ ì‹œì‘ -->
 									<div class="carousel-inner">
-										<!-- Å°¿ò ÆÀ¿ş¾î Ã¹¹øÂ° ÆäÀÌÁö -->
+										<!-- í‚¤ì›€ íŒ€ì›¨ì–´ ì²«ë²ˆì§¸ í˜ì´ì§€ -->
 										<div class="carousel-item active" data-bs-interval="10000">
 											<div class="row h-100 align-items-center g-2">
 												<%
 												for (ProductDto dto : list) {
-													if (dto.getTeamName().equals("Å°¿ò È÷¾î·ÎÁî")) {
-														if (dto.getpCategory().equals("ÆÀ¿ş¾î")) {
+													if (dto.getTeamName().equals("í‚¤ì›€ íˆì–´ë¡œì¦ˆ")) {
+														if (dto.getpCategory().equals("íŒ€ì›¨ì–´")) {
 												%>
 												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
 													<div class="card card-span h-100 text-white">
@@ -954,20 +957,20 @@ List<ProductDto> list_all = dao_all.getList_pDay(start, perPage);
 								</div>
 							</div>
 
-							<!-- Å°¿ò ÀÀ¿ø¿ëÇ° -->
+							<!-- í‚¤ì›€ ì‘ì›ìš©í’ˆ -->
 							<div class="tab-pane fade" id="pills-kiwoom_cheering"
 								role="tabpanel" aria-labelledby="pills-kiwoom_cheering-tab">
 								<div class="carousel slide" id="carouselCategoryKiwoomCheering"
 									data-bs-touch="false" data-bs-interval="false">
-									<!-- Å°¿ò ÀÀ¿ø¿ëÇ° ½ÃÀÛ -->
+									<!-- í‚¤ì›€ ì‘ì›ìš©í’ˆ ì‹œì‘ -->
 									<div class="carousel-inner">
-										<!-- Å°¿ò ÀÀ¿ø¿ëÇ° Ã¹¹øÂ° ÆäÀÌÁö -->
+										<!-- í‚¤ì›€ ì‘ì›ìš©í’ˆ ì²«ë²ˆì§¸ í˜ì´ì§€ -->
 										<div class="carousel-item active" data-bs-interval="10000">
 											<div class="row h-100 align-items-center g-2">
 												<%
 												for (ProductDto dto : list) {
-													if (dto.getTeamName().equals("Å°¿ò È÷¾î·ÎÁî")) {
-														if (dto.getpCategory().equals("ÀÀ¿ø¿ëÇ°")) {
+													if (dto.getTeamName().equals("í‚¤ì›€ íˆì–´ë¡œì¦ˆ")) {
+														if (dto.getpCategory().equals("ì‘ì›ìš©í’ˆ")) {
 												%>
 												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
 													<div class="card card-span h-100 text-white">
@@ -999,20 +1002,20 @@ List<ProductDto> list_all = dao_all.getList_pDay(start, perPage);
 								</div>
 							</div>
 
-							<!-- Å°¿ò ¾ß±¸¿ëÇ° -->
+							<!-- í‚¤ì›€ ì•¼êµ¬ìš©í’ˆ -->
 							<div class="tab-pane fade" id="pills-kiwoom_baseball"
 								role="tabpanel" aria-labelledby="pills-kiwoom_baseball-tab">
 								<div class="carousel slide" id="carouselCategoryKiwoombaseball"
 									data-bs-touch="false" data-bs-interval="false">
-									<!-- Å°¿ò ¾ß±¸¿ëÇ° ½ÃÀÛ -->
+									<!-- í‚¤ì›€ ì•¼êµ¬ìš©í’ˆ ì‹œì‘ -->
 									<div class="carousel-inner">
-										<!-- Å°¿ò ¾ß±¸¿ëÇ° Ã¹¹øÂ° ÆäÀÌÁö -->
+										<!-- í‚¤ì›€ ì•¼êµ¬ìš©í’ˆ ì²«ë²ˆì§¸ í˜ì´ì§€ -->
 										<div class="carousel-item active" data-bs-interval="10000">
 											<div class="row h-100 align-items-center g-2">
 												<%
 												for (ProductDto dto : list) {
-													if (dto.getTeamName().equals("Å°¿ò È÷¾î·ÎÁî")) {
-														if (dto.getpCategory().equals("¾ß±¸¿ëÇ°")) {
+													if (dto.getTeamName().equals("í‚¤ì›€ íˆì–´ë¡œì¦ˆ")) {
+														if (dto.getpCategory().equals("ì•¼êµ¬ìš©í’ˆ")) {
 												%>
 												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
 													<div class="card card-span h-100 text-white">
@@ -1045,20 +1048,20 @@ List<ProductDto> list_all = dao_all.getList_pDay(start, perPage);
 
 							</div>
 
-							<!-- Å°¿ò ±â³ä»óÇ° -->
+							<!-- í‚¤ì›€ ê¸°ë…ìƒí’ˆ -->
 							<div class="tab-pane fade" id="pills-kiwoom_memory"
 								role="tabpanel" aria-labelledby="pills-kiwoom_memory-tab">
 								<div class="carousel slide" id="carouselCategoryKiwoomMemory"
 									data-bs-touch="false" data-bs-interval="false">
-									<!-- Å°¿ò ±â³ä»óÇ° ½ÃÀÛ -->
+									<!-- í‚¤ì›€ ê¸°ë…ìƒí’ˆ ì‹œì‘ -->
 									<div class="carousel-inner">
-										<!-- Å°¿ò ±â³ä»óÇ° Ã¹¹øÂ° ÆäÀÌÁö -->
+										<!-- í‚¤ì›€ ê¸°ë…ìƒí’ˆ ì²«ë²ˆì§¸ í˜ì´ì§€ -->
 										<div class="carousel-item active" data-bs-interval="10000">
 											<div class="row h-100 align-items-center g-2">
 												<%
 												for (ProductDto dto : list) {
-													if (dto.getTeamName().equals("Å°¿ò È÷¾î·ÎÁî")) {
-														if (dto.getpCategory().equals("±â³ä»óÇ°")) {
+													if (dto.getTeamName().equals("í‚¤ì›€ íˆì–´ë¡œì¦ˆ")) {
+														if (dto.getpCategory().equals("ê¸°ë…ìƒí’ˆ")) {
 												%>
 												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
 													<div class="card card-span h-100 text-white">
@@ -1092,7 +1095,7 @@ List<ProductDto> list_all = dao_all.getList_pDay(start, perPage);
 						</div>
 					</div>
 
-					<!-- ÇÑÈ­ -->
+					<!-- í•œí™” -->
 					<div class="tab-pane fade" id="navv-hanhwa" role="tabpanel"
 						style="opacity: 1" aria-labelledby="navv-hanhwa-tab">
 						<ul class="navv navv-pills mb-5 justify-content-center"
@@ -1101,43 +1104,43 @@ List<ProductDto> list_all = dao_all.getList_pDay(start, perPage);
 								<button class="navv-link active" id="pills-hanhwa_teamwear-tab"
 									data-bs-toggle="pill" data-bs-target="#pills-hanhwa_teamwear"
 									type="button" role="tab" aria-controls="pills-hanhwa_teamwear"
-									aria-selected="true">ÆÀ¿ş¾î</button>
+									aria-selected="true">íŒ€ì›¨ì–´</button>
 							</li>
 							<li class="navv-item" role="presentation">
 								<button class="navv-link" id="pills-hanhwa_cheering-tab"
 									data-bs-toggle="pill" data-bs-target="#pills-hanhwa_cheering"
 									type="button" role="tab" aria-controls="pills-hanhwa_cheering"
-									aria-selected="false">ÀÀ¿ø¿ëÇ°</button>
+									aria-selected="false">ì‘ì›ìš©í’ˆ</button>
 							</li>
 							<li class="navv-item" role="presentation">
 								<button class="navv-link" id="pills-hanhwa_baseball-tab"
 									data-bs-toggle="pill" data-bs-target="#pills-hanhwa_baseball"
 									type="button" role="tab" aria-controls="pills-hanhwa_baseball"
-									aria-selected="false">¾ß±¸¿ëÇ°</button>
+									aria-selected="false">ì•¼êµ¬ìš©í’ˆ</button>
 							</li>
 							<li class="navv-item" role="presentation">
 								<button class="navv-link" id="pills-hanhwa_memory-tab"
 									data-bs-toggle="pill" data-bs-target="#pills-hanhwa_memory"
 									type="button" role="tab" aria-controls="pills-hanhwa_memory"
-									aria-selected="false">±â³ä»óÇ°</button>
+									aria-selected="false">ê¸°ë…ìƒí’ˆ</button>
 							</li>
 						</ul>
 
 						<div class="tab-content" id="pills-tabContentHanhwa">
-							<!-- ÇÑÈ­ ÆÀ¿ş¾î -->
+							<!-- í•œí™” íŒ€ì›¨ì–´ -->
 							<div class="tab-pane fade show active" id="pills-hanhwa_teamwear"
 								role="tabpanel" aria-labelledby="pills-hanhwa_teamwear-tab">
 								<div class="carousel slide" id="carouselCategoryHanhwaTeamwear"
 									data-bs-touch="false" data-bs-interval="false">
-									<!-- ÇÑÈ­ ÆÀ¿ş¾î ½ÃÀÛ -->
+									<!-- í•œí™” íŒ€ì›¨ì–´ ì‹œì‘ -->
 									<div class="carousel-inner">
-										<!-- ÇÑÈ­ ÆÀ¿ş¾î Ã¹¹øÂ° ÆäÀÌÁö -->
+										<!-- í•œí™” íŒ€ì›¨ì–´ ì²«ë²ˆì§¸ í˜ì´ì§€ -->
 										<div class="carousel-item active" data-bs-interval="10000">
 											<div class="row h-100 align-items-center g-2">
 												<%
 												for (ProductDto dto : list) {
-													if (dto.getTeamName().equals("ÇÑÈ­ ÀÌ±Û½º")) {
-														if (dto.getpCategory().equals("ÆÀ¿ş¾î")) {
+													if (dto.getTeamName().equals("í•œí™” ì´ê¸€ìŠ¤")) {
+														if (dto.getpCategory().equals("íŒ€ì›¨ì–´")) {
 												%>
 												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
 													<div class="card card-span h-100 text-white">
@@ -1169,20 +1172,20 @@ List<ProductDto> list_all = dao_all.getList_pDay(start, perPage);
 								</div>
 							</div>
 
-							<!-- ÇÑÈ­ ÀÀ¿ø¿ëÇ° -->
+							<!-- í•œí™” ì‘ì›ìš©í’ˆ -->
 							<div class="tab-pane fade" id="pills-hanhwa_cheering"
 								role="tabpanel" aria-labelledby="pills-hanhwa_cheering-tab">
 								<div class="carousel slide" id="carouselCategoryHanhwaCheering"
 									data-bs-touch="false" data-bs-interval="false">
-									<!-- ÇÑÈ­ ÀÀ¿ø¿ëÇ° ½ÃÀÛ -->
+									<!-- í•œí™” ì‘ì›ìš©í’ˆ ì‹œì‘ -->
 									<div class="carousel-inner">
-										<!-- ÇÑÈ­ ÀÀ¿ø¿ëÇ° Ã¹¹øÂ° ÆäÀÌÁö -->
+										<!-- í•œí™” ì‘ì›ìš©í’ˆ ì²«ë²ˆì§¸ í˜ì´ì§€ -->
 										<div class="carousel-item active" data-bs-interval="10000">
 											<div class="row h-100 align-items-center g-2">
 												<%
 												for (ProductDto dto : list) {
-													if (dto.getTeamName().equals("ÇÑÈ­ ÀÌ±Û½º")) {
-														if (dto.getpCategory().equals("ÀÀ¿ø¿ëÇ°")) {
+													if (dto.getTeamName().equals("í•œí™” ì´ê¸€ìŠ¤")) {
+														if (dto.getpCategory().equals("ì‘ì›ìš©í’ˆ")) {
 												%>
 												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
 													<div class="card card-span h-100 text-white">
@@ -1213,20 +1216,20 @@ List<ProductDto> list_all = dao_all.getList_pDay(start, perPage);
 								</div>
 							</div>
 
-							<!-- ÇÑÈ­ ¾ß±¸¿ëÇ° -->
+							<!-- í•œí™” ì•¼êµ¬ìš©í’ˆ -->
 							<div class="tab-pane fade" id="pills-hanhwa_baseball"
 								role="tabpanel" aria-labelledby="pills-hanhwa_baseball-tab">
 								<div class="carousel slide" id="carouselCategoryHanhwabaseball"
 									data-bs-touch="false" data-bs-interval="false">
-									<!-- ÇÑÈ­ ¾ß±¸¿ëÇ° ½ÃÀÛ -->
+									<!-- í•œí™” ì•¼êµ¬ìš©í’ˆ ì‹œì‘ -->
 									<div class="carousel-inner">
-										<!-- ÇÑÈ­ ¾ß±¸¿ëÇ° Ã¹¹øÂ° ÆäÀÌÁö -->
+										<!-- í•œí™” ì•¼êµ¬ìš©í’ˆ ì²«ë²ˆì§¸ í˜ì´ì§€ -->
 										<div class="carousel-item active" data-bs-interval="10000">
 											<div class="row h-100 align-items-center g-2">
 												<%
 												for (ProductDto dto : list) {
-													if (dto.getTeamName().equals("ÇÑÈ­ ÀÌ±Û½º")) {
-														if (dto.getpCategory().equals("¾ß±¸¿ëÇ°")) {
+													if (dto.getTeamName().equals("í•œí™” ì´ê¸€ìŠ¤")) {
+														if (dto.getpCategory().equals("ì•¼êµ¬ìš©í’ˆ")) {
 												%>
 												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
 													<div class="card card-span h-100 text-white">
@@ -1258,20 +1261,20 @@ List<ProductDto> list_all = dao_all.getList_pDay(start, perPage);
 								</div>
 							</div>
 
-							<!-- ÇÑÈ­ ±â³ä»óÇ° -->
+							<!-- í•œí™” ê¸°ë…ìƒí’ˆ -->
 							<div class="tab-pane fade" id="pills-hanhwa_memory"
 								role="tabpanel" aria-labelledby="pills-hanhwa_memory-tab">
 								<div class="carousel slide" id="carouselCategoryHanhwaMemory"
 									data-bs-touch="false" data-bs-interval="false">
-									<!-- ÇÑÈ­ ±â³ä»óÇ° ½ÃÀÛ -->
+									<!-- í•œí™” ê¸°ë…ìƒí’ˆ ì‹œì‘ -->
 									<div class="carousel-inner">
-										<!-- ÇÑÈ­ ±â³ä»óÇ° Ã¹¹øÂ° ÆäÀÌÁö -->
+										<!-- í•œí™” ê¸°ë…ìƒí’ˆ ì²«ë²ˆì§¸ í˜ì´ì§€ -->
 										<div class="carousel-item active" data-bs-interval="10000">
 											<div class="row h-100 align-items-center g-2">
 												<%
 												for (ProductDto dto : list) {
-													if (dto.getTeamName().equals("ÇÑÈ­ ÀÌ±Û½º")) {
-														if (dto.getpCategory().equals("±â³ä»óÇ°")) {
+													if (dto.getTeamName().equals("í•œí™” ì´ê¸€ìŠ¤")) {
+														if (dto.getpCategory().equals("ê¸°ë…ìƒí’ˆ")) {
 												%>
 												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
 													<div class="card card-span h-100 text-white">
@@ -1314,43 +1317,43 @@ List<ProductDto> list_all = dao_all.getList_pDay(start, perPage);
 								<button class="navv-link active" id="pills-kia_teamwear-tab"
 									data-bs-toggle="pill" data-bs-target="#pills-kia_teamwear"
 									type="button" role="tab" aria-controls="pills-kia_teamwear"
-									aria-selected="true">ÆÀ¿ş¾î</button>
+									aria-selected="true">íŒ€ì›¨ì–´</button>
 							</li>
 							<li class="navv-item" role="presentation">
 								<button class="navv-link" id="pills-kia_cheering-tab"
 									data-bs-toggle="pill" data-bs-target="#pills-kia_cheering"
 									type="button" role="tab" aria-controls="pills-kia_cheering"
-									aria-selected="false">ÀÀ¿ø¿ëÇ°</button>
+									aria-selected="false">ì‘ì›ìš©í’ˆ</button>
 							</li>
 							<li class="navv-item" role="presentation">
 								<button class="navv-link" id="pills-kia_baseball-tab"
 									data-bs-toggle="pill" data-bs-target="#pills-kia_baseball"
 									type="button" role="tab" aria-controls="pills-kia_baseball"
-									aria-selected="false">¾ß±¸¿ëÇ°</button>
+									aria-selected="false">ì•¼êµ¬ìš©í’ˆ</button>
 							</li>
 							<li class="navv-item" role="presentation">
 								<button class="navv-link" id="pills-kia_memory-tab"
 									data-bs-toggle="pill" data-bs-target="#pills-kia_memory"
 									type="button" role="tab" aria-controls="pills-kia_memory"
-									aria-selected="false">±â³ä»óÇ°</button>
+									aria-selected="false">ê¸°ë…ìƒí’ˆ</button>
 							</li>
 						</ul>
 
 						<div class="tab-content" id="pills-tabContentKia">
-							<!-- KIA ÆÀ¿ş¾î -->
+							<!-- KIA íŒ€ì›¨ì–´ -->
 							<div class="tab-pane fade show active" id="pills-kia_teamwear"
 								role="tabpanel" aria-labelledby="pills-kia_teamwear-tab">
 								<div class="carousel slide" id="carouselCategoryKiaTeamwear"
 									data-bs-touch="false" data-bs-interval="false">
-									<!-- KIA ÆÀ¿ş¾î ½ÃÀÛ -->
+									<!-- KIA íŒ€ì›¨ì–´ ì‹œì‘ -->
 									<div class="carousel-inner">
-										<!-- KIA ÆÀ¿ş¾î Ã¹¹øÂ° ÆäÀÌÁö -->
+										<!-- KIA íŒ€ì›¨ì–´ ì²«ë²ˆì§¸ í˜ì´ì§€ -->
 										<div class="carousel-item active" data-bs-interval="10000">
 											<div class="row h-100 align-items-center g-2">
 												<%
 												for (ProductDto dto : list) {
-													if (dto.getTeamName().equals("KIA Å¸ÀÌ°ÅÁî")) {
-														if (dto.getpCategory().equals("ÆÀ¿ş¾î")) {
+													if (dto.getTeamName().equals("KIA íƒ€ì´ê±°ì¦ˆ")) {
+														if (dto.getpCategory().equals("íŒ€ì›¨ì–´")) {
 												%>
 												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
 													<div class="card card-span h-100 text-white">
@@ -1382,20 +1385,20 @@ List<ProductDto> list_all = dao_all.getList_pDay(start, perPage);
 								</div>
 							</div>
 
-							<!-- KIA ÀÀ¿ø¿ëÇ° -->
+							<!-- KIA ì‘ì›ìš©í’ˆ -->
 							<div class="tab-pane fade" id="pills-kia_cheering"
 								role="tabpanel" aria-labelledby="pills-kia_cheering-tab">
 								<div class="carousel slide" id="carouselCategoryKiaCheering"
 									data-bs-touch="false" data-bs-interval="false">
-									<!-- KIA ÀÀ¿ø¿ëÇ° ½ÃÀÛ -->
+									<!-- KIA ì‘ì›ìš©í’ˆ ì‹œì‘ -->
 									<div class="carousel-inner">
-										<!-- KIA ÀÀ¿ø¿ëÇ° Ã¹¹øÂ° ÆäÀÌÁö -->
+										<!-- KIA ì‘ì›ìš©í’ˆ ì²«ë²ˆì§¸ í˜ì´ì§€ -->
 										<div class="carousel-item active" data-bs-interval="10000">
 											<div class="row h-100 align-items-center g-2">
 												<%
 												for (ProductDto dto : list) {
-													if (dto.getTeamName().equals("KIA Å¸ÀÌ°ÅÁî")) {
-														if (dto.getpCategory().equals("ÀÀ¿ø¿ëÇ°")) {
+													if (dto.getTeamName().equals("KIA íƒ€ì´ê±°ì¦ˆ")) {
+														if (dto.getpCategory().equals("ì‘ì›ìš©í’ˆ")) {
 												%>
 												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
 													<div class="card card-span h-100 text-white">
@@ -1427,20 +1430,20 @@ List<ProductDto> list_all = dao_all.getList_pDay(start, perPage);
 								</div>
 							</div>
 
-							<!-- KIA ¾ß±¸¿ëÇ° -->
+							<!-- KIA ì•¼êµ¬ìš©í’ˆ -->
 							<div class="tab-pane fade" id="pills-kia_baseball"
 								role="tabpanel" aria-labelledby="pills-kia_baseball-tab">
 								<div class="carousel slide" id="carouselCategoryKiabaseball"
 									data-bs-touch="false" data-bs-interval="false">
-									<!-- KIA ¾ß±¸¿ëÇ° ½ÃÀÛ -->
+									<!-- KIA ì•¼êµ¬ìš©í’ˆ ì‹œì‘ -->
 									<div class="carousel-inner">
-										<!-- KIA ¾ß±¸¿ëÇ° Ã¹¹øÂ° ÆäÀÌÁö -->
+										<!-- KIA ì•¼êµ¬ìš©í’ˆ ì²«ë²ˆì§¸ í˜ì´ì§€ -->
 										<div class="carousel-item active" data-bs-interval="10000">
 											<div class="row h-100 align-items-center g-2">
 												<%
 												for (ProductDto dto : list) {
-													if (dto.getTeamName().equals("KIA Å¸ÀÌ°ÅÁî")) {
-														if (dto.getpCategory().equals("¾ß±¸¿ëÇ°")) {
+													if (dto.getTeamName().equals("KIA íƒ€ì´ê±°ì¦ˆ")) {
+														if (dto.getpCategory().equals("ì•¼êµ¬ìš©í’ˆ")) {
 												%>
 												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
 													<div class="card card-span h-100 text-white">
@@ -1472,20 +1475,20 @@ List<ProductDto> list_all = dao_all.getList_pDay(start, perPage);
 								</div>
 							</div>
 
-							<!-- KIA ±â³ä»óÇ° -->
+							<!-- KIA ê¸°ë…ìƒí’ˆ -->
 							<div class="tab-pane fade" id="pills-kia_memory" role="tabpanel"
 								aria-labelledby="pills-kia_memory-tab">
 								<div class="carousel slide" id="carouselCategoryKiaMemory"
 									data-bs-touch="false" data-bs-interval="false">
-									<!-- KIA ±â³ä»óÇ° ½ÃÀÛ -->
+									<!-- KIA ê¸°ë…ìƒí’ˆ ì‹œì‘ -->
 									<div class="carousel-inner">
-										<!-- KIA ±â³ä»óÇ° Ã¹¹øÂ° ÆäÀÌÁö -->
+										<!-- KIA ê¸°ë…ìƒí’ˆ ì²«ë²ˆì§¸ í˜ì´ì§€ -->
 										<div class="carousel-item active" data-bs-interval="10000">
 											<div class="row h-100 align-items-center g-2">
 												<%
 												for (ProductDto dto : list) {
-													if (dto.getTeamName().equals("KIA Å¸ÀÌ°ÅÁî")) {
-														if (dto.getpCategory().equals("±â³ä»óÇ°")) {
+													if (dto.getTeamName().equals("KIA íƒ€ì´ê±°ì¦ˆ")) {
+														if (dto.getpCategory().equals("ê¸°ë…ìƒí’ˆ")) {
 												%>
 												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
 													<div class="card card-span h-100 text-white">
@@ -1527,43 +1530,44 @@ List<ProductDto> list_all = dao_all.getList_pDay(start, perPage);
 								<button class="navv-link active" id="pills-kt_teamwear-tab"
 									data-bs-toggle="pill" data-bs-target="#pills-kt_teamwear"
 									type="button" role="tab" aria-controls="pills-kt_teamwear"
-									aria-selected="true">ÆÀ¿ş¾î</button>
+									aria-selected="true">íŒ€ì›¨ì–´</button>
 							</li>
 							<li class="navv-item" role="presentation">
 								<button class="navv-link" id="pills-kt_cheering-tab"
 									data-bs-toggle="pill" data-bs-target="#pills-kt_cheering"
 									type="button" role="tab" aria-controls="pills-kt_cheering"
-									aria-selected="false">ÀÀ¿ø¿ëÇ°</button>
+									aria-selected="false">ì‘ì›ìš©í’ˆ</button>
 							</li>
 							<li class="navv-item" role="presentation">
 								<button class="navv-link" id="pills-kt_baseball-tab"
 									data-bs-toggle="pill" data-bs-target="#pills-kt_baseball"
 									type="button" role="tab" aria-controls="pills-kt_baseball"
-									aria-selected="false">¾ß±¸¿ëÇ°</button>
+									aria-selected="false">ì•¼êµ¬ìš©í’ˆ</button>
 							</li>
 							<li class="navv-item" role="presentation">
 								<button class="navv-link" id="pills-kt_memory-tab"
 									data-bs-toggle="pill" data-bs-target="#pills-kt_memory"
 									type="button" role="tab" aria-controls="pills-kt_memory"
-									aria-selected="false">±â³ä»óÇ°</button>
+									aria-selected="false">ê¸°ë…ìƒí’ˆ</button>
 							</li>
 						</ul>
 
 						<div class="tab-content" id="pills-tabContentKt">
-							<!-- KT ÆÀ¿ş¾î -->
+
+							<!-- KT íŒ€ì›¨ì–´ -->
 							<div class="tab-pane fade show active" id="pills-kt_teamwear"
 								role="tabpanel" aria-labelledby="pills-kt_teamwear-tab">
 								<div class="carousel slide" id="carouselCategoryKtTeamwear"
 									data-bs-touch="false" data-bs-interval="false">
-									<!-- KT ÆÀ¿ş¾î ½ÃÀÛ -->
+									<!-- KT íŒ€ì›¨ì–´ ì‹œì‘ -->
 									<div class="carousel-inner">
-										<!-- KT ÆÀ¿ş¾î Ã¹¹øÂ° ÆäÀÌÁö -->
+										<!-- KT íŒ€ì›¨ì–´ ì²«ë²ˆì§¸ í˜ì´ì§€ -->
 										<div class="carousel-item active" data-bs-interval="10000">
 											<div class="row h-100 align-items-center g-2">
 												<%
 												for (ProductDto dto : list) {
 													if (dto.getTeamName().equals("KT WIZ")) {
-														if (dto.getpCategory().equals("ÆÀ¿ş¾î")) {
+														if (dto.getpCategory().equals("íŒ€ì›¨ì–´")) {
 												%>
 												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
 													<div class="card card-span h-100 text-white">
@@ -1595,20 +1599,20 @@ List<ProductDto> list_all = dao_all.getList_pDay(start, perPage);
 								</div>
 							</div>
 
-							<!-- KT ÀÀ¿ø¿ëÇ° -->
+							<!-- KT ì‘ì›ìš©í’ˆ -->
 							<div class="tab-pane fade" id="pills-kt_cheering" role="tabpanel"
 								aria-labelledby="pills-kt_cheering-tab">
 								<div class="carousel slide" id="carouselCategoryKtCheering"
 									data-bs-touch="false" data-bs-interval="false">
-									<!-- KT ÀÀ¿ø¿ëÇ° ½ÃÀÛ -->
+									<!-- KT ì‘ì›ìš©í’ˆ ì‹œì‘ -->
 									<div class="carousel-inner">
-										<!-- KT ÀÀ¿ø¿ëÇ° Ã¹¹øÂ° ÆäÀÌÁö -->
+										<!-- KT ì‘ì›ìš©í’ˆ ì²«ë²ˆì§¸ í˜ì´ì§€ -->
 										<div class="carousel-item active" data-bs-interval="10000">
 											<div class="row h-100 align-items-center g-2">
 												<%
 												for (ProductDto dto : list) {
 													if (dto.getTeamName().equals("KT WIZ")) {
-														if (dto.getpCategory().equals("ÀÀ¿ø¿ëÇ°")) {
+														if (dto.getpCategory().equals("ì‘ì›ìš©í’ˆ")) {
 												%>
 												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
 													<div class="card card-span h-100 text-white">
@@ -1640,20 +1644,20 @@ List<ProductDto> list_all = dao_all.getList_pDay(start, perPage);
 								</div>
 							</div>
 
-							<!-- KT ¾ß±¸¿ëÇ° -->
+							<!-- KT ì•¼êµ¬ìš©í’ˆ -->
 							<div class="tab-pane fade" id="pills-kt_baseball" role="tabpanel"
 								aria-labelledby="pills-kt_baseball-tab">
 								<div class="carousel slide" id="carouselCategoryKtbaseball"
 									data-bs-touch="false" data-bs-interval="false">
-									<!-- KT ¾ß±¸¿ëÇ° ½ÃÀÛ -->
+									<!-- KT ì•¼êµ¬ìš©í’ˆ ì‹œì‘ -->
 									<div class="carousel-inner">
-										<!-- KT ¾ß±¸¿ëÇ° Ã¹¹øÂ° ÆäÀÌÁö -->
+										<!-- KT ì•¼êµ¬ìš©í’ˆ ì²«ë²ˆì§¸ í˜ì´ì§€ -->
 										<div class="carousel-item active" data-bs-interval="10000">
 											<div class="row h-100 align-items-center g-2">
 												<%
 												for (ProductDto dto : list) {
 													if (dto.getTeamName().equals("KT WIZ")) {
-														if (dto.getpCategory().equals("¾ß±¸¿ëÇ°")) {
+														if (dto.getpCategory().equals("ì•¼êµ¬ìš©í’ˆ")) {
 												%>
 												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
 													<div class="card card-span h-100 text-white">
@@ -1685,20 +1689,20 @@ List<ProductDto> list_all = dao_all.getList_pDay(start, perPage);
 								</div>
 							</div>
 
-							<!-- KT ±â³ä»óÇ° -->
+							<!-- KT ê¸°ë…ìƒí’ˆ -->
 							<div class="tab-pane fade" id="pills-kt_memory" role="tabpanel"
 								aria-labelledby="pills-kt_memory-tab">
 								<div class="carousel slide" id="carouselCategoryKtMemory"
 									data-bs-touch="false" data-bs-interval="false">
-									<!-- KT ±â³ä»óÇ° ½ÃÀÛ -->
+									<!-- KT ê¸°ë…ìƒí’ˆ ì‹œì‘ -->
 									<div class="carousel-inner">
-										<!-- KT ±â³ä»óÇ° Ã¹¹øÂ° ÆäÀÌÁö -->
+										<!-- KT ê¸°ë…ìƒí’ˆ ì²«ë²ˆì§¸ í˜ì´ì§€ -->
 										<div class="carousel-item active" data-bs-interval="10000">
 											<div class="row h-100 align-items-center g-2">
 												<%
 												for (ProductDto dto : list) {
 													if (dto.getTeamName().equals("KT WIZ")) {
-														if (dto.getpCategory().equals("±â³ä»óÇ°")) {
+														if (dto.getpCategory().equals("ê¸°ë…ìƒí’ˆ")) {
 												%>
 												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
 													<div class="card card-span h-100 text-white">
@@ -1741,43 +1745,43 @@ List<ProductDto> list_all = dao_all.getList_pDay(start, perPage);
 								<button class="navv-link active" id="pills-lg_teamwear-tab"
 									data-bs-toggle="pill" data-bs-target="#pills-lg_teamwear"
 									type="button" role="tab" aria-controls="pills-lg_teamwear"
-									aria-selected="true">ÆÀ¿ş¾î</button>
+									aria-selected="true">íŒ€ì›¨ì–´</button>
 							</li>
 							<li class="navv-item" role="presentation">
 								<button class="navv-link" id="pills-lg_cheering-tab"
 									data-bs-toggle="pill" data-bs-target="#pills-lg_cheering"
 									type="button" role="tab" aria-controls="pills-lg_cheering"
-									aria-selected="false">ÀÀ¿ø¿ëÇ°</button>
+									aria-selected="false">ì‘ì›ìš©í’ˆ</button>
 							</li>
 							<li class="navv-item" role="presentation">
 								<button class="navv-link" id="pills-lg_baseball-tab"
 									data-bs-toggle="pill" data-bs-target="#pills-lg_baseball"
 									type="button" role="tab" aria-controls="pills-lg_baseball"
-									aria-selected="false">¾ß±¸¿ëÇ°</button>
+									aria-selected="false">ì•¼êµ¬ìš©í’ˆ</button>
 							</li>
 							<li class="navv-item" role="presentation">
 								<button class="navv-link" id="pills-lg_memory-tab"
 									data-bs-toggle="pill" data-bs-target="#pills-lg_memory"
 									type="button" role="tab" aria-controls="pills-lg_memory"
-									aria-selected="false">±â³ä»óÇ°</button>
+									aria-selected="false">ê¸°ë…ìƒí’ˆ</button>
 							</li>
 						</ul>
 
 						<div class="tab-content" id="pills-tabContentLg">
-							<!-- LG ÆÀ¿ş¾î -->
+							<!-- LG íŒ€ì›¨ì–´ -->
 							<div class="tab-pane fade show active" id="pills-lg_teamwear"
 								role="tabpanel" aria-labelledby="pills-lg_teamwear-tab">
 								<div class="carousel slide" id="carouselCategoryLgTeamwear"
 									data-bs-touch="false" data-bs-interval="false">
-									<!-- LG ÆÀ¿ş¾î ½ÃÀÛ -->
+									<!-- LG íŒ€ì›¨ì–´ ì‹œì‘ -->
 									<div class="carousel-inner">
-										<!-- LG ÆÀ¿ş¾î Ã¹¹øÂ° ÆäÀÌÁö -->
+										<!-- LG íŒ€ì›¨ì–´ ì²«ë²ˆì§¸ í˜ì´ì§€ -->
 										<div class="carousel-item active" data-bs-interval="10000">
 											<div class="row h-100 align-items-center g-2">
 												<%
 												for (ProductDto dto : list) {
-													if (dto.getTeamName().equals("LG Æ®À©½º")) {
-														if (dto.getpCategory().equals("ÆÀ¿ş¾î")) {
+													if (dto.getTeamName().equals("LG íŠ¸ìœˆìŠ¤")) {
+														if (dto.getpCategory().equals("íŒ€ì›¨ì–´")) {
 												%>
 												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
 													<div class="card card-span h-100 text-white">
@@ -1809,20 +1813,20 @@ List<ProductDto> list_all = dao_all.getList_pDay(start, perPage);
 								</div>
 							</div>
 
-							<!-- LG ÀÀ¿ø¿ëÇ° -->
+							<!-- LG ì‘ì›ìš©í’ˆ -->
 							<div class="tab-pane fade" id="pills-lg_cheering" role="tabpanel"
 								aria-labelledby="pills-lg_cheering-tab">
 								<div class="carousel slide" id="carouselCategoryLgCheering"
 									data-bs-touch="false" data-bs-interval="false">
-									<!-- LG ÀÀ¿ø¿ëÇ° ½ÃÀÛ -->
+									<!-- LG ì‘ì›ìš©í’ˆ ì‹œì‘ -->
 									<div class="carousel-inner">
-										<!-- LG ÀÀ¿ø¿ëÇ° Ã¹¹øÂ° ÆäÀÌÁö -->
+										<!-- LG ì‘ì›ìš©í’ˆ ì²«ë²ˆì§¸ í˜ì´ì§€ -->
 										<div class="carousel-item active" data-bs-interval="10000">
 											<div class="row h-100 align-items-center g-2">
 												<%
 												for (ProductDto dto : list) {
-													if (dto.getTeamName().equals("LG Æ®À©½º")) {
-														if (dto.getpCategory().equals("ÀÀ¿ø¿ëÇ°")) {
+													if (dto.getTeamName().equals("LG íŠ¸ìœˆìŠ¤")) {
+														if (dto.getpCategory().equals("ì‘ì›ìš©í’ˆ")) {
 												%>
 												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
 													<div class="card card-span h-100 text-white">
@@ -1854,20 +1858,20 @@ List<ProductDto> list_all = dao_all.getList_pDay(start, perPage);
 								</div>
 							</div>
 
-							<!-- LG ¾ß±¸¿ëÇ° -->
+							<!-- LG ì•¼êµ¬ìš©í’ˆ -->
 							<div class="tab-pane fade" id="pills-lg_baseball" role="tabpanel"
 								aria-labelledby="pills-lg_baseball-tab">
 								<div class="carousel slide" id="carouselCategoryLgbaseball"
 									data-bs-touch="false" data-bs-interval="false">
-									<!-- LG ¾ß±¸¿ëÇ° ½ÃÀÛ -->
+									<!-- LG ì•¼êµ¬ìš©í’ˆ ì‹œì‘ -->
 									<div class="carousel-inner">
-										<!-- LG ¾ß±¸¿ëÇ° Ã¹¹øÂ° ÆäÀÌÁö -->
+										<!-- LG ì•¼êµ¬ìš©í’ˆ ì²«ë²ˆì§¸ í˜ì´ì§€ -->
 										<div class="carousel-item active" data-bs-interval="10000">
 											<div class="row h-100 align-items-center g-2">
 												<%
 												for (ProductDto dto : list) {
-													if (dto.getTeamName().equals("LG Æ®À©½º")) {
-														if (dto.getpCategory().equals("¾ß±¸¿ëÇ°")) {
+													if (dto.getTeamName().equals("LG íŠ¸ìœˆìŠ¤")) {
+														if (dto.getpCategory().equals("ì•¼êµ¬ìš©í’ˆ")) {
 												%>
 												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
 													<div class="card card-span h-100 text-white">
@@ -1900,20 +1904,20 @@ List<ProductDto> list_all = dao_all.getList_pDay(start, perPage);
 
 							</div>
 
-							<!-- LG ±â³ä»óÇ° -->
+							<!-- LG ê¸°ë…ìƒí’ˆ -->
 							<div class="tab-pane fade" id="pills-lg_memory" role="tabpanel"
 								aria-labelledby="pills-lg_memory-tab">
 								<div class="carousel slide" id="carouselCategoryLgMemory"
 									data-bs-touch="false" data-bs-interval="false">
-									<!-- LG ±â³ä»óÇ° ½ÃÀÛ -->
+									<!-- LG ê¸°ë…ìƒí’ˆ ì‹œì‘ -->
 									<div class="carousel-inner">
-										<!-- LG ±â³ä»óÇ° Ã¹¹øÂ° ÆäÀÌÁö -->
+										<!-- LG ê¸°ë…ìƒí’ˆ ì²«ë²ˆì§¸ í˜ì´ì§€ -->
 										<div class="carousel-item active" data-bs-interval="10000">
 											<div class="row h-100 align-items-center g-2">
 												<%
 												for (ProductDto dto : list) {
-													if (dto.getTeamName().equals("LG Æ®À©½º")) {
-														if (dto.getpCategory().equals("±â³ä»óÇ°")) {
+													if (dto.getTeamName().equals("LG íŠ¸ìœˆìŠ¤")) {
+														if (dto.getpCategory().equals("ê¸°ë…ìƒí’ˆ")) {
 												%>
 												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
 													<div class="card card-span h-100 text-white">
@@ -1955,43 +1959,43 @@ List<ProductDto> list_all = dao_all.getList_pDay(start, perPage);
 								<button class="navv-link active" id="pills-nc_teamwear-tab"
 									data-bs-toggle="pill" data-bs-target="#pills-nc_teamwear"
 									type="button" role="tab" aria-controls="pills-nc_teamwear"
-									aria-selected="true">ÆÀ¿ş¾î</button>
+									aria-selected="true">íŒ€ì›¨ì–´</button>
 							</li>
 							<li class="navv-item" role="presentation">
 								<button class="navv-link" id="pills-nc_cheering-tab"
 									data-bs-toggle="pill" data-bs-target="#pills-nc_cheering"
 									type="button" role="tab" aria-controls="pills-nc_cheering"
-									aria-selected="false">ÀÀ¿ø¿ëÇ°</button>
+									aria-selected="false">ì‘ì›ìš©í’ˆ</button>
 							</li>
 							<li class="navv-item" role="presentation">
 								<button class="navv-link" id="pills-nc_baseball-tab"
 									data-bs-toggle="pill" data-bs-target="#pills-nc_baseball"
 									type="button" role="tab" aria-controls="pills-nc_baseball"
-									aria-selected="false">¾ß±¸¿ëÇ°</button>
+									aria-selected="false">ì•¼êµ¬ìš©í’ˆ</button>
 							</li>
 							<li class="navv-item" role="presentation">
 								<button class="navv-link" id="pills-nc_memory-tab"
 									data-bs-toggle="pill" data-bs-target="#pills-nc_memory"
 									type="button" role="tab" aria-controls="pills-nc_memory"
-									aria-selected="false">±â³ä»óÇ°</button>
+									aria-selected="false">ê¸°ë…ìƒí’ˆ</button>
 							</li>
 						</ul>
 
 						<div class="tab-content" id="pills-tabContentNc">
-							<!-- NC ÆÀ¿ş¾î -->
+							<!-- NC íŒ€ì›¨ì–´ -->
 							<div class="tab-pane fade show active" id="pills-nc_teamwear"
 								role="tabpanel" aria-labelledby="pills-nc_teamwear-tab">
 								<div class="carousel slide" id="carouselCategoryNcTeamwear"
 									data-bs-touch="false" data-bs-interval="false">
-									<!-- NC ÆÀ¿ş¾î ½ÃÀÛ -->
+									<!-- NC íŒ€ì›¨ì–´ ì‹œì‘ -->
 									<div class="carousel-inner">
-										<!-- NC ÆÀ¿ş¾î Ã¹¹øÂ° ÆäÀÌÁö -->
+										<!-- NC íŒ€ì›¨ì–´ ì²«ë²ˆì§¸ í˜ì´ì§€ -->
 										<div class="carousel-item active" data-bs-interval="10000">
 											<div class="row h-100 align-items-center g-2">
 												<%
 												for (ProductDto dto : list) {
-													if (dto.getTeamName().equals("NC ´ÙÀÌ³ë½º")) {
-														if (dto.getpCategory().equals("ÆÀ¿ş¾î")) {
+													if (dto.getTeamName().equals("NC ë‹¤ì´ë…¸ìŠ¤")) {
+														if (dto.getpCategory().equals("íŒ€ì›¨ì–´")) {
 												%>
 												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
 													<div class="card card-span h-100 text-white">
@@ -2023,20 +2027,20 @@ List<ProductDto> list_all = dao_all.getList_pDay(start, perPage);
 								</div>
 							</div>
 
-							<!-- NC ÀÀ¿ø¿ëÇ° -->
+							<!-- NC ì‘ì›ìš©í’ˆ -->
 							<div class="tab-pane fade" id="pills-nc_cheering" role="tabpanel"
 								aria-labelledby="pills-nc_cheering-tab">
 								<div class="carousel slide" id="carouselCategoryNcCheering"
 									data-bs-touch="false" data-bs-interval="false">
-									<!-- NC ÀÀ¿ø¿ëÇ° ½ÃÀÛ -->
+									<!-- NC ì‘ì›ìš©í’ˆ ì‹œì‘ -->
 									<div class="carousel-inner">
-										<!-- NC ÀÀ¿ø¿ëÇ° Ã¹¹øÂ° ÆäÀÌÁö -->
+										<!-- NC ì‘ì›ìš©í’ˆ ì²«ë²ˆì§¸ í˜ì´ì§€ -->
 										<div class="carousel-item active" data-bs-interval="10000">
 											<div class="row h-100 align-items-center g-2">
 												<%
 												for (ProductDto dto : list) {
-													if (dto.getTeamName().equals("NC ´ÙÀÌ³ë½º")) {
-														if (dto.getpCategory().equals("ÀÀ¿ø¿ëÇ°")) {
+													if (dto.getTeamName().equals("NC ë‹¤ì´ë…¸ìŠ¤")) {
+														if (dto.getpCategory().equals("ì‘ì›ìš©í’ˆ")) {
 												%>
 												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
 													<div class="card card-span h-100 text-white">
@@ -2068,20 +2072,20 @@ List<ProductDto> list_all = dao_all.getList_pDay(start, perPage);
 								</div>
 							</div>
 
-							<!-- NC ¾ß±¸¿ëÇ° -->
+							<!-- NC ì•¼êµ¬ìš©í’ˆ -->
 							<div class="tab-pane fade" id="pills-nc_baseball" role="tabpanel"
 								aria-labelledby="pills-nc_baseball-tab">
 								<div class="carousel slide" id="carouselCategoryNcbaseball"
 									data-bs-touch="false" data-bs-interval="false">
-									<!-- NC ¾ß±¸¿ëÇ° ½ÃÀÛ -->
+									<!-- NC ì•¼êµ¬ìš©í’ˆ ì‹œì‘ -->
 									<div class="carousel-inner">
-										<!-- NC ¾ß±¸¿ëÇ° Ã¹¹øÂ° ÆäÀÌÁö -->
+										<!-- NC ì•¼êµ¬ìš©í’ˆ ì²«ë²ˆì§¸ í˜ì´ì§€ -->
 										<div class="carousel-item active" data-bs-interval="10000">
 											<div class="row h-100 align-items-center g-2">
 												<%
 												for (ProductDto dto : list) {
-													if (dto.getTeamName().equals("NC ´ÙÀÌ³ë½º")) {
-														if (dto.getpCategory().equals("¾ß±¸¿ëÇ°")) {
+													if (dto.getTeamName().equals("NC ë‹¤ì´ë…¸ìŠ¤")) {
+														if (dto.getpCategory().equals("ì•¼êµ¬ìš©í’ˆ")) {
 												%>
 												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
 													<div class="card card-span h-100 text-white">
@@ -2113,20 +2117,20 @@ List<ProductDto> list_all = dao_all.getList_pDay(start, perPage);
 								</div>
 							</div>
 
-							<!-- NC ±â³ä»óÇ° -->
+							<!-- NC ê¸°ë…ìƒí’ˆ -->
 							<div class="tab-pane fade" id="pills-nc_memory" role="tabpanel"
 								aria-labelledby="pills-nc_memory-tab">
 								<div class="carousel slide" id="carouselCategoryNcMemory"
 									data-bs-touch="false" data-bs-interval="false">
-									<!-- NC ±â³ä»óÇ° ½ÃÀÛ -->
+									<!-- NC ê¸°ë…ìƒí’ˆ ì‹œì‘ -->
 									<div class="carousel-inner">
-										<!-- NC ±â³ä»óÇ° Ã¹¹øÂ° ÆäÀÌÁö -->
+										<!-- NC ê¸°ë…ìƒí’ˆ ì²«ë²ˆì§¸ í˜ì´ì§€ -->
 										<div class="carousel-item active" data-bs-interval="10000">
 											<div class="row h-100 align-items-center g-2">
 												<%
 												for (ProductDto dto : list) {
-													if (dto.getTeamName().equals("NC ´ÙÀÌ³ë½º")) {
-														if (dto.getpCategory().equals("±â³ä»óÇ°")) {
+													if (dto.getTeamName().equals("NC ë‹¤ì´ë…¸ìŠ¤")) {
+														if (dto.getpCategory().equals("ê¸°ë…ìƒí’ˆ")) {
 												%>
 												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
 													<div class="card card-span h-100 text-white">
@@ -2170,43 +2174,43 @@ List<ProductDto> list_all = dao_all.getList_pDay(start, perPage);
 								<button class="navv-link active" id="pills-ssg_teamwear-tab"
 									data-bs-toggle="pill" data-bs-target="#pills-ssg_teamwear"
 									type="button" role="tab" aria-controls="pills-ssg_teamwear"
-									aria-selected="true">ÆÀ¿ş¾î</button>
+									aria-selected="true">íŒ€ì›¨ì–´</button>
 							</li>
 							<li class="navv-item" role="presentation">
 								<button class="navv-link" id="pills-ssg_cheering-tab"
 									data-bs-toggle="pill" data-bs-target="#pills-ssg_cheering"
 									type="button" role="tab" aria-controls="pills-ssg_cheering"
-									aria-selected="false">ÀÀ¿ø¿ëÇ°</button>
+									aria-selected="false">ì‘ì›ìš©í’ˆ</button>
 							</li>
 							<li class="navv-item" role="presentation">
 								<button class="navv-link" id="pills-ssg_baseball-tab"
 									data-bs-toggle="pill" data-bs-target="#pills-ssg_baseball"
 									type="button" role="tab" aria-controls="pills-ssg_baseball"
-									aria-selected="false">¾ß±¸¿ëÇ°</button>
+									aria-selected="false">ì•¼êµ¬ìš©í’ˆ</button>
 							</li>
 							<li class="navv-item" role="presentation">
 								<button class="navv-link" id="pills-ssg_memory-tab"
 									data-bs-toggle="pill" data-bs-target="#pills-ssg_memory"
 									type="button" role="tab" aria-controls="pills-ssg_memory"
-									aria-selected="false">±â³ä»óÇ°</button>
+									aria-selected="false">ê¸°ë…ìƒí’ˆ</button>
 							</li>
 						</ul>
 
 						<div class="tab-content" id="pills-tabContentSsg">
-							<!-- SSG ÆÀ¿ş¾î -->
+							<!-- SSG íŒ€ì›¨ì–´ -->
 							<div class="tab-pane fade show active" id="pills-ssg_teamwear"
 								role="tabpanel" aria-labelledby="pills-ssg_teamwear-tab">
 								<div class="carousel slide" id="carouselCategorySsgTeamwear"
 									data-bs-touch="false" data-bs-interval="false">
-									<!-- SSG ÆÀ¿ş¾î ½ÃÀÛ -->
+									<!-- SSG íŒ€ì›¨ì–´ ì‹œì‘ -->
 									<div class="carousel-inner">
-										<!-- SSG ÆÀ¿ş¾î Ã¹¹øÂ° ÆäÀÌÁö -->
+										<!-- SSG íŒ€ì›¨ì–´ ì²«ë²ˆì§¸ í˜ì´ì§€ -->
 										<div class="carousel-item active" data-bs-interval="10000">
 											<div class="row h-100 align-items-center g-2">
 												<%
 												for (ProductDto dto : list) {
-													if (dto.getTeamName().equals("SSG ·£´õ½º")) {
-														if (dto.getpCategory().equals("ÆÀ¿ş¾î")) {
+													if (dto.getTeamName().equals("SSG ëœë”ìŠ¤")) {
+														if (dto.getpCategory().equals("íŒ€ì›¨ì–´")) {
 												%>
 												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
 													<div class="card card-span h-100 text-white">
@@ -2239,20 +2243,20 @@ List<ProductDto> list_all = dao_all.getList_pDay(start, perPage);
 								</div>
 							</div>
 
-							<!-- SSG ÀÀ¿ø¿ëÇ° -->
+							<!-- SSG ì‘ì›ìš©í’ˆ -->
 							<div class="tab-pane fade" id="pills-ssg_cheering"
 								role="tabpanel" aria-labelledby="pills-ssg_cheering-tab">
 								<div class="carousel slide" id="carouselCategorySsgCheering"
 									data-bs-touch="false" data-bs-interval="false">
-									<!-- SSG ÀÀ¿ø¿ëÇ° ½ÃÀÛ -->
+									<!-- SSG ì‘ì›ìš©í’ˆ ì‹œì‘ -->
 									<div class="carousel-inner">
-										<!-- SSG ÀÀ¿ø¿ëÇ° Ã¹¹øÂ° ÆäÀÌÁö -->
+										<!-- SSG ì‘ì›ìš©í’ˆ ì²«ë²ˆì§¸ í˜ì´ì§€ -->
 										<div class="carousel-item active" data-bs-interval="10000">
 											<div class="row h-100 align-items-center g-2">
 												<%
 												for (ProductDto dto : list) {
-													if (dto.getTeamName().equals("SSG ·£´õ½º")) {
-														if (dto.getpCategory().equals("ÀÀ¿ø¿ëÇ°")) {
+													if (dto.getTeamName().equals("SSG ëœë”ìŠ¤")) {
+														if (dto.getpCategory().equals("ì‘ì›ìš©í’ˆ")) {
 												%>
 												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
 													<div class="card card-span h-100 text-white">
@@ -2284,20 +2288,20 @@ List<ProductDto> list_all = dao_all.getList_pDay(start, perPage);
 								</div>
 							</div>
 
-							<!-- SSG ¾ß±¸¿ëÇ° -->
+							<!-- SSG ì•¼êµ¬ìš©í’ˆ -->
 							<div class="tab-pane fade" id="pills-ssg_baseball"
 								role="tabpanel" aria-labelledby="pills-ssg_baseball-tab">
 								<div class="carousel slide" id="carouselCategorySsgbaseball"
 									data-bs-touch="false" data-bs-interval="false">
-									<!-- SSG ¾ß±¸¿ëÇ° ½ÃÀÛ -->
+									<!-- SSG ì•¼êµ¬ìš©í’ˆ ì‹œì‘ -->
 									<div class="carousel-inner">
-										<!-- SSG ¾ß±¸¿ëÇ° Ã¹¹øÂ° ÆäÀÌÁö -->
+										<!-- SSG ì•¼êµ¬ìš©í’ˆ ì²«ë²ˆì§¸ í˜ì´ì§€ -->
 										<div class="carousel-item active" data-bs-interval="10000">
 											<div class="row h-100 align-items-center g-2">
 												<%
 												for (ProductDto dto : list) {
-													if (dto.getTeamName().equals("SSG ·£´õ½º")) {
-														if (dto.getpCategory().equals("¾ß±¸¿ëÇ°")) {
+													if (dto.getTeamName().equals("SSG ëœë”ìŠ¤")) {
+														if (dto.getpCategory().equals("ì•¼êµ¬ìš©í’ˆ")) {
 												%>
 												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
 													<div class="card card-span h-100 text-white">
@@ -2329,20 +2333,20 @@ List<ProductDto> list_all = dao_all.getList_pDay(start, perPage);
 								</div>
 							</div>
 
-							<!-- SSG ±â³ä»óÇ° -->
+							<!-- SSG ê¸°ë…ìƒí’ˆ -->
 							<div class="tab-pane fade" id="pills-ssg_memory" role="tabpanel"
 								aria-labelledby="pills-ssg_memory-tab">
 								<div class="carousel slide" id="carouselCategorySsgMemory"
 									data-bs-touch="false" data-bs-interval="false">
-									<!-- SSG ±â³ä»óÇ° ½ÃÀÛ -->
+									<!-- SSG ê¸°ë…ìƒí’ˆ ì‹œì‘ -->
 									<div class="carousel-inner">
-										<!-- SSG ±â³ä»óÇ° Ã¹¹øÂ° ÆäÀÌÁö -->
+										<!-- SSG ê¸°ë…ìƒí’ˆ ì²«ë²ˆì§¸ í˜ì´ì§€ -->
 										<div class="carousel-item active" data-bs-interval="10000">
 											<div class="row h-100 align-items-center g-2">
 												<%
 												for (ProductDto dto : list) {
-													if (dto.getTeamName().equals("SSG ·£´õ½º")) {
-														if (dto.getpCategory().equals("±â³ä»óÇ°")) {
+													if (dto.getTeamName().equals("SSG ëœë”ìŠ¤")) {
+														if (dto.getpCategory().equals("ê¸°ë…ìƒí’ˆ")) {
 												%>
 												<div class="col-sm-6 col-md-3 mb-3 mb-md-0 h-100">
 													<div class="card card-span h-100 text-white">
@@ -2387,7 +2391,7 @@ List<ProductDto> list_all = dao_all.getList_pDay(start, perPage);
 	<link
 		href="https://fonts.googleapis.com/css2?family=Jost:wght@200;300;400;500;600;700;800;900&amp;display=swap"
 		rel="stylesheet" />
-		
-		
+
+
 </body>
 </html>
