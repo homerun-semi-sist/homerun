@@ -14,43 +14,46 @@
 			href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" />
 		<script src="https://code.jquery.com/jquery-3.6.3.js"></script>
 		<link href="../assets/css/index.css" rel="stylesheet">
+		<script type="text/javascript">
+		
+		</script>
 	</head>
 	<style>
     
     .logout-box{
-       border: 1px solid #0b214e;
-       width:400px;
-       height: 180px;
+       height: 100%;
+       width: 370px;
+       border: 1px solid gray;
+       margin-left: 10px;
     }
     
-    .photo{
-    position: absolute;
+    .photo{  
 	width: 70px;
-    top: 50px;
-    left: 20px;
     height: 70px;
+    margin: 10px;
     }
     
     .logout{
-        position: absolute;
 	    border: 1px solid #0b214e;
-	    left: 320px;
-	    top: 10px;
 	    font-weight: bold;
+	    float: right;
+	    margin: 10px;
     }
     
-    .uid{
-	    position: absolute;
-	    top: 65px;
-	    left: 100px;
+    .nickname{
 	    font-size: 20pt;
     }
     
     .text2{
-       position: relative;
-       left: 18px;
-       top: 5px;
+    	font-size: 15pt;
+    	margin-left: 10px;
     }
+    .uid{
+    	font-size: 15pt;
+    	position: absolute;
+   		top: 103px;
+    }
+    
 </style>
 
 	<body>
@@ -61,10 +64,11 @@
 %>
         <div class="logout-box">
             <b class="text2">환영합니다</b>
+            <button type="button" class="logout" onclick="location.href='../homerun/user/user_logoutaction.jsp'">로그아웃</button>
             <br>
-            <img class="photo" src="../homerun/assets/img/로그인프로필.png">
-            <b class="uid"><%=dto.getNickname() %>(<%=uid %>)</b>
-        <button type="button" class="logout" onclick="location.href='../homerun/user/user_logoutaction.jsp'">로그아웃</button>
+   				 <img class="photo" src="../homerun/assets/img/프로필.png">
+            <b class="nickname"><%=dto.getNickname() %></b>
+            <b class="uid">(<%=uid %>)</b>
         </div>
         
       </body>

@@ -66,10 +66,6 @@ $("#btnnck").click(function(){
 	
 	function passcheck(f)
 	{
-<<<<<<< HEAD
-		
-=======
->>>>>>> UngTest6
 					 if(f.pw1.value!=f.pw2.value){
 						
 						alert("비밀번호가 일치하지 않습니다");
@@ -82,6 +78,7 @@ $("#btnnck").click(function(){
 					}else if(f.pw1.value==""){
 						
 						alert("비밀번호를 입력 해 주세요");
+						
 						return false;
 						
 					}else if(f.pw2.value==""){
@@ -97,7 +94,7 @@ $("#btnnck").click(function(){
 					}else if(f.nickname.value==""){
 						
 						alert("닉네임을 입력 해 주세요");
-<<<<<<< HEAD
+
 						return false;					
 						
 					}else if(document.getElementById("check").value==''){
@@ -108,14 +105,6 @@ $("#btnnck").click(function(){
 							return false;
 						
 						}		
-=======
-						return false;
-						
-					}else if(document.getElementById("check").value==''){
-						alert("닉네임 중복체크를 해 주세요");
-						return false;
-									
->>>>>>> UngTest6
 					}else if(f.hp2.value==""){
 						
 						alert("전화번호를 입력 해 주세요");
@@ -401,26 +390,14 @@ function noSpacialForm(obj) { // 공백사용못하게
 					<div class="col-sm-8" style="border: 0px solid pink;">
 						
 						<!-- write here -->
-
-<<<<<<< HEAD
-=======
-	String uid=(String)session.getAttribute("uid");
-
-	UserDao dao=new UserDao();
-	
-	UserDto dto=dao.getData(uid);
-	
-	String [] hp=dto.getHp().split("-");
-	String [] addr=dto.getAddr().split(" ");
-%>
->>>>>>> UngTest6
+						
 						<form action="mypage_modifyaction.jsp" method="post" class="joinForm" 
 		onsubmit="return passcheck(f)" name="f">
                                                                                                
       <h2>회원정보 수정</h2>
       
       <div class="textForm">
-      	<b style="position: relative;left: 50px; top:21px;">(수정 불가)</b>
+      	<b style="position: relative;left: 50px; top:21px;">&nbsp;&nbsp;&nbsp;(수정 불가)</b>
  		<input name="uid" type="text" class="uid" id="uid" placeholder="아이디 (특수문자,공백 제외 8자 이하)" required="required" value="<%=uid%>" readonly="readonly">			
  		<!-- <button type="button" class="btnck" id="btnck" >중복체크</button> -->
       </div>

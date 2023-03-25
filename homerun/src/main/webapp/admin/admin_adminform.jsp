@@ -166,7 +166,7 @@
 
 					<div class="head">
 						<div class="summaryContainer">
-							<h3>관리자페이지</h3>
+							<h3><b>관리자페이지</b></h3>
 							<hr class="line" style="height: 5px;">
 						</div>
 
@@ -184,11 +184,11 @@ onclick="location.href='../mypage/mypage_unregistform.jsp'">회원탈퇴</button
 						</div>
 
 						<div class="name">
-							<%=uName %>
+							<b><%=uName %></b>
 						</div>
 						<br><br>
 						<div class="nickname">
-							<%=uid %>
+							<b><%=uid %></b>
 							님 환영합니다</div>
 					</div>
 
@@ -207,7 +207,7 @@ onclick="location.href='../mypage/mypage_unregistform.jsp'">회원탈퇴</button
 											 src="../assets/img/회원 관리.png">
 									</a>
 									<div class="text"><br>회원 관리</div>
-									<div class="green number">6건</div>
+									<div class="green number"><%=dao.getTotalCount() %>명</div>
 								</div>
 							</div>
 
