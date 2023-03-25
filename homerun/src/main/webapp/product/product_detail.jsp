@@ -88,7 +88,7 @@ NumberFormat nf = NumberFormat.getCurrencyInstance();
 					if (loginok == "yes" && !uid.equals("admin")) {
 					%>
 					<div class="d-flex">
-						<input class="form-control text-center me-4" id="inputQuantity"
+						<input class="form-control text-center me-2" id="inputQuantity"
 							type="number" value="1" style="max-width: 4rem" />
 
 						<button class="btn btn-dark flex-shrink-0" type="button"
