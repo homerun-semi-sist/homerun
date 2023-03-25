@@ -66,7 +66,7 @@ public class FreeCommentDao {
  		PreparedStatement pstmt = null;
  		ResultSet rs = null;
  		
- 		String sql = "select * from FREECOMMENT where fcReport != 0 order by fcIdx desc limit ?, ?";
+ 		String sql = "select * from FREECOMMENT where fcReport != 0 order by fcReport desc limit ?, ?";
  		 		
  		try {
  			pstmt = conn.prepareStatement(sql);

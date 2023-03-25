@@ -204,7 +204,7 @@ $(function(){
 						s+="<td style='text-align: center;'><div class='dropdown'><button type='button' class='btn p-0 dropdown-toggle hide-arrow' data-bs-toggle='dropdown'><i class='bx bx-dots-vertical-rounded'></i></button>";
 						s+="<div class='dropdown-menu'>";
 						s+="<a class='dropdown-item delBtn' num='"+ item.rbNum + "' category='" + category + "'><i class='bx bx-trash me-1'></i> Delete</a>";
-						s+="<a class='dropdown-item delUserBtn' href='#?fbNum="+item.rbNum+"'><i class='bx bx-user-minus me-1'></i> Withdrawal</a></button>";
+						s+="<a class='dropdown-item delUserBtn' uId='"+item.rbUId+"' category='" + category + "'><i class='bx bx-user-minus me-1'></i> Withdrawal</a></button>";
 						s+="</div></div></td>"
 						s+="</tr>"		
 					});
@@ -256,7 +256,7 @@ $(function(){
 						s+="<td style='text-align: center;'><div class='dropdown'><button type='button' class='btn p-0 dropdown-toggle hide-arrow' data-bs-toggle='dropdown'><i class='bx bx-dots-vertical-rounded'></i></button>";
 						s+="<div class='dropdown-menu'>";
 						s+="<a class='dropdown-item delBtn' num='"+ item.cIdx + "' category='" + category + "'><i class='bx bx-trash me-1'></i> Delete</a>";
-						s+="<a class='dropdown-item delUserBtn' href='#?fbNum="+item.num+"'><i class='bx bx-user-minus me-1'></i> Withdrawal</a></button>";
+						s+="<a class='dropdown-item delUserBtn' uId='"+item.uId+"' category='" + category + "'><i class='bx bx-user-minus me-1'></i> Withdrawal</a></button>";
 						s+="</div></div></td>"
 						s+="</tr>"		
 					});
@@ -285,7 +285,6 @@ $(function(){
 		
 	}); 
 	
-	
 	$(document).on("click", ".delBtn", function() {
 		var num = $(this).attr("num");
 		var category = $(this).attr("category");
@@ -309,6 +308,26 @@ $(function(){
 				else 
 					location.href="../reviewBoard/reviewComment_delete.jsp?rcIdx=" + num;
 			}
+		}
+							
+	});
+	
+	$(document).on("click", ".delUserBtn", function() {
+		var uId = $(this).attr("uId");
+		
+		var a = confirm("해당 회원을 정말로 강제 탈퇴하시겠습니까?");
+	
+		if(a) {
+			$.ajax({
+				type:"get",
+				dataType:"html",
+				data:{"uId" : uId},
+				url:"management_userDelete.jsp",
+				success:function(res){
+					location.reload();
+					alert("강제 탈퇴 완료하였습니다.");
+				}
+			});
 		}
 							
 	});
@@ -360,7 +379,7 @@ function fbList(){
 					s+="<td style='text-align: center;'><div class='dropdown'><button type='button' class='btn p-0 dropdown-toggle hide-arrow' data-bs-toggle='dropdown'><i class='bx bx-dots-vertical-rounded'></i></button>";
 					s+="<div class='dropdown-menu'>";
 					s+="<a class='dropdown-item delBtn' num='"+ item.fbNum + "' category='" + category + "'><i class='bx bx-trash me-1'></i> Delete</a>";
-					s+="<a class='dropdown-item delUserBtn' href='#?fbNum="+item.fbNum+"'><i class='bx bx-user-minus me-1'></i> Withdrawal</a></button>";
+					s+="<a class='dropdown-item delUserBtn' uId='"+item.fbUId+"' category='" + category + "'><i class='bx bx-user-minus me-1'></i> Withdrawal</a></button>";
 					s+="</div></div></td>"
 					s+="</tr>"		
 				});

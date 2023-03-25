@@ -94,7 +94,7 @@
 			
 			ob.put("totalCnt", totalCnt);
 			ob.put("rbNum", rbDto.getRbNum());
-			ob.put("frbUId", rbDto.getUId());
+			ob.put("rbUId", rbDto.getUId());
 			ob.put("nickname", nickname);
 			ob.put("rbSubject", rbDto.getRbSubject());
 			ob.put("rbContent", rbDto.getRbContent());

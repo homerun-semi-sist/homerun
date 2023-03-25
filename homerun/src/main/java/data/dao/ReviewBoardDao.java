@@ -70,7 +70,7 @@ public class ReviewBoardDao {
  		PreparedStatement pstmt = null;
  		ResultSet rs = null;
  		
- 		String sql = "select * from REVIEWBOARD where rbReport != 0 order by rbNum desc limit ?, ?";
+ 		String sql = "select * from REVIEWBOARD where rbReport != 0 order by rbReport desc limit ?, ?";
  		 		
  		try {
  			pstmt = conn.prepareStatement(sql);
