@@ -104,7 +104,7 @@
     			var val = $("#search :selected").val();
         		var currentPage = $("#currentPage").val();
         		var str = $("#search_str").val();
-        		// alert(val + ", "+ currentPage + ", "+ str);
+        		 alert(val + ", "+ currentPage + ", "+ str);
     		    
     		    $.ajax({
     			
@@ -141,26 +141,26 @@
 						} else {
 							$.each(res, function(idx, item){
 								s+="<tr>";
-								s+="<td style='text-align: center; vertical-align:middle;'>" + item.rbNum + "</td>";
+								s+="<td style='text-align: center; vertical-align:middle;'>" + (item.totalCnt - idx) + "</td>";
 								s+="<td style='text-align: center; vertical-align:middle;'>" + item.year + "." + item.month + "." + item.day + "</td>"
 								
 								
 								if(item.home == "한화") {	
 									s+="<td style='text-align: center; vertical-align:middle;'>";
 									s+="<img src='" + item.homeImg + "' style='width: 50px; vertical-align:middle;'>";
-									s+="vs ";
+									s+=" vs ";
 									s+="<img src='" + item.awayImg + "' style='width: 40px; vertical-align:middle;'>";
 									s+="</td>"; 						
 								} else if(item.away == "한화") {
 									s+="<td style='text-align: center; vertical-align:middle;'>";
 									s+="<img src='" + item.homeImg + "' style='width: 40px; vertical-align:middle;'>";
-									s+=" vs";
+									s+=" vs ";
 									s+="<img src='" + item.awayImg + "' style='width: 50px; vertical-align:middle;'>";
 									s+="</td>"; 	
 								} else {
 									s+="<td style='text-align: center; vertical-align:middle;'>";
 									s+="<img src='" + item.homeImg + "' style='width: 40px; vertical-align:middle;'>";
-									s+=" vs";
+									s+=" vs ";
 									s+="<img src='" + item.awayImg + "' style='width: 40px; vertical-align:middle;'>";
 									s+="</td>";
 								}
@@ -230,26 +230,26 @@
 					} else {
 						$.each(res, function(idx, item){
 							s+="<tr>";
-							s+="<td style='text-align: center; vertical-align:middle;'>" + item.rbNum + "</td>";
+							s+="<td style='text-align: center; vertical-align:middle;'>" + (item.totalCnt - idx) + "</td>";
 							s+="<td style='text-align: center; vertical-align:middle;'>" + item.year + "." + item.month + "." + item.day + "</td>"
 							
 							
 							if(item.home == "한화") {	
 								s+="<td style='text-align: center; vertical-align:middle;'>";
 								s+="<img src='" + item.homeImg + "' style='width: 50px; vertical-align:middle;'>";
-								s+="vs ";
+								s+=" vs ";
 								s+="<img src='" + item.awayImg + "' style='width: 40px; vertical-align:middle;'>";
 								s+="</td>"; 						
 							} else if(item.away == "한화") {
 								s+="<td style='text-align: center; vertical-align:middle;'>";
 								s+="<img src='" + item.homeImg + "' style='width: 40px; vertical-align:middle;'>";
-								s+=" vs";
+								s+=" vs ";
 								s+="<img src='" + item.awayImg + "' style='width: 50px; vertical-align:middle;'>";
 								s+="</td>"; 	
 							} else {
 								s+="<td style='text-align: center; vertical-align:middle;'>";
 								s+="<img src='" + item.homeImg + "' style='width: 40px; vertical-align:middle;'>";
-								s+=" vs";
+								s+=" vs ";
 								s+="<img src='" + item.awayImg + "' style='width: 40px; vertical-align:middle;'>";
 								s+="</td>";
 							}

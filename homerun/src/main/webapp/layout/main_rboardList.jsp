@@ -53,7 +53,7 @@
 				for(int i = admin; i < 5 + admin; i++) {
 					ReviewBoardDto dto = list.get(i);				
 			%>
-					<li style="margin-bottom: 8px;"><a href="<%=root %>/reviewBoard/reviewPost_detailPage.jsp?rbNum=<%=dto.getRbNum() %>" style="text-decoration: none; color: black;"><%=dto.getRbSubject() %></a></li>
+					<li style="margin-bottom: 8px;"><a href="<%=root %>/reviewBoard/reviewPost_detailPage.jsp?rbNum=<%=dto.getRbNum() %>&currentPage=1" style="text-decoration: none; color: black;"><%=dto.getRbSubject() %></a></li>
 			<%
 				}
 			%>

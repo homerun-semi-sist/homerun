@@ -20,16 +20,20 @@
         <title>지도에 구단, 날씨 표시</title>
 
         <style>
-        .box {
-        position: absolute;
-        padding: 10px;
-        height: 635px;
-        border: 1px solid gray;
-        margin: 10px;
-        }
+        .wBox {
+	            width: 100%;
+	            height: 245px;
+	            text-align: center;
+	            background-color: #F9F9F9;
+	            border: 1px solid #F9F9F9;
+	            border-radius: 20px;
+	            position: relative;
+	        }
         .mapBox {
-        border: 0px solid gray;
+        	border: 0px solid gray;
         	margin-top: 15px;
+        	width: 100%;
+        	height: 500px;
         }
           .teamBox {
             border: 1px solid gray;
@@ -59,21 +63,12 @@
 	            margin: 5px;
 	            position: absolute;
 	        }
-	
-	        .wBox {
-	            width: 350px;
-	            height: 245px;
-	            text-align: center;
-	            background-color: #F9F9F9;
-	            border: 1px solid #F9F9F9;
-	            border-radius: 20px;
-	        }
-	
+
 	        .stadium {
 	            width: 280px;
 	            height: 40px;
 	            margin-top: 10px;
-	            margin-left: 35px;
+	            margin-left: 20%;
 	            line-height: 40px;
 	            font-size: 14pt;
 	            font-weight: bold;
@@ -83,14 +78,14 @@
 	            width: 100px;
 	            height: 100px;
 	            margin-top: 50px;
-	            margin-left: 70px;
+	            margin-left: 140px;
 	        }
 	
 	        .tem_text {
 	            width: 150px;
 	            height: 100px;
 	            margin-top: 50px;
-	            margin-left: 145px;
+	            margin-left: 215px;
 	            line-height: 100px;
 	            font-weight: bold;
 	            font-size: 45pt;
@@ -98,10 +93,10 @@
 	        }
 	
 	        .tem_info {
-	            width: 80px;
+	            width: 90px;
 	            height: 60px;
 	            margin-top: 170px;
-	            margin-left: 6px;
+	            margin-left: 50px;
 	            line-height: 60px;
 	            border: 1px solid #8DB596;
 	            border-radius: 10px;
@@ -112,10 +107,10 @@
 	        }
 	
 	        .dust {
-	            width: 80px;
+	            width: 90px;
 	            height: 60px;
 	            margin-top: 170px;
-	            margin-left: 91px;
+	            margin-left: 150px;
 	            border: 1px solid #EFB08C;
 	            border-radius: 10px;
 	            background-color: #FAF1E6;
@@ -124,10 +119,10 @@
 	        }
 	
 	        .humidity {
-	            width: 80px;
+	            width: 90px;
 	            height: 60px;
 	            margin-top: 170px;
-	            margin-left: 176px;
+	            margin-left: 250px;
 	            border: 1px solid #748DA6;
 	            border-radius: 10px;
 	            background-color: #DAEAF1;
@@ -136,10 +131,10 @@
 	        }
 	
 	        .feel{
-	            width: 80px;
+	            width: 90px;
 	            height: 60px;
 	            margin-top: 170px;
-	            margin-left: 261px;
+	            margin-left: 350px;
 	            border: 1px solid #FFB3B3;
 	            border-radius: 10px;
 	            background-color: #FFE3E1;
@@ -150,7 +145,7 @@
       </head>
 
       <body>
-      <div class="box">
+      <div class="box" style="width: 100%; height: 100%;">
       <!-- 날씨 -->
 		<% 
 			String root = request.getContextPath();
@@ -180,19 +175,7 @@
 			}
 			else 
 				place = dao.getTeam(team[num]).getStadium();
-		%>
-		
-		<!-- <script>
-			// 5초마다 장소 바뀜
-			var time =  setInter(fun, 5000);
-			
-			function fun() {
-				
-			}
-			dao.getData(10).getStadium();
-		</script> -->
-		
-		<%		
+	
 			String URL = "https://search.naver.com/search.naver?sm=tab_hty.top&where=nexearch&query=" + place + "+날씨&oquery=" +  place + "+날씨&tqi=isynnlprvxZsstNKUjhsssssszs-082509";
 			Document doc; 
 
@@ -225,9 +208,9 @@
 	        <div class="weather feel">체감 온도<br><span style="font-weight: bold; color: #FF8787;"><%=feel %></span></div>
     	</div>
       
-      	
-			<!-- 지도 -->
-          <div class="mapBox" id="map" style="width:350px;height:350px;"></div>
+      	<!-- 지도 -->
+			<div class="mapBox">
+          <div id="map" style="width:100%;height:100%;"></div>
 
           <script type="text/javascript"
             src="//dapi.kakao.com/v2/maps/sdk.js?appkey=5c284434bbcfaaeb8631c4edd7f52db3"></script>
@@ -346,24 +329,6 @@
 				}
 			];
  
-            <%-- var teams[positions.length];
-            for(var i = 0; i < positions.length; i++) {
-            	Team dto = dao.getData(i+1);
-	             
-            	//var team = dto.get
-            	var teams = [ 
-	                {
-	                  // team: "HANHWA EAGLES",
-	                  team: "<%=dto.getTeamNick() %>",
-	                  color: "<%=dto.gettColor() %>",
-	                  logo: "<%=dto.getTeamLogo()%>",
-	                  stadium: "<%=dto.getStadium() %>",
-	                  location: "<%=dto.getLocation() %>"
-	                }
-	            ]
-            
-            } --%>
-            
             // 마커 이미지의 이미지 주소
             var imageSrc = "https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/marker_red.png";
 
@@ -436,7 +401,7 @@
               };
             }
           </script>
-          
+          </div>
        </div>   
       </body>
 

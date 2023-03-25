@@ -402,7 +402,7 @@ public class ReviewBoardDao {
         PreparedStatement pstmt = null;
         ResultSet rs = null;
 
-        String sql = "select r.*  from REVIEWBOARD r, USER u where r.uId=u.uId and u.nickname Like ? order by uId='admin' desc, rbNum desc limit ?, ?";
+        String sql = "select r.*  from REVIEWBOARD r, USER u where r.uId=u.uId and u.nickname Like ? order by u.uId='admin' desc, rbNum desc limit ?, ?";
 
         try {
             pstmt = conn.prepareStatement(sql);
@@ -449,7 +449,7 @@ public class ReviewBoardDao {
         PreparedStatement pstmt = null;
         ResultSet rs = null;
 
-        String sql = "select * from REVIEWBOARD where rbSubject Like ? order by uId='admin' desc, rbNum desc limit ?, ?";
+        String sql = "select * from REVIEWBOARD where rbSubject Like ? order by u.uId='admin' desc, rbNum desc limit ?, ?";
 
         try {
             pstmt = conn.prepareStatement(sql);
@@ -495,7 +495,7 @@ public class ReviewBoardDao {
         PreparedStatement pstmt = null;
         ResultSet rs = null;
 
-        String sql = "select * from REVIEWBOARD where rbContent Like ? order by uId='admin' desc, rbNum desc limit ?, ?";
+        String sql = "select * from REVIEWBOARD where rbContent Like ? order by u.uId='admin' desc, rbNum desc limit ?, ?";
 
         try {
             pstmt = conn.prepareStatement(sql);

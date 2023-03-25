@@ -52,62 +52,47 @@
 	String uId = fbDto.getUId();
 %>
 
-<!-- Layout wrapper -->
-    <div class="layout-wrapper layout-content-navbar">
-        <div class="layout-container">
+	<form action="freePost_updateAction.jsp" method="post">
 
-            <!-- Content wrapper -->
-            <div class="content-wrapper">
-                <!-- Content -->
-
-                <div class="container-xxl flex-grow-1 container-p-y">
-                    <div class="card">
-						<form action="freePost_updateAction.jsp" method="post">
-
-							<input type="hidden" name="uId" value="<%=uId %>">	
-							<input type="hidden" name="fbNum" value="<%=fbNum %>">
-							<input type="hidden" name="currentPage" value="<%=currentPage %>">
-							
-							<table class="table table-bordered" style="height:30px; width: 1000px; height:700px; margin-left: 100px;">
-								<caption style="caption-side: top;"><h3>자유 게시판 작성글 수정</h3></caption>
-								<tr>
-									<th width="100" style="height:30px; text-align: center; line-height: 30px; background-color: #F8F9FA;">카테고리</th>
-									<td width="100" style="height:30px; text-align: center; line-height: 30px;">
-										<%=fbDto.getFbCategory() %>
-									</td>
-							
-									<th width="100" style="height:30px; text-align: center; line-height: 30px; background-color: #F8F9FA;">제목</th>
-									<td>
-										<input type="text" name="subject" class="form-control"
-											required="required" style="width: 500px;" value="<%=fbDto.getFbSubject() %>">
-									</td>
-								</tr>
-								<tr>
-									<td colspan="4">
-										<textarea name="content" id="content"		
-											required="required"			
-											style="width: 100%; height: 600px; display: none;"><%=fbDto.getFbContent() %></textarea>		
-									</td>
-								</tr>
-								<tr>
-									<td colspan="4" align="center">
-										<button type="button" class="updateBtn"
-											style="width: 120px;"
-											onclick="submitContents(this)">수정</button>
-										
-										<button type="button" class="listBtn"
-											style="width: 120px;"
-											onclick="location.href='freeBoard_listPage.jsp?currentPage=<%=currentPage %>'">목록</button>
-									</td>
-								</tr>
-								
-							</table>   
-						</form>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
+		<input type="hidden" name="uId" value="<%=uId %>">	
+		<input type="hidden" name="fbNum" value="<%=fbNum %>">
+		<input type="hidden" name="currentPage" value="<%=currentPage %>">
+		
+		<table class="table table-bordered" style="height:30px; width: 1000px; height:700px; margin-left: 100px;">
+			<caption style="caption-side: top;"><h3>자유 게시판 작성글 수정</h3></caption>
+			<tr>
+				<th width="100" style="height:30px; text-align: center; line-height: 30px; background-color: #F8F9FA;">카테고리</th>
+				<td width="100" style="height:30px; text-align: center; line-height: 30px;">
+					<%=fbDto.getFbCategory() %>
+				</td>
+		
+				<th width="100" style="height:30px; text-align: center; line-height: 30px; background-color: #F8F9FA;">제목</th>
+				<td>
+					<input type="text" name="subject" class="form-control"
+						required="required" style="width: 500px;" value="<%=fbDto.getFbSubject() %>">
+				</td>
+			</tr>
+			<tr>
+				<td colspan="4">
+					<textarea name="content" id="content"		
+						required="required"			
+						style="width: 100%; height: 600px; display: none;"><%=fbDto.getFbContent() %></textarea>		
+				</td>
+			</tr>
+			<tr>
+				<td colspan="4" align="center">
+					<button type="button" class="updateBtn"
+						style="width: 120px;"
+						onclick="submitContents(this)">수정</button>
+					
+					<button type="button" class="listBtn"
+						style="width: 120px;"
+						onclick="location.href='freeBoard_listPage.jsp?currentPage=<%=currentPage %>'">목록</button>
+				</td>
+			</tr>
+			
+		</table>   
+	</form>
 
 <!-- 스마트게시판에 대한 스크립트 코드 넣기 -->
 <script type="text/javascript">

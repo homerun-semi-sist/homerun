@@ -54,7 +54,7 @@
 				for(int i = admin; i < 5 + admin; i++) {
 					FreeBoardDto dto = list.get(i);				
 			%>
-					<li style="margin-bottom: 8px;"><a href="<%=root %>/freeBoard/freePost_detailPage.jsp?fbNum=<%=dto.getFbNum() %>" style="text-decoration: none; color: black;"><%=dto.getFbSubject() %></a></li>
+					<li style="margin-bottom: 8px;"><a href="<%=root %>/freeBoard/freePost_detailPage.jsp?fbNum=<%=dto.getFbNum() %>&currentPage=1" style="text-decoration: none; color: black;"><%=dto.getFbSubject() %></a></li>
 			<%
 				}
 			%>

@@ -44,7 +44,7 @@
 	</div>
 	</div>
 
-	<div class="main_footer">
+	<div class="main_footer" style="margin-top: 20px;">
 		<jsp:include page="layout/footer.jsp" />
 	</div>
 </body>

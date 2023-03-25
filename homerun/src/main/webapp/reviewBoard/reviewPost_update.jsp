@@ -52,7 +52,7 @@
 	
 	String uId = rbDto.getUId();
 %>
-<form action="reviewBoard_updateAction.jsp" method="post">
+<form action="reviewPost_updateAction.jsp" method="post">
 	<input type="hidden" name="rbNum" value="<%=rbNum %>">
 	
 	<!-- hiddend으로 nickname / value 값 변경 필요 -->

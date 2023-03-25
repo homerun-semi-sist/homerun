@@ -10,10 +10,16 @@
 <meta charset="UTF-8">
 <title>HOMERUN | REVIEWBOARD_INSERT</title>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-<link rel="stylesheet" href="resources/css/plugin/datepicker/bootstrap-datepicker.css">
 
+<link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
+ <link rel="stylesheet" href="/resources/demos/style.css">
 <script src="https://code.jquery.com/jquery-3.5.0.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/locales/bootstrap-datepicker.ko.min.js" integrity="sha512-L4qpL1ZotXZLLe8Oo0ZyHrj/SweV7CieswUODAAPN/tnqN3PA1P+4qPu5vIryNor6HQ5o22NujIcAZIfyVXwbQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
+
+<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css"></script> -->
+
+<script src="https://kit.fontawesome.com/8dcaa4675e.js" crossorigin="anonymous"></script>
 
 <!-- se2 폴더에서 js 파일 가져오기 -->
 <script type="text/javascript" src="../smartEditor/js/HuskyEZCreator.js"
@@ -38,7 +44,56 @@
 		 	color: #0b214e;
 		  	background-color: #f8f9fa;
 		}
+		
+		.event {
+   			background-color: #0b214e;
+    		color: #fff;
+		}
 </style>
+
+<script type="text/javascript">
+	$(function() {
+		$('#datePicker').datepicker({
+		   	 dateFormat: 'yy-mm-dd',
+	         showOtherMonths : true,
+	         showMonthAfterYear : true,
+	         onSelect: function(dateString) {
+	             selectDate(dateString);
+	         }	 
+	      });
+	})
+      
+   function selectDate(date) {
+		 //alert("선택 날짜 : " + date);
+		
+		$.ajax({   			
+   			type : "get",
+   			url : "reviewPost_getGame.jsp",
+   			dataType : "json",
+   			data : {"date" : date},
+   			success:function(res) {
+   				// alert(res.length);
+   				if(res.length == 0) {
+   					alert("해당 날짜에는 경기 일정이 존재하지 않습니다.");
+   					 					
+   					$("#selectGame option").text("경기일을 선택해주세요.");
+   				} 
+   				else {
+   					$("#selectGame option").text("경기팀을 선택해주세요.");
+   					$('#selectGame').empty();
+   					$.each(res, function(idx, item) {
+						
+						var option = "<option value='"+ item.gId +"'>"+ item.home + " vs " + item.away + "</option>";
+		                $('#selectGame').append(option);
+						
+					});
+   				}
+   				
+   			}
+		});
+	}
+</script>	
+				
 </head>
 
 <body>
@@ -58,32 +113,15 @@
 	<table class="table table-bordered" style="width: 1000px; height:700px; margin-left: 100px;">
 		<caption style="caption-side: top;"><h3>후기게시판 게시글 등록</h3></caption>
 		<tr>
-			<!-- <th width="100" style="height:30px; text-align: center; line-height: 30px; background-color: #F8F9FA;">경기일</th>
+			<th width="100" style="height:30px; text-align: center; line-height: 30px; background-color: #F8F9FA;">경기일</th>
 			<td width="300">
-				<input type="date" id="input_date" max="2023-12-31" min="2020-01-01" value="2023-04-01" style="width: 140px;">		
-				<input type="button" class="btn btn-default" onclick="inputDate()" value="확인" style="width: 50px; height: 30px;">	
-				
-				<script type="text/javascript">
-					function inputDate() {
-						var day = $("#input_date").val();
-						alert(day);
-					}
-				</script>
-			
-			</td> -->
+				 <span><i class="fa-regular fa-calendar-check"></i></span>&nbsp;<input type="text" id="datePicker" style="width: 160px;">		
+			</td>
 			
 			<th width="100" style="height:30px; text-align: center; line-height: 30px; background-color: #F8F9FA;">경기팀</th>
 			<td>
-				<select name="gId" class="form-control" style="width: 300px;">
-					<option value="null">-</option>
-						<%
-							for(GameDto dto : list) {
-						%>
-							<%-- <option value="<%=dto.getgId() %>"><%=dto.getHome() %> vs <%=dto.getAway() %></option> --%>
-							<option value="<%=dto.getgId() %>"><%=dto.getgDay() %> <%=dto.getHome() %> vs <%=dto.getAway() %></option>
-						<%
-							}
-						%>
+				<select id="selectGame" name="gId" class="form-control" style="width: 300px;" onchange="selectGame()">
+					<option value="null">경기일을 선택해주세요.</option>
 				</select>
 			</td>
 		</tr>	

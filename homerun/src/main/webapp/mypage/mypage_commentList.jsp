@@ -436,23 +436,7 @@ function fcList(){
 						    <div class="tab-content">
 						        <div class="tab-pane fade show active" id="naavs-top-fc" role="tabpanel">
 						           	<div class="fcList"></div>
-
-									<div class="bBottom" style="margin-top: 30px;">
-									    <div class="bsBox">
-									        <div class="bSelect">
-									            <select id="search" class="form-control" style="width: 100px; height: 40px; text-align: center;">
-									                <option value="nickname" selected="selected">작성자</option>
-									                <option value="subject">제목</option>
-									                <option value="content">내용</option>
-									            </select>
-									        </div>
-									        <div class="bSearch">
-									            <input type="text" id="search_str" class="form-control" required="required"
-									                style="width: 200px; height: 40px;">
-									        </div>
-									        <button type="button" class="btn btn-default" id="searchBtn" style="margin-left: 5px;">검색</button>
-									    </div>
-									</div>
+									
 									<!-- 페이징 처리 -->
 									<div style="width: 500px; text-align: center;" class="container">
 									    <ul class="pagination">
@@ -504,23 +488,7 @@ function fcList(){
 						        
 						        <div class="tab-pane fade" id="naavs-top-rc" role="tabpanel">
 							        <div class="rcList"></div>
-	
-									<div class="bBottom" style="margin-top: 30px;">
-									    <div class="bsBox">
-									        <div class="bSelect">
-									            <select id="search" class="form-control" style="width: 100px; height: 40px; text-align: center;">
-									                <option value="nickname" selected="selected">작성자</option>
-									                <option value="subject">제목</option>
-									                <option value="content">내용</option>
-									            </select>
-									        </div>
-									        <div class="bSearch">
-									            <input type="text" id="search_str" class="form-control" required="required"
-									                style="width: 200px; height: 40px;">
-									        </div>
-									        <button type="button" class="btn btn-default" id="searchBtn" style="margin-left: 5px;">검색</button>
-									    </div>
-									</div>
+										
 									<!-- 페이징 처리 -->
 									<div style="width: 500px; text-align: center;" class="container">
 									    <ul class="pagination">

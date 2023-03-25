@@ -1,3 +1,4 @@
+<%@page import="data.dao.PostReportDao"%>
 <%@page import="data.dto.ReviewCommentDto"%>
 <%@page import="data.dto.FreeCommentDto"%>
 <%@page import="data.dao.ReviewCommentDao"%>
@@ -29,6 +30,7 @@
 	ReviewBoardDao rbDao = new ReviewBoardDao();
 	FreeCommentDao fcDao = new FreeCommentDao();
 	ReviewCommentDao rcDao = new ReviewCommentDao();
+	PostReportDao prDao = new PostReportDao();
 	
 	List<FreeBoardDto> fbList = fbDao.getAllFBs_report(start, perPage);	
 	List<ReviewBoardDto> rbList = rbDao.getAllRBs_report(start, perPage);
@@ -47,9 +49,10 @@
 			JSONObject ob = new JSONObject();		
 			String nickname = uDao.getUser(fbDto.getUId()).getNickname();
 			String teamLogoImg = tDao.getTeam(fbDto.getFbCategory()).getTeamLogo();
-			
+			int totalCnt = prDao.getFBRPcnt();
 			int fcCnt = fcDao.getAllFCs(fbDto.getFbNum()).size();
 					
+			ob.put("totalCnt", totalCnt);
 			ob.put("fbNum", fbDto.getFbNum());
 			ob.put("fbUId", fbDto.getUId());
 			ob.put("nickname", nickname);
@@ -86,9 +89,10 @@
 			String year = gDto.getgDay().substring(2, 4);
 			String month = gDto.getgDay().substring(5, 7);
 			String day = gDto.getgDay().substring(8, 10);
-			
+			int totalCnt = prDao.getRBRPcnt();
 			int rcCnt = rcDao.getAllRCs(rbDto.getRbNum()).size();
 			
+			ob.put("totalCnt", totalCnt);
 			ob.put("rbNum", rbDto.getRbNum());
 			ob.put("frbUId", rbDto.getUId());
 			ob.put("nickname", nickname);
@@ -118,7 +122,9 @@
 			
 			String nickname = uDao.getUser(fcDto.getUId()).getNickname();
 			String subject = fbDao.getFB(fcDto.getFbNum()).getFbSubject();
+			int totalCnt = fcDao.getAllFCs_reportCount();
 			
+			ob.put("totalCnt", totalCnt);
 			ob.put("cIdx", fcDto.getFcIdx());
 			ob.put("num", fcDto.getFbNum());
 			ob.put("subject", subject);
@@ -140,7 +146,9 @@
 			
 			String nickname = uDao.getUser(rcDto.getUId()).getNickname();
 			String subject = rbDao.getRB(rcDto.getRbNum()).getRbSubject();
+			int totalCnt = rcDao.getAllRCs_reportCount();
 			
+			ob.put("totalCnt", totalCnt);
 			ob.put("cIdx", rcDto.getRcIdx());
 			ob.put("num", rcDto.getRbNum());
 			ob.put("subject", subject);

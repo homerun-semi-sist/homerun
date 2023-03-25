@@ -21,7 +21,7 @@
 		PostReportDto prDto = new PostReportDto();
 		
 		prDto.setuId(uId);
-		prDto.setFbNum(num);
+		prDto.setRbNum(num);
 		
 		prDao.insertRBPR(prDto);
 		rbDao.updateReport(num);

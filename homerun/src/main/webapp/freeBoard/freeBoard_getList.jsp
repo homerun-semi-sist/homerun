@@ -19,7 +19,8 @@
 
 	FreeBoardDao fbDao = new FreeBoardDao();
 	List<FreeBoardDto> fbList = fbDao.getFBList(start, perPage);
-
+	int totalCnt = fbDao.getFBTotalCount();
+	
 	UserDao uDao = new UserDao();
 	TeamDao tDao = new TeamDao();
 	FreeCommentDao fcDao = new FreeCommentDao();
@@ -34,6 +35,7 @@
 		
 		int fcCnt = fcDao.getAllFCs(dto.getFbNum()).size();
 				
+		ob.put("totalCnt", totalCnt);
 		ob.put("fbNum", dto.getFbNum());
 		ob.put("fbUId", dto.getUId());
 		ob.put("nickname", nickname);

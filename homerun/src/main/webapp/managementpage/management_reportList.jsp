@@ -153,72 +153,6 @@ else
 $(function(){
 	fbList();
 	
-	$("#searchBtn").click(function(){
-		var val = $("#search :selected").val();
-		var currentPage=$("#currentPage").val();
-		var str = $("#search_str").val();
-		
-	   
-	    $.ajax({
-		
-			type : "get",
-			url : "management_getSearchReportList.jsp",
-			dataType : "json",
-			data : {"val" : val, "str" : str, "currentPage" : currentPage},
-			success:function(res) {
-				//alert(val + ", "+ str +", " + res.length);
-				
-				var s="";
-				
-				s+="<div class='text-nowrap'>";
-				s+="<table class='table'>";
-				s+="<thead style='background-color: #F8F9FA'>";
-				s+="<tr>";
-				s+="<th style='text-align: center; width: 80px;'>NO.</th>";
-				s+="<th style='text-align: center; width: 100px;'>카테고리</th>";
-				s+="<th style='text-align: center;'>제목</th>";
-				s+="<th style='text-align: center; width: 150px;'>작성자</th>";
-				s+="<th style='text-align: center; width: 150px;'>작성일</th>";
-				s+="<th style='text-align: center; width: 80px;'>조회수</th>";
-				s+="<th style='text-align: center; width: 80px;'>누적 신고수</th>";
-				s+="<th style='text-align: center; width: 150px;'>관리</th>";
-				s+="</tr>";
-				s+="</thead>";
-				s+="<tbody class='table-border-bottom-0'>";
-				
-				if(res.length == 0) {
-					s+="<tr>";
-					s+="<td colspan='8' align='center' style='font-size: 18pt;'>\"" + str + "\" 검색 결과가 없습니다</td>";
-					s+="</tr>";
-				} else {
-					$.each(res, function(idx, item){
-						s+="<tr>";
-						s+="<td style='text-align: center;'>" + item.fbNum + "</td>";
-						s+="<td style='text-align: center; vertical-align:middle;'><b>" + item.fbCategory + "</b></td>";
-						s+="<td style='vertical-align:middle;'><a href='../freeBoard/freePost_detailPage.jsp?fbNum=" + item.fbNum + "&currentPage=" + currentPage + "' style=' text-decoration: none; color: black;'>" + item.fbSubject + "</a></td>";
-						s+="<td style='text-align: center; vertical-align:middle;'>" + item.nickname + "</td>";
-						s+="<td style='text-align: center; vertical-align:middle;'>" + item.fbWriteday + "</td>";
-						s+="<td style='text-align: center; vertical-align:middle;'>" + item.fbReadCnt + "</td>";
-						s+="<td style='text-align: center; vertical-align:middle;'>" + item.fbReport + "</td>";										
-						s+="<td style='text-align: center;'><div class='dropdown'><button type='button' class='btn p-0 dropdown-toggle hide-arrow' data-bs-toggle='dropdown'><i class='bx bx-dots-vertical-rounded'></i></button>";
-						s+="<div class='dropdown-menu'>";
-						s+="<a class='dropdown-item delBtn' num='"+ item.fbNum + "' category='" + category + "'><i class='bx bx-trash me-1'></i> Delete</a>";
-						s+="<a class='dropdown-item delUserBtn' href='#?fbNum="+item.fbNum+"'><i class='bx bx-user-minus me-1'></i> Withdrawal</a></button>";
-						s+="</div></div></td>"
-						s+="</tr>"		
-					});
-				}
-				
-				s+="</tbody>";
-				s+="</table>";
-				s+="</div>";
-				
-				$("div.fbList").html(s);
-			}
-		});
-	    
-	});
-	
 	$("button.naav-link").click(function() {
 		var category = $(this).attr("category");
 		var currentPage = $("#currentPage").val();
@@ -260,7 +194,7 @@ $(function(){
 				} else {
 					$.each(res, function(idx, item){
 						s+="<tr>";
-						s+="<td style='text-align: center; vertical-align:middle;'>" + item.rbNum + "</td>";
+						s+="<td style='text-align: center; vertical-align:middle;'>" + (item.totalCnt - idx) + "</td>";
 						s+="<td style='text-align: center; vertical-align:middle;'>" + item.home + " vs " + item.away + "</td>";				
 						s+="<td style='vertical-align:middle;'><a href='../reviewBoard/reviewPost_detailPage.jsp?rbNum=" + item.rbNum + "&currentPage=" + currentPage + "' style=' text-decoration: none; color: black;'>" + item.rbSubject + "</a></td>";
 						s+="<td style='text-align: center; vertical-align:middle;'>" + item.nickname + "</td>";
@@ -291,7 +225,7 @@ $(function(){
 				s+="<tr>";
 				s+="<th style='text-align: center; width: 100px;'>NO.</th>";
 				s+="<th style='text-align: center; width: 120px;'>게시글 제목</th>";
-				s+="<th style='text-align: center;'>댓글 내용</th>";
+				s+="<th style='text-align: center; width: 200px;'>댓글 내용</th>";
 				s+="<th style='text-align: center; width: 100px;'>작성자</th>";
 				s+="<th style='text-align: center; width: 100px;'>작성일</th>";
 				s+="<th style='text-align: center; width: 80px;'>누적 신고수</th>";
@@ -307,7 +241,7 @@ $(function(){
 				} else {
 					$.each(res, function(idx, item){
 						s+="<tr>";
-						s+="<td style='text-align: center; vertical-align:middle;'>" + item.cIdx + "</td>";	
+						s+="<td style='text-align: center; vertical-align:middle;'>" + (item.totalCnt - idx) + "</td>";	
 						
 						if(category == "fc")
 							s+="<td style='vertical-align:middle;'><a href='../freeBoard/freePost_detailPage.jsp?fbNum=" + item.num + "&currentPage=" + currentPage + "' style=' text-decoration: none; color: black;'>" + item.subject + "</a></td>";
@@ -416,7 +350,7 @@ function fbList(){
 			} else {
 				$.each(res, function(idx, item){
 					s+="<tr>";
-					s+="<td style='text-align: center;'>" + item.fbNum + "</td>";
+					s+="<td style='text-align: center;'>" + (item.totalCnt - idx) + "</td>";
 					s+="<td style='text-align: center; vertical-align:middle;'><b>" + item.fbCategory + "</b></td>";
 					s+="<td style='vertical-align:middle;'><a href='../freeBoard/freePost_detailPage.jsp?fbNum=" + item.fbNum + "&currentPage=" + currentPage + "' style=' text-decoration: none; color: black;'>" + item.fbSubject + "</a></td>";
 					s+="<td style='text-align: center; vertical-align:middle;'>" + item.nickname + "</td>";
@@ -491,26 +425,7 @@ function fbList(){
 						    <div class="tab-content">
 						        <div class="tab-pane fade show active" id="naavs-top-fb" role="tabpanel">
 						           	<div class="fbList"></div>
-
-									<div class="bBottom" style="margin-top: 30px;">
-									    <div class="bsBox">
-									        <div class="bSelect">
-									            <select id="search" class="form-control" style="width: 100px; height: 40px; text-align: center;">
-									                <option value="nickname" selected="selected">작성자</option>
-									                <option value="subject">제목</option>
-									                <option value="content">내용</option>
-									            </select>
-									        </div>
-									        <div class="bSearch">
-									            <input type="text" id="search_str" class="form-control" required="required"
-									                style="width: 200px; height: 40px;">
-									        </div>
-									        <button type="button" class="btn btn-default" id="searchBtn" style="margin-left: 5px;">검색</button>
-									    </div>
-									    <div class="bInsert">
-									        <button type="button" class="btn btn-default" id="insertBtn">글쓰기</button>
-									    </div>
-									</div>
+								
 									<!-- 페이징 처리 -->
 									<div style="width: 500px; text-align: center;" class="container">
 									    <ul class="pagination">
@@ -561,26 +476,7 @@ function fbList(){
 						        
 						        <div class="tab-pane fade" id="naavs-top-rb" role="tabpanel">
 							        <div class="rbList"></div>
-	
-									<div class="bBottom" style="margin-top: 30px;">
-									    <div class="bsBox">
-									        <div class="bSelect">
-									            <select id="search" class="form-control" style="width: 100px; height: 40px; text-align: center;">
-									                <option value="nickname" selected="selected">작성자</option>
-									                <option value="subject">제목</option>
-									                <option value="content">내용</option>
-									            </select>
-									        </div>
-									        <div class="bSearch">
-									            <input type="text" id="search_str" class="form-control" required="required"
-									                style="width: 200px; height: 40px;">
-									        </div>
-									        <button type="button" class="btn btn-default" id="searchBtn" style="margin-left: 5px;">검색</button>
-									    </div>
-									    <div class="bInsert">
-									        <button type="button" class="btn btn-default" id="insertBtn">글쓰기</button>
-									    </div>
-									</div>
+							
 									<!-- 페이징 처리 -->
 									<div style="width: 500px; text-align: center;" class="container">
 									    <ul class="pagination">
@@ -633,25 +529,6 @@ function fbList(){
 								<div class="tab-pane fade" id="naavs-top-fc" role="tabpanel">
 							        <div class="cList"></div>
 	
-									<div class="bBottom" style="margin-top: 30px;">
-									    <div class="bsBox">
-									        <div class="bSelect">
-									            <select id="search" class="form-control" style="width: 100px; height: 40px; text-align: center;">
-									                <option value="nickname" selected="selected">작성자</option>
-									                <option value="subject">제목</option>
-									                <option value="content">내용</option>
-									            </select>
-									        </div>
-									        <div class="bSearch">
-									            <input type="text" id="search_str" class="form-control" required="required"
-									                style="width: 200px; height: 40px;">
-									        </div>
-									        <button type="button" class="btn btn-default" id="searchBtn" style="margin-left: 5px;">검색</button>
-									    </div>
-									    <div class="bInsert">
-									        <button type="button" class="btn btn-default" id="insertBtn">글쓰기</button>
-									    </div>
-									</div>
 									<!-- 페이징 처리 -->
 									<div style="width: 500px; text-align: center;" class="container">
 									    <ul class="pagination">
@@ -704,25 +581,6 @@ function fbList(){
 								<div class="tab-pane fade" id="naavs-top-rc" role="tabpanel">
 							        <div class="cList"></div>
 	
-									<div class="bBottom" style="margin-top: 30px;">
-									    <div class="bsBox">
-									        <div class="bSelect">
-									            <select id="search" class="form-control" style="width: 100px; height: 40px; text-align: center;">
-									                <option value="nickname" selected="selected">작성자</option>
-									                <option value="subject">제목</option>
-									                <option value="content">내용</option>
-									            </select>
-									        </div>
-									        <div class="bSearch">
-									            <input type="text" id="search_str" class="form-control" required="required"
-									                style="width: 200px; height: 40px;">
-									        </div>
-									        <button type="button" class="btn btn-default" id="searchBtn" style="margin-left: 5px;">검색</button>
-									    </div>
-									    <div class="bInsert">
-									        <button type="button" class="btn btn-default" id="insertBtn">글쓰기</button>
-									    </div>
-									</div>
 									<!-- 페이징 처리 -->
 									<div style="width: 500px; text-align: center;" class="container">
 									    <ul class="pagination">

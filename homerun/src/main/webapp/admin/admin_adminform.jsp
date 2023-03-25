@@ -1,3 +1,5 @@
+<%@page import="data.dao.ReviewCommentDao"%>
+<%@page import="data.dao.FreeCommentDao"%>
 <%@page import="data.dao.PostReportDao" %>
 <%@page import="data.dao.UserDao" %>
 <%@ page import="data.dao.ProductDao" %>
@@ -159,9 +161,15 @@
 			<div class="col-sm-2" style="border: 0px solid red;"></div>
 			<div class="col-sm-8" style="border: 0px solid pink;">
 				<!-- write here -->
-				<% String uid=(String)session.getAttribute("uid"); UserDao dao=new
-						UserDao(); String uName=dao.getuName(uid); ProductDao pDao=new
-						ProductDao(); PostReportDao prDao=new PostReportDao(); %>
+				<% String uid=(String)session.getAttribute("uid"); 
+					UserDao dao=new UserDao(); 
+					String uName=dao.getuName(uid); 
+					ProductDao pDao=new ProductDao(); 
+					PostReportDao prDao=new PostReportDao(); 
+					FreeCommentDao fcDao = new FreeCommentDao();
+					ReviewCommentDao rcDao = new ReviewCommentDao();
+					int cCnt = fcDao.getAllFCs_reportCount() + rcDao.getAllRCs_reportCount();
+				%>
 				<div class="wrap">
 
 					<div class="head">
@@ -234,7 +242,7 @@ onclick="location.href='../mypage/mypage_unregistform.jsp'">회원탈퇴</button
 											 src="../assets/img/게시글 관리.png">
 										<div class="text">게시글/댓글<br>신고 관리</div>
 										<div class="green number">
-											<%=prDao.getPRTotalCount() %>건
+											<%=prDao.getPRTotalCount() %> / <%=cCnt %>건
 										</div>
 									</a>
 								</div>

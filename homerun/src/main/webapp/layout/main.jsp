@@ -57,7 +57,7 @@
 	width: 40%;
 	height: 100%;
 	float: right;
-	border: 0px solid pink;
+	border: 1px solid pink;
 }
 
 .right-top {
@@ -65,14 +65,14 @@
 	height: 30%;
 	top: 0;
 	margin-bottom: 20px;
-	border: 0px solid yellow;
+	border: 1px solid yellow;
 }
 
 .right-bottom {
 	width: 100%;
 	bottom: 0;
 	height: 65%;
-	border: 0px solid green;
+	border: 1px solid green;
 }
 </style>
 </head>
@@ -94,7 +94,7 @@
 		</div>
 		<div class="right">
 			<div class="right-top">
-			<% // loginok 가져오기
+				<% // loginok 가져오기
             String loginok = (String) session.getAttribute("loginok");
             if (loginok == null) 
          { //로그아웃
@@ -118,13 +118,9 @@
         </div>
         <% } %>
 			</div>
-			<div class="right-bottom">
-            <jsp:include page="mapWeather.jsp"></jsp:include>
-        </div >
-			</div>
+			<div class="right-bottom"><jsp:include page="mapWeather.jsp"></jsp:include></div>
 		</div>
-
 	</div>
-
+		
 </body>
 </html>

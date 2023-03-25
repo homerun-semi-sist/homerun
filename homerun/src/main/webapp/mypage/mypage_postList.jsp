@@ -347,7 +347,7 @@ $(function(){
 	$(document).on("click", ".modBtn", function() {
 		var num = $(this).attr("num");
 		var category = $(this).attr("category");
-		alert(num + ", " + category);
+		// alert(num + ", " + category);
 		
 		var a = confirm("해당 게시글을 수정하시겠습니까?");
 		if(a) {
@@ -489,23 +489,7 @@ function fbList(){
 						    <div class="tab-content">
 						        <div class="tab-pane fade show active" id="naavs-top-fb" role="tabpanel">
 						           	<div class="fbList"></div>
-
-									<div class="bBottom" style="margin-top: 30px;">
-									    <div class="bsBox">
-									        <div class="bSelect">
-									            <select id="search" class="form-control" style="width: 100px; height: 40px; text-align: center;">
-									                <option value="nickname" selected="selected">작성자</option>
-									                <option value="subject">제목</option>
-									                <option value="content">내용</option>
-									            </select>
-									        </div>
-									        <div class="bSearch">
-									            <input type="text" id="search_str" class="form-control" required="required"
-									                style="width: 200px; height: 40px;">
-									        </div>
-									        <button type="button" class="btn btn-default" id="searchBtn" style="margin-left: 5px;">검색</button>
-									    </div>
-									</div>
+									
 									<!-- 페이징 처리 -->
 									<div style="width: 500px; text-align: center;" class="container">
 									    <ul class="pagination">
@@ -558,22 +542,6 @@ function fbList(){
 						        <div class="tab-pane fade" id="naavs-top-rb" role="tabpanel">
 							        <div class="rbList"></div>
 	
-									<div class="bBottom" style="margin-top: 30px;">
-									    <div class="bsBox">
-									        <div class="bSelect">
-									            <select id="search" class="form-control" style="width: 100px; height: 40px; text-align: center;">
-									                <option value="nickname" selected="selected">작성자</option>
-									                <option value="subject">제목</option>
-									                <option value="content">내용</option>
-									            </select>
-									        </div>
-									        <div class="bSearch">
-									            <input type="text" id="search_str" class="form-control" required="required"
-									                style="width: 200px; height: 40px;">
-									        </div>
-									        <button type="button" class="btn btn-default" id="searchBtn" style="margin-left: 5px;">검색</button>
-									    </div>
-									</div>
 									<!-- 페이징 처리 -->
 									<div style="width: 500px; text-align: center;" class="container">
 									    <ul class="pagination">

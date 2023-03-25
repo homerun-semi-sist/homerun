@@ -20,11 +20,12 @@
 
 	ReviewBoardDao rbDao = new ReviewBoardDao();
 	List<ReviewBoardDto> list = rbDao.getRBList(start, perPage);
+	int totalCnt = rbDao.getRBTotalCount(); 
 	
 	ReviewCommentDao rcDao = new ReviewCommentDao();
 	
 	JSONArray arr = new JSONArray();
-	SimpleDateFormat sdf = new SimpleDateFormat("yy.MM.dd HH:mm");
+	SimpleDateFormat sdf = new SimpleDateFormat("yy.MM.dd");
 	
 	for(ReviewBoardDto rbDto : list) {
 		JSONObject ob = new JSONObject();	
@@ -49,6 +50,7 @@
 		
 		int rcCnt = rcDao.getAllRCs(rbDto.getRbNum()).size();
 		
+		ob.put("totalCnt", totalCnt);
 		ob.put("rbNum", rbDto.getRbNum());
 		ob.put("gId", rbDto.getgId());
 		ob.put("frbUId", rbDto.getUId());

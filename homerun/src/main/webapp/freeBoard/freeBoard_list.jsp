@@ -157,19 +157,19 @@
 									s+="</td>";
 								} else if(item.fbCategory == "전체") {  
 									s+="<tr>";
-									s+="<td style='text-align: center; vertical-align:middle;'>" + item.fbNum + "</td>";
+									s+="<td style='text-align: center; vertical-align:middle;'>" + (item.totalCnt - idx) + "</td>";
 									s+="<td style='text-align: center; vertical-align:middle;'>";
 									s+="<img src='https://cdn.icon-icons.com/icons2/2070/PNG/512/baseball_icon_126956.png' style='width: 30px;'>";
 									   s+="</td>";
 								} else if(item.fbCategory == "한화") {
 									s+="<tr>";
-									s+="<td style='text-align: center; vertical-align:middle;'>" + item.fbNum + "</td>";
+									s+="<td style='text-align: center; vertical-align:middle;'>" + (item.totalCnt - idx) + "</td>";
 									s+="<td style='text-align: center; vertical-align:middle;'>";
 									s+="<img src='" + item.teamLogoImg + "' style='width: 50px;'>";
 									s+="</td>";
 								} else {
 									s+="<tr>";
-									s+="<td style='text-align: center; vertical-align:middle;'>" + item.fbNum + "</td>";
+									s+="<td style='text-align: center; vertical-align:middle;'>" + (item.totalCnt - idx) + "</td>";
 									s+="<td style='text-align: center; vertical-align:middle;'>";
 									s+="<img src='" + item.teamLogoImg + "' style='width: 40px;'>";
 									   s+="</td>";
@@ -262,19 +262,19 @@
 									s+="</td>";
 								} else if(item.fbCategory == "전체") {   
 									s+="<tr>";
-									s+="<td style='text-align: center; vertical-align:middle;'>" + item.fbNum + "</td>";
+									s+="<td style='text-align: center; vertical-align:middle;'>" + (item.totalCnt - idx) + "</td>";
 									s+="<td style='text-align: center; vertical-align:middle;'>";
 									s+="<img src='https://cdn.icon-icons.com/icons2/2070/PNG/512/baseball_icon_126956.png' style='width: 30px;'>";
 									s+="</td>";
 								} else if(item.fbCategory == "한화") {
 									s+="<tr>";
-									s+="<td style='text-align: center; vertical-align:middle;'>" + item.fbNum + "</td>";
+									s+="<td style='text-align: center; vertical-align:middle;'>" + (item.totalCnt - idx) + "</td>";
 									s+="<td style='text-align: center; vertical-align:middle;'>";
 									s+="<img src='" + item.teamLogoImg + "' style='width: 50px;'>";
 									s+="</td>";
 								} else {
 									s+="<tr>";
-									s+="<td style='text-align: center; vertical-align:middle;'>" + item.fbNum + "</td>";
+									s+="<td style='text-align: center; vertical-align:middle;'>" + (item.totalCnt - idx) + "</td>";
 									s+="<td style='text-align: center; vertical-align:middle;'>";
 									s+="<img src='" + item.teamLogoImg + "' style='width: 40px;'>";
 									   s+="</td>";
@@ -373,19 +373,19 @@
 								s+="</td>";
 							} else if(item.fbCategory == "전체") {   
 								s+="<tr>";
-								s+="<td style='text-align: center; vertical-align:middle;'>" + item.fbNum + "</td>";
+								s+="<td style='text-align: center; vertical-align:middle;'>" + (item.totalCnt - idx) + "</td>";
 								s+="<td style='text-align: center; vertical-align:middle;'>";
 								s+="<img src='https://cdn.icon-icons.com/icons2/2070/PNG/512/baseball_icon_126956.png' style='width: 30px;'>";
 								s+="</td>";
 							} else if(item.fbCategory == "한화") {
 								s+="<tr>";
-								s+="<td style='text-align: center; vertical-align:middle;'>" + item.fbNum + "</td>";
+								s+="<td style='text-align: center; vertical-align:middle;'>" + (item.totalCnt - idx) + "</td>";
 								s+="<td style='text-align: center; vertical-align:middle;'>";
 								s+="<img src='" + item.teamLogoImg + "' style='width: 50px;'>";
 								s+="</td>";
 							} else {
 								s+="<tr>";
-								s+="<td style='text-align: center; vertical-align:middle;'>" + item.fbNum + "</td>";
+								s+="<td style='text-align: center; vertical-align:middle;'>" + (item.totalCnt - idx) + "</td>";
 								s+="<td style='text-align: center; vertical-align:middle;'>";
 								s+="<img src='" + item.teamLogoImg + "' style='width: 40px;'>";
 								   s+="</td>";
