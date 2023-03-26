@@ -56,7 +56,8 @@
 	%>
 	<form action="reviewPost_updateAction.jsp" method="post">
 		<input type="hidden" name="rbNum" value="<%=rbNum%>">
-
+		<input type="hidden" name="currentPage" value="<%=currentPage%>">
+		
 		<!-- hiddend으로 nickname / value 값 변경 필요 -->
 		<input type="hidden" name="uId" value="<%=uId%>">
 		<%-- <input type="hidden" name="currentPage" value="<%=currentPage %>"> --%>

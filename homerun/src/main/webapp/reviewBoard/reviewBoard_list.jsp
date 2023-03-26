@@ -277,9 +277,9 @@ a {
 								}
 								
 								if(item.rcCnt == 0)
-									s+="<td style='vertical-align:middle;'><a href='reviewPost_detailPage.jsp?rbNum=" + item.rbNum + "&currentPage=" + currentPage + "'>" + item.rbSubject + "</a></td>";					
+									s+="<td style='vertical-align:middle;'><a href='reviewPost_detailPage.jsp?rbNum=" + item.rbNum + "&currentPage=" + currentPage + "' style='text-decoration: none; color: black;'>" + item.rbSubject + "</a></td>";					
 								else
-									s+="<td style='vertical-align:middle;'><a href='reviewPost_detailPage.jsp?rbNum=" + item.rbNum + "&currentPage=" + currentPage + "'>" + item.rbSubject + "</a><span style='color: tomato;'>&nbsp;&nbsp;[" + item.rcCnt + "]</span></td>";
+									s+="<td style='vertical-align:middle;'><a href='reviewPost_detailPage.jsp?rbNum=" + item.rbNum + "&currentPage=" + currentPage + "' style='text-decoration: none; color: black;'>" + item.rbSubject + "</a><span style='color: tomato;'>&nbsp;&nbsp;[" + item.rcCnt + "]</span></td>";
 								
 								s+="<td style='text-align: center; vertical-align:middle;'>" + item.nickname + "</td>";
 								s+="<td style='text-align: center; vertical-align:middle;'>" + item.rbWriteday + "</td>";
@@ -449,8 +449,7 @@ a {
 	<script type="text/javascript">
 		
 		$("#insertBtn").click(function() {
-			var login = '<%=loginok %>
-		';
+			var login = '<%=loginok %>';
 
 			// alert(login);
 			if (login == "yes") {

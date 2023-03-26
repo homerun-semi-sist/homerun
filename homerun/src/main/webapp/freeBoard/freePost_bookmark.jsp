@@ -15,7 +15,7 @@ boolean flag;
 BookMarkDao dao = new BookMarkDao();
 int n = dao.getFBBMcnt(uId, num);
 
-System.out.println(n);
+// System.out.println(n);
 if (n == 0) {
 	BookMarkDto dto = new BookMarkDto();
 

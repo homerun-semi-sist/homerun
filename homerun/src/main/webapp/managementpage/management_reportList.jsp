@@ -353,25 +353,36 @@ else
 
 							if (category == "fb" || category == "rb") {
 								var a = confirm("해당 게시글을 정말로 강제 삭제하시겠습니까?");
-
+								alert(num + ", " + category);
 								if (a) {
-									if (category == "fb")
-										location.href = "../freeBoard/freePost_delete.jsp?fbNum="
-												+ num;
-									else
-										location.href = "../reviewBoard/reviewPost_delete.jsp?rbNum="
-												+ num;
+									$.ajax({
+										type : "get",
+										dataType : "html",
+										data : {
+											"num" : num,
+											"category" : category
+										},
+										url : "management_postDelete.jsp",
+										success : function(res) {
+											location.reload();
+											alert("강제 삭제 완료하였습니다.");
+										}
+									});
 								}
 							} else {
 								var a = confirm("해당 댓글을 정말로 강제 삭제하시겠습니까?");
 
 								if (a) {
-									if (category == "fc")
-										location.href = "../freeBoard/freeComment_delete.jsp?fcIdx="
-												+ num;
-									else
-										location.href = "../reviewBoard/reviewComment_delete.jsp?rcIdx="
-												+ num;
+									if (category == "fc") {
+										location.href = "../freeBoard/freeComment_delete.jsp?fcIdx="+ num;
+										location.reload();
+										alert("강제 삭제 완료하였습니다.");
+									}
+									else {
+										location.href = "../reviewBoard/reviewComment_delete.jsp?rcIdx="+ num;
+										location.reload();
+										alert("강제 삭제 완료하였습니다.");
+									}
 								}
 							}
 

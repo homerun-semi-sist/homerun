@@ -1433,8 +1433,7 @@ a {
 	<script type="text/javascript">
 			
 		$("#insertBtn").click(function() {
-			var login = '<%=loginok%>
-		';
+			var login = '<%=loginok%>';
 
 			// alert(login);
 			if (login == "yes") {
