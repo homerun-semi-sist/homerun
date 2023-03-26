@@ -6,17 +6,17 @@
 	pageEncoding="UTF-8"%>
 
 <%
-	String fcIdx = request.getParameter("fcIdx");
-	
-	// dao
-	FreeCommentDao dao = new FreeCommentDao();
-	
-	FreeCommentDto dto =  dao.getFC(fcIdx);
-	
-	JSONObject ob = new JSONObject();
-	
-	ob.put("fcIdx", dto.getFcIdx());
-	ob.put("fcContent", dto.getFcContent());	
+String fcIdx = request.getParameter("fcIdx");
+
+// dao
+FreeCommentDao dao = new FreeCommentDao();
+
+FreeCommentDto dto = dao.getFC(fcIdx);
+
+JSONObject ob = new JSONObject();
+
+ob.put("fcIdx", dto.getFcIdx());
+ob.put("fcContent", dto.getFcContent());
 %>
 
-<%=ob.toString() %>
+<%=ob.toString()%>

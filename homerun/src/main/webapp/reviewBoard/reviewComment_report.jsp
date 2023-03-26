@@ -4,19 +4,19 @@
 	pageEncoding="UTF-8"%>
 
 <%
-	// num 
-	String rcIdx = request.getParameter("rcIdx");
+// num 
+String rcIdx = request.getParameter("rcIdx");
 
-	// dao
-	ReviewCommentDao dao = new ReviewCommentDao();
+// dao
+ReviewCommentDao dao = new ReviewCommentDao();
 
-	dao.updateReport(rcIdx);
+dao.updateReport(rcIdx);
 
-	String report = dao.getRC(rcIdx).getRcReport();
-	
-	JSONObject ob = new JSONObject();
-	
-	ob.put("report", report);
+String report = dao.getRC(rcIdx).getRcReport();
+
+JSONObject ob = new JSONObject();
+
+ob.put("report", report);
 %>
 
-<%=ob.toString() %>
+<%=ob.toString()%>

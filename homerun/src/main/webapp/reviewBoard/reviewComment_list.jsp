@@ -9,33 +9,33 @@
 	pageEncoding="UTF-8"%>
 
 <%
-	String num = request.getParameter("num");
+String num = request.getParameter("num");
 
-	ReviewCommentDao RCDao = new ReviewCommentDao();
-	List<ReviewCommentDto> list = RCDao.getAllRCs(num);
-	
-	UserDao uDao = new UserDao();
-	
-	JSONArray arr = new JSONArray();
-	SimpleDateFormat sdf = new SimpleDateFormat("yy.MM.dd HH:mm");
-	
-	for(ReviewCommentDto dto : list) {
-		JSONObject ob = new JSONObject();
-		
-		String nickname = uDao.getUser(dto.getUId()).getNickname();
-		
-		ob.put("rcIdx", dto.getRcIdx());
-		ob.put("rbNum", dto.getRbNum());
-		ob.put("rcUId", dto.getUId());
-		ob.put("nickname", nickname);
-		ob.put("rcContent", dto.getRcContent());
-		ob.put("rcLike", dto.getRcLike());
-		ob.put("rcDislike", dto.getRcDislike());
-		ob.put("rcWriteday", sdf.format(dto.getRcWriteday()));
-		ob.put("rcReport", dto.getRcReport());
-		
-		arr.add(ob);
-	}
+ReviewCommentDao RCDao = new ReviewCommentDao();
+List<ReviewCommentDto> list = RCDao.getAllRCs(num);
+
+UserDao uDao = new UserDao();
+
+JSONArray arr = new JSONArray();
+SimpleDateFormat sdf = new SimpleDateFormat("yy.MM.dd HH:mm");
+
+for (ReviewCommentDto dto : list) {
+	JSONObject ob = new JSONObject();
+
+	String nickname = uDao.getUser(dto.getUId()).getNickname();
+
+	ob.put("rcIdx", dto.getRcIdx());
+	ob.put("rbNum", dto.getRbNum());
+	ob.put("rcUId", dto.getUId());
+	ob.put("nickname", nickname);
+	ob.put("rcContent", dto.getRcContent());
+	ob.put("rcLike", dto.getRcLike());
+	ob.put("rcDislike", dto.getRcDislike());
+	ob.put("rcWriteday", sdf.format(dto.getRcWriteday()));
+	ob.put("rcReport", dto.getRcReport());
+
+	arr.add(ob);
+}
 %>
 
-<%=arr.toString() %>
+<%=arr.toString()%>

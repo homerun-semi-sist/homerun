@@ -439,7 +439,6 @@ public class ReviewBoardDao {
 				
 	}
 	
-	
 	// search - rbSubject
 	// select * from REVIEWBOARD where rbSubject Like "%?%";
 	public List<ReviewBoardDto> search_subject(int start, int perPage, String fbSubject) {

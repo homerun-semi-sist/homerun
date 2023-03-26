@@ -6,17 +6,17 @@
 	pageEncoding="UTF-8"%>
 
 <%
-	String rcIdx = request.getParameter("rcIdx");
-	
-	// dao
-	ReviewCommentDao dao = new ReviewCommentDao();
-	
-	ReviewCommentDto dto =  dao.getRC(rcIdx);
-	
-	JSONObject ob = new JSONObject();
-	
-	ob.put("rcIdx", dto.getRcIdx());
-	ob.put("rcContent", dto.getRcContent());	
+String rcIdx = request.getParameter("rcIdx");
+
+// dao
+ReviewCommentDao dao = new ReviewCommentDao();
+
+ReviewCommentDto dto = dao.getRC(rcIdx);
+
+JSONObject ob = new JSONObject();
+
+ob.put("rcIdx", dto.getRcIdx());
+ob.put("rcContent", dto.getRcContent());
 %>
 
-<%=ob.toString() %>
+<%=ob.toString()%>

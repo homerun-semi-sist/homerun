@@ -3,10 +3,10 @@
 	pageEncoding="UTF-8"%>
 
 <%
-	String rcIdx = request.getParameter("rcIdx");
-	
-	// dao
-	ReviewCommentDao dao = new ReviewCommentDao();
-	
-	dao.deleteRC(rcIdx);
+String rcIdx = request.getParameter("rcIdx");
+
+// dao
+ReviewCommentDao dao = new ReviewCommentDao();
+
+dao.deleteRC(rcIdx);
 %>

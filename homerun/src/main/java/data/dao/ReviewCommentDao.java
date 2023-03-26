@@ -359,10 +359,5 @@ public class ReviewCommentDao {
 			db.dbClose(pstmt, conn);
 		}
 	}
-	
-	// search - nickname
-		
-	// search - rcContent
 
-	// 페이징 처리
 }

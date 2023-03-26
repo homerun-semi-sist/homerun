@@ -8,7 +8,6 @@ import java.util.List;
 import java.util.Vector;
 
 import data.dto.BookMarkDto;
-import data.dto.ReviewBoardDto;
 import mysql.db.DbConnect;
 
 public class BookMarkDao {
@@ -245,7 +244,5 @@ public class BookMarkDao {
 		}
 		
 	}
-	
-	// 페이징 처리
-	
+
 }

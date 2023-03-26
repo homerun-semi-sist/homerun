@@ -8,10 +8,10 @@
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" />
 <link href="assets/css/style_main.css" rel="stylesheet" />
-<script src="https://code.jquery.com/jquery-3.6.3.js"></script>
+
 </head>
 <%
-String loginok = (String)session.getAttribute("loginok");
+String loginok = (String) session.getAttribute("loginok");
 String uid = (String) session.getAttribute("uid");
 String root = request.getContextPath();
 %>
@@ -25,7 +25,7 @@ String root = request.getContextPath();
 						semi_2</div>
 					<div class="text-muted">
 						<%
-						if (loginok=="yes") {
+						if (loginok == "yes") {
 						%>
 						<a style="color: white" class="text-muted"
 							href="<%=root%>/user/user_logoutaction.jsp">LogOut</a>

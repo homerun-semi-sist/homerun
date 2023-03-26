@@ -54,10 +54,6 @@ public class FreeCommentDao {
 		return list;
 	}
 	
-	// list - 최신순
-	
-	// list - 추천순
-	
 	// list - 신고수
 	public List<FreeCommentDto> getAllFCs_report(int start, int perPage) {
 		List<FreeCommentDto> list = new Vector<>();
@@ -359,10 +355,4 @@ public class FreeCommentDao {
 		}
 	}
 
-	// search - nickname
-		
-	// search - fcContent
-
-	// 페이징 처리
-	
 }

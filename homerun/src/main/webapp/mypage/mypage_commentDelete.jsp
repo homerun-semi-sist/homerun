@@ -6,14 +6,14 @@
 	pageEncoding="UTF-8"%>
 
 <%
-	String cIdx = request.getParameter("cIdx");
-	String category = request.getParameter("category");
-	
-	FreeCommentDao fcDao = new FreeCommentDao();
-	ReviewCommentDao rcDao = new ReviewCommentDao();
-	
-	if(category.equals("fc"))
-		fcDao.deleteFC(cIdx);
-	else 
-		rcDao.deleteRC(cIdx);
+String cIdx = request.getParameter("cIdx");
+String category = request.getParameter("category");
+
+FreeCommentDao fcDao = new FreeCommentDao();
+ReviewCommentDao rcDao = new ReviewCommentDao();
+
+if (category.equals("fc"))
+	fcDao.deleteFC(cIdx);
+else
+	rcDao.deleteRC(cIdx);
 %>

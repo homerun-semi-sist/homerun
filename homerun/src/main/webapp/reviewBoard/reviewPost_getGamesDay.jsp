@@ -8,19 +8,19 @@
 	pageEncoding="UTF-8"%>
 
 <%
-	GameDao gDao = new GameDao();
-	
-	List<GameDto> gList = gDao.getGamesDay();
-	
-	JSONArray arr = new JSONArray();
-	
-	for(GameDto gDto : gList) {
-		JSONObject ob = new JSONObject();	
+GameDao gDao = new GameDao();
 
-		ob.put("gDay", gDto.getgDay());
-	
-		arr.add(ob);
-	}
+List<GameDto> gList = gDao.getGamesDay();
+
+JSONArray arr = new JSONArray();
+
+for (GameDto gDto : gList) {
+	JSONObject ob = new JSONObject();
+
+	ob.put("gDay", gDto.getgDay());
+
+	arr.add(ob);
+}
 %>
 
-<%=arr.toString() %>
+<%=arr.toString()%>

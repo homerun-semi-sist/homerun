@@ -8,7 +8,6 @@ import java.util.List;
 import java.util.Vector;
 
 import data.dto.FreeBoardDto;
-import data.dto.TeamDto;
 import mysql.db.DbConnect;
 
 public class FreeBoardDao {
@@ -146,8 +145,6 @@ public class FreeBoardDao {
 		return list;
 				
 	}
-		
-	// list - 최신순
 		
 	// list - 추천순
 	public List<FreeBoardDto> getAllFBs_like() {
