@@ -229,7 +229,7 @@ button.regist {
 							</div>
 
 							<div class="user-box">
-								<input type="password" name="pw" id="pw" maxlength="10"
+								<input type="password" name="pw" id="pw" minlength="10"
 									required="required" onkeyup="noSpaceForm(this);"
 									onchange="noSpaceForm(this);"> <label>비밀번호</label>
 							</div>

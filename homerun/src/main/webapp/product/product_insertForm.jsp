@@ -1,5 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-	pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=utf-8"
+	pageEncoding="utf-8"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -24,15 +24,15 @@
 				data : {"pId" : pId},
 				success : function(res) {
 					if (res.count == 1) {
-						alert("��� �Ұ�");
+						alert("사용 불가");
 						$("#pId").val("");
 						$("#check").val("");
 					} else if (res.count == 0 && res.pattern=="x") {
-						alert("��ǰ���̵� ������ 'p + ���� 4�ڸ�'�Դϴ�.");
+						alert("상품아이디 형식은 'p + 숫자 4자리'입니다.");
 						$("#pId").val("");
 						$("#check").val("");
 					} else {
-						alert("��� ����");
+						alert("사용 가능");
 						$("#check").val("checked");
 						
 					}
@@ -44,7 +44,7 @@
 	function duplicate_click(){
 
 		if(document.getElementById("check").value==''){
-		alert("���̵� �ߺ�Ȯ���� ���ּ���.");
+		alert("아이디 중복확인을 해주세요.");
 		return false;
 		}
 	}	
@@ -54,75 +54,75 @@
 	<form action="product_insertAction.jsp" method="post"
 		class="insertForm" onsubmit ="return duplicate_click()">
 		
-		<h2>����Է�</h2>
+		<h2>재고입력</h2>
 		<div class="textForm teamNcategory">
 			<div style="width: 400px">
 				<input name="pId" id="pId" type="text" class="inputForm"
-					placeholder="��ǰ���̵� �Է�" required="required">
+					placeholder="상품아이디 입력" required="required">
 			</div>
 			<div>
-				<button type="button" class="pinsertbtn btnDuplicate">�ߺ�Ȯ��</button>
+				<button type="button" class="pinsertbtn btnDuplicate">중복확인</button>
 			</div>
 			<input type="hidden" id="check" value="" required="required">
 		</div>
 
 		<div class="textForm">
 			<input name="pName" type="text" class="inputForm"
-				placeholder="��ǰ�� �Է�" required="required">
+				placeholder="상품명 입력" required="required">
 		</div>
 
 		<div class="textForm teamNcategory">
-			<span class="inputForm"> <span class="sameWidth"> ��
-					����&nbsp;&nbsp; </span> <select name="teamName">
-					<option value="�λ� ���" selected="selected">�λ� ���</option>
-					<option value="�Ե� ���̾���">�Ե� ���̾���</option>
-					<option value="�Ｚ ���̿���">�Ｚ ���̿���</option>
-					<option value="Ű�� �������">Ű�� �������</option>
-					<option value="��ȭ �̱۽�">��ȭ �̱۽�</option>
-					<option value="KIA Ÿ�̰���">KIA Ÿ�̰���</option>
+			<span class="inputForm"> <span class="sameWidth"> 팀
+					선택&nbsp;&nbsp; </span> <select name="teamName">
+					<option value="두산 베어스" selected="selected">두산 베어스</option>
+					<option value="롯데 자이언츠">롯데 자이언츠</option>
+					<option value="삼성 라이온즈">삼성 라이온즈</option>
+					<option value="키움 히어로즈">키움 히어로즈</option>
+					<option value="한화 이글스">한화 이글스</option>
+					<option value="KIA 타이거즈">KIA 타이거즈</option>
 					<option value="KT WIZ">KT WIZ</option>
-					<option value="LG Ʈ����">LG Ʈ����</option>
-					<option value="NC ���̳뽺">NC ���̳뽺</option>
-					<option value="SSG ������">SSG ������</option>
+					<option value="LG 트윈스">LG 트윈스</option>
+					<option value="NC 다이노스">NC 다이노스</option>
+					<option value="SSG 랜더스">SSG 랜더스</option>
 			</select>
 			</span> <span class="inputForm"> <span class="categoryWidth">
-					ī�װ��� ����&nbsp;&nbsp; </span> <select name="pCategory">
-					<option value="������" selected="selected">������</option>
-					<option value="������ǰ">������ǰ</option>
-					<option value="�߱���ǰ">�߱���ǰ</option>
-					<option value="����ǰ">����ǰ</option>
+					카테고리 선택&nbsp;&nbsp; </span> <select name="pCategory">
+					<option value="팀웨어" selected="selected">팀웨어</option>
+					<option value="응원용품">응원용품</option>
+					<option value="야구용품">야구용품</option>
+					<option value="기념상품">기념상품</option>
 			</select>
 			</span>
 		</div>
 
 		<div class="textForm">
-			<span class="inputForm sameWidth">�����&nbsp;&nbsp;</span> <input
+			<span class="inputForm sameWidth">재고수&nbsp;&nbsp;</span> <input
 				name="pStock" type="number" min="1" value="100" style="width: 50px">
 		</div>
 
 		<div class="textForm">
 			<span class="inputForm">&#8361;&nbsp;&nbsp;</span> <input
 				name="price" type="text" class="inputForm" style="width: 100px"
-				placeholder="���� �Է�" required="required"
+				placeholder="가격 입력" required="required"
 				oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');">
 		</div>
 
 		<div class="textForm">
-			<span class="inputForm">��ǰ����<br></span>
+			<span class="inputForm">상품설명<br></span>
 			<textarea name="pDetail" style="width: 100%; height: 100px;"
 				required="required"></textarea>
 		</div>
 
 		<div class="textForm">
-			<span class="inputForm">��ǰ�̹��� &nbsp;</span> <input name="pImage"
+			<span class="inputForm">상품이미지 &nbsp;</span> <input name="pImage"
 				type="text" class="inputForm" placeholder="https://"
 				required="required">
 		</div>
 
 		<div style="margin-top: 50px">
-			<button type="submit" class="pinsertbtn pinsertbtn1">����Է�</button>
+			<button type="submit" class="pinsertbtn pinsertbtn1">재고입력</button>
 			<button type="button" class="pinsertbtn"
-				onclick="location.href='../managementpage/management_stockListPage.jsp'">���</button>
+				onclick="location.href='../managementpage/management_stockListPage.jsp'">취소</button>
 		</div>
 	</form>
 
