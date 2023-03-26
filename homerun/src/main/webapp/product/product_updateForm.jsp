@@ -25,7 +25,7 @@ ProductDto dto = dao.getProduct(pId);
 <body>
 	<form action="product_updateAction.jsp" method="post"
 		class="insertForm">
-		<h2>재고입력</h2>
+		<h2 style="color: #B11B38;">재고수정</h2>
 		<div class="textForm teamNcategory">
 			<div style="width: 400px">
 				<input name="pId" type="text" class="inputForm"
