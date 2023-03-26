@@ -198,7 +198,7 @@ else
 																		item) {
 																	s += "<tr>";
 																	s += "<td style='text-align: center; vertical-align:middle;'>"
-																			+ item.fbNum
+																			+ (res.length-idx)
 																			+ "</td>";
 																	s += "<td style='text-align: center; vertical-align:middle;'><b>"
 																			+ item.fbCategory
@@ -301,7 +301,7 @@ else
 											function(idx, item) {
 												s += "<tr>";
 												s += "<td style='text-align: center; vertical-align:middle;'>"
-														+ item.num + "</td>";
+														+ (res.length-idx) + "</td>";
 												s += "<td style='text-align: center; vertical-align:middle;'>"
 														+ item.board + "</td>"
 

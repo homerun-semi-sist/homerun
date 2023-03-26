@@ -204,7 +204,7 @@ else
 																		item) {
 																	s += "<tr>";
 																	s += "<td style='text-align: center; vertical-align:middle;'>"
-																			+ item.fbNum
+																			+ (res.length-idx)
 																			+ "</td>";
 																	s += "<td style='text-align: center; vertical-align:middle;'><b>"
 																			+ item.fbCategory
@@ -307,7 +307,7 @@ else
 																			item) {
 																		s += "<tr>";
 																		s += "<td style='text-align: center; vertical-align:middle;'>"
-																				+ item.num
+																				+ (res.length-idx)
 																				+ "</td>";
 																		s += "<td style='text-align: center; vertical-align:middle;'>"
 																				+ item.year
@@ -498,7 +498,7 @@ else
 												if (item.category == "전체") {
 													s += "<tr>";
 													s += "<td style='text-align: center; vertical-align:middle;'>"
-															+ item.num
+															+ (res.length-idx)
 															+ "</td>";
 													s += "<td style='text-align: center; vertical-align:middle;'>";
 													s += "<img src='https://cdn.icon-icons.com/icons2/2070/PNG/512/baseball_icon_126956.png' style='width: 30px;'>";
@@ -506,7 +506,7 @@ else
 												} else if (item.category == "한화") {
 													s += "<tr>";
 													s += "<td style='text-align: center; vertical-align:middle;'>"
-															+ item.num
+															+ (res.length-idx)
 															+ "</td>";
 													s += "<td style='text-align: center; vertical-align:middle;'>";
 													s += "<img src='" + item.teamLogoImg + "' style='width: 50px;'>";
@@ -514,7 +514,7 @@ else
 												} else {
 													s += "<tr>";
 													s += "<td style='text-align: center; vertical-align:middle;'>"
-															+ item.num
+															+ (res.length-idx)
 															+ "</td>";
 													s += "<td style='text-align: center; vertical-align:middle;'>";
 													s += "<img src='" + item.teamLogoImg + "' style='width: 40px;'>";

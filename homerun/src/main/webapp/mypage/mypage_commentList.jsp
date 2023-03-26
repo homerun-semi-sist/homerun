@@ -204,7 +204,7 @@ else
 																		item) {
 																	s += "<tr>";
 																	s += "<td style='text-align: center; vertical-align:middle;'>"
-																			+ item.fbNum
+																			+ (res.length-idx)
 																			+ "</td>";
 																	s += "<td style='text-align: center; vertical-align:middle;'>"
 																			+ item.fbCategory
@@ -312,7 +312,7 @@ else
 
 																		if (category == "fc")
 																			s += "<td style='vertical-align:middle;'><a href='../freeBoard/freePost_detailPage.jsp?fbNum="
-																					+ item.num
+																					+ (res.length-idx)
 																					+ "&currentPage="
 																					+ currentPage
 																					+ "' style=' text-decoration: none; color: black;'>"
@@ -442,7 +442,7 @@ else
 											function(idx, item) {
 												s += "<tr>";
 												s += "<td style='text-align: center; vertical-align:middle;'>"
-														+ item.cIdx + "</td>";
+														+ (res.length-idx) + "</td>";
 
 												if (category == "fc")
 													s += "<td style='vertical-align:middle;'><a href='../freeBoard/freePost_detailPage.jsp?fbNum="

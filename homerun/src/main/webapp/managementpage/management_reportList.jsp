@@ -207,7 +207,7 @@ else
 																			item) {
 																		s += "<tr>";
 																		s += "<td style='text-align: center; vertical-align:middle;'>"
-																				+ (item.totalCnt - idx)
+																				+ (res.length-idx)
 																				+ "</td>";
 																		s += "<td style='text-align: center; vertical-align:middle;'>"
 																				+ item.home
@@ -455,7 +455,7 @@ else
 											function(idx, item) {
 												s += "<tr>";
 												s += "<td style='text-align: center;'>"
-														+ (item.totalCnt - idx)
+														+ (res.length-idx)
 														+ "</td>";
 												s += "<td style='text-align: center; vertical-align:middle;'><b>"
 														+ item.fbCategory
