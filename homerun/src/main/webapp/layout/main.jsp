@@ -57,7 +57,7 @@
 	width: 40%;
 	height: 100%;
 	float: right;
-	border: 1px solid pink;
+	border: 0px solid pink;
 }
 
 .right-top {
@@ -65,14 +65,14 @@
 	height: 30%;
 	top: 0;
 	margin-bottom: 20px;
-	border: 1px solid yellow;
+	border: 0px solid yellow;
 }
 
 .right-bottom {
 	width: 100%;
 	bottom: 0;
 	height: 65%;
-	border: 1px solid green;
+	border: 0px solid green;
 }
 </style>
 </head>
