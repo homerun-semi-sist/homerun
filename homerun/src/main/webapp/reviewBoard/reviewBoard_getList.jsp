@@ -14,8 +14,6 @@
 	pageEncoding="UTF-8"%>
 
 <%
-p
-
 int currentPage = Integer.parseInt(request.getParameter("currentPage"));
 int perPage = 15;
 int start = (currentPage - 1) * perPage;
