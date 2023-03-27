@@ -94,7 +94,7 @@
 		</div>
 		<div class="right">
 			<div class="right-top">
-			<% // loginok 가져오기
+				<% // loginok 가져오기
             String loginok = (String) session.getAttribute("loginok");
             if (loginok == null) 
          { //로그아웃
@@ -118,13 +118,9 @@
         </div>
         <% } %>
 			</div>
-			<div class="right-bottom">
-            <jsp:include page="mapWeather.jsp"></jsp:include>
-        </div >
-			</div>
+			<div class="right-bottom"><jsp:include page="mapWeather.jsp"></jsp:include></div>
 		</div>
-
 	</div>
-
+		
 </body>
 </html>

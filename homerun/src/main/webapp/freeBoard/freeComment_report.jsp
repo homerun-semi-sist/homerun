@@ -4,19 +4,19 @@
 	pageEncoding="UTF-8"%>
 
 <%
-	// num 
-	String fcIdx = request.getParameter("fcIdx");
+// num 
+String fcIdx = request.getParameter("fcIdx");
 
-	// dao
-	FreeCommentDao dao = new FreeCommentDao();
+// dao
+FreeCommentDao dao = new FreeCommentDao();
 
-	dao.updateReport(fcIdx);
+dao.updateReport(fcIdx);
 
-	String report = dao.getFC(fcIdx).getFcReport();
-	
-	JSONObject ob = new JSONObject();
-	
-	ob.put("report", report);
+String report = dao.getFC(fcIdx).getFcReport();
+
+JSONObject ob = new JSONObject();
+
+ob.put("report", report);
 %>
 
-<%=ob.toString() %>
+<%=ob.toString()%>

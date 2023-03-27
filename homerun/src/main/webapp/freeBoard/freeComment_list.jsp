@@ -9,33 +9,33 @@
 	pageEncoding="UTF-8"%>
 
 <%
-	String num = request.getParameter("num");
+String num = request.getParameter("num");
 
-	FreeCommentDao FCDao = new FreeCommentDao();
-	List<FreeCommentDto> list = FCDao.getAllFCs(num);
-	
-	UserDao uDao = new UserDao();
-	
-	JSONArray arr = new JSONArray();
-	SimpleDateFormat sdf = new SimpleDateFormat("yy.MM.dd HH:mm");
-	
-	for(FreeCommentDto dto : list) {
-		JSONObject ob = new JSONObject();
-		
-		String nickname = uDao.getUser(dto.getUId()).getNickname();
-		
-		ob.put("fcIdx", dto.getFcIdx());
-		ob.put("fbNum", dto.getFbNum());
-		ob.put("fcUId", dto.getUId());
-		ob.put("nickname", nickname);
-		ob.put("fcContent", dto.getFcContent());
-		ob.put("fcLike", dto.getFcLike());
-		ob.put("fcDislike", dto.getFcDislike());
-		ob.put("fcWriteday", sdf.format(dto.getFcWriteday()));
-		ob.put("fcReport", dto.getFcReport());
-		
-		arr.add(ob);
-	}
+FreeCommentDao FCDao = new FreeCommentDao();
+List<FreeCommentDto> list = FCDao.getAllFCs(num);
+
+UserDao uDao = new UserDao();
+
+JSONArray arr = new JSONArray();
+SimpleDateFormat sdf = new SimpleDateFormat("yy.MM.dd HH:mm");
+
+for (FreeCommentDto dto : list) {
+	JSONObject ob = new JSONObject();
+
+	String nickname = uDao.getUser(dto.getUId()).getNickname();
+
+	ob.put("fcIdx", dto.getFcIdx());
+	ob.put("fbNum", dto.getFbNum());
+	ob.put("fcUId", dto.getUId());
+	ob.put("nickname", nickname);
+	ob.put("fcContent", dto.getFcContent());
+	ob.put("fcLike", dto.getFcLike());
+	ob.put("fcDislike", dto.getFcDislike());
+	ob.put("fcWriteday", sdf.format(dto.getFcWriteday()));
+	ob.put("fcReport", dto.getFcReport());
+
+	arr.add(ob);
+}
 %>
 
-<%=arr.toString() %>
+<%=arr.toString()%>

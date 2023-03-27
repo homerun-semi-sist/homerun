@@ -66,7 +66,7 @@ public class ReviewCommentDao {
  		PreparedStatement pstmt = null;
  		ResultSet rs = null;
  		
- 		String sql = "select * from REVIEWCOMMENT where rcReport != 0 order by rcIdx desc limit ?, ?";
+ 		String sql = "select * from REVIEWCOMMENT where rcReport != 0 order by rcReport desc limit ?, ?";
  		 		
  		try {
  			pstmt = conn.prepareStatement(sql);
@@ -359,10 +359,5 @@ public class ReviewCommentDao {
 			db.dbClose(pstmt, conn);
 		}
 	}
-	
-	// search - nickname
-		
-	// search - rcContent
 
-	// 페이징 처리
 }

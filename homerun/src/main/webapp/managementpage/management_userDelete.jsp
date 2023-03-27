@@ -1,5 +1,4 @@
-
-<%@page import="data.dao.BookMarkDao"%>
+<%@page import="data.dao.UserDao"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -13,21 +12,17 @@
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
 <script src="https://code.jquery.com/jquery-3.6.3.js"></script>
 
-<title>HOMERUN | BOOKMARK_DELETE</title>
+<title>HOMERUN | MANAGEMENT_USERDELETE</title>
 </head>
 
 <body>
 	<%
 	request.setCharacterEncoding("UTF-8");
 
-	String bId = request.getParameter("bId");
+	String uId = request.getParameter("uId");
 
-	BookMarkDao dao = new BookMarkDao();
-
-	// dao 삭제
-	dao.deleteMyBM(bId);
-
-	response.sendRedirect("mypage_bookmarkListPage.jsp");
+	UserDao dao = new UserDao();
+	dao.deleteUser(uId);
 	%>
 </body>
 </html>

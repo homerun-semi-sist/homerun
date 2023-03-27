@@ -4,20 +4,20 @@
 	pageEncoding="UTF-8"%>
 
 <%
-	// num 
-	String rcIdx = request.getParameter("rcIdx");
+// num 
+String rcIdx = request.getParameter("rcIdx");
 
-	// dao
-	ReviewCommentDao dao = new ReviewCommentDao();
-	
-	// num에 해당하는 like 증가
-	dao.updateLike(rcIdx);
+// dao
+ReviewCommentDao dao = new ReviewCommentDao();
 
-	String like = dao.getRC(rcIdx).getRcLike();
-	
-	JSONObject ob = new JSONObject();
-	
-	ob.put("like", like);
+// num에 해당하는 like 증가
+dao.updateLike(rcIdx);
+
+String like = dao.getRC(rcIdx).getRcLike();
+
+JSONObject ob = new JSONObject();
+
+ob.put("like", like);
 %>
 
-<%=ob.toString() %>
+<%=ob.toString()%>

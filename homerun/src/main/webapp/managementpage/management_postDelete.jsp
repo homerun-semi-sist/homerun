@@ -1,5 +1,6 @@
 <%@page import="data.dao.ReviewBoardDao"%>
-<%@page import="data.dto.ReviewBoardDto"%>
+<%@page import="data.dao.FreeBoardDao"%>
+<%@page import="data.dao.UserDao"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -13,32 +14,24 @@
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
 <script src="https://code.jquery.com/jquery-3.6.3.js"></script>
 
-<title>Insert title here</title>
+<title>HOMERUN | MANAGEMENT_USERDELETE</title>
 </head>
 
 <body>
 	<%
 	request.setCharacterEncoding("UTF-8");
 
-	String rbNum = request.getParameter("rbNum");
-	String subject = request.getParameter("subject");
-	String content = request.getParameter("content");
-	String currentPage = request.getParameter("currentPage");
+	String num = request.getParameter("num");
+	String category = request.getParameter("category");
+
+	FreeBoardDao fbDao = new FreeBoardDao();
+	ReviewBoardDao rbDao = new ReviewBoardDao();
 	
-	ReviewBoardDto dto = new ReviewBoardDto();
-
-	dto.setRbNum(rbNum);
-	dto.setRbSubject(subject);
-	dto.setRbContent(content);
-
-	ReviewBoardDao dao = new ReviewBoardDao();
-	dao.updateRB(dto);
-
-	// 페이징 처리
-	/* int num = dao.getMaxNum(); */
-
-	response.sendRedirect("reviewPost_detailPage.jsp?rbNum=" + rbNum + "&currentPage=" + currentPage);
+	if(category.equals("fb"))
+		fbDao.deleteFB(num);
+	else
+		rbDao.deleteRB(num);
+	
 	%>
-
 </body>
 </html>

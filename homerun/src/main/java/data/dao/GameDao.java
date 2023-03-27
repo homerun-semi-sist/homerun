@@ -48,6 +48,44 @@ public class GameDao {
 		return list;
 	}
 
+	// 날짜별 game
+	public Vector<GameDto> getGames(String date) {
+		Vector<GameDto> list = new Vector<>();
+
+		Connection conn = db.getConnection();
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+
+		String sql = "select * from GAME where gDay=? order by gId";
+
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setString(1, date);
+			
+			rs = pstmt.executeQuery();
+
+			while (rs.next()) {
+				GameDto dto = new GameDto();
+
+				dto.setgId(rs.getString("gId"));
+				dto.setgDay(rs.getString("gDay"));
+				dto.setHome(rs.getString("home"));
+				dto.setAway(rs.getString("away"));
+				dto.setWin(rs.getString("win"));
+
+				// list 추가
+				list.add(dto);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			db.dbClose(rs, pstmt, conn);
+		}
+
+		return list;
+	}
+	
 	// getGame
 	public GameDto getGame(String gId) {
 		GameDto dto = new GameDto();
@@ -78,6 +116,37 @@ public class GameDao {
 		}
 
 		return dto;
+	}
+
+	// getGames
+	public Vector<GameDto> getGamesDay() {
+		Vector<GameDto> list = new Vector<>();
+
+		Connection conn = db.getConnection();
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+
+		String sql = "select DISTINCT gDay from GAME";
+
+		try {
+			pstmt = conn.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+
+			// 하나의 데이터
+			while(rs.next()) {
+				GameDto dto = new GameDto();
+				
+				dto.setgDay(rs.getString("gDay"));
+				
+				list.add(dto);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			db.dbClose(rs, pstmt, conn);
+		}
+
+		return list;
 	}
 
 	public void insertGame(String gDay, String home, String away, String win) {

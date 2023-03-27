@@ -8,7 +8,6 @@ import java.util.List;
 import java.util.Vector;
 
 import data.dto.FreeBoardDto;
-import data.dto.TeamDto;
 import mysql.db.DbConnect;
 
 public class FreeBoardDao {
@@ -147,8 +146,6 @@ public class FreeBoardDao {
 				
 	}
 		
-	// list - 최신순
-		
 	// list - 추천순
 	public List<FreeBoardDto> getAllFBs_like() {
 		List<FreeBoardDto> list = new Vector<>();
@@ -240,7 +237,7 @@ public class FreeBoardDao {
  		PreparedStatement pstmt = null;
  		ResultSet rs = null;
  		
- 		String sql = "select * from FREEBOARD where fbReport !=0 order by fbNum desc limit ?, ?";
+ 		String sql = "select * from FREEBOARD where fbReport !=0 order by fbReport desc limit ?, ?";
  		 		
  		try {
  			pstmt = conn.prepareStatement(sql);

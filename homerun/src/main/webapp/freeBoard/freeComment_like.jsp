@@ -4,21 +4,21 @@
 	pageEncoding="UTF-8"%>
 
 <%
-	// num 
-	String fcIdx = request.getParameter("fcIdx");
+// num 
+String fcIdx = request.getParameter("fcIdx");
 
-	// dao
-	FreeCommentDao dao = new FreeCommentDao();
-	
-	// num에 해당하는 like 증가
-	dao.updateLike(fcIdx);
+// dao
+FreeCommentDao dao = new FreeCommentDao();
 
-	String like = dao.getFC(fcIdx).getFcLike();
-	
-	JSONObject ob = new JSONObject();
-	
-	ob.put("like", like);
-	ob.put("fcIdx", fcIdx);
+// num에 해당하는 like 증가
+dao.updateLike(fcIdx);
+
+String like = dao.getFC(fcIdx).getFcLike();
+
+JSONObject ob = new JSONObject();
+
+ob.put("like", like);
+ob.put("fcIdx", fcIdx);
 %>
 
-<%=ob.toString() %>
+<%=ob.toString()%>

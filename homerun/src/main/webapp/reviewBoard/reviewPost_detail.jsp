@@ -16,56 +16,63 @@
 <html lang="en">
 
 <head>
-    <meta charset="utf-8">
-    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-    <title>게시글 상세페이지</title>
-    <meta content="" name="description">
-    <meta content="" name="keywords">
+<title>HOMERUN | REVIEWPOST_DETAIL</title>
+<meta content="" name="description">
+<meta content="" name="keywords">
 
-    <!-- Vendor CSS Files -->
-    <link href="../assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-    <!-- <link href="../assets/detail/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet"> -->
-    
-    <link href="../assets/detail/vendor/aos/aos.css" rel="stylesheet">
-    <link href="../assets/detail/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
-    <link href="../assets/detail/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+<!-- Vendor CSS Files -->
+<link href="../assets/vendor/bootstrap/css/bootstrap.min.css"
+	rel="stylesheet">
+<!-- <link href="../assets/detail/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet"> -->
 
- 	<!-- Core CSS -->
-	<link rel="stylesheet" href="../assets/board/vendor/css/core.css" class="template-customizer-core-css" />
-    <link rel="stylesheet" href="../assets/board/vendor/css/theme-default.css" class="template-customizer-theme-css" />
-    <link rel="stylesheet" href="../assets/board/css/demo.css" />
-    
-    <!-- Template Main CSS File -->
-    <link href="../assets/detail/css/main.css" rel="stylesheet">
-    
-    <script src="https://kit.fontawesome.com/8dcaa4675e.js" crossorigin="anonymous"></script>
-    
-    <style type="text/css">
-    	.listBtn {
-			border-radius: 4px;
-			padding: 10px 20px;
-			border: 1px solid #0b214e;
-			background-color: #0b214e;
-		  	color: #F8F9FA;
-		  	width: 80px; 
-		  	height: 40px; 
-		  	line-height: 20px;
-		}
+<link href="../assets/detail/vendor/aos/aos.css" rel="stylesheet">
+<link href="../assets/detail/vendor/glightbox/css/glightbox.min.css"
+	rel="stylesheet">
+<link href="../assets/detail/vendor/swiper/swiper-bundle.min.css"
+	rel="stylesheet">
 
-		.listBtn:hover {
-		 	color: #0b214e;
-		  	background-color: #f8f9fa;
-		}
-		
-		.cday {
-			color: #6c757d;
-			font-size: 0.7rem;
-			margin-left: 30px;
-		}
-    </style>
-    
-    <script type="text/javascript">
+<!-- Core CSS -->
+<link rel="stylesheet" href="../assets/board/vendor/css/core.css"
+	class="template-customizer-core-css" />
+<link rel="stylesheet"
+	href="../assets/board/vendor/css/theme-default.css"
+	class="template-customizer-theme-css" />
+<link rel="stylesheet" href="../assets/board/css/demo.css" />
+
+<!-- Template Main CSS File -->
+<link href="../assets/detail/css/main.css" rel="stylesheet">
+
+<script src="https://kit.fontawesome.com/8dcaa4675e.js"
+	crossorigin="anonymous"></script>
+
+<style type="text/css">
+.listBtn {
+	border-radius: 4px;
+	padding: 10px 20px;
+	border: 1px solid #0b214e;
+	background-color: #0b214e;
+	color: #F8F9FA;
+	width: 80px;
+	height: 40px;
+	line-height: 20px;
+}
+
+.listBtn:hover {
+	color: #0b214e;
+	background-color: #f8f9fa;
+}
+
+.cday {
+	color: #6c757d;
+	font-size: 0.7rem;
+	margin-left: 30px;
+}
+</style>
+
+<script type="text/javascript">
 		$(function() {
 			
 			// 댓글 관련 method
@@ -333,7 +340,7 @@
 </head>
 
 <body>
-<%
+	<%
 	request.setCharacterEncoding("UTF-8");
 
 	String rbNum = request.getParameter("rbNum");
@@ -368,65 +375,196 @@
 	<input type="hidden" id="loginok" name="loginok" value="<%=loginok %>">
 	<input type="hidden" id="rbNum" name="rbNum" value="<%=rbNum %>">
 	<input type="hidden" id="uId" name="uId" value="<%=uId %>">
-	<input type="hidden" id="rbUId" name="rbUId" value="<%=rbDto.getUId() %>">
-	
-<!-- Layout wrapper -->
-    <div class="layout-wrapper">
-        <div class="layout-container">
+	<input type="hidden" id="rbUId" name="rbUId"
+		value="<%=rbDto.getUId() %>">
 
-            <!-- Content wrapper -->
-            <div class="content-wrapper"">
-                <!-- Content -->
+	<!-- Layout wrapper -->
+	<div class="layout-wrapper">
+		<div class="layout-container">
 
-                <div class="container-xxl flex-grow-1 container-p-y">
-<!--  <main id="main"> -->
-        <!-- ======= Blog Details Section ======= -->
-        <div id="blog" class="blog col" >
-            <div class="" data-aos="fade-up" data-aos-delay="100">
-                <div class="row">
+			<!-- Content wrapper -->
+			<div class="content-wrapper"">
+				<!-- Content -->
+
+				<div class="container-xxl flex-grow-1 container-p-y">
+					<!--  <main id="main"> -->
+					<!-- ======= Blog Details Section ======= -->
+					<div id="blog" class="blog col">
+						<div class="" data-aos="fade-up" data-aos-delay="100">
+							<div class="row">
 
 
-					<div style="margin-bottom: 30px;">
-				   		<button type="button" class="listBtn" onclick="location.href='reviewBoard_listPage.jsp?currentPage=<%=currentPage%>'">목록</button> 
-				    </div>
-				    
-                    <div class="col">
+								<div style="margin-bottom: 30px;">
+									<button type="button" class="listBtn"
+										onclick="location.href='reviewBoard_listPage.jsp?currentPage=<%=currentPage%>'">목록</button>
+								</div>
 
-                        <article class="blog-details" style="background-color: #fff;">
-                            <span class="title" style="vertical-align:middle; color:#0b214e;">
-                            
-                            <% 
-                            	GameDto gDto = gDao.getGame(rbDto.getgId()); 
-                            	
-	                            String year = gDto.getgDay().substring(2, 4);
-	                    		String month = gDto.getgDay().substring(5, 7);
-	                    		String day = gDto.getgDay().substring(8, 10);
-                           %>
-                           		<span style="font-size: 0.8em;">[ 
-                           <%
-                               	if(gDto.getHome().equals("한화")) {	
-                           %>
-                               		<img src="<%=tDao.getTeam(gDto.getHome()).getTeamLogo() %>" style="width: 60px; vertical-align:middle;">
-                               		vs&nbsp;
-                                   	<img src="<%=tDao.getTeam(gDto.getAway()).getTeamLogo() %>" style="width: 50px; vertical-align:middle;">
-                           <%		
-                            	} else if(gDto.getAway().equals("한화")) {
-                           %>
-                               		<img src="<%=tDao.getTeam(gDto.getHome()).getTeamLogo() %>" style="width: 50px; vertical-align:middle;">
-                               		&nbsp;vs
-                                   	<img src="<%=tDao.getTeam(gDto.getAway()).getTeamLogo() %>" style="width: 60px; vertical-align:middle;">
-                           <%			
+								<div class="col">
+
+									<article class="blog-details" style="background-color: #fff;">
+
+										<% 
+                            	if(rbDto.getUId().equals("admin")) {
+                            %>
+										<span class="title" style="color: red;"><b>[공지] <%=rbDto.getRbSubject()%></b></span>
+										<%
                             	} else {
-                           %>
-                               		<img src="<%=tDao.getTeam(gDto.getHome()).getTeamLogo() %>" style="width: 50px; vertical-align:middle;">
-                               		vs
-                                   	<img src="<%=tDao.getTeam(gDto.getAway()).getTeamLogo() %>" style="width: 50px; vertical-align:middle;"> 
-                           <%
-                                 }     
-                           %>
-                           		&nbsp;<%=year %>.<%=month %>.<%=day %> ]</span> <%=rbDto.getRbSubject() %></span> 
-                           <%
+                                 %>
+										<span class="title"
+											style="vertical-align: middle; color: #0b214e;"> <% 
+     	                            	GameDto gDto = gDao.getGame(rbDto.getgId()); 
+     	                            	
+     		                            String year = gDto.getgDay().substring(2, 4);
+     		                    		String month = gDto.getgDay().substring(5, 7);
+     		                    		String day = gDto.getgDay().substring(8, 10);
+     		                    %> <span style="font-size: 0.8em;">[ <%
+     	                               	if(gDto.getHome().equals("한화")) {	
+     		                    %> <img
+												src="<%=tDao.getTeam(gDto.getHome()).getTeamLogo() %>"
+												style="width: 60px; vertical-align: middle;"> vs&nbsp;
+												<img src="<%=tDao.getTeam(gDto.getAway()).getTeamLogo() %>"
+												style="width: 50px; vertical-align: middle;"> <%		
+     	                            	} else if(gDto.getAway().equals("한화")) {
+     		                    %> <img
+												src="<%=tDao.getTeam(gDto.getHome()).getTeamLogo() %>"
+												style="width: 50px; vertical-align: middle;"> &nbsp;vs
+												<img src="<%=tDao.getTeam(gDto.getAway()).getTeamLogo() %>"
+												style="width: 60px; vertical-align: middle;"> <%			
+     	                            	} else {
+     		                    %> <img
+												src="<%=tDao.getTeam(gDto.getHome()).getTeamLogo() %>"
+												style="width: 50px; vertical-align: middle;"> vs <img
+												src="<%=tDao.getTeam(gDto.getAway()).getTeamLogo() %>"
+												style="width: 50px; vertical-align: middle;"> <%
+     	                                 }     
+     		                    %> &nbsp;<%=year %>.<%=month %>.<%=day %> ]
+										</span> <%=rbDto.getRbSubject() %></span>
+										<%       		
+     		                        }
                         	
+                        		if(loginok != null && rbDto.getUId().equals(uId)) {
+	                       %>
+										<span style="float: right; margin-top: 20px; cursor: pointer;"
+											onclick="funDel(<%=rbNum%>, <%=currentPage%>)">삭제</span> <span
+											style="float: right; margin-top: 20px;">&nbsp;&nbsp;|&nbsp;&nbsp;</span>
+										<span style="float: right; margin-top: 20px; cursor: pointer;"
+											onclick="location.href='reviewPost_updatePage.jsp?rbNum=<%=rbDto.getRbNum() %>&currentPage=<%=currentPage%>'">수정</span>
+										<%	
+	                        	} else {
+	                        		if(!rbDto.getUId().equals("admin")) {
+	                       %>
+										<span id="report"
+											style="float: right; margin-top: 20px; color: red; cursor: pointer;">신고&nbsp;<i
+											class="fa-solid fa-bullhorn"></i></span>
+										<%
+	                        		}
+	                        	}
+	                       %>
+
+										<div class="meta-top">
+											<span style="font-size: 17px;"><i
+												class="fa-regular fa-user"></i><%=uDto.getNickname()%></span>
+											<%
+                            	if(!rbDto.getUId().equals("admin")) {
+                            %>
+											<span style="float: right;"><i
+												class="fa-regular fa-thumbs-down"></i><span id="dlcnt"><%=rbDto.getRbDislike()%></span></span>
+											<span style="float: right;">&nbsp;&nbsp;|&nbsp;&nbsp;</span>
+											<span style="float: right;"><i
+												class="fa-regular fa-thumbs-up"></i><span id="lcnt"><%=rbDto.getRbLike()%></span></span>
+											<span style="float: right;">&nbsp;&nbsp;|&nbsp;&nbsp;</span>
+											<span style="float: right;"><i
+												class="fa-regular fa-eye"></i><%=rbDto.getRbReadCnt()%></span> <span
+												style="float: right;">&nbsp;&nbsp;|&nbsp;&nbsp;</span>
+											<% 
+                            	}
+                            %>
+											<span style="float: right;"><i
+												class="fa-regular fa-calendar"></i><%=sdf.format(rbDto.getRbWriteday())%></span>
+										</div>
+										<!-- End meta top -->
+										<hr>
+										<div class="content" style="min-height: 500px;">
+											<%=rbDto.getRbContent().replace("\n", "<br>")%>
+
+										</div>
+										<!-- End post content -->
+
+										<%
+								if(!rbDto.getUId().equals("admin")) {
+                            %>
+										<div class="meta-bottom"
+											style="text-align: center; height: 100px;">
+											<span class="fa-regular fa-thumbs-up"
+												style="font-size: 30px; margin: 20px; cursor: pointer; color: blue;"
+												id="likeCnt" num="<%=rbNum%>"></span> <span
+												class="fa-regular fa-thumbs-down"
+												style="font-size: 30px; margin: 20px; cursor: pointer; color: red;"
+												id="dislikeCnt" num="<%=rbNum%>"></span>
+
+											<%
+									if(bookmark != 0) {
+								%>
+											<span class="fa-solid fa-heart"
+												style="font-size: 30px; margin: 20px; cursor: pointer; color: pink;"
+												id="bookmark" num="<%=rbNum%>"></span>
+											<%
+									} else {
+								%>
+											<span class="fa-regular fa-heart"
+												style="font-size: 30px; margin: 20px; cursor: pointer; color: pink;"
+												id="bookmark" num="<%=rbNum%>"></span>
+										</div>
+										<!-- End meta bottom -->
+										<%
+									}
+							
+                            	}
+                            %>
+
+										<%-- <%
+                            	if(rbDto.getUId().equals("admin")) {
+                            %>
+                            		 <span class="title" style="color:red;"><b>[공지] <%=rbDto.getRbSubject()%></b></span>
+                            <%
+                            	} else {
+                            %>
+                            		<span class="title" style="vertical-align:middle; color:#0b214e;">
+                                                       
+		                    <% 
+	                            	GameDto gDto = gDao.getGame(rbDto.getgId()); 
+	                            	
+		                            String year = gDto.getgDay().substring(2, 4);
+		                    		String month = gDto.getgDay().substring(5, 7);
+		                    		String day = gDto.getgDay().substring(8, 10);
+		                    %>
+	                           		<span style="font-size: 0.8em;">[ 
+		                    <%
+	                               	if(gDto.getHome().equals("한화")) {	
+		                    %>
+	                               		<img src="<%=tDao.getTeam(gDto.getHome()).getTeamLogo() %>" style="width: 60px; vertical-align:middle;">
+	                               		vs&nbsp;
+	                                   	<img src="<%=tDao.getTeam(gDto.getAway()).getTeamLogo() %>" style="width: 50px; vertical-align:middle;">
+		                    <%		
+	                            	} else if(gDto.getAway().equals("한화")) {
+		                    %>
+	                               		<img src="<%=tDao.getTeam(gDto.getHome()).getTeamLogo() %>" style="width: 50px; vertical-align:middle;">
+	                               		&nbsp;vs
+	                                   	<img src="<%=tDao.getTeam(gDto.getAway()).getTeamLogo() %>" style="width: 60px; vertical-align:middle;">
+		                    <%			
+	                            	} else {
+		                    %>
+	                               		<img src="<%=tDao.getTeam(gDto.getHome()).getTeamLogo() %>" style="width: 50px; vertical-align:middle;">
+	                               		vs
+	                                   	<img src="<%=tDao.getTeam(gDto.getAway()).getTeamLogo() %>" style="width: 50px; vertical-align:middle;"> 
+		                    <%
+	                                 }     
+		                    %>
+		                           		&nbsp;<%=year %>.<%=month %>.<%=day %> ]</span> <%=rbDto.getRbSubject() %></span> 
+		                           		
+		                        }
+		                    <%
+		                        	
                             	if(loginok != null && rbDto.getUId().equals(uId)) {
                            %>
                             		<span style="float: right; margin-top: 20px; cursor: pointer;" onclick="funDel(<%=rbNum%>, <%=currentPage%>)">삭제</span>
@@ -439,137 +577,148 @@
                            <%
                             	}
                            %>
-                                                 
-                            <div class="meta-top">
-                                <span style="font-size: 17px;"><i class="fa-regular fa-user"></i><%=uDto.getNickname()%></span>                   
-                                <span style="float: right;"><i class="fa-regular fa-thumbs-down"></i><span id="dlcnt"><%=rbDto.getRbDislike()%></span></span>
-                                <span style="float: right;">&nbsp;&nbsp;|&nbsp;&nbsp;</span>
-                                <span style="float: right;"><i class="fa-regular fa-thumbs-up"></i><span id="lcnt"><%=rbDto.getRbLike()%></span></span>
-                                <span style="float: right;">&nbsp;&nbsp;|&nbsp;&nbsp;</span>
-                                <span style="float: right;"><i class="fa-regular fa-eye"></i><%=rbDto.getRbReadCnt()%></span>
-                                <span style="float: right;">&nbsp;&nbsp;|&nbsp;&nbsp;</span>
-                                <span style="float: right;"><i class="fa-regular fa-calendar"></i><%=sdf.format(rbDto.getRbWriteday())%></span>
-                            </div><!-- End meta top -->
-							<hr>
-                            <div class="content" style="min-height: 500px;">
-                                <%=rbDto.getRbContent().replace("\n", "<br>")%>
+		                                                 
+		                            <div class="meta-top">
+		                                <span style="font-size: 17px;"><i class="fa-regular fa-user"></i><%=uDto.getNickname()%></span>                   
+		                                <span style="float: right;"><i class="fa-regular fa-thumbs-down"></i><span id="dlcnt"><%=rbDto.getRbDislike()%></span></span>
+		                                <span style="float: right;">&nbsp;&nbsp;|&nbsp;&nbsp;</span>
+		                                <span style="float: right;"><i class="fa-regular fa-thumbs-up"></i><span id="lcnt"><%=rbDto.getRbLike()%></span></span>
+		                                <span style="float: right;">&nbsp;&nbsp;|&nbsp;&nbsp;</span>
+		                                <span style="float: right;"><i class="fa-regular fa-eye"></i><%=rbDto.getRbReadCnt()%></span>
+		                                <span style="float: right;">&nbsp;&nbsp;|&nbsp;&nbsp;</span>
+		                                <span style="float: right;"><i class="fa-regular fa-calendar"></i><%=sdf.format(rbDto.getRbWriteday())%></span>
+		                            </div><!-- End meta top -->
+									<hr>
+		                            <div class="content" style="min-height: 500px;">
+		                                <%=rbDto.getRbContent().replace("\n", "<br>")%>
+		
+		                            </div><!-- End post content -->
+		
+		                            <div class="meta-bottom" style="text-align: center; height: 100px;">                        
+										<span class="fa-regular fa-thumbs-up" style="font-size: 30px; margin: 20px; cursor: pointer;color: blue;" id="likeCnt"
+							num="<%=rbNum%>"></span>
+		                                <span class="fa-regular fa-thumbs-down" style="font-size: 30px; margin: 20px; cursor: pointer; color: red;" id="dislikeCnt"
+							num="<%=rbNum%>"></span>
+										
+										<%
+											if(bookmark != 0) {
+										%>
+											<span class="fa-solid fa-heart" style="font-size: 30px; margin: 20px; cursor: pointer; color: pink;" id="bookmark"
+							num="<%=rbNum%>"></span>
+										<%
+											} else {
+										%>
+												<span class="fa-regular fa-heart" style="font-size: 30px; margin: 20px; cursor: pointer; color: pink;" id="bookmark"
+							num="<%=rbNum%>"></span>
+										<%
+											}
+										%>        
+		                            </div><!-- End meta bottom -->
+                                     
+                            <%
+                            	}
+                            %> --%>
 
-                            </div><!-- End post content -->
+									</article>
+									<!-- End blog post -->
 
-                            <div class="meta-bottom" style="text-align: center; height: 100px;">                        
-								<span class="fa-regular fa-thumbs-up" style="font-size: 30px; margin: 20px; cursor: pointer;color: blue;" id="likeCnt"
-					num="<%=rbNum%>"></span>
-                                <span class="fa-regular fa-thumbs-down" style="font-size: 30px; margin: 20px; cursor: pointer; color: red;" id="dislikeCnt"
-					num="<%=rbNum%>"></span>
-								
-								<%
-									if(bookmark != 0) {
-								%>
-									<span class="fa-solid fa-heart" style="font-size: 30px; margin: 20px; cursor: pointer; color: pink;" id="bookmark"
-					num="<%=rbNum%>"></span>
-								<%
-									} else {
-								%>
-										<span class="fa-regular fa-heart" style="font-size: 30px; margin: 20px; cursor: pointer; color: pink;" id="bookmark"
-					num="<%=rbNum%>"></span>
-								<%
-									}
-								%>
-					
-                                
-             
-                            </div><!-- End meta bottom -->
+									<div class="comments">
+										<div class="card" style="border: 0px solid gray;">
+											<div class="card-body" style="background-color: #fff;">
 
-                        </article><!-- End blog post -->
-               
-                        <div class="comments">
-                            <div class="card" style="border: 0px solid gray;">
-                                <div class="card-body" style="background-color: #fff;">
-                                
-                                	<div class="d-flex">
-                                        <div class="ms-3">
-                                            <span><i class="fa-regular fa-comment-dots"></i>&nbsp;댓글&nbsp;<b class="rcCnt">0</b>개</a></span>
-                                        </div>
-                                    </div><hr>
-         				
-	                   				<div class="rcList"></div>
-                                    
-                                </div>
-                            </div>
+												<div class="d-flex">
+													<div class="ms-3">
+														<span><i class="fa-regular fa-comment-dots"></i>&nbsp;댓글&nbsp;<b
+															class="rcCnt">0</b>개</a></span>
+													</div>
+												</div>
+												<hr>
 
-                        </div>
-                        
-                        <%
+												<div class="rcList"></div>
+
+											</div>
+										</div>
+
+									</div>
+
+									<%
                         	if(loginok == null) {
                         %>
-	                        	<div class="commentForm">
-	                        		<div class="comments">
-			                        	<div class="reply-form" style="background-color: #F8F9FA;">	                           
-				                            <div class="row">
-				                            	<span>&nbsp;<i class="fa-solid fa-user-pen"></i>&nbsp;비회원</span>
-				                            </div>
-				                            <div class="row" style="margin-top: 20px;">
-			                    				<div class="col-11 form-group">
-			                      					<textarea name="content" id="content" class="form-control" placeholder="비회원은 로그인 후 이용 가능합니다" readonly="readonly"></textarea>
-							                    </div>
-							                    <div class="col-1">
-							                      <button type="button" id="loginNoBtn" class="btn btn-primary" style="width: 80px; height: 40px; line-height: 20px;">입력</button>
-							                    </div>
-			                 				 </div>	                          
-			                        	</div>
-									</div>     
-								</div> 
-                        <%
+									<div class="commentForm">
+										<div class="comments">
+											<div class="reply-form" style="background-color: #F8F9FA;">
+												<div class="row">
+													<span>&nbsp;<i class="fa-solid fa-user-pen"></i>&nbsp;비회원
+													</span>
+												</div>
+												<div class="row" style="margin-top: 20px;">
+													<div class="col-12 form-group">
+														<textarea name="content" id="content" class="form-control"
+															placeholder="비회원은 로그인 후 이용 가능합니다" readonly="readonly"></textarea>
+													</div>												
+												</div>
+											</div>
+										</div>
+									</div>
+									<%
                         	} else {
                         %>
-	                       		<div class="commentForm">
-	                        		<div class="comments">
-			                        	<div class="reply-form" style="background-color: #F8F9FA;">	                           
-				                            <div class="row">
-				                            	<span>&nbsp;&nbsp;<i class="fa-solid fa-user-pen"></i>&nbsp;&nbsp;<b><%=uDao.getUser(uId).getNickname() %></b></span>
-				                            </div>
-				                            <div class="row" style="margin-top: 20px;">
-			                    				<div class="col-11 form-group">
-			                      					<textarea name="content" id="content" class="form-control" placeholder="댓글 입력"></textarea>
-							                    </div>
-							                    <div class="col-1">
-							                      <button type="button" id="rInsertBtn" class="btn btn-primary" style="width: 80px; height: 40px; line-height: 20px;">입력</button>
-							                    </div>
-			                 				 </div>	                          
-			                        	</div>
-									</div>  
-								</div>           
-                        <%		
+									<div class="commentForm">
+										<div class="comments">
+											<div class="reply-form" style="background-color: #F8F9FA;">
+												<div class="row">
+													<span>&nbsp;&nbsp;<i class="fa-solid fa-user-pen"></i>&nbsp;&nbsp;<b><%=uDao.getUser(uId).getNickname() %></b></span>
+												</div>
+												<div class="row" style="margin-top: 20px;">
+													<div class="col-11 form-group">
+														<textarea name="content" id="content" class="form-control"
+															placeholder="댓글 입력"></textarea>
+													</div>
+													<div class="col-1">
+														<button type="button" id="rInsertBtn"
+															class="btn btn-primary"
+															style="width: 80px; height: 40px; line-height: 20px;">입력</button>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+									<%		
                         	}
                         %>
-                            	<div class="commentUpdateForm">
-	                        		<div class="comments">
-			                        	<div class="reply-form" style="background-color: #F8F9FA;">	                           
-				                            <div class="row">
-				                            	<span>&nbsp;&nbsp;<i class="fa-solid fa-user-pen"></i>&nbsp;&nbsp;<b><%=uDao.getUser(uId).getNickname() %></b></span>
-				                            </div>
-				                            <div class="row" style="margin-top: 20px;">
-			                    				<div class="col-11 form-group">
-			                      					<textarea name="ucontent" id="ucontent" class="form-control"></textarea>
-							                    </div>
-							                    <div class="col-1">
-							                      <button type="button" id="rUpdateBtn" class="btn btn-primary" style="width: 80px; height: 40px; line-height: 20px;">수정</button>
-							                    </div>
-			                 				 </div>	                          
-			                        	</div>
-									</div>  
-								</div>                        
-                    </div>
-                </div>
-            </div>
-        </div><!-- End Blog Details Section -->
+									<div class="commentUpdateForm">
+										<div class="comments">
+											<div class="reply-form" style="background-color: #F8F9FA;">
+												<div class="row">
+													<span>&nbsp;&nbsp;<i class="fa-solid fa-user-pen"></i>&nbsp;&nbsp;<b><%=uDao.getUser(uId).getNickname() %></b></span>
+												</div>
+												<div class="row" style="margin-top: 20px;">
+													<div class="col-11 form-group">
+														<textarea name="ucontent" id="ucontent"
+															class="form-control"></textarea>
+													</div>
+													<div class="col-1">
+														<button type="button" id="rUpdateBtn"
+															class="btn btn-primary"
+															style="width: 80px; height: 40px; line-height: 20px;">수정</button>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<!-- End Blog Details Section -->
 
-   <!--  </main> --><!-- End #main -->
-    
-    </div>
-    </div>
-</div>
-    </div>
+					<!--  </main> -->
+					<!-- End #main -->
+
+				</div>
+			</div>
+		</div>
+	</div>
 	<script type="text/javascript">
 		
 		// 게시글 method
@@ -731,19 +880,22 @@
 			}
 		}
 	</script>
-		
 
-    <!-- Vendor JS Files -->
-    <script src="../assets/detail/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-    <script src="../assets/detail/vendor/aos/aos.js"></script>
-    <script src="../assets/detail/vendor/glightbox/js/glightbox.min.js"></script>
-    <script src="../assets/detail/vendor/isotope-layout/isotope.pkgd.min.js"></script>
-    <script src="../assets/detail/vendor/swiper/swiper-bundle.min.js"></script>
-    <script src="../assets/detail/vendor/purecounter/purecounter_vanilla.js"></script>
-    <script src="../assets/detail/vendor/php-email-form/validate.js"></script>
 
-    <!-- Template Main JS File -->
-    <script src="../assets/detail/js/main.js"></script>
+	<!-- Vendor JS Files -->
+	<script
+		src="../assets/detail/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+	<script src="../assets/detail/vendor/aos/aos.js"></script>
+	<script src="../assets/detail/vendor/glightbox/js/glightbox.min.js"></script>
+	<script
+		src="../assets/detail/vendor/isotope-layout/isotope.pkgd.min.js"></script>
+	<script src="../assets/detail/vendor/swiper/swiper-bundle.min.js"></script>
+	<script
+		src="../assets/detail/vendor/purecounter/purecounter_vanilla.js"></script>
+	<script src="../assets/detail/vendor/php-email-form/validate.js"></script>
+
+	<!-- Template Main JS File -->
+	<script src="../assets/detail/js/main.js"></script>
 
 </body>
 
