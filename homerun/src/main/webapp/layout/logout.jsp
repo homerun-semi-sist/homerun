@@ -141,7 +141,7 @@
 
 		<div class="login-box">
             <!-- <b class="text">로그인 후 이용해 주세요</b> -->
-        <button type="button" class="login" onclick="location.href='../homerun/user/user_loginform.jsp'">로그아웃</button>
+        <button type="button" class="login" onclick="location.href='../homerun/user/user_logoutaction.jsp'">로그아웃</button>
          <br>
          <a class="regist"><b style="font-size:1.2em;"><%=dto.getNickname() %></b>님 환영합니다</a>
         </div>
