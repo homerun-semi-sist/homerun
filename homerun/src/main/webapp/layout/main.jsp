@@ -57,23 +57,23 @@
 
 .right {
 	width: 40%;
-	height: 100%;
+	height: 900px;
 	float: right;
 	border: 0px solid pink;
 }
 
 .right-top {
 	width: 100%;
-	height: 30%;
+	height: 25%;
 	top: 0;
-	margin-bottom: 20px;
+	margin-bottom: 50px;
 	border: 0px solid yellow;
 }
 
 .right-bottom {
 	width: 100%;
 	bottom: 0;
-	height: 65%;
+	height: 55%;
 	border: 0px solid green;
 }
 </style>

@@ -22,30 +22,33 @@
     }
     
  .login{
-	    width: 320px;
-	    height: 90px;
+	    width: 400px;
+	    height: 110px;
 	    color: white;
 	    text-align: center;
 	    background-color: #0b214e;
-	    margin-left: 25px;
-	    margin-top: 20px;
+	    margin-left: 50px;
+	    margin-top: 50px;
 	    margin-bottom: 10px;
 	    font-weight: bold;
-	    font-size: 15pt;
+	    font-size: 2.2em;
 	    letter-spacing: 5px;
+	     border-radius: 5px;
     }
     
     .login-box{
        height: 100%;
-       width: 370px;
-       border: 1px solid gray;
-       margin-left: 10px;
+       width: 100%;
+       border: 0px solid gray;
+        background-color: #F8F9FA;
+       border-radius: 10px;
     }
     
     .regist{
        color: #0b214e;
        font-weight: bold;
-       left: 290px;
+       font-size: 1.2em;
+       left: 380px;
        bottom: 5px;
        position: relative;
     }
@@ -64,7 +67,7 @@
 
    
         <div class="login-box">
-            <b class="text">로그인 후 이용해 주세요</b>
+            <!-- <b class="text">로그인 후 이용해 주세요</b> -->
         <button type="button" class="login" onclick="location.href='../homerun/user/user_loginform.jsp'">로그인</button>
          <br>
          <a class="regist" href="../homerun/regist/regist_registform.jsp">회원가입</a>

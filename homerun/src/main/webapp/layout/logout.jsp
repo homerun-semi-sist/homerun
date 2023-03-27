@@ -14,23 +14,31 @@
 			href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" />
 		<script src="https://code.jquery.com/jquery-3.6.3.js"></script>
 		<link href="../assets/css/index.css" rel="stylesheet">
-		<script type="text/javascript">
-		
-		</script>
+		<script src="https://kit.fontawesome.com/8dcaa4675e.js"
+	crossorigin="anonymous"></script>
 	</head>
-	<style>
+	<!-- <style>
     
     .logout-box{
        height: 100%;
-       width: 370px;
+       width: 100%;
        border: 1px solid gray;
-       margin-left: 10px;
+       background-color: #F8F9FA;
+       border-radius: 4px;
+    }
+    
+    .box {
+    border: 0px solid gray;
+    margin-top: 80px;
+    text-align: center;
     }
     
     .photo{  
 	width: 70px;
     height: 70px;
     margin: 10px;
+    margin-right: 20px;
+    color: #0b214e;
     }
     
     .logout{
@@ -41,7 +49,9 @@
     }
     
     .nickname{
-	    font-size: 20pt;
+	    font-size: 28pt;
+	   line-height: 100%;
+	   color: #0b214e;
     }
     
     .text2{
@@ -49,11 +59,77 @@
     	margin-left: 10px;
     }
     .uid{
-    	font-size: 15pt;
-    	position: absolute;
-   		top: 103px;
+    	font-size: 20pt;
+    	color: #0b214e;
+    	
+   		
     }
     
+    .btn {
+	border-radius: 4px;
+	padding: 10px 20px;
+	border: 1px solid #0b214e;
+	background-color: #0b214e;
+	color: #F8F9FA;
+	width: 80px;
+	height: 40px;
+	line-height: 20px;
+	 float: right;
+	 margin-top: 20px;
+	 margin-right: 10px;
+}
+
+	.btn:hover {
+	color: #0b214e;
+	background-color: #f8f9fa;
+}
+    
+</style> -->
+<style>
+ .text{
+ 	   position: relative;
+       left: 25px;
+       top: 10px;
+       font-size: 10pt;
+    }
+    
+ .login{
+	    width: 400px;
+	    height: 110px;
+	    color: white;
+	    text-align: center;
+	    background-color: #0b214e;
+	    margin-left: 50px;
+	    margin-top: 50px;
+	    margin-bottom: 10px;
+	    font-weight: bold;
+	    font-size: 2.2em;
+	    letter-spacing: 5px;
+	     border-radius: 5px;
+    }
+    
+    .login-box{
+       height: 100%;
+       width: 100%;
+       border: 0px solid gray;
+        background-color: #F8F9FA;
+       border-radius: 10px;
+    }
+    
+    .regist{
+       color: #0b214e;
+       font-weight: bold;
+       font-size: 1.2em;
+       left: 290px;
+       bottom: 5px;
+       position: relative;
+    }
+    
+    .regist:hover{
+       text-decoration: none;
+       color: #0b214e;
+    }
+
 </style>
 
 	<body>
@@ -62,13 +138,12 @@
 	UserDao dao=new UserDao();
 	UserDto dto=dao.getData(uid);
 %>
-        <div class="logout-box">
-            <b class="text2">환영합니다</b>
-            <button type="button" class="logout" onclick="location.href='../homerun/user/user_logoutaction.jsp'">로그아웃</button>
-            <br>
-   				 <img class="photo" src="../homerun/assets/img/프로필.png">
-            <b class="nickname"><%=dto.getNickname() %></b>
-            <b class="uid">(<%=uid %>)</b>
+
+		<div class="login-box">
+            <!-- <b class="text">로그인 후 이용해 주세요</b> -->
+        <button type="button" class="login" onclick="location.href='../homerun/user/user_loginform.jsp'">로그아웃</button>
+         <br>
+         <a class="regist"><b style="font-size:1.2em;"><%=dto.getNickname() %></b>님 환영합니다</a>
         </div>
         
       </body>
