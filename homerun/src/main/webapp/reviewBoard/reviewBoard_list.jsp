@@ -144,7 +144,7 @@ a {
 						} else {
 							$.each(res, function(idx, item){
 								s+="<tr>";
-								s+="<td style='text-align: center; vertical-align:middle;'>" + (item.totalCnt - idx) + "</td>";
+								s+="<td style='text-align: center; vertical-align:middle;'>" + (res.length - idx) + "</td>";
 								s+="<td style='text-align: center; vertical-align:middle;'>" + item.year + "." + item.month + "." + item.day + "</td>"
 								
 								
@@ -253,7 +253,7 @@ a {
 								s+="</tr>"
 							} else {
 								s+="<tr>";
-								s+="<td style='text-align: center; vertical-align:middle;'>" + (item.totalCnt - idx) + "</td>";
+								s+="<td style='text-align: center; vertical-align:middle;'>" + (res.length - idx) + "</td>";
 								s+="<td style='text-align: center; vertical-align:middle;'>" + item.year + "." + item.month + "." + item.day + "</td>"
 															
 								if(item.home == "한화") {	
