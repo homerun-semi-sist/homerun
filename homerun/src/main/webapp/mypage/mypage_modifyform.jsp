@@ -66,10 +66,6 @@ $("#btnnck").click(function(){
 	
 	function passcheck(f)
 	{
-<<<<<<< HEAD
-		
-=======
->>>>>>> UngTest6
 					 if(f.pw1.value!=f.pw2.value){
 						
 						alert("비밀번호가 일치하지 않습니다");
@@ -82,6 +78,7 @@ $("#btnnck").click(function(){
 					}else if(f.pw1.value==""){
 						
 						alert("비밀번호를 입력 해 주세요");
+						
 						return false;
 						
 					}else if(f.pw2.value==""){
@@ -97,7 +94,7 @@ $("#btnnck").click(function(){
 					}else if(f.nickname.value==""){
 						
 						alert("닉네임을 입력 해 주세요");
-<<<<<<< HEAD
+
 						return false;					
 						
 					}else if(document.getElementById("check").value==''){
@@ -108,14 +105,6 @@ $("#btnnck").click(function(){
 							return false;
 						
 						}		
-=======
-						return false;
-						
-					}else if(document.getElementById("check").value==''){
-						alert("닉네임 중복체크를 해 주세요");
-						return false;
-									
->>>>>>> UngTest6
 					}else if(f.hp2.value==""){
 						
 						alert("전화번호를 입력 해 주세요");
@@ -159,18 +148,35 @@ function noSpacialForm(obj) { // 공백사용못하게
 	    }
 	}
 	
-	function noSpaceForm(obj) { // 공백사용못하게
-				
-			    var str_space = /\s/;  // 공백체크
-			    
-			    if(str_space.exec(obj.value)) { //공백 체크
-			        alert("공백은 사용할 수 없습니다");
-			        obj.focus();
-			        obj.value = obj.value.replace(' ',''); // 공백제거
-			        return false;
-		        
-		    }
-		}
+ function chkPW(){
+
+	 var pw1 = $("#pw1").val();
+	 var num = pw1.search(/[0-9]/g);
+	 var eng = pw1.search(/[a-z]/ig);
+	 var spe = pw1.search(/[`~!@@#$%^&*|₩₩₩'₩";:₩/?]/gi);
+
+	 if(pw1.length < 10){
+
+	  alert("비밀번호는 10자리 이상으로 입력 해 주세요");
+	 $("#pw1").focus();
+	 $("#pw1").val("");
+	  return false;
+	 }else if(pw1.search(/\s/) != -1){
+	  alert("비밀번호는 공백 없이 입력해주세요.");
+	  $("#pw1").focus();
+	  $("#pw1").val("");
+	  return false;
+	 }else if(spe < 0 ){
+	  alert("특수문자를 1개이상 포함 해 주세요");
+	  $("#pw1").focus();
+	  $("#pw1").val("");
+	  return false;
+	 }else {
+	    return true;
+	 }
+
+	} 
+
 	
 	function sample6_execDaumPostcode() {
         new daum.Postcode({
@@ -401,38 +407,25 @@ function noSpacialForm(obj) { // 공백사용못하게
 					<div class="col-sm-8" style="border: 0px solid pink;">
 						
 						<!-- write here -->
-
-<<<<<<< HEAD
-=======
-	String uid=(String)session.getAttribute("uid");
-
-	UserDao dao=new UserDao();
-	
-	UserDto dto=dao.getData(uid);
-	
-	String [] hp=dto.getHp().split("-");
-	String [] addr=dto.getAddr().split(" ");
-%>
->>>>>>> UngTest6
+						
 						<form action="mypage_modifyaction.jsp" method="post" class="joinForm" 
 		onsubmit="return passcheck(f)" name="f">
                                                                                                
       <h2>회원정보 수정</h2>
       
       <div class="textForm">
-      	<b style="position: relative;left: 50px; top:21px;">(수정 불가)</b>
+      	<b style="position: relative;left: 50px; top:21px;">&nbsp;&nbsp;&nbsp;(수정 불가)</b>
  		<input name="uid" type="text" class="uid" id="uid" placeholder="아이디 (특수문자,공백 제외 8자 이하)" required="required" value="<%=uid%>" readonly="readonly">			
  		<!-- <button type="button" class="btnck" id="btnck" >중복체크</button> -->
       </div>
       
       <div class="textForm">
         <input name="pw1" id="pw1" type="password" class="pw" placeholder="비밀번호 변경 (특수문자 포함 10자 이상)" required="required" 
-        onkeyup="noSpaceForm(this);" onchange="noSpaceForm(this);">
+         onchange="chkPW(this);">
       </div>
       
        <div class="textForm">
-        <input name="pw2" id="pw2" type="password" class="pw" placeholder="비밀번호 변경 확인" required="required" 
-        onkeyup="noSpaceForm(this);" onchange="noSpaceForm(this);">
+        <input name="pw2" id="pw2" type="password" class="pw" placeholder="비밀번호 변경 확인" required="required" >
       </div>
       
       <div class="textForm">
@@ -549,7 +542,7 @@ function noSpacialForm(obj) { // 공백사용못하게
 		   <input type="text" name="addr3" class="addr" id="sample6_extraAddress" placeholder="참고항목">
 		</div>
     
-       <button type="submit" class="btn1">수정하기</button>
+       <button type="submit" class="btn1" onclick="passcheck(f)">수정하기</button>
        <button type="button" class="btn2"  onclick="location.href='../index.jsp'">메인으로</button>
    
     </form>

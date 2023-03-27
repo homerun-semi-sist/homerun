@@ -79,7 +79,7 @@ String root = request.getContextPath();
 					
 					<a class="b_logout" href="<%=root%>/user/user_logoutaction.jsp">
 						 
-						 <span>로그아웃</span>
+						 <span style="color: yellow">로그아웃</span>
 						 
 						 </a>
 						
@@ -98,7 +98,7 @@ String root = request.getContextPath();
 				<div class="d-flex align-items-center justify-content-end">
 					<span class="me-3">
 					
-						<span class="uname_title"><%=uid %></span>
+						<span class="uname_title"><%=dto.getNickname() %></span>
 						
 						<span style="color: white;">님</span>
 						
@@ -106,7 +106,7 @@ String root = request.getContextPath();
 					
 						<a class="a_logout" href="<%=root%>/user/user_logoutaction.jsp">
 						 
-						 <span>로그아웃</span>
+						 <span style="color: yellow">로그아웃</span>
 						 
 						 </a>
 						 

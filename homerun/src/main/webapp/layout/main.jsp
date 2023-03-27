@@ -27,7 +27,7 @@
 	width: 100%;
 	height: 38%;
 	top: 0;
-	margin-bottom: 40px;
+	margin-bottom: 60px;
 	border: 0px solid yellow;
 }
 
@@ -43,7 +43,8 @@
 	top: 0;
 	height: 48%;
 	border: 0px solid black;
-	margin-bottom: 20px;
+	margin-bottom: 50px;
+	margin-top: 20px;
 }
 
 .left-bottom-bottom {
@@ -51,6 +52,7 @@
 	bottom: 0;
 	height: 48%;
 	border: 0px solid orange;
+	margin-bottom: 50px;
 }
 
 .right {
@@ -94,28 +96,16 @@
 		</div>
 		<div class="right">
 			<div class="right-top">
-				<% // loginok 가져오기
+			<% // loginok 가져오기
             String loginok = (String) session.getAttribute("loginok");
             if (loginok == null) 
          { //로그아웃
         %>
-        <div class="login-box">
-            <b class="text">로그인 후 이용해 주세요
-        <button type="button" class="login" onclick="location.href='../homerun/user/user_loginform.jsp'">로그인</button>
-         <br>
-         <a class="regist" href="../homerun/regist/regist_registform.jsp">회원가입</a>
-
-        </div>
+			<jsp:include page="login.jsp"></jsp:include>
         <% }
             
             else { %>
-            <div class="logout-box">
-            <b class="text2">환영합니다
-            <br>
-            <img class="photo" src="../homerun/assets/img/로그인프로필.png">
-            <b class="uid"><%=uid %>
-        <button type="button" class="logout" onclick="location.href='../homerun/user/user_logoutaction.jsp'">로그아웃</button>
-        </div>
+            <jsp:include page="logout.jsp"></jsp:include>
         <% } %>
 			</div>
 			<div class="right-bottom"><jsp:include page="mapWeather.jsp"></jsp:include></div>

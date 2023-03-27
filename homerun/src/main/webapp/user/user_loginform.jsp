@@ -209,10 +209,10 @@ button.regist {
 					//세션 값 얻기
 					String saveok = (String) session.getAttribute("saveok");
 
-					String myid = "";
+					String uid = "";
 
 					if (saveok != null) {
-						myid = (String) session.getAttribute("myid");
+						uid = (String) session.getAttribute("uid");
 					}
 					%>
 
@@ -225,11 +225,11 @@ button.regist {
 							<div class="user-box">
 								<input type="text" name="uid" id="uid" maxlength="8"
 									required="required" onkeyup="noSpacialForm(this);"
-									onchange="noSpacialForm(this);"> <label>아이디</label>
+									onchange="noSpacialForm(this);" value="<%=uid%>"> <label>아이디</label>
 							</div>
 
 							<div class="user-box">
-								<input type="password" name="pw" id="pw" minlength="10"
+								<input type="password" name="pw" id="pw" maxlength="20"
 									required="required" onkeyup="noSpaceForm(this);"
 									onchange="noSpaceForm(this);"> <label>비밀번호</label>
 							</div>

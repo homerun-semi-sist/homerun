@@ -17,34 +17,36 @@
  .text{
  	   position: relative;
        left: 25px;
-       top: 20px;
+       top: 10px;
        font-size: 10pt;
     }
     
  .login{
-       width: 350px;
-       height: 90px;
-       color: white;
-       text-align: center;
-       background-color: #0b214e;
-       margin-left: 25px;
-       margin-top: 40px;
-       font-weight: bold;
-       font-size: 15pt;
-       letter-spacing: 5px;
+	    width: 320px;
+	    height: 90px;
+	    color: white;
+	    text-align: center;
+	    background-color: #0b214e;
+	    margin-left: 25px;
+	    margin-top: 20px;
+	    margin-bottom: 10px;
+	    font-weight: bold;
+	    font-size: 15pt;
+	    letter-spacing: 5px;
     }
     
     .login-box{
-       border: 1px solid #0b214e;
-       width:100%;
        height: 100%;
+       width: 370px;
+       border: 1px solid gray;
+       margin-left: 10px;
     }
     
     .regist{
        color: #0b214e;
        font-weight: bold;
-       left: 320px;
-       margin-top: 5px;
+       left: 290px;
+       bottom: 5px;
        position: relative;
     }
     
