@@ -10,11 +10,8 @@ String cId=request.getParameter("cId");
 
 
 	CartDao dao=new CartDao();
-	
 	dao.cQTYdown(cId);
-	
 	int cQTY=dao.getData(cId).getcQTY();
-	
 	JSONObject ob=new JSONObject();
 	ob.put("cQTY",cQTY);
 %>

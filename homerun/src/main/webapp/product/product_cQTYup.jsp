@@ -10,11 +10,8 @@ String cId=request.getParameter("cId");
 
 
 	CartDao dao=new CartDao();
-	
 	dao.cQTYup(cId);
-	
 	int cQTY=dao.getData(cId).getcQTY();
-	
 	JSONObject ob=new JSONObject();
 	ob.put("cQTY",cQTY);
 	//response.sendRedirect("product_cartlist.jsp");

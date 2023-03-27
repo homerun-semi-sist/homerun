@@ -107,7 +107,6 @@ width:95%;
 
 				});
 
-	
 		//상품선택시 디테일페이지 이동
 		$("div.pName").click(
 						function() {
@@ -247,17 +246,17 @@ NumberFormat nf = NumberFormat.getInstance();
 											<img src="<%=photo%>" class="photo" style="width:90px;" align="left" hspace="20" pId="<%=map.get("pId")%>">
 
 											<h4 style="line-height: 80px;">
-												<b> <%=map.get("pName")%> &nbsp;&nbsp;&nbsp;&nbsp;
-												</b>
+												 <%=map.get("pName")%>     
+												
 											</h4>
 											<td><span style="line-height: 35px"
-												></span><br> <span><b>
+												></span><br> <span>
 														수량: <%=map.get("oQTY")%>개
-												</b></span> <br>
+												</span> <br>
 												</td>
 											<td><br>
 												<h4 style="line-height: 30px">
-													<b> <%=nf.getCurrencyInstance(Locale.KOREA).format(Integer.parseInt(map.get("price")))%></b>
+													 <%=nf.getCurrencyInstance(Locale.KOREA).format(Integer.parseInt(map.get("price")))%>
 												</h4></td>
 
 											<td>
@@ -267,15 +266,15 @@ NumberFormat nf = NumberFormat.getInstance();
 												price *= oQTY;
 												%>
 												<h4 style="line-height: 80px;">
-													<b> <%=nf.getCurrencyInstance(Locale.KOREA).format(price)%>
+													 <%=nf.getCurrencyInstance(Locale.KOREA).format(price)%>
 														<%-- <span class="glyphicon glyphicon-trash del"
                                     style="color: red;" cId="<%=map.get("cId")%>"></span> --%>
-													</b>
+													
 												</h4>
 											</td>
 												<td><br>
 												<h4 style="line-height: 30px">
-													<b> <%=map.get("oDay")%></b>
+													 <%=map.get("oDay")%>
 												</h4></td>
 								</tr>
 								
@@ -287,8 +286,8 @@ NumberFormat nf = NumberFormat.getInstance();
 								%>
 
 <tr>
-									<td colspan="6" style="font-size: 2em"><b>
-									</b><span style="margin-left: 90px"><button
+									<td colspan="6" style="font-size: 2em">
+									<span style="margin-left: 90px"><button
 												type="button" class="btn1" style="" id="btncartdel">목록삭제</button>
 											<button type="button" class="btn2" onclick="location.href='../index.jsp'">메인으로</button></span>
 									</td>

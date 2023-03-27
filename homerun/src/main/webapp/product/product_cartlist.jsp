@@ -276,6 +276,7 @@ width:88.5%;
 					"cId" : cId
 				},
 				success : function() {
+					location.reload();
 				}
 
 			});
@@ -294,7 +295,7 @@ width:88.5%;
 				orderlist(uId,pId,cQTY);
 				setTimeout(function() {
 				del(cId);
-				},100);
+				},250);
 			});
 			
 		});
@@ -430,23 +431,23 @@ NumberFormat nf = NumberFormat.getInstance();
 											<img src="<%=photo%>" class="photo" align="left"  style="width:90px;" hspace="20" pId="<%=map.get("pId")%>">
 
 											<h4 style="line-height: 80px;">
-												<b> <%=map.get("pName")%> &nbsp;&nbsp;&nbsp;&nbsp;
-												</b>
+												 <%=map.get("pName")%>     
+												
 												<sapn style="font-size:0.8em">
 												</sapn>
 											</h4>
 											<td><span style="line-height: 35px"
 												class="glyphicon glyphicon-triangle-top cQTYup"
 												cId="<%=map.get("cId")%>" cQTY="<%=map.get("cQTY")%>"
-												pStock="<%=map.get("pStock")%>"></span><br> <span><b>
+												pStock="<%=map.get("pStock")%>"></span><br> <span>
 														수량: <%=map.get("cQTY")%>개
-												</b></span> <br>
+												</span> <br>
 											<span class="glyphicon glyphicon-triangle-bottom cQTYdown"
 												cId="<%=map.get("cId")%>" cQTY="<%=map.get("cQTY")%>"
 												pStock="<%=map.get("pStock")%>"></span></td>
 											<td><br>
 												<h4 style="line-height: 30px">
-													<b> <%=nf.getCurrencyInstance(Locale.KOREA).format(Integer.parseInt(map.get("price")))%></b>
+													 <%=nf.getCurrencyInstance(Locale.KOREA).format(Integer.parseInt(map.get("price")))%>
 												</h4></td>
 
 											<td>
@@ -458,10 +459,10 @@ NumberFormat nf = NumberFormat.getInstance();
 												total = total + price;
 												%>
 												<h4 style="line-height: 80px;">
-													<b> <%=nf.getCurrencyInstance(Locale.KOREA).format(price)%>
+													 <%=nf.getCurrencyInstance(Locale.KOREA).format(price)%>
 														<%-- <span class="glyphicon glyphicon-trash del"
                                     style="color: red;" cId="<%=map.get("cId")%>"></span> --%>
-													</b>
+													
 												</h4>
 											</td>
 									</td>
@@ -482,9 +483,9 @@ NumberFormat nf = NumberFormat.getInstance();
 								<tr>
 								</tr>
 								<tr>
-									<td colspan="5" style="font-size: 2em"><b>총 주문금액:
+									<td colspan="5" style="font-size: 2em">총 주문금액:
 											&\#8361; <span class="endprice" style=""><br></span>
-									</b><br> <span style="margin-left: 90px"><button
+									<br> <span style="margin-left: 90px"><button
 												type="button" class="btn1" style="" id="btncartdel">상품삭제</button>
 											<button type="button" class="btn2" id="buyBtn">구매하기</button></span>
 									</td>

@@ -78,7 +78,6 @@ margin-top:50px;
 </style>
 
 
-	
 <body style="overflow-x: hidden;">
 	<%
 	String mainPage = "../layout/main.jsp";
@@ -153,7 +152,7 @@ margin-top:50px;
 					<div style="margin-left: 100px;margin-bottom:30px;">
 						<button type="submit" class="btn2"
 							onclick="location.href='product_orderlist.jsp'">주문목록</button>
-						&nbsp;
+						 
 						<button type="button" class="btn1"
 							onclick="location.href='../index.jsp'">메인으로</button>
 					</div>

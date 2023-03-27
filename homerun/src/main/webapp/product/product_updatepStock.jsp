@@ -6,8 +6,6 @@
 	String pId=request.getParameter("pId");
 	String cId=request.getParameter("cId");
 	CartDao dao=new CartDao();
-	
-	
 	dao.QTYmethod(pId,cId);
 	//response.sendRedirect("product_success.jsp");
 %>
