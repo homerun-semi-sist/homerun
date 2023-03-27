@@ -1,0 +1,79 @@
+* {
+	margin: 0px;
+	padding: 0px;
+	text-decoration: none;
+}
+
+.insertForm {
+	position: relative;
+	width: 580px;
+	height: 900px;
+	padding: 30px, 20px;
+	background-color: #FFFFFF;
+	top: 40%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	border-radius: 15px;
+	border: 1px solid gray;
+	margin-top: 100px;
+}
+
+.insertForm h2 {
+	text-align: center;
+	margin: 30px;
+	font-weight: bold;
+}
+
+.textForm {
+	border-bottom: 1px solid #0b214e;
+	margin: 40px;
+	padding: 10px 10px;
+}
+
+.inputForm {
+	width: 100%;
+	border: none;
+	outline: none;
+	color: #636e72;
+	font-size: 16px;
+	height: 25px;
+	background: none;
+}
+
+.teamNcategory {
+	display: flex;
+	justify-content: space-between;
+}
+
+.sameWidth {
+	display: inline-block;
+	width: 80px;
+}
+
+.categoryWidth {
+	display: inline-block;
+	width: 120px;
+}
+
+.pinsertbtn {
+	position: relative;
+	left: 40%;
+	transform: translateX(-38%);
+	width: 100px;
+	height: 30px;
+	color: white;
+	font-weight: bold;
+	border: none;
+	cursor: pointer;
+	background-color: #0b214e;
+}
+
+.pinsertbtn1 {
+	margin-right: 10px;
+}
+
+.pinsertbtn:hover {
+	background-color: white;
+	color: #0b214e;
+	border: 1px solid #0b214e;
+}

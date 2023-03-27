@@ -1,3 +1,5 @@
+<%@page import="data.dto.UserDto"%>
+<%@page import="data.dao.UserDao"%>
 <%@ page language="java" contentType="text/html; charset=utf-8"
 	pageEncoding="utf-8"%>
 <!DOCTYPE html>
@@ -27,7 +29,7 @@
 <link href="assets/css/bootstrap.min.css" rel="stylesheet" />
 
 <!-- Template Stylesheet -->
-<link href="assets/css/style.css" rel="stylesheet" />
+<link href="assets/css/style_main.css" rel="stylesheet" />
 </head>
 
 <%
@@ -36,6 +38,8 @@ String root = request.getContextPath();
 
 <body>
 	<!-- Topbar Start -->
+
+
 	<div class="container-fluid px-5 d-none d-lg-block"
 		style="background-color: #0b214e; height: 150px;">
 		<div class=" gx-5 align-items-center">
@@ -44,19 +48,88 @@ String root = request.getContextPath();
 			</div>
 			<div class="col-lg-6">
 				<div class="d-flex align-items-center justify-content-center">
-					<a href="index.jsp" class="navbar-brand"> <img
+					<a href="<%=root %>/index.jsp" class="navbar-brand"> <img
 						src="<%=root%>/assets/img/로고.png" style="width: 150px;" />
 					</a>
 				</div>
-			</div>
+			</div>		
+<%
+	// loginok 가져오기
+	String loginok=(String)session.getAttribute("loginok");
+	String uid=(String)session.getAttribute("uid");
+	
+	UserDao dao=new UserDao();
+	
+	UserDto dto=dao.getData(uid);
+
+	if(loginok==null)	//로그아웃
+	{%>
+				
+	<%}else if(loginok!=null && uid.equals("admin")){%>
+		
 			<div class="col-lg-3" style="margin-top: 20px;">
 				<div class="d-flex align-items-center justify-content-end">
-					<span class="me-3"><span class="uname_title">박예은</span><span
-						class="a_title">님</span></span> <a class="a_title" href="#"><span>마이페이지</span></a><span
-						class="a_title">&nbsp;|&nbsp;</span> <a style="color: white;"
-						href="#"><span>장바구니</span></a>
+					<span class="me-4">
+					
+						<span class="uname_title"><%=dto.getNickname()%></span>
+						
+						<span style="color: white;">님</span>
+						
+					</span>
+					
+					<a class="b_logout" href="<%=root%>/user/user_logoutaction.jsp">
+						 
+						 <span style="color: yellow">로그아웃</span>
+						 
+						 </a>
+						
+						 <a class="b_title" href="<%=root%>/admin/admin_adminform.jsp">
+
+						 
+						 <span>관리자페이지</span>
+						 
+						 </a>
+						 
 				</div>
 			</div>
+			
+	<%}else{%>
+		<div class="col-lg-3" style="margin-top: 20px;">
+				<div class="d-flex align-items-center justify-content-end">
+					<span class="me-3">
+					
+						<span class="uname_title"><%=dto.getNickname() %></span>
+						
+						<span style="color: white;">님</span>
+						
+					</span>
+					
+						<a class="a_logout" href="<%=root%>/user/user_logoutaction.jsp">
+						 
+						 <span style="color: yellow">로그아웃</span>
+						 
+						 </a>
+						 
+						
+						 <a class="a_title" href="<%=root%>/mypage/mypage_myinfo.jsp">
+						 
+						 <span>마이페이지</span>
+						 
+						 </a>
+						 
+						 <span class="a_title">&nbsp;|&nbsp;</span> 
+						 
+						 <a class="a_title" style="color: white;" href="<%=root%>/product/product_cartlist.jsp">
+
+						 
+						 <span>장바구니</span>
+				</div>
+			</div>
+		
+	<%}
+%>
+
+			
 		</div>
 	</div>
 	<!-- Topbar End -->

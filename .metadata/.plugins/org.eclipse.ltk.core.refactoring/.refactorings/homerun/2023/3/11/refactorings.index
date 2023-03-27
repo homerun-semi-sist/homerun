@@ -18,3 +18,41 @@
 1678761454508	Rename resource 'footer_u.jsp'
 1678763986940	Delete element
 1678763988962	Delete element
+<<<<<<< HEAD
+1678772276179	Rename resource 'loginaction.jsp'
+1678772290158	Rename resource 'loginform.jsp'
+1678772313216	Rename resource 'logoutaction.jsp'
+1678772320310	Rename resource 'logoutform.jsp'
+1678772342881	Rename resource 'loginmain.jsp'
+1678772364720	Rename resource 'registform.jsp'
+1678772376359	Rename resource 'registaction.jsp'
+1678785185765	Rename resource 'registsuccess.jsp'
+1678841508150	Rename resource 'regist_idsearch.jsp'
+1678843765379	Rename resource 'regist_search.jsp'
+1678843840557	Copy file
+1678844059731	Rename resource 'regist_idsearch.jsp'
+1678844065728	Delete element
+1678864320695	Delete element
+1678864454914	Rename resource '완료아이콘.png'
+1678872898903	Delete element
+1678872906199	Delete element
+1678927352181	Delete element
+1678927694198	Delete element
+1678927704097	Delete element
+1678927707201	Delete element
+1678927718005	Delete element
+1678928544275	Delete element
+1678935474442	Delete element
+1678954551227	Delete element
+1679012757241	Rename resource 'mypage_modify.jsp'
+1679036370239	Rename resource 'mypage_modifyaction.jsp'
+1679036377926	Rename resource 'test.jsp'
+1679036524303	Delete element
+1679041203511	Delete element
+=======
+1678798620385	Delete element
+1678798684039	Delete element
+1678848413066	Delete element
+1678848431286	Rename resource 'free-icon-shopping-cart-1991808.png'
+1679022852024	Delete element
+>>>>>>> SungUng
