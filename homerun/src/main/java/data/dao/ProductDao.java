@@ -18,7 +18,7 @@ public class ProductDao {
 		Connection conn = db.getConnection();
 		PreparedStatement pstmt = null;
 
-		String sql = "insert into PRODUCT values(?,?,?,?,?,?,?,?,?,now())";
+		String sql = "insert into PRODUCT values(?,?,?,?,?,?,?,?,now())";
 
 		try {
 			pstmt = conn.prepareStatement(sql);
@@ -26,10 +26,10 @@ public class ProductDao {
 			pstmt.setString(2, dto.getTeamName());
 			pstmt.setString(3, dto.getpCategory());
 			pstmt.setString(4, dto.getpName());
-			pstmt.setInt(6, dto.getpStock());
-			pstmt.setInt(7, dto.getPrice());
-			pstmt.setString(8, dto.getpDetail());
-			pstmt.setString(9, dto.getpImage());
+			pstmt.setInt(5, dto.getpStock());
+			pstmt.setInt(6, dto.getPrice());
+			pstmt.setString(7, dto.getpDetail());
+			pstmt.setString(8, dto.getpImage());
 
 			pstmt.execute();
 		} catch (SQLException e) {
