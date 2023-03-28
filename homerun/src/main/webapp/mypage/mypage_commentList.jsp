@@ -295,7 +295,7 @@ else
 
 												if (res.length == 0) {
 													s += "<tr>";
-													s += "<td colspan='8' align='center' style='font-size: 18pt;'>아직 작성된 댓글이 없습니다</td>";
+													s += "<td colspan='8' align='center' style='font-size: 18pt;'>아직 작성한 댓글이 없습니다</td>";
 													s += "</tr>";
 												} else {
 													$
