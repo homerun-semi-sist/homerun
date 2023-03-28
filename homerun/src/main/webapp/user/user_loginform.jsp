@@ -81,14 +81,9 @@ body {
 }
 
 .login-box {
-	/* position: absolute; */
-	/* margin-top: 450px; */
-	/* left: 50%; */
-	/* width: 600px; */
 	margin:100px 50px;
 	height:500px;
 	padding: 40px;
-	/* transform: translate(-50%, -50%); */
 	background: #0b214e;
 	box-sizing: border-box;
 	border-radius: 10px;
@@ -229,7 +224,7 @@ button.regist {
 							</div>
 
 							<div class="user-box">
-								<input type="password" name="pw" id="pw" maxlength="20"
+								<input type="password" name="pw" id="pw" minlength="10"
 									required="required" onkeyup="noSpaceForm(this);"
 									onchange="noSpaceForm(this);"> <label>비밀번호</label>
 							</div>
