@@ -38,7 +38,7 @@
 	ProductDao dao = new ProductDao();
 	dao.insertProduct(dto);
 
-	response.sendRedirect("../index.jsp");
+	response.sendRedirect("../managementpage/management_stockListPage.jsp");
 	%>
 
 </body>
