@@ -187,7 +187,7 @@ onclick="location.href='../mypage/mypage_unregistform.jsp'">회원탈퇴</button
 								onclick="location.href='../user/user_logoutaction.jsp'">로그아웃</button>
 
 						<div class="profile">
-							<img class="photo" src="../assets/img/프로필.png">
+							<img class="photo" src="../assets/img/profile.png">
 							<br><br>
 						</div>
 
@@ -212,7 +212,7 @@ onclick="location.href='../mypage/mypage_unregistform.jsp'">회원탈퇴</button
 								<div>
 									<a href="admin_usermanageform.jsp">
 										<img class="image"
-											 src="../assets/img/회원 관리.png">
+											 src="../assets/img/usermanage.png">
 									</a>
 									<div class="text"><br>회원 관리</div>
 									<div class="green number"><%=dao.getTotalCount() %>명</div>
@@ -224,7 +224,7 @@ onclick="location.href='../mypage/mypage_unregistform.jsp'">회원탈퇴</button
 									<a href="../managementpage/management_stockListPage.jsp"
 									   style="text-decoration: none;color: black;">
 										<img class="image"
-											 src="../assets/img/재고 관리.png">
+											 src="../assets/img/itemmanage.png">
 
 										<div class="text"><br>재고 관리</div>
 										<div class="number">
@@ -239,7 +239,7 @@ onclick="location.href='../mypage/mypage_unregistform.jsp'">회원탈퇴</button
 									<a href="../managementpage/management_reportListPage.jsp"
 									   style="text-decoration: none;color: black;">
 										<img class="image"
-											 src="../assets/img/게시글 관리.png">
+											 src="../assets/img/textmanage.png">
 										<div class="text">게시글/댓글<br>신고 관리</div>
 										<div class="green number">
 											<%=prDao.getPRTotalCount() %> / <%=cCnt %>건

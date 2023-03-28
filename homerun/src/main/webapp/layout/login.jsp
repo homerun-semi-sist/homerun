@@ -63,14 +63,15 @@
 	<body>
 <%
    String uid=(String)session.getAttribute("uid");
+   String root = request.getContextPath();
 %>
 
    
         <div class="login-box">
             <!-- <b class="text">로그인 후 이용해 주세요</b> -->
-        <button type="button" class="login" onclick="location.href='../homerun/user/user_loginform.jsp'">로그인</button>
+        <button type="button" class="login" onclick="location.href='<%=root%>/user/user_loginform.jsp'">로그인</button>
          <br>
-         <a class="regist" href="../homerun/regist/regist_registform.jsp">회원가입</a>
+         <a class="regist" href="<%=root%>/regist/regist_registform.jsp">회원가입</a>
         </div>  
         
       </body>

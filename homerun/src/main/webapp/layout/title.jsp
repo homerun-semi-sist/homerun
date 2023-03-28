@@ -49,7 +49,7 @@ String root = request.getContextPath();
 			<div class="col-lg-6">
 				<div class="d-flex align-items-center justify-content-center">
 					<a href="<%=root %>/index.jsp" class="navbar-brand"> <img
-						src="<%=root%>/assets/img/로고.png" style="width: 150px;" />
+						src="<%=root%>/assets/img/logo.png" style="width: 150px;" />
 					</a>
 				</div>
 			</div>		

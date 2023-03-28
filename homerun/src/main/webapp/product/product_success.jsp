@@ -129,7 +129,7 @@ margin-top:50px;
 
 
 					<div>
-						<img src="../assets/img/결제완료.png" id="successlogo"> <br>
+						<img src="../assets/img/success2.png" id="successlogo"> <br>
 						<br> <br>
 					</div>
 					<div id="thanksmsg">구매해 주셔서 감사합니다.</div>

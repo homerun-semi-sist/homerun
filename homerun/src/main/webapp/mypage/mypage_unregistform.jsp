@@ -102,7 +102,7 @@ div {
 %>
 				<div class=main>
 					<div>
-						<img src="../assets/img/완료.png" id="successlogo"> <br>
+						<img src="../assets/img/success.png" id="successlogo"> <br>
 						<br> <br>
 					</div>
 					<div id="thanksmsg">회원탈퇴가 <b>완료</b> 되었습니다.</div>

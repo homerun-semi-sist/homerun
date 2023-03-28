@@ -298,7 +298,7 @@ NumberFormat nf = NumberFormat.getInstance();
 							} else {	
 							%>
 
-							<img src="../assets/img/빈주문리스트.png" id="noCart">
+							<img src="../assets/img/nolist.png" id="noCart">
 
 							<%
 							}

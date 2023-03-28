@@ -293,7 +293,7 @@ div{
 		
 	  <div class="profile">
 	  	<a data-toggle="modal" data-target="#myModal2">
-	 		<img class="photo" src="../assets/img/프로필.png">
+	 		<img class="photo" src="../assets/img/profile.png">
 	 		<br><br>
 	 	</a>
 	  </div>
@@ -340,7 +340,7 @@ div{
       
       <div class="item">
         <div>
-          <img class="image" id ="orderlist"  src="../assets/img/주문내역.png">
+          <img class="image" id ="orderlist"  src="../assets/img/orderlist.png">
           <div class="text" >주문내역</div>
           <div class="green number"><%=OrderSize %>건</div>
         </div>
@@ -349,7 +349,7 @@ div{
       <div class="item">
         <div>
           <a href="../mypage/mypage_postListPage.jsp" style="text-decoration: none;color: black;">          
-	          <img class="image" src="../assets/img/게시글.png">
+	          <img class="image" src="../assets/img/boardtext.png">
 	          <div class="text">내 게시글</div>
 	          <div class="number"><%=postCnt %>건</div>
           </a>
@@ -359,7 +359,7 @@ div{
       <div class="item" >
         <div>
           <a href="../mypage/mypage_commentListPage.jsp" style="text-decoration: none;color: black;"> 
-	          <img class="image" src="../assets/img/댓글.png">        
+	          <img class="image" src="../assets/img/reply.png">        
 	          <div class="text">내 댓글</div>
 	          <div class="green number"><%=commentCnt %>건</div>
           </a>
@@ -369,7 +369,7 @@ div{
       <div class="item">
         <div>
           <a href="../mypage/mypage_bookmarkListPage.jsp" style="text-decoration: none;color: black;"> 
-	          <img class="image" src="../assets/img/찜.png">        
+	          <img class="image" src="../assets/img/zzim.png">        
 	          <div class="text">게시글 찜</div>
 	          <div class="green number"><%=bmCbt %>건</div>
           </a>

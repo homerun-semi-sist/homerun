@@ -495,7 +495,7 @@ NumberFormat nf = NumberFormat.getInstance();
 							} else {
 							%>
 
-							<img src="../assets/img/빈장바구니.png" id="noCart">
+							<img src="../assets/img/nocart.png" id="noCart">
 
 							<%
 							}
