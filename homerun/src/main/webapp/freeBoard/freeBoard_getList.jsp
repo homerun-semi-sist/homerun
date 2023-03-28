@@ -32,7 +32,7 @@ for (FreeBoardDto dto : fbList) {
 	JSONObject ob = new JSONObject();
 	String nickname = uDao.getUser(dto.getUId()).getNickname();
 	String teamLogoImg = tDao.getTeam(dto.getFbCategory()).getTeamLogo();
-
+	int i = 0;
 	int fcCnt = fcDao.getAllFCs(dto.getFbNum()).size();
 
 	ob.put("totalCnt", totalCnt);
@@ -51,6 +51,7 @@ for (FreeBoardDto dto : fbList) {
 	ob.put("fcCnt", fcCnt);
 
 	arr.add(ob);
+	i++;
 }
 %>
 

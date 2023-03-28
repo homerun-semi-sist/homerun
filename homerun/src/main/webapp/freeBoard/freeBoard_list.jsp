@@ -151,7 +151,8 @@ a {
 							s+="</tr>";
 						} else {
 							$.each(res, function(idx, item){
-									
+								var n = 0;
+								
 								if(item.fbCategory == "공지") {
 									s+="<tr style='background-color: #FFF2F2; color: red; font-size: bold;'>";
 									s+="<td style='text-align: center; vertical-align:middle;'></td>";
@@ -206,6 +207,8 @@ a {
 									s+="<td style='text-align: center; vertical-align:middle;'>" + item.fbDislike + "</td> ";							
 									s+="</tr>"
 								}
+								
+								n++;
 							});
 						}
 						
@@ -265,19 +268,19 @@ a {
 									s+="</td>";
 								} else if(item.fbCategory == "전체") {   
 									s+="<tr>";
-									s+="<td style='text-align: center; vertical-align:middle;'>" + (res.length - idx) + "</td>";
+									s+="<td style='text-align: center; vertical-align:middle;'>" + (item.totalCnt - idx) + "</td>";
 									s+="<td style='text-align: center; vertical-align:middle;'>";
 									s+="<img src='https://cdn.icon-icons.com/icons2/2070/PNG/512/baseball_icon_126956.png' style='width: 30px;'>";
 									s+="</td>";
 								} else if(item.fbCategory == "한화") {
 									s+="<tr>";
-									s+="<td style='text-align: center; vertical-align:middle;'>" + (res.length - idx) + "</td>";
+									s+="<td style='text-align: center; vertical-align:middle;'>" + (item.totalCnt - idx) + "</td>";
 									s+="<td style='text-align: center; vertical-align:middle;'>";
 									s+="<img src='" + item.teamLogoImg + "' style='width: 50px;'>";
 									s+="</td>";
 								} else {
 									s+="<tr>";
-									s+="<td style='text-align: center; vertical-align:middle;'>" + (res.length - idx) + "</td>";
+									s+="<td style='text-align: center; vertical-align:middle;'>" + (item.totalCnt - idx) + "</td>";
 									s+="<td style='text-align: center; vertical-align:middle;'>";
 									s+="<img src='" + item.teamLogoImg + "' style='width: 40px;'>";
 									   s+="</td>";
@@ -340,7 +343,7 @@ a {
     			dataType : "json",
     			data : {"currentPage" : currentPage}, 
     			success:function(res) {
-
+    				
     				var s="";
     				
     				s+="<div class='table-responsive text-nowrap'>";
@@ -367,7 +370,7 @@ a {
 						s+="</tr>";
 					} else {
 						$.each(res, function(idx, item){
-							
+													
 							if(item.fbCategory == "공지") {
 								s+="<tr style='background-color: #FFF2F2; color: red; font-size: bold;'>";
 								s+="<td style='text-align: center;'></td>";
@@ -376,19 +379,19 @@ a {
 								s+="</td>";
 							} else if(item.fbCategory == "전체") {   
 								s+="<tr>";
-								s+="<td style='text-align: center; vertical-align:middle;'>" + (res.length - idx) + "</td>";
+								s+="<td style='text-align: center; vertical-align:middle;'>" + item.fbNum + "</td>";
 								s+="<td style='text-align: center; vertical-align:middle;'>";
 								s+="<img src='https://cdn.icon-icons.com/icons2/2070/PNG/512/baseball_icon_126956.png' style='width: 30px;'>";
 								s+="</td>";
 							} else if(item.fbCategory == "한화") {
 								s+="<tr>";
-								s+="<td style='text-align: center; vertical-align:middle;'>" + (res.length - idx) + "</td>";
+								s+="<td style='text-align: center; vertical-align:middle;'>" + item.fbNum + "</td>";
 								s+="<td style='text-align: center; vertical-align:middle;'>";
 								s+="<img src='" + item.teamLogoImg + "' style='width: 50px;'>";
 								s+="</td>";
 							} else {
 								s+="<tr>";
-								s+="<td style='text-align: center; vertical-align:middle;'>" + (res.length - idx) + "</td>";
+								s+="<td style='text-align: center; vertical-align:middle;'>" + item.fbNum + "</td>";
 								s+="<td style='text-align: center; vertical-align:middle;'>";
 								s+="<img src='" + item.teamLogoImg + "' style='width: 40px;'>";
 								   s+="</td>";
@@ -422,6 +425,7 @@ a {
 								s+="<td style='text-align: center; vertical-align:middle;'>" + item.fbDislike + "</td> ";							
 								s+="</tr>"
 							}
+							
 						});
 					}
     				s+="</tbody>";
