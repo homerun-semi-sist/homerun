@@ -296,3 +296,9 @@
 </div>
 </details>
 
+<br>
+
+## 🏠 메인 페이지
+
+<img src="https://user-images.githubusercontent.com/77319040/229453127-83e2cb6d-b2a9-427c-8d7e-b55f389a7363.png" width="700"/>
+
